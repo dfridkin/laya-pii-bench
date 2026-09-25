@@ -8,6 +8,11 @@ say()  { printf '\033[1;32m==>\033[0m %s\n' "$*"; }
 warn() { printf '\033[1;33m!!\033[0m %s\n' "$*"; }
 die()  { printf '\033[1;31mxx\033[0m %s\n' "$*"; exit 1; }
 
+say "Checking scaffold"
+for f in .claude/settings.json .claude/hooks/protect-artifacts.sh .gitignore .python-version; do
+  [ -e "$f" ] || die "Missing $f. Hidden files were probably dropped when copying (Finder hides dot-files). Re-extract with: unzip laya-pii-bench.zip && rsync -a laya-pii-bench/ ./"
+done
+
 say "Checking tools"
 command -v uv  >/dev/null || die "uv not found: brew install uv"
 command -v git >/dev/null || die "git not found"

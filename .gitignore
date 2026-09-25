@@ -1,0 +1,32 @@
+# Python / tooling
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Generated artifacts (reproducible from config + seed)
+data/
+runs/
+calib/
+scores/
+hw.json
+
+# Keep reports/ tracked (report.md, audits), ignore bulky exports
+reports/**/*.jsonl
+
+# HUD
+hud/node_modules/
+hud/dist/
+hud/public/replay.json
+
+# Fine-tune outputs
+finetune/output/
+finetune/checkpoints/
+
+# Local
+.env
+.DS_Store
+.claude/settings.local.json
