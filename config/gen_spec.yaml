@@ -1,0 +1,47 @@
+# Synthetic generator spec. See docs/specs/generator.md.
+seed: 42
+
+world:
+  sponsor: Fenwick Therapeutics
+  compound_prefix: FTX
+  studies: 3
+  sites_per_study: 8
+  subjects_per_site: 15
+
+doc_types:                  # exact counts; total 600
+  csr_patient_narrative: 70
+  sae_cioms: 60
+  crf_page: 70
+  lab_report: 50
+  monitoring_visit_report: 50
+  deviation_log: 40
+  conmed_log: 40
+  delegation_log: 30
+  site_correspondence: 60
+  icf_signature_page: 30
+  protocol_section: 70
+  irb_letter: 30
+
+lang_mix: {en: 0.90, de: 0.04, es: 0.03, pl: 0.03}
+locales: {en: en_US, de: de_DE, es: es_ES, pl: pl_PL}
+
+length_mix: {short: 0.35, medium: 0.35, long: 0.22, xl: 0.08}
+length_tokens:              # multilingual tokenizer counts
+  short: [120, 1000]
+  medium: [1000, 4000]
+  long: [4000, 8000]
+  xl: [8200, 11000]
+
+hard_negative_rate: 0.25
+pii_depth_docs: 60          # sparse long docs with one PII block at controlled depth
+pii_depth_positions: {early: [0.0, 0.2], middle: [0.4, 0.6], late: [0.8, 1.0]}
+
+perturbations:
+  line_wrap: 0.30
+  ocr_noise: 0.10
+  table: 0.20
+  headers_footers: 0.40
+  email_quoting: site_correspondence_only
+
+paraphrase: {enabled: false, model: null}   # D-011
+distribution_tolerance_pp: 3

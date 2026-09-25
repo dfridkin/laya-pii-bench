@@ -1,0 +1,48 @@
+# Gold-label policy. Changing this file changes gold answers: rerun `label` onward.
+version: 1
+
+# D-001 (OPEN, provisional): are coded subject / randomization IDs PII?
+coded_id_is_pii: true
+
+# Categories that make pii_present = A. coded_id is added automatically iff coded_id_is_pii.
+pii_categories: [phi_direct, phi_quasi, staff_pii]
+
+# Single-choice category flattening for qs_v1 (first match wins).
+category_precedence: [phi_direct, phi_quasi, coded_id, staff_pii]
+category_answer_map:
+  phi_direct: direct
+  phi_quasi: quasi
+  coded_id: coded
+  staff_pii: staff
+
+# Roles that count toward subject_role. sponsor maps to none.
+role_map:
+  patient: patient
+  staff: staff
+  sponsor: none
+
+doc_kind_map:
+  csr_patient_narrative: narrative
+  sae_cioms: form_table
+  crf_page: form_table
+  lab_report: form_table
+  conmed_log: form_table
+  deviation_log: form_table
+  delegation_log: form_table
+  icf_signature_page: form_table
+  monitoring_visit_report: narrative
+  site_correspondence: correspondence
+  irb_letter: correspondence
+  protocol_section: protocol_text
+
+# Operating-point targets (D-007). Fit on calib only.
+routing:
+  recall_target: 0.995      # t_low: forward only below this p(pii)
+  precision_target: 0.98    # t_high: redact at or above
+  patient_role_forces_redact: true
+
+# Bootstrap (report CIs)
+bootstrap:
+  resamples: 2000
+  unit: document
+  seed: 7

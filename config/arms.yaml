@@ -1,0 +1,39 @@
+# Benchmark arms. See docs/PLAN.md. `run` never touches the train split for zero-shot arms.
+defaults:
+  warmup_calls: 10
+  device: auto            # cuda -> mps -> cpu
+  splits_to_run: [calib, test, holdout]
+  question_sets: [qs_v1, qs_v2]
+
+arms:
+  A:
+    checkpoint: english
+    unit: {kind: chunk, size: 256, overlap: 32}
+    max_len: 512
+    head_max_len: 192
+  B1:
+    checkpoint: multilingual
+    unit: {kind: chunk, size: 768, overlap: 64}
+    max_len: 1024
+    head_max_len: 256
+  B2:
+    checkpoint: multilingual
+    unit: {kind: section, target_tokens: 1800}
+    max_len: 2048
+    head_max_len: 256
+  B3:
+    checkpoint: multilingual
+    unit: {kind: section, target_tokens: 3800}
+    max_len: 4096
+    head_max_len: 256
+  B4:
+    checkpoint: multilingual
+    unit: {kind: doc}
+    max_len: 8192
+    head_max_len: 256
+  C:
+    checkpoint: finetuned_english     # produced in M8; path set in finetune/output.yaml
+    unit: {kind: chunk, size: 256, overlap: 32}
+    max_len: 512
+    head_max_len: 192
+    enabled: false                    # flipped by M8
