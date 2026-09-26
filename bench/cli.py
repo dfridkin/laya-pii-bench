@@ -99,5 +99,33 @@ def label(
         typer.echo(f"{name}: {len(units)} units ({n_trunc} truncated) -> {out / name}.jsonl")
 
 
+@app.command()
+def calibrate(
+    decisions: Annotated[Path, typer.Option(help="Decisions JSONL for one arm x qs.")],
+    units: Annotated[Path, typer.Option(help="Units JSONL (gold answers).")],
+    out: Annotated[Path, typer.Option(help="Calib params JSON to write.")],
+    policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),
+    debug_fit_all: Annotated[
+        bool, typer.Option(help="Fixture only: fit on every unit (no calib split). Labeled.")
+    ] = False,
+) -> None:
+    """Fit temperatures and routing thresholds on the calib split; write hashed params."""
+    from bench import calibrate as cal
+    from bench.config import load_policy
+    from bench.label import read_units
+    from bench.score import read_decisions
+
+    if not debug_fit_all:
+        typer.echo("calib split selection arrives with `bench split` (M5); use --debug-fit-all")
+        raise typer.Exit(2)
+    unit_map = {u.id: u for u in read_units(units)}
+    params = cal.fit(read_decisions(decisions), unit_map, load_policy(policy), "fixture_debug")
+    cal.write(params, out)
+    typer.echo(
+        f"{params.arm}/{params.qs}: t_low={params.t_low:.4f} t_high={params.t_high:.4f} "
+        f"fit_on={params.fit_on} hash={params.content_hash[:12]} -> {out}"
+    )
+
+
 if __name__ == "__main__":
     app()

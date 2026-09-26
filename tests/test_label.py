@@ -17,7 +17,7 @@ from bench.label import (
     member_spans,
     read_docs,
 )
-from tests.fixture_expected import FIXTURE_UNITS
+from tests.fixture_expected import FIXTURE_UNIT_OFFSETS, FIXTURE_UNITS
 
 ROOT = Path(__file__).resolve().parent.parent
 POLICY = load_policy(ROOT / "config" / "policy.yaml")
@@ -193,4 +193,5 @@ def test_fixture_units_match_hand_gold() -> None:
     units = label_docs(docs, ARMS.arms["A"], POLICY, tok, tok.name)
     got = {u.id: (u.gold, u.split_span) for u in units}
     assert got == FIXTURE_UNITS
+    assert {u.id: (u.start, u.end, u.tokens) for u in units} == FIXTURE_UNIT_OFFSETS
     assert all(not u.truncated and u.tokens <= 256 for u in units)
