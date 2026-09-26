@@ -414,6 +414,14 @@ def routing(rows: Sequence[Row]) -> RoutingMetrics:
     )
 
 
+def _truncated(r: Row) -> bool:
+    """The runner's per-question measurement when present (laya's real room is larger than the
+    label stage's max_len - head_max_len budget); the label flag only for decisions without it."""
+    if r.decision.state_tokens is not None:
+        return bool(r.decision.truncated_questions)
+    return r.unit.truncated
+
+
 def _slice_keys(r: Row) -> list[tuple[str, str]]:
     d = r.doc
     perturb = [t for t in PERTURBATION_TAGS if t in d.tags] or ["none"]
@@ -424,7 +432,7 @@ def _slice_keys(r: Row) -> list[tuple[str, str]]:
         ("hard_negative", "yes" if "hard_negative" in d.tags else "no"),
         ("pre_redacted", "yes" if "pre_redacted" in d.tags else "no"),
         ("split_span", "yes" if r.unit.split_span else "no"),
-        ("truncated", "yes" if r.unit.truncated or r.decision.truncated_questions else "no"),
+        ("truncated", "yes" if _truncated(r) else "no"),
         ("lang", d.lang),
         *(("perturbation", t) for t in perturb),
     ]

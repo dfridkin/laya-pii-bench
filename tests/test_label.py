@@ -86,7 +86,7 @@ def test_backoff_lands_on_word_start() -> None:
     first_end = windows[0][1]
     assert first_end == 18  # 20 is mid-word; 18 starts a word
     assert text[offs[first_end][0]].isspace()
-    assert windows[1][0] == first_end - 4
+    assert windows[1][0] == first_end - 3  # 18 - 4 = 14 is mid-word; snapped to the word at 15
 
 
 def test_hard_cut_without_word_start() -> None:
@@ -94,6 +94,22 @@ def test_hard_cut_without_word_start() -> None:
     offs = fake_offsets(text)
     windows = chunk_windows(text, offs, 20, 4)
     assert windows[0] == (0, 20)
+
+
+def test_whitespace_tail_joins_previous_window() -> None:
+    # audit A7: exactly `size` word tokens then a newline gave [(0, 20), (16, 21)], a duplicate unit
+    text = " ".join(["ab"] * 20) + "\n"
+    offs = fake_offsets(text)
+    assert len(offs) == 20  # the trailing newline is part of no token here; add one explicitly
+    offs = [*offs, (len(text) - 1, len(text))]
+    assert chunk_windows(text, offs, 20, 4) == [(0, 21)]
+
+
+def test_next_window_starts_on_a_word() -> None:
+    text = " ".join(["abcdefghi"] * 20)  # words = 3 pieces; word starts at tokens 0, 3, 6, ...
+    offs = fake_offsets(text)
+    windows = chunk_windows(text, offs, 20, 4)
+    assert windows[0] == (0, 18) and windows[1][0] == 15  # 18 - 4 = 14 (mid-word) -> 15
 
 
 def test_size_must_exceed_overlap_plus_backoff() -> None:
@@ -112,7 +128,10 @@ def test_windows_cover_every_token(ws: list[str], size: int, overlap: int) -> No
     windows = chunk_windows(text, offs, size, overlap)
     assert windows[0][0] == 0 and windows[-1][1] == len(offs)
     for (s0, e0), (s1, _) in pairwise(windows):
-        assert s1 == e0 - overlap and s1 > s0
+        assert e0 - overlap <= s1 <= e0 and s1 > s0
+        assert s1 < e0 or overlap == 0  # windows share tokens only when overlap > 0
+        # snapped forward to a word start unless none exists in the overlap
+        assert s1 == e0 - overlap or text[offs[s1][0]].isspace() or text[offs[s1][0] - 1].isspace()
     for s, e in windows:
         assert 0 < e - s <= size
 

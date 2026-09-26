@@ -33,7 +33,11 @@ def _word_start(text: str, offsets: Sequence[tuple[int, int]], j: int) -> bool:
 def chunk_windows(
     text: str, offsets: Sequence[tuple[int, int]], size: int, overlap: int
 ) -> list[tuple[int, int]]:
-    """Token windows [start, end) of at most `size` tokens; neighbours share `overlap` tokens."""
+    """Token windows [start, end) of at most `size` tokens (plus a whitespace-only tail).
+
+    Ends back off up to 8 tokens to a word start; the next window starts `overlap` tokens back,
+    snapped forward to a word start, so windows share at most `overlap` tokens.
+    """
     if size - BACKOFF_TOKENS <= overlap:
         raise ValueError("chunk size must exceed overlap + backoff")
     n = len(offsets)
@@ -46,10 +50,19 @@ def chunk_windows(
                 if _word_start(text, offsets, j):
                     end = j
                     break
+        # a tail of whitespace-only tokens joins this window instead of becoming its own unit
+        # (it would repeat the overlap and be scored twice)
+        if end < n and all(text[a:b].isspace() for a, b in offsets[end:]):
+            end = n
         windows.append((start, end))
         if end >= n:
             return windows
+        # next window starts `overlap` tokens back, snapped forward to a word start
         start = end - overlap
+        for j in range(start, end):
+            if _word_start(text, offsets, j):
+                start = j
+                break
 
 
 def member_spans(spans: Iterable[Span], start: int, end: int) -> list[Span]:
