@@ -1,14 +1,14 @@
 # Status
 
-Active milestone: **M3 Runner, arm A on fixture**
-Last updated: 2026-09-26 (M3 built, gate review pending)
+Active milestone: **M4 Generator**
+Last updated: 2026-09-26 (M3 gate passed)
 
 | Milestone | State | Gate passed | Notes |
 |---|---|---|---|
 | M0 Bootstrap | done | 2026-09-25 (`reports/audits/M0-gate-20260925-2255.md`) | mps, p50 67.8 ms |
 | M1 Contracts + fixture | done | 2026-09-26 (`reports/audits/M1-gate-20260926.md`) | fixture locked; gold audit 0 errors |
 | M2 Scorer + report on fixture | done | 2026-09-26 (`reports/audits/M2-gate-20260926-pass.md`; review #1 FAIL fixed) | golden metrics exact; hash check exits 2 |
-| M3 Runner, arm A on fixture | built, gate re-review pending | | real laya run on fixture; p50 ~500 ms/unit (qs_v1, mps) |
+| M3 Runner, arm A on fixture | done | 2026-09-26 (`reports/audits/M3-gate-20260926-pass.md`; review #1 FAIL fixed) | real laya run on fixture; p50 ~500 ms/unit (qs_v1, mps) |
 | M4 Generator | not started | | |
 | M5 Label + split | not started | | |
 | M6 Zero-shot arms, calibrate, score, report v1 | not started | | |
@@ -131,6 +131,13 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## Later (out of current scope, noted for the owning milestone)
 
+- Before M6: make `Decision.mode` required (or reject rows without it) so an old batched row can't
+  count as batch-1; refuse resume when `decisions.jsonl` exists without `meta.json`.
+- Before M6 qs_v2 speed: laya can silently turn MPS autocast off mid-run (fp32, no device change;
+  agent.py ~640). Record amp/dtype per decision or abort on change. qs_v1 (4 rows) never uses amp.
+- Spec wording: laya-runtime.md says "fall back to cpu and record"; the runner aborts instead
+  (stricter). Update the spec or confirm.
+
 - M6: laya enables MPS mixed precision only at >= 5 rows (`mps_amp_min_rows`), so qs_v1 (4 questions)
   runs fp32 and qs_v2 (5 questions) mixed precision. Label this in the speed comparison.
 - M6: 500 ms/unit on the dev M2 means full runs take hours; run them in the background.
@@ -167,7 +174,7 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## Next action
 
-Rerun `/gate M3`, then close out M3.
+Run `/milestone M4` (generator; largest milestone, sub-steps 4a-4g).
 
 ## Session log
 
@@ -176,3 +183,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-25 M0: hw fingerprint, bench hw, laya_smoke (mps p50 67.8 ms); gate PASS (independent review).
 - 2026-09-26 M1: domain, config, validate, schema, 10-doc fixture; gate PASS, gold audit 0 errors; fixtures locked.
 - 2026-09-26 M2: label/calibrate/score/report + golden metrics; review #1 FAIL (calibrated tie noise) fixed; review #2 PASS. D-013, D-014 opened.
+- 2026-09-26 M3: laya client, runner (resume, warmup, meta), real arm-A fixture run (p50 ~500 ms/unit on mps); review #1 FAIL (batched tail, resume provenance, cpu fallback) fixed; review #2 PASS.
