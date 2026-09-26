@@ -211,7 +211,7 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 Audit complete: B1-B5 decided (D-005 amended, D-015..D-018), fix batch A1-A11 done and
 independently reviewed (PASS). Next: `/milestone M4` (starts with the `doc_plan` draft for owner
-review, D-015, and `Span.value`, D-016). Audit C1-C8 before M6.
+review, D-015, and `Span.value`, D-016). Audit C2-C8 before M6 (C1 decided: D-019, built in M5).
 
 ## Session log
 
@@ -224,3 +224,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-26 audit: three independent audits of M0-M3; 2 blockers (split design, calib/scores untracked), 2 high code defects (calib provenance, recall CI). M4 on hold pending decisions.
 - 2026-09-26 audit fixes A1-A11 applied with tests; fixture artifacts regenerated (answers identical). Review pending.
 - 2026-09-26 audit fix batch: review 1 FAIL (R1-R7 + test gaps) fixed; review 2 PASS; follow-ups closed. Ready for M4.
+- 2026-09-26 C1 decided as D-019 (calib freeze in git, enforced by score); added to M5 build + gate, M6 gate 2 made checkable.

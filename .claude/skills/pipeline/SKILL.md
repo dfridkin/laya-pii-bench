@@ -16,7 +16,8 @@ Requires milestones through M6 (full) or M3 (smoke) to have passed their gates. 
   1. `make gen` → check `data/gen_manifest.json` validators all pass
   2. `make label split`
   3. `make run-all` (poll the log; report progress per arm)
-  4. `make calibrate` → commit `calib/` hashes listed in the commit message before scoring
+  4. `make calibrate` then `make freeze-calib` (commits calib files; `bench score` refuses
+     uncommitted calib, D-019)
   5. `make score report`
   6. Delegate to the `results-analyst` subagent; save its review to
      `reports/audits/pipeline_<YYYYMMDD-HHMM>.md`.

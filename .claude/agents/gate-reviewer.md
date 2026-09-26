@@ -21,8 +21,9 @@ When invoked with a milestone ID:
    - split grouping by site; no test-split access before score
    - routing/threshold logic only in score
    - no `noul` question sent to the English checkpoint
-   - no hand-edited generated artifacts (git log for data/runs/calib/scores should be empty; they're
-     gitignored except calib hashes in commit messages)
+   - no hand-edited generated artifacts (data/ and runs/ are gitignored; calib/ and scores/ are
+     tracked from M5 per D-019: calib only via `make freeze-calib` commits, scores citing a calib
+     commit that precedes them)
 5. Return this format:
 
 ```

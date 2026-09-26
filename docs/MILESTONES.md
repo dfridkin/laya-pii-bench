@@ -146,6 +146,10 @@ commit after each.
 - `bench/label.py` full: units for chunk (256/768), section (2k), doc (4k/8k) per arm config;
   gold answers per `docs/specs/gold-labels.md`; `truncated` flag; `split_span` flag.
 - `bench/split.py`: site-grouped stratified split + holdout doc type.
+- Calib freeze (D-019): stop ignoring `calib/` and `scores/` in `.gitignore`; `make freeze-calib`
+  commits calib files with their content hashes in the message; `bench score` refuses a calib file
+  that isn't committed and unmodified at HEAD and records the calib commit sha and time in
+  `RunContext`. Split-aware `calibrate` (fit on calib only) and `score` (test/holdout).
 
 **Gate**
 1. No site id and no subject id appears in more than one of train/calib/test (test asserts).
@@ -156,6 +160,8 @@ commit after each.
    counts are reported, missing classes marked (D-005).
 3. Label stage is deterministic (hash check).
 4. Unit counts per arm and per split written to `data/label_manifest.json`.
+5. `bench score` with an uncommitted or locally modified calib file exits non-zero; with a
+   committed one, the scores record its commit sha (D-019; tested on the fixture).
 
 ---
 
@@ -171,7 +177,9 @@ commit after each.
 
 **Gate**
 1. All 10 run dirs have `decisions.jsonl` covering 100% of their calib/test/holdout units.
-2. `calib/*.json` files committed **before** any `scores/*.json` exists (git log order checked).
+2. `calib/*.json` files committed **before** any `scores/*.json` exists (git log order checked):
+   every scores file cites a calib commit that is an ancestor of the commit adding the scores and
+   older than the scores' `created_at` (D-019).
 3. `reports/report.md` includes headline operating point, per-question metrics, calibration
    raw vs. calibrated, speed table with hardware label, all slices, bootstrap CIs.
 4. If any headline recall CI half-width > 0.01, STATUS flags D-008 for review.

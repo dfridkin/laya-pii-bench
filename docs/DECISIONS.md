@@ -24,6 +24,7 @@ entries only via `/decide`.
 | D-016 | Contract details for M4/M5 (audit B3) | DECIDED | `Span.value: str \| None` (generator always fills it; validate checks `text[start:end] == value` when present; fixture stays valid). Split group key = `world_refs.study + "/" + world_refs.site`; generator keeps site numbers unique within a study | Types change first; rerun gen onward |
 | D-017 | Sponsor/CRO persons (audit B4; also the CRA-role question) | DECIDED | Sponsor-role spans are `staff_pii` and count as PII; `policy.role_map.sponsor = staff`, so their subject_role answer is `staff` (qs_v1: "monitors, or other site staff"). CRAs stay role `staff` | Rerun label onward |
 | D-018 | Staff identity across splits (audit B5) | DECIDED | Each staff person belongs to exactly one site in the world model (no CRA across sites, no PI across studies); M5 gate 1 also checks staff person ids across train/calib/test. Holdout IRB letters may name their site's PI; report a caveat that arm C may have seen those names | Rerun gen onward |
+| D-019 | Calib freeze before scoring (audit C1) | DECIDED | `calib/*.json` and `scores/*.json` are tracked in git (not ignored). `make freeze-calib` commits calib files with their content hashes in the message. `bench score` refuses unless the calib file is committed and unmodified at HEAD, and records the calib commit sha and commit time in the scores. Applies to fixture debug calibs too. M6 gate 2 checks that each scores file cites a calib commit that is an ancestor of the scores commit and older than its `created_at` | Rescore only |
 
 ## Log
 
@@ -37,3 +38,4 @@ Append entries as `YYYY-MM-DD D-nnn: <change> (by <who>)`.
 - 2026-09-26 D-016, D-017, D-018 decided (audit B3-B5); policy.role_map.sponsor none -> staff (by Dmitriy).
 - 2026-09-26 D-013 provisional text extended: `--allow-no-meta` tied to fixture_debug calib (fix-batch review 2 follow-up; by Claude, pending owner).
 - 2026-09-26 D-013 confirmed as written, incl. `--allow-no-meta` only with a fixture_debug calib; OPEN -> DECIDED (by Dmitriy).
+- 2026-09-26 D-019 decided (audit C1): calib frozen in git before scoring, enforced by `bench score`; built in M5 (by Dmitriy).
