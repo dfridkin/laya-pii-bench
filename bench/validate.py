@@ -57,6 +57,11 @@ class Report:
         return bool(self.results) and self.n_valid == len(self.results)
 
 
+def _splits_word(text: str, pos: int) -> bool:
+    """True if `pos` falls between two alphanumeric characters (an edge cutting a token)."""
+    return 0 < pos < len(text) and text[pos - 1].isalnum() and text[pos].isalnum()
+
+
 def _check_offsets(text: str, name: str, items: Sequence[Span | Negative]) -> Iterable[str]:
     for i, it in enumerate(items):
         if it.end > len(text):
@@ -65,6 +70,8 @@ def _check_offsets(text: str, name: str, items: Sequence[Span | Negative]) -> It
         value = text[it.start : it.end]
         if value != value.strip():
             yield f"{name}[{i}] {value!r} has leading/trailing whitespace"
+        if _splits_word(text, it.start) or _splits_word(text, it.end):
+            yield f"{name}[{i}] {value!r} starts or ends inside a word"
     starts = [it.start for it in items]
     if starts != sorted(starts):
         yield f"{name} not sorted by start"

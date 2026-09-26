@@ -66,13 +66,16 @@ def test_valid_doc(policy: Policy) -> None:
         ({"spans": [span(8, 99)]}, "beyond text length"),
         ({"negatives": [{"start": 50, "end": 99, "kind": "k"}]}, "beyond text length"),
         ({"spans": [span(7, 18)]}, "whitespace"),
+        ({"spans": [span(9, 18), span(24, 32)]}, "inside a word"),
+        ({"spans": [span(8, 17), span(24, 32)]}, "inside a word"),
+        ({"negatives": [{"start": 44, "end": 55, "kind": "protocol_no"}]}, "inside a word"),
         ({"spans": [span(24, 32), span(8, 18)]}, "not sorted"),
         ({"spans": [span(8, 18), span(13, 19)]}, "overlap"),
         (
             {
                 "negatives": [
-                    {"start": 43, "end": 50, "kind": "a"},
-                    {"start": 46, "end": 55, "kind": "b"},
+                    {"start": 43, "end": 51, "kind": "a"},  # FTX-4471
+                    {"start": 47, "end": 55, "kind": "b"},  # 4471-012
                 ]
             },
             "negatives[0] and negatives[1] overlap",
