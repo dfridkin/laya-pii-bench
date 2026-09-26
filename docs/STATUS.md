@@ -1,11 +1,11 @@
 # Status
 
-Active milestone: **M0 Bootstrap**
-Last updated: 2026-09-25 (scaffold created)
+Active milestone: **M1 Contracts + fixture**
+Last updated: 2026-09-25 (M0 gate passed)
 
 | Milestone | State | Gate passed | Notes |
 |---|---|---|---|
-| M0 Bootstrap | built, gate review pending | | mps, p50 67.8 ms |
+| M0 Bootstrap | done | 2026-09-25 (`reports/audits/M0-gate-20260925-2255.md`) | mps, p50 67.8 ms |
 | M1 Contracts + fixture | not started | | |
 | M2 Scorer + report on fixture | not started | | |
 | M3 Runner, arm A on fixture | not started | | |
@@ -39,14 +39,17 @@ Last updated: 2026-09-25 (scaffold created)
   one the router gates on before building `score` routing. Store both.
 - M3: checkpoint warns `choice:11+` temperature out of range (clamped to 0.5). Irrelevant while
   every question has <= 10 options; keep it that way.
+- M3: `models.lock.json` stores absolute HF cache paths (one machine). Resolve path at load time
+  from repo + revision instead (download_models.py writes it; fix there, not by hand).
+- M3: runner warmup follows spec default (10 calls on fixture units), not the M0 smoke's 5.
 - M6/B4: dev box has 8 GB RAM; 8192-token multilingual runs may be memory-bound on MPS.
 
 ## Next action
 
-Run `/gate M0`.
+Run `/milestone M1`.
 
 ## Session log
 
 Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 
-- 2026-09-25 M0: hw fingerprint, bench hw, laya_smoke (mps p50 67.8 ms); gate review next.
+- 2026-09-25 M0: hw fingerprint, bench hw, laya_smoke (mps p50 67.8 ms); gate PASS (independent review).
