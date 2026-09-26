@@ -1,0 +1,21 @@
+id: fx08
+doc_type: lab_report
+lang: en
+tags: [ocr_noise]
+length_bucket: short
+pii_depth: null
+world_refs: {study: FTX-4471-012, site: "1002", subjects: ["1002-0007"]}
+gen_meta: {source: hand_fixture, case: ocr_noisy_mrn}
+text: |
+  LAB0RATORY REP0RT    Brightwater Clinical Research
+  Subject: ⟦s|1002-0007|coded_id|patient|subject_id|plain⟧     MRN: ⟦s|0O7Z1l84|phi_direct|patient|mrn|ocr_noisy⟧
+  Collected: ⟦s|21-Aug-2025|phi_quasi|patient|event_date|dd_mon_yyyy⟧   Visit: 4
+
+  Test          Result   Units    Flag
+  ALT           34       U/L
+  AST           29       U/L
+  Creatinine    1.4      mg/dL    H
+  Hemoglobin    11.2     g/dL     L
+  P1atelets     212      10^9/L
+
+  Specimen received ambient. Hemolysis index normal.

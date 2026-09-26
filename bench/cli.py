@@ -65,5 +65,16 @@ def schema(
     typer.echo(f"wrote {export(out)}")
 
 
+@app.command("build-fixture")
+def build_fixture(
+    src: Annotated[Path, typer.Option(help="Hand-labeled sources.")] = Path("fixtures/mini/src"),
+    out: Annotated[Path, typer.Option(help="Output JSONL.")] = Path("fixtures/mini/docs.jsonl"),
+) -> None:
+    """Resolve the hand-labeled fixture sources (inline sentinel markup) into docs JSONL."""
+    from bench.fixture import write
+
+    typer.echo(f"wrote {write(src, out)} docs -> {out}")
+
+
 if __name__ == "__main__":
     app()

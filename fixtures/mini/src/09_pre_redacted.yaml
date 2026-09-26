@@ -1,0 +1,19 @@
+id: fx09
+doc_type: sae_cioms
+lang: en
+tags: [hard_negative, pre_redacted]
+length_bucket: short
+pii_depth: null
+world_refs: {study: FTX-4471-012, site: "1001", subjects: []}
+gen_meta: {source: hand_fixture, case: pre_redacted}
+text: |
+  CIOMS I: Suspect Adverse Reaction Report
+
+  1. Patient initials: ⟦n|[REDACTED]|pre_redacted⟧     1a. Country: USA
+  2. Date of birth: ⟦n|XX-XXX-XXXX|pre_redacted⟧     2a. Age: 58     3. Sex: F
+  4-6. Reaction onset: ⟦n|**-***-2025|pre_redacted⟧
+  7+13. Describe reaction: Grade 3 neutropenia detected at a scheduled visit. Study drug was held for 7 days and restarted at a reduced dose. Recovered.
+  14. Suspect drug: ⟦n|FTX-4471|compound_code⟧ 50 mg tablets, oral, once daily
+  22. Concomitant drugs: none
+  24b. Reporter: ⟦n|***|pre_redacted⟧, investigator
+  25a. Report type: follow-up     Report version date: ⟦n|05-Sep-2025|non_phi_date⟧

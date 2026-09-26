@@ -1,0 +1,19 @@
+id: fx03
+doc_type: delegation_log
+lang: en
+tags: [table]
+length_bucket: short
+pii_depth: null
+world_refs: {study: FTX-4471-012, site: "1002", subjects: []}
+gen_meta: {source: hand_fixture, case: staff_only_delegation_log}
+text: |
+  Site Delegation of Authority Log: Brightwater Clinical Research
+
+  | Name | Role | Initials | Delegated tasks | Contact |
+  |---|---|---|---|---|
+  | ⟦s|Dr. Helen Marsh|staff_pii|staff|person_name|title_first_last⟧ | Principal Investigator | ⟦s|HM|staff_pii|staff|initials|plain⟧ | 1-14 | ⟦s|h.marsh@brightwater-cr.example.org|staff_pii|staff|email|institutional⟧ |
+  | ⟦s|Dr. Rafael Ortega|staff_pii|staff|person_name|title_first_last⟧ | Sub-Investigator | ⟦s|RO|staff_pii|staff|initials|plain⟧ | 2-9, 12 | ⟦s|(555) 013-7702|staff_pii|staff|phone|us_paren⟧ |
+  | ⟦s|Priya Raman|staff_pii|staff|person_name|first_last⟧ | Study Coordinator | ⟦s|PR|staff_pii|staff|initials|plain⟧ | 3, 5-8, 13 | ⟦s|p.raman@brightwater-cr.example.org|staff_pii|staff|email|institutional⟧ |
+  | ⟦s|Kenji Watanabe|staff_pii|staff|person_name|first_last⟧ | Research Pharmacist | ⟦s|KW|staff_pii|staff|initials|plain⟧ | 10, 11 | ⟦s|(555) 013-7718|staff_pii|staff|phone|us_paren⟧ |
+
+  Task key: 1 informed consent, 2 eligibility, 3 CRF entry, 5 vital signs, 10 drug accountability, 13 query resolution.

@@ -1,0 +1,17 @@
+id: fx04
+doc_type: crf_page
+lang: en
+tags: [table]
+length_bucket: short
+pii_depth: null
+world_refs: {study: FTX-4471-012, site: "1001", subjects: ["1001-0023", "1001-0031", "1001-0044"]}
+gen_meta: {source: hand_fixture, case: crf_table_subject_ids_only}
+text: |
+  CRF Page 14: Vital Signs, Visit 3
+
+  Subject      SBP (mmHg)   DBP (mmHg)   HR (bpm)   Temp (C)   Position
+  ⟦s|1001-0023|coded_id|patient|subject_id|plain⟧    128          82           71         36.8       seated
+  ⟦s|1001-0031|coded_id|patient|subject_id|plain⟧    141          88           77         37.1       seated
+  ⟦s|1001-0044|coded_id|patient|subject_id|plain⟧    117          74           64         36.6       supine
+
+  Measurements taken after 5 minutes of rest. Repeat any SBP above 160 mmHg within 15 minutes.

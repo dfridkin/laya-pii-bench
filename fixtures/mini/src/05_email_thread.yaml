@@ -1,0 +1,25 @@
+id: fx05
+doc_type: site_correspondence
+lang: en
+tags: [email_quoting]
+length_bucket: short
+pii_depth: null
+world_refs: {study: FTX-4471-012, site: "1002", subjects: ["1002-0007"]}
+gen_meta: {source: hand_fixture, case: email_thread_signature}
+text: |
+  From: ⟦s|Priya Raman|staff_pii|staff|person_name|first_last⟧ <⟦s|p.raman@brightwater-cr.example.org|staff_pii|staff|email|institutional⟧>
+  To: ⟦s|Tom Becker|staff_pii|staff|person_name|first_last⟧ <⟦s|t.becker@halcyon-cro.example.com|staff_pii|staff|email|institutional⟧>
+  Subject: RE: Query 2291, conmed page for subject ⟦s|1002-0007|coded_id|patient|subject_id|plain⟧
+
+  Hi ⟦s|Tom|staff_pii|staff|person_name|first⟧,
+
+  The conmed entry for ⟦s|1002-0007|coded_id|patient|subject_id|plain⟧ is corrected: the paracetamol stop date now matches the source. I also closed the open query on the visit 4 vitals page.
+
+  Best regards,
+  ⟦s|Priya Raman|staff_pii|staff|person_name|first_last⟧
+  Study Coordinator, Brightwater Clinical Research
+  Tel. ⟦s|+1 555 013 4471|staff_pii|staff|phone|intl⟧
+
+  > On Tue, 12 Aug 2025, ⟦s|Tom Becker|staff_pii|staff|person_name|first_last⟧ wrote:
+  > Hi ⟦s|Priya|staff_pii|staff|person_name|first⟧, could you check the conmed log for ⟦s|1002-0007|coded_id|patient|subject_id|plain⟧? The
+  > paracetamol stop date is after the last visit. Thanks, ⟦s|Tom|staff_pii|staff|person_name|first⟧

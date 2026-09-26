@@ -1,0 +1,21 @@
+id: fx02
+doc_type: protocol_section
+lang: en
+tags: []
+length_bucket: short
+pii_depth: null
+world_refs: {study: FTX-4471-012, site: SPONSOR, subjects: []}
+gen_meta: {source: hand_fixture, case: clean_protocol_text}
+text: |
+  5.2 Exclusion Criteria
+
+  Participants are not eligible for enrollment if any of the following apply:
+
+  1. Known hypersensitivity to the investigational product or any of its excipients.
+  2. Estimated glomerular filtration rate below 45 mL/min/1.73 m2 at screening.
+  3. Active hepatitis B or hepatitis C infection, or known HIV infection with a detectable viral load.
+  4. Participation in another interventional clinical study within 30 days before the first dose.
+  5. Pregnancy or breastfeeding, or unwillingness to use highly effective contraception during the treatment period and for 90 days after the last dose.
+  6. Any condition that, in the judgment of the investigator, would interfere with the evaluation of the study objectives or put the participant at undue risk.
+
+  Participants who fail screening may be rescreened once, after approval from the medical monitor. All screening assessments must then be repeated.

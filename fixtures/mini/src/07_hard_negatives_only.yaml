@@ -1,0 +1,14 @@
+id: fx07
+doc_type: protocol_section
+lang: en
+tags: [hard_negative]
+length_bucket: short
+pii_depth: null
+world_refs: {study: FTX-4471-012, site: SPONSOR, subjects: []}
+gen_meta: {source: hand_fixture, case: hard_negatives_only}
+text: |
+  9.4 Statistical Methods: Protocol ⟦n|FTX-4471-012|protocol_no⟧ (⟦n|NCT09990421|nct_id⟧; EudraCT ⟦n|2031-004417-22|eudract_no⟧), Version 4.0, effective ⟦n|03-Feb-2025|non_phi_date⟧
+
+  Time-to-event endpoints will be estimated with the ⟦n|Kaplan-Meier|eponym⟧ method and compared with a stratified log-rank test. Creatinine clearance is calculated with the ⟦n|Cockcroft-Gault|eponym⟧ formula. Secondary continuous endpoints are compared with the ⟦n|Wilcoxon|eponym⟧ rank-sum test, with ⟦n|Bonferroni|eponym⟧ correction across the four secondary endpoints.
+
+  Investigational product ⟦n|FTX-4471|compound_code⟧ is supplied as 50 mg tablets, lot ⟦n|LT-240917-B|lot_no⟧, in kits numbered from ⟦n|K-004417|kit_no⟧. Dosing visits occur on Day 1 and ⟦n|Day 15 ±2|visit_window⟧. Database lock is planned for ⟦n|30-Nov-2026|non_phi_date⟧.

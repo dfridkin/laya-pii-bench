@@ -1,0 +1,14 @@
+id: fx01
+doc_type: csr_patient_narrative
+lang: en
+tags: []
+length_bucket: short
+pii_depth: null
+world_refs: {study: FTX-4471-012, site: "1001", subjects: ["1001-0023"]}
+gen_meta: {source: hand_fixture, case: dense_phi_narrative}
+text: |
+  Patient Narrative: Subject ⟦s|1001-0023|coded_id|patient|subject_id|plain⟧
+
+  ⟦s|Marta Kowalczyk|phi_direct|patient|person_name|first_last⟧ (initials ⟦s|M.K.|phi_quasi|patient|initials|dotted⟧), a 64-year-old woman born ⟦s|14-Mar-1961|phi_direct|patient|dob|dd_mon_yyyy⟧, MRN ⟦s|00482913|phi_direct|patient|mrn|site_1001⟧, was randomized on ⟦s|02-Jun-2025|phi_quasi|patient|event_date|dd_mon_yyyy⟧ (randomization no. ⟦s|R-58213|coded_id|patient|rand_no|prefixed⟧) and received her first dose the same day. She lives at ⟦s|418 Alder Crest Road, Linden Valley, OR|phi_direct|patient|address|street_city_state⟧ ⟦s|97411|phi_quasi|patient|zip|us5⟧ and can be reached at ⟦s|(555) 014-2290|phi_direct|patient|phone|us_paren⟧.
+
+  On ⟦s|16-Jun-2025|phi_quasi|patient|event_date|dd_mon_yyyy⟧ she reported a grade 2 headache and nausea. ⟦s|Ms. Kowalczyk|phi_direct|patient|person_name|title_last⟧ was seen at the clinic by the investigator, ⟦s|Dr. Samuel Okafor|staff_pii|staff|person_name|title_first_last⟧, who judged the event possibly related to study drug. Treatment was not interrupted. The event resolved on ⟦s|19-Jun-2025|phi_quasi|patient|event_date|dd_mon_yyyy⟧ without sequelae. Her medical history includes hypertension, controlled with lisinopril.

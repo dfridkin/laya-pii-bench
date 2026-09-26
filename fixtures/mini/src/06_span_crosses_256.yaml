@@ -1,0 +1,33 @@
+id: fx06
+doc_type: monitoring_visit_report
+lang: en
+tags: []
+length_bucket: short
+pii_depth: null
+world_refs: {study: FTX-4471-012, site: "1001", subjects: ["1001-0031"]}
+gen_meta: {source: hand_fixture, case: span_crosses_256_token_boundary}
+text: |
+  Monitoring Visit Report: Interim Monitoring Visit 6, Linden Valley Medical Center
+
+  Monitor: ⟦s|Tom Becker|staff_pii|staff|person_name|first_last⟧, Clinical Research Associate
+  Site staff present: ⟦s|Dr. Samuel Okafor|staff_pii|staff|person_name|title_first_last⟧ (Principal Investigator), ⟦s|Lena Brandt|staff_pii|staff|person_name|first_last⟧ (Study Coordinator)
+
+  1. Overview
+
+  The visit covered source data verification for the three subjects enrolled since the previous visit, a review of the investigator site file, investigational product accountability, and follow-up of the action items raised at visit 5. All action items from visit 5 were closed except the outstanding training record for the new pharmacy technician.
+
+  2. Investigator Site File
+
+  The investigator site file was complete and current. The latest protocol amendment and the revised informed consent form were filed with the ethics committee approval letter. The delegation log was updated to add the new pharmacy technician.
+
+  3. Source Data Verification
+
+  Source data verification was completed for all visits through visit 4. Two findings were raised. First, a concomitant medication recorded in the clinic notes was missing from the electronic case report form; the coordinator entered it during the visit. Second, the source documents for one subject listed an outdated contact address. The coordinator confirmed that the current address is ⟦s|2207 Quarry Hill Lane, Apartment 5B, Linden Valley, OR|phi_direct|patient|address|street_apt_city_state⟧, updated the source, and noted the change in the subject file. No other discrepancies were found.
+
+  4. Investigational Product
+
+  Drug accountability was reconciled for all dispensed kits. Returned tablets were counted and matched the dosing diaries. No temperature excursions were reported.
+
+  5. Action Items
+
+  The site will file the pharmacy technician training record and send confirmation to the monitor before the next visit.
