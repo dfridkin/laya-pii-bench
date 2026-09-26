@@ -43,6 +43,7 @@ class Span(BaseModel):
     category: PiiCategory; role: SubjectRole
     value_kind: str                            # "person_name", "mrn", "dob", "subject_id", ...
     surface: str                               # variant generator used, e.g. "last_first_upper"
+    value: str | None = None                   # text[start:end] at generation (D-016)
 
 class Negative(BaseModel):
     start: int; end: int

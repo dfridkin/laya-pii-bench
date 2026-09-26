@@ -19,7 +19,12 @@ Template → Render → Perturb → Validate → docs.jsonl
 ```
 
 The same subject appears across SAE form, narrative, and deviation log with consistent dates.
-Splits group on `world_refs.site`.
+Splits group on `world_refs.site` (D-005, amended): sponsor-level documents (protocol sections)
+have no site and no subjects and are split per document; IRB letters are all held out and must
+name no subjects (IRB and site staff only).
+Every staff person belongs to exactly one site (no CRA across sites, no PI across studies; D-018).
+Sponsor/CRO persons are labeled `staff_pii` with role `sponsor` (answered as staff, D-017).
+Split group key is `study/site`; site numbers are unique within a study (D-016).
 
 ## Layout
 

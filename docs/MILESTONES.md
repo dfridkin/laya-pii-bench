@@ -148,9 +148,12 @@ commit after each.
 - `bench/split.py`: site-grouped stratified split + holdout doc type.
 
 **Gate**
-1. No site id and no subject id appears in more than one split (test asserts).
-2. Every split has ≥ 1 example of every gold class for every question in both question sets
-   (report counts; if a class is missing in calib, stop and ask).
+1. No site id and no subject id appears in more than one of train/calib/test (test asserts).
+   Holdout (all IRB letters, D-005) is exempt from site grouping and contains no subject ids.
+   No staff person id appears in more than one of train/calib/test (D-018).
+2. Each of train/calib/test has ≥ 1 example of every gold class for every question in both
+   question sets (report counts; if a class is missing in calib, stop and ask). Holdout class
+   counts are reported, missing classes marked (D-005).
 3. Label stage is deterministic (hash check).
 4. Unit counts per arm and per split written to `data/label_manifest.json`.
 

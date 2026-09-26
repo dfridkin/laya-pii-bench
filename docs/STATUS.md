@@ -120,12 +120,10 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## Questions for the owner (not blocking; candidates for DECISIONS entries)
 
+(CRA role and sponsor-level docs answered: D-017, D-005 amended.)
+
 - Staff initials (fx03) labeled `staff_pii`; domain.md says "name + contact". Confirm for the generator.
-- CRO monitor (CRA) labeled role `staff` per domain.md; if CRO/sponsor staff should be `sponsor` (maps to
-  subject_role none), gold changes.
 - Relative timing ("Day 53", "discharged after nine days") left unlabeled; spec is silent.
-- Sponsor-level docs (protocol sections) have no site; fixture uses `site: SPONSOR`. M5 split needs a rule
-  for them (they'd all land in one group).
 - `config/arms.yaml` B2: `target_tokens: 1800` exceeds the state budget 2048-256 = 1792, so full-size
   sections would be flagged truncated. Lower to <= 1792 or accept.
 
@@ -174,8 +172,8 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## Next action
 
-Cross-milestone audit done (`reports/audits/M0-M3-audit-20260926.md`): fix batch A1-A11 and
-owner decisions B1-B5 before `/milestone M4`; C1-C8 before M6.
+Audit B1-B5 decided (D-005 amended, D-015..D-018). Next: fix batch A1-A11 (code + tests,
+independent review), then `/milestone M4`. C1-C8 before M6.
 
 ## Session log
 

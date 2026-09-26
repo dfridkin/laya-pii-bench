@@ -132,7 +132,7 @@ def test_member_spans_overlap_semantics() -> None:
         ([], ("B", "none", "none")),
         ([span(0, 4)], ("A", "patient", "direct")),
         ([span(0, 4, "staff_pii", "staff")], ("A", "staff", "staff")),
-        ([span(0, 4, "staff_pii", "sponsor")], ("A", "none", "staff")),
+        ([span(0, 4, "staff_pii", "sponsor")], ("A", "staff", "staff")),  # D-017
         ([span(0, 4, "coded_id"), span(5, 9, "staff_pii", "staff")], ("A", "both", "coded")),
         ([span(0, 4, "phi_quasi"), span(5, 9, "phi_direct")], ("A", "patient", "direct")),
     ],

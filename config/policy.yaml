@@ -15,11 +15,11 @@ category_answer_map:
   coded_id: coded
   staff_pii: staff
 
-# Roles that count toward subject_role. sponsor maps to none.
+# Roles that count toward subject_role. Sponsor/CRO people answer as staff (D-017).
 role_map:
   patient: patient
   staff: staff
-  sponsor: none
+  sponsor: staff
 
 doc_kind_map:
   csr_patient_narrative: narrative
