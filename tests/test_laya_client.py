@@ -57,3 +57,17 @@ def test_predict_adapts(client) -> None:  # type: ignore[no-untyped-def]
     assert all(a.answer_confidence is not None for a in answers)
     batch, ns_b = client.predict_batch(["a", "b"])
     assert len(batch) == 2 and ns_b > 0
+
+
+def test_multilingual_client_explicit_max_len() -> None:
+    """Invariant 8: the multilingual checkpoint loads from its subfolder and always gets an explicit
+    max_len; its state room at 1024 is far above the English one."""
+    from bench.laya_client import LayaClient, to_answers
+
+    arm = load_arms(ROOT / "config" / "arms.yaml").arms["B1"]
+    qs = load_question_set(ROOT / "config" / "questions" / "qs_v1.yaml")
+    ml = LayaClient("multilingual", build(qs, "multilingual"), arm.max_len, arm.head_max_len,
+                    ROOT / "models.lock.json")  # fmt: skip
+    assert ml.max_len == 1024 and all(800 < r < 1024 for r in ml._room.values())
+    res, _ = ml.predict("Patientin Marta Kowalczyk, geb. 14.03.1961, Prüfzentrum 2104.")
+    assert [a.question for a in to_answers(res, ml.questions)] == list(qs.questions)

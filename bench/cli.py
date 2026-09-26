@@ -319,6 +319,9 @@ def report(
     from bench import report as rep
 
     paths = scores or sorted(scores_dir.glob("*.json"))
+    if not paths:
+        typer.echo(f"error: no scores given and none in {scores_dir}/", err=True)
+        raise typer.Exit(2)
     rep.write(rep.read_scores(paths), out)
     typer.echo(f"wrote {out} from {len(paths)} scores file(s)")
     if hud is not None:

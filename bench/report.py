@@ -184,20 +184,21 @@ def _calibration(all_scores: Sequence[Scores]) -> list[str]:
 
 
 def _reliability(cal: dict[str, CalibrationMetrics]) -> list[str]:
-    c = cal.get("pii_present")
-    if c is None:
-        return []
-    rows = [
-        (f"[{r.lo:.3f}, {r.hi:.3f})", r.n, _f(r.mean_confidence), _f(r.accuracy),
-         c.reliability_calibrated[i].n, _f(c.reliability_calibrated[i].accuracy))
-        for i, r in enumerate(c.reliability_raw)
-        if r.n or c.reliability_calibrated[i].n
-    ]  # fmt: skip
-    return [
-        "Reliability data, `pii_present` (non-empty bins):",
-        "",
-        *_table(["bin", "n raw", "conf raw", "acc raw", "n cal", "acc cal"], rows),
-    ]
+    out: list[str] = []
+    for q, c in cal.items():
+        rows = [
+            (f"[{r.lo:.3f}, {r.hi:.3f})", r.n, _f(r.mean_confidence), _f(r.accuracy),
+             c.reliability_calibrated[i].n, _f(c.reliability_calibrated[i].mean_confidence),
+             _f(c.reliability_calibrated[i].accuracy))
+            for i, r in enumerate(c.reliability_raw)
+            if r.n or c.reliability_calibrated[i].n
+        ]  # fmt: skip
+        out += [
+            f"Reliability data, `{q}` (non-empty bins):",
+            "",
+            *_table(["bin", "n raw", "conf raw", "acc raw", "n cal", "conf cal", "acc cal"], rows),
+        ]
+    return out
 
 
 def _routing(all_scores: Sequence[Scores]) -> list[str]:

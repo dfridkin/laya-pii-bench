@@ -43,7 +43,8 @@ whatever the installed laya version returns: inspect once in M0 and pin in a tes
 ## Device
 
 Order: cuda → mps → cpu. Record the chosen device and torch version in `hw.json`. If mps errors on
-an op, fall back to cpu and record the fallback. ONNX Runtime (`laya[onnx]`) is an optional later
+an op at load, laya falls back to cpu; the run records the actual device in `meta.json`. A
+fallback *during* a run aborts it (the affected batch is discarded; timings would mix). ONNX Runtime (`laya[onnx]`) is an optional later
 arm for CPU latency, not a replacement.
 
 ## Timing protocol

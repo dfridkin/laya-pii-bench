@@ -49,10 +49,12 @@ from bench.domain import (
     Unit,
 )
 from bench.label import member_spans
+from bench.validate import KNOWN_TAGS
 
 ECE_BINS = 15
 SMALL_SLICE = 30
-PERTURBATION_TAGS = ("table", "ocr_noise", "line_wrap", "headers_footers", "email_quoting")
+# document tags that describe a perturbation (the rest of validate.KNOWN_TAGS are content tags)
+PERTURBATION_TAGS = tuple(sorted(KNOWN_TAGS - {"hard_negative", "pre_redacted"}))
 
 
 class ScoreError(ValueError):

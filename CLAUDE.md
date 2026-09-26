@@ -39,12 +39,15 @@ Every stage reads files and writes files. No stage calls another stage in-proces
 | Stage | Reads | Writes |
 |---|---|---|
 | gen | config/gen_spec.yaml, templates | data/docs.jsonl, data/gen_manifest.json |
-| label | docs, config/policy.yaml, config/arms.yaml | data/units/{unit_id}.jsonl |
+| label | docs, config/policy.yaml, config/arms.yaml | data/units/{arm}.jsonl |
 | split | docs | data/splits.json |
-| run | units, splits, arm, question set | runs/{arm}/{qs}/decisions.jsonl + meta.json |
-| calibrate | calib-split decisions | calib/{arm}__{qs}.json (hashed, frozen) |
-| score | test-split decisions + frozen calib | scores/{arm}__{qs}.json |
+| run | units, splits, arm, question set | runs/{arm}/{qs}/decisions.jsonl + meta.json (`{qs}__batch{n}` for batched) |
+| calibrate | calib-split decisions, units | calib/{arm}__{qs}.json (hashed, frozen; records input hashes + calib doc ids) |
+| score | test-split decisions + frozen calib, units, docs, run meta | scores/{arm}__{qs}.json |
 | report | scores, decisions | reports/report.md, hud/public/replay.json |
+
+Named datasets other than `data/docs.jsonl` (e.g. the fixture, `--docs fixtures/mini/docs.jsonl`)
+are namespaced: `data/{name}/units/`, `runs/{name}/{arm}/{qs}` (`bench/paths.py`).
 
 Domain types live in `bench/domain.py` (pydantic v2). JSON Schema exported to `schema/` and
 converted to TS types for the HUD. Change a type there first, then everything downstream.
@@ -53,7 +56,9 @@ converted to TS types for the HUD. Change a type there first, then everything do
 
 1. **Gold spans come only from the sentinel renderer.** Never locate PII by searching the rendered
    text. See `docs/specs/generator.md`.
-2. **Split by site** (`world_refs.site`), never by document or unit. No subject in two splits.
+2. **Split by site** (`study/site`), never by chunk or unit. No subject or staff person in two of
+   train/calib/test. Sponsor-level docs (no site, no subjects) are grouped per document; all IRB
+   letters are the holdout (D-005, D-016, D-018).
 3. **Test split is sealed** until the score stage. Temperatures and thresholds are fit on calib
    only, written to `calib/`, hashed, and the hash is checked by `score`.
 4. **Runner stores raw probabilities.** Routing and thresholds are applied in `score`, so thresholds

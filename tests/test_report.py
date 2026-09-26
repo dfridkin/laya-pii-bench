@@ -127,3 +127,33 @@ def test_report_hud_note_and_empty(pipeline: dict[str, Path], tmp_path: Path) ->
     assert not (tmp_path / "replay.json").exists()
     with pytest.raises(ValueError):
         render([])
+
+
+def test_report_without_scores_is_a_clean_error(tmp_path: Path) -> None:
+    r = RUN.invoke(app, ["report", "--scores-dir", str(tmp_path), "--out", str(tmp_path / "r.md")])
+    assert r.exit_code == 2 and "no scores" in r.output
+    assert not isinstance(r.exception, ValueError)  # was an uncaught "no scores to report"
+
+
+def test_multilabel_and_every_reliability_table_render() -> None:
+    from bench import score as sc
+    from bench.domain import Answer, Decision
+    from bench.label import read_docs
+    from tests.test_metrics_golden import IDENTITY, POLICY
+
+    qs = ["pii_present", "has_phi_direct", "has_phi_quasi", "has_coded_id", "has_staff_pii"]
+    decisions = [
+        Decision(unit_id=u.id, arm="mock", qs="qs_v2", checkpoint="english", checkpoint_rev="M",
+                 max_len=512, latency_ms=1.0, t_offset_ms=0.0, batch_size=1,
+                 answers=[Answer(question=q, choice="A", probs={"A": 0.7, "B": 0.3}, confidence=0.1)
+                          for q in qs])
+        for u in fixture_units()
+    ]  # fmt: skip
+    calib = IDENTITY.model_copy(update={"qs": "qs_v2", "temperatures": {f"{q}:2": 1.0 for q in qs}})
+    docs = read_docs(MINI / "docs.jsonl")
+    text = render([sc.score(decisions, fixture_units(), docs, calib, POLICY,
+                            {"fixture": {d.id for d in docs}}, None,
+                            {"docs": "d", "units": "u", "decisions": "x"})])  # fmt: skip
+    assert "Multi-label categories: micro-F1" in text
+    for q in qs:
+        assert f"Reliability data, `{q}`" in text
