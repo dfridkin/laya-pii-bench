@@ -24,3 +24,4 @@ entries only via `/decide`.
 Append entries as `YYYY-MM-DD D-nnn: <change> (by <who>)`.
 
 - 2026-09-25 D-001..D-012 created from planning conversation (by Dmitriy + Claude).
+- 2026-09-26 Fixture lock: one-time exception to add `fixtures/mini/decisions_mock.jsonl` for M2 (owner approved in session). `.locks/fixtures` removed and recreated around that single new file; `fixtures/mini/src/` and `docs.jsonl` unchanged (by Dmitriy + Claude).
