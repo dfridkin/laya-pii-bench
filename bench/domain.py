@@ -236,11 +236,161 @@ class CalibParams(_Model):
     t_high: float
     recall_target: float
     precision_target: float
-    fit_on: Literal["calib"]
+    # "fixture_debug": fit on the fixture itself (no calib split exists); score refuses it unless
+    # explicitly allowed, and the report labels it. Real runs are always "calib" (invariant 3).
+    fit_on: Literal["calib", "fixture_debug"]
     content_hash: str
 
 
-# Exported to schema/ and to the HUD. Scores joins this list in M2 (docs/specs/domain.md).
+# --- scores (docs/specs/metrics.md; one section per report section) ---------------------------
+
+
+class Interval(_Model):
+    point: float
+    lo: float | None  # 95% document-level bootstrap CI; None if not estimable
+    hi: float | None
+    n_resamples: int  # resamples where the statistic was defined
+
+
+class Headline(_Model):
+    t_low: float
+    t_high: float
+    n_units: int
+    n_docs: int
+    n_positive: int
+    recall: Interval | None  # pii_present recall at t_low; None without positives
+    forward_rate: Interval
+    false_forwards: int
+    precision: float | None  # of p(pii) >= t_low; None if nothing is above t_low
+
+
+class ConfusionMatrix(_Model):
+    labels: list[str]
+    counts: list[list[int]]  # rows = gold, columns = predicted, both in `labels` order
+
+
+class QuestionMetrics(_Model):
+    n: int
+    accuracy: float
+    macro_f1: float  # over labels present in gold or predictions
+    per_class_f1: dict[str, float]
+    confusion: ConfusionMatrix
+    majority_class: str
+    majority_baseline_accuracy: float
+
+
+class MultiLabelMetrics(_Model):
+    questions: list[str]
+    micro_f1: float
+    macro_f1: float
+    per_label_f1: dict[str, float]
+
+
+class ReliabilityBin(_Model):
+    lo: float
+    hi: float
+    n: int
+    mean_confidence: float | None
+    accuracy: float | None
+
+
+class CalibrationMetrics(_Model):
+    n: int
+    ece_raw: float  # 15 equal-width bins on max probability
+    ece_calibrated: float
+    brier_raw: float  # multi-class: mean over units of sum_k (p_k - y_k)^2
+    brier_calibrated: float
+    auroc_raw: float | None  # max probability as a score for correctness; None if one class
+    auroc_calibrated: float | None
+    reliability_raw: list[ReliabilityBin]
+    reliability_calibrated: list[ReliabilityBin]
+
+
+class RoutingMetrics(_Model):
+    counts: dict[Route, int]
+    by_gold_pii: dict[str, dict[Route, int]]  # gold pii_present -> route -> count
+    triggers: dict[str, int]
+
+
+class SliceRow(_Model):
+    dimension: str
+    value: str
+    n_units: int
+    n_docs: int
+    n_positive: int
+    recall: float | None
+    forward_rate: float
+    false_forwards: int
+    pii_accuracy: float
+    small_sample: bool  # n_units < 30
+
+
+class FailureCase(_Model):
+    unit_id: str
+    doc_id: str
+    text_markdown: str  # unit text with gold spans in bold
+    route: Route
+    triggers: list[str]
+    gold: GoldAnswers
+    raw_probs: dict[str, dict[str, float]]
+    calibrated_probs: dict[str, dict[str, float]]
+    missed_value_kinds: list[str]
+
+
+class SplitScores(_Model):
+    coverage_units: int  # units in this split
+    coverage_decided: int  # of those, units with a decision
+    headline: Headline
+    per_question: dict[str, QuestionMetrics]
+    multilabel: MultiLabelMetrics | None  # qs_v2-style per-category binaries
+    calibration: dict[str, CalibrationMetrics]
+    routing: RoutingMetrics
+    slices: list[SliceRow]
+    false_forward_value_kinds: dict[str, int]
+    failures: list[FailureCase]
+
+
+class LatencyStats(_Model):
+    n: int
+    p50_ms: float
+    p95_ms: float
+    p99_ms: float
+    mean_ms: float
+    units_per_sec: float
+
+
+class SpeedMetrics(_Model):
+    hardware: str
+    batch1: LatencyStats | None
+    batched: LatencyStats | None
+    per_doc_ms: LatencyStats | None  # wall time per document = sum over its units (batch-1)
+    warmup_excluded: int
+
+
+class RunContext(_Model):
+    arm: str
+    qs: str
+    splits: list[str]
+    docs_sha256: str
+    units_sha256: str
+    decisions_sha256: str
+    calib_hash: str
+    calib_fit_on: Literal["calib", "fixture_debug"]
+    hw: HwInfo | None
+    laya_version: str
+    checkpoints: list[str]
+    checkpoint_revs: list[str]
+    created_at: str
+
+
+class Scores(_Model):
+    context: RunContext
+    splits: dict[str, SplitScores]
+    speed: SpeedMetrics
+    caveats: list[str]
+
+
+# Exported to schema/ and to the HUD.
 EXPORTED: tuple[type[BaseModel], ...] = (
     Document,
     Unit,
@@ -250,4 +400,5 @@ EXPORTED: tuple[type[BaseModel], ...] = (
     RunMeta,
     CalibParams,
     HwInfo,
+    Scores,
 )

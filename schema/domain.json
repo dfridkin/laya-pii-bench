@@ -38,7 +38,10 @@
           "type": "string"
         },
         "fit_on": {
-          "const": "calib",
+          "enum": [
+            "calib",
+            "fixture_debug"
+          ],
           "type": "string"
         },
         "precision_target": {
@@ -77,6 +80,71 @@
       "title": "CalibParams",
       "type": "object"
     },
+    "CalibrationMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "auroc_calibrated": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "auroc_raw": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "brier_calibrated": {
+          "type": "number"
+        },
+        "brier_raw": {
+          "type": "number"
+        },
+        "ece_calibrated": {
+          "type": "number"
+        },
+        "ece_raw": {
+          "type": "number"
+        },
+        "n": {
+          "type": "integer"
+        },
+        "reliability_calibrated": {
+          "items": {
+            "$ref": "#/$defs/ReliabilityBin"
+          },
+          "type": "array"
+        },
+        "reliability_raw": {
+          "items": {
+            "$ref": "#/$defs/ReliabilityBin"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "n",
+        "ece_raw",
+        "ece_calibrated",
+        "brier_raw",
+        "brier_calibrated",
+        "auroc_raw",
+        "auroc_calibrated",
+        "reliability_raw",
+        "reliability_calibrated"
+      ],
+      "title": "CalibrationMetrics",
+      "type": "object"
+    },
     "ChoiceQuestion": {
       "additionalProperties": false,
       "properties": {
@@ -102,6 +170,32 @@
         "criteria"
       ],
       "title": "ChoiceQuestion",
+      "type": "object"
+    },
+    "ConfusionMatrix": {
+      "additionalProperties": false,
+      "properties": {
+        "counts": {
+          "items": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "labels": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "labels",
+        "counts"
+      ],
+      "title": "ConfusionMatrix",
       "type": "object"
     },
     "Decision": {
@@ -271,6 +365,69 @@
       "title": "Document",
       "type": "object"
     },
+    "FailureCase": {
+      "additionalProperties": false,
+      "properties": {
+        "calibrated_probs": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object"
+          },
+          "type": "object"
+        },
+        "doc_id": {
+          "type": "string"
+        },
+        "gold": {
+          "$ref": "#/$defs/GoldAnswers"
+        },
+        "missed_value_kinds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "raw_probs": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object"
+          },
+          "type": "object"
+        },
+        "route": {
+          "$ref": "#/$defs/Route"
+        },
+        "text_markdown": {
+          "type": "string"
+        },
+        "triggers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "unit_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit_id",
+        "doc_id",
+        "text_markdown",
+        "route",
+        "triggers",
+        "gold",
+        "raw_probs",
+        "calibrated_probs",
+        "missed_value_kinds"
+      ],
+      "title": "FailureCase",
+      "type": "object"
+    },
     "GoldAnswers": {
       "additionalProperties": false,
       "properties": {
@@ -327,6 +484,65 @@
         "categories_multi"
       ],
       "title": "GoldAnswers",
+      "type": "object"
+    },
+    "Headline": {
+      "additionalProperties": false,
+      "properties": {
+        "false_forwards": {
+          "type": "integer"
+        },
+        "forward_rate": {
+          "$ref": "#/$defs/Interval"
+        },
+        "n_docs": {
+          "type": "integer"
+        },
+        "n_positive": {
+          "type": "integer"
+        },
+        "n_units": {
+          "type": "integer"
+        },
+        "precision": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recall": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Interval"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "t_high": {
+          "type": "number"
+        },
+        "t_low": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "t_low",
+        "t_high",
+        "n_units",
+        "n_docs",
+        "n_positive",
+        "recall",
+        "forward_rate",
+        "false_forwards",
+        "precision"
+      ],
+      "title": "Headline",
       "type": "object"
     },
     "HwInfo": {
@@ -391,6 +607,78 @@
       "title": "HwInfo",
       "type": "object"
     },
+    "Interval": {
+      "additionalProperties": false,
+      "properties": {
+        "hi": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lo": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "n_resamples": {
+          "type": "integer"
+        },
+        "point": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "point",
+        "lo",
+        "hi",
+        "n_resamples"
+      ],
+      "title": "Interval",
+      "type": "object"
+    },
+    "LatencyStats": {
+      "additionalProperties": false,
+      "properties": {
+        "mean_ms": {
+          "type": "number"
+        },
+        "n": {
+          "type": "integer"
+        },
+        "p50_ms": {
+          "type": "number"
+        },
+        "p95_ms": {
+          "type": "number"
+        },
+        "p99_ms": {
+          "type": "number"
+        },
+        "units_per_sec": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "n",
+        "p50_ms",
+        "p95_ms",
+        "p99_ms",
+        "mean_ms",
+        "units_per_sec"
+      ],
+      "title": "LatencyStats",
+      "type": "object"
+    },
     "LengthBucket": {
       "enum": [
         "short",
@@ -400,6 +688,37 @@
       ],
       "title": "LengthBucket",
       "type": "string"
+    },
+    "MultiLabelMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "macro_f1": {
+          "type": "number"
+        },
+        "micro_f1": {
+          "type": "number"
+        },
+        "per_label_f1": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        },
+        "questions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "questions",
+        "micro_f1",
+        "macro_f1",
+        "per_label_f1"
+      ],
+      "title": "MultiLabelMetrics",
+      "type": "object"
     },
     "Negative": {
       "additionalProperties": false,
@@ -461,6 +780,46 @@
       "title": "PiiDepth",
       "type": "string"
     },
+    "QuestionMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "accuracy": {
+          "type": "number"
+        },
+        "confusion": {
+          "$ref": "#/$defs/ConfusionMatrix"
+        },
+        "macro_f1": {
+          "type": "number"
+        },
+        "majority_baseline_accuracy": {
+          "type": "number"
+        },
+        "majority_class": {
+          "type": "string"
+        },
+        "n": {
+          "type": "integer"
+        },
+        "per_class_f1": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "n",
+        "accuracy",
+        "macro_f1",
+        "per_class_f1",
+        "confusion",
+        "majority_class",
+        "majority_baseline_accuracy"
+      ],
+      "title": "QuestionMetrics",
+      "type": "object"
+    },
     "QuestionSet": {
       "additionalProperties": false,
       "properties": {
@@ -498,6 +857,49 @@
         "questions"
       ],
       "title": "QuestionSet",
+      "type": "object"
+    },
+    "ReliabilityBin": {
+      "additionalProperties": false,
+      "properties": {
+        "accuracy": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "hi": {
+          "type": "number"
+        },
+        "lo": {
+          "type": "number"
+        },
+        "mean_confidence": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "n": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "lo",
+        "hi",
+        "n",
+        "mean_confidence",
+        "accuracy"
+      ],
+      "title": "ReliabilityBin",
       "type": "object"
     },
     "Route": {
@@ -542,6 +944,126 @@
         "calibrated_probs"
       ],
       "title": "RoutedDecision",
+      "type": "object"
+    },
+    "RoutingMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "by_gold_pii": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "propertyNames": {
+              "$ref": "#/$defs/Route"
+            },
+            "type": "object"
+          },
+          "type": "object"
+        },
+        "counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "propertyNames": {
+            "$ref": "#/$defs/Route"
+          },
+          "type": "object"
+        },
+        "triggers": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "counts",
+        "by_gold_pii",
+        "triggers"
+      ],
+      "title": "RoutingMetrics",
+      "type": "object"
+    },
+    "RunContext": {
+      "additionalProperties": false,
+      "properties": {
+        "arm": {
+          "type": "string"
+        },
+        "calib_fit_on": {
+          "enum": [
+            "calib",
+            "fixture_debug"
+          ],
+          "type": "string"
+        },
+        "calib_hash": {
+          "type": "string"
+        },
+        "checkpoint_revs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "checkpoints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "decisions_sha256": {
+          "type": "string"
+        },
+        "docs_sha256": {
+          "type": "string"
+        },
+        "hw": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HwInfo"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "laya_version": {
+          "type": "string"
+        },
+        "qs": {
+          "type": "string"
+        },
+        "splits": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "units_sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "arm",
+        "qs",
+        "splits",
+        "docs_sha256",
+        "units_sha256",
+        "decisions_sha256",
+        "calib_hash",
+        "calib_fit_on",
+        "hw",
+        "laya_version",
+        "checkpoints",
+        "checkpoint_revs",
+        "created_at"
+      ],
+      "title": "RunContext",
       "type": "object"
     },
     "RunMeta": {
@@ -623,6 +1145,93 @@
       "title": "ScoreQuestion",
       "type": "object"
     },
+    "Scores": {
+      "additionalProperties": false,
+      "properties": {
+        "caveats": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "context": {
+          "$ref": "#/$defs/RunContext"
+        },
+        "speed": {
+          "$ref": "#/$defs/SpeedMetrics"
+        },
+        "splits": {
+          "additionalProperties": {
+            "$ref": "#/$defs/SplitScores"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "context",
+        "splits",
+        "speed",
+        "caveats"
+      ],
+      "title": "Scores",
+      "type": "object"
+    },
+    "SliceRow": {
+      "additionalProperties": false,
+      "properties": {
+        "dimension": {
+          "type": "string"
+        },
+        "false_forwards": {
+          "type": "integer"
+        },
+        "forward_rate": {
+          "type": "number"
+        },
+        "n_docs": {
+          "type": "integer"
+        },
+        "n_positive": {
+          "type": "integer"
+        },
+        "n_units": {
+          "type": "integer"
+        },
+        "pii_accuracy": {
+          "type": "number"
+        },
+        "recall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "small_sample": {
+          "type": "boolean"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "dimension",
+        "value",
+        "n_units",
+        "n_docs",
+        "n_positive",
+        "recall",
+        "forward_rate",
+        "false_forwards",
+        "pii_accuracy",
+        "small_sample"
+      ],
+      "title": "SliceRow",
+      "type": "object"
+    },
     "Span": {
       "additionalProperties": false,
       "properties": {
@@ -656,6 +1265,127 @@
         "surface"
       ],
       "title": "Span",
+      "type": "object"
+    },
+    "SpeedMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "batch1": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LatencyStats"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "batched": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LatencyStats"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "hardware": {
+          "type": "string"
+        },
+        "per_doc_ms": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LatencyStats"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "warmup_excluded": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "hardware",
+        "batch1",
+        "batched",
+        "per_doc_ms",
+        "warmup_excluded"
+      ],
+      "title": "SpeedMetrics",
+      "type": "object"
+    },
+    "SplitScores": {
+      "additionalProperties": false,
+      "properties": {
+        "calibration": {
+          "additionalProperties": {
+            "$ref": "#/$defs/CalibrationMetrics"
+          },
+          "type": "object"
+        },
+        "coverage_decided": {
+          "type": "integer"
+        },
+        "coverage_units": {
+          "type": "integer"
+        },
+        "failures": {
+          "items": {
+            "$ref": "#/$defs/FailureCase"
+          },
+          "type": "array"
+        },
+        "false_forward_value_kinds": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "type": "object"
+        },
+        "headline": {
+          "$ref": "#/$defs/Headline"
+        },
+        "multilabel": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MultiLabelMetrics"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "per_question": {
+          "additionalProperties": {
+            "$ref": "#/$defs/QuestionMetrics"
+          },
+          "type": "object"
+        },
+        "routing": {
+          "$ref": "#/$defs/RoutingMetrics"
+        },
+        "slices": {
+          "items": {
+            "$ref": "#/$defs/SliceRow"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "coverage_units",
+        "coverage_decided",
+        "headline",
+        "per_question",
+        "multilabel",
+        "calibration",
+        "routing",
+        "slices",
+        "false_forward_value_kinds",
+        "failures"
+      ],
+      "title": "SplitScores",
       "type": "object"
     },
     "SubjectRole": {

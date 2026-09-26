@@ -76,5 +76,28 @@ def build_fixture(
     typer.echo(f"wrote {write(src, out)} docs -> {out}")
 
 
+@app.command()
+def label(
+    docs: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
+    policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),
+    arms: Annotated[Path, typer.Option(help="Arms config.")] = Path("config/arms.yaml"),
+    arm: Annotated[list[str] | None, typer.Option(help="Arm(s) to label.")] = None,
+    out: Annotated[Path, typer.Option(help="Directory for {arm}.jsonl.")] = Path("data/units"),
+) -> None:
+    """Segment documents into units and derive gold answers (chunk units only until M5)."""
+    from bench import tokenize
+    from bench.config import load_arms, load_policy
+    from bench.label import label_docs, read_docs, write_units
+
+    cfg, pol, documents = load_arms(arms), load_policy(policy), read_docs(docs)
+    for name in arm or [n for n, a in cfg.arms.items() if a.enabled]:
+        spec = cfg.arms[name]
+        tok = tokenize.load(spec.checkpoint)
+        units = label_docs(documents, spec, pol, tok, tok.name)
+        write_units(units, out / f"{name}.jsonl")
+        n_trunc = sum(u.truncated for u in units)
+        typer.echo(f"{name}: {len(units)} units ({n_trunc} truncated) -> {out / name}.jsonl")
+
+
 if __name__ == "__main__":
     app()

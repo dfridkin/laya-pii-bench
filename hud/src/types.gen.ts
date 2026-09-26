@@ -71,7 +71,7 @@ export interface Answer {
 export interface CalibParams {
   arm: string;
   content_hash: string;
-  fit_on: "calib";
+  fit_on: "calib" | "fixture_debug";
   precision_target: number;
   qs: string;
   recall_target: number;
@@ -83,6 +83,32 @@ export interface CalibParams {
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "CalibrationMetrics".
+ */
+export interface CalibrationMetrics {
+  auroc_calibrated: number | null;
+  auroc_raw: number | null;
+  brier_calibrated: number;
+  brier_raw: number;
+  ece_calibrated: number;
+  ece_raw: number;
+  n: number;
+  reliability_calibrated: ReliabilityBin[];
+  reliability_raw: ReliabilityBin[];
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "ReliabilityBin".
+ */
+export interface ReliabilityBin {
+  accuracy: number | null;
+  hi: number;
+  lo: number;
+  mean_confidence: number | null;
+  n: number;
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
  * via the `definition` "ChoiceQuestion".
  */
 export interface ChoiceQuestion {
@@ -91,6 +117,14 @@ export interface ChoiceQuestion {
   };
   instructions: string;
   type: "choice";
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "ConfusionMatrix".
+ */
+export interface ConfusionMatrix {
+  counts: number[][];
+  labels: string[];
 }
 /**
  * One per unit per run; also the HUD trace event.
@@ -162,6 +196,29 @@ export interface WorldRefs {
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "FailureCase".
+ */
+export interface FailureCase {
+  calibrated_probs: {
+    [k: string]: {
+      [k: string]: number;
+    };
+  };
+  doc_id: string;
+  gold: GoldAnswers;
+  missed_value_kinds: string[];
+  raw_probs: {
+    [k: string]: {
+      [k: string]: number;
+    };
+  };
+  route: Route;
+  text_markdown: string;
+  triggers: string[];
+  unit_id: string;
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
  * via the `definition` "GoldAnswers".
  */
 export interface GoldAnswers {
@@ -172,6 +229,31 @@ export interface GoldAnswers {
   doc_kind: "narrative" | "form_table" | "correspondence" | "protocol_text";
   pii_present: "A" | "B";
   subject_role: "patient" | "staff" | "both" | "none";
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "Headline".
+ */
+export interface Headline {
+  false_forwards: number;
+  forward_rate: Interval;
+  n_docs: number;
+  n_positive: number;
+  n_units: number;
+  precision: number | null;
+  recall: Interval | null;
+  t_high: number;
+  t_low: number;
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "Interval".
+ */
+export interface Interval {
+  hi: number | null;
+  lo: number | null;
+  n_resamples: number;
+  point: number;
 }
 /**
  * Hardware fingerprint (`hw.json`), attached to every run (invariant 9).
@@ -196,11 +278,50 @@ export interface HwInfo {
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "LatencyStats".
+ */
+export interface LatencyStats {
+  mean_ms: number;
+  n: number;
+  p50_ms: number;
+  p95_ms: number;
+  p99_ms: number;
+  units_per_sec: number;
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "MultiLabelMetrics".
+ */
+export interface MultiLabelMetrics {
+  macro_f1: number;
+  micro_f1: number;
+  per_label_f1: {
+    [k: string]: number;
+  };
+  questions: string[];
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
  * via the `definition` "NoulQuestion".
  */
 export interface NoulQuestion {
   instructions: string;
   type: "noul";
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "QuestionMetrics".
+ */
+export interface QuestionMetrics {
+  accuracy: number;
+  confusion: ConfusionMatrix;
+  macro_f1: number;
+  majority_baseline_accuracy: number;
+  majority_class: string;
+  n: number;
+  per_class_f1: {
+    [k: string]: number;
+  };
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
@@ -252,6 +373,42 @@ export interface RoutedDecision {
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "RoutingMetrics".
+ */
+export interface RoutingMetrics {
+  by_gold_pii: {
+    [k: string]: {
+      [k: string]: number;
+    };
+  };
+  counts: {
+    [k: string]: number;
+  };
+  triggers: {
+    [k: string]: number;
+  };
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "RunContext".
+ */
+export interface RunContext {
+  arm: string;
+  calib_fit_on: "calib" | "fixture_debug";
+  calib_hash: string;
+  checkpoint_revs: string[];
+  checkpoints: string[];
+  created_at: string;
+  decisions_sha256: string;
+  docs_sha256: string;
+  hw: HwInfo | null;
+  laya_version: string;
+  qs: string;
+  splits: string[];
+  units_sha256: string;
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
  * via the `definition` "RunMeta".
  */
 export interface RunMeta {
@@ -265,6 +422,67 @@ export interface RunMeta {
   qs: string;
   started_at: string;
   warmup_calls: number;
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "Scores".
+ */
+export interface Scores {
+  caveats: string[];
+  context: RunContext;
+  speed: SpeedMetrics;
+  splits: {
+    [k: string]: SplitScores;
+  };
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "SpeedMetrics".
+ */
+export interface SpeedMetrics {
+  batch1: LatencyStats | null;
+  batched: LatencyStats | null;
+  hardware: string;
+  per_doc_ms: LatencyStats | null;
+  warmup_excluded: number;
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "SplitScores".
+ */
+export interface SplitScores {
+  calibration: {
+    [k: string]: CalibrationMetrics;
+  };
+  coverage_decided: number;
+  coverage_units: number;
+  failures: FailureCase[];
+  false_forward_value_kinds: {
+    [k: string]: number;
+  };
+  headline: Headline;
+  multilabel: MultiLabelMetrics | null;
+  per_question: {
+    [k: string]: QuestionMetrics;
+  };
+  routing: RoutingMetrics;
+  slices: SliceRow[];
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "SliceRow".
+ */
+export interface SliceRow {
+  dimension: string;
+  false_forwards: number;
+  forward_rate: number;
+  n_docs: number;
+  n_positive: number;
+  n_units: number;
+  pii_accuracy: number;
+  recall: number | null;
+  small_sample: boolean;
+  value: string;
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
