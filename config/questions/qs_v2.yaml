@@ -11,23 +11,23 @@ questions:
     type: choice
     instructions: Does this text contain a direct identifier of a patient or participant, such as a full name, medical record number, phone number, email, street address, or full date of birth?
     criteria:
-      A: yes
-      B: no
+      A: "yes"
+      B: "no"
   has_phi_quasi:
     type: choice
     instructions: Does this text contain indirect identifiers of a patient, such as event or visit dates, initials, an age over 89, or a postal code?
     criteria:
-      A: yes
-      B: no
+      A: "yes"
+      B: "no"
   has_coded_id:
     type: choice
     instructions: Does this text contain a coded study identifier for a participant, such as a subject number or randomization number?
     criteria:
-      A: yes
-      B: no
+      A: "yes"
+      B: "no"
   has_staff_pii:
     type: choice
     instructions: Does this text contain the name or contact details of an investigator, coordinator, monitor, or other site staff member?
     criteria:
-      A: yes
-      B: no
+      A: "yes"
+      B: "no"

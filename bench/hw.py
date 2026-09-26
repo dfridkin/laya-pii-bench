@@ -10,27 +10,8 @@ import sys
 from datetime import UTC, datetime
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
-from typing import Literal
 
-from pydantic import BaseModel, ConfigDict
-
-Device = Literal["cuda", "mps", "cpu"]
-
-
-class HwInfo(BaseModel):
-    model_config = ConfigDict(extra="forbid", frozen=True)
-
-    os: str
-    arch: str
-    cpu: str
-    ram_gb: float
-    python: str
-    torch: str
-    laya: str
-    device: Device
-    device_name: str
-    checkpoints: dict[str, str]
-    created_at: str
+from bench.domain import Device, HwInfo
 
 
 def pick_device() -> tuple[Device, str]:
