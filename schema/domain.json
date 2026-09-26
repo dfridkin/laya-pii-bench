@@ -3,6 +3,17 @@
     "Answer": {
       "additionalProperties": false,
       "properties": {
+        "answer_confidence": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "choice": {
           "type": "string"
         },
@@ -230,8 +241,25 @@
         "qs": {
           "type": "string"
         },
+        "state_tokens": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "t_offset_ms": {
           "type": "number"
+        },
+        "truncated_questions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "unit_id": {
           "type": "string"
@@ -1072,6 +1100,13 @@
         "arm": {
           "type": "string"
         },
+        "batch_size": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "checkpoint": {
+          "type": "string"
+        },
         "checkpoint_rev": {
           "type": "string"
         },
@@ -1080,6 +1115,17 @@
             "type": "string"
           },
           "type": "object"
+        },
+        "dataset": {
+          "type": "string"
+        },
+        "device": {
+          "enum": [
+            "cuda",
+            "mps",
+            "cpu"
+          ],
+          "type": "string"
         },
         "finished_at": {
           "anyOf": [
@@ -1097,6 +1143,10 @@
         "qs": {
           "type": "string"
         },
+        "sessions": {
+          "minimum": 1,
+          "type": "integer"
+        },
         "started_at": {
           "type": "string"
         },
@@ -1108,10 +1158,15 @@
       "required": [
         "arm",
         "qs",
+        "dataset",
         "hw",
+        "device",
+        "checkpoint",
         "checkpoint_rev",
         "config_hashes",
+        "batch_size",
         "warmup_calls",
+        "sessions",
         "started_at",
         "finished_at"
       ],

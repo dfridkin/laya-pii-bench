@@ -164,7 +164,8 @@ class Answer(_Model):
     question: str
     choice: str
     probs: dict[str, float]
-    confidence: float
+    confidence: float  # laya `confidence` (choice: 1 - normalized entropy)
+    answer_confidence: float | None = None  # laya `answer_confidence` (max p); D-014
 
 
 class Route(StrEnum):
@@ -187,6 +188,10 @@ class Decision(_Model):
     t_offset_ms: float
     batch_size: int = Field(ge=1)
     warmup: bool = False
+    # State tokens as the checkpoint tokenizes them, and the questions whose input cut the state
+    # short (laya's per-question room: max_len - prompt head - specials). Invariant 7.
+    state_tokens: int | None = None
+    truncated_questions: list[str] = Field(default_factory=lambda: [])
 
 
 class RoutedDecision(_Model):
@@ -220,10 +225,15 @@ class HwInfo(_Model):
 class RunMeta(_Model):
     arm: str
     qs: str
+    dataset: str  # "main" for data/docs.jsonl, else the docs file's directory name
     hw: HwInfo
+    device: Device  # device the checkpoint actually ran on (after any laya fallback)
+    checkpoint: str
     checkpoint_rev: str
-    config_hashes: dict[str, str]
-    warmup_calls: int = Field(ge=0)
+    config_hashes: dict[str, str]  # arm config, question set, docs, units
+    batch_size: int = Field(ge=1)
+    warmup_calls: int = Field(ge=0)  # per session
+    sessions: int = Field(ge=1)  # 1 + number of resumes that made calls
     started_at: str
     finished_at: str | None
 

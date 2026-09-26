@@ -79,6 +79,7 @@ class GoldAnswers(BaseModel):
 class Answer(BaseModel):
     question: str; choice: str
     probs: dict[str, float]; confidence: float
+    answer_confidence: float | None = None     # laya max-p confidence, stored for D-014
 
 class Route(StrEnum):
     FORWARD = "forward"; REDACT = "redact"; ESCALATE = "escalate"
@@ -89,14 +90,18 @@ class Decision(BaseModel):                     # one per unit per run; also the 
     answers: list[Answer]                      # RAW probabilities (invariant 4)
     latency_ms: float; t_offset_ms: float; batch_size: int
     warmup: bool = False
+    state_tokens: int | None = None            # as the checkpoint tokenizer sees the state
+    truncated_questions: list[str] = []        # questions whose input cut the state (inv. 7)
 
 class RoutedDecision(BaseModel):               # produced by score stage only
     decision: Decision; route: Route; triggers: list[str]
     calibrated_probs: dict[str, dict[str, float]]
 
 class RunMeta(BaseModel):
-    arm: str; qs: str; hw: dict; checkpoint_rev: str
-    config_hashes: dict[str, str]; warmup_calls: int
+    arm: str; qs: str; dataset: str; hw: HwInfo
+    device: Device                             # actual device after laya fallback
+    checkpoint: str; checkpoint_rev: str
+    config_hashes: dict[str, str]; batch_size: int; warmup_calls: int; sessions: int
     started_at: str; finished_at: str | None
 
 class CalibParams(BaseModel):

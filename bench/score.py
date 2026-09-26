@@ -395,7 +395,7 @@ def _slice_keys(r: Row) -> list[tuple[str, str]]:
         ("hard_negative", "yes" if "hard_negative" in d.tags else "no"),
         ("pre_redacted", "yes" if "pre_redacted" in d.tags else "no"),
         ("split_span", "yes" if r.unit.split_span else "no"),
-        ("truncated", "yes" if r.unit.truncated else "no"),
+        ("truncated", "yes" if r.unit.truncated or r.decision.truncated_questions else "no"),
         ("lang", d.lang),
         *(("perturbation", t) for t in perturb),
     ]

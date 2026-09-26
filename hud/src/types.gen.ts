@@ -57,6 +57,7 @@ export interface Domain {}
  * via the `definition` "Answer".
  */
 export interface Answer {
+  answer_confidence?: number | null;
   choice: string;
   confidence: number;
   probs: {
@@ -141,7 +142,9 @@ export interface Decision {
   latency_ms: number;
   max_len: number;
   qs: string;
+  state_tokens?: number | null;
   t_offset_ms: number;
+  truncated_questions?: string[];
   unit_id: string;
   warmup?: boolean;
 }
@@ -413,13 +416,18 @@ export interface RunContext {
  */
 export interface RunMeta {
   arm: string;
+  batch_size: number;
+  checkpoint: string;
   checkpoint_rev: string;
   config_hashes: {
     [k: string]: string;
   };
+  dataset: string;
+  device: "cuda" | "mps" | "cpu";
   finished_at: string | null;
   hw: HwInfo;
   qs: string;
+  sessions: number;
   started_at: string;
   warmup_calls: number;
 }

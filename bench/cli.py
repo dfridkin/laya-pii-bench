@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Annotated
 
@@ -82,12 +84,17 @@ def label(
     policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),
     arms: Annotated[Path, typer.Option(help="Arms config.")] = Path("config/arms.yaml"),
     arm: Annotated[list[str] | None, typer.Option(help="Arm(s) to label.")] = None,
-    out: Annotated[Path, typer.Option(help="Directory for {arm}.jsonl.")] = Path("data/units"),
+    out: Annotated[
+        Path | None, typer.Option(help="Directory for {arm}.jsonl (default: by dataset).")
+    ] = None,
 ) -> None:
     """Segment documents into units and derive gold answers (chunk units only until M5)."""
     from bench import tokenize
     from bench.config import load_arms, load_policy
     from bench.label import label_docs, read_docs, write_units
+    from bench.paths import units_dir
+
+    out = out or units_dir(docs)
 
     cfg, pol, documents = load_arms(arms), load_policy(policy), read_docs(docs)
     for name in arm or [n for n, a in cfg.arms.items() if a.enabled]:
@@ -127,6 +134,96 @@ def calibrate(
     )
 
 
+@app.command("run")
+def run_cmd(
+    arm: Annotated[str, typer.Option(help="Arm name from config/arms.yaml.")],
+    qs: Annotated[str, typer.Option(help="Question set id (config/questions/{qs}.yaml).")],
+    docs: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
+    units: Annotated[Path | None, typer.Option(help="Units JSONL (default: by dataset).")] = None,
+    out: Annotated[Path | None, typer.Option(help="Run directory (default: by dataset).")] = None,
+    batch_size: Annotated[int, typer.Option(help="1 = headline batch-1 mode.")] = 1,
+    warmup_docs: Annotated[Path, typer.Option(help="Warmup text source.")] = Path(
+        "fixtures/mini/docs.jsonl"
+    ),
+    arms: Annotated[Path, typer.Option(help="Arms config.")] = Path("config/arms.yaml"),
+    qs_dir: Annotated[Path, typer.Option(help="Question sets.")] = Path("config/questions"),
+    models_lock: Annotated[Path, typer.Option(help="Pinned checkpoints.")] = Path(
+        "models.lock.json"
+    ),
+) -> None:
+    """Run one arm x question set over units: raw probabilities, honest timing, resumable."""
+    import json
+
+    from bench import hw as hw_mod
+    from bench.config import load_arms, load_question_set
+    from bench.label import read_docs, read_units
+    from bench.laya_client import LayaClient
+    from bench.paths import dataset_name, run_dir, units_dir
+    from bench.questions import build
+    from bench.run import RunSpec
+    from bench.run import run as do_run
+    from bench.score import sha256_file
+
+    cfg = load_arms(arms, qs_dir)
+    if arm not in cfg.arms or not cfg.arms[arm].enabled:
+        raise typer.BadParameter(f"arm {arm!r} is not an enabled arm in {arms}")
+    spec_arm, dataset = cfg.arms[arm], dataset_name(docs)
+    if dataset == "main":
+        typer.echo(
+            "running on the main dataset needs `bench split` (M5) to select splits", err=True
+        )
+        raise typer.Exit(2)
+    if batch_size < 1:
+        raise typer.BadParameter("batch size must be >= 1")
+    units = units or units_dir(docs) / f"{arm}.jsonl"
+    if not units.exists():
+        typer.echo(
+            f"{units} not found: run `bench label --docs {docs} --arm {arm}` first", err=True
+        )
+        raise typer.Exit(2)
+    out = out or run_dir(docs, arm, qs, batch_size)
+    qs_path = qs_dir / f"{qs}.yaml"
+    qset = load_question_set(qs_path)
+    questions = build(qset, spec_arm.checkpoint)  # rejects noul on English before loading
+    doc_map = {d.id: d for d in read_docs(docs)}
+    unit_list = read_units(units)
+    missing = sorted({u.doc_id for u in unit_list} - set(doc_map))
+    if missing:
+        raise typer.BadParameter(f"units reference docs not in {docs}: {missing[:3]}")
+    texts = {u.id: doc_map[u.doc_id].text[u.start : u.end] for u in unit_list}
+    arm_json = json.dumps(spec_arm.model_dump(mode="json"), sort_keys=True).encode()
+    hashes = {
+        "arm": hashlib.sha256(arm_json).hexdigest(),
+        "question_set": sha256_file(qs_path),
+        "docs": sha256_file(docs),
+        "units": sha256_file(units),
+    }
+    spec = RunSpec(
+        arm=arm, qs=qset, questions=questions, checkpoint=spec_arm.checkpoint,
+        max_len=spec_arm.max_len, dataset=dataset, out_dir=out, batch_size=batch_size,
+        warmup_calls=cfg.defaults.warmup_calls, config_hashes=hashes,
+    )  # fmt: skip
+    device = None if cfg.defaults.device == "auto" else cfg.defaults.device
+    out.mkdir(parents=True, exist_ok=True)
+    log_file = (out / "run.log").open("a", encoding="utf-8")
+
+    def log(msg: str) -> None:
+        line = f"{datetime.now(UTC).isoformat(timespec='seconds')} {msg}"
+        typer.echo(line)
+        log_file.write(line + "\n")
+        log_file.flush()
+
+    def factory() -> LayaClient:
+        return LayaClient(spec_arm.checkpoint, questions, spec_arm.max_len,
+                          spec_arm.head_max_len, models_lock, device)  # fmt: skip
+
+    try:
+        do_run(spec, unit_list, texts, [d.text for d in read_docs(warmup_docs)], factory,
+               hw_mod.collect(models_lock), log)  # fmt: skip
+    finally:
+        log_file.close()
+
+
 @app.command()
 def score(
     decisions: Annotated[Path, typer.Option(help="Decisions JSONL for one arm x qs.")],
@@ -135,7 +232,10 @@ def score(
     out: Annotated[Path, typer.Option(help="Scores JSON to write.")],
     docs: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
     policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),
-    hw: Annotated[Path, typer.Option(help="Hardware fingerprint.")] = Path("hw.json"),
+    hw: Annotated[
+        Path | None,
+        typer.Option(help="Hardware fingerprint, only if the run has no meta.json next to it."),
+    ] = None,
     allow_debug_calib: Annotated[
         bool, typer.Option(help="Accept fit_on=fixture_debug calib (fixture runs only).")
     ] = False,
@@ -154,7 +254,15 @@ def score(
         raise typer.Exit(2) from e
     documents = read_docs(docs)
     split_docs = {"fixture": {d.id for d in documents}}  # bench split (M5) adds calib/test/holdout
-    hw_info = HwInfo.model_validate_json(hw.read_text()) if hw.exists() else None
+    from bench.domain import RunMeta
+
+    meta_path = decisions.parent / "meta.json"
+    hw_info: HwInfo | None = None
+    if meta_path.exists():  # the run's own hardware, with the device it actually used
+        meta = RunMeta.model_validate_json(meta_path.read_text())
+        hw_info = meta.hw.model_copy(update={"device": meta.device})
+    elif hw is not None and hw.exists():
+        hw_info = HwInfo.model_validate_json(hw.read_text())
     hashes = {k: sc.sha256_file(p) for k, p in (("docs", docs), ("units", units),
                                                 ("decisions", decisions))}  # fmt: skip
     scores = sc.score(sc.read_decisions(decisions), read_units(units), documents, params,
