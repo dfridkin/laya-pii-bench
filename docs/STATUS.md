@@ -1,13 +1,13 @@
 # Status
 
 Active milestone: **M2 Scorer + report on fixture**
-Last updated: 2026-09-26 (M1 gate passed)
+Last updated: 2026-09-26 (M2 built, gate review pending)
 
 | Milestone | State | Gate passed | Notes |
 |---|---|---|---|
 | M0 Bootstrap | done | 2026-09-25 (`reports/audits/M0-gate-20260925-2255.md`) | mps, p50 67.8 ms |
 | M1 Contracts + fixture | done | 2026-09-26 (`reports/audits/M1-gate-20260926.md`) | fixture locked; gold audit 0 errors |
-| M2 Scorer + report on fixture | not started | | |
+| M2 Scorer + report on fixture | built, gate review pending | | golden metrics exact; hash check exits 2 |
 | M3 Runner, arm A on fixture | not started | | |
 | M4 Generator | not started | | |
 | M5 Label + split | not started | | |
@@ -50,6 +50,35 @@ Deviations from the scaffold (accepted by gate review):
 - `HwInfo` moved into `bench/domain.py`; `RunMeta.hw` is typed `HwInfo` instead of `dict`.
 - Validator also rejects span/negative edges that cut inside a word (gate finding 3).
 
+## M2 evidence
+
+- `make check`: 146 passed, 3 skipped (model-marked; `-m model`: 3 passed). Golden metric tests
+  (`tests/test_metrics_golden.py`) pass at tolerance 1e-9 against hand arithmetic on the mock
+  decisions (identity calibration, t_low 0.25, t_high 0.85): accuracy 8/11, confusion [[6,2],[1,2]],
+  macro-F1 (12/15 + 4/7)/2, ECE 3.08/11, Brier, AUROC 19/24, recall 7/8, forward rate 2/11,
+  1 false forward (fx06 chunk 1, missed `address`). Temperature fit golden: T = 2 exactly.
+- Gate 2: `bench label` (fixture, arm A, 11 units) -> `bench calibrate --debug-fit-all` ->
+  `bench score --allow-debug-calib` -> `bench report` writes `reports/fixture/report.md` with all
+  9 metrics.md sections (test asserts the headings against the spec).
+- Gate 3: score with a calib file whose `t_low` was edited exits 2 ("content hash mismatch") and
+  writes no scores (manual run + test).
+- One-time fixture unlock to add `fixtures/mini/decisions_mock.jsonl` (owner approved; logged in
+  DECISIONS.md); lock recreated in the same commit.
+
+Interpretations made in M2 (cheap to change; flag if you disagree):
+- Routing: predicted role `both` forces REDACT like `patient` (PLAN says "role = patient"; `both`
+  includes patient data). qs_v2 has no role question, so routing there is threshold-only.
+- `category` gold uses only categories counted as PII; `categories_multi` is raw presence. Only
+  differs if D-001 flips to "no".
+- Temperature scaling acts on log of laya's 4-dp probabilities (zeros clipped to 1e-6).
+- `t_high`: smallest observed p reaching the precision target; 1.0 if unreachable; never < t_low.
+- Macro-F1 averages over labels present in gold or predictions; majority baseline is computed on
+  the scored set; ECE/AUROC use max probability (laya's entropy `confidence` is stored, not used).
+- `CalibParams.fit_on` gained `fixture_debug`; `score` refuses it without `--allow-debug-calib`,
+  and the report prints a DEBUG banner.
+- Until `bench split` exists (M5): `calibrate` only runs with `--debug-fit-all`, and `score` treats
+  every document as split `fixture`. Units are written to `<out>/{arm}.jsonl`.
+
 ## Questions for the owner (not blocking; candidates for DECISIONS entries)
 
 - Staff initials (fx03) labeled `staff_pii`; domain.md says "name + contact". Confirm for the generator.
@@ -62,6 +91,11 @@ Deviations from the scaffold (accepted by gate review):
   sections would be flagged truncated. Lower to <= 1792 or accept.
 
 ## Later (out of current scope, noted for the owning milestone)
+
+- M5: `bench split` + split-aware `calibrate`/`score` (calib-only fit, test/holdout scoring); section
+  and doc units in `label`. Makefile `calibrate`/`score` targets (`--all`) need that too.
+- M6: bootstrap CIs are percentile intervals on document resamples; forward rate and recall only.
+- M7: `bench report --hud` currently prints a note and writes nothing.
 
 - M2/M3: fx06 boundary check assumes raw-text English tokens without special tokens; the M2 segmenter
   must count the same way, or re-tune fx06 (needs an owner OK: fixtures are locked).
@@ -88,7 +122,7 @@ Deviations from the scaffold (accepted by gate review):
 
 ## Next action
 
-Run `/milestone M2`.
+Run `/gate M2`, then close out M2.
 
 ## Session log
 
