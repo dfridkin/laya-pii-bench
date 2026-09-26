@@ -137,10 +137,18 @@ def fit(
     units: Mapping[str, Unit],
     policy: Policy,
     fit_on: Literal["calib", "fixture_debug"],
+    *,
+    input_hashes: Mapping[str, str],
 ) -> CalibParams:
+    """`input_hashes`: sha256 of the decisions and units files ("decisions", "units")."""
     live = [d for d in decisions if not d.warmup]
     if not live:
         raise CalibError("no non-warmup decisions")
+    seen: set[str] = set()
+    for d in live:
+        if d.unit_id in seen:
+            raise CalibError(f"duplicate decision for unit {d.unit_id}")
+        seen.add(d.unit_id)
     arms, qss = {d.arm for d in live}, {d.qs for d in live}
     if len(arms) != 1 or len(qss) != 1:
         raise CalibError(f"decisions mix arms {arms} or question sets {qss}")
@@ -188,6 +196,9 @@ def fit(
         recall_target=policy.routing.recall_target,
         precision_target=policy.routing.precision_target,
         fit_on=fit_on,
+        decisions_sha256=input_hashes["decisions"],
+        units_sha256=input_hashes["units"],
+        calib_doc_ids=sorted({units[d.unit_id].doc_id for d in live}),
         content_hash="",
     )
     return params.model_copy(update={"content_hash": content_hash(params)})

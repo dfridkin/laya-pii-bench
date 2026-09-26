@@ -560,6 +560,42 @@ def caveats(splits: Mapping[str, SplitScores], calib: CalibParams) -> list[str]:
     return out
 
 
+# --- provenance (invariant 3) -------------------------------------------------------------------
+
+
+def verify_provenance(
+    calib: CalibParams,
+    units_sha256: str,
+    docs_sha256: str,
+    run_hashes: Mapping[str, str] | None,
+    scored_doc_ids: set[str],
+) -> None:
+    """Refuse to score gold or calib that doesn't belong to this run.
+
+    - units/docs must be the files the run was produced from (run meta config hashes);
+    - calib must have been fit on the same units (same gold);
+    - calib docs must be disjoint from scored docs, except for the labeled fixture_debug fit.
+    """
+    if run_hashes is not None:
+        for key, got in (("units", units_sha256), ("docs", docs_sha256)):
+            want = run_hashes.get(key)
+            if want is not None and want != got:
+                raise ScoreError(
+                    f"{key} file differs from the one this run was produced from "
+                    f"(run {want[:12]}, given {got[:12]})"
+                )
+    if calib.units_sha256 != units_sha256:
+        raise ScoreError(
+            f"calib was fit on different units (calib {calib.units_sha256[:12]}, "
+            f"given {units_sha256[:12]})"
+        )
+    overlap = scored_doc_ids & set(calib.calib_doc_ids)
+    if overlap and calib.fit_on != "fixture_debug":
+        raise ScoreError(
+            f"{len(overlap)} scored documents were used to fit calib, e.g. {sorted(overlap)[0]}"
+        )
+
+
 # --- stage entry -------------------------------------------------------------------------------
 
 

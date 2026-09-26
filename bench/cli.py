@@ -125,8 +125,25 @@ def calibrate(
     if not debug_fit_all:
         typer.echo("calib split selection arrives with `bench split` (M5); use --debug-fit-all")
         raise typer.Exit(2)
+    from bench.domain import RunMeta
+    from bench.score import sha256_file
+
+    hashes = {"decisions": sha256_file(decisions), "units": sha256_file(units)}
+    meta_path = decisions.parent / "meta.json"
+    if meta_path.exists():
+        run_units = RunMeta.model_validate_json(meta_path.read_text()).config_hashes.get("units")
+        if run_units is not None and run_units != hashes["units"]:
+            typer.echo(
+                f"error: {units} differs from the units this run was produced from", err=True
+            )
+            raise typer.Exit(2)
     unit_map = {u.id: u for u in read_units(units)}
-    params = cal.fit(read_decisions(decisions), unit_map, load_policy(policy), "fixture_debug")
+    try:
+        params = cal.fit(read_decisions(decisions), unit_map, load_policy(policy), "fixture_debug",
+                         input_hashes=hashes)  # fmt: skip
+    except cal.CalibError as e:
+        typer.echo(f"error: {e}", err=True)
+        raise typer.Exit(2) from e
     cal.write(params, out)
     typer.echo(
         f"{params.arm}/{params.qs}: t_low={params.t_low:.4f} t_high={params.t_high:.4f} "
@@ -258,15 +275,23 @@ def score(
 
     meta_path = decisions.parent / "meta.json"
     hw_info: HwInfo | None = None
+    run_hashes: dict[str, str] | None = None
     if meta_path.exists():  # the run's own hardware, with the device it actually used
         meta = RunMeta.model_validate_json(meta_path.read_text())
         hw_info = meta.hw.model_copy(update={"device": meta.device})
+        run_hashes = meta.config_hashes
     elif hw is not None and hw.exists():
         hw_info = HwInfo.model_validate_json(hw.read_text())
     hashes = {k: sc.sha256_file(p) for k, p in (("docs", docs), ("units", units),
                                                 ("decisions", decisions))}  # fmt: skip
-    scores = sc.score(sc.read_decisions(decisions), read_units(units), documents, params,
-                      load_policy(policy), split_docs, hw_info, hashes)  # fmt: skip
+    scored: set[str] = {d for ids in split_docs.values() for d in ids}
+    try:
+        sc.verify_provenance(params, hashes["units"], hashes["docs"], run_hashes, scored)
+        scores = sc.score(sc.read_decisions(decisions), read_units(units), documents, params,
+                          load_policy(policy), split_docs, hw_info, hashes)  # fmt: skip
+    except sc.ScoreError as e:
+        typer.echo(f"error: {e}", err=True)
+        raise typer.Exit(2) from e
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(scores.model_dump_json(indent=2) + "\n", encoding="utf-8")
     for name, sp in scores.splits.items():

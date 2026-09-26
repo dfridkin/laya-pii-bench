@@ -38,6 +38,9 @@ IDENTITY = CalibParams(
     recall_target=0.995,
     precision_target=0.98,
     fit_on="fixture_debug",
+    decisions_sha256="d",
+    units_sha256="u",
+    calib_doc_ids=[],
     content_hash="not-checked-here",
 )
 

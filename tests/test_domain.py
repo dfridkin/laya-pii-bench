@@ -153,6 +153,9 @@ def test_calib_params_fit_on_calib_only() -> None:
         "t_high": 0.9,
         "recall_target": 0.995,
         "precision_target": 0.98,
+        "decisions_sha256": "d",
+        "units_sha256": "u",
+        "calib_doc_ids": ["d1"],
         "content_hash": "x",
     }
     CalibParams.model_validate(kw | {"fit_on": "calib"})

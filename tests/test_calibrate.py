@@ -11,6 +11,7 @@ from tests.fixture_expected import FIXTURE_UNITS, fixture_units
 ROOT = Path(__file__).resolve().parent.parent
 POLICY = load_policy(ROOT / "config" / "policy.yaml")
 MOCK = ROOT / "fixtures" / "mini" / "decisions_mock.jsonl"
+HASHES = {"decisions": "d" * 64, "units": "u" * 64}
 
 
 def units() -> dict[str, Unit]:
@@ -69,7 +70,7 @@ def test_gold_answer_mapping() -> None:
 
 
 def test_fit_on_mock_and_hash_roundtrip(tmp_path: Path) -> None:
-    params = cal.fit(mock_decisions(), units(), POLICY, "fixture_debug")
+    params = cal.fit(mock_decisions(), units(), POLICY, "fixture_debug", input_hashes=HASHES)
     assert params.arm == "mock" and params.qs == "qs_v1" and params.fit_on == "fixture_debug"
     assert set(params.temperatures) == {
         "pii_present:2",
@@ -92,18 +93,23 @@ def test_fit_on_mock_and_hash_roundtrip(tmp_path: Path) -> None:
 def test_fit_rejects_bad_inputs() -> None:
     decs = mock_decisions()
     with pytest.raises(cal.CalibError, match="no non-warmup"):
-        cal.fit([d for d in decs if d.warmup], units(), POLICY, "fixture_debug")
+        cal.fit(
+            [d for d in decs if d.warmup], units(), POLICY, "fixture_debug", input_hashes=HASHES
+        )
     other = decs[2].model_copy(update={"arm": "other"})
     with pytest.raises(cal.CalibError, match="mix"):
-        cal.fit([*decs, other], units(), POLICY, "fixture_debug")
+        cal.fit([*decs[:2], other, *decs[3:]], units(), POLICY, "fixture_debug",
+                input_hashes=HASHES)  # fmt: skip
+    with pytest.raises(cal.CalibError, match="duplicate decision"):  # audit A9
+        cal.fit([*decs, decs[2]], units(), POLICY, "fixture_debug", input_hashes=HASHES)
     orphan = decs[2].model_copy(update={"unit_id": "nope:chunk:512:0"})
     with pytest.raises(cal.CalibError, match="no unit"):
-        cal.fit([*decs, orphan], units(), POLICY, "fixture_debug")
+        cal.fit([*decs, orphan], units(), POLICY, "fixture_debug", input_hashes=HASHES)
     no_pii = decs[2].model_copy(
         update={"answers": [a for a in decs[2].answers if a.question != "pii_present"]}
     )
     with pytest.raises(cal.CalibError, match="pii_present"):
-        cal.fit([*decs[3:], no_pii], units(), POLICY, "fixture_debug")
+        cal.fit([*decs[3:], no_pii], units(), POLICY, "fixture_debug", input_hashes=HASHES)
     with pytest.raises(cal.CalibError, match="no rows"):
         cal.fit_temperature([], [])
     assert isinstance(decs[2].answers[0], Answer)

@@ -45,7 +45,16 @@
         "arm": {
           "type": "string"
         },
+        "calib_doc_ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "content_hash": {
+          "type": "string"
+        },
+        "decisions_sha256": {
           "type": "string"
         },
         "fit_on": {
@@ -88,6 +97,9 @@
             "type": "number"
           },
           "type": "object"
+        },
+        "units_sha256": {
+          "type": "string"
         }
       },
       "required": [
@@ -99,6 +111,9 @@
         "recall_target",
         "precision_target",
         "fit_on",
+        "decisions_sha256",
+        "units_sha256",
+        "calib_doc_ids",
         "content_hash"
       ],
       "title": "CalibParams",

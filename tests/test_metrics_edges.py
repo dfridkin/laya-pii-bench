@@ -23,9 +23,11 @@ from bench.domain import (
 
 ROOT = Path(__file__).resolve().parent.parent
 POLICY = load_policy(ROOT / "config" / "policy.yaml")
+HASHES = {"decisions": "d" * 64, "units": "u" * 64}
 CALIB = CalibParams(
     arm="t", qs="q", temperatures={"pii_present:2": 1.0}, t_low=0.5, t_high=0.9,
-    recall_target=0.995, precision_target=0.98, fit_on="calib", content_hash="x",
+    recall_target=0.995, precision_target=0.98, fit_on="calib", decisions_sha256="d",
+    units_sha256="u", calib_doc_ids=[], content_hash="x",
 )  # fmt: skip
 
 
@@ -157,7 +159,9 @@ def test_fallbacks_recorded_in_calib_params() -> None:
 
     mock = (ROOT / "fixtures/mini/decisions_mock.jsonl").read_text().splitlines()
     decisions = [Decision.model_validate_json(x) for x in mock]
-    params = cal.fit(decisions, {u.id: u for u in fixture_units()}, POLICY, "fixture_debug")
+    params = cal.fit(
+        decisions, {u.id: u for u in fixture_units()}, POLICY, "fixture_debug", input_hashes=HASHES
+    )
     assert params.temperature_fallbacks == {"doc_kind:4": "calib accuracy 1.0"}
     assert params.temperatures["doc_kind:4"] == 1.0
 

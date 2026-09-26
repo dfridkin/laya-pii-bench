@@ -252,6 +252,11 @@ class CalibParams(_Model):
     # "fixture_debug": fit on the fixture itself (no calib split exists); score refuses it unless
     # explicitly allowed, and the report labels it. Real runs are always "calib" (invariant 3).
     fit_on: Literal["calib", "fixture_debug"]
+    # provenance (covered by content_hash): what the params were fit on. `score` checks that the
+    # units match, and that calib docs are disjoint from scored docs unless fit_on=fixture_debug.
+    decisions_sha256: str
+    units_sha256: str
+    calib_doc_ids: list[str]
     content_hash: str
 
 

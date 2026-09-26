@@ -71,7 +71,9 @@ export interface Answer {
  */
 export interface CalibParams {
   arm: string;
+  calib_doc_ids: string[];
   content_hash: string;
+  decisions_sha256: string;
   fit_on: "calib" | "fixture_debug";
   precision_target: number;
   qs: string;
@@ -84,6 +86,7 @@ export interface CalibParams {
   temperatures: {
     [k: string]: number;
   };
+  units_sha256: string;
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
