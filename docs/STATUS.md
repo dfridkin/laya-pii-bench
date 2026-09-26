@@ -8,7 +8,7 @@ Last updated: 2026-09-26 (M3 built, gate review pending)
 | M0 Bootstrap | done | 2026-09-25 (`reports/audits/M0-gate-20260925-2255.md`) | mps, p50 67.8 ms |
 | M1 Contracts + fixture | done | 2026-09-26 (`reports/audits/M1-gate-20260926.md`) | fixture locked; gold audit 0 errors |
 | M2 Scorer + report on fixture | done | 2026-09-26 (`reports/audits/M2-gate-20260926-pass.md`; review #1 FAIL fixed) | golden metrics exact; hash check exits 2 |
-| M3 Runner, arm A on fixture | built, gate review pending | | real laya run on fixture; p50 497 ms/unit (qs_v1, mps) |
+| M3 Runner, arm A on fixture | built, gate re-review pending | | real laya run on fixture; p50 ~500 ms/unit (qs_v1, mps) |
 | M4 Generator | not started | | |
 | M5 Label + split | not started | | |
 | M6 Zero-shot arms, calibrate, score, report v1 | not started | | |
@@ -88,7 +88,12 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## M3 evidence
 
-- `make check`: 157 passed, 3 skipped; model-marked tests (`LAYA_SKIP_MODEL=0 USE_TF=0 uv run pytest -m
+- Gate review #1 FAILED (`reports/audits/M3-gate-20260926-fail.md`) on three latent invariant-9
+  defects, now fixed with tests: decisions record `mode` (batch1/batched) and post-call `device`, and
+  speed splits on mode (a batched tail never counts as batch-1); resume refuses a changed checkpoint
+  revision or hw/runtime fingerprint; a mid-run laya fallback to cpu aborts and discards the batch.
+  The fixture run was regenerated after the fix (pre-fix run moved to scratch, not edited).
+- `make check`: 160 passed, 7 skipped; model-marked tests (7 passed) (`LAYA_SKIP_MODEL=0 USE_TF=0 uv run pytest -m
   model`) include the real-client tests (adapter, per-question state room, tokenizer agreement).
 - Gate 1: `uv run bench label --docs fixtures/mini/docs.jsonl --arm A` (-> `data/mini/units/A.jsonl`),
   then `uv run bench run --arm A --qs qs_v1 --docs fixtures/mini/docs.jsonl` completed: 21 laya calls
@@ -100,7 +105,7 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 - Gate 4: `bench calibrate --debug-fit-all` -> `bench score --allow-debug-calib` -> `bench report`
   on the real decisions: `reports/fixture/report_armA_qs_v1.md`, all 9 sections, DEBUG banner.
   The milestone text says `--calib-from fixture`; the equivalent here is the D-013 debug pair.
-- Timing: batch-1 p50 497 ms/unit, p95 651 ms (qs_v1, 4 questions, ~190-token chunks, mps).
+- Timing: batch-1 p50 504 ms/unit, p95 588 ms (run 2; run 1: 497 / 651) (qs_v1, 4 questions, ~190-token chunks, mps).
   Controlled check with laya directly: 1 question/short state 61 ms (matches M0), 1 question/190
   tokens 125 ms, 4 questions/short 226 ms, 4 questions/190 tokens 515 ms. Latency scales with the
   number of questions (one sequence row each) and state length; runner overhead is negligible.
@@ -162,7 +167,7 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## Next action
 
-Run `/gate M3`, then close out M3.
+Rerun `/gate M3`, then close out M3.
 
 ## Session log
 

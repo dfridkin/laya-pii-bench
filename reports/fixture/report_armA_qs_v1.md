@@ -13,13 +13,13 @@
 | splits | fixture |
 | docs sha256 | `427b466abb995d4d7566741e2eca660e61726727e652e74319f6381ad52acd27` |
 | units sha256 | `a6f2412b36e8b3c6cacfee8429adb41b0d30c991391ea283717b8213e59f5778` |
-| decisions sha256 | `df637deb313b67b282751aca38f2b5edbec514783b6ddc0f360a8c697749ce75` |
+| decisions sha256 | `373e48581b90ecf48d9986093d103693aea5028daa88cb353b29caaf301845d3` |
 | calib hash / fit_on | `27ce9d42056dbd41` / fixture_debug |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-26T14:59:17+00:00 |
+| date | 2026-09-26T15:08:47+00:00 |
 
 ## 2. Headline operating point
 
@@ -125,9 +125,9 @@ Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 11 | 496.7 | 651.4 | 749.2 | 495.5 | 2.02 |
+| per unit, batch-1 | 11 | 503.8 | 587.5 | 630.5 | 484.2 | 2.07 |
 | per unit, batched | 0 | n/a | n/a | n/a | n/a | n/a |
-| per document (sum of units, batch-1) | 10 | 497.0 | 888.4 | 1123.5 | 545.0 | 1.83 |
+| per document (sum of units, batch-1) | 10 | 505.0 | 813.6 | 996.8 | 532.6 | 1.88 |
 
 ## 7. Slices
 
