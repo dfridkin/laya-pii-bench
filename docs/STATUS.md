@@ -19,7 +19,6 @@ Last updated: 2026-09-26 (M3 gate passed)
 
 - D-001 coded IDs counted as PII.
 - D-002 dev hardware only.
-- D-013 `fit_on: fixture_debug` for fixture-only calibration (debug flags must be restricted in M5).
 - D-014 routing on calibrated p(pii); metrics on max p; laya `confidence` stored, unused.
 
 ## M0 evidence
