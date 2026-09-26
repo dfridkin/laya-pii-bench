@@ -1,13 +1,13 @@
 # Status
 
-Active milestone: **M2 Scorer + report on fixture**
-Last updated: 2026-09-26 (M2 built, gate review pending)
+Active milestone: **M3 Runner, arm A on fixture**
+Last updated: 2026-09-26 (M2 gate passed)
 
 | Milestone | State | Gate passed | Notes |
 |---|---|---|---|
 | M0 Bootstrap | done | 2026-09-25 (`reports/audits/M0-gate-20260925-2255.md`) | mps, p50 67.8 ms |
 | M1 Contracts + fixture | done | 2026-09-26 (`reports/audits/M1-gate-20260926.md`) | fixture locked; gold audit 0 errors |
-| M2 Scorer + report on fixture | built, gate review pending | | golden metrics exact; hash check exits 2 |
+| M2 Scorer + report on fixture | done | 2026-09-26 (`reports/audits/M2-gate-20260926-pass.md`; review #1 FAIL fixed) | golden metrics exact; hash check exits 2 |
 | M3 Runner, arm A on fixture | not started | | |
 | M4 Generator | not started | | |
 | M5 Label + split | not started | | |
@@ -76,7 +76,7 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 - Routing: predicted role `both` forces REDACT like `patient` (PLAN says "role = patient"; `both`
   includes patient data). qs_v2 has no role question, so routing there is threshold-only.
 - `category` gold uses only categories counted as PII; `categories_multi` is raw presence. Only
-  differs if D-001 flips to "no".
+  differs if D-001 flips to "no": then `has_coded_id` can be A while `pii_present` is B.
 - Temperature scaling acts on log of laya's 4-dp probabilities (zeros clipped to 1e-6).
 - `t_high`: smallest observed p reaching the precision target; 1.0 if unreachable; never < t_low.
 - Macro-F1 averages over labels present in gold or predictions; majority baseline is computed on
@@ -103,6 +103,10 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
   and doc units in `label`. Makefile `calibrate`/`score` targets (`--all`) need that too.
 - M6: bootstrap CIs are percentile intervals on document resamples; forward rate and recall only.
 - M7: `bench report --hud` currently prints a note and writes nothing.
+- M3: `bench score` labels speed with the scoring machine's `hw.json`; take hw from the run's
+  `meta.json` instead so the hardware label belongs to the run (invariant 9).
+- Report: reliability table could add a calibrated mean-confidence column; add a test for the
+  multi-label line.
 
 - M2/M3: fx06 boundary check assumes raw-text English tokens without special tokens; the M2 segmenter
   must count the same way, or re-tune fx06 (needs an owner OK: fixtures are locked).
@@ -129,7 +133,7 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## Next action
 
-Run `/gate M2`, then close out M2.
+Run `/milestone M3`.
 
 ## Session log
 
@@ -137,3 +141,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 
 - 2026-09-25 M0: hw fingerprint, bench hw, laya_smoke (mps p50 67.8 ms); gate PASS (independent review).
 - 2026-09-26 M1: domain, config, validate, schema, 10-doc fixture; gate PASS, gold audit 0 errors; fixtures locked.
+- 2026-09-26 M2: label/calibrate/score/report + golden metrics; review #1 FAIL (calibrated tie noise) fixed; review #2 PASS. D-013, D-014 opened.
