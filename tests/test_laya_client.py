@@ -23,10 +23,16 @@ def client():  # type: ignore[no-untyped-def]
                       ROOT / "models.lock.json")  # fmt: skip
 
 
-def test_room_is_below_naive_budget_and_positive(client) -> None:  # type: ignore[no-untyped-def]
-    rooms = client._room
-    assert set(rooms) == {"pii_present", "subject_role", "category", "doc_kind"}
-    assert all(0 < r <= 512 - 1 for r in rooms.values())
+def test_state_room_per_question_is_exact(client) -> None:  # type: ignore[no-untyped-def]
+    # laya: [CLS] head [SEP] options [SEP] state [SEP], capped at max_len 512. Pinned values,
+    # independently reproduced with laya.common.build_sequence in the M3 gate review.
+    assert client._room == {
+        "pii_present": 449,
+        "subject_role": 458,
+        "category": 420,
+        "doc_kind": 459,
+    }
+    assert client.current_device() == client.device
 
 
 def test_token_counts_match_label_stage(client) -> None:  # type: ignore[no-untyped-def]

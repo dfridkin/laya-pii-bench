@@ -232,11 +232,35 @@
         "checkpoint_rev": {
           "type": "string"
         },
+        "device": {
+          "anyOf": [
+            {
+              "enum": [
+                "cuda",
+                "mps",
+                "cpu"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "latency_ms": {
           "type": "number"
         },
         "max_len": {
           "type": "integer"
+        },
+        "mode": {
+          "default": "batch1",
+          "enum": [
+            "batch1",
+            "batched"
+          ],
+          "type": "string"
         },
         "qs": {
           "type": "string"

@@ -89,6 +89,8 @@ class Decision(BaseModel):                     # one per unit per run; also the 
     checkpoint: str; checkpoint_rev: str; max_len: int
     answers: list[Answer]                      # RAW probabilities (invariant 4)
     latency_ms: float; t_offset_ms: float; batch_size: int
+    mode: Literal["batch1", "batched"] = "batch1"   # speed stats split on mode, not batch_size
+    device: Device | None = None               # device after the call (fallback detection)
     warmup: bool = False
     state_tokens: int | None = None            # as the checkpoint tokenizer sees the state
     truncated_questions: list[str] = []        # questions whose input cut the state (inv. 7)

@@ -35,6 +35,7 @@ class LayaLike(Protocol):
     revision: str
     device: Device
 
+    def current_device(self) -> Device: ...
     def predict(self, state: str) -> tuple[dict[str, Any], int]: ...
     def predict_batch(self, states: Sequence[str]) -> tuple[list[dict[str, Any]], int]: ...
     def state_tokens(self, state: str) -> tuple[int, list[str]]: ...
@@ -109,10 +110,7 @@ class LayaClient:
         self.max_len, self.head_max_len = max_len, head_max_len
         load: Any = laya.load  # pyright: ignore[reportUnknownMemberType]
         self._agent: Any = load(entry["path"], device=device, subfolder=LOADABLE[checkpoint])
-        dev = str(self._agent.device.type)
-        if dev not in get_args(Device):
-            raise LayaError(f"unsupported device {dev!r}")
-        self.device = cast(Device, dev)
+        self.device = self.current_device()
         self._tok: Any = self._agent.tok
         # Room for the state per question: build each question's input around an empty state.
         build: Any = getattr(common, "build_sequence")  # noqa: B009 (untyped laya API)
@@ -124,6 +122,13 @@ class LayaClient:
                 build(self._tok, "", internal, max_len, head_max_len, state_ids=[]),
             )
             self._room[qid] = max(0, max_len - (len(seq) - 1) - 1)
+
+    def current_device(self) -> Device:
+        """laya may move the agent to cpu mid-run (e.g. on an MPS memory error)."""
+        dev = str(self._agent.device.type)
+        if dev not in get_args(Device):
+            raise LayaError(f"unsupported device {dev!r}")
+        return cast(Device, dev)
 
     def state_tokens(self, state: str) -> tuple[int, list[str]]:
         ids: list[int] = self._tok(

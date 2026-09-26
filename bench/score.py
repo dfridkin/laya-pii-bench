@@ -494,7 +494,7 @@ def speed(
     decisions: Sequence[Decision], units: Mapping[str, Unit], hw: HwInfo | None
 ) -> SpeedMetrics:
     live = [d for d in decisions if not d.warmup]
-    b1 = [d for d in live if d.batch_size == 1]
+    b1 = [d for d in live if d.mode == "batch1"]
     per_doc: dict[str, float] = defaultdict(float)
     for d in b1:
         per_doc[units[d.unit_id].doc_id] += d.latency_ms
@@ -506,7 +506,7 @@ def speed(
     return SpeedMetrics(
         hardware=hardware,
         batch1=latency_stats([d.latency_ms for d in b1]),
-        batched=latency_stats([d.latency_ms for d in live if d.batch_size > 1]),
+        batched=latency_stats([d.latency_ms for d in live if d.mode == "batched"]),
         per_doc_ms=latency_stats(list(per_doc.values())),
         warmup_excluded=len(decisions) - len(live),
     )

@@ -15,11 +15,11 @@ from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import ValidationError
 
-from bench.domain import Decision, HwInfo, QuestionSet, RunMeta, Unit
+from bench.domain import Decision, Device, HwInfo, QuestionSet, RunMeta, Unit
 from bench.laya_client import LayaLike, to_answers
 
 Log = Callable[[str], None]
@@ -79,6 +79,17 @@ def _check_resume(prev: RunMeta, spec: RunSpec) -> None:
         )
 
 
+def _check_same_machine(prev: HwInfo, now: HwInfo) -> None:
+    """Refuse to resume on a different machine, runtime or checkpoint set (invariant 9)."""
+    a, b = prev.model_dump(exclude={"created_at"}), now.model_dump(exclude={"created_at"})
+    changed = sorted(k for k in a if a[k] != b[k])
+    if changed:
+        raise RunError(
+            f"hardware/runtime fingerprint changed since the run started ({changed}); timings "
+            "would mix. Use a fresh run directory."
+        )
+
+
 class _Writer:
     """Append-only JSONL; each batch is flushed and fsynced so a crash loses at most one batch."""
 
@@ -109,6 +120,7 @@ def run(
     prev = RunMeta.model_validate_json(meta_path.read_text()) if meta_path.exists() else None
     if prev is not None:
         _check_resume(prev, spec)
+        _check_same_machine(prev.hw, hw)
     unit_ids = {u.id for u in units}
     done = {d.unit_id for d in read_existing(decisions_path) if not d.warmup}
     stray = sorted(done - unit_ids)
@@ -128,6 +140,22 @@ def run(
         f"in {time.perf_counter() - t_load:.1f}s")  # fmt: skip
     if prev is not None and prev.device != client.device:
         raise RunError(f"device changed from {prev.device} to {client.device}; timings would mix")
+    if prev is not None and prev.checkpoint_rev != client.revision:
+        raise RunError(
+            f"checkpoint revision changed from {prev.checkpoint_rev} to {client.revision}; "
+            "use a fresh run directory"
+        )
+    mode: Literal["batch1", "batched"] = "batch1" if spec.batch_size == 1 else "batched"
+
+    def check_device() -> Device:
+        dev = client.current_device()
+        if dev != client.device:
+            log(f"ERROR laya moved from {client.device} to {dev} mid-run; batch discarded")
+            raise RunError(
+                f"laya fell back from {client.device} to {dev} mid-run; timings would mix. "
+                "Resume on the original device or start a fresh run with device set explicitly."
+            )
+        return dev
 
     meta = RunMeta(
         arm=spec.arm,
@@ -152,6 +180,7 @@ def run(
         latency_ms: float,
         t_offset_ms: float,
         batch_size: int,
+        device: Device,
         warmup: bool = False,
         state_tokens: int | None = None,
         cut: Sequence[str] = (),
@@ -167,6 +196,8 @@ def run(
             latency_ms=latency_ms,
             t_offset_ms=t_offset_ms,
             batch_size=batch_size,
+            mode=mode,
+            device=device,
             warmup=warmup,
             state_tokens=state_tokens,
             truncated_questions=list(cut),
@@ -181,7 +212,8 @@ def run(
             start = time.perf_counter_ns()
             res, ns = client.predict(text)
             calls += 1
-            warm = decision(f"warmup:{i}", res, ns / 1e6, (start - t0) / 1e6, 1, warmup=True)
+            dev = check_device()
+            warm = decision(f"warmup:{i}", res, ns / 1e6, (start - t0) / 1e6, 1, dev, warmup=True)
             writer.write([warm])
         for b in range(0, len(todo), spec.batch_size):
             batch = todo[b : b + spec.batch_size]
@@ -194,6 +226,7 @@ def run(
             else:
                 results, ns = client.predict_batch(states)
             calls += 1
+            dev = check_device()
             out: list[Decision] = []
             for u, res, (n_tok, cut) in zip(batch, results, seen, strict=True):
                 if cut and not u.truncated:
@@ -205,7 +238,7 @@ def run(
                     log(f"note {u.id}: unit.truncated=true but no question cut the state")
                 out.append(
                     decision(u.id, res, ns / 1e6 / len(batch), (start - t0) / 1e6, len(batch),
-                             state_tokens=n_tok, cut=cut)
+                             dev, state_tokens=n_tok, cut=cut)
                 )  # fmt: skip
             writer.write(out)
             if (b // spec.batch_size) % 25 == 0:

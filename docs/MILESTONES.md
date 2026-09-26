@@ -107,6 +107,7 @@ into the gate review.
 3. `meta.json` contains hw fingerprint, warmup count, and checkpoint revision.
 4. `bench score` + `bench report` run end to end on these real decisions (fixture has no calib
    split: use `--calib-from fixture` debug flag, clearly labeled in the report).
+   *Implemented as `bench calibrate --debug-fit-all` + `bench score --allow-debug-calib` (D-013).*
 
 ---
 

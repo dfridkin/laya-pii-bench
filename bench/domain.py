@@ -64,6 +64,7 @@ CategoryAnswer = Literal["direct", "quasi", "coded", "staff", "none"]
 DocKindAnswer = Literal["narrative", "form_table", "correspondence", "protocol_text"]
 UnitKind = Literal["chunk", "section", "doc"]
 Split = Literal["train", "calib", "test", "holdout"]
+Device = Literal["cuda", "mps", "cpu"]
 
 
 class _Interval(_Model):
@@ -186,7 +187,9 @@ class Decision(_Model):
     answers: list[Answer]  # RAW probabilities (invariant 4)
     latency_ms: float
     t_offset_ms: float
-    batch_size: int = Field(ge=1)
+    batch_size: int = Field(ge=1)  # states in this call (a batched run's tail may be smaller)
+    mode: Literal["batch1", "batched"] = "batch1"  # run mode; speed stats split on this
+    device: Device | None = None  # device laya reported after this call
     warmup: bool = False
     # State tokens as the checkpoint tokenizes them, and the questions whose input cut the state
     # short (laya's per-question room: max_len - prompt head - specials). Invariant 7.
@@ -201,9 +204,6 @@ class RoutedDecision(_Model):
     route: Route
     triggers: list[str]
     calibrated_probs: dict[str, dict[str, float]]
-
-
-Device = Literal["cuda", "mps", "cpu"]
 
 
 class HwInfo(_Model):

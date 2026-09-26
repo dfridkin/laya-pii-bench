@@ -43,12 +43,21 @@ def fake_result(state: str) -> dict[str, Any]:
 
 class FakeClient:
     checkpoint = "english"
-    revision = "rev-abc"
 
-    def __init__(self, device: Device = "mps", cut_over: int = 10_000) -> None:
+    def __init__(
+        self, device: Device = "mps", cut_over: int = 10_000, fall_back_after: int | None = None,
+        revision: str = "rev-abc",
+    ) -> None:  # fmt: skip
         self.device: Device = device
+        self.revision = revision
         self.calls = 0
         self.cut_over = cut_over
+        self.fall_back_after = fall_back_after
+
+    def current_device(self) -> Device:
+        if self.fall_back_after is not None and self.calls > self.fall_back_after:
+            return "cpu"  # laya moved the agent to cpu (e.g. MPS out of memory)
+        return self.device
 
     def predict(self, state: str) -> tuple[dict[str, Any], int]:
         self.calls += 1
@@ -91,6 +100,7 @@ def test_first_run_then_resume_makes_zero_calls(tmp_path: Path) -> None:
     live = [d for d in decisions if not d.warmup]
     assert [d.unit_id for d in live] == [u.id for u in UNITS]
     assert all(d.batch_size == 1 and d.latency_ms == 5.0 and d.state_tokens for d in live)
+    assert all(d.mode == "batch1" and d.device == "mps" for d in decisions)
     assert live[0].answers[0].answer_confidence == 0.9
 
     log2: list[str] = []
@@ -156,6 +166,45 @@ def test_truncation_recorded_and_warned(tmp_path: Path) -> None:
     live = read_existing(tmp_path / "decisions.jsonl")
     assert all(d.truncated_questions == ["pii_present"] for d in live)
     assert any(line.startswith("WARN fx01:chunk:512:0: state cut") for line in log)
+
+
+def test_batched_tail_never_counts_as_batch1(tmp_path: Path) -> None:
+    from bench.score import speed
+
+    go(spec(tmp_path, batch_size=5, warmup=0))
+    live = read_existing(tmp_path / "decisions.jsonl")
+    assert [d.batch_size for d in live] == [5] * 10 + [1]  # tail call holds one state
+    assert all(d.mode == "batched" for d in live)
+    sp = speed(live, {u.id: u for u in UNITS}, None)
+    assert sp.batch1 is None and sp.batched is not None and sp.batched.n == 11
+
+
+def test_resume_refuses_new_revision_or_machine(tmp_path: Path) -> None:
+    go(spec(tmp_path))
+    lines = (tmp_path / "decisions.jsonl").read_text().splitlines()
+    (tmp_path / "decisions.jsonl").write_text("\n".join(lines[:-1]) + "\n")
+    with pytest.raises(RunError, match="checkpoint revision changed"):
+        go(spec(tmp_path), FakeClient(revision="rev-NEW"))
+    other = HW.model_copy(update={"cpu": "Apple M1", "laya": "0.4.0"})
+    with pytest.raises(RunError, match=r"fingerprint changed.*'cpu', 'laya'"):
+        run(spec(tmp_path), UNITS, TEXTS, ["w"], FakeClient, other, print)
+    later = HW.model_copy(update={"created_at": "later"})  # same machine, new timestamp: fine
+    n = run(spec(tmp_path), UNITS, TEXTS, ["w"], FakeClient, later, print)
+    assert n == 3 + 1
+    meta = RunMeta.model_validate_json((tmp_path / "meta.json").read_text())
+    assert meta.checkpoint_rev == "rev-abc" and meta.hw.cpu == "c"
+
+
+def test_mid_run_cpu_fallback_aborts_without_writing(tmp_path: Path) -> None:
+    log: list[str] = []
+    with pytest.raises(RunError, match="fell back from mps to cpu"):
+        go(spec(tmp_path, warmup=2), FakeClient(fall_back_after=4), log=log)
+    live = [d for d in read_existing(tmp_path / "decisions.jsonl") if not d.warmup]
+    assert len(live) == 2  # calls 3 and 4 were written; call 5 ran on cpu and was discarded
+    assert all(d.device == "mps" for d in live)
+    assert any("ERROR laya moved from mps to cpu" in line for line in log)
+    meta = RunMeta.model_validate_json((tmp_path / "meta.json").read_text())
+    assert meta.finished_at is None
 
 
 def test_batched_mode_splits_latency(tmp_path: Path) -> None:

@@ -110,6 +110,8 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
   per decision; the truncated slice uses either signal. laya's tokenizer matches the label stage's
   token counts on all 11 fixture units.
 - Zero-shot arm A on the fixture is weak (expected per the model card): see the report.
+- Warmup: 10 calls (spec default) on whole fixture documents, which laya truncates to `max_len`;
+  the spec says "fixture units". Same input shapes, excluded from every metric; noted as a deviation.
 
 ## Questions for the owner (not blocking; candidates for DECISIONS entries)
 
@@ -156,7 +158,6 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
   every question has <= 10 options; keep it that way.
 - M3: `models.lock.json` stores absolute HF cache paths (one machine). Resolve path at load time
   from repo + revision instead (download_models.py writes it; fix there, not by hand).
-- M3: runner warmup follows spec default (10 calls on fixture units), not the M0 smoke's 5.
 - M6/B4: dev box has 8 GB RAM; 8192-token multilingual runs may be memory-bound on MPS.
 
 ## Next action

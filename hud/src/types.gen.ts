@@ -139,8 +139,10 @@ export interface Decision {
   batch_size: number;
   checkpoint: string;
   checkpoint_rev: string;
+  device?: ("cuda" | "mps" | "cpu") | null;
   latency_ms: number;
   max_len: number;
+  mode?: "batch1" | "batched";
   qs: string;
   state_tokens?: number | null;
   t_offset_ms: number;
