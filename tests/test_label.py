@@ -214,3 +214,7 @@ def test_fixture_units_match_hand_gold() -> None:
     assert got == FIXTURE_UNITS
     assert {u.id: (u.start, u.end, u.tokens) for u in units} == FIXTURE_UNIT_OFFSETS
     assert all(not u.truncated and u.tokens <= 256 for u in units)
+    # units record exactly which tokenizer revision counted them (audit A10)
+    rev = tokenize.load("english", ROOT / "models.lock.json").name
+    assert rev.startswith("english@") and len(rev) == len("english@") + 40
+    assert {u.tokenizer for u in units} == {rev}

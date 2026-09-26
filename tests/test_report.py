@@ -34,12 +34,14 @@ def pipeline(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     }
     write_units(fixture_units(), paths["units"])
     common = ["--decisions", str(MINI / "decisions_mock.jsonl"), "--units", str(paths["units"])]
-    r = RUN.invoke(app, ["calibrate", *common, "--out", str(paths["calib"]), "--debug-fit-all"])
+    r = RUN.invoke(app, ["calibrate", *common, "--out", str(paths["calib"]), "--debug-fit-all",
+                         "--allow-no-meta"])  # fmt: skip
     assert r.exit_code == 0, r.output
     r = RUN.invoke(
         app,
         ["score", *common, "--calib", str(paths["calib"]), "--out", str(paths["scores"]),
-         "--docs", str(MINI / "docs.jsonl"), "--hw", str(d / "no-hw.json"), "--allow-debug-calib"],
+         "--docs", str(MINI / "docs.jsonl"), "--hw", str(d / "no-hw.json"), "--allow-debug-calib",
+         "--allow-no-meta"],
     )  # fmt: skip
     assert r.exit_code == 0, r.output
     r = RUN.invoke(app, ["report", "--scores", str(paths["scores"]), "--out", str(paths["report"])])
@@ -91,7 +93,7 @@ def test_tampered_calib_exits_nonzero(pipeline: dict[str, Path], tmp_path: Path)
         app,
         ["score", "--decisions", str(MINI / "decisions_mock.jsonl"), "--units",
          str(pipeline["units"]), "--calib", str(bad), "--out", str(tmp_path / "s.json"),
-         "--docs", str(MINI / "docs.jsonl"), "--allow-debug-calib"],
+         "--docs", str(MINI / "docs.jsonl"), "--allow-debug-calib", "--allow-no-meta"],
     )  # fmt: skip
     assert r.exit_code != 0
     assert "hash mismatch" in r.output

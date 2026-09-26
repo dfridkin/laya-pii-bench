@@ -140,6 +140,16 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 - Fixture artifacts regenerated through the stages (pre-audit copies in the session scratchpad):
   model answers byte-identical to the pre-audit run; p50 490 ms/unit.
 - `make check` 188 passed, 8 skipped; model tests 8 passed.
+- Review of the batch FAILED (`reports/audits/M0-M3-fixbatch-review-20260926-fail.md`): calibrate
+  crashed on `t_high: None` (R1), meta-less decisions bypassed provenance (R2), the disjointness
+  check would have refused scoring a calib split (R3), torn-line repair dropped a valid last line
+  and ran before resume checks (R4), missing HF cache gave a raw error (R5), and six fixes had no
+  test that noticed their removal. All fixed; the A4 bound check now compares objective values
+  (a flat objective stopped the optimizer at T = 0.06, short of the 0.05 bound). All 12 surviving
+  mutants from the review are now killed. `make check` 200 passed; model tests 8 passed.
+- Fixture commands that use the meta-less mock decisions now also need `--allow-no-meta`
+  (`bench calibrate --debug-fit-all --allow-no-meta`, `bench score --allow-debug-calib
+  --allow-no-meta`); runs produced by `bench run` have meta.json and don't.
 
 ## Questions for the owner (not blocking; candidates for DECISIONS entries)
 
@@ -152,8 +162,11 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Later (out of current scope, noted for the owning milestone)
 
-- Before M6: make `Decision.mode` required (or reject rows without it) so an old batched row can't
-  count as batch-1; refuse resume when `decisions.jsonl` exists without `meta.json`.
+- Done (audit A9): instead of making `Decision.mode` required (the locked mock decisions lack it),
+  `score` rejects any row whose mode doesn't match its run's `meta.json`; meta-less run dirs are
+  refused by the runner, and by calibrate/score unless `--allow-no-meta` (fixture debug only).
+- M4a: add `Span.value: str | None` to `bench/domain.py` (D-016; already in domain.md), regenerate
+  schema, and have validate check `text[start:end] == value` when present.
 - Before M6 qs_v2 speed: laya can silently turn MPS autocast off mid-run (fp32, no device change;
   agent.py ~640). Record amp/dtype per decision or abort on change. qs_v1 (4 rows) never uses amp.
 - Spec wording: laya-runtime.md says "fall back to cpu and record"; the runner aborts instead
@@ -189,8 +202,6 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
   one the router gates on before building `score` routing. Store both.
 - M3: checkpoint warns `choice:11+` temperature out of range (clamped to 0.5). Irrelevant while
   every question has <= 10 options; keep it that way.
-- M3: `models.lock.json` stores absolute HF cache paths (one machine). Resolve path at load time
-  from repo + revision instead (download_models.py writes it; fix there, not by hand).
 - M6/B4: dev box has 8 GB RAM; 8192-token multilingual runs may be memory-bound on MPS.
 
 ## Next action

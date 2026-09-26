@@ -115,6 +115,12 @@ def calibrate(
     debug_fit_all: Annotated[
         bool, typer.Option(help="Fixture only: fit on every unit (no calib split). Labeled.")
     ] = False,
+    allow_no_meta: Annotated[
+        bool,
+        typer.Option(
+            help="Fixture only (with --debug-fit-all): decisions without a run meta.json."
+        ),
+    ] = False,
 ) -> None:
     """Fit temperatures and routing thresholds on the calib split; write hashed params."""
     from bench import calibrate as cal
@@ -130,6 +136,13 @@ def calibrate(
 
     hashes = {"decisions": sha256_file(decisions), "units": sha256_file(units)}
     meta_path = decisions.parent / "meta.json"
+    if not meta_path.exists() and not (allow_no_meta and debug_fit_all):
+        typer.echo(
+            f"error: no meta.json next to {decisions}; units provenance can't be checked "
+            "(fixture-only override: --debug-fit-all --allow-no-meta)",
+            err=True,
+        )
+        raise typer.Exit(2)
     if meta_path.exists():
         run_units = RunMeta.model_validate_json(meta_path.read_text()).config_hashes.get("units")
         if run_units is not None and run_units != hashes["units"]:
@@ -146,7 +159,8 @@ def calibrate(
         raise typer.Exit(2) from e
     cal.write(params, out)
     typer.echo(
-        f"{params.arm}/{params.qs}: t_low={params.t_low:.4f} t_high={params.t_high:.4f} "
+        f"{params.arm}/{params.qs}: t_low={params.t_low:.4f} "
+        f"t_high={'none' if params.t_high is None else f'{params.t_high:.4f}'} "
         f"fit_on={params.fit_on} hash={params.content_hash[:12]} -> {out}"
     )
 
@@ -256,6 +270,10 @@ def score(
     allow_debug_calib: Annotated[
         bool, typer.Option(help="Accept fit_on=fixture_debug calib (fixture runs only).")
     ] = False,
+    allow_no_meta: Annotated[
+        bool,
+        typer.Option(help="Fixture only (with --allow-debug-calib): decisions without meta.json."),
+    ] = False,
 ) -> None:
     """Score decisions against gold with frozen calib params. Refuses a calib hash mismatch."""
     from bench import calibrate as cal
@@ -270,10 +288,24 @@ def score(
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(2) from e
     documents = read_docs(docs)
-    split_docs = {"fixture": {d.id for d in documents}}  # bench split (M5) adds calib/test/holdout
+    # bench split (M5) replaces this with calib/test/holdout from data/splits.json
+    split_docs = {"fixture": {d.id for d in documents}}
     from bench.domain import RunMeta
 
     meta_path = decisions.parent / "meta.json"
+    extra_caveats: list[str] = []
+    if not meta_path.exists():
+        if not (allow_no_meta and allow_debug_calib):
+            typer.echo(
+                f"error: no meta.json next to {decisions}; units/docs provenance can't be checked "
+                "(fixture-only override: --allow-debug-calib --allow-no-meta)",
+                err=True,
+            )
+            raise typer.Exit(2)
+        extra_caveats.append(
+            "Decisions have no run meta.json (--allow-no-meta): units/docs were not checked "
+            "against the run that produced them."
+        )
     hw_info: HwInfo | None = None
     run_hashes: dict[str, str] | None = None
     run_batch_size = None
@@ -286,14 +318,15 @@ def score(
         hw_info = HwInfo.model_validate_json(hw.read_text())
     hashes = {k: sc.sha256_file(p) for k, p in (("docs", docs), ("units", units),
                                                 ("decisions", decisions))}  # fmt: skip
-    scored: set[str] = {d for ids in split_docs.values() for d in ids}
+    scored = sc.disjointness_scope(split_docs)
     try:
         sc.verify_provenance(params, hashes["units"], hashes["docs"], run_hashes, scored)
         rows = sc.read_decisions(decisions)
         if run_batch_size is not None:
             sc.verify_run_rows(rows, run_batch_size)
         scores = sc.score(rows, read_units(units), documents, params,
-                          load_policy(policy), split_docs, hw_info, hashes)  # fmt: skip
+                          load_policy(policy), split_docs, hw_info, hashes,
+                          extra_caveats)  # fmt: skip
     except sc.ScoreError as e:
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(2) from e

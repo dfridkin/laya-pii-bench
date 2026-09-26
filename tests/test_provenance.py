@@ -50,7 +50,10 @@ def test_flipped_gold_is_refused_end_to_end(tmp_path: Path) -> None:
     c = tmp_path / "c.json"
     common = ["--decisions", str(MINI / "decisions_mock.jsonl"), "--units", str(units)]
     assert (
-        RUN.invoke(app, ["calibrate", *common, "--out", str(c), "--debug-fit-all"]).exit_code == 0
+        RUN.invoke(
+            app, ["calibrate", *common, "--out", str(c), "--debug-fit-all", "--allow-no-meta"]
+        ).exit_code
+        == 0
     )
     flipped = tmp_path / "flipped.jsonl"
     write_units(
@@ -61,7 +64,7 @@ def test_flipped_gold_is_refused_end_to_end(tmp_path: Path) -> None:
     r = RUN.invoke(app, ["score", "--decisions", str(MINI / "decisions_mock.jsonl"),
                          "--units", str(flipped), "--calib", str(c), "--out",
                          str(tmp_path / "s.json"), "--docs", str(MINI / "docs.jsonl"),
-                         "--allow-debug-calib"])  # fmt: skip
+                         "--allow-debug-calib", "--allow-no-meta"])  # fmt: skip
     assert r.exit_code == 2 and "calib was fit on different units" in r.output
     assert not (tmp_path / "s.json").exists()
 

@@ -72,9 +72,15 @@ def repair_torn_tail(path: Path) -> int:
     if not data or data.endswith(b"\n"):
         return 0
     keep = data.rfind(b"\n") + 1
-    with path.open("r+b") as f:
-        f.truncate(keep)
-    return len(data) - keep
+    try:  # a complete record that only lost its newline is kept
+        Decision.model_validate_json(data[keep:])
+    except ValidationError:
+        with path.open("r+b") as f:
+            f.truncate(keep)
+        return len(data) - keep
+    with path.open("ab") as f:
+        f.write(b"\n")
+    return 0
 
 
 def write_atomic(path: Path, text: str) -> None:
@@ -146,12 +152,12 @@ def run(
             f"{decisions_path} exists without meta.json; provenance is unknown. Use a fresh run "
             "directory."
         )
-    torn = repair_torn_tail(decisions_path)
-    if torn:
-        log(f"repaired torn final line ({torn} bytes) in {decisions_path.name}")
     if prev is not None:
         _check_resume(prev, spec)
         _check_same_machine(prev.hw, hw)
+    torn = repair_torn_tail(decisions_path)  # only once resuming is allowed
+    if torn:
+        log(f"repaired torn final line ({torn} bytes) in {decisions_path.name}")
     unit_ids = {u.id for u in units}
     done = {d.unit_id for d in read_existing(decisions_path) if not d.warmup}
     stray = sorted(done - unit_ids)

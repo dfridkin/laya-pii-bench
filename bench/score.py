@@ -573,6 +573,12 @@ def caveats(splits: Mapping[str, SplitScores], calib: CalibParams) -> list[str]:
 # --- provenance (invariant 3) -------------------------------------------------------------------
 
 
+def disjointness_scope(split_docs: Mapping[str, set[str]]) -> set[str]:
+    """Scored docs that must not overlap calib's docs: every split except a split named `calib`,
+    which may be scored descriptively (in-sample by definition)."""
+    return {d for name, ids in split_docs.items() if name != "calib" for d in ids}
+
+
 def verify_provenance(
     calib: CalibParams,
     units_sha256: str,
@@ -639,6 +645,7 @@ def score(
     split_docs: Mapping[str, set[str]],
     hw: HwInfo | None,
     hashes: Mapping[str, str],
+    extra_caveats: Sequence[str] = (),
 ) -> Scores:
     unit_map = {u.id: u for u in units}
     doc_map = {d.id: d for d in docs}
@@ -671,5 +678,5 @@ def score(
         context=context,
         splits=splits,
         speed=speed(decisions, unit_map, hw),
-        caveats=caveats(splits, calib),
+        caveats=[*extra_caveats, *caveats(splits, calib)],
     )

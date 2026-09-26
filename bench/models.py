@@ -32,7 +32,10 @@ def pinned(name: str, models_lock: Path = MODELS_LOCK) -> Pinned:
     import huggingface_hub
 
     entry: dict[str, str] = json.loads(models_lock.read_text())[name]
-    scan: Any = getattr(huggingface_hub, "scan_cache_dir")()  # noqa: B009 (untyped result)
+    try:
+        scan: Any = getattr(huggingface_hub, "scan_cache_dir")()  # noqa: B009 (untyped result)
+    except Exception as e:
+        raise FileNotFoundError(f"no local HF cache ({e}); run `make bootstrap`") from e
     root: Path | None = None
     for repo in scan.repos:
         if repo.repo_id == entry["repo"]:

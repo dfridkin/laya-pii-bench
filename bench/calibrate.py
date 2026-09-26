@@ -115,8 +115,11 @@ def fit_or_fallback(
     if correct == 0:
         return 1.0, "calib accuracy 0.0"
     t = fit_temperature(rows, gold_idx)
-    lo, hi = T_BOUNDS
-    if t <= lo * 1.001 or t >= hi / 1.001:
+    # A bounded optimizer on a flat objective stops short of the bound (e.g. T = 0.06), so compare
+    # objective values: if a bound is at least as good as the fit, the fit is running into it.
+    r, g = np.array(rows, dtype=float), np.array(gold_idx, dtype=int)
+    at_t = _nll(r, g, t)
+    if any(_nll(r, g, b) <= at_t + 1e-9 for b in T_BOUNDS):
         return 1.0, f"fit hit bound ({t:.4g})"
     return t, None
 
