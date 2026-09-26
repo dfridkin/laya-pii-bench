@@ -20,7 +20,7 @@
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-26T17:23:01+00:00 |
+| date | 2026-09-26T17:37:41+00:00 |
 
 ## 2. Headline operating point
 

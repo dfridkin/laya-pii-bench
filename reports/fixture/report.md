@@ -20,7 +20,7 @@
 | laya version | unknown |
 | checkpoints | english |
 | checkpoint revisions | MOCK |
-| date | 2026-09-26T17:22:36+00:00 |
+| date | 2026-09-26T17:37:40+00:00 |
 
 ## 2. Headline operating point
 
@@ -192,6 +192,7 @@ none
 
 ## 9. Caveats
 
+- mock / qs_v1: Decisions have no run meta.json (--allow-no-meta): units/docs were not checked against the run that produced them.
 - mock / qs_v1: Calibration fit_on=fixture_debug: temperatures and thresholds were fit on the scored units themselves. Calibrated metrics and routing are in-sample; this is a pipeline check, not a benchmark result.
 - mock / qs_v1: No holdout split was scored.
 - mock / qs_v1: fixture: slices with n < 30: doc_type=crf_page (n=1), doc_type=csr_patient_narrative (n=2), doc_type=delegation_log (n=1), doc_type=lab_report (n=1), doc_type=monitoring_visit_report (n=2), doc_type=protocol_section (n=2), doc_type=sae_cioms (n=1), doc_type=site_correspondence (n=1), hard_negative=no (n=9), hard_negative=yes (n=2), lang=de (n=1), lang=en (n=10), length_bucket=short (n=11), perturbation=email_quoting (n=1), perturbation=none (n=7), perturbation=ocr_noise (n=1), perturbation=table (n=2), pii_depth=none (n=11), pre_redacted=no (n=10), pre_redacted=yes (n=1), split_span=no (n=10), split_span=yes (n=1), truncated=no (n=11)
