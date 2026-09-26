@@ -1,0 +1,756 @@
+{
+  "$defs": {
+    "Answer": {
+      "additionalProperties": false,
+      "properties": {
+        "choice": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "number"
+        },
+        "probs": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        },
+        "question": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "question",
+        "choice",
+        "probs",
+        "confidence"
+      ],
+      "title": "Answer",
+      "type": "object"
+    },
+    "CalibParams": {
+      "additionalProperties": false,
+      "properties": {
+        "arm": {
+          "type": "string"
+        },
+        "content_hash": {
+          "type": "string"
+        },
+        "fit_on": {
+          "const": "calib",
+          "type": "string"
+        },
+        "precision_target": {
+          "type": "number"
+        },
+        "qs": {
+          "type": "string"
+        },
+        "recall_target": {
+          "type": "number"
+        },
+        "t_high": {
+          "type": "number"
+        },
+        "t_low": {
+          "type": "number"
+        },
+        "temperatures": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "arm",
+        "qs",
+        "temperatures",
+        "t_low",
+        "t_high",
+        "recall_target",
+        "precision_target",
+        "fit_on",
+        "content_hash"
+      ],
+      "title": "CalibParams",
+      "type": "object"
+    },
+    "ChoiceQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "criteria": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxProperties": 10,
+          "minProperties": 2,
+          "type": "object"
+        },
+        "instructions": {
+          "type": "string"
+        },
+        "type": {
+          "const": "choice",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "instructions",
+        "criteria"
+      ],
+      "title": "ChoiceQuestion",
+      "type": "object"
+    },
+    "Decision": {
+      "additionalProperties": false,
+      "description": "One per unit per run; also the HUD trace event.",
+      "properties": {
+        "answers": {
+          "items": {
+            "$ref": "#/$defs/Answer"
+          },
+          "type": "array"
+        },
+        "arm": {
+          "type": "string"
+        },
+        "batch_size": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "checkpoint": {
+          "type": "string"
+        },
+        "checkpoint_rev": {
+          "type": "string"
+        },
+        "latency_ms": {
+          "type": "number"
+        },
+        "max_len": {
+          "type": "integer"
+        },
+        "qs": {
+          "type": "string"
+        },
+        "t_offset_ms": {
+          "type": "number"
+        },
+        "unit_id": {
+          "type": "string"
+        },
+        "warmup": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "unit_id",
+        "arm",
+        "qs",
+        "checkpoint",
+        "checkpoint_rev",
+        "max_len",
+        "answers",
+        "latency_ms",
+        "t_offset_ms",
+        "batch_size"
+      ],
+      "title": "Decision",
+      "type": "object"
+    },
+    "DocType": {
+      "enum": [
+        "protocol_section",
+        "icf_signature_page",
+        "crf_page",
+        "sae_cioms",
+        "csr_patient_narrative",
+        "monitoring_visit_report",
+        "deviation_log",
+        "lab_report",
+        "conmed_log",
+        "delegation_log",
+        "irb_letter",
+        "site_correspondence"
+      ],
+      "title": "DocType",
+      "type": "string"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "doc_type": {
+          "$ref": "#/$defs/DocType"
+        },
+        "gen_meta": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            ]
+          },
+          "type": "object"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lang": {
+          "enum": [
+            "en",
+            "de",
+            "es",
+            "pl"
+          ],
+          "type": "string"
+        },
+        "length_bucket": {
+          "$ref": "#/$defs/LengthBucket"
+        },
+        "negatives": {
+          "items": {
+            "$ref": "#/$defs/Negative"
+          },
+          "type": "array"
+        },
+        "pii_depth": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PiiDepth"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "type": "array"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "text": {
+          "type": "string"
+        },
+        "world_refs": {
+          "$ref": "#/$defs/WorldRefs"
+        }
+      },
+      "required": [
+        "id",
+        "doc_type",
+        "lang",
+        "text",
+        "spans",
+        "negatives",
+        "tags",
+        "length_bucket",
+        "pii_depth",
+        "world_refs",
+        "gen_meta"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "GoldAnswers": {
+      "additionalProperties": false,
+      "properties": {
+        "categories_multi": {
+          "additionalProperties": {
+            "type": "boolean"
+          },
+          "propertyNames": {
+            "$ref": "#/$defs/PiiCategory"
+          },
+          "type": "object"
+        },
+        "category": {
+          "enum": [
+            "direct",
+            "quasi",
+            "coded",
+            "staff",
+            "none"
+          ],
+          "type": "string"
+        },
+        "doc_kind": {
+          "enum": [
+            "narrative",
+            "form_table",
+            "correspondence",
+            "protocol_text"
+          ],
+          "type": "string"
+        },
+        "pii_present": {
+          "enum": [
+            "A",
+            "B"
+          ],
+          "type": "string"
+        },
+        "subject_role": {
+          "enum": [
+            "patient",
+            "staff",
+            "both",
+            "none"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "pii_present",
+        "subject_role",
+        "category",
+        "doc_kind",
+        "categories_multi"
+      ],
+      "title": "GoldAnswers",
+      "type": "object"
+    },
+    "HwInfo": {
+      "additionalProperties": false,
+      "description": "Hardware fingerprint (`hw.json`), attached to every run (invariant 9).",
+      "properties": {
+        "arch": {
+          "type": "string"
+        },
+        "checkpoints": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "cpu": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "device": {
+          "enum": [
+            "cuda",
+            "mps",
+            "cpu"
+          ],
+          "type": "string"
+        },
+        "device_name": {
+          "type": "string"
+        },
+        "laya": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "python": {
+          "type": "string"
+        },
+        "ram_gb": {
+          "type": "number"
+        },
+        "torch": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "os",
+        "arch",
+        "cpu",
+        "ram_gb",
+        "python",
+        "torch",
+        "laya",
+        "device",
+        "device_name",
+        "checkpoints",
+        "created_at"
+      ],
+      "title": "HwInfo",
+      "type": "object"
+    },
+    "LengthBucket": {
+      "enum": [
+        "short",
+        "medium",
+        "long",
+        "xl"
+      ],
+      "title": "LengthBucket",
+      "type": "string"
+    },
+    "Negative": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "kind"
+      ],
+      "title": "Negative",
+      "type": "object"
+    },
+    "NoulQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "instructions": {
+          "type": "string"
+        },
+        "type": {
+          "const": "noul",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "instructions"
+      ],
+      "title": "NoulQuestion",
+      "type": "object"
+    },
+    "PiiCategory": {
+      "enum": [
+        "phi_direct",
+        "phi_quasi",
+        "coded_id",
+        "staff_pii"
+      ],
+      "title": "PiiCategory",
+      "type": "string"
+    },
+    "PiiDepth": {
+      "enum": [
+        "early",
+        "middle",
+        "late"
+      ],
+      "title": "PiiDepth",
+      "type": "string"
+    },
+    "QuestionSet": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "questions": {
+          "additionalProperties": {
+            "discriminator": {
+              "mapping": {
+                "choice": "#/$defs/ChoiceQuestion",
+                "noul": "#/$defs/NoulQuestion",
+                "score": "#/$defs/ScoreQuestion"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ChoiceQuestion"
+              },
+              {
+                "$ref": "#/$defs/ScoreQuestion"
+              },
+              {
+                "$ref": "#/$defs/NoulQuestion"
+              }
+            ]
+          },
+          "minProperties": 1,
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "questions"
+      ],
+      "title": "QuestionSet",
+      "type": "object"
+    },
+    "Route": {
+      "enum": [
+        "forward",
+        "redact",
+        "escalate"
+      ],
+      "title": "Route",
+      "type": "string"
+    },
+    "RoutedDecision": {
+      "additionalProperties": false,
+      "description": "Produced by the score stage only (routing never happens in the runner).",
+      "properties": {
+        "calibrated_probs": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object"
+          },
+          "type": "object"
+        },
+        "decision": {
+          "$ref": "#/$defs/Decision"
+        },
+        "route": {
+          "$ref": "#/$defs/Route"
+        },
+        "triggers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "decision",
+        "route",
+        "triggers",
+        "calibrated_probs"
+      ],
+      "title": "RoutedDecision",
+      "type": "object"
+    },
+    "RunMeta": {
+      "additionalProperties": false,
+      "properties": {
+        "arm": {
+          "type": "string"
+        },
+        "checkpoint_rev": {
+          "type": "string"
+        },
+        "config_hashes": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "finished_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "hw": {
+          "$ref": "#/$defs/HwInfo"
+        },
+        "qs": {
+          "type": "string"
+        },
+        "started_at": {
+          "type": "string"
+        },
+        "warmup_calls": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "arm",
+        "qs",
+        "hw",
+        "checkpoint_rev",
+        "config_hashes",
+        "warmup_calls",
+        "started_at",
+        "finished_at"
+      ],
+      "title": "RunMeta",
+      "type": "object"
+    },
+    "ScoreQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "criteria": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 10,
+          "minItems": 2,
+          "type": "array"
+        },
+        "instructions": {
+          "type": "string"
+        },
+        "type": {
+          "const": "score",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "instructions",
+        "criteria"
+      ],
+      "title": "ScoreQuestion",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/PiiCategory"
+        },
+        "end": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "role": {
+          "$ref": "#/$defs/SubjectRole"
+        },
+        "start": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "surface": {
+          "type": "string"
+        },
+        "value_kind": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "category",
+        "role",
+        "value_kind",
+        "surface"
+      ],
+      "title": "Span",
+      "type": "object"
+    },
+    "SubjectRole": {
+      "enum": [
+        "patient",
+        "staff",
+        "sponsor"
+      ],
+      "title": "SubjectRole",
+      "type": "string"
+    },
+    "Unit": {
+      "additionalProperties": false,
+      "properties": {
+        "doc_id": {
+          "type": "string"
+        },
+        "end": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "gold": {
+          "$ref": "#/$defs/GoldAnswers"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "chunk",
+            "section",
+            "doc"
+          ],
+          "type": "string"
+        },
+        "split_span": {
+          "type": "boolean"
+        },
+        "start": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "tokenizer": {
+          "type": "string"
+        },
+        "tokens": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "doc_id",
+        "kind",
+        "start",
+        "end",
+        "tokens",
+        "tokenizer",
+        "truncated",
+        "split_span",
+        "gold"
+      ],
+      "title": "Unit",
+      "type": "object"
+    },
+    "WorldRefs": {
+      "additionalProperties": false,
+      "properties": {
+        "site": {
+          "type": "string"
+        },
+        "study": {
+          "type": "string"
+        },
+        "subjects": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "study",
+        "site",
+        "subjects"
+      ],
+      "title": "WorldRefs",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "laya-pii-bench domain model (bench/domain.py). Generated; do not edit.",
+  "title": "Domain",
+  "type": "object"
+}

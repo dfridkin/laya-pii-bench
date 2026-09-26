@@ -37,7 +37,9 @@ hw:
 
 schema:
 	$(BENCH) schema --out schema/
-	npx --yes json-schema-to-typescript@15 -i 'schema/*.json' -o hud/src/types.gen.ts --declareExternallyReferenced
+	mkdir -p hud/src
+	npx --yes json-schema-to-typescript@15 -i schema/domain.json -o hud/src/types.gen.ts \
+	  --unreachableDefinitions --additionalProperties false
 
 fixture:
 	$(BENCH) validate fixtures/mini/docs.jsonl

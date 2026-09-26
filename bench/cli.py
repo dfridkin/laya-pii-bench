@@ -55,5 +55,15 @@ def validate(
         raise typer.Exit(1)
 
 
+@app.command()
+def schema(
+    out: Annotated[Path, typer.Option(help="Directory for the JSON Schema.")] = Path("schema"),
+) -> None:
+    """Export the domain model as JSON Schema (input to the HUD's generated TS types)."""
+    from bench.schema_export import export
+
+    typer.echo(f"wrote {export(out)}")
+
+
 if __name__ == "__main__":
     app()
