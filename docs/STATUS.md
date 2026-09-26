@@ -118,6 +118,29 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 - Warmup: 10 calls (spec default) on whole fixture documents, which laya truncates to `max_len`;
   the spec says "fixture units". Same input shapes, excluded from every metric; noted as a deviation.
 
+## Audit fix batch (2026-09-26)
+
+Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8d6292b:
+- A1 calib provenance: CalibParams records input hashes and calib doc ids; score refuses units/docs
+  other than the run's, calib fit on other units, and calib/scored doc overlap (except the labeled
+  fixture_debug fit). The audit's flipped-gold reproduction now exits 2.
+- A2 exact recall bound: Clopper-Pearson lower bound beside the doc bootstrap (fixture: bootstrap
+  [1.0, 1.0] vs exact lower 0.6306 on 8 positives); bootstrap CI n/a below 2 documents.
+- A3 `t_high` is None when unreachable (1.0 was reachable). A4 degenerate temperatures fall back to
+  T = 1 and are reported (fixture arm A: `subject_role:4` fit hit the upper bound 20).
+- A5 edge tests kill all 9 mutants that survived the audit (verified on a scratch copy).
+- A6 truncated slice uses the runner's measurement; A7 chunk starts word-aligned, whitespace-only
+  tails merged (fixture units unchanged). A8 route-level recall in the headline.
+- A9 runner: torn final line repaired, atomic meta, meta-less run dirs refused, score rejects rows
+  whose mode doesn't match the run, calibrate rejects duplicate unit decisions.
+- A10 checkpoints resolve repo + locked revision at load; download_models keeps the lock unless
+  --update; units record `english@<revision>`.
+- A11 reliability for every question, clean no-scores error, perturbation keys from validator tags,
+  multilingual client model test; CLAUDE.md contract table and invariant 2 updated.
+- Fixture artifacts regenerated through the stages (pre-audit copies in the session scratchpad):
+  model answers byte-identical to the pre-audit run; p50 490 ms/unit.
+- `make check` 188 passed, 8 skipped; model tests 8 passed.
+
 ## Questions for the owner (not blocking; candidates for DECISIONS entries)
 
 (CRA role and sponsor-level docs answered: D-017, D-005 amended.)
@@ -172,8 +195,8 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## Next action
 
-Audit B1-B5 decided (D-005 amended, D-015..D-018). Next: fix batch A1-A11 (code + tests,
-independent review), then `/milestone M4`. C1-C8 before M6.
+Audit B1-B5 decided (D-005 amended, D-015..D-018); fix batch A1-A11 done, independent review
+pending. Then `/milestone M4`. Audit C1-C8 before M6.
 
 ## Session log
 
@@ -184,3 +207,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-26 M2: label/calibrate/score/report + golden metrics; review #1 FAIL (calibrated tie noise) fixed; review #2 PASS. D-013, D-014 opened.
 - 2026-09-26 M3: laya client, runner (resume, warmup, meta), real arm-A fixture run (p50 ~500 ms/unit on mps); review #1 FAIL (batched tail, resume provenance, cpu fallback) fixed; review #2 PASS.
 - 2026-09-26 audit: three independent audits of M0-M3; 2 blockers (split design, calib/scores untracked), 2 high code defects (calib provenance, recall CI). M4 on hold pending decisions.
+- 2026-09-26 audit fixes A1-A11 applied with tests; fixture artifacts regenerated (answers identical). Review pending.

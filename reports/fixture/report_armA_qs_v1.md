@@ -12,22 +12,23 @@
 | question set | qs_v1 |
 | splits | fixture |
 | docs sha256 | `427b466abb995d4d7566741e2eca660e61726727e652e74319f6381ad52acd27` |
-| units sha256 | `a6f2412b36e8b3c6cacfee8429adb41b0d30c991391ea283717b8213e59f5778` |
-| decisions sha256 | `373e48581b90ecf48d9986093d103693aea5028daa88cb353b29caaf301845d3` |
-| calib hash / fit_on | `27ce9d42056dbd41` / fixture_debug |
+| units sha256 | `382f89964e6b8cde86035e9883c17512de6241c4903d4d780e4f0b1e0a614615` |
+| decisions sha256 | `8859e79c3522a874cb4175a68b36a36a3dc53837afacbe13873998c42d8f8377` |
+| calib hash / fit_on | `d7f5dfe943ab06a4` / fixture_debug |
+| temperature fallbacks (T = 1) | subject_role:4: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-26T15:08:47+00:00 |
+| date | 2026-09-26T17:23:01+00:00 |
 
 ## 2. Headline operating point
 
-pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI).
+pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). The exact lower bound is Clopper-Pearson on unit counts (ignores clustering within documents; informative when there are no misses). Route recall counts misses after routing (1 - false forwards / positives). t_high `none`: no threshold reached the precision target, so only the role rule redacts.
 
-| arm / qs | split | t_low | recall | forward rate | false forwards | precision | units / docs / positives |
-|---|---|---|---|---|---|---|---|
-| A / qs_v1 | fixture | 0.4366 | 1.0000 [1.0000, 1.0000] | 0.0909 [0.0000, 0.3000] | 0 | 0.8000 | 11 / 10 / 8 |
+| arm / qs | split | t_low | t_high | recall | recall exact lo | route recall | forward rate | false forwards | precision | units / docs / positives |
+|---|---|---|---|---|---|---|---|---|---|---|
+| A / qs_v1 | fixture | 0.4366 | 0.5512 | 1.0000 [1.0000, 1.0000] | 0.6306 | 1.0000 | 0.0909 [0.0000, 0.3000] | 0 | 0.8000 | 11 / 10 / 8 |
 
 ## 3. Per-question
 
@@ -84,21 +85,60 @@ ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
 | pii_present | 0.3132 | 0.1053 | 0.6111 | 0.4952 | 0.7000 | 0.7000 |
-| subject_role | 0.5066 | 0.1997 | 1.0748 | 0.7550 | 0.6667 | 0.6667 |
+| subject_role | 0.5066 | 0.5066 | 1.0748 | 1.0748 | 0.6667 | 0.6667 |
 | category | 0.2764 | 0.1339 | 0.7743 | 0.7645 | 0.5000 | 0.5333 |
 | doc_kind | 0.2689 | 0.2593 | 0.4425 | 0.4419 | 1.0000 | 1.0000 |
 
 Reliability data, `pii_present` (non-empty bins):
 
-| bin | n raw | conf raw | acc raw | n cal | acc cal |
-|---|---|---|---|---|---|
-| [0.467, 0.533) | 1 | 0.5306 | 0.0000 | 4 | 0.2500 |
-| [0.533, 0.600) | 0 | n/a | n/a | 7 | 0.5714 |
-| [0.600, 0.667) | 2 | 0.6330 | 0.5000 | 0 | n/a |
-| [0.667, 0.733) | 1 | 0.6682 | 0.0000 | 0 | n/a |
-| [0.733, 0.800) | 3 | 0.7834 | 0.6667 | 0 | n/a |
-| [0.800, 0.867) | 3 | 0.8430 | 0.3333 | 0 | n/a |
-| [0.867, 0.933) | 1 | 0.8985 | 1.0000 | 0 | n/a |
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.467, 0.533) | 1 | 0.5306 | 0.0000 | 4 | 0.5179 | 0.2500 |
+| [0.533, 0.600) | 0 | n/a | n/a | 7 | 0.5591 | 0.5714 |
+| [0.600, 0.667) | 2 | 0.6330 | 0.5000 | 0 | n/a | n/a |
+| [0.667, 0.733) | 1 | 0.6682 | 0.0000 | 0 | n/a | n/a |
+| [0.733, 0.800) | 3 | 0.7834 | 0.6667 | 0 | n/a | n/a |
+| [0.800, 0.867) | 3 | 0.8430 | 0.3333 | 0 | n/a | n/a |
+| [0.867, 0.933) | 1 | 0.8985 | 1.0000 | 0 | n/a | n/a |
+
+Reliability data, `subject_role` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.400, 0.467) | 3 | 0.4504 | 0.0000 | 3 | 0.4504 | 0.0000 |
+| [0.467, 0.533) | 1 | 0.4759 | 0.0000 | 1 | 0.4759 | 0.0000 |
+| [0.533, 0.600) | 1 | 0.5810 | 0.0000 | 1 | 0.5810 | 0.0000 |
+| [0.600, 0.667) | 2 | 0.6163 | 0.5000 | 2 | 0.6163 | 0.5000 |
+| [0.667, 0.733) | 1 | 0.6815 | 1.0000 | 1 | 0.6815 | 1.0000 |
+| [0.733, 0.800) | 1 | 0.7689 | 0.0000 | 1 | 0.7689 | 0.0000 |
+| [0.867, 0.933) | 1 | 0.9055 | 0.0000 | 1 | 0.9054 | 0.0000 |
+| [0.933, 1.000) | 1 | 0.9389 | 0.0000 | 1 | 0.9389 | 0.0000 |
+
+Reliability data, `category` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.200, 0.267) | 0 | n/a | n/a | 2 | 0.2549 | 0.5000 |
+| [0.267, 0.333) | 2 | 0.3099 | 0.5000 | 4 | 0.2961 | 0.5000 |
+| [0.333, 0.400) | 1 | 0.3409 | 0.0000 | 3 | 0.3443 | 0.3333 |
+| [0.400, 0.467) | 3 | 0.4313 | 0.6667 | 2 | 0.4330 | 0.5000 |
+| [0.467, 0.533) | 3 | 0.5087 | 0.3333 | 0 | n/a | n/a |
+| [0.600, 0.667) | 1 | 0.6513 | 1.0000 | 0 | n/a | n/a |
+| [0.733, 0.800) | 1 | 0.7389 | 0.0000 | 0 | n/a | n/a |
+
+Reliability data, `doc_kind` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.267, 0.333) | 1 | 0.3319 | 0.0000 | 0 | n/a | n/a |
+| [0.333, 0.400) | 3 | 0.3483 | 0.0000 | 4 | 0.3560 | 0.0000 |
+| [0.467, 0.533) | 1 | 0.5099 | 0.0000 | 0 | n/a | n/a |
+| [0.533, 0.600) | 1 | 0.5854 | 1.0000 | 1 | 0.5362 | 0.0000 |
+| [0.600, 0.667) | 0 | n/a | n/a | 1 | 0.6256 | 1.0000 |
+| [0.667, 0.733) | 1 | 0.7078 | 1.0000 | 0 | n/a | n/a |
+| [0.733, 0.800) | 1 | 0.7573 | 1.0000 | 1 | 0.7548 | 1.0000 |
+| [0.800, 0.867) | 0 | n/a | n/a | 1 | 0.8017 | 1.0000 |
+| [0.933, 1.000) | 3 | 0.9596 | 1.0000 | 3 | 0.9751 | 1.0000 |
 
 ## 5. Routing
 
@@ -125,9 +165,9 @@ Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 11 | 503.8 | 587.5 | 630.5 | 484.2 | 2.07 |
+| per unit, batch-1 | 11 | 489.9 | 566.1 | 608.6 | 468.5 | 2.13 |
 | per unit, batched | 0 | n/a | n/a | n/a | n/a | n/a |
-| per document (sum of units, batch-1) | 10 | 505.0 | 813.6 | 996.8 | 532.6 | 1.88 |
+| per document (sum of units, batch-1) | 10 | 492.5 | 782.7 | 959.3 | 515.4 | 1.94 |
 
 ## 7. Slices
 

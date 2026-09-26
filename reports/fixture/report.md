@@ -12,22 +12,23 @@
 | question set | qs_v1 |
 | splits | fixture |
 | docs sha256 | `427b466abb995d4d7566741e2eca660e61726727e652e74319f6381ad52acd27` |
-| units sha256 | `a6f2412b36e8b3c6cacfee8429adb41b0d30c991391ea283717b8213e59f5778` |
+| units sha256 | `382f89964e6b8cde86035e9883c17512de6241c4903d4d780e4f0b1e0a614615` |
 | decisions sha256 | `0af837472a733cd02faae60c09b4573cc761b6575855262c60617df8a375ed5c` |
-| calib hash / fit_on | `164fee546c3ff618` / fixture_debug |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
-| laya version | 0.3.20 |
+| calib hash / fit_on | `0d763516b65e1552` / fixture_debug |
+| temperature fallbacks (T = 1) | doc_kind:4: calib accuracy 1.0 |
+| hardware | not recorded |
+| laya version | unknown |
 | checkpoints | english |
 | checkpoint revisions | MOCK |
-| date | 2026-09-26T14:43:01+00:00 |
+| date | 2026-09-26T17:22:36+00:00 |
 
 ## 2. Headline operating point
 
-pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI).
+pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). The exact lower bound is Clopper-Pearson on unit counts (ignores clustering within documents; informative when there are no misses). Route recall counts misses after routing (1 - false forwards / positives). t_high `none`: no threshold reached the precision target, so only the role rule redacts.
 
-| arm / qs | split | t_low | recall | forward rate | false forwards | precision | units / docs / positives |
-|---|---|---|---|---|---|---|---|
-| mock / qs_v1 | fixture | 0.2189 | 1.0000 [1.0000, 1.0000] | 0.0909 [0.0000, 0.3000] | 0 | 0.8000 | 11 / 10 / 8 |
+| arm / qs | split | t_low | t_high | recall | recall exact lo | route recall | forward rate | false forwards | precision | units / docs / positives |
+|---|---|---|---|---|---|---|---|---|---|---|
+| mock / qs_v1 | fixture | 0.2189 | 0.6154 | 1.0000 [1.0000, 1.0000] | 0.6306 | 1.0000 | 0.0909 [0.0000, 0.3000] | 0 | 0.8000 | 11 / 10 / 8 |
 
 ## 3. Per-question
 
@@ -86,19 +87,38 @@ ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC
 | pii_present | 0.2800 | 0.2820 | 0.3415 | 0.3404 | 0.7917 | 0.7917 |
 | subject_role | 0.0273 | 0.0000 | 0.4473 | 0.4463 | 0.5000 | 0.5000 |
 | category | 0.1273 | 0.0000 | 0.4727 | 0.4525 | 0.5000 | 0.5000 |
-| doc_kind | 0.1500 | 0.0000 | 0.0300 | 0.0000 | n/a | n/a |
+| doc_kind | 0.1500 | 0.1500 | 0.0300 | 0.0300 | n/a | n/a |
 
 Reliability data, `pii_present` (non-empty bins):
 
-| bin | n raw | conf raw | acc raw | n cal | acc cal |
-|---|---|---|---|---|---|
-| [0.533, 0.600) | 1 | 0.5600 | 0.0000 | 1 | 0.0000 |
-| [0.600, 0.667) | 2 | 0.6200 | 1.0000 | 2 | 1.0000 |
-| [0.667, 0.733) | 2 | 0.7150 | 0.5000 | 2 | 0.5000 |
-| [0.733, 0.800) | 1 | 0.7900 | 0.0000 | 1 | 0.0000 |
-| [0.800, 0.867) | 1 | 0.8300 | 1.0000 | 2 | 1.0000 |
-| [0.867, 0.933) | 3 | 0.8867 | 1.0000 | 2 | 1.0000 |
-| [0.933, 1.000) | 1 | 0.9700 | 1.0000 | 1 | 1.0000 |
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.533, 0.600) | 1 | 0.5600 | 0.0000 | 1 | 0.5576 | 0.0000 |
+| [0.600, 0.667) | 2 | 0.6200 | 1.0000 | 2 | 0.6154 | 1.0000 |
+| [0.667, 0.733) | 2 | 0.7150 | 0.5000 | 2 | 0.7074 | 0.5000 |
+| [0.733, 0.800) | 1 | 0.7900 | 0.0000 | 1 | 0.7811 | 0.0000 |
+| [0.800, 0.867) | 1 | 0.8300 | 1.0000 | 2 | 0.8410 | 1.0000 |
+| [0.867, 0.933) | 3 | 0.8867 | 1.0000 | 2 | 0.8867 | 1.0000 |
+| [0.933, 1.000) | 1 | 0.9700 | 1.0000 | 1 | 0.9657 | 1.0000 |
+
+Reliability data, `subject_role` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.667, 0.733) | 11 | 0.7000 | 0.7273 | 11 | 0.7273 | 0.7273 |
+
+Reliability data, `category` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.600, 0.667) | 11 | 0.6000 | 0.7273 | 0 | n/a | n/a |
+| [0.667, 0.733) | 0 | n/a | n/a | 11 | 0.7273 | 0.7273 |
+
+Reliability data, `doc_kind` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.800, 0.867) | 11 | 0.8500 | 1.0000 | 11 | 0.8500 | 1.0000 |
 
 ## 5. Routing
 
@@ -122,7 +142,7 @@ Reliability data, `pii_present` (non-empty bins):
 
 ### mock / qs_v1
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 2.
+Hardware: **unknown hardware (no hw.json)**. Warmup calls excluded: 2.
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
