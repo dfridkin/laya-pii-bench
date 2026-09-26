@@ -28,7 +28,7 @@ COV_GATED := bench/domain.py bench/config.py bench/validate.py
 
 test:
 	LAYA_SKIP_MODEL=$${LAYA_SKIP_MODEL:-1} uv run pytest --cov=bench --cov-report=
-	@for f in $(COV_GATED); do [ ! -e $$f ] || uv run coverage report --include=$$f --fail-under=90 >/dev/null \
+	@for f in $(COV_GATED); do uv run coverage report --include=$$f --fail-under=90 >/dev/null \
 	  || { uv run coverage report --include=$$f; echo "coverage < 90% on $$f"; exit 1; }; done
 	@uv run coverage report --include='$(shell echo $(COV_GATED) | tr ' ' ',')'
 
