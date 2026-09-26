@@ -19,6 +19,8 @@ Last updated: 2026-09-26 (M2 built, gate review pending)
 
 - D-001 coded IDs counted as PII.
 - D-002 dev hardware only.
+- D-013 `fit_on: fixture_debug` for fixture-only calibration (debug flags must be restricted in M5).
+- D-014 routing on calibrated p(pii); metrics on max p; laya `confidence` stored, unused.
 
 ## M0 evidence
 
@@ -52,7 +54,7 @@ Deviations from the scaffold (accepted by gate review):
 
 ## M2 evidence
 
-- `make check`: 146 passed, 3 skipped (model-marked; `-m model`: 3 passed). Golden metric tests
+- `make check`: 148 passed, 3 skipped (model-marked; `-m model`: 3 passed). Golden metric tests
   (`tests/test_metrics_golden.py`) pass at tolerance 1e-9 against hand arithmetic on the mock
   decisions (identity calibration, t_low 0.25, t_high 0.85): accuracy 8/11, confusion [[6,2],[1,2]],
   macro-F1 (12/15 + 4/7)/2, ECE 3.08/11, Brier, AUROC 19/24, recall 7/8, forward rate 2/11,
@@ -62,6 +64,11 @@ Deviations from the scaffold (accepted by gate review):
   9 metrics.md sections (test asserts the headings against the spec).
 - Gate 3: score with a calib file whose `t_low` was edited exits 2 ("content hash mismatch") and
   writes no scores (manual run + test).
+- Gate review #1 FAILED (`reports/audits/M2-gate-20260926-fail.md`): calibrated AUROC was wrong
+  on permuted-probability ties (key-order float noise in `apply_temperature`). Fixed with an
+  order-independent `math.fsum`; golden tests added for exact ties at T != 1 and for qs_v2
+  multi-label F1. The `fit_on: fixture_debug` widening and the confidence definition are now
+  OPEN entries D-013 and D-014 in DECISIONS.md.
 - One-time fixture unlock to add `fixtures/mini/decisions_mock.jsonl` (owner approved; logged in
   DECISIONS.md); lock recreated in the same commit.
 
@@ -74,7 +81,7 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 - `t_high`: smallest observed p reaching the precision target; 1.0 if unreachable; never < t_low.
 - Macro-F1 averages over labels present in gold or predictions; majority baseline is computed on
   the scored set; ECE/AUROC use max probability (laya's entropy `confidence` is stored, not used).
-- `CalibParams.fit_on` gained `fixture_debug`; `score` refuses it without `--allow-debug-calib`,
+- `CalibParams.fit_on` gained `fixture_debug` (D-013, OPEN); `score` refuses it without `--allow-debug-calib`,
   and the report prints a DEBUG banner.
 - Until `bench split` exists (M5): `calibrate` only runs with `--debug-fit-all`, and `score` treats
   every document as split `fixture`. Units are written to `<out>/{arm}.jsonl`.

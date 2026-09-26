@@ -54,8 +54,10 @@ def apply_temperature(probs: Mapping[str, float], t: float) -> dict[str, float]:
     keys = list(probs)
     logp = np.log(np.clip(np.array([probs[k] for k in keys], dtype=float), EPS, None)) / t
     z = np.exp(logp - logp.max())
-    z /= z.sum()
-    return {k: float(v) for k, v in zip(keys, z, strict=True)}
+    # fsum is exactly rounded, hence order-independent: equal inputs give bit-identical outputs
+    # whatever their position, so permuted rows tie exactly in AUROC and ECE binning.
+    total = math.fsum(float(v) for v in z)
+    return {k: float(v) / total for k, v in zip(keys, z, strict=True)}
 
 
 def _nll(rows: np.ndarray, gold_idx: np.ndarray, t: float) -> float:

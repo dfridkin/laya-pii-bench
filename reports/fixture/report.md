@@ -19,7 +19,7 @@
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | MOCK |
-| date | 2026-09-26T14:36:11+00:00 |
+| date | 2026-09-26T14:43:01+00:00 |
 
 ## 2. Headline operating point
 
@@ -84,8 +84,8 @@ ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
 | pii_present | 0.2800 | 0.2820 | 0.3415 | 0.3404 | 0.7917 | 0.7917 |
-| subject_role | 0.0273 | 0.0000 | 0.4473 | 0.4463 | 0.5000 | 0.3125 |
-| category | 0.1273 | 0.0000 | 0.4727 | 0.4525 | 0.5000 | 0.5833 |
+| subject_role | 0.0273 | 0.0000 | 0.4473 | 0.4463 | 0.5000 | 0.5000 |
+| category | 0.1273 | 0.0000 | 0.4727 | 0.4525 | 0.5000 | 0.5000 |
 | doc_kind | 0.1500 | 0.0000 | 0.0300 | 0.0000 | n/a | n/a |
 
 Reliability data, `pii_present` (non-empty bins):

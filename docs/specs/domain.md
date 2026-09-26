@@ -103,7 +103,8 @@ class CalibParams(BaseModel):
     arm: str; qs: str
     temperatures: dict[str, float]             # key f"{question}:{n_options}"
     t_low: float; t_high: float; recall_target: float; precision_target: float
-    fit_on: Literal["calib"]; content_hash: str
+    fit_on: Literal["calib", "fixture_debug"]   # fixture_debug: D-013 (OPEN)
+    content_hash: str
 ```
 
 `Scores` mirrors the sections in `docs/specs/metrics.md`; define it when building M2.

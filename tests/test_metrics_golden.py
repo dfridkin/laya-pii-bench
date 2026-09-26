@@ -177,3 +177,56 @@ def test_primitives_directly() -> None:
     assert sc.route_unit(0.1, "patient", 0.25, 0.85, True) == (Route.REDACT, ["role_patient"])
     assert sc.route_unit(0.1, "patient", 0.25, 0.85, False)[0] is Route.FORWARD
     assert sc.route_unit(0.1, None, 0.25, 0.85, True)[0] is Route.FORWARD
+
+
+def test_calibrated_ties_are_exact() -> None:
+    """Permuted rows stay tied after T != 1: every calibrated subject_role/category max-prob is
+    equal (rows are permutations of {.7,.1,.1,.1} and {.6,.1,.1,.1,.1}), so AUROC is exactly 1/2
+    and all 11 units share one ECE bin (gate review #1 defect)."""
+    temps = dict(IDENTITY.temperatures) | {"subject_role:4": 0.9357849653653632, "category:5": 1.7}
+    calib = IDENTITY.model_copy(update={"temperatures": temps})
+    docs = read_docs(MINI / "docs.jsonl")
+    s = sc.score(sc.read_decisions(MINI / "decisions_mock.jsonl"), fixture_units(), docs, calib,
+                 POLICY, {"fixture": {d.id for d in docs}}, None,
+                 {"docs": "d", "units": "u", "decisions": "x"})  # fmt: skip
+    for q in ("subject_role", "category"):
+        c = s.splits["fixture"].calibration[q]
+        assert c.auroc_calibrated == 0.5 and c.auroc_raw == 0.5
+        assert [b.n for b in c.reliability_calibrated if b.n] == [11]
+
+
+def test_multilabel_qs_v2_golden() -> None:
+    """qs_v2 per-category binaries: predictions equal gold except two flips.
+    Gold A counts: direct 5, quasi 3, coded 5, staff 5 (tests/fixture_expected.py).
+    Flip 1: fx01 has_staff_pii predicted B (fn). Flip 2: fx02 has_phi_quasi predicted A (fp).
+    F1: direct 1, quasi 2*3/(6+1) = 6/7, coded 1, staff 2*4/(8+1) = 8/9.
+    Micro: tp 17, fp 1, fn 1 -> 34/36."""
+    from bench.calibrate import gold_answer
+    from bench.domain import Answer, Decision
+
+    flips = {("fx01:chunk:512:0", "has_staff_pii"), ("fx02:chunk:512:0", "has_phi_quasi")}
+    qs = ["pii_present", "has_phi_direct", "has_phi_quasi", "has_coded_id", "has_staff_pii"]
+    decisions: list[Decision] = []
+    for u in fixture_units():
+        answers: list[Answer] = []
+        for q in qs:
+            g = gold_answer(u.gold, q)
+            pick = ("B" if g == "A" else "A") if (u.id, q) in flips else g
+            probs = {"A": 0.8, "B": 0.2} if pick == "A" else {"A": 0.2, "B": 0.8}
+            answers.append(Answer(question=q, choice=pick, probs=probs, confidence=0.3))
+        decisions.append(
+            Decision(unit_id=u.id, arm="mock", qs="qs_v2", checkpoint="english",
+                     checkpoint_rev="MOCK", max_len=512, answers=answers, latency_ms=60.0,
+                     t_offset_ms=0.0, batch_size=1)
+        )  # fmt: skip
+    calib = IDENTITY.model_copy(update={"qs": "qs_v2", "temperatures": {f"{q}:2": 1.0 for q in qs}})
+    docs = read_docs(MINI / "docs.jsonl")
+    s = sc.score(decisions, fixture_units(), docs, calib, POLICY,
+                 {"fixture": {d.id for d in docs}}, None,
+                 {"docs": "d", "units": "u", "decisions": "x"})  # fmt: skip
+    ml = s.splits["fixture"].multilabel
+    assert ml is not None and ml.questions == qs[1:]
+    assert close(ml.per_label_f1["has_phi_quasi"], 6 / 7)
+    assert close(ml.per_label_f1["has_staff_pii"], 8 / 9)
+    assert close(ml.micro_f1, 34 / 36)
+    assert close(ml.macro_f1, (1 + 6 / 7 + 1 + 8 / 9) / 4)
