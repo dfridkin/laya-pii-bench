@@ -21,6 +21,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
+from scipy.stats import beta  # pyright: ignore[reportMissingTypeStubs]
 
 from bench.calibrate import PII_QUESTION, apply_temperature, calib_key, gold_answer
 from bench.config import Policy
@@ -153,11 +154,20 @@ def recall_at(p: Sequence[float], positive: Sequence[bool], t_low: float) -> flo
     return sum(q >= t_low for q in pos) / len(pos) if pos else None
 
 
+def exact_recall_lo(hits: int, n: int) -> float | None:
+    """Clopper-Pearson two-sided 95% lower bound for hits/n (0 when hits == 0)."""
+    if n == 0:
+        return None
+    if hits == 0:
+        return 0.0
+    return float(beta.ppf(0.025, hits, n - hits + 1))  # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType]
+
+
 def route_unit(
-    p_pii: float, role: str | None, t_low: float, t_high: float, patient_forces: bool
+    p_pii: float, role: str | None, t_low: float, t_high: float | None, patient_forces: bool
 ) -> tuple[Route, list[str]]:
     triggers: list[str] = []
-    if p_pii >= t_high:
+    if t_high is not None and p_pii >= t_high:
         triggers.append("p_at_or_above_t_high")
     if patient_forces and role in ("patient", "both"):
         triggers.append(f"role_{role}")
@@ -256,15 +266,14 @@ def build_rows(
 # --- sections ----------------------------------------------------------------------------------
 
 
-def bootstrap(
+def bootstrap_values(
     rows: Sequence[Row],
     stat: Callable[[Sequence[Row]], float | None],
     resamples: int,
     seed: int,
-) -> Interval | None:
-    point = stat(rows)
-    if point is None:
-        return None
+) -> list[float]:
+    """The statistic on `resamples` document-level resamples (units of a doc move together);
+    resamples where the statistic is undefined (e.g. no positives) are dropped."""
     by_doc: dict[str, list[Row]] = defaultdict(list)
     for r in rows:
         by_doc[r.doc.id].append(r)
@@ -277,6 +286,21 @@ def bootstrap(
         v = stat(sample)
         if v is not None:
             values.append(v)
+    return values
+
+
+def bootstrap(
+    rows: Sequence[Row],
+    stat: Callable[[Sequence[Row]], float | None],
+    resamples: int,
+    seed: int,
+) -> Interval | None:
+    point = stat(rows)
+    if point is None:
+        return None
+    if len({r.doc.id for r in rows}) < 2:  # one document: resampling can't vary anything
+        return Interval(point=point, lo=None, hi=None, n_resamples=0)
+    values = bootstrap_values(rows, stat, resamples, seed)
     if len(values) < 2:
         return Interval(point=point, lo=None, hi=None, n_resamples=len(values))
     lo, hi = np.percentile(np.array(values), [2.5, 97.5])
@@ -294,6 +318,9 @@ def _forward_rate(rows: Sequence[Row]) -> float:
 def headline(rows: Sequence[Row], calib: CalibParams, policy: Policy) -> Headline:
     b = policy.bootstrap
     above = [r for r in rows if r.p_pii >= calib.t_low]
+    n_pos = sum(r.positive for r in rows)
+    hits = sum(r.positive and r.p_pii >= calib.t_low for r in rows)
+    false_fwd = sum(r.false_forward for r in rows)
     fwd = bootstrap(rows, _forward_rate, b.resamples, b.seed)
     assert fwd is not None
     return Headline(
@@ -301,10 +328,12 @@ def headline(rows: Sequence[Row], calib: CalibParams, policy: Policy) -> Headlin
         t_high=calib.t_high,
         n_units=len(rows),
         n_docs=len({r.doc.id for r in rows}),
-        n_positive=sum(r.positive for r in rows),
+        n_positive=n_pos,
         recall=bootstrap(rows, lambda rs: _recall(rs, calib.t_low), b.resamples, b.seed),
+        recall_exact_lo=exact_recall_lo(hits, n_pos),
+        route_recall=1 - false_fwd / n_pos if n_pos else None,
         forward_rate=fwd,
-        false_forwards=sum(r.false_forward for r in rows),
+        false_forwards=false_fwd,
         precision=sum(r.positive for r in above) / len(above) if above else None,
     )
 
@@ -573,6 +602,7 @@ def score(
         decisions_sha256=hashes["decisions"],
         calib_hash=calib.content_hash,
         calib_fit_on=calib.fit_on,
+        calib_temperature_fallbacks=dict(calib.temperature_fallbacks),
         hw=hw,
         laya_version=hw.laya if hw else "unknown",
         checkpoints=sorted({d.checkpoint for d in live}),

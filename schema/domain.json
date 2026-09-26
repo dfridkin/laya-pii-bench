@@ -65,10 +65,23 @@
           "type": "number"
         },
         "t_high": {
-          "type": "number"
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "t_low": {
           "type": "number"
+        },
+        "temperature_fallbacks": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
         },
         "temperatures": {
           "additionalProperties": {
@@ -576,8 +589,35 @@
             }
           ]
         },
+        "recall_exact_lo": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "route_recall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "t_high": {
-          "type": "number"
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "t_low": {
           "type": "number"
@@ -590,6 +630,8 @@
         "n_docs",
         "n_positive",
         "recall",
+        "recall_exact_lo",
+        "route_recall",
         "forward_rate",
         "false_forwards",
         "precision"
@@ -1053,6 +1095,12 @@
         "calib_hash": {
           "type": "string"
         },
+        "calib_temperature_fallbacks": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
         "checkpoint_revs": {
           "items": {
             "type": "string"
@@ -1109,6 +1157,7 @@
         "decisions_sha256",
         "calib_hash",
         "calib_fit_on",
+        "calib_temperature_fallbacks",
         "hw",
         "laya_version",
         "checkpoints",

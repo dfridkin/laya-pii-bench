@@ -242,8 +242,11 @@ class CalibParams(_Model):
     arm: str
     qs: str
     temperatures: dict[str, float]  # key f"{question}:{n_options}"
+    # keys whose fit was degenerate (calib accuracy 0 or 1, or the optimum hit a bound) and fell
+    # back to T = 1, with the reason; reported, never silent
+    temperature_fallbacks: dict[str, str] = Field(default_factory=lambda: {})
     t_low: float
-    t_high: float
+    t_high: float | None  # None: no observed threshold reaches precision_target; no p-based redact
     recall_target: float
     precision_target: float
     # "fixture_debug": fit on the fixture itself (no calib split exists); score refuses it unless
@@ -264,11 +267,15 @@ class Interval(_Model):
 
 class Headline(_Model):
     t_low: float
-    t_high: float
+    t_high: float | None
     n_units: int
     n_docs: int
     n_positive: int
     recall: Interval | None  # pii_present recall at t_low; None without positives
+    # exact (Clopper-Pearson) 95% lower bound on unit-level recall at t_low; ignores within-document
+    # clustering (optimistic), but unlike the bootstrap it is informative when there are no misses
+    recall_exact_lo: float | None
+    route_recall: float | None  # 1 - false_forwards / n_positive (routing incl. role override)
     forward_rate: Interval
     false_forwards: int
     precision: float | None  # of p(pii) >= t_low; None if nothing is above t_low
@@ -386,6 +393,7 @@ class RunContext(_Model):
     decisions_sha256: str
     calib_hash: str
     calib_fit_on: Literal["calib", "fixture_debug"]
+    calib_temperature_fallbacks: dict[str, str]
     hw: HwInfo | None
     laya_version: str
     checkpoints: list[str]

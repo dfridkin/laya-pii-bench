@@ -65,6 +65,11 @@ def _run_context(all_scores: Sequence[Scores]) -> list[str]:
                 ("units sha256", f"`{c.units_sha256}`"),
                 ("decisions sha256", f"`{c.decisions_sha256}`"),
                 ("calib hash / fit_on", f"`{c.calib_hash[:16]}` / {c.calib_fit_on}"),
+                (
+                    "temperature fallbacks (T = 1)",
+                    "; ".join(f"{k}: {v}" for k, v in c.calib_temperature_fallbacks.items())
+                    or "none",
+                ),
                 ("hardware", hw),
                 ("laya version", c.laya_version),
                 ("checkpoints", ", ".join(c.checkpoints)),
@@ -85,7 +90,10 @@ def _headline(all_scores: Sequence[Scores]) -> list[str]:
                     _label(s),
                     split,
                     _f(h.t_low),
+                    _f(h.t_high) if h.t_high is not None else "none",
                     _ci(h.recall),
+                    _f(h.recall_exact_lo),
+                    _f(h.route_recall),
                     _ci(h.forward_rate),
                     h.false_forwards,
                     _f(h.precision),
@@ -93,14 +101,21 @@ def _headline(all_scores: Sequence[Scores]) -> list[str]:
                 )
             )
     return [
-        "pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI).",
+        "pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). The exact "
+        "lower bound is Clopper-Pearson on unit counts (ignores clustering within documents; "
+        "informative when there are no misses). Route recall counts misses after routing "
+        "(1 - false forwards / positives). t_high `none`: no threshold reached the precision "
+        "target, so only the role rule redacts.",
         "",
         *_table(
             [
                 "arm / qs",
                 "split",
                 "t_low",
+                "t_high",
                 "recall",
+                "recall exact lo",
+                "route recall",
                 "forward rate",
                 "false forwards",
                 "precision",

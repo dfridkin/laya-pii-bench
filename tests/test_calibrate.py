@@ -54,7 +54,9 @@ def test_t_high() -> None:
     assert cal.fit_t_high(p, y, 0.98, 0.0) == 0.7  # {0.7, 0.9} both positive
     assert cal.fit_t_high(p, y, 0.7, 0.0) == 0.4  # all 5: 3/5 < 0.7; {0.4..0.9}: 3/4
     assert cal.fit_t_high(p, y, 0.98, 0.8) == 0.8  # never below t_low
-    assert cal.fit_t_high([0.5], [False], 0.98, 0.1) == 1.0  # unreachable
+    assert cal.fit_t_high([0.5], [False], 0.98, 0.1) is None  # unreachable
+    # audit A3: p = 1.0 with precision 0.5 must not yield a reachable "unreachable" sentinel
+    assert cal.fit_t_high([0.5, 1.0, 1.0], [True, False, True], 0.98, 0.5) is None
 
 
 def test_gold_answer_mapping() -> None:

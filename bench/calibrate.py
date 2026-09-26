@@ -8,7 +8,11 @@ Thresholds act on the calibrated p(pii_present = A):
 - t_low: the largest threshold keeping recall >= recall_target, i.e. positives with p < t_low
   number at most floor((1 - target) * n_pos).
 - t_high: the smallest observed p whose "p >= t" set has precision >= precision_target;
-  1.0 if none does. Never below t_low.
+  None if none does (no p-based redaction). Never below t_low.
+
+A temperature whose fit is degenerate falls back to T = 1 and is recorded in
+`temperature_fallbacks`: calib accuracy 1.0 (NLL keeps falling as T -> 0, collapsing
+probabilities to exactly 0/1) or 0.0, or an optimum on a bound of T_BOUNDS.
 """
 
 from __future__ import annotations
@@ -91,12 +95,30 @@ def fit_t_low(p_positive: Sequence[float], recall_target: float) -> float:
     return sorted(p_positive)[allowed_misses]
 
 
-def fit_t_high(p: Sequence[float], positive: Sequence[bool], target: float, t_low: float) -> float:
+def fit_t_high(
+    p: Sequence[float], positive: Sequence[bool], target: float, t_low: float
+) -> float | None:
     for t in sorted(set(p)):
         sel = [y for q, y in zip(p, positive, strict=True) if q >= t]
         if sel and sum(sel) / len(sel) >= target:
             return max(t, t_low)
-    return max(1.0, t_low)
+    return None
+
+
+def fit_or_fallback(
+    rows: Sequence[Sequence[float]], gold_idx: Sequence[int]
+) -> tuple[float, str | None]:
+    """Temperature for one (question, n_options) key, or (1.0, reason) if the fit is degenerate."""
+    correct = sum(int(np.argmax(r)) == g for r, g in zip(rows, gold_idx, strict=True))
+    if correct == len(rows):
+        return 1.0, "calib accuracy 1.0"
+    if correct == 0:
+        return 1.0, "calib accuracy 0.0"
+    t = fit_temperature(rows, gold_idx)
+    lo, hi = T_BOUNDS
+    if t <= lo * 1.001 or t >= hi / 1.001:
+        return 1.0, f"fit hit bound ({t:.4g})"
+    return t, None
 
 
 def calib_key(question: str, n_options: int) -> str:
@@ -136,7 +158,12 @@ def fit(
             gold_idx.setdefault(k, []).append(
                 keys.index(gold_answer(units[d.unit_id].gold, a.question))
             )
-    temps = {k: fit_temperature(rows[k], gold_idx[k]) for k in sorted(rows)}
+    temps: dict[str, float] = {}
+    fallbacks: dict[str, str] = {}
+    for k in sorted(rows):
+        temps[k], reason = fit_or_fallback(rows[k], gold_idx[k])
+        if reason:
+            fallbacks[k] = reason
 
     p_pii: list[float] = []
     positive: list[bool] = []
@@ -155,6 +182,7 @@ def fit(
         arm=arms.pop(),
         qs=qss.pop(),
         temperatures=temps,
+        temperature_fallbacks=fallbacks,
         t_low=t_low,
         t_high=t_high,
         recall_target=policy.routing.recall_target,

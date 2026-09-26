@@ -76,8 +76,11 @@ export interface CalibParams {
   precision_target: number;
   qs: string;
   recall_target: number;
-  t_high: number;
+  t_high: number | null;
   t_low: number;
+  temperature_fallbacks?: {
+    [k: string]: string;
+  };
   temperatures: {
     [k: string]: number;
   };
@@ -247,7 +250,9 @@ export interface Headline {
   n_units: number;
   precision: number | null;
   recall: Interval | null;
-  t_high: number;
+  recall_exact_lo: number | null;
+  route_recall: number | null;
+  t_high: number | null;
   t_low: number;
 }
 /**
@@ -401,6 +406,9 @@ export interface RunContext {
   arm: string;
   calib_fit_on: "calib" | "fixture_debug";
   calib_hash: string;
+  calib_temperature_fallbacks: {
+    [k: string]: string;
+  };
   checkpoint_revs: string[];
   checkpoints: string[];
   created_at: string;
