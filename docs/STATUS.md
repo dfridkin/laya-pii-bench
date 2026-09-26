@@ -174,7 +174,8 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## Next action
 
-Run `/milestone M4` (generator; largest milestone, sub-steps 4a-4g).
+Cross-milestone audit done (`reports/audits/M0-M3-audit-20260926.md`): fix batch A1-A11 and
+owner decisions B1-B5 before `/milestone M4`; C1-C8 before M6.
 
 ## Session log
 
@@ -184,3 +185,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-26 M1: domain, config, validate, schema, 10-doc fixture; gate PASS, gold audit 0 errors; fixtures locked.
 - 2026-09-26 M2: label/calibrate/score/report + golden metrics; review #1 FAIL (calibrated tie noise) fixed; review #2 PASS. D-013, D-014 opened.
 - 2026-09-26 M3: laya client, runner (resume, warmup, meta), real arm-A fixture run (p50 ~500 ms/unit on mps); review #1 FAIL (batched tail, resume provenance, cpu fallback) fixed; review #2 PASS.
+- 2026-09-26 audit: three independent audits of M0-M3; 2 blockers (split design, calib/scores untracked), 2 high code defects (calib provenance, recall CI). M4 on hold pending decisions.
