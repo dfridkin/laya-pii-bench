@@ -61,6 +61,28 @@ def read_existing(path: Path) -> list[Decision]:
     return out
 
 
+def repair_torn_tail(path: Path) -> int:
+    """Drop an unterminated final line (a write cut off by a crash). Returns bytes removed.
+
+    Complete lines are never touched: an invalid *terminated* line still stops the run.
+    """
+    if not path.exists():
+        return 0
+    data = path.read_bytes()
+    if not data or data.endswith(b"\n"):
+        return 0
+    keep = data.rfind(b"\n") + 1
+    with path.open("r+b") as f:
+        f.truncate(keep)
+    return len(data) - keep
+
+
+def write_atomic(path: Path, text: str) -> None:
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(text, encoding="utf-8")
+    os.replace(tmp, path)
+
+
 def _now() -> str:
     return datetime.now(UTC).isoformat(timespec="seconds")
 
@@ -91,7 +113,8 @@ def _check_same_machine(prev: HwInfo, now: HwInfo) -> None:
 
 
 class _Writer:
-    """Append-only JSONL; each batch is flushed and fsynced so a crash loses at most one batch."""
+    """Append-only JSONL. Each batch is flushed and fsynced; a crash can leave at most one torn
+    final line, which `repair_torn_tail` removes on resume (that batch is then redone)."""
 
     def __init__(self, path: Path) -> None:
         self._f = path.open("a", encoding="utf-8")
@@ -118,6 +141,14 @@ def run(
     spec.out_dir.mkdir(parents=True, exist_ok=True)
     decisions_path, meta_path = spec.out_dir / "decisions.jsonl", spec.out_dir / "meta.json"
     prev = RunMeta.model_validate_json(meta_path.read_text()) if meta_path.exists() else None
+    if prev is None and decisions_path.exists() and decisions_path.stat().st_size:
+        raise RunError(
+            f"{decisions_path} exists without meta.json; provenance is unknown. Use a fresh run "
+            "directory."
+        )
+    torn = repair_torn_tail(decisions_path)
+    if torn:
+        log(f"repaired torn final line ({torn} bytes) in {decisions_path.name}")
     if prev is not None:
         _check_resume(prev, spec)
         _check_same_machine(prev.hw, hw)
@@ -172,7 +203,7 @@ def run(
         started_at=prev.started_at if prev else _now(),
         finished_at=None,
     )
-    meta_path.write_text(meta.model_dump_json(indent=2) + "\n")
+    write_atomic(meta_path, meta.model_dump_json(indent=2) + "\n")
 
     def decision(
         unit_id: str,
@@ -245,8 +276,8 @@ def run(
                 log(f"progress: {len(done) + b + len(batch)}/{len(units)}")
     finally:
         writer.close()
-    meta_path.write_text(
-        meta.model_copy(update={"finished_at": _now()}).model_dump_json(indent=2) + "\n"
+    write_atomic(
+        meta_path, meta.model_copy(update={"finished_at": _now()}).model_dump_json(indent=2) + "\n"
     )
     log(f"laya calls: {calls} ({spec.warmup_calls} warmup)")
     return calls

@@ -2,19 +2,18 @@
 
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
 
 from tokenizers import Tokenizer
 
 from bench.fixture import load_source
+from bench.models import pinned
 
 
 def main(src: str) -> None:
     doc = load_source(Path(src))
-    lock = json.loads(Path("models.lock.json").read_text())
-    tok = Tokenizer.from_file(lock["english"]["path"] + "/tokenizer/tokenizer.json")
+    tok = Tokenizer.from_file(str(pinned("english").snapshot / "tokenizer" / "tokenizer.json"))
     enc = tok.encode(doc.text, add_special_tokens=False)
     print(f"{doc.id}: {len(enc.ids)} tokens")
     for s in doc.spans:

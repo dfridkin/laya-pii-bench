@@ -604,6 +604,18 @@ def verify_provenance(
         )
 
 
+def verify_run_rows(decisions: Sequence[Decision], batch_size: int) -> None:
+    """Every row of a run must carry that run's mode, so an old or foreign row (e.g. a batched row
+    without `mode`, which defaults to batch1) can't enter the wrong speed statistic."""
+    mode = "batch1" if batch_size == 1 else "batched"
+    bad = [d.unit_id for d in decisions if d.mode != mode or d.batch_size > batch_size]
+    if bad:
+        raise ScoreError(
+            f"{len(bad)} decisions don't match the run's mode {mode!r} (batch {batch_size}), "
+            f"e.g. {bad[0]}"
+        )
+
+
 # --- stage entry -------------------------------------------------------------------------------
 
 

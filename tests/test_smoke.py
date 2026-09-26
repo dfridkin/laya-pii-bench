@@ -6,6 +6,7 @@ import pytest
 from typer.testing import CliRunner
 
 from bench.cli import app
+from bench.models import pinned
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -52,8 +53,7 @@ def test_laya_choice_result_shape() -> None:
     os.environ.setdefault("USE_TF", "0")
     import laya
 
-    lock = json.loads((ROOT / "models.lock.json").read_text())
-    agent = laya.load(lock["english"]["path"])
+    agent = laya.load(str(pinned("english", ROOT / "models.lock.json").snapshot))
     q = {
         "pii": {
             "type": "choice",
@@ -70,3 +70,14 @@ def test_laya_choice_result_shape() -> None:
     assert 0.0 <= ans["confidence"] <= 1.0
     assert "answer_confidence" in ans
     assert "act_probability" in ans["action"]
+
+
+def test_pinned_refuses_unknown_revision(tmp_path: Path) -> None:
+    from bench.models import pinned
+
+    lock = tmp_path / "models.lock.json"
+    lock.write_text(
+        json.dumps({"english": {"repo": "convaiinnovations/laya", "revision": "0" * 40}})
+    )
+    with pytest.raises(FileNotFoundError, match="make bootstrap"):
+        pinned("english", lock)

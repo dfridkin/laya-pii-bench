@@ -17,6 +17,8 @@ os.environ.setdefault("USE_TF", "0")
 
 import laya
 
+from bench.models import pinned
+
 CALLS = 20
 WARMUP = 5
 MAX_LEN = 512
@@ -47,7 +49,7 @@ def main() -> None:
     lock = json.loads(Path("models.lock.json").read_text())
     ckpt = lock["english"]
     t0 = time.perf_counter()
-    agent = laya.load(ckpt["path"])
+    agent = laya.load(str(pinned("english").snapshot))
     load_s = time.perf_counter() - t0
 
     times_ms: list[float] = []

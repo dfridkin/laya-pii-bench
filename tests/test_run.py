@@ -149,7 +149,17 @@ def test_torn_line_and_stray_units(tmp_path: Path) -> None:
     go(spec(tmp_path))
     path = tmp_path / "decisions.jsonl"
     good = path.read_text()
-    path.write_text(good + '{"unit_id": "fx0')
+    # crash mid-write of the last unit: unterminated final line is dropped, that unit redone
+    lines = good.splitlines(keepends=True)
+    path.write_text("".join(lines[:-1]) + lines[-1][:40])
+    log: list[str] = []
+    n, _ = go(spec(tmp_path), log=log)
+    assert n == 3 + 1 and any("repaired torn final line" in m for m in log)
+    live = [d for d in read_existing(path) if not d.warmup]
+    assert sorted(d.unit_id for d in live) == sorted(u.id for u in UNITS)
+    good = path.read_text()
+    # a complete but invalid line is never "repaired"
+    path.write_text(good + '{"unit_id": "fx0"}\n')
     with pytest.raises(RunError, match="torn write"):
         go(spec(tmp_path))
     stray = Decision.model_validate_json(good.splitlines()[-1]).model_copy(
@@ -158,6 +168,32 @@ def test_torn_line_and_stray_units(tmp_path: Path) -> None:
     path.write_text(good + stray.model_dump_json() + "\n")
     with pytest.raises(RunError, match="not in this run"):
         go(spec(tmp_path))
+
+
+def test_decisions_without_meta_are_refused(tmp_path: Path) -> None:
+    go(spec(tmp_path))
+    (tmp_path / "meta.json").unlink()
+    with pytest.raises(RunError, match=r"without meta\.json"):
+        go(spec(tmp_path))
+
+
+def test_meta_written_atomically(tmp_path: Path) -> None:
+    go(spec(tmp_path))
+    assert not list(tmp_path.glob("*.tmp"))
+    RunMeta.model_validate_json((tmp_path / "meta.json").read_text())
+
+
+def test_score_rejects_rows_from_another_mode(tmp_path: Path) -> None:
+    from bench.score import ScoreError, verify_run_rows
+
+    go(spec(tmp_path, batch_size=4, warmup=0))
+    rows = read_existing(tmp_path / "decisions.jsonl")
+    verify_run_rows(rows, 4)
+    old_style = rows[0].model_copy(update={"mode": "batch1"})  # pre-fix row: mode defaulted
+    with pytest.raises(ScoreError, match="don't match the run's mode"):
+        verify_run_rows([*rows[1:], old_style], 4)
+    with pytest.raises(ScoreError):
+        verify_run_rows(rows, 1)
 
 
 def test_truncation_recorded_and_warned(tmp_path: Path) -> None:

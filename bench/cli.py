@@ -276,10 +276,12 @@ def score(
     meta_path = decisions.parent / "meta.json"
     hw_info: HwInfo | None = None
     run_hashes: dict[str, str] | None = None
+    run_batch_size = None
     if meta_path.exists():  # the run's own hardware, with the device it actually used
         meta = RunMeta.model_validate_json(meta_path.read_text())
         hw_info = meta.hw.model_copy(update={"device": meta.device})
         run_hashes = meta.config_hashes
+        run_batch_size: int | None = meta.batch_size
     elif hw is not None and hw.exists():
         hw_info = HwInfo.model_validate_json(hw.read_text())
     hashes = {k: sc.sha256_file(p) for k, p in (("docs", docs), ("units", units),
@@ -287,7 +289,10 @@ def score(
     scored: set[str] = {d for ids in split_docs.values() for d in ids}
     try:
         sc.verify_provenance(params, hashes["units"], hashes["docs"], run_hashes, scored)
-        scores = sc.score(sc.read_decisions(decisions), read_units(units), documents, params,
+        rows = sc.read_decisions(decisions)
+        if run_batch_size is not None:
+            sc.verify_run_rows(rows, run_batch_size)
+        scores = sc.score(rows, read_units(units), documents, params,
                           load_policy(policy), split_docs, hw_info, hashes)  # fmt: skip
     except sc.ScoreError as e:
         typer.echo(f"error: {e}", err=True)

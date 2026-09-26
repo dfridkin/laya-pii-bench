@@ -6,12 +6,13 @@ state budget (docs/specs/gold-labels.md).
 
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
 
 from tokenizers import Tokenizer
+
+from bench.models import MODELS_LOCK, pinned
 
 _SUBDIR = {"english": "tokenizer", "multilingual": "multilingual/tokenizer"}
 
@@ -29,9 +30,11 @@ class CheckpointTokenizer:
         return list(self.tokenizer.encode(text, add_special_tokens=False).offsets)
 
 
-def load(checkpoint: str, models_lock: Path = Path("models.lock.json")) -> CheckpointTokenizer:
+def load(checkpoint: str, models_lock: Path = MODELS_LOCK) -> CheckpointTokenizer:
+    """Tokenizer of the locked checkpoint revision; `name` is `{checkpoint}@{revision}` so units
+    record exactly which tokenizer counted them."""
     if checkpoint not in _SUBDIR:
         raise ValueError(f"no tokenizer for checkpoint {checkpoint!r}")
-    lock: dict[str, dict[str, str]] = json.loads(models_lock.read_text())
-    path = Path(lock[checkpoint]["path"]) / _SUBDIR[checkpoint] / "tokenizer.json"
-    return CheckpointTokenizer(checkpoint, Tokenizer.from_file(str(path)))
+    pin = pinned(checkpoint, models_lock)
+    path = pin.snapshot / _SUBDIR[checkpoint] / "tokenizer.json"
+    return CheckpointTokenizer(f"{checkpoint}@{pin.revision}", Tokenizer.from_file(str(path)))

@@ -8,7 +8,6 @@ state differs per question.
 
 from __future__ import annotations
 
-import json
 import math
 import os
 import time
@@ -17,6 +16,7 @@ from pathlib import Path
 from typing import Any, Protocol, cast, get_args
 
 from bench.domain import Answer, Device
+from bench.models import pinned
 
 os.environ.setdefault("USE_TF", "0")
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
@@ -103,13 +103,13 @@ class LayaClient:
         import laya  # pyright: ignore[reportMissingTypeStubs]
         from laya import common  # pyright: ignore[reportMissingTypeStubs]
 
-        entry: dict[str, str] = json.loads(models_lock.read_text())[checkpoint]
+        pin = pinned(checkpoint, models_lock)
         self.checkpoint = checkpoint
-        self.revision = entry["revision"]
+        self.revision = pin.revision
         self.questions = {k: dict(v) for k, v in questions.items()}
         self.max_len, self.head_max_len = max_len, head_max_len
         load: Any = laya.load  # pyright: ignore[reportUnknownMemberType]
-        self._agent: Any = load(entry["path"], device=device, subfolder=LOADABLE[checkpoint])
+        self._agent: Any = load(str(pin.snapshot), device=device, subfolder=LOADABLE[checkpoint])
         self.device = self.current_device()
         self._tok: Any = self._agent.tok
         # Room for the state per question: build each question's input around an empty state.

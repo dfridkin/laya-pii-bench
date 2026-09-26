@@ -1,6 +1,5 @@
 """The hand-labeled fixture (M1): rebuilds exactly, validates, covers every required case."""
 
-import json
 from pathlib import Path
 
 import pytest
@@ -8,6 +7,7 @@ import pytest
 from bench.config import load_policy
 from bench.domain import Document, PiiCategory, SubjectRole
 from bench.fixture import build, dumps
+from bench.models import pinned
 from bench.validate import validate_file
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -117,8 +117,9 @@ def test_fx06_span_straddles_token_256(docs: dict[str, Document]) -> None:
     """Arm A chunks are 256 tokens; the segmenter may back off up to 8 tokens to whitespace."""
     from tokenizers import Tokenizer
 
-    lock = json.loads((ROOT / "models.lock.json").read_text())
-    tok = Tokenizer.from_file(lock["english"]["path"] + "/tokenizer/tokenizer.json")
+    tok = Tokenizer.from_file(
+        str(pinned("english", ROOT / "models.lock.json").snapshot / "tokenizer" / "tokenizer.json")
+    )
     d = docs["fx06"]
     offsets = tok.encode(d.text, add_special_tokens=False).offsets
     crossing = [
