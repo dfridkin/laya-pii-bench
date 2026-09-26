@@ -127,5 +127,65 @@ def calibrate(
     )
 
 
+@app.command()
+def score(
+    decisions: Annotated[Path, typer.Option(help="Decisions JSONL for one arm x qs.")],
+    units: Annotated[Path, typer.Option(help="Units JSONL (gold answers).")],
+    calib: Annotated[Path, typer.Option(help="Frozen calib params JSON (hash-checked).")],
+    out: Annotated[Path, typer.Option(help="Scores JSON to write.")],
+    docs: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
+    policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),
+    hw: Annotated[Path, typer.Option(help="Hardware fingerprint.")] = Path("hw.json"),
+    allow_debug_calib: Annotated[
+        bool, typer.Option(help="Accept fit_on=fixture_debug calib (fixture runs only).")
+    ] = False,
+) -> None:
+    """Score decisions against gold with frozen calib params. Refuses a calib hash mismatch."""
+    from bench import calibrate as cal
+    from bench import score as sc
+    from bench.config import load_policy
+    from bench.domain import HwInfo
+    from bench.label import read_docs, read_units
+
+    try:
+        params = cal.load_verified(calib, allow_debug=allow_debug_calib)
+    except cal.CalibError as e:
+        typer.echo(f"error: {e}", err=True)
+        raise typer.Exit(2) from e
+    documents = read_docs(docs)
+    split_docs = {"fixture": {d.id for d in documents}}  # bench split (M5) adds calib/test/holdout
+    hw_info = HwInfo.model_validate_json(hw.read_text()) if hw.exists() else None
+    hashes = {k: sc.sha256_file(p) for k, p in (("docs", docs), ("units", units),
+                                                ("decisions", decisions))}  # fmt: skip
+    scores = sc.score(sc.read_decisions(decisions), read_units(units), documents, params,
+                      load_policy(policy), split_docs, hw_info, hashes)  # fmt: skip
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(scores.model_dump_json(indent=2) + "\n", encoding="utf-8")
+    for name, sp in scores.splits.items():
+        h = sp.headline
+        rec = "n/a" if h.recall is None else f"{h.recall.point:.4f}"
+        typer.echo(f"{name}: recall@t_low={rec} forward_rate={h.forward_rate.point:.4f} "
+                   f"false_forwards={h.false_forwards} -> {out}")  # fmt: skip
+
+
+@app.command()
+def report(
+    scores: Annotated[list[Path] | None, typer.Option(help="Scores JSON files.")] = None,
+    scores_dir: Annotated[Path, typer.Option(help="Used when --scores is not given.")] = Path(
+        "scores"
+    ),
+    out: Annotated[Path, typer.Option(help="Report markdown.")] = Path("reports/report.md"),
+    hud: Annotated[Path | None, typer.Option(help="HUD replay export (M7).")] = None,
+) -> None:
+    """Render the markdown report from scores."""
+    from bench import report as rep
+
+    paths = scores or sorted(scores_dir.glob("*.json"))
+    rep.write(rep.read_scores(paths), out)
+    typer.echo(f"wrote {out} from {len(paths)} scores file(s)")
+    if hud is not None:
+        typer.echo(f"note: HUD replay export arrives in M7; {hud} not written", err=True)
+
+
 if __name__ == "__main__":
     app()
