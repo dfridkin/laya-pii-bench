@@ -233,3 +233,51 @@ def test_valid_unterminated_last_line_is_kept(tmp_path: Path) -> None:
     assert path.read_text() == text and len(read_existing(path)) == 13
     path.write_text(text + text.splitlines()[3][:30])  # genuinely torn
     assert repair_torn_tail(path) == 30 and path.read_text() == text
+
+
+# --- review 2 follow-ups ---
+
+
+def test_refused_resume_leaves_torn_file_untouched(tmp_path: Path) -> None:
+    from bench.run import RunError
+    from tests.test_run import go, spec
+
+    go(spec(tmp_path))
+    path = tmp_path / "decisions.jsonl"
+    torn = path.read_bytes() + b'{"unit_id": "fx0'
+    path.write_bytes(torn)
+    changed = {"arm": "a", "question_set": "OTHER", "docs": "d", "units": "u"}
+    with pytest.raises(RunError, match="different settings"):
+        go(spec(tmp_path, hashes=changed))
+    assert path.read_bytes() == torn  # repair only after resuming is allowed
+
+
+def test_flat_objective_falls_back() -> None:
+    # identical probabilities across options: NLL is log 2 for every T, so any T "fits"; the bound
+    # is exactly as good as the fit and must count as a bound hit (needs the 1e-9 tolerance)
+    t, reason = cal.fit_or_fallback([[0.5, 0.5]] * 3, [0, 1, 0])
+    assert t == 1.0 and reason is not None and reason.startswith("fit hit bound")
+
+
+def test_run_meta_without_hashes_is_refused() -> None:
+    params = cal.fit([Decision.model_validate_json(x) for x in MOCK.read_text().splitlines()],
+                     {u.id: u for u in fixture_units()}, POLICY, "calib",
+                     input_hashes={"decisions": "d", "units": "u"})  # fmt: skip
+    with pytest.raises(sc.ScoreError, match="no units hash"):
+        sc.verify_provenance(params, "u", "docs", {}, set())
+
+
+def test_no_meta_override_requires_fixture_debug_calib(tmp_path: Path) -> None:
+    units = tmp_path / "units.jsonl"
+    write_units(fixture_units(), units)
+    params = cal.fit([Decision.model_validate_json(x) for x in MOCK.read_text().splitlines()],
+                     {u.id: u for u in fixture_units()}, POLICY, "calib",
+                     input_hashes={"decisions": sc.sha256_file(MOCK),
+                                   "units": sc.sha256_file(units)})  # fmt: skip
+    c = tmp_path / "c.json"
+    cal.write(params, c)  # a real (fit_on="calib") calib
+    r = RUN.invoke(app, ["score", "--decisions", str(MOCK), "--units", str(units), "--calib",
+                         str(c), "--out", str(tmp_path / "s.json"), "--docs",
+                         str(MINI / "docs.jsonl"), "--allow-debug-calib",
+                         "--allow-no-meta"])  # fmt: skip
+    assert r.exit_code == 2 and "no meta.json" in r.output

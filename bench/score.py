@@ -595,7 +595,9 @@ def verify_provenance(
     if run_hashes is not None:
         for key, got in (("units", units_sha256), ("docs", docs_sha256)):
             want = run_hashes.get(key)
-            if want is not None and want != got:
+            if want is None:
+                raise ScoreError(f"run meta has no {key} hash; provenance can't be checked")
+            if want != got:
                 raise ScoreError(
                     f"{key} file differs from the one this run was produced from "
                     f"(run {want[:12]}, given {got[:12]})"

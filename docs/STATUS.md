@@ -147,6 +147,10 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
   test that noticed their removal. All fixed; the A4 bound check now compares objective values
   (a flat objective stopped the optimizer at T = 0.06, short of the 0.05 bound). All 12 surviving
   mutants from the review are now killed. `make check` 200 passed; model tests 8 passed.
+- Review 2 PASSED (`reports/audits/M0-M3-fixbatch-review-20260926-pass.md`); its four
+  non-blocking follow-ups are closed with tests (R4 ordering, `--allow-no-meta` only with a
+  fixture_debug calib, flat-objective tolerance, run meta must carry units/docs hashes).
+  `make check` 204 passed.
 - Fixture commands that use the meta-less mock decisions now also need `--allow-no-meta`
   (`bench calibrate --debug-fit-all --allow-no-meta`, `bench score --allow-debug-calib
   --allow-no-meta`); runs produced by `bench run` have meta.json and don't.
@@ -206,8 +210,9 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-Audit B1-B5 decided (D-005 amended, D-015..D-018); fix batch A1-A11 done, independent review
-pending. Then `/milestone M4`. Audit C1-C8 before M6.
+Audit complete: B1-B5 decided (D-005 amended, D-015..D-018), fix batch A1-A11 done and
+independently reviewed (PASS). Next: `/milestone M4` (starts with the `doc_plan` draft for owner
+review, D-015, and `Span.value`, D-016). Audit C1-C8 before M6.
 
 ## Session log
 
@@ -219,3 +224,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-26 M3: laya client, runner (resume, warmup, meta), real arm-A fixture run (p50 ~500 ms/unit on mps); review #1 FAIL (batched tail, resume provenance, cpu fallback) fixed; review #2 PASS.
 - 2026-09-26 audit: three independent audits of M0-M3; 2 blockers (split design, calib/scores untracked), 2 high code defects (calib provenance, recall CI). M4 on hold pending decisions.
 - 2026-09-26 audit fixes A1-A11 applied with tests; fixture artifacts regenerated (answers identical). Review pending.
+- 2026-09-26 audit fix batch: review 1 FAIL (R1-R7 + test gaps) fixed; review 2 PASS; follow-ups closed. Ready for M4.

@@ -136,7 +136,7 @@ def calibrate(
 
     hashes = {"decisions": sha256_file(decisions), "units": sha256_file(units)}
     meta_path = decisions.parent / "meta.json"
-    if not meta_path.exists() and not (allow_no_meta and debug_fit_all):
+    if not meta_path.exists() and not allow_no_meta:  # debug_fit_all is required above
         typer.echo(
             f"error: no meta.json next to {decisions}; units provenance can't be checked "
             "(fixture-only override: --debug-fit-all --allow-no-meta)",
@@ -145,7 +145,7 @@ def calibrate(
         raise typer.Exit(2)
     if meta_path.exists():
         run_units = RunMeta.model_validate_json(meta_path.read_text()).config_hashes.get("units")
-        if run_units is not None and run_units != hashes["units"]:
+        if run_units != hashes["units"]:
             typer.echo(
                 f"error: {units} differs from the units this run was produced from", err=True
             )
@@ -295,7 +295,7 @@ def score(
     meta_path = decisions.parent / "meta.json"
     extra_caveats: list[str] = []
     if not meta_path.exists():
-        if not (allow_no_meta and allow_debug_calib):
+        if not (allow_no_meta and params.fit_on == "fixture_debug"):
             typer.echo(
                 f"error: no meta.json next to {decisions}; units/docs provenance can't be checked "
                 "(fixture-only override: --allow-debug-calib --allow-no-meta)",
