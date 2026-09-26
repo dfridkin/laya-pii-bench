@@ -70,6 +70,8 @@ def _check_offsets(text: str, name: str, items: Sequence[Span | Negative]) -> It
         value = text[it.start : it.end]
         if value != value.strip():
             yield f"{name}[{i}] {value!r} has leading/trailing whitespace"
+        if it.value is not None and it.value != value:
+            yield f"{name}[{i}] recorded value {it.value!r} != text {value!r}"
         if _splits_word(text, it.start) or _splits_word(text, it.end):
             yield f"{name}[{i}] {value!r} starts or ends inside a word"
     starts = [it.start for it in items]

@@ -165,9 +165,10 @@ def test_policy_inconsistencies(tmp_path: Path, patch: dict[str, Any], match: st
 @pytest.mark.parametrize(
     ("patch", "match"),
     [
-        ({"lang_mix": {"en": 0.5, "de": 0.1, "es": 0.1, "pl": 0.1}}, "lang_mix"),
-        ({"lang_mix": {"en": 1.1, "de": -0.1, "es": 0.0, "pl": 0.0}}, "negative"),
+        ({"lang_counts": {"en": 500, "de": 24, "es": 18, "pl": 18}}, "lang_counts sum"),
+        ({"lang_counts": {"en": 541, "de": -1, "es": 42, "pl": 18}}, ">= 0"),
         ({"locales": {"en": "en_US"}}, "locales"),
+        ({"non_english_buckets": ["xl"]}, "don't fit"),
         ({"length_mix": {"short": 1.0}}, "LengthBucket"),
         ({"doc_types": {"crf_page": 600}}, "every DocType"),
         (
@@ -209,3 +210,52 @@ def test_arms_missing_question_set(tmp_path: Path) -> None:
     data["defaults"]["question_sets"] = ["qs_v1", "qs_v9"]
     with pytest.raises(ValueError, match="qs_v9"):
         config.load_arms(dump(tmp_path, "arms.yaml", data), qs_dir=CFG / "questions")
+
+
+def test_gen_spec_derived_counts() -> None:
+    g = config.load_gen_spec(CFG / "gen_spec.yaml")
+    assert g.bucket_counts == {"short": 210, "medium": 210, "long": 132, "xl": 48}
+    assert g.hard_negative_count == 150
+    assert config.largest_remainder(10, {"a": 0.34, "b": 0.33, "c": 0.33}) == {
+        "a": 4,
+        "b": 3,
+        "c": 3,
+    }
+
+
+@pytest.mark.parametrize(
+    ("plan_patch", "match"),
+    [
+        ({"protocol_section": {"clean_rate": 0.5}}, "sponsor-level"),
+        ({"crf_page": {"pii": {}}}, "at least one pii"),
+        ({"crf_page": {"langs": ["de"]}}, "English"),
+        ({"irb_letter": {"pii": {"staff_pii": 1.0, "coded_id": 0.2}}}, "no subjects"),
+        (
+            {
+                t: {"langs": ["en", "es", "pl"]}
+                for t in (
+                    "csr_patient_narrative",
+                    "sae_cioms",
+                    "lab_report",
+                    "site_correspondence",
+                    "icf_signature_page",
+                )
+            },
+            "may be de",
+        ),
+        (
+            {
+                "protocol_section": {"buckets": ["short"]},
+                "monitoring_visit_report": {"buckets": ["short"]},
+                "site_correspondence": {"buckets": ["short"]},
+            },
+            "may be long",
+        ),
+    ],
+)
+def test_doc_plan_inconsistencies(tmp_path: Path, plan_patch: dict[str, Any], match: str) -> None:
+    data = raw("gen_spec.yaml")
+    for t, patch in plan_patch.items():
+        data["doc_plan"][t] |= patch
+    with pytest.raises(ValidationError, match=match):
+        config.load_gen_spec(dump(tmp_path, "gen_spec.yaml", data))

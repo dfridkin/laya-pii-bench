@@ -24,7 +24,9 @@ def build(src_dir: Path) -> list[Document]:
 
 
 def dumps(docs: list[Document]) -> str:
-    return "".join(d.model_dump_json() + "\n" for d in docs)
+    # defaults (e.g. Span.value = None, added after the fixture was locked) are omitted so the
+    # locked docs.jsonl stays byte-identical
+    return "".join(d.model_dump_json(exclude_defaults=True) + "\n" for d in docs)
 
 
 def write(src_dir: Path, out: Path) -> int:

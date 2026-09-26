@@ -83,10 +83,12 @@ class Span(_Interval):
     role: SubjectRole
     value_kind: str  # "person_name", "mrn", "dob", "subject_id", ...
     surface: str  # variant generator used, e.g. "last_first_upper"
+    value: str | None = None  # text[start:end] at generation; validate checks it (D-016)
 
 
 class Negative(_Interval):
     kind: str  # "protocol_no", "nct_id", "lot_no", "eponym", ...
+    value: str | None = None  # text[start:end] at generation
 
 
 class WorldRefs(_Model):
@@ -106,7 +108,8 @@ class Document(_Model):
     length_bucket: LengthBucket
     pii_depth: PiiDepth | None
     world_refs: WorldRefs
-    gen_meta: dict[str, str | int | list[str]]
+    # generator bookkeeping; `sections` holds section start offsets (ints) for section units (M5)
+    gen_meta: dict[str, str | int | list[str] | list[int]]
 
 
 class GoldAnswers(_Model):
@@ -258,6 +261,27 @@ class CalibParams(_Model):
     units_sha256: str
     calib_doc_ids: list[str]
     content_hash: str
+
+
+# --- generator manifest -----------------------------------------------------------------------
+
+
+class ValidatorResult(_Model):
+    name: str  # "V1".."V6"
+    passed: bool
+    failures: int
+    detail: list[str]  # first failures, for the log
+
+
+class GenManifest(_Model):
+    seed: int
+    n_docs: int
+    sha256: str  # of data/docs.jsonl
+    gen_spec_sha256: str
+    counts: dict[str, dict[str, int]]  # dimension -> value -> docs (doc_type, lang, bucket, ...)
+    rates: dict[str, float]  # tag -> realized share of docs
+    validators: list[ValidatorResult]
+    created_at: str
 
 
 # --- scores (docs/specs/metrics.md; one section per report section) ---------------------------
@@ -424,4 +448,5 @@ EXPORTED: tuple[type[BaseModel], ...] = (
     CalibParams,
     HwInfo,
     Scores,
+    GenManifest,
 )

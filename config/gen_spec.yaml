@@ -22,7 +22,9 @@ doc_types:                  # exact counts; total 600
   protocol_section: 70
   irb_letter: 30
 
-lang_mix: {en: 0.90, de: 0.04, es: 0.03, pl: 0.03}
+lang_counts: {en: 540, de: 24, es: 18, pl: 18}   # exact (D-015)
+non_english_buckets: [short]    # DRAFT for owner review: non-English docs stay < 1k tokens, so
+                                # no filler grammar is needed in de/es/pl
 locales: {en: en_US, de: de_DE, es: es_ES, pl: pl_PL}
 
 length_mix: {short: 0.35, medium: 0.35, long: 0.22, xl: 0.08}
@@ -45,3 +47,78 @@ perturbations:
 
 paraphrase: {enabled: false, model: null}   # D-011
 distribution_tolerance_pp: 3
+
+# Per doc type (D-015). DRAFT for owner review.
+#   level: site | sponsor (sponsor-level: no site, no subjects, no persons; split per doc, D-005)
+#   buckets / langs: allowed values (long/xl only for prose types; de/es/pl only site-facing types)
+#   clean_rate: share rendered without any person data (blank or pre-redacted forms, generic notes)
+#   pii: probability a non-clean doc contains each category (every non-clean doc has >= 1)
+doc_plan:
+  protocol_section:
+    {level: sponsor, buckets: [short, medium, long, xl], langs: [en], clean_rate: 1.0, pii: {}}
+  csr_patient_narrative:
+    level: site
+    buckets: [short, medium, long, xl]
+    langs: [en, de, es, pl]
+    clean_rate: 0.10            # pre-redacted narratives
+    pii: {phi_direct: 0.9, phi_quasi: 1.0, coded_id: 1.0, staff_pii: 0.8}
+  sae_cioms:
+    level: site
+    buckets: [short, medium]
+    langs: [en, de, es, pl]
+    clean_rate: 0.10            # pre-redacted
+    pii: {phi_direct: 0.3, phi_quasi: 1.0, coded_id: 1.0, staff_pii: 0.9}
+  crf_page:
+    level: site
+    buckets: [short, medium]
+    langs: [en]
+    clean_rate: 0.35            # blank or aggregate pages
+    pii: {phi_direct: 0.1, phi_quasi: 0.7, coded_id: 1.0, staff_pii: 0.3}
+  lab_report:
+    level: site
+    buckets: [short, medium]
+    langs: [en, de, es, pl]
+    clean_rate: 0.10            # QC / reference-range sheets
+    pii: {phi_direct: 0.6, phi_quasi: 0.9, coded_id: 1.0, staff_pii: 0.2}
+  monitoring_visit_report:
+    level: site
+    buckets: [short, medium, long, xl]
+    langs: [en]
+    clean_rate: 0.20            # site-level summaries without names
+    pii: {phi_direct: 0.2, phi_quasi: 0.4, coded_id: 0.7, staff_pii: 1.0}
+  deviation_log:
+    level: site
+    buckets: [short, medium]
+    langs: [en]
+    clean_rate: 0.20
+    pii: {phi_quasi: 0.8, coded_id: 1.0, staff_pii: 0.5}
+  conmed_log:
+    level: site
+    buckets: [short, medium]
+    langs: [en]
+    clean_rate: 0.20
+    pii: {phi_quasi: 0.8, coded_id: 1.0, staff_pii: 0.2}
+  delegation_log:
+    level: site
+    buckets: [short, medium]
+    langs: [en]
+    clean_rate: 0.10            # blank template
+    pii: {staff_pii: 1.0}
+  site_correspondence:
+    level: site
+    buckets: [short, medium, long, xl]
+    langs: [en, de, es, pl]
+    clean_rate: 0.30            # generic sponsor notices
+    pii: {phi_direct: 0.2, phi_quasi: 0.3, coded_id: 0.7, staff_pii: 1.0}
+  icf_signature_page:
+    level: site
+    buckets: [short]
+    langs: [en, de, es, pl]
+    clean_rate: 0.20            # blank signature page
+    pii: {phi_direct: 1.0, phi_quasi: 0.8, coded_id: 0.5, staff_pii: 1.0}
+  irb_letter:
+    level: site                 # holdout; names no subjects (D-005)
+    buckets: [short, medium]
+    langs: [en]
+    clean_rate: 0.30
+    pii: {staff_pii: 1.0}

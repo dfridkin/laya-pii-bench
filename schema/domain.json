@@ -374,6 +374,12 @@
                   "type": "string"
                 },
                 "type": "array"
+              },
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
               }
             ]
           },
@@ -506,6 +512,59 @@
         "missed_value_kinds"
       ],
       "title": "FailureCase",
+      "type": "object"
+    },
+    "GenManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "counts": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object"
+          },
+          "type": "object"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "gen_spec_sha256": {
+          "type": "string"
+        },
+        "n_docs": {
+          "type": "integer"
+        },
+        "rates": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "validators": {
+          "items": {
+            "$ref": "#/$defs/ValidatorResult"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "seed",
+        "n_docs",
+        "sha256",
+        "gen_spec_sha256",
+        "counts",
+        "rates",
+        "validators",
+        "created_at"
+      ],
+      "title": "GenManifest",
       "type": "object"
     },
     "GoldAnswers": {
@@ -842,6 +901,17 @@
         "start": {
           "minimum": 0,
           "type": "integer"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
@@ -1395,6 +1465,17 @@
         "surface": {
           "type": "string"
         },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "value_kind": {
           "type": "string"
         }
@@ -1595,6 +1676,34 @@
         "gold"
       ],
       "title": "Unit",
+      "type": "object"
+    },
+    "ValidatorResult": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "failures": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "passed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "passed",
+        "failures",
+        "detail"
+      ],
+      "title": "ValidatorResult",
       "type": "object"
     },
     "WorldRefs": {

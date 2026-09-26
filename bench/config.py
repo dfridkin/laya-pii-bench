@@ -110,6 +110,53 @@ class Perturbations(_Cfg):
     email_quoting: Literal["site_correspondence_only"]
 
 
+class PiiProfile(_Cfg):
+    """Probability that a non-clean document of this type contains each category."""
+
+    phi_direct: float = Field(default=0.0, ge=0, le=1)
+    phi_quasi: float = Field(default=0.0, ge=0, le=1)
+    coded_id: float = Field(default=0.0, ge=0, le=1)
+    staff_pii: float = Field(default=0.0, ge=0, le=1)
+
+    @property
+    def any(self) -> bool:
+        return any(v > 0 for v in (self.phi_direct, self.phi_quasi, self.coded_id, self.staff_pii))
+
+    @property
+    def patient(self) -> bool:
+        return any(v > 0 for v in (self.phi_direct, self.phi_quasi, self.coded_id))
+
+
+class DocPlanEntry(_Cfg):
+    """How one doc type is generated (D-015)."""
+
+    level: Literal["site", "sponsor"]  # sponsor-level: no site, no subjects, no persons (D-005)
+    buckets: list[LengthBucket] = Field(min_length=1)
+    langs: list[Lang] = Field(min_length=1)
+    clean_rate: float = Field(ge=0, le=1)  # share rendered without any person data
+    pii: PiiProfile
+
+    @model_validator(mode="after")
+    def _consistent(self) -> DocPlanEntry:
+        if self.level == "sponsor" and (self.clean_rate != 1.0 or self.pii.any):
+            raise ValueError("sponsor-level doc types carry no person data (clean_rate 1, no pii)")
+        if self.clean_rate < 1.0 and not self.pii.any:
+            raise ValueError("clean_rate < 1 needs at least one pii category")
+        if "en" not in self.langs:
+            raise ValueError("every doc type must allow English")
+        return self
+
+
+def largest_remainder(total: int, shares: dict[str, float]) -> dict[str, int]:
+    """Integer counts summing to `total`, proportional to `shares` (deterministic tie-break)."""
+    raw = {k: total * v for k, v in shares.items()}
+    out = {k: int(v) for k, v in raw.items()}
+    rest = total - sum(out.values())
+    for k in sorted(raw, key=lambda k: (-(raw[k] - out[k]), k))[:rest]:
+        out[k] += 1
+    return out
+
+
 class Paraphrase(_Cfg):
     enabled: bool
     model: str | None
@@ -119,7 +166,8 @@ class GenSpec(_Cfg):
     seed: int
     world: World
     doc_types: dict[DocType, int]
-    lang_mix: dict[Lang, float]
+    lang_counts: dict[Lang, int]  # exact (D-015)
+    non_english_buckets: list[LengthBucket]  # non-English docs only in these buckets
     locales: dict[Lang, str]
     length_mix: dict[LengthBucket, float]
     length_tokens: dict[LengthBucket, tuple[int, int]]
@@ -129,6 +177,7 @@ class GenSpec(_Cfg):
     perturbations: Perturbations
     paraphrase: Paraphrase
     distribution_tolerance_pp: float = Field(gt=0)
+    doc_plan: dict[DocType, DocPlanEntry]
 
     @model_validator(mode="after")
     def _consistent(self) -> GenSpec:
@@ -136,10 +185,16 @@ class GenSpec(_Cfg):
             raise ValueError("doc_types must give a count for every DocType")
         if any(n < 0 for n in self.doc_types.values()):
             raise ValueError("doc_types counts must be >= 0")
-        _check_mix("lang_mix", {str(k): v for k, v in self.lang_mix.items()})
+        if any(n < 0 for n in self.lang_counts.values()):
+            raise ValueError("lang_counts must be >= 0")
+        if sum(self.lang_counts.values()) != self.total_docs:
+            raise ValueError(
+                f"lang_counts sum to {sum(self.lang_counts.values())}, "
+                f"doc_types to {self.total_docs}"
+            )
         _check_mix("length_mix", {str(k): v for k, v in self.length_mix.items()})
-        if set(self.locales) != set(self.lang_mix):
-            raise ValueError("locales and lang_mix must cover the same languages")
+        if set(self.locales) != set(self.lang_counts):
+            raise ValueError("locales and lang_counts must cover the same languages")
         if set(self.length_tokens) != set(LengthBucket) or set(self.length_mix) != set(
             LengthBucket
         ):
@@ -150,7 +205,55 @@ class GenSpec(_Cfg):
         for depth, (lo, hi) in self.pii_depth_positions.items():
             if not 0.0 <= lo < hi <= 1.0:
                 raise ValueError(f"pii_depth_positions.{depth}: need 0 <= lo < hi <= 1")
+        self._check_plan()
         return self
+
+    def _check_plan(self) -> None:
+        """The plan must be able to realize the exact counts (fail at load, not mid-generation)."""
+        if set(self.doc_plan) != set(DocType):
+            raise ValueError("doc_plan must have an entry for every DocType")
+        irb = self.doc_plan[DocType.IRB]
+        if irb.pii.patient:
+            raise ValueError("irb_letter names no subjects (D-005): no patient categories")
+        buckets = self.bucket_counts
+        for b, need in buckets.items():
+            cap = sum(n for t, n in self.doc_types.items() if b in self.doc_plan[t].buckets)
+            if cap < need:
+                raise ValueError(f"only {cap} docs may be {b}, {need} needed")
+        for lang, need in self.lang_counts.items():
+            if lang == "en":
+                continue
+            cap = sum(
+                n for t, n in self.doc_types.items()
+                if lang in self.doc_plan[t].langs
+                and set(self.doc_plan[t].buckets) & set(self.non_english_buckets)
+            )  # fmt: skip
+            if cap < need:
+                raise ValueError(f"only {cap} docs may be {lang}, {need} needed")
+        non_en = sum(n for lang, n in self.lang_counts.items() if lang != "en")
+        slots = sum(buckets[b] for b in self.non_english_buckets)
+        if non_en > slots:
+            raise ValueError(
+                f"{non_en} non-English docs don't fit {slots} {self.non_english_buckets} slots"
+            )
+        depth_cap = sum(
+            int(n * (1 - self.doc_plan[t].clean_rate)) for t, n in self.doc_types.items()
+            if self.doc_plan[t].level == "site"
+            and {LengthBucket.LONG, LengthBucket.XL} & set(self.doc_plan[t].buckets)
+        )  # fmt: skip
+        if depth_cap < self.pii_depth_docs:
+            raise ValueError(
+                f"only ~{depth_cap} PII-bearing long docs for {self.pii_depth_docs} depth docs"
+            )
+
+    @property
+    def bucket_counts(self) -> dict[LengthBucket, int]:
+        counts = largest_remainder(self.total_docs, {str(k): v for k, v in self.length_mix.items()})
+        return {LengthBucket(k): v for k, v in counts.items()}
+
+    @property
+    def hard_negative_count(self) -> int:
+        return round(self.total_docs * self.hard_negative_rate)
 
     @property
     def total_docs(self) -> int:

@@ -65,6 +65,10 @@ def test_valid_doc(policy: Policy) -> None:
     [
         ({"spans": [span(8, 99)]}, "beyond text length"),
         ({"negatives": [{"start": 50, "end": 99, "kind": "k"}]}, "beyond text length"),
+        (
+            {"spans": [span(8, 18) | {"value": "Anna Nowak"}, span(24, 32) | {"value": "0048291"}]},
+            "recorded value",
+        ),  # D-016
         ({"spans": [span(7, 18)]}, "whitespace"),
         ({"spans": [span(9, 18), span(24, 32)]}, "inside a word"),
         ({"spans": [span(8, 17), span(24, 32)]}, "inside a word"),
@@ -97,6 +101,11 @@ def test_valid_doc(policy: Policy) -> None:
 def test_invalid_docs(policy: Policy, patch: dict[str, Any], match: str) -> None:
     errs = errors(policy, doc(**patch))
     assert any(match in e for e in errs), errs
+
+
+def test_recorded_values_that_match_pass(policy: Policy) -> None:
+    spans = [span(8, 18) | {"value": "Anna Nowak"}, span(24, 32) | {"value": "00482913"}]
+    assert errors(policy, doc(spans=spans)) == []
 
 
 def test_staff_pii_sponsor_ok(policy: Policy) -> None:

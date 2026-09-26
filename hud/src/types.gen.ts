@@ -163,7 +163,7 @@ export interface Decision {
 export interface Document {
   doc_type: DocType;
   gen_meta: {
-    [k: string]: string | number | string[];
+    [k: string]: string | number | string[] | number[];
   };
   id: string;
   lang: "en" | "de" | "es" | "pl";
@@ -183,6 +183,7 @@ export interface Negative {
   end: number;
   kind: string;
   start: number;
+  value?: string | null;
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
@@ -194,6 +195,7 @@ export interface Span {
   role: SubjectRole;
   start: number;
   surface: string;
+  value?: string | null;
   value_kind: string;
 }
 /**
@@ -240,6 +242,36 @@ export interface GoldAnswers {
   doc_kind: "narrative" | "form_table" | "correspondence" | "protocol_text";
   pii_present: "A" | "B";
   subject_role: "patient" | "staff" | "both" | "none";
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "GenManifest".
+ */
+export interface GenManifest {
+  counts: {
+    [k: string]: {
+      [k: string]: number;
+    };
+  };
+  created_at: string;
+  gen_spec_sha256: string;
+  n_docs: number;
+  rates: {
+    [k: string]: number;
+  };
+  seed: number;
+  sha256: string;
+  validators: ValidatorResult[];
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "ValidatorResult".
+ */
+export interface ValidatorResult {
+  detail: string[];
+  failures: number;
+  name: string;
+  passed: boolean;
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
