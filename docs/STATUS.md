@@ -1,14 +1,14 @@
 # Status
 
 Active milestone: **M3 Runner, arm A on fixture**
-Last updated: 2026-09-26 (M2 gate passed)
+Last updated: 2026-09-26 (M3 built, gate review pending)
 
 | Milestone | State | Gate passed | Notes |
 |---|---|---|---|
 | M0 Bootstrap | done | 2026-09-25 (`reports/audits/M0-gate-20260925-2255.md`) | mps, p50 67.8 ms |
 | M1 Contracts + fixture | done | 2026-09-26 (`reports/audits/M1-gate-20260926.md`) | fixture locked; gold audit 0 errors |
 | M2 Scorer + report on fixture | done | 2026-09-26 (`reports/audits/M2-gate-20260926-pass.md`; review #1 FAIL fixed) | golden metrics exact; hash check exits 2 |
-| M3 Runner, arm A on fixture | not started | | |
+| M3 Runner, arm A on fixture | built, gate review pending | | real laya run on fixture; p50 497 ms/unit (qs_v1, mps) |
 | M4 Generator | not started | | |
 | M5 Label + split | not started | | |
 | M6 Zero-shot arms, calibrate, score, report v1 | not started | | |
@@ -86,6 +86,31 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 - Until `bench split` exists (M5): `calibrate` only runs with `--debug-fit-all`, and `score` treats
   every document as split `fixture`. Units are written to `<out>/{arm}.jsonl`.
 
+## M3 evidence
+
+- `make check`: 157 passed, 3 skipped; model-marked tests (`LAYA_SKIP_MODEL=0 USE_TF=0 uv run pytest -m
+  model`) include the real-client tests (adapter, per-question state room, tokenizer agreement).
+- Gate 1: `uv run bench label --docs fixtures/mini/docs.jsonl --arm A` (-> `data/mini/units/A.jsonl`),
+  then `uv run bench run --arm A --qs qs_v1 --docs fixtures/mini/docs.jsonl` completed: 21 laya calls
+  (10 warmup + 11 units), exit 0. All 21 decisions and `meta.json` validate against
+  `schema/domain.json` (jsonschema: 0 errors) and the pydantic models.
+- Gate 2: rerun logs `resumed: 11/11 already done` and `laya calls: 0`; the checkpoint isn't loaded.
+- Gate 3: `runs/mini/A/qs_v1/meta.json` has the hw fingerprint (Apple M2, 8 GB), `device: mps`
+  (actual), `warmup_calls: 10`, `checkpoint_rev: 55cf4c4e...`, config hashes (arm, qs, docs, units).
+- Gate 4: `bench calibrate --debug-fit-all` -> `bench score --allow-debug-calib` -> `bench report`
+  on the real decisions: `reports/fixture/report_armA_qs_v1.md`, all 9 sections, DEBUG banner.
+  The milestone text says `--calib-from fixture`; the equivalent here is the D-013 debug pair.
+- Timing: batch-1 p50 497 ms/unit, p95 651 ms (qs_v1, 4 questions, ~190-token chunks, mps).
+  Controlled check with laya directly: 1 question/short state 61 ms (matches M0), 1 question/190
+  tokens 125 ms, 4 questions/short 226 ms, 4 questions/190 tokens 515 ms. Latency scales with the
+  number of questions (one sequence row each) and state length; runner overhead is negligible.
+- Truncation: laya's real per-question state room for arm A is 420-476 tokens (qs_v1: 420-459,
+  qs_v2: 449-476), above the spec's 320 (`max_len - head_max_len`), so `unit.truncated` from the
+  label stage is conservative. The runner records exact `state_tokens` and `truncated_questions`
+  per decision; the truncated slice uses either signal. laya's tokenizer matches the label stage's
+  token counts on all 11 fixture units.
+- Zero-shot arm A on the fixture is weak (expected per the model card): see the report.
+
 ## Questions for the owner (not blocking; candidates for DECISIONS entries)
 
 - Staff initials (fx03) labeled `staff_pii`; domain.md says "name + contact". Confirm for the generator.
@@ -99,12 +124,15 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## Later (out of current scope, noted for the owning milestone)
 
+- M6: laya enables MPS mixed precision only at >= 5 rows (`mps_amp_min_rows`), so qs_v1 (4 questions)
+  runs fp32 and qs_v2 (5 questions) mixed precision. Label this in the speed comparison.
+- M6: 500 ms/unit on the dev M2 means full runs take hours; run them in the background.
+- M5: `bench run` on the main dataset exits 2 until `bench split` exists.
+
 - M5: `bench split` + split-aware `calibrate`/`score` (calib-only fit, test/holdout scoring); section
   and doc units in `label`. Makefile `calibrate`/`score` targets (`--all`) need that too.
 - M6: bootstrap CIs are percentile intervals on document resamples; forward rate and recall only.
 - M7: `bench report --hud` currently prints a note and writes nothing.
-- M3: `bench score` labels speed with the scoring machine's `hw.json`; take hw from the run's
-  `meta.json` instead so the hardware label belongs to the run (invariant 9).
 - Report: reliability table could add a calibrated mean-confidence column; add a test for the
   multi-label line.
 
@@ -133,7 +161,7 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 
 ## Next action
 
-Run `/milestone M3`.
+Run `/gate M3`, then close out M3.
 
 ## Session log
 
