@@ -10,7 +10,6 @@ hard negatives, filler) happen before resolve instead, so they need no remap.
 from __future__ import annotations
 
 import random
-import re
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 from itertools import pairwise
@@ -148,28 +147,38 @@ def ocr_noise(doc: Document, r: random.Random, rate: float = 0.01) -> list[Edit]
     return edits
 
 
-_PIPE_ROW = re.compile(r"^[^\n]*\|[^\n]*$", re.MULTILINE)
+def _table_blocks(text: str) -> list[list[tuple[int, str]]]:
+    """Runs of >= 2 consecutive lines with ` | ` separators, as (line start, line) pairs.
+    Single pipe lines (e.g. page headers) are not tables."""
+    blocks: list[list[tuple[int, str]]] = []
+    run: list[tuple[int, str]] = []
+    pos = 0
+    for line in text.split("\n"):
+        if " | " in line:
+            run.append((pos, line))
+        else:
+            if len(run) >= 2:
+                blocks.append(run)
+            run = []
+        pos += len(line) + 1
+    if len(run) >= 2:
+        blocks.append(run)
+    return blocks
 
 
 def table_style(doc: Document, style: str) -> list[Edit]:
     """Re-render pipe tables as tab-separated or fixed-width columns (separators are never inside
     labeled values, so only unlabeled text changes)."""
     edits: list[Edit] = []
-    rows = [m for m in _PIPE_ROW.finditer(doc.text)]
-    widths: list[int] = []
-    if style == "fixed":
-        for m in rows:
-            cells = m.group(0).split(" | ")
-            widths = [
-                max(w, len(c)) for w, c in zip(widths + [0] * len(cells), cells, strict=False)
-            ]
-    for m in rows:
-        line = m.group(0)
-        col = 0
-        cells = line.split(" | ")
-        for k, cell in enumerate(cells[:-1]):
-            col += len(cell)
-            sep = "\t" if style == "tab" else " " * (widths[k] - len(cell) + 2)
-            edits.append(Edit(m.start() + col, 3, sep))
-            col += 3
+    for block in _table_blocks(doc.text):
+        rows = [line.split(" | ") for _, line in block]
+        ncol = max(len(r) for r in rows)
+        widths = [max((len(r[k]) for r in rows if k < len(r)), default=0) for k in range(ncol)]
+        for (start, _), cells in zip(block, rows, strict=True):
+            col = 0
+            for k, cell in enumerate(cells[:-1]):
+                col += len(cell)
+                sep = "\t" if style == "tab" else " " * (widths[k] - len(cell) + 2)
+                edits.append(Edit(start + col, 3, sep))
+                col += 3
     return edits

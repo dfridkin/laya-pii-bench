@@ -68,15 +68,41 @@ def _strip(raw: str) -> str:
     return SENTINEL.sub("x", raw)
 
 
-def assemble(ds: DocSpec, spec: GenSpec, count: TokenCounter, max_rounds: int = 60) -> Document:
+Post = Callable[[Document], Document]
+
+
+class _TooLong(AssemblyError):
+    pass
+
+
+def assemble(
+    ds: DocSpec, spec: GenSpec, count: TokenCounter, post: Post | None = None,
+    max_rounds: int = 60,
+) -> Document:  # fmt: skip
+    """Assemble `ds` into its bucket. `post` (character-level perturbations) is applied to every
+    candidate before counting, so the final, perturbed text is what lands in the bucket (V4). A
+    form whose rows alone overflow the bucket is retried with fewer rows."""
+    factor = 1.0
+    for attempt in range(6):
+        try:
+            return _assemble(ds, spec, count, post, max_rounds, factor, attempt)
+        except _TooLong:
+            factor *= 0.7
+    raise AssemblyError(f"{ds.doc_id}: base document too long for {ds.bucket} even with few rows")
+
+
+def _assemble(
+    ds: DocSpec, spec: GenSpec, count: TokenCounter, post: Post | None, max_rounds: int,
+    factor: float, attempt: int,
+) -> Document:  # fmt: skip
     lo, hi = spec.length_tokens[ds.bucket]
-    r = rng(spec.seed, "assemble", ds.doc_id)
+    r = rng(spec.seed, "assemble", ds.doc_id, attempt)
     margin = max(10, (hi - lo) // 20)
     target = r.randint(lo + margin, hi - margin)
     extra = dict(ds.extra)
     if ds.doc_type in ROWS and ds.bucket is not LengthBucket.SHORT:
         per_row, cap = ROWS[ds.doc_type]
-        extra["rows"] = min(cap, max(3, int(0.6 * target / per_row)))
+        extra["rows"] = min(cap, max(3, int(0.6 * target / per_row * factor)))
 
     ctx = DocCtx(lang=ds.lang, rng=r, enabled=ds.enabled,
                  mode="clean" if ds.pii_depth else ds.mode)  # fmt: skip
@@ -151,26 +177,7 @@ def assemble(ds: DocSpec, spec: GenSpec, count: TokenCounter, max_rounds: int = 
         if pii_block and depth_at is None:
             depth_at = _depth_index(compose(n_sec, None, paginate=False), ds, spec, count)
         out: Rendered = finish(compose(n_sec, depth_at), ctx)
-        n = count(out.text)
-        if n < lo or n > hi:
-            if n < lo:
-                if n_sec == len(sections):
-                    sections.append(new_section())
-                n_sec += 1
-            else:
-                if n_sec == 0:
-                    raise AssemblyError(f"{ds.doc_id}: base document alone is {n} tokens > {hi}")
-                n_sec -= 1
-            depth_at = None  # layout changed: recompute the depth position
-            continue
-        if pii_block:
-            assert depth_at is not None and ds.pii_depth is not None
-            frac = realized_depth_of(out, count)
-            lo_f, hi_f = spec.pii_depth_positions[ds.pii_depth]
-            if not lo_f <= frac <= hi_f:
-                depth_at += 1 if frac < lo_f else -1
-                continue
-        return Document(
+        doc = Document(
             id=ds.doc_id, doc_type=ds.doc_type, lang=ds.lang, text=out.text,
             spans=sorted(out.spans, key=lambda s: s.start),
             negatives=sorted(out.negatives, key=lambda x: x.start),
@@ -181,8 +188,30 @@ def assemble(ds: DocSpec, spec: GenSpec, count: TokenCounter, max_rounds: int = 
                                  site=ds.site.site_no if ds.site else SPONSOR_SITE,
                                  subjects=subjects),
             gen_meta={"template": template, "mode": ds.mode, "sections": out.sections,
-                      "tokens_multilingual": n, "target_tokens": target},
+                      "target_tokens": target},
         )  # fmt: skip
+        if post is not None:
+            doc = post(doc)
+        n = count(doc.text)
+        if n < lo or n > hi:
+            if n < lo:
+                if n_sec == len(sections):
+                    sections.append(new_section())
+                n_sec += 1
+            else:
+                if n_sec == 0:
+                    raise _TooLong(f"{ds.doc_id}: base document alone is {n} tokens > {hi}")
+                n_sec -= 1
+            depth_at = None  # layout changed: recompute the depth position
+            continue
+        if pii_block:
+            assert depth_at is not None and ds.pii_depth is not None
+            frac = realized_depth_of(doc, count)
+            lo_f, hi_f = spec.pii_depth_positions[ds.pii_depth]
+            if not lo_f <= frac <= hi_f:
+                depth_at += 1 if frac < lo_f else -1
+                continue
+        return doc.model_copy(update={"gen_meta": {**doc.gen_meta, "tokens_multilingual": n}})
     raise AssemblyError(f"{ds.doc_id}: could not reach {ds.bucket} ({lo}-{hi}) / depth")
 
 

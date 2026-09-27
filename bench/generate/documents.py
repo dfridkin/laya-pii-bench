@@ -71,11 +71,15 @@ def subject_date_set(subs: list[Subject]) -> set[date]:
 
 def safe_date(r: random.Random, subs: list[Subject], lo: date = STUDY_START,
               span_days: int = 420) -> date:  # fmt: skip
-    """A document date (not PHI) that coincides with none of the referenced subjects' dates."""
-    taken = subject_date_set(subs)
+    """A document date (not PHI) that shares no rendered form with any referenced subject date:
+    `07/08/2025` is July 8 in US order and August 7 in European order, so string forms are
+    compared, not calendar dates."""
+    from bench.generate.variants import date_forms
+
+    taken = {f for d in subject_date_set(subs) for f in date_forms(d)}
     for _ in range(1000):
         d = lo + timedelta(days=r.randint(0, span_days))
-        if d not in taken:
+        if not set(date_forms(d)) & taken:
             return d
     raise RuntimeError("no free document date")
 

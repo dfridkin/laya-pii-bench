@@ -62,8 +62,24 @@ def test_injected_docs_pass_and_are_tagged(t: DocType, world: W.World,
         assert "hard_negative" in doc.tags
         assert checks.check(doc, POLICY, scanner) == [], doc.text
         kinds |= {n.kind for n in doc.negatives}
-        # negative dates never coincide with a referenced subject's dates
+        # negative dates share no rendered form with a referenced subject's dates
         refs = [s for s in site.subjects if s.subject_id in doc.world_refs.subjects]
         taken = {f for d in subject_date_set(refs) for f in date_forms(d)}
         assert not any(n.value in taken for n in doc.negatives if n.kind == "non_phi_date")
     assert {"protocol_no", "nct_id", "eudract_no"} & kinds
+
+
+def test_safe_date_avoids_ambiguous_day_month_order(world: W.World) -> None:
+    from datetime import date
+
+    from bench.generate.documents import safe_date
+
+    sub = world.sites()[0].subjects[0]
+    real = next(d for d in [sub.enrolled, *sub.visits] if d.day <= 12 and d.day != d.month)
+    swapped = date(real.year, real.day, real.month)  # 07/08 read the other way round
+    taken = {f for d in subject_date_set([sub]) for f in date_forms(d)}
+    assert set(date_forms(swapped)) & taken  # the ambiguity is real
+    with pytest.raises(RuntimeError):  # the only candidate is ambiguous: refused
+        safe_date(rng(5, "safe"), [sub], lo=swapped, span_days=0)
+    for k in range(300):
+        assert not set(date_forms(safe_date(rng(5, "safe", k), [sub]))) & taken

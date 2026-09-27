@@ -79,6 +79,45 @@ def build_fixture(
 
 
 @app.command()
+def gen(
+    spec: Annotated[Path, typer.Option(help="Generator spec.")] = Path("config/gen_spec.yaml"),
+    out: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
+    policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),
+    verify_determinism: Annotated[
+        bool, typer.Option(help="V6: generate twice and compare hashes.")
+    ] = True,
+) -> None:
+    """Generate the synthetic corpus and data/gen_manifest.json; fails on any validator failure."""
+    from bench import tokenize
+    from bench.config import load_gen_spec, load_policy
+    from bench.generate import corpus
+
+    gs = load_gen_spec(spec)
+    tok = tokenize.load("multilingual")
+
+    def count(text: str) -> int:
+        return len(tok(text))
+
+    import hashlib
+
+    pol = load_policy(policy)
+    result = corpus.generate(gs, pol, count)
+    rerun = None
+    if verify_determinism:  # V6: an independent second generation must hash identically
+        rerun = hashlib.sha256(
+            corpus.serialize(corpus.generate(gs, pol, count).docs).encode()
+        ).hexdigest()
+    manifest = corpus.write(result, gs, spec, out, rerun)
+    for v in manifest.validators:
+        typer.echo(f"{v.name}: {'pass' if v.passed else f'FAIL ({v.failures})'}")
+        for d in v.detail[:5]:
+            typer.echo(f"  {d}")
+    typer.echo(f"{manifest.n_docs} docs, sha256 {manifest.sha256[:16]} -> {out}")
+    if not all(v.passed for v in manifest.validators):
+        raise typer.Exit(1)
+
+
+@app.command()
 def label(
     docs: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
     policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),

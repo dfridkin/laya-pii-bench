@@ -109,7 +109,9 @@ def v1(doc: Document, policy: Policy) -> list[str]:
                 errs.append(
                     f"V1 {kind}[{i}] value {it.value!r} != text {doc.text[it.start : it.end]!r}"
                 )
-    return errs + [f"V1 {e}" for e in check_document(doc, policy)]
+    return errs + [
+        f"V3 {e}" if "overlaps negatives" in e else f"V1 {e}" for e in check_document(doc, policy)
+    ]
 
 
 def check(doc: Document, policy: Policy, scanner: Scanner) -> list[str]:
