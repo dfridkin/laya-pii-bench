@@ -243,6 +243,8 @@ class DocCtx:
         if a <= 89:
             return str(a)
         if not self._on(PiiCategory.PHI_QUASI):
+            if self._redact_next:  # partial redaction chose this value: consume the flag here
+                return self._off("patient", None)
             return "over 89" if self.lang == "en" else ">89"
         return self.pii(str(a), PiiCategory.PHI_QUASI, "patient", "age", "over_89")
 

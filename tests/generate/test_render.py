@@ -169,3 +169,18 @@ def test_world_names_avoid_template_vocabulary(world: W.World) -> None:
     vocab = template_vocabulary()
     for p in world.persons():
         assert p.given.lower() not in vocab and p.family.lower() not in vocab
+
+
+def test_age_over_89_consumes_a_partial_redaction(world: W.World) -> None:
+    """Gold audit run 3, R3: a redaction drawn for an age > 89 must not leak into the next value."""
+    import random
+
+    from bench.generate.render import DocCtx
+
+    sub = next(s for site in world.sites() for s in site.subjects if s.age > 89)
+    ctx = DocCtx(lang="en", rng=random.Random(0), enabled=ALL, partial_redact=1.0)
+    out = ctx.age(sub)
+    assert out.startswith("⟦n") and ctx.negs[-1].meta["kind"] == "pre_redacted"
+    assert ctx._redact_next is False
+    ctx.partial_redact = 0.0
+    assert ctx.name(sub.person, alt="the participant").startswith("⟦s")  # not a stray placeholder

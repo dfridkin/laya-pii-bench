@@ -261,6 +261,13 @@ def distributions(docs: Sequence[Document]) -> tuple[dict[str, dict[str, int]], 
         "length_bucket": Counter(d.length_bucket.value for d in docs),
         "pii_depth": Counter(d.pii_depth.value for d in docs if d.pii_depth),
         "mode": Counter(str(d.gen_meta.get("mode")) for d in docs),
+        # flagged for partial redaction vs. actually containing a placeholder (per-value rate 0.2,
+        # so small docs may draw none; gold audit run 3, R2)
+        "partial_redaction": Counter(
+            ("realized" if any(n.kind == "pre_redacted" for n in d.negatives) else "none_drawn")
+            for d in docs
+            if d.gen_meta.get("partial_redact") == 1
+        ),
     }
     tags = Counter(t for d in docs for t in d.tags)
     rates = {t: tags[t] / len(docs) for t in sorted(tags)} if docs else {}

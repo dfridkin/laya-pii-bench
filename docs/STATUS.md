@@ -1,7 +1,7 @@
 # Status
 
 Active milestone: **M4 Generator**
-Last updated: 2026-09-27 (M4 built; gold audit + gate review pending)
+Last updated: 2026-09-27 (M4 built; gate review pending)
 
 | Milestone | State | Gate passed | Notes |
 |---|---|---|---|
@@ -9,7 +9,7 @@ Last updated: 2026-09-27 (M4 built; gold audit + gate review pending)
 | M1 Contracts + fixture | done | 2026-09-26 (`reports/audits/M1-gate-20260926.md`) | fixture locked; gold audit 0 errors |
 | M2 Scorer + report on fixture | done | 2026-09-26 (`reports/audits/M2-gate-20260926-pass.md`; review #1 FAIL fixed) | golden metrics exact; hash check exits 2 |
 | M3 Runner, arm A on fixture | done | 2026-09-26 (`reports/audits/M3-gate-20260926-pass.md`; review #1 FAIL fixed) | real laya run on fixture; p50 ~500 ms/unit (qs_v1, mps) |
-| M4 Generator | built, gold audit + gate review pending | | 600 docs, V1-V6 pass, deterministic |
+| M4 Generator | built, gate review pending | | 600 docs, V1-V6 pass, deterministic; gold audit 0 errors |
 | M5 Label + split | not started | | |
 | M6 Zero-shot arms, calibrate, score, report v1 | not started | | |
 | M7 HUD replay | not started | | |
@@ -120,12 +120,18 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 ## M4 evidence
 
 - `make gen`: 600 docs, validators ASSEMBLY/V1/V2/V3/V4/V5/V6 all pass (`data/gen_manifest.json`);
-  ~23 s on the M2 including the V6 second generation. sha256 `600fada2082c2ab8...`, identical across
-  separate `make gen` runs (gate 2). `bench validate data/docs.jsonl`: 600/600.
+  ~23 s on the M2 including the V6 second generation. Final corpus sha256 `3507af1fba6661b4...`,
+  identical across separate `make gen` runs (gate 2). `bench validate data/docs.jsonl`: 600/600.
+- Gold audit (gate 5): three runs on the same seeded 30-doc sample, each zero label errors; each run's
+  generator-level judgment calls were fixed before the next (no label changes). Final corpus record:
+  `reports/audits/M4_gold_audit_run3_final.md` (runs 1-2: `M4_gold_audit_run1.md`,
+  `M4_gold_audit.md`). The final run also checked all 60 partial-redaction docs and all 1,268 CRF rows.
 - Realized distributions equal gen_spec exactly (gate 3): doc types as specified; lang 540/24/18/18;
   buckets 210/210/132/48; hard_negative .25, headers_footers .40, line_wrap .30, ocr_noise .10,
   table .20, email_quoting on all 60 correspondence docs; 174 clean/pre-redacted docs; pii_depth
   20/20/20.
+  Partial pre-redaction (gold audit N5, `gen_spec.partial_redaction_docs: 60`): 46 of the 60 flagged
+  docs realize at least one placeholder (reported in the manifest); pre_redacted tag on 59 docs.
 - Hypothesis tests (gate 4): sentinel resolve 600 examples (`tests/generate/test_render.py`), span
   remap 700 examples (`tests/generate/test_perturb.py`). `make check` 299 passed.
 - Sub-steps: 4a world + providers + doc_plan (owner-approved), 4b renderer/variants/V1-V2, 4c all 12
@@ -148,6 +154,22 @@ Design choices made in M4 (flag if you disagree):
 - Site locales: 14 en, 4 de, 3 es, 3 pl sites (`world.site_locales`); non-English docs come from
   sites of their locale. M5 should stratify the site split on locale too, or the language slice
   may land in one split.
+- Gold-audit fixes (no label changes): SAE forms report real, preferably serious, world AEs;
+  deviation logs list only world deviations; CRF rows are distinct (subject, visit); document dates
+  follow the events and avoid every rendered form of referenced (incl. PII-depth) subjects' dates;
+  eponyms fit their sentence; non-English docs are native-only (no English filler, translated AE
+  terms, localized headers); placeholders grammatical; CRO domain distinct from site names.
+
+Known limitations (owner may want these addressed before M5/M6; not label errors):
+- R4 / J5 lexical shortcut: 49 of 104 PII-free site docs contain an alt phrase that never appears in
+  a PII-bearing doc (e.g. CRF "for subject (see first row)", IRB "To: the Principal Investigator",
+  blank underscores on ICF/delegation pages). Alt text only renders where a category is off, which in
+  practice means clean views. Risk: arm C (and doc-level zero-shot) can key on it. M6 should report
+  the clean-view slice; a fix is to render category-off alt text in some PII-bearing docs too.
+- R1: partial redaction is per value, so a redacted name can sit next to the same person's labeled
+  email/initials. Labels are correct; realism is imperfect.
+- N7 accepted: a document date can equal another same-site subject's date (not tied to that subject
+  in the text; not PII; V2 correctly scoped).
 
 ## Audit fix batch (2026-09-26)
 
@@ -235,7 +257,7 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-M4: gold audit of 30 docs running; then `/gate M4`. Audit items C2-C8 before M6 (C1 decided:
+M4: gold audit done (zero label errors); run `/gate M4`. Audit items C2-C8 before M6 (C1 decided:
 D-019, built in M5).
 
 ## Session log
@@ -251,3 +273,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-26 audit fix batch: review 1 FAIL (R1-R7 + test gaps) fixed; review 2 PASS; follow-ups closed. Ready for M4.
 - 2026-09-26 C1 decided as D-019 (calib freeze in git, enforced by score); added to M5 build + gate, M6 gate 2 made checkable.
 - 2026-09-27 M4: generator built (4a-4g); make gen 600 docs, V1-V6 pass, deterministic; gold audit + gate review pending.
+- 2026-09-27 M4: gold audit runs 1-3 zero label errors; generator realism fixes between runs; final corpus 3507af1f; gate review next.
