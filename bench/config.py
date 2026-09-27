@@ -100,6 +100,13 @@ class World(_Cfg):
     studies: int = Field(ge=1)
     sites_per_study: int = Field(ge=1)
     subjects_per_site: int = Field(ge=1)
+    site_locales: dict[Lang, int]  # number of sites per language; sums to studies x sites
+
+    @model_validator(mode="after")
+    def _sites(self) -> World:
+        if sum(self.site_locales.values()) != self.studies * self.sites_per_study:
+            raise ValueError("world.site_locales must sum to studies x sites_per_study")
+        return self
 
 
 class Perturbations(_Cfg):

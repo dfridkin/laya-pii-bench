@@ -7,6 +7,7 @@ world:
   studies: 3
   sites_per_study: 8
   subjects_per_site: 15
+  site_locales: {en: 14, de: 4, es: 3, pl: 3}   # non-English docs come from sites of that locale
 
 doc_types:                  # exact counts; total 600
   csr_patient_narrative: 70
