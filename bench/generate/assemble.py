@@ -100,6 +100,8 @@ def _assemble(
     margin = max(10, (hi - lo) // 20)
     target = r.randint(lo + margin, hi - margin)
     extra = dict(ds.extra)
+    if ds.pii_depth and ds.subject is not None:  # document dates must avoid the depth subject too
+        extra["avoid_dates_of"] = [ds.subject]
     if ds.doc_type in ROWS and ds.bucket is not LengthBucket.SHORT:
         per_row, cap = ROWS[ds.doc_type]
         extra["rows"] = min(cap, max(3, int(0.6 * target / per_row * factor)))
@@ -112,6 +114,7 @@ def _assemble(
     template, data, subjects = VIEWS[ds.doc_type](req, ctx)
     base = render_raw(template, ctx, **data)
     refs = [s for s in (ds.site.subjects if ds.site else []) if s.subject_id in subjects]
+    refs += list(extra.get("avoid_dates_of", []))
     tags: list[str] = ["email_quoting"] if ds.doc_type is DocType.SITE_EMAIL else []
     if ds.headers_footers:
         tags.append("headers_footers")

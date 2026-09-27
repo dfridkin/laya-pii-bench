@@ -138,3 +138,21 @@ def test_document_dates_follow_the_events(sample_docs: list) -> None:  # type: i
             assert doc_dates[0] < ev[0], d.id  # version date before signature date
             checked += 1
     assert checked >= 5
+
+
+def test_depth_subject_dates_are_avoided_by_document_dates() -> None:
+    """Regression (d0371): the depth subject is added after the view picks its document dates;
+    those dates must still avoid every rendered form of the depth subject's dates."""
+    from bench.generate.checks import subject_dates
+
+    world = W.build(SPEC, frozenset(template_vocabulary()))
+    slots_ = corpus.plan(SPEC, world)
+    depth = [s.idx for s in slots_ if s.depth is not None]
+    result = corpus.generate(SPEC, POLICY, words, only=[371, *depth[:12]])
+    assert result.problems == {}
+    subjects = {s.subject_id: s for site in world.sites() for s in site.subjects}
+    for d in result.docs:
+        if d.pii_depth is None:
+            continue
+        taken = {f for sid in d.world_refs.subjects for f, _ in subject_dates(subjects[sid])}
+        assert not any(n.value in taken for n in d.negatives if n.kind == "non_phi_date"), d.id

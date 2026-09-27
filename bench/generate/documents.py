@@ -83,6 +83,13 @@ def safe_date(r: random.Random, subs: list[Subject], lo: date = STUDY_START,
     raise RuntimeError("no free document date")
 
 
+def _avoid(req: ViewRequest, subs: list[Subject]) -> list[Subject]:
+    """Subjects whose dates document dates must avoid: the view's own plus any the assembler adds
+    later (the PII-depth subject), passed as `extra["avoid_dates_of"]`."""
+    extra: list[Subject] = list(req.extra.get("avoid_dates_of", []))
+    return [*subs, *extra]
+
+
 def _sae_subject(r: random.Random, site: Site, sub: Subject) -> tuple[Subject, AdverseEvent]:
     """An SAE form reports a real adverse event from the world (no invented events, so the same
     subject's dates agree across SAE form, narrative and logs). If the planned subject has no AE,
@@ -104,7 +111,9 @@ def _sae(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]
         "study": req.study, "site": req.site, "sub": sub, "ae": ae,
         "reporter": req.site.staff[r.choice(["pi", "subi"])],
         # the report follows the onset (and never shares a rendered form with the subject's dates)
-        "report_date": safe_date(r, [sub], lo=ae.onset + timedelta(days=1), span_days=45),
+        "report_date": safe_date(
+            r, _avoid(req, [sub]), lo=ae.onset + timedelta(days=1), span_days=45
+        ),
         "ctrl_no": f"FEN-{r.randint(2025000, 2025999)}",
         "followups": list(req.extra.get("followups", [])),
     }  # fmt: skip
@@ -236,8 +245,10 @@ def _correspondence(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any],
         "b": st[r.choice(["cra", "sponsor_contact"])], "subs": subs, "topic": r.choice(TOPICS),
         "body_lines": [*r.sample(BODY, 2), *req.extra.get("body", [])],
         "ask_lines": r.sample(ASK, 1),
-        "sent": safe_date(r, subs, lo=max((x.visits[1] for x in subs), default=STUDY_START)
-                          + timedelta(days=1), span_days=40),
+        "sent": safe_date(
+            r, _avoid(req, subs), span_days=40,
+            lo=max((x.visits[1] for x in subs), default=STUDY_START) + timedelta(days=1),
+        ),
     }  # fmt: skip
     return f"site_correspondence/{req.lang}.j2", data, sorted(s.subject_id for s in subs)
 
@@ -250,7 +261,7 @@ def _icf(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]
         "sub": sub,
         "investigator": req.site.staff[req.rng.choice(["pi", "subi"])],
         "version_date": safe_date(
-            req.rng, [sub], lo=sub.enrolled - timedelta(days=150), span_days=140
+            req.rng, _avoid(req, [sub]), lo=sub.enrolled - timedelta(days=150), span_days=140
         ),  # version dated before the signature
     }
     return f"icf_signature_page/{req.lang}.j2", data, [sub.subject_id]
@@ -273,7 +284,7 @@ def _irb(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]
         "chair": st["irb_chair"],
         "admin": st["irb_admin"],
         "pi": st["pi"],
-        "meeting": safe_date(r, []),
+        "meeting": safe_date(r, _avoid(req, [])),
         "amendment": f"A{r.randint(1, 6)}",
         "conditions": [*r.sample(CONDITIONS, 3), *req.extra.get("conditions", [])],
     }
