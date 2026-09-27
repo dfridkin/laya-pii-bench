@@ -50,7 +50,9 @@ class Negative(BaseModel):
     kind: str                                  # "protocol_no", "nct_id", "lot_no", "eponym", ...
 
 class WorldRefs(BaseModel):
-    study: str; site: str; subjects: list[str]
+    study: str; site: str
+    subjects: list[str]   # subjects the view was drawn from: a superset of those whose data appears
+                          # (clean/masked views still list them); conservative for split checks
 
 class Document(BaseModel):
     id: str; doc_type: DocType; lang: Literal["en", "de", "es", "pl"]

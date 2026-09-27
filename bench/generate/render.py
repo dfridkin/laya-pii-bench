@@ -28,6 +28,21 @@ SENTINEL = re.compile(r"⟦([snh])(\d+)⟧")
 Mode = Literal["normal", "clean", "redacted"]
 
 REDACTIONS = ("[REDACTED]", "XX-XXXX", "***")
+AE_TERMS_I18N: dict[str, dict[str, str]] = {  # audit J6: no English clinical terms in de/es/pl docs
+    "de": {"headache": "Kopfschmerzen", "nausea": "Übelkeit", "fatigue": "Erschöpfung",
+           "neutropenia": "Neutropenie", "rash": "Hautausschlag", "diarrhoea": "Diarrhö",
+           "dizziness": "Schwindel", "pneumonia": "Pneumonie", "elevated ALT": "erhöhte ALT",
+           "hypertension": "Hypertonie", "arthralgia": "Arthralgie", "insomnia": "Schlaflosigkeit"},
+    "es": {"headache": "cefalea", "nausea": "náuseas", "fatigue": "fatiga",
+           "neutropenia": "neutropenia", "rash": "exantema", "diarrhoea": "diarrea",
+           "dizziness": "mareo", "pneumonia": "neumonía", "elevated ALT": "ALT elevada",
+           "hypertension": "hipertensión", "arthralgia": "artralgia", "insomnia": "insomnio"},
+    "pl": {"headache": "ból głowy", "nausea": "nudności", "fatigue": "zmęczenie",
+           "neutropenia": "neutropenia", "rash": "wysypka", "diarrhoea": "biegunka",
+           "dizziness": "zawroty głowy", "pneumonia": "zapalenie płuc",
+           "elevated ALT": "podwyższona ALT", "hypertension": "nadciśnienie",
+           "arthralgia": "bóle stawów", "insomnia": "bezsenność"},
+}  # fmt: skip
 ALT = {  # neutral text when a category is off (clean docs, or category not sampled)
     "en": {"patient": "the participant", "staff": "the investigator", "sponsor": "the sponsor"},
     "de": {"patient": "der Teilnehmer", "staff": "der Prüfarzt", "sponsor": "der Sponsor"},
@@ -117,6 +132,10 @@ class DocCtx:
     def section(self, title: str) -> str:
         self.heads.append(title)
         return f"⟦h{len(self.heads) - 1}⟧"
+
+    def tr(self, term: str) -> str:
+        """Clinical term in the document's language."""
+        return AE_TERMS_I18N.get(self.lang, {}).get(term, term)
 
     def pick(self, options: Iterable[str]) -> str:
         return self.rng.choice(sorted(options))
@@ -244,9 +263,9 @@ class DocCtx:
 
     def globals(self) -> dict[str, Any]:
         return {n: getattr(self, n) for n in (
-            "pii", "neg", "section", "pick", "name", "initials", "email", "phone", "subject_id",
-            "rand_no", "mrn", "dob", "address", "postcode", "event_date", "age", "protocol", "nct",
-            "eudract", "compound", "site_no", "doc_date", "fmt",
+            "pii", "neg", "section", "pick", "tr", "name", "initials", "email", "phone",
+            "subject_id", "rand_no", "mrn", "dob", "address", "postcode", "event_date", "age",
+            "protocol", "nct", "eudract", "compound", "site_no", "doc_date", "fmt",
         )}  # fmt: skip
 
 

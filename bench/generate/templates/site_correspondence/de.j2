@@ -6,7 +6,7 @@ Hallo {{ name(b, "first", alt="zusammen") }},
 
 die offenen Fragen wurden bearbeitet und die Einträge im eCRF korrigiert.
 {% for s in subs %}
-Teilnehmer {{ subject_id(s, alt="(maskiert)") }}: Daten der Visite vom {{ event_date(s.visits[1], alt="letzten Visitentag") }} korrigiert.
+Teilnehmer {{ subject_id(s, alt="(Nummer nicht angegeben)") }}: Daten der Visite 2 ({{ event_date(s.visits[1], alt="Datum nicht angegeben") }}) korrigiert.
 {% endfor %}
 {% if subs %}
 Die Papierquelle für {{ name(subs[0].person, alt="diesen Teilnehmer") }} liegt im Teilnehmerordner.

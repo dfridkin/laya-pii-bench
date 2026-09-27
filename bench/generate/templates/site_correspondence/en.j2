@@ -9,7 +9,7 @@ Hi {{ name(b, "first", alt="all") }},
 {{ line }}
 {% endfor %}
 {% for s in subs %}
-Subject {{ subject_id(s, alt="(masked)") }}: data corrected for the visit on {{ event_date(s.visits[1], alt="the last visit") }}.
+Subject {{ subject_id(s, alt="(number withheld)") }}: data corrected for visit 2 ({{ event_date(s.visits[1], alt="date not shown") }}).
 {% endfor %}
 {% if subs %}
 The paper source for {{ name(subs[0].person, alt="this participant") }} is filed in the subject binder.

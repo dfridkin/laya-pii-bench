@@ -4,7 +4,7 @@ Protocol {{ protocol(study) }}    Site {{ site_no(site.site_no) }}
 
 Name | Role | Initials | Delegated tasks | Contact
 {% for r in staff_rows %}
-{{ name(r.person, alt="[name]") }} | {{ r.person.job_title }} | {{ initials(r.person, alt="--") }} | {{ r.tasks }} | {{ pick([email(r.person, alt="on file"), phone(r.person, alt="on file")]) }}
+{{ name(r.person, alt="________________") }} | {{ r.person.job_title }} | {{ initials(r.person, alt="____") }} | {{ r.tasks }} | {{ pick([email(r.person, alt="________________"), phone(r.person, alt="________________")]) }}
 {% endfor %}
 
 Task key: 1 informed consent, 2 eligibility, 3 CRF entry, 4 vital signs, 5 drug accountability, 6 query resolution.

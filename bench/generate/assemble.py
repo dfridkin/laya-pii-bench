@@ -165,10 +165,12 @@ def _assemble(
         body = "\n\n".join(filler.paragraph(r, t) for _ in range(r.randint(2, 4)))
         return f"{ctx.section(filler.title(r, t))}\n{body}"
 
-    # grow to the target by estimate, then settle on exact counts
+    # grow to the target by estimate, then settle on exact counts. Filler is English, so
+    # non-English docs (short only, D-015) get none: no English text next to native PII (audit J6).
+    filler_ok = ds.lang == "en"
     n_sec = 0
     est = count(_strip(base))
-    while est < target:
+    while filler_ok and est < target:
         sections.append(new_section())
         est += count(_strip(sections[-1]))
         n_sec += 1
@@ -195,6 +197,8 @@ def _assemble(
         n = count(doc.text)
         if n < lo or n > hi:
             if n < lo:
+                if not filler_ok:
+                    raise AssemblyError(f"{ds.doc_id}: native {ds.lang} text is {n} tokens < {lo}")
                 if n_sec == len(sections):
                     sections.append(new_section())
                 n_sec += 1

@@ -5,7 +5,7 @@ Numer kontrolny: {{ neg(ctrl_no, "report_no") }}    Protokół: {{ protocol(stud
 1. Inicjały: {{ initials(sub.person, alt="nie podano") }}    1a. Uczestnik: {{ subject_id(sub, alt="nie podano") }}
 2. Data urodzenia: {{ dob(sub, alt="nie podano") }}    2a. Wiek: {{ age(sub) }} lat    3. Płeć: {{ sub.person.sex }}
 4-6. Początek reakcji: {{ event_date(ae.onset, alt="patrz opis") }}
-7+13. Opis: {{ ae.term }}, stopień {{ ae.grade }}{% if ae.serious %}; wymagała hospitalizacji{% endif %}.
+7+13. Opis: {{ tr(ae.term) }}, stopień {{ ae.grade }}{% if ae.serious %}; wymagała hospitalizacji{% endif %}.
 
 {{ section("V. Zgłaszający") }}
 24b. {{ name(reporter, alt="Badacz ośrodka") }}, {{ site.institution }}, tel. {{ phone(reporter, alt="w dokumentacji") }}

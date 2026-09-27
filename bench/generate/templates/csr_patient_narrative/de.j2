@@ -1,13 +1,14 @@
-{{ section("Patientennarrativ") }}: Prüfungsteilnehmer {{ subject_id(sub, alt="[Teilnehmer]") }}
+{{ section("Patientennarrativ") }}: Prüfungsteilnehmer {{ subject_id(sub, alt="Nummer nicht vergeben") }}
 Prüfplan {{ protocol(study) }}, Prüfzentrum {{ site_no(site.site_no) }}
 
+{% set pc = postcode(sub, alt="") %}
 {{ section("Demografie und Ausgangsbefund") }}
-{{ name(sub.person, alt="Der Teilnehmer") }} ({{ initials(sub.person, alt="Initialen nicht erfasst") }}), {{ age(sub) }} Jahre, geb. {{ dob(sub, alt="Datum nicht erfasst") }}, Patientennummer {{ mrn(sub, alt="nicht erfasst") }}, wurde am {{ event_date(sub.enrolled, alt="Randomisierungstag") }} randomisiert (Randomisierungsnummer {{ rand_no(sub, alt="nicht angegeben") }}) und erhielt am selben Tag die erste Dosis {{ compound(study) }}. Wohnort: {{ address(sub, site.city, alt="nicht erfasst") }} {{ postcode(sub, alt="") }}.
+{{ name(sub.person, alt="Der Teilnehmer") }} ({{ initials(sub.person, alt="Initialen nicht erfasst") }}), {{ age(sub) }} Jahre, geb. {{ dob(sub, alt="Datum nicht erfasst") }}, Patientennummer {{ mrn(sub, alt="nicht erfasst") }}, wurde am {{ event_date(sub.enrolled, alt="Randomisierungstag") }} randomisiert (Randomisierungsnummer {{ rand_no(sub, alt="nicht angegeben") }}) und erhielt am selben Tag die erste Dosis {{ compound(study) }}. Wohnort: {{ address(sub, site.city, alt="nicht erfasst") }}{{ (" " ~ pc) if pc else "" }}.
 Die Begleitmedikation wurde von {{ name(pi, alt="der Prüfärztin") }} überprüft.
 
 {{ section("Unerwünschtes Ereignis") }}
 {% if ae %}
-Am {{ event_date(ae.onset, alt="späteren Visitentag") }} meldete der Teilnehmer ein Ereignis ({{ ae.term }}, Grad {{ ae.grade }}){% if ae.serious %}, als schwerwiegend eingestuft{% endif %}. {% if ae.resolved %}Das Ereignis klang am {{ event_date(ae.resolved, alt="späteren Tag") }} folgenlos ab.{% else %}Das Ereignis dauerte zum Datenschnitt an.{% endif %}
+Am {{ event_date(ae.onset, alt="späteren Visitentag") }} meldete der Teilnehmer ein Ereignis ({{ tr(ae.term) }}, Grad {{ ae.grade }}){% if ae.serious %}, als schwerwiegend eingestuft{% endif %}. {% if ae.resolved %}Das Ereignis klang am {{ event_date(ae.resolved, alt="späteren Tag") }} folgenlos ab.{% else %}Das Ereignis dauerte zum Datenschnitt an.{% endif %}
 
 
 {% else %}

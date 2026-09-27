@@ -71,7 +71,7 @@ STAFF_JOBS: tuple[tuple[str, SubjectRole, str], ...] = (
     ("irb_chair", SubjectRole.STAFF, "IRB Chair"),
     ("irb_admin", SubjectRole.STAFF, "IRB Administrator"),
 )
-CRO_DOMAIN = "northvale-cro.example.com"
+CRO_DOMAIN = "halcyon-cro.example.com"  # not constructible from PLACE_STEMS (audit J8)
 SPONSOR_DOMAIN = "fenwick-tx.example.com"
 
 

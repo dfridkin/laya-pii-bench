@@ -13,7 +13,6 @@ from bench.domain import DocType, Document, Lang, LengthBucket, PiiCategory, Wor
 from bench.generate import negatives
 from bench.generate.render import DocCtx, Mode, Rendered, finish, insert_at_section, render_raw
 from bench.generate.world import (
-    AE_TERMS,
     CONMEDS,
     STUDY_START,
     AdverseEvent,
@@ -84,22 +83,29 @@ def safe_date(r: random.Random, subs: list[Subject], lo: date = STUDY_START,
     raise RuntimeError("no free document date")
 
 
-def _ae(r: random.Random, sub: Subject) -> AdverseEvent:
-    if sub.aes:
-        serious = [a for a in sub.aes if a.serious]
-        return r.choice(serious or sub.aes)
-    onset = sub.visits[0] + timedelta(days=r.randint(3, 60))
-    return AdverseEvent(term=r.choice(AE_TERMS), onset=onset, resolved=onset + timedelta(days=5),
-                        serious=True, grade=3, related=False)  # fmt: skip
+def _sae_subject(r: random.Random, site: Site, sub: Subject) -> tuple[Subject, AdverseEvent]:
+    """An SAE form reports a real adverse event from the world (no invented events, so the same
+    subject's dates agree across SAE form, narrative and logs). If the planned subject has no AE,
+    another subject of the same site who has one is reported instead."""
+    if not sub.aes:
+        with_ae = [s for s in site.subjects if s.aes]
+        if not with_ae:
+            raise ValueError(f"site {site.key} has no subject with an adverse event")
+        sub = with_ae[r.randrange(len(with_ae))]
+    serious = [a for a in sub.aes if a.serious]
+    return sub, r.choice(serious or sub.aes)
 
 
 def _sae(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
     assert req.site is not None and req.subject is not None
-    r, sub = req.rng, req.subject
+    r = req.rng
+    sub, ae = _sae_subject(r, req.site, req.subject)
     data = {
-        "study": req.study, "site": req.site, "sub": sub, "ae": _ae(r, sub),
+        "study": req.study, "site": req.site, "sub": sub, "ae": ae,
         "reporter": req.site.staff[r.choice(["pi", "subi"])],
-        "report_date": safe_date(r, [sub]), "ctrl_no": f"FEN-{r.randint(2025000, 2025999)}",
+        # the report follows the onset (and never shares a rendered form with the subject's dates)
+        "report_date": safe_date(r, [sub], lo=ae.onset + timedelta(days=1), span_days=45),
+        "ctrl_no": f"FEN-{r.randint(2025000, 2025999)}",
         "followups": list(req.extra.get("followups", [])),
     }  # fmt: skip
     return f"sae_cioms/{req.lang}.j2", data, [sub.subject_id]
@@ -229,7 +235,9 @@ def _correspondence(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any],
         "study": req.study, "site": req.site, "a": st[r.choice(["coordinator", "pi"])],
         "b": st[r.choice(["cra", "sponsor_contact"])], "subs": subs, "topic": r.choice(TOPICS),
         "body_lines": [*r.sample(BODY, 2), *req.extra.get("body", [])],
-        "ask_lines": r.sample(ASK, 1), "sent": safe_date(r, subs),
+        "ask_lines": r.sample(ASK, 1),
+        "sent": safe_date(r, subs, lo=max((x.visits[1] for x in subs), default=STUDY_START)
+                          + timedelta(days=1), span_days=40),
     }  # fmt: skip
     return f"site_correspondence/{req.lang}.j2", data, sorted(s.subject_id for s in subs)
 
@@ -241,7 +249,9 @@ def _icf(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]
         "study": req.study,
         "sub": sub,
         "investigator": req.site.staff[req.rng.choice(["pi", "subi"])],
-        "version_date": safe_date(req.rng, [sub]),
+        "version_date": safe_date(
+            req.rng, [sub], lo=sub.enrolled - timedelta(days=150), span_days=140
+        ),  # version dated before the signature
     }
     return f"icf_signature_page/{req.lang}.j2", data, [sub.subject_id]
 

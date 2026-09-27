@@ -6,7 +6,7 @@ Hola {{ name(b, "first", alt="a todos") }}:
 
 Hemos resuelto las consultas abiertas y corregido el cuaderno de recogida de datos.
 {% for s in subs %}
-Sujeto {{ subject_id(s, alt="(oculto)") }}: datos corregidos de la visita del {{ event_date(s.visits[1], alt="día de la última visita") }}.
+Sujeto {{ subject_id(s, alt="(número no indicado)") }}: datos corregidos de la visita 2 ({{ event_date(s.visits[1], alt="fecha no indicada") }}).
 {% endfor %}
 {% if subs %}
 El documento fuente de {{ name(subs[0].person, alt="este participante") }} está archivado en la carpeta del sujeto.

@@ -71,3 +71,70 @@ def test_sample_generates_cleanly_and_deterministically() -> None:
     assert a.problems == {}
     b = corpus.generate(SPEC, POLICY, words, only=sample)
     assert [d.model_dump_json() for d in a.docs] == [d.model_dump_json() for d in b.docs]
+
+
+@pytest.fixture(scope="module")
+def sample_docs() -> list:  # type: ignore[type-arg]
+    from bench.domain import DocType
+
+    slots_ = corpus.plan(SPEC, W.build(SPEC, frozenset(template_vocabulary())))
+    wanted = [s.idx for s in slots_ if s.doc_type in (DocType.SAE, DocType.ICF, DocType.SITE_EMAIL)
+              or s.lang != "en"][:80]  # fmt: skip
+    return corpus.generate(SPEC, POLICY, words, only=wanted).docs
+
+
+def test_sae_forms_report_real_adverse_events(sample_docs: list) -> None:  # type: ignore[type-arg]
+    """Audit J2: no invented AEs; the reported onset is one of the subject's world AE onsets."""
+    from bench.generate.variants import date_forms
+
+    world = W.build(SPEC, frozenset(template_vocabulary()))
+    subjects = {s.subject_id: s for site in world.sites() for s in site.subjects}
+    for d in (
+        x for x in sample_docs if x.doc_type.value == "sae_cioms" and x.gen_meta["mode"] == "normal"
+    ):
+        sub = subjects[d.world_refs.subjects[0]]
+        assert sub.aes
+        onsets = {f for ae in sub.aes for f in date_forms(ae.onset)}
+        event_dates = [s.value for s in d.spans if s.value_kind == "event_date"]
+        assert not event_dates or event_dates[0] in onsets  # the form's first date is the onset
+
+
+def test_non_english_docs_are_native_only(sample_docs: list) -> None:  # type: ignore[type-arg]
+    """Audit J6: no English filler sections or English AE terms in de/es/pl docs."""
+    from bench.generate import filler
+    from bench.generate.world import AE_TERMS
+
+    titles = {t for topic in filler.TOPICS for t in filler._GRAMMAR[topic]["titles"]}  # pyright: ignore[reportPrivateUsage]
+    for d in (x for x in sample_docs if x.lang != "en"):
+        assert not any(t in d.text for t in titles), d.id
+        assert not any(f" {term} " in d.text or f"({term}," in d.text for term in AE_TERMS
+                       if term not in ("neutropenia",)), d.id  # fmt: skip
+
+
+def test_document_dates_follow_the_events(sample_docs: list) -> None:  # type: ignore[type-arg]
+    """Audit J3: SAE report after onset; ICF version dated before the signature."""
+    from datetime import date, timedelta
+
+    from bench.generate.variants import date_forms
+
+    parse: dict[str, date] = {}
+    d0 = date(2024, 6, 1)
+    for k in range(900):
+        d = d0 + timedelta(days=k)
+        for f in date_forms(d):
+            parse.setdefault(f, d)  # ambiguous forms keep the first; checked docs avoid them
+    checked = 0
+    for d in sample_docs:
+        if d.gen_meta["mode"] != "normal":
+            continue
+        doc_dates = [
+            parse[n.value] for n in d.negatives if n.kind == "non_phi_date" and n.value in parse
+        ]
+        ev = [parse[s.value] for s in d.spans if s.value_kind == "event_date" and s.value in parse]
+        if d.doc_type.value == "sae_cioms" and doc_dates and ev:
+            assert doc_dates[-1] > ev[0], d.id  # report date (last) after onset (first event)
+            checked += 1
+        if d.doc_type.value == "icf_signature_page" and doc_dates and ev:
+            assert doc_dates[0] < ev[0], d.id  # version date before signature date
+            checked += 1
+    assert checked >= 5

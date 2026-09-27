@@ -6,7 +6,7 @@ Dzień dobry {{ name(b, "first", alt="Państwu") }},
 
 otwarte zapytania zostały wyjaśnione, a wpisy w eCRF poprawione.
 {% for s in subs %}
-Uczestnik {{ subject_id(s, alt="(ukryty)") }}: poprawiono dane z wizyty z dnia {{ event_date(s.visits[1], alt="ostatniej wizyty") }}.
+Uczestnik {{ subject_id(s, alt="(numer nie podany)") }}: poprawiono dane z wizyty 2 ({{ event_date(s.visits[1], alt="data nie podana") }}).
 {% endfor %}
 {% if subs %}
 Papierowa dokumentacja źródłowa dla {{ name(subs[0].person, alt="tego uczestnika") }} znajduje się w segregatorze uczestnika.

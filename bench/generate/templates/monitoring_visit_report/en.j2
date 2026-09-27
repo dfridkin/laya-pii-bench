@@ -14,7 +14,7 @@ The visit covered source data verification, investigational product accountabili
 
 {{ section("2. Findings") }}
 {% for f in findings %}
-{{ loop.index }}. Subject {{ subject_id(f.sub, alt="(not identified)") }}: {{ f.text }}{% if f.date %} (visit on {{ event_date(f.date, alt="a recent visit") }}){% endif %}.
+{{ loop.index }}. Subject {{ subject_id(f.sub, alt="(not identified)") }}: {{ f.text }}{% if f.date %} (visit date: {{ event_date(f.date, alt="not recorded") }}){% endif %}.
 {% else %}
 No subject-level findings were raised.
 {% endfor %}

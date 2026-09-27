@@ -1,9 +1,10 @@
 {# Patient narrative (CSR section 14.3.3 style). Context: study, site, sub, pi, ae #}
-{{ section("Patient Narrative") }}: Subject {{ subject_id(sub, alt="[subject]") }}
+{{ section("Patient Narrative") }}: Subject {{ subject_id(sub, alt="number not assigned") }}
 Protocol {{ protocol(study) }}, site {{ site_no(site.site_no) }}
 
+{% set pc = postcode(sub, alt="") %}
 {{ section("Demographics and Baseline") }}
-{{ name(sub.person, alt="The participant") }} ({{ initials(sub.person, alt="initials not recorded") }}), {{ "a woman" if sub.person.sex == "F" else "a man" }} aged {{ age(sub) }}, born {{ dob(sub, alt="on a date not recorded here") }}, medical record number {{ mrn(sub, alt="not recorded") }}, was randomized on {{ event_date(sub.enrolled, alt="the randomization date") }} (randomization number {{ rand_no(sub, alt="withheld") }}) and received the first dose of {{ compound(study) }} the same day. Residence: {{ address(sub, site.city, alt="not recorded") }} {{ postcode(sub, alt="") }}.
+{{ name(sub.person, alt="The participant") }} ({{ initials(sub.person, alt="initials not recorded") }}), {{ "a woman" if sub.person.sex == "F" else "a man" }} aged {{ age(sub) }}, born {{ dob(sub, alt="on a date not recorded here") }}, medical record number {{ mrn(sub, alt="not recorded") }}, was randomized on {{ event_date(sub.enrolled, alt="the randomization date") }} (randomization number {{ rand_no(sub, alt="withheld") }}) and received the first dose of {{ compound(study) }} the same day. Residence: {{ address(sub, site.city, alt="not recorded") }}{{ (" " ~ pc) if pc else "" }}.
 Medical history was notable for {{ pick(["hypertension", "hyperlipidaemia", "osteoarthritis", "seasonal allergies"]) }}. Concomitant medications at baseline were reviewed by {{ name(pi, alt="the investigator") }}.
 
 {{ section("Adverse Event") }}

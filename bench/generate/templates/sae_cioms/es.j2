@@ -5,7 +5,7 @@ N.º de control: {{ neg(ctrl_no, "report_no") }}    Protocolo: {{ protocol(study
 1. Iniciales: {{ initials(sub.person, alt="no indicadas") }}    1a. Sujeto: {{ subject_id(sub, alt="no indicado") }}
 2. Fecha de nacimiento: {{ dob(sub, alt="no indicada") }}    2a. Edad: {{ age(sub) }} años    3. Sexo: {{ sub.person.sex }}
 4-6. Inicio de la reacción: {{ event_date(ae.onset, alt="ver narrativa") }}
-7+13. Descripción: {{ ae.term }}, grado {{ ae.grade }}{% if ae.serious %}; requirió hospitalización{% endif %}.
+7+13. Descripción: {{ tr(ae.term) }}, grado {{ ae.grade }}{% if ae.serious %}; requirió hospitalización{% endif %}.
 
 {{ section("V. Notificador") }}
 24b. {{ name(reporter, alt="Investigador del centro") }}, {{ site.institution }}, tel. {{ phone(reporter, alt="en archivo") }}

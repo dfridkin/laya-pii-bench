@@ -1,6 +1,6 @@
 {# Concomitant medication log. Context: study, site, sub, rows[(drug, dose, start, stop, indication)] #}
 {{ section("Concomitant Medication Log") }}
-Protocol {{ protocol(study) }}    Subject {{ subject_id(sub, alt="[not stated]") }}
+Protocol {{ protocol(study) }}    Subject {{ subject_id(sub, alt="not stated") }}
 
 Medication | Dose | Route | Start | Stop | Indication
 {% for r in rows %}

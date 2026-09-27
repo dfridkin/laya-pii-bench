@@ -19,10 +19,18 @@ from bench.generate import providers as pv
 from bench.generate.render import DocCtx
 from bench.generate.world import Study
 
-EPONYMS = (
-    "Kaplan-Meier", "Cockcroft-Gault", "Wilcoxon", "Bonferroni", "Hodgkin", "Mantel-Haenszel",
-    "Fisher", "Bland-Altman",
-)  # fmt: skip
+# eponyms by the context they make sense in (audit J4: "renal function uses the Hodgkin formula"
+# would make hard negatives easy to spot)
+EPONYM_POOLS: dict[str, tuple[str, ...]] = {
+    "tte": ("Kaplan-Meier",),
+    "renal": ("Cockcroft-Gault",),
+    "rank": ("Wilcoxon", "Mann-Whitney"),
+    "exact": ("Fisher",),
+    "correction": ("Bonferroni", "Holm"),
+    "stratified": ("Mantel-Haenszel",),
+    "agreement": ("Bland-Altman",),
+    "disease": ("Hodgkin",),
+}
 
 
 def cas_like(r: random.Random) -> str:
@@ -49,6 +57,10 @@ def ref_range(r: random.Random) -> str:
     return f"{lo}-{lo + r.randint(20, 90)}"
 
 
+def _pick(pool: tuple[str, ...]) -> Callable[[random.Random, Study, date], str]:
+    return lambda r, st, d: r.choice(pool)
+
+
 # sentence templates: {field} -> (value factory, negative kind)
 Factory = Callable[[random.Random, Study, date], str]
 FIELDS: dict[str, tuple[Factory, str]] = {
@@ -64,8 +76,7 @@ FIELDS: dict[str, tuple[Factory, str]] = {
     "window": (lambda r, st, d: visit_window(r), "visit_window"),
     "dose": (lambda r, st, d: dose(r), "dose"),
     "range": (lambda r, st, d: ref_range(r), "reference_range"),
-    "eponym": (lambda r, st, d: r.choice(EPONYMS), "eponym"),
-    "eponym2": (lambda r, st, d: r.choice(EPONYMS), "eponym"),
+    **{f"ep_{ctx}": (_pick(pool), "eponym") for ctx, pool in EPONYM_POOLS.items()},
     "date": (lambda r, st, d: "", "non_phi_date"),  # filled by ctx.doc_date
 }
 SENTENCES: dict[str, list[str]] = yaml.safe_load(
