@@ -10,7 +10,8 @@ from datetime import date, timedelta
 from typing import Any
 
 from bench.domain import DocType, Document, Lang, LengthBucket, PiiCategory, WorldRefs
-from bench.generate.render import DocCtx, Mode, Rendered, render
+from bench.generate import negatives
+from bench.generate.render import DocCtx, Mode, Rendered, finish, insert_at_section, render_raw
 from bench.generate.world import (
     AE_TERMS,
     CONMEDS,
@@ -285,9 +286,20 @@ SUBJECT_TYPES = frozenset(
 
 
 def build(doc_id: str, req: ViewRequest) -> Document:
+    """Render the view; when `req.extra["hard_negative"]` is set, splice in a hard-negative
+    paragraph (4d) before resolving, and tag the document."""
     ctx = DocCtx(lang=req.lang, rng=req.rng, enabled=req.enabled, mode=req.mode)
     template, data, subjects = VIEWS[req.doc_type](req, ctx)
-    out: Rendered = render(template, ctx, **data)
+    raw = render_raw(template, ctx, **data)
+    tags: list[str] = []
+    if req.extra.get("hard_negative"):
+        refs = [s for s in (req.site.subjects if req.site else []) if s.subject_id in subjects]
+        para = negatives.block(ctx, req.study, safe_date(req.rng, refs))
+        raw = insert_at_section(raw, para, req.rng)
+        tags.append("hard_negative")
+    out: Rendered = finish(raw, ctx)
+    if req.mode == "redacted" and any(n.kind == "pre_redacted" for n in out.negatives):
+        tags.append("pre_redacted")
     return Document(
         id=doc_id,
         doc_type=req.doc_type,
@@ -295,7 +307,7 @@ def build(doc_id: str, req: ViewRequest) -> Document:
         text=out.text,
         spans=sorted(out.spans, key=lambda s: s.start),
         negatives=sorted(out.negatives, key=lambda n: n.start),
-        tags=["pre_redacted"] if req.mode == "redacted" and out.negatives else [],
+        tags=tags,
         length_bucket=LengthBucket.SHORT,  # set by assembly (4e)
         pii_depth=None,
         world_refs=WorldRefs(

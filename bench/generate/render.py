@@ -264,10 +264,31 @@ def template_names() -> list[str]:
     return sorted(_ENV.list_templates(extensions=["j2"]))
 
 
-def render(template: str, ctx: DocCtx, **data: Any) -> Rendered:
-    raw = _ENV.get_template(template).render(**ctx.globals(), lang=ctx.lang, mode=ctx.mode, **data)
+def render_raw(template: str, ctx: DocCtx, **data: Any) -> str:
+    """Rendered text still containing sentinels. Blocks rendered with the same ctx (hard
+    negatives, filler, headers/footers) can be spliced in before `finish` resolves once, so
+    inserted content is labeled by the same left-to-right pass (no span remap needed)."""
+    return _ENV.get_template(template).render(**ctx.globals(), lang=ctx.lang, mode=ctx.mode, **data)
+
+
+def finish(raw: str, ctx: DocCtx) -> Rendered:
     raw = re.sub(r"\n{3,}", "\n\n", raw).strip() + "\n"
     return resolve(raw, ctx.slots, ctx.negs, ctx.heads)
+
+
+def render(template: str, ctx: DocCtx, **data: Any) -> Rendered:
+    return finish(render_raw(template, ctx, **data), ctx)
+
+
+def insert_at_section(raw: str, block: str, r: random.Random) -> str:
+    """Insert `block` (a paragraph) before a random section header other than the first, or at
+    the end when the document has a single section."""
+    heads = [m.start() for m in SENTINEL.finditer(raw) if m.group(1) == "h"][1:]
+    if not heads:
+        return raw.rstrip("\n") + "\n\n" + block.strip("\n") + "\n"
+    at = r.choice(heads)
+    line_start = raw.rfind("\n", 0, at) + 1
+    return raw[:line_start] + block.strip("\n") + "\n\n" + raw[line_start:]
 
 
 GENERATOR_DIR = Path(__file__).parent
