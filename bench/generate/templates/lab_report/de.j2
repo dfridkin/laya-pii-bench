@@ -1,0 +1,14 @@
+{{ section("Laborbefund") }}
+{{ site.institution }}    Prüfplan {{ protocol(study) }}
+Patient: {{ name(sub.person, alt="Studienteilnehmer") }}    Teilnehmer: {{ subject_id(sub, alt="nicht angegeben") }}    Patientennummer: {{ mrn(sub, alt="k. A.") }}
+{% for v in visits %}
+
+{{ section("Probe " ~ loop.index) }}
+Entnahme: {{ event_date(v.date, alt="laut Visitenplan") }}
+Test | Ergebnis | Einheit | Referenzbereich
+{% for r in v.results %}
+{{ r.test }} | {{ r.value }} | {{ r.unit }} | {{ r.low }}-{{ r.high }}
+{% endfor %}
+{% endfor %}
+
+Befundet von: {{ name(reviewer, alt="Laborpersonal") }}

@@ -1,0 +1,27 @@
+{# Monitoring visit report. Context: study, site, cra, pi, coordinator, visit_no, findings[(sub, text, date)], paragraphs #}
+{{ section("Monitoring Visit Report") }}: Interim Monitoring Visit {{ visit_no }}, {{ site.institution }}
+Protocol {{ protocol(study) }}    Site {{ site_no(site.site_no) }}
+
+Monitor: {{ name(cra, alt="Clinical Research Associate") }}
+Site staff present: {{ name(pi, alt="Principal Investigator") }} (Principal Investigator), {{ name(coordinator, alt="Study Coordinator") }} (Study Coordinator)
+
+{{ section("1. Overview") }}
+The visit covered source data verification, investigational product accountability, review of the investigator site file and follow-up of open action items.
+{% for p in paragraphs %}
+
+{{ p }}
+{% endfor %}
+
+{{ section("2. Findings") }}
+{% for f in findings %}
+{{ loop.index }}. Subject {{ subject_id(f.sub, alt="(not identified)") }}: {{ f.text }}{% if f.date %} (visit on {{ event_date(f.date, alt="a recent visit") }}){% endif %}.
+{% else %}
+No subject-level findings were raised.
+{% endfor %}
+
+{% if findings %}
+The source data verification sample included medical record {{ mrn(findings[0].sub, alt="(on file)") }}.
+{% endif %}
+
+{{ section("3. Action Items") }}
+The site will resolve open queries before the next visit and send confirmation to {{ name(cra, alt="the monitor") }} at {{ email(cra, alt="the study mailbox") }}.

@@ -1,0 +1,11 @@
+{# Concomitant medication log. Context: study, site, sub, rows[(drug, dose, start, stop, indication)] #}
+{{ section("Concomitant Medication Log") }}
+Protocol {{ protocol(study) }}    Subject {{ subject_id(sub, alt="[not stated]") }}
+
+Medication | Dose | Route | Start | Stop | Indication
+{% for r in rows %}
+{{ r.drug }} | {{ r.dose }} | oral | {{ event_date(r.start, alt="----") }} | {% if r.stop %}{{ event_date(r.stop, alt="----") }}{% else %}ongoing{% endif %} | {{ r.indication }}
+{% endfor %}
+
+Record all medications taken within 30 days before screening and throughout the study.
+Reviewed by: {{ initials(reviewer, alt="site staff") }}

@@ -270,10 +270,15 @@ def render(template: str, ctx: DocCtx, **data: Any) -> Rendered:
     return resolve(raw, ctx.slots, ctx.negs, ctx.heads)
 
 
+GENERATOR_DIR = Path(__file__).parent
+
+
 def template_vocabulary() -> set[str]:
-    """Every word used by templates (lowercased); the world avoids names that collide with it."""
+    """Every word the generator can emit (lowercased): templates, filler grammar, and the string
+    constants in generator code (month names, AE terms, findings, ...). The world avoids person
+    names that collide with any of them, so V2 never mistakes ordinary text for a person."""
     words: set[str] = set()
-    for p in sorted(TEMPLATES.rglob("*")):
-        if p.is_file():
+    for p in sorted(GENERATOR_DIR.rglob("*")):
+        if p.is_file() and p.suffix in (".j2", ".py", ".txt", ".yaml"):
             words |= {w.lower() for w in re.findall(r"[^\W\d_]{2,}", p.read_text(encoding="utf-8"))}
     return words

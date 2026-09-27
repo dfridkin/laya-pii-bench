@@ -1,0 +1,22 @@
+Od: {{ name(a, "first_last", alt="Zespół ośrodka") }} <{{ email(a, alt="skrzynka ośrodka") }}>
+Do: {{ name(b, "first_last", alt="Sponsor") }} <{{ email(b, alt="skrzynka badania") }}>
+Temat: RE: Zapytanie o dane{% if subs %} uczestnika {{ subject_id(subs[0], alt="(patrz zapytanie)") }}{% endif %}
+
+Dzień dobry {{ name(b, "first", alt="Państwu") }},
+
+otwarte zapytania zostały wyjaśnione, a wpisy w eCRF poprawione.
+{% for s in subs %}
+Uczestnik {{ subject_id(s, alt="(ukryty)") }}: poprawiono dane z wizyty z dnia {{ event_date(s.visits[1], alt="ostatniej wizyty") }}.
+{% endfor %}
+{% if subs %}
+Papierowa dokumentacja źródłowa dla {{ name(subs[0].person, alt="tego uczestnika") }} znajduje się w segregatorze uczestnika.
+{% endif %}
+
+Pozdrawiam
+{{ name(a, "first_last", alt="Zespół ośrodka") }}
+{{ site.institution }}
+Tel. {{ phone(a, alt="patrz lista kontaktów") }}
+
+> Dnia {{ doc_date(sent) }} {{ name(b, "first_last", alt="zespół badania") }} napisał(a):
+> Dzień dobry {{ name(a, "first", alt="zespole") }}, proszę o sprawdzenie otwartych zapytań.
+> Dziękuję, {{ name(b, "first", alt="zespół badania") }}

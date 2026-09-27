@@ -1,0 +1,17 @@
+{# IRB approval letter: site-level holdout, names no subjects (D-005). Context: study, site, chair, admin, pi, meeting, conditions #}
+{{ section(site.institution ~ " Institutional Review Board") }}
+
+To: {{ name(pi, "title_first_last", alt="the Principal Investigator") }}, {{ site.institution }}
+Re: Protocol {{ protocol(study) }}, Amendment {{ neg(amendment, "amendment_no") }}
+Meeting date: {{ doc_date(meeting) }}
+
+Dear {{ name(pi, "title_last", alt="Investigator") }},
+
+The Institutional Review Board reviewed the amendment and the revised informed consent form at its convened meeting and approved them for use at your site.
+{% for c in conditions %}
+{{ loop.index }}. {{ c }}
+{% endfor %}
+
+Sincerely,
+{{ name(chair, "title_first_last", alt="IRB Chair") }}, IRB Chair
+Contact: {{ name(admin, "first_last", alt="IRB office") }}, {{ email(admin, alt="IRB office") }}

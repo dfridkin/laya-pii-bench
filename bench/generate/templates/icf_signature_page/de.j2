@@ -1,0 +1,11 @@
+{{ section("Einwilligungserklärung: Unterschriftenseite") }}
+Prüfplan {{ protocol(study) }}    Version vom {{ doc_date(version_date) }}
+
+Mit meiner Unterschrift bestätige ich, dass ich die Informationen gelesen habe, Fragen stellen konnte und der Teilnahme zustimme.
+
+Name des Teilnehmers (Druckschrift): {{ name(sub.person, "first_last", alt="____________________") }}
+Geburtsdatum: {{ dob(sub, alt="____________") }}
+Datum der Unterschrift: {{ event_date(sub.enrolled, alt="____________") }}
+Teilnehmernummer: {{ subject_id(sub, alt="____________") }}
+
+Aufklärende Person: {{ name(investigator, "first_last", alt="____________________") }}

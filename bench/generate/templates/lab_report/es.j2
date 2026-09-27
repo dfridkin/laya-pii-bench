@@ -1,0 +1,14 @@
+{{ section("Informe de laboratorio") }}
+{{ site.institution }}    Protocolo {{ protocol(study) }}
+Paciente: {{ name(sub.person, alt="participante del estudio") }}    Sujeto: {{ subject_id(sub, alt="no indicado") }}    Historia clínica: {{ mrn(sub, alt="n/d") }}
+{% for v in visits %}
+
+{{ section("Muestra " ~ loop.index) }}
+Extracción: {{ event_date(v.date, alt="según calendario de visitas") }}
+Prueba | Resultado | Unidades | Intervalo de referencia
+{% for r in v.results %}
+{{ r.test }} | {{ r.value }} | {{ r.unit }} | {{ r.low }}-{{ r.high }}
+{% endfor %}
+{% endfor %}
+
+Revisado por: {{ name(reviewer, alt="personal del laboratorio") }}

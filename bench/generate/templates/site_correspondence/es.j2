@@ -1,0 +1,22 @@
+De: {{ name(a, "first_last", alt="Equipo del centro") }} <{{ email(a, alt="buzón del centro") }}>
+Para: {{ name(b, "first_last", alt="Promotor") }} <{{ email(b, alt="buzón del estudio") }}>
+Asunto: RE: Consulta de datos{% if subs %} del sujeto {{ subject_id(subs[0], alt="(ver consulta)") }}{% endif %}
+
+Hola {{ name(b, "first", alt="a todos") }}:
+
+Hemos resuelto las consultas abiertas y corregido el cuaderno de recogida de datos.
+{% for s in subs %}
+Sujeto {{ subject_id(s, alt="(oculto)") }}: datos corregidos de la visita del {{ event_date(s.visits[1], alt="día de la última visita") }}.
+{% endfor %}
+{% if subs %}
+El documento fuente de {{ name(subs[0].person, alt="este participante") }} está archivado en la carpeta del sujeto.
+{% endif %}
+
+Un saludo,
+{{ name(a, "first_last", alt="Equipo del centro") }}
+{{ site.institution }}
+Tel. {{ phone(a, alt="ver lista de contactos") }}
+
+> El {{ doc_date(sent) }}, {{ name(b, "first_last", alt="el equipo del estudio") }} escribió:
+> Hola {{ name(a, "first", alt="equipo") }}, por favor revisad las consultas abiertas.
+> Gracias, {{ name(b, "first", alt="equipo del estudio") }}

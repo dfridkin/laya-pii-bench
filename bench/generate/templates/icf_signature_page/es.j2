@@ -1,0 +1,11 @@
+{{ section("Consentimiento informado: hoja de firmas") }}
+Protocolo {{ protocol(study) }}    Versión de fecha {{ doc_date(version_date) }}
+
+Con mi firma confirmo que he leído la información, he podido hacer preguntas y acepto participar en el estudio.
+
+Nombre del participante (en mayúsculas): {{ name(sub.person, "first_last", alt="____________________") }}
+Fecha de nacimiento: {{ dob(sub, alt="____________") }}
+Fecha de la firma: {{ event_date(sub.enrolled, alt="____________") }}
+Número de sujeto: {{ subject_id(sub, alt="____________") }}
+
+Persona que obtiene el consentimiento: {{ name(investigator, "first_last", alt="____________________") }}

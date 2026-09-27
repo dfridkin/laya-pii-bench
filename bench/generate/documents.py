@@ -5,12 +5,23 @@ from __future__ import annotations
 
 import random
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from datetime import date, timedelta
 from typing import Any
 
 from bench.domain import DocType, Document, Lang, LengthBucket, PiiCategory, WorldRefs
 from bench.generate.render import DocCtx, Mode, Rendered, render
-from bench.generate.world import Site, Study, Subject, World
+from bench.generate.world import (
+    AE_TERMS,
+    CONMEDS,
+    STUDY_START,
+    AdverseEvent,
+    LabResult,
+    Site,
+    Study,
+    Subject,
+    World,
+)
 
 SPONSOR_SITE = "SPONSOR"
 
@@ -25,6 +36,7 @@ class ViewRequest:
     mode: Mode
     enabled: frozenset[PiiCategory]
     rng: random.Random
+    extra: dict[str, Any] = field(default_factory=lambda: {})  # sizing knobs set by assembly (4e)
 
 
 View = Callable[[ViewRequest, DocCtx], tuple[str, dict[str, Any], list[str]]]
@@ -44,10 +56,232 @@ def _protocol(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[
     return "protocol_section/en.j2", {"study": req.study, "part": part}, []
 
 
+def subject_date_set(subs: list[Subject]) -> set[date]:
+    out: set[date] = set()
+    for s in subs:
+        out |= {s.dob, s.enrolled, *s.visits, *(lab.collected for lab in s.labs)}
+        out |= {d.on for d in s.deviations}
+        for ae in s.aes:
+            out |= {ae.onset} | ({ae.resolved} if ae.resolved else set())
+        for cm in s.conmeds:
+            out |= {cm.start} | ({cm.stop} if cm.stop else set())
+    return out
+
+
+def safe_date(r: random.Random, subs: list[Subject], lo: date = STUDY_START,
+              span_days: int = 420) -> date:  # fmt: skip
+    """A document date (not PHI) that coincides with none of the referenced subjects' dates."""
+    taken = subject_date_set(subs)
+    for _ in range(1000):
+        d = lo + timedelta(days=r.randint(0, span_days))
+        if d not in taken:
+            return d
+    raise RuntimeError("no free document date")
+
+
+def _ae(r: random.Random, sub: Subject) -> AdverseEvent:
+    if sub.aes:
+        serious = [a for a in sub.aes if a.serious]
+        return r.choice(serious or sub.aes)
+    onset = sub.visits[0] + timedelta(days=r.randint(3, 60))
+    return AdverseEvent(term=r.choice(AE_TERMS), onset=onset, resolved=onset + timedelta(days=5),
+                        serious=True, grade=3, related=False)  # fmt: skip
+
+
+def _sae(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    assert req.site is not None and req.subject is not None
+    r, sub = req.rng, req.subject
+    data = {
+        "study": req.study, "site": req.site, "sub": sub, "ae": _ae(r, sub),
+        "reporter": req.site.staff[r.choice(["pi", "subi"])],
+        "report_date": safe_date(r, [sub]), "ctrl_no": f"FEN-{r.randint(2025000, 2025999)}",
+        "followups": list(req.extra.get("followups", [])),
+    }  # fmt: skip
+    return f"sae_cioms/{req.lang}.j2", data, [sub.subject_id]
+
+
+def _crf(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    assert req.site is not None
+    r = req.rng
+    n = int(req.extra.get("rows", r.randint(3, 8)))
+    rows: list[dict[str, Any]] = []
+    for i in range(n):
+        sub = req.site.subjects[r.randrange(len(req.site.subjects))]
+        v = r.randint(1, len(sub.visits) - 1)
+        rows.append({"sub": sub, "visit": f"Visit {v + 1}", "date": sub.visits[v],
+                     "sbp": r.randint(105, 165), "dbp": r.randint(62, 98),
+                     "hr": r.randint(55, 98), "temp": round(r.uniform(36.1, 37.8), 1),
+                     "i": i})  # fmt: skip
+    subs = sorted({x["sub"].subject_id for x in rows})
+    data = {"study": req.study, "site": req.site, "rows": rows, "page": r.randint(8, 40),
+            "entered_by": req.site.staff["coordinator"]}  # fmt: skip
+    return "crf_page/en.j2", data, subs
+
+
+def _lab(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    assert req.site is not None and req.subject is not None
+    sub = req.subject
+    by_date: dict[date, list[LabResult]] = {}
+    for lab in sub.labs:
+        by_date.setdefault(lab.collected, []).append(lab)
+    dates = sorted(by_date)[: int(req.extra.get("rows", 1 + req.rng.randint(0, 1)))]
+    visits = [{"date": d, "results": by_date[d]} for d in dates]
+    data = {"study": req.study, "site": req.site, "sub": sub, "visits": visits,
+            "reviewer": req.site.staff[req.rng.choice(["subi", "pharmacist"])]}  # fmt: skip
+    return f"lab_report/{req.lang}.j2", data, [sub.subject_id]
+
+
+FINDINGS = (
+    "a concomitant medication in the clinic notes was missing from the case report form",
+    "the source document listed an outdated contact address; the coordinator updated it",
+    "a laboratory value was transcribed with the wrong unit and has been queried",
+    "the dosing diary was incomplete for two days; the participant was retrained",
+    "an adverse event recorded in the notes had not been entered; now entered",
+)
+
+
+def _monitoring(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    assert req.site is not None
+    r, st = req.rng, req.site.staff
+    picks = r.sample(req.site.subjects, r.randint(1, 3))
+    findings = [{"sub": s, "text": r.choice(FINDINGS), "date": s.visits[r.randint(1, 4)]
+                 if r.random() < 0.7 else None} for s in picks]  # fmt: skip
+    data = {"study": req.study, "site": req.site, "cra": st["cra"], "pi": st["pi"],
+            "coordinator": st["coordinator"], "visit_no": r.randint(2, 9), "findings": findings,
+            "paragraphs": list(req.extra.get("paragraphs", []))}  # fmt: skip
+    return "monitoring_visit_report/en.j2", data, sorted(s.subject_id for s in picks)
+
+
+def _deviation(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    assert req.site is not None
+    r, site = req.rng, req.site
+    rows: list[dict[str, Any]] = []
+    for sub in site.subjects:
+        rows += [{"sub": sub, "date": d.on, "text": d.description} for d in sub.deviations]
+    n = int(req.extra.get("rows", r.randint(3, 8)))
+    while len(rows) < n:
+        sub = r.choice(site.subjects)
+        rows.append({"sub": sub, "date": sub.visits[r.randint(1, 4)],
+                     "text": "visit performed outside the protocol window"})  # fmt: skip
+    rows = sorted(rows[:n], key=lambda x: (x["date"], x["sub"].subject_id))
+    for x in rows:
+        x["category"] = r.choice(["minor", "minor", "major"])
+        x["reporter"] = site.staff[r.choice(["coordinator", "pi"])]
+    data = {"study": req.study, "site": site, "rows": rows}
+    return "deviation_log/en.j2", data, sorted({x["sub"].subject_id for x in rows})
+
+
+INDICATIONS_CM = ("pain", "hypertension", "type 2 diabetes", "hyperlipidaemia", "reflux",
+                  "infection", "hypothyroidism")  # fmt: skip
+
+
+def _conmed(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    assert req.site is not None and req.subject is not None
+    r, sub = req.rng, req.subject
+    rows = [{"drug": c.drug, "dose": c.dose, "start": c.start, "stop": c.stop,
+             "indication": r.choice(INDICATIONS_CM)} for c in sub.conmeds]  # fmt: skip
+    n = int(req.extra.get("rows", max(2, len(rows))))
+    while len(rows) < n:
+        drug, dose = r.choice(CONMEDS)
+        start = sub.visits[r.randint(0, 3)]
+        rows.append({"drug": drug, "dose": dose, "start": start, "stop": None,
+                     "indication": r.choice(INDICATIONS_CM)})  # fmt: skip
+    data = {"study": req.study, "site": req.site, "sub": sub, "rows": rows[:n],
+            "reviewer": req.site.staff[r.choice(["coordinator", "subi"])]}  # fmt: skip
+    return "conmed_log/en.j2", data, [sub.subject_id]
+
+
+TASKS = ("1-6", "2, 3, 6", "3, 4, 6", "5", "1, 2", "3, 6")
+
+
+def _delegation(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    assert req.site is not None
+    r, st = req.rng, req.site.staff
+    rows = [
+        {"person": st[j], "tasks": r.choice(TASKS)}
+        for j in ("pi", "subi", "coordinator", "pharmacist")
+    ]
+    data = {"study": req.study, "site": req.site, "staff_rows": rows,
+            "history": list(req.extra.get("history", []))}  # fmt: skip
+    return "delegation_log/en.j2", data, []
+
+
+TOPICS = ("open data queries", "monitoring visit follow-up", "drug shipment receipt",
+          "conmed page query", "visit window question")  # fmt: skip
+BODY = ("I resolved the open queries and updated the eCRF this morning.",
+        "The shipment arrived intact and the temperature log shows no excursions.",
+        "Please find the corrected pages attached for your review.",
+        "The investigator has signed the updated delegation log.")  # fmt: skip
+ASK = ("could you check the open queries before Friday?", "is the visit window still +/- 2 days?",
+       "please confirm the corrected pages have been filed.")  # fmt: skip
+
+
+def _correspondence(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    assert req.site is not None
+    r, st = req.rng, req.site.staff
+    subs = r.sample(req.site.subjects, r.choice((0, 1, 1, 2)))
+    data = {
+        "study": req.study, "site": req.site, "a": st[r.choice(["coordinator", "pi"])],
+        "b": st[r.choice(["cra", "sponsor_contact"])], "subs": subs, "topic": r.choice(TOPICS),
+        "body_lines": [*r.sample(BODY, 2), *req.extra.get("body", [])],
+        "ask_lines": r.sample(ASK, 1), "sent": safe_date(r, subs),
+    }  # fmt: skip
+    return f"site_correspondence/{req.lang}.j2", data, sorted(s.subject_id for s in subs)
+
+
+def _icf(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    assert req.site is not None and req.subject is not None
+    sub = req.subject
+    data = {
+        "study": req.study,
+        "sub": sub,
+        "investigator": req.site.staff[req.rng.choice(["pi", "subi"])],
+        "version_date": safe_date(req.rng, [sub]),
+    }
+    return f"icf_signature_page/{req.lang}.j2", data, [sub.subject_id]
+
+
+CONDITIONS = (
+    "Use only the approved version of the informed consent form.",
+    "Report serious adverse events to the Board within 7 days of awareness.",
+    "Submit a progress report at least 30 days before the approval expires.",
+    "Any change to the approved research requires prior Board review.",
+)
+
+
+def _irb(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    assert req.site is not None
+    r, st = req.rng, req.site.staff
+    data = {
+        "study": req.study,
+        "site": req.site,
+        "chair": st["irb_chair"],
+        "admin": st["irb_admin"],
+        "pi": st["pi"],
+        "meeting": safe_date(r, []),
+        "amendment": f"A{r.randint(1, 6)}",
+        "conditions": [*r.sample(CONDITIONS, 3), *req.extra.get("conditions", [])],
+    }
+    return "irb_letter/en.j2", data, []
+
+
 VIEWS: dict[DocType, View] = {
     DocType.NARRATIVE: _narrative,
     DocType.PROTOCOL: _protocol,
+    DocType.SAE: _sae,
+    DocType.CRF: _crf,
+    DocType.LAB: _lab,
+    DocType.MONITORING: _monitoring,
+    DocType.DEVIATION: _deviation,
+    DocType.CONMED: _conmed,
+    DocType.DELEGATION: _delegation,
+    DocType.SITE_EMAIL: _correspondence,
+    DocType.ICF: _icf,
+    DocType.IRB: _irb,
 }
+SUBJECT_TYPES = frozenset(
+    {DocType.NARRATIVE, DocType.SAE, DocType.LAB, DocType.CONMED, DocType.ICF}
+)
 
 
 def build(doc_id: str, req: ViewRequest) -> Document:

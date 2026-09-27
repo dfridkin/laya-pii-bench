@@ -1,0 +1,12 @@
+{# CRF page: vital signs table. Context: study, site, rows[(sub, visit_idx)], entered_by, page #}
+{{ section("CRF Page " ~ page ~ ": Vital Signs") }}
+Protocol {{ protocol(study) }}    Site {{ site_no(site.site_no) }}
+
+Subject | Initials | Visit | Visit date | SBP | DBP | HR | Temp
+{% for r in rows %}
+{{ subject_id(r.sub, alt="----") }} | {{ initials(r.sub.person, alt="--") }} | {{ r.visit }} | {{ event_date(r.date, alt="----") }} | {{ r.sbp }} | {{ r.dbp }} | {{ r.hr }} | {{ r.temp }}
+{% endfor %}
+
+Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
+Entered by: {{ initials(entered_by, alt="site staff") }}
+Source verified against medical record {{ mrn(rows[0].sub, alt="(source on file)") }} for subject {{ subject_id(rows[0].sub, alt="(see first row)") }}.

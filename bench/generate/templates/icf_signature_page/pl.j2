@@ -1,0 +1,11 @@
+{{ section("Formularz świadomej zgody: strona podpisów") }}
+Protokół {{ protocol(study) }}    Wersja z dnia {{ doc_date(version_date) }}
+
+Podpisując poniżej potwierdzam, że zapoznałem się z informacjami, mogłem zadać pytania i wyrażam zgodę na udział w badaniu.
+
+Imię i nazwisko uczestnika: {{ name(sub.person, "first_last", alt="____________________") }}
+Data urodzenia: {{ dob(sub, alt="____________") }}
+Data podpisu: {{ event_date(sub.enrolled, alt="____________") }}
+Numer uczestnika: {{ subject_id(sub, alt="____________") }}
+
+Osoba uzyskująca zgodę: {{ name(investigator, "first_last", alt="____________________") }}

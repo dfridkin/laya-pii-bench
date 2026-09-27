@@ -1,0 +1,22 @@
+Von: {{ name(a, "first_last", alt="Studienteam") }} <{{ email(a, alt="Zentrumspostfach") }}>
+An: {{ name(b, "first_last", alt="Sponsor") }} <{{ email(b, alt="Studienpostfach") }}>
+Betreff: AW: Datenklärung{% if subs %} zu Teilnehmer {{ subject_id(subs[0], alt="(siehe Anfrage)") }}{% endif %}
+
+Hallo {{ name(b, "first", alt="zusammen") }},
+
+die offenen Fragen wurden bearbeitet und die Einträge im eCRF korrigiert.
+{% for s in subs %}
+Teilnehmer {{ subject_id(s, alt="(maskiert)") }}: Daten der Visite vom {{ event_date(s.visits[1], alt="letzten Visitentag") }} korrigiert.
+{% endfor %}
+{% if subs %}
+Die Papierquelle für {{ name(subs[0].person, alt="diesen Teilnehmer") }} liegt im Teilnehmerordner.
+{% endif %}
+
+Viele Grüße
+{{ name(a, "first_last", alt="Studienteam") }}
+{{ site.institution }}
+Tel. {{ phone(a, alt="siehe Kontaktliste") }}
+
+> Am {{ doc_date(sent) }} schrieb {{ name(b, "first_last", alt="das Studienteam") }}:
+> Hallo {{ name(a, "first", alt="Team") }}, bitte prüfen Sie die offenen Anfragen.
+> Danke, {{ name(b, "first", alt="Studienteam") }}

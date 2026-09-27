@@ -1,0 +1,14 @@
+{{ section("Wynik badania laboratoryjnego") }}
+{{ site.institution }}    Protokół {{ protocol(study) }}
+Pacjent: {{ name(sub.person, alt="uczestnik badania") }}    Uczestnik: {{ subject_id(sub, alt="nie podano") }}    Numer dokumentacji: {{ mrn(sub, alt="b.d.") }}
+{% for v in visits %}
+
+{{ section("Próbka " ~ loop.index) }}
+Pobranie: {{ event_date(v.date, alt="zgodnie z harmonogramem wizyt") }}
+Badanie | Wynik | Jednostka | Zakres referencyjny
+{% for r in v.results %}
+{{ r.test }} | {{ r.value }} | {{ r.unit }} | {{ r.low }}-{{ r.high }}
+{% endfor %}
+{% endfor %}
+
+Zweryfikował: {{ name(reviewer, alt="personel laboratorium") }}

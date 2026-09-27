@@ -1,0 +1,20 @@
+{# CIOMS I form. Context: study, site, sub, ae, reporter, report_date, followups #}
+{{ section("CIOMS I: Suspect Adverse Reaction Report") }}
+Manufacturer control no.: {{ neg(ctrl_no, "report_no") }}    Protocol: {{ protocol(study) }}    Site: {{ site_no(site.site_no) }}
+
+{{ section("I. Reaction Information") }}
+1. Patient initials: {{ initials(sub.person, alt="not provided") }}    1a. Subject: {{ subject_id(sub, alt="not provided") }}
+2. Date of birth: {{ dob(sub, alt="withheld") }}    2a. Age: {{ age(sub) }} years    3. Sex: {{ sub.person.sex }}
+4-6. Reaction onset: {{ event_date(ae.onset, alt="see narrative") }}
+7+13. Describe reaction(s): Grade {{ ae.grade }} {{ ae.term }}{% if ae.serious %}; criterion: required or prolonged hospitalisation{% endif %}. {% if ae.resolved %}Recovered on {{ event_date(ae.resolved, alt="a later date") }}.{% else %}Not yet recovered at the time of this report.{% endif %}
+
+{{ section("II. Suspect Drug Information") }}
+14. Suspect drug: {{ compound(study) }} film-coated tablets, oral, once daily
+{% for f in followups %}
+Follow-up {{ loop.index }}: {{ f }}
+{% endfor %}
+
+{{ section("V. Reporter") }}
+24b. Name and address of reporter: {{ name(reporter, alt="Site investigator") }}, {{ site.institution }}
+Telephone: {{ phone(reporter, alt="on file") }}
+25a. Report type: {{ pick(["initial", "follow-up"]) }}    Date of this report: {{ doc_date(report_date) }}

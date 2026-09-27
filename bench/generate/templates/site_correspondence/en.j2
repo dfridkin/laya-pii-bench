@@ -1,0 +1,31 @@
+{# Email thread with a quoted earlier message (email quoting, D-015). Context: study, site, a, b, subs, topic, body_lines, ask_lines, sent #}
+From: {{ name(a, "first_last", alt="Site team") }} <{{ email(a, alt="site mailbox") }}>
+To: {{ name(b, "first_last", alt="Study team") }} <{{ email(b, alt="study mailbox") }}>
+Subject: RE: {{ topic }}{% if subs %} for subject {{ subject_id(subs[0], alt="(see query)") }}{% endif %}
+
+Hi {{ name(b, "first", alt="all") }},
+
+{% for line in body_lines %}
+{{ line }}
+{% endfor %}
+{% for s in subs %}
+Subject {{ subject_id(s, alt="(masked)") }}: data corrected for the visit on {{ event_date(s.visits[1], alt="the last visit") }}.
+{% endfor %}
+{% if subs %}
+The paper source for {{ name(subs[0].person, alt="this participant") }} is filed in the subject binder.
+{% endif %}
+
+Best regards,
+{{ name(a, "first_last", alt="Site team") }}
+{{ a.job_title }}, {{ site.institution }}
+Tel. {{ phone(a, alt="see site contact list") }}
+
+> On {{ doc_date(sent) }}, {{ name(b, "first_last", alt="the study team") }} wrote:
+> Hi {{ name(a, "first", alt="team") }},
+{% for line in ask_lines %}
+> {{ line }}
+{% endfor %}
+{% if subs %}
+> Please check subject {{ subject_id(subs[0], alt="(see query)") }} first.
+{% endif %}
+> Thanks, {{ name(b, "first", alt="the study team") }}

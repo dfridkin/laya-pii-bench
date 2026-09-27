@@ -1,0 +1,12 @@
+{{ section("CIOMS-I-Bericht: Verdacht auf Nebenwirkung") }}
+Kontrollnummer: {{ neg(ctrl_no, "report_no") }}    Prüfplan: {{ protocol(study) }}    Zentrum: {{ site_no(site.site_no) }}
+
+{{ section("I. Angaben zur Reaktion") }}
+1. Initialen: {{ initials(sub.person, alt="nicht angegeben") }}    1a. Teilnehmer: {{ subject_id(sub, alt="nicht angegeben") }}
+2. Geburtsdatum: {{ dob(sub, alt="nicht angegeben") }}    2a. Alter: {{ age(sub) }} Jahre    3. Geschlecht: {{ sub.person.sex }}
+4-6. Beginn der Reaktion: {{ event_date(ae.onset, alt="siehe Narrativ") }}
+7+13. Beschreibung: {{ ae.term }}, Grad {{ ae.grade }}{% if ae.serious %}; Krankenhausaufnahme erforderlich{% endif %}.
+
+{{ section("V. Meldende Person") }}
+24b. {{ name(reporter, alt="Prüfarzt") }}, {{ site.institution }}, Tel. {{ phone(reporter, alt="liegt vor") }}
+25a. Datum dieses Berichts: {{ doc_date(report_date) }}

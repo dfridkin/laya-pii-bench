@@ -1,0 +1,10 @@
+{# Protocol deviation log. Context: study, site, rows[(sub, date, text, reporter)] #}
+{{ section("Protocol Deviation Log") }}
+Protocol {{ protocol(study) }}    Site {{ site_no(site.site_no) }}
+
+No. | Subject | Date | Deviation | Category | Reported by
+{% for r in rows %}
+{{ loop.index }} | {{ subject_id(r.sub, alt="n/a") }} | {{ event_date(r.date, alt="----") }} | {{ r.text }} | {{ r.category }} | {{ initials(r.reporter, alt="site") }}
+{% endfor %}
+
+Deviations are reviewed monthly by the investigator and reported to the sponsor within 5 working days.

@@ -1,0 +1,13 @@
+{# ICF signature page. Context: study, sub, investigator, version_date #}
+{{ section("Informed Consent Form: Signature Page") }}
+Protocol {{ protocol(study) }}    ICF version dated {{ doc_date(version_date) }}
+
+By signing below I confirm that I have read this information, had the opportunity to ask questions, and agree to take part in this study.
+
+Participant name (printed): {{ name(sub.person, "first_last", alt="____________________") }}
+Date of birth: {{ dob(sub, alt="____________") }}
+Participant signature date: {{ event_date(sub.enrolled, alt="____________") }}
+Subject number: {{ subject_id(sub, alt="____________") }}
+
+Person obtaining consent: {{ name(investigator, "first_last", alt="____________________") }}
+Signature date: {{ event_date(sub.enrolled, alt="____________") }}

@@ -1,0 +1,15 @@
+{# Local lab report. Context: study, site, sub, visits[(date, results)], reviewer #}
+{{ section("Laboratory Report") }}
+{{ site.institution }}    Protocol {{ protocol(study) }}
+Patient: {{ name(sub.person, alt="study participant") }}    Subject: {{ subject_id(sub, alt="not stated") }}    MRN: {{ mrn(sub, alt="n/a") }}
+{% for v in visits %}
+
+{{ section("Specimen " ~ loop.index) }}
+Collected: {{ event_date(v.date, alt="per visit schedule") }}
+Test | Result | Units | Reference range | Flag
+{% for r in v.results %}
+{{ r.test }} | {{ r.value }} | {{ r.unit }} | {{ r.low }}-{{ r.high }} | {{ "H" if r.value > r.high else ("L" if r.value < r.low else "") }}
+{% endfor %}
+{% endfor %}
+
+Reviewed by: {{ name(reviewer, alt="laboratory staff") }}
