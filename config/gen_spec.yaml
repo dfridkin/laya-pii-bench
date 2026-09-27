@@ -23,8 +23,7 @@ doc_types:                  # exact counts; total 600
   irb_letter: 30
 
 lang_counts: {en: 540, de: 24, es: 18, pl: 18}   # exact (D-015)
-non_english_buckets: [short]    # DRAFT for owner review: non-English docs stay < 1k tokens, so
-                                # no filler grammar is needed in de/es/pl
+non_english_buckets: [short]    # non-English docs stay < 1k tokens: no de/es/pl filler (D-015)
 locales: {en: en_US, de: de_DE, es: es_ES, pl: pl_PL}
 
 length_mix: {short: 0.35, medium: 0.35, long: 0.22, xl: 0.08}
@@ -48,7 +47,7 @@ perturbations:
 paraphrase: {enabled: false, model: null}   # D-011
 distribution_tolerance_pp: 3
 
-# Per doc type (D-015). DRAFT for owner review.
+# Per doc type (D-015, approved by owner 2026-09-26).
 #   level: site | sponsor (sponsor-level: no site, no subjects, no persons; split per doc, D-005)
 #   buckets / langs: allowed values (long/xl only for prose types; de/es/pl only site-facing types)
 #   clean_rate: share rendered without any person data (blank or pre-redacted forms, generic notes)

@@ -39,3 +39,4 @@ Append entries as `YYYY-MM-DD D-nnn: <change> (by <who>)`.
 - 2026-09-26 D-013 provisional text extended: `--allow-no-meta` tied to fixture_debug calib (fix-batch review 2 follow-up; by Claude, pending owner).
 - 2026-09-26 D-013 confirmed as written, incl. `--allow-no-meta` only with a fixture_debug calib; OPEN -> DECIDED (by Dmitriy).
 - 2026-09-26 D-019 decided (audit C1): calib frozen in git before scoring, enforced by `bench score`; built in M5 (by Dmitriy).
+- 2026-09-26 D-015 addendum: doc_plan in config/gen_spec.yaml approved as drafted; non-English docs restricted to the short bucket (by Dmitriy).
