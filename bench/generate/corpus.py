@@ -15,7 +15,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 
-from bench.config import GenSpec, Policy
+from bench.config import GenSpec, Policy, largest_remainder
 from bench.domain import (
     DocType,
     Document,
@@ -39,6 +39,8 @@ TABLE_TYPES = frozenset(
 )
 REDACTED_TYPES = frozenset({DocType.NARRATIVE, DocType.SAE})  # their clean share is pre-redacted
 WRAP_WIDTH = 78
+# guard against the M4 gold-audit R4 shortcut (was 49/104 before partial alt text)
+ALT_EXCLUSIVE_MAX = 0.05
 
 
 class GenError(RuntimeError):
@@ -61,6 +63,7 @@ class Slot:
     hard_negative: bool = False
     headers_footers: bool = False
     partial_redact: bool = False
+    partial_alt: bool = False
     post: list[str] = field(
         default_factory=lambda: []
     )  # "table:tab|fixed", "line_wrap", "ocr_noise"
@@ -167,6 +170,29 @@ def plan(spec: GenSpec, world: W.World) -> list[Slot]:
     ):
         s.partial_redact = True
 
+    # partial alt: stratified by (doc type, language) so every stratum's alt phrases also occur next
+    # to real PII; any stratum that has clean docs gets at least one (audit R4)
+    alt_pool = [s for s in partial_pool if not s.partial_redact]
+    strata: dict[str, list[Slot]] = defaultdict(list)
+    for s in alt_pool:
+        strata[f"{s.doc_type.value}/{s.lang}"].append(s)
+    has_clean = {f"{s.doc_type.value}/{s.lang}" for s in slots if s.site and s.mode != "normal"}
+    floor = {k: 1 for k in strata if k in has_clean}
+    rest = spec.partial_alt_docs - sum(floor.values())
+    if rest < 0:
+        raise GenError("partial_alt_docs is smaller than the number of strata that need one")
+    shares = {k: len(v) / len(alt_pool) for k, v in strata.items()}
+    quota = largest_remainder(rest, shares)
+    for k in sorted(strata):
+        n = min(len(strata[k]), floor.get(k, 0) + quota[k])
+        for j, s in enumerate(_take(rng(seed, "partial_alt", k), strata[k], n, f"alt {k}")):
+            s.partial_alt = True
+            # whole-category alt: drop one enabled category (rotating within the stratum), so all of
+            # its alt phrases appear beside the other categories' real PII
+            if len(s.enabled) >= 2:  # staff first: staff alt phrases dominate clean views
+                cats = sorted(s.enabled, key=lambda c: (c is not PiiCategory.STAFF_PII, c.value))
+                s.enabled = frozenset(c for c in cats if c is not cats[j % len(cats)])
+
     # hard negatives, headers/footers, post-resolve perturbations: exact counts
     total = len(slots)
     for s in _take(rng(seed, "hardneg"), slots, spec.hard_negative_count, "hard negatives"):
@@ -193,7 +219,7 @@ def doc_spec(s: Slot, world: W.World) -> DocSpec:
         doc_id=f"d{s.idx:04d}", doc_type=s.doc_type, lang=s.lang, bucket=s.bucket, study=study,
         site=site, subject=s.subject, mode=s.mode, enabled=s.enabled,
         hard_negative=s.hard_negative, headers_footers=s.headers_footers, pii_depth=s.depth,
-        partial_redact=s.partial_redact,
+        partial_redact=s.partial_redact, partial_alt=s.partial_alt,
     )  # fmt: skip
 
 
@@ -263,15 +289,34 @@ def distributions(docs: Sequence[Document]) -> tuple[dict[str, dict[str, int]], 
         "mode": Counter(str(d.gen_meta.get("mode")) for d in docs),
         # flagged for partial redaction vs. actually containing a placeholder (per-value rate 0.2,
         # so small docs may draw none; gold audit run 3, R2)
+        "partial_alt": Counter(  # realized = shows alt text next to real PII
+            ("realized" if d.spans and d.gen_meta.get("alt_phrases") else "none_drawn")
+            for d in docs
+            if d.gen_meta.get("partial_alt") == 1
+        ),
         "partial_redaction": Counter(
             ("realized" if any(n.kind == "pre_redacted" for n in d.negatives) else "none_drawn")
             for d in docs
             if d.gen_meta.get("partial_redact") == 1
         ),
     }
+    counts["alt_phrases"] = Counter({"pii_free_site_docs_with_exclusive_alt": alt_exclusive(docs)})
     tags = Counter(t for d in docs for t in d.tags)
     rates = {t: tags[t] / len(docs) for t in sorted(tags)} if docs else {}
     return {k: dict(sorted(v.items())) for k, v in counts.items()}, rates
+
+
+def alt_exclusive(docs: Sequence[Document]) -> int:
+    """PII-free site docs containing an alt phrase that no PII-bearing doc contains (the M4 gold
+    audit's R4 shortcut metric; lower is better)."""
+
+    def phrases(d: Document) -> set[str]:
+        v = d.gen_meta.get("alt_phrases", [])
+        return {str(x) for x in v} if isinstance(v, list) else set()
+
+    site = [d for d in docs if d.world_refs.site != "SPONSOR"]
+    seen_with_pii = {p for d in site if d.spans for p in phrases(d)}
+    return sum(1 for d in site if not d.spans and phrases(d) - seen_with_pii)
 
 
 def v5(spec: GenSpec, docs: Sequence[Document]) -> list[str]:
@@ -297,6 +342,14 @@ def v5(spec: GenSpec, docs: Sequence[Document]) -> list[str]:
     n_email = sum(d.doc_type is DocType.SITE_EMAIL for d in docs)
     if sum("email_quoting" in d.tags for d in docs) != n_email:
         out.append("V5 email_quoting must be on every site_correspondence doc")
+    clean_site = sum(1 for d in docs if d.world_refs.site != "SPONSOR" and not d.spans)
+    exclusive = alt_exclusive(docs)
+    if clean_site and exclusive / clean_site > ALT_EXCLUSIVE_MAX:
+        out.append(f"V5 alt shortcut: {exclusive}/{clean_site} PII-free site docs carry an alt "
+                   f"phrase no PII-bearing doc has (max {ALT_EXCLUSIVE_MAX:.0%})")  # fmt: skip
+    n_alt = sum(d.gen_meta.get("partial_alt") == 1 for d in docs)
+    if abs(n_alt - spec.partial_alt_docs) > len(spec.doc_types) * len(spec.lang_counts):
+        out.append(f"V5 partial_alt docs {n_alt} vs {spec.partial_alt_docs}")
     if sum(d.gen_meta.get("partial_redact") == 1 for d in docs) != spec.partial_redaction_docs:
         out.append("V5 partial_redaction docs count")
     if len([d for d in docs if d.pii_depth]) != spec.pii_depth_docs:

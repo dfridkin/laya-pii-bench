@@ -5,6 +5,7 @@ Betreff: AW: Datenklärung{% if subs %} zu Teilnehmer {{ subject_id(subs[0], alt
 Hallo {{ name(b, "first", alt="zusammen") }},
 
 die offenen Fragen wurden bearbeitet und die Einträge im eCRF korrigiert.
+Die korrigierten Seiten liegen im Prüfarztordner; die Quelldokumente wurden erneut abgeglichen. Bitte geben Sie kurz Bescheid, ob weitere Anfragen offen sind.
 {% for s in subs %}
 Teilnehmer {{ subject_id(s, alt="(Nummer nicht angegeben)") }}: Daten der Visite 2 ({{ event_date(s.visits[1], alt="Datum nicht angegeben") }}) korrigiert.
 {% endfor %}

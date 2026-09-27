@@ -1,7 +1,7 @@
 {# Local lab report. Context: study, site, sub, visits[(date, results)], reviewer #}
 {{ section("Laboratory Report") }}
 {{ site.institution }}    Protocol {{ protocol(study) }}
-Patient: {{ name(sub.person, alt="study participant") }}    Subject: {{ subject_id(sub, alt=pick(["not stated", "on file", "see requisition"])) }}    MRN: {{ mrn(sub, alt="n/a") }}
+Patient: {{ name(sub.person, alt="study participant") }}    Subject: {{ subject_id(sub, alt="not stated") }}    MRN: {{ mrn(sub, alt="n/a") }}
 {% for v in visits %}
 
 {{ section("Specimen " ~ loop.index) }}

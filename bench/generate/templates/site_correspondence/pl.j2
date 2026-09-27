@@ -5,6 +5,7 @@ Temat: RE: Zapytanie o dane{% if subs %} uczestnika {{ subject_id(subs[0], alt="
 Dzień dobry {{ name(b, "first", alt="Państwu") }},
 
 otwarte zapytania zostały wyjaśnione, a wpisy w eCRF poprawione.
+Poprawione strony znajdują się w segregatorze badacza, a dokumentacja źródłowa została ponownie zweryfikowana. Proszę o informację, czy pozostały jeszcze jakieś otwarte zapytania.
 {% for s in subs %}
 Uczestnik {{ subject_id(s, alt="(numer nie podany)") }}: poprawiono dane z wizyty 2 ({{ event_date(s.visits[1], alt="data nie podana") }}).
 {% endfor %}

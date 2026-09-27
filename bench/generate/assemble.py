@@ -44,6 +44,7 @@ PII_BLOCK = {  # the single PII paragraph of a depth doc (English: depth docs ar
 
 
 PARTIAL_RATE = 0.2  # share of enabled PII values redacted in a partially redacted doc
+PARTIAL_ALT_RATE = 0.25  # share of enabled PII values shown as neutral alt text (audit R4)
 HEADER = {  # running header/footer in the document's language (audit N6)
     "en": ("Protocol", "Confidential", "Page"),
     "de": ("Prüfplan", "Vertraulich", "Seite"),
@@ -70,6 +71,7 @@ class DocSpec:
     hard_negative: bool = False
     headers_footers: bool = False
     partial_redact: bool = False
+    partial_alt: bool = False
     pii_depth: PiiDepth | None = None
     extra: dict[str, Any] = field(default_factory=lambda: {})
 
@@ -118,7 +120,8 @@ def _assemble(
 
     ctx = DocCtx(lang=ds.lang, rng=r, enabled=ds.enabled,
                  mode="clean" if ds.pii_depth else ds.mode,
-                 partial_redact=PARTIAL_RATE if ds.partial_redact else 0.0)  # fmt: skip
+                 partial_redact=PARTIAL_RATE if ds.partial_redact else 0.0,
+                 partial_alt=PARTIAL_ALT_RATE if ds.partial_alt else 0.0)  # fmt: skip
     req = ViewRequest(
         ds.doc_type, ds.lang, ds.study, ds.site, ds.subject, ctx.mode, ds.enabled, r, extra
     )
@@ -205,7 +208,9 @@ def _assemble(
                                  site=ds.site.site_no if ds.site else SPONSOR_SITE,
                                  subjects=subjects),
             gen_meta={"template": template, "mode": ds.mode, "sections": out.sections,
-                      "target_tokens": target, "partial_redact": int(ds.partial_redact)},
+                      "target_tokens": target, "partial_redact": int(ds.partial_redact),
+                      "partial_alt": int(ds.partial_alt), "alt_values": ctx.alt_values,
+                      "alt_phrases": sorted(set(ctx.alt_log))},
         )  # fmt: skip
         if post is not None:
             doc = post(doc)

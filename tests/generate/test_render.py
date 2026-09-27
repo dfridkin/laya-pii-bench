@@ -184,3 +184,15 @@ def test_age_over_89_consumes_a_partial_redaction(world: W.World) -> None:
     assert ctx._redact_next is False
     ctx.partial_redact = 0.0
     assert ctx.name(sub.person, alt="the participant").startswith("⟦s")  # not a stray placeholder
+
+
+def test_partial_alt_renders_alt_text_for_enabled_categories(world: W.World) -> None:
+    """Audit R4: in partial-alt docs an enabled value may render as its neutral alt text."""
+    import random
+
+    from bench.generate.render import DocCtx
+
+    sub = world.sites()[0].subjects[0]
+    ctx = DocCtx(lang="en", rng=random.Random(0), enabled=ALL, partial_alt=1.0)
+    assert ctx.subject_id(sub, alt="not stated") == "not stated"
+    assert ctx.alt_values == 1 and ctx.alt_log == ["not stated"] and ctx.slots == []

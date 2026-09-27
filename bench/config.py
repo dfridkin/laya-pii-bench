@@ -183,6 +183,9 @@ class GenSpec(_Cfg):
     # PII-bearing docs where some values appear as pre-redaction placeholders (so placeholders are
     # not a "no PII" cue; M4 gold audit N5)
     partial_redaction_docs: int = Field(default=0, ge=0)
+    # PII-bearing docs where some values render as neutral alt text instead (so alt phrases are not
+    # a "no PII" cue; M4 gold audit R4). Allocated per doc type, disjoint from partial redaction.
+    partial_alt_docs: int = Field(default=0, ge=0)
     pii_depth_positions: dict[PiiDepth, tuple[float, float]]
     perturbations: Perturbations
     paraphrase: Paraphrase

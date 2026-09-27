@@ -37,6 +37,7 @@ length_tokens:              # multilingual tokenizer counts
 hard_negative_rate: 0.25
 pii_depth_docs: 60          # sparse long docs with one PII block at controlled depth
 partial_redaction_docs: 60  # PII-bearing docs with some values pre-redacted (gold audit N5)
+partial_alt_docs: 100       # PII-bearing docs with some values shown as neutral alt text (gold audit R4)
 pii_depth_positions: {early: [0.0, 0.2], middle: [0.4, 0.6], late: [0.8, 1.0]}
 
 perturbations:

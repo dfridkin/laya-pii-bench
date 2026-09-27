@@ -113,6 +113,11 @@ class DocCtx:
     # share of enabled PII values rendered as pre-redaction placeholders instead (audit N5: the
     # placeholders must not only occur in PII-free documents)
     partial_redact: float = 0.0
+    # share of enabled PII values rendered as their neutral alt text instead, so alt phrases also
+    # occur in PII-bearing documents and aren't a "no PII" cue (M4 gold audit R4)
+    partial_alt: float = 0.0
+    alt_values: int = 0  # how many values partial_alt replaced (reported in gen_meta)
+    alt_log: list[str] = field(default_factory=lambda: [])  # alt phrases rendered (R4 metric)
     _redact_next: bool = False
     slots: list[Slot] = field(default_factory=lambda: [])
     negs: list[Slot] = field(default_factory=lambda: [])
@@ -152,13 +157,19 @@ class DocCtx:
         if self.partial_redact and self.rng.random() < self.partial_redact:
             self._redact_next = True
             return False
+        if self.partial_alt and self.rng.random() < self.partial_alt:
+            self.alt_values += 1
+            return False
         return True
 
     def _off(self, role: str, alt: str | None) -> str:
         if self.mode == "redacted" or self._redact_next:
             self._redact_next = False
             return self.neg(self.pick(REDACTIONS), "pre_redacted")
-        return alt if alt is not None else ALT[self.lang]["staff" if role == "sponsor" else role]
+        text = alt if alt is not None else ALT[self.lang]["staff" if role == "sponsor" else role]
+        if text.strip():
+            self.alt_log.append(text)
+        return text
 
     @staticmethod
     def _cat(p: Person, patient_cat: PiiCategory) -> tuple[PiiCategory, str]:

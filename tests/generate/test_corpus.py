@@ -225,3 +225,16 @@ def test_headers_are_localized(world_and_docs: tuple) -> None:  # type: ignore[t
     for d in docs:
         if d.lang != "en" and "headers_footers" in d.tags:
             assert "Confidential" not in d.text and "Page " not in d.text, d.id
+
+
+def test_partial_alt_allocation(slots: list[corpus.Slot]) -> None:
+    """Audit R4: partial-alt docs are PII-bearing, disjoint from partial redaction and depth, and
+    cover every (type, lang) stratum that has clean docs."""
+    alt = [s for s in slots if s.partial_alt]
+    assert abs(len(alt) - SPEC.partial_alt_docs) <= 48
+    assert all(s.enabled and not s.partial_redact and s.depth is None for s in alt)
+    strata_clean = {(s.doc_type, s.lang) for s in slots if s.site and s.mode != "normal"}
+    strata_alt = {(s.doc_type, s.lang) for s in alt}
+    pool = {(s.doc_type, s.lang) for s in slots if s.site and s.mode == "normal" and s.enabled
+            and s.depth is None and not s.partial_redact}  # fmt: skip
+    assert strata_clean & pool <= strata_alt
