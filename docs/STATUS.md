@@ -1,7 +1,7 @@
 # Status
 
 Active milestone: **M4 Generator**
-Last updated: 2026-09-26 (M3 gate passed)
+Last updated: 2026-09-27 (M4 built; gold audit + gate review pending)
 
 | Milestone | State | Gate passed | Notes |
 |---|---|---|---|
@@ -9,7 +9,7 @@ Last updated: 2026-09-26 (M3 gate passed)
 | M1 Contracts + fixture | done | 2026-09-26 (`reports/audits/M1-gate-20260926.md`) | fixture locked; gold audit 0 errors |
 | M2 Scorer + report on fixture | done | 2026-09-26 (`reports/audits/M2-gate-20260926-pass.md`; review #1 FAIL fixed) | golden metrics exact; hash check exits 2 |
 | M3 Runner, arm A on fixture | done | 2026-09-26 (`reports/audits/M3-gate-20260926-pass.md`; review #1 FAIL fixed) | real laya run on fixture; p50 ~500 ms/unit (qs_v1, mps) |
-| M4 Generator | not started | | |
+| M4 Generator | built, gold audit + gate review pending | | 600 docs, V1-V6 pass, deterministic |
 | M5 Label + split | not started | | |
 | M6 Zero-shot arms, calibrate, score, report v1 | not started | | |
 | M7 HUD replay | not started | | |
@@ -117,6 +117,38 @@ Interpretations made in M2 (cheap to change; flag if you disagree):
 - Warmup: 10 calls (spec default) on whole fixture documents, which laya truncates to `max_len`;
   the spec says "fixture units". Same input shapes, excluded from every metric; noted as a deviation.
 
+## M4 evidence
+
+- `make gen`: 600 docs, validators ASSEMBLY/V1/V2/V3/V4/V5/V6 all pass (`data/gen_manifest.json`);
+  ~23 s on the M2 including the V6 second generation. sha256 `600fada2082c2ab8...`, identical across
+  separate `make gen` runs (gate 2). `bench validate data/docs.jsonl`: 600/600.
+- Realized distributions equal gen_spec exactly (gate 3): doc types as specified; lang 540/24/18/18;
+  buckets 210/210/132/48; hard_negative .25, headers_footers .40, line_wrap .30, ocr_noise .10,
+  table .20, email_quoting on all 60 correspondence docs; 174 clean/pre-redacted docs; pii_depth
+  20/20/20.
+- Hypothesis tests (gate 4): sentinel resolve 600 examples (`tests/generate/test_render.py`), span
+  remap 700 examples (`tests/generate/test_perturb.py`). `make check` 299 passed.
+- Sub-steps: 4a world + providers + doc_plan (owner-approved), 4b renderer/variants/V1-V2, 4c all 12
+  types (27 templates incl. de/es/pl), 4d hard negatives, 4e length/filler/depth, 4f perturbations,
+  4g planner + manifest.
+
+Design choices made in M4 (flag if you disagree):
+- Content-adding steps (hard-negative paragraphs, filler, headers/footers, the depth PII block) are
+  spliced into the raw rendered text before the one sentinel pass, so their labels need no remap;
+  only character-level perturbations (line wrap, OCR noise, table restyle) run after resolve with
+  span remap. Email quoting is native to the correspondence templates. (Spec said all perturbations
+  after resolve; the audit showed the remap contract can't express inserted labeled content.)
+- Every person (incl. sponsor/CRO contacts) belongs to one site, so each site has its own sponsor
+  contact rather than a study-wide medical monitor (D-018).
+- Person names are drawn to avoid every word the generator can emit (templates, filler grammar,
+  month names, AE terms, ...), and family names are unique and >= 3 letters, so V2 is unambiguous.
+- Document dates avoid any rendered form of a referenced subject's dates (07/08 vs 08/07).
+- NCT ids start `NCT99`, EudraCT uses 2031, CAS-format numbers carry an invalid check digit.
+- The M1 validator rule "hard_negative tag iff negatives" is now "tag -> negatives" (D-015).
+- Site locales: 14 en, 4 de, 3 es, 3 pl sites (`world.site_locales`); non-English docs come from
+  sites of their locale. M5 should stratify the site split on locale too, or the language slice
+  may land in one split.
+
 ## Audit fix batch (2026-09-26)
 
 Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8d6292b:
@@ -168,8 +200,6 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 - Done (audit A9): instead of making `Decision.mode` required (the locked mock decisions lack it),
   `score` rejects any row whose mode doesn't match its run's `meta.json`; meta-less run dirs are
   refused by the runner, and by calibrate/score unless `--allow-no-meta` (fixture debug only).
-- M4a: add `Span.value: str | None` to `bench/domain.py` (D-016; already in domain.md), regenerate
-  schema, and have validate check `text[start:end] == value` when present.
 - Before M6 qs_v2 speed: laya can silently turn MPS autocast off mid-run (fp32, no device change;
   agent.py ~640). Record amp/dtype per decision or abort on change. qs_v1 (4 rows) never uses amp.
 - Spec wording: laya-runtime.md says "fall back to cpu and record"; the runner aborts instead
@@ -190,10 +220,6 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 - M2/M3: fx06 boundary check assumes raw-text English tokens without special tokens; the M2 segmenter
   must count the same way, or re-tune fx06 (needs an owner OK: fixtures are locked).
 - M3: re-run model-marked tests (fx06 boundary, laya result shape) whenever laya or the tokenizer changes.
-- M4: `Document.gen_meta` allows `list[str]` only; section offsets (`gen_meta.sections`) need `list[int]`.
-- M4: generator OCR substitutions (l/1, O/0, drops) don't include Z/2 as used in fx08; extend or accept.
-- M4: NCT ids like NCT0999xxxx are above today's issued range but could be issued later; consider a
-  clearly invalid prefix. EudraCT uses year 2031 (safe).
 - `bench build-fixture` writes via Bash, so the Edit/Write lock hook doesn't block it; output is fully
   determined by the locked sources.
 - `bench/validate.py` doc_kind_map branch is unreachable (Policy validator guarantees completeness).
@@ -209,9 +235,8 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-Audit complete: B1-B5 decided (D-005 amended, D-015..D-018), fix batch A1-A11 done and
-independently reviewed (PASS). Next: `/milestone M4` (starts with the `doc_plan` draft for owner
-review, D-015, and `Span.value`, D-016). Audit C2-C8 before M6 (C1 decided: D-019, built in M5).
+M4: gold audit of 30 docs running; then `/gate M4`. Audit items C2-C8 before M6 (C1 decided:
+D-019, built in M5).
 
 ## Session log
 
@@ -225,3 +250,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-26 audit fixes A1-A11 applied with tests; fixture artifacts regenerated (answers identical). Review pending.
 - 2026-09-26 audit fix batch: review 1 FAIL (R1-R7 + test gaps) fixed; review 2 PASS; follow-ups closed. Ready for M4.
 - 2026-09-26 C1 decided as D-019 (calib freeze in git, enforced by score); added to M5 build + gate, M6 gate 2 made checkable.
+- 2026-09-27 M4: generator built (4a-4g); make gen 600 docs, V1-V6 pass, deterministic; gold audit + gate review pending.
