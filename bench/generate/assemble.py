@@ -59,6 +59,7 @@ class DocSpec:
     mode: Mode
     enabled: frozenset[PiiCategory]
     hard_negative: bool = False
+    headers_footers: bool = False
     pii_depth: PiiDepth | None = None
     extra: dict[str, Any] = field(default_factory=lambda: {})
 
@@ -85,7 +86,9 @@ def assemble(ds: DocSpec, spec: GenSpec, count: TokenCounter, max_rounds: int = 
     template, data, subjects = VIEWS[ds.doc_type](req, ctx)
     base = render_raw(template, ctx, **data)
     refs = [s for s in (ds.site.subjects if ds.site else []) if s.subject_id in subjects]
-    tags: list[str] = []
+    tags: list[str] = ["email_quoting"] if ds.doc_type is DocType.SITE_EMAIL else []
+    if ds.headers_footers:
+        tags.append("headers_footers")
     if ds.hard_negative:
         base = insert_at_section(base, negatives.block(ctx, ds.study, safe_date(r, refs)), r)
         tags.append("hard_negative")
@@ -107,7 +110,7 @@ def assemble(ds: DocSpec, spec: GenSpec, count: TokenCounter, max_rounds: int = 
     topics = list(filler.TOPICS)
     r.shuffle(topics)
 
-    def compose(n_sections: int, depth_at: int | None) -> str:
+    def compose(n_sections: int, depth_at: int | None, paginate: bool = True) -> str:
         raw = base
         for k, sec in enumerate(sections[:n_sections]):
             if ds.doc_type in PROSE:  # fixed position per section, so layouts are stable
@@ -118,7 +121,18 @@ def assemble(ds: DocSpec, spec: GenSpec, count: TokenCounter, max_rounds: int = 
             paras = raw.split("\n\n")
             i = min(max(depth_at or 0, 1), len(paras))  # never before the title line
             raw = "\n\n".join([*paras[:i], pii_block, *paras[i:]])
+        if ds.headers_footers and paginate:
+            raw = _paginate(raw, header)
         return raw
+
+    headers: list[str] = []
+
+    def header(page: int) -> str:
+        while len(headers) < page:  # one labeled protocol-number negative per page header
+            headers.append(
+                f"{spec.world.sponsor} | Protocol {ctx.protocol(ds.study)} | Confidential"
+            )
+        return headers[page - 1]
 
     def new_section() -> str:
         t = topics[len(sections) % len(topics)]
@@ -135,7 +149,7 @@ def assemble(ds: DocSpec, spec: GenSpec, count: TokenCounter, max_rounds: int = 
     depth_at: int | None = None
     for _ in range(max_rounds):
         if pii_block and depth_at is None:
-            depth_at = _depth_index(compose(n_sec, None), ds, spec, count)
+            depth_at = _depth_index(compose(n_sec, None, paginate=False), ds, spec, count)
         out: Rendered = finish(compose(n_sec, depth_at), ctx)
         n = count(out.text)
         if n < lo or n > hi:
@@ -170,6 +184,24 @@ def assemble(ds: DocSpec, spec: GenSpec, count: TokenCounter, max_rounds: int = 
                       "tokens_multilingual": n, "target_tokens": target},
         )  # fmt: skip
     raise AssemblyError(f"{ds.doc_id}: could not reach {ds.bucket} ({lo}-{hi}) / depth")
+
+
+PARAS_PER_PAGE = 12
+
+
+def _paginate(raw: str, header: Callable[[int], str]) -> str:
+    """Repeated page header (with the protocol number) and page footer every PARAS_PER_PAGE
+    paragraphs; inserted before resolve so the header negatives are labeled natively."""
+    paras = raw.split("\n\n")
+    out: list[str] = [header(1)]
+    page = 1
+    for k, p in enumerate(paras, start=1):
+        out.append(p)
+        if k % PARAS_PER_PAGE == 0 and k < len(paras):
+            page += 1
+            out += [f"Page {page - 1}", header(page)]
+    out.append(f"Page {page}")
+    return "\n\n".join(out)
 
 
 def _depth_index(raw: str, ds: DocSpec, spec: GenSpec, count: TokenCounter) -> int:
