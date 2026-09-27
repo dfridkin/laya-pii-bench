@@ -9,7 +9,7 @@ Last updated: 2026-09-27 (M4 gate passed)
 | M1 Contracts + fixture | done | 2026-09-26 (`reports/audits/M1-gate-20260926.md`) | fixture locked; gold audit 0 errors |
 | M2 Scorer + report on fixture | done | 2026-09-26 (`reports/audits/M2-gate-20260926-pass.md`; review #1 FAIL fixed) | golden metrics exact; hash check exits 2 |
 | M3 Runner, arm A on fixture | done | 2026-09-26 (`reports/audits/M3-gate-20260926-pass.md`; review #1 FAIL fixed) | real laya run on fixture; p50 ~500 ms/unit (qs_v1, mps) |
-| M4 Generator | done | 2026-09-27 (`reports/audits/M4-gate-20260927.md`; gold: `M4_gold_audit_run3_final.md`) | 600 docs, V1-V6 pass, deterministic; gold audit 0 errors |
+| M4 Generator | done | 2026-09-27 (`reports/audits/M4-gate-20260927.md`; gold: `M4_gold_audit_run4_final.md`; R4 fix after gate, D-020) | 600 docs, V1-V6 pass, deterministic; gold audit 0 errors |
 | M5 Label + split | not started | | |
 | M6 Zero-shot arms, calibrate, score, report v1 | not started | | |
 | M7 HUD replay | not started | | |
@@ -160,12 +160,16 @@ Design choices made in M4 (flag if you disagree):
   eponyms fit their sentence; non-English docs are native-only (no English filler, translated AE
   terms, localized headers); placeholders grammatical; CRO domain distinct from site names.
 
-Known limitations (owner may want these addressed before M5/M6; not label errors):
-- R4 / J5 lexical shortcut: 49 of 104 PII-free site docs contain an alt phrase that never appears in
-  a PII-bearing doc (e.g. CRF "for subject (see first row)", IRB "To: the Principal Investigator",
-  blank underscores on ICF/delegation pages). Alt text only renders where a category is off, which in
-  practice means clean views. Risk: arm C (and doc-level zero-shot) can key on it. M6 should report
-  the clean-view slice; a fix is to render category-off alt text in some PII-bearing docs too.
+R4 fix after the gate (owner decision D-020): 100 PII-bearing docs show neutral alt text beside real
+PII; the shortcut metric fell from 49/104 to 3/106 PII-free site docs (manifest; V5 fails above 5%),
+confirmed independently by gold audit run 4 (`reports/audits/M4_gold_audit_run4_final.md`, zero label
+errors). Gate re-run on the final corpus (sha256 `9a88ce5c4c5b4a85...`): `make gen` all validators
+pass, identical across separate runs, 600/600 valid, fixture 10/10, `make check` 310 passed.
+
+Known limitations (not label errors):
+- S1: line-level alt residue in IRB letters ("Contact: IRB office, IRB office" in all 10 PII-free
+  letters, none PII-bearing). IRB letters are holdout-only (D-005), so train/calib/test are
+  unaffected; M6 should caveat holdout IRB results. Phrase-level metric residue: 3 de/pl emails.
 - R1: partial redaction is per value, so a redacted name can sit next to the same person's labeled
   email/initials. Labels are correct; realism is imperfect.
 - N7 accepted: a document date can equal another same-site subject's date (not tied to that subject
@@ -260,8 +264,7 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-Decide R4/F1 (lexical shortcut: accept with an M6 clean-view slice, or fix now) and record it
-in DECISIONS.md; then `/milestone M5`. Audit items C2-C8 before M6 (C1 decided:
+Run `/milestone M5` (label + split; includes D-019 calib freeze). Audit items C2-C8 before M6 (C1 decided:
 D-019, built in M5).
 
 ## Session log
@@ -279,3 +282,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-27 M4: generator built (4a-4g); make gen 600 docs, V1-V6 pass, deterministic; gold audit + gate review pending.
 - 2026-09-27 M4: gold audit runs 1-3 zero label errors; generator realism fixes between runs; final corpus 3507af1f; gate review next.
 - 2026-09-27 M4: gate PASS (independent review); spec/DECISIONS/MILESTONES updated for F2-F4; R4 decision pending.
+- 2026-09-27 M4: R4 shortcut fixed (D-020), gold audit run 4 zero label errors; corpus 9a88ce5c; ready for M5.
