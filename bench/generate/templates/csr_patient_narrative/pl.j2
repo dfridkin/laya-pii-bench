@@ -1,0 +1,18 @@
+{{ section("Opis przypadku") }}: uczestnik {{ subject_id(sub, alt="[uczestnik]") }}
+Protokół {{ protocol(study) }}, ośrodek {{ site_no(site.site_no) }}
+
+{{ section("Dane demograficzne") }}
+{{ name(sub.person, alt="Uczestnik") }} ({{ initials(sub.person, alt="inicjały nie zapisane") }}), wiek {{ age(sub) }} lat, data urodzenia {{ dob(sub, alt="nie zapisana") }}, numer dokumentacji {{ mrn(sub, alt="nie zapisany") }}, został zrandomizowany dnia {{ event_date(sub.enrolled, alt="dnia randomizacji") }} (numer randomizacji {{ rand_no(sub, alt="nie podany") }}) i tego samego dnia otrzymał pierwszą dawkę {{ compound(study) }}. Adres: {{ address(sub, site.city, alt="nie zapisany") }} {{ postcode(sub, alt="") }}.
+Leczenie towarzyszące zweryfikował {{ name(pi, alt="badacz") }}.
+
+{{ section("Zdarzenie niepożądane") }}
+{% if ae %}
+Dnia {{ event_date(ae.onset, alt="podczas późniejszej wizyty") }} uczestnik zgłosił zdarzenie ({{ ae.term }}, stopień {{ ae.grade }}){% if ae.serious %}, uznane za ciężkie{% endif %}. {% if ae.resolved %}Zdarzenie ustąpiło dnia {{ event_date(ae.resolved, alt="później") }} bez następstw.{% else %}Zdarzenie trwało w dniu odcięcia danych.{% endif %}
+
+
+{% else %}
+W okresie leczenia nie zgłoszono zdarzeń niepożądanych.
+
+{% endif %}
+{{ section("Przebieg") }}
+Uczestnik kontynuował udział w badaniu zgodnie z protokołem.

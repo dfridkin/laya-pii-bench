@@ -204,8 +204,9 @@ def _ascii(s: str) -> str:
 class _Names:
     """Unique full and family names across the world, drawn per locale."""
 
-    def __init__(self, seed: int) -> None:
+    def __init__(self, seed: int, forbidden: frozenset[str] = frozenset()) -> None:
         self.seed = seed
+        self.forbidden = forbidden  # lowercased words used by templates/filler (V2 collisions)
         self.families: set[str] = set()
         self.fakers = {lang: Faker(loc) for lang, loc in LOCALES.items()}
 
@@ -218,6 +219,8 @@ class _Names:
             if " " in given or "-" in family or " " in family or len(family) < 3:
                 continue  # keep one-token names so surface variants stay well defined
             if family in self.families or family in forbidden or given == family:
+                continue
+            if given.lower() in self.forbidden or family.lower() in self.forbidden:
                 continue
             self.families.add(family)
             return given, family
@@ -234,9 +237,11 @@ def _place(lang: str, r: random.Random, used: set[str]) -> str:
     raise RuntimeError("ran out of place names")
 
 
-def build(spec: GenSpec) -> World:
+def build(spec: GenSpec, forbidden_words: frozenset[str] = frozenset()) -> World:
+    """`forbidden_words`: lowercased vocabulary of templates and filler; no given or family name
+    may equal one of them, so V2 never confuses ordinary text with a person."""
     seed, w = spec.seed, spec.world
-    names = _Names(seed)
+    names = _Names(seed, forbidden_words)
     places: set[str] = set()
     site_langs: list[Lang] = [lang for lang, n in sorted(w.site_locales.items()) for _ in range(n)]
     rng(seed, "site_langs").shuffle(site_langs)

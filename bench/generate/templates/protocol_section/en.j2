@@ -1,0 +1,25 @@
+{# Sponsor-level protocol section: no site, no subjects, no persons (D-005). Context: study, part #}
+{% if part == "eligibility" %}
+{{ section("5.1 Inclusion Criteria") }}
+Participants are eligible for enrollment in protocol {{ protocol(study) }} only if all of the following apply:
+1. Adults aged 18 years or older at screening with a confirmed diagnosis of {{ study.indication }}.
+2. Adequate organ function as defined by the laboratory thresholds in Appendix 2.
+3. Willing and able to comply with scheduled visits, treatment plan and laboratory tests.
+4. Written informed consent obtained before any study-specific procedure.
+
+{{ section("5.2 Exclusion Criteria") }}
+1. Known hypersensitivity to {{ compound(study) }} or any of its excipients.
+2. Estimated glomerular filtration rate below 45 mL/min/1.73 m2 at screening.
+3. Participation in another interventional study within 30 days before the first dose.
+4. Pregnancy or breastfeeding, or unwillingness to use highly effective contraception.
+{% elif part == "statistics" %}
+{{ section("9.4 Statistical Methods") }}
+The primary analysis population for protocol {{ protocol(study) }} ({{ nct(study) }}; EudraCT {{ eudract(study) }}) is the full analysis set. Continuous endpoints are summarised with descriptive statistics and compared with an analysis of covariance adjusting for baseline value and stratification factors.
+{{ section("9.5 Sample Size") }}
+Assuming a two-sided significance level of 5% and a dropout rate of 10%, the planned sample size provides at least 85% power to detect the prespecified treatment difference.
+{% else %}
+{{ section("6.1 Study Treatment") }}
+Investigational product {{ compound(study) }} is supplied as film-coated tablets for oral administration once daily with water. Dose modifications follow the toxicity management table in Section 6.4.
+{{ section("6.2 Treatment Compliance") }}
+Compliance is assessed at each scheduled visit by tablet count and review of the dosing diary.
+{% endif %}

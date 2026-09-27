@@ -110,8 +110,10 @@ def _check_tags(doc: Document) -> Iterable[str]:
         yield f"unknown tags {unknown}"
     if len(set(doc.tags)) != len(doc.tags):
         yield "duplicate tags"
-    if bool(doc.negatives) != ("hard_negative" in doc.tags):
-        yield "tag hard_negative must be present iff the doc has negatives"
+    # D-015: the tag marks docs chosen by the hard-negative injector; other docs may still carry
+    # labeled negatives (e.g. protocol numbers in headers), so only tag -> negatives is required
+    if "hard_negative" in doc.tags and not doc.negatives:
+        yield "tag hard_negative requires labeled negatives"
     if doc.pii_depth is not None and doc.length_bucket not in (LengthBucket.LONG, LengthBucket.XL):
         yield "pii_depth is only set on long or xl docs"
 

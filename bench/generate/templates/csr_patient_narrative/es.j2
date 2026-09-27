@@ -1,0 +1,18 @@
+{{ section("Narrativa del paciente") }}: sujeto {{ subject_id(sub, alt="[sujeto]") }}
+Protocolo {{ protocol(study) }}, centro {{ site_no(site.site_no) }}
+
+{{ section("Datos demográficos") }}
+{{ name(sub.person, alt="El participante") }} ({{ initials(sub.person, alt="iniciales no registradas") }}), de {{ age(sub) }} años, nacido el {{ dob(sub, alt="fecha no registrada") }}, historia clínica {{ mrn(sub, alt="no registrada") }}, fue aleatorizado el {{ event_date(sub.enrolled, alt="día de aleatorización") }} (número de aleatorización {{ rand_no(sub, alt="no indicado") }}) y recibió la primera dosis de {{ compound(study) }} ese mismo día. Domicilio: {{ address(sub, site.city, alt="no registrado") }} {{ postcode(sub, alt="") }}.
+La medicación concomitante fue revisada por {{ name(pi, alt="el investigador") }}.
+
+{{ section("Acontecimiento adverso") }}
+{% if ae %}
+El {{ event_date(ae.onset, alt="día de una visita posterior") }} el participante notificó un acontecimiento ({{ ae.term }}, grado {{ ae.grade }}){% if ae.serious %}, considerado grave{% endif %}. {% if ae.resolved %}El acontecimiento se resolvió el {{ event_date(ae.resolved, alt="día posterior") }} sin secuelas.{% else %}El acontecimiento continuaba en la fecha de corte.{% endif %}
+
+
+{% else %}
+No se notificaron acontecimientos adversos durante el tratamiento.
+
+{% endif %}
+{{ section("Evolución") }}
+El participante continuó en el estudio según el protocolo.

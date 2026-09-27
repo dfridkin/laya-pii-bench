@@ -90,7 +90,6 @@ def test_valid_doc(policy: Policy) -> None:
         ({"spans": [span(8, 18, category="staff_pii", role="patient")]}, "staff or sponsor"),
         ({"tags": ["hard_negative", "sparkly"]}, "unknown tags"),
         ({"tags": ["hard_negative", "hard_negative"]}, "duplicate tags"),
-        ({"tags": []}, "hard_negative"),
         ({"negatives": []}, "hard_negative"),
         ({"pii_depth": "early"}, "pii_depth"),
         ({"lang": "fr"}, "lang"),
@@ -106,6 +105,11 @@ def test_invalid_docs(policy: Policy, patch: dict[str, Any], match: str) -> None
 def test_recorded_values_that_match_pass(policy: Policy) -> None:
     spans = [span(8, 18) | {"value": "Anna Nowak"}, span(24, 32) | {"value": "00482913"}]
     assert errors(policy, doc(spans=spans)) == []
+
+
+def test_negatives_without_tag_ok(policy: Policy) -> None:
+    # D-015: header/footer identifiers are labeled negatives without the hard_negative tag
+    assert errors(policy, doc(tags=[])) == []
 
 
 def test_staff_pii_sponsor_ok(policy: Policy) -> None:
@@ -129,7 +133,7 @@ def test_blank_lines_skipped_and_empty_file_not_ok(policy: Policy, tmp_path: Pat
 
 def test_cli_reports_counts(tmp_path: Path) -> None:
     p = tmp_path / "docs.jsonl"
-    p.write_text(json.dumps(doc()) + "\n" + json.dumps(doc(id="d2", tags=[])) + "\n")
+    p.write_text(json.dumps(doc()) + "\n" + json.dumps(doc(id="d2", negatives=[])) + "\n")
     policy_path = str(ROOT / "config" / "policy.yaml")
     result = CliRunner().invoke(app, ["validate", str(p), "--policy", policy_path])
     assert result.exit_code == 1
