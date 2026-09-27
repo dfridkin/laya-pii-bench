@@ -111,11 +111,13 @@ def gen(world: W.World, t: DocType, bucket: LengthBucket, k: int, **kw: object) 
     site = world.sites()[k % 24]
     cats = frozenset(c for c in PiiCategory if getattr(plan.pii, c.value) > 0)
     sponsor = plan.level == "sponsor"
-    return assemble(DocSpec(
-        doc_id=f"p-{t.value}-{k}", doc_type=t, lang="en", bucket=bucket, study=world.study_of(site),
-        site=None if sponsor else site, subject=site.subjects[k % 15] if t in SUBJECT_TYPES else None,
+    subject = site.subjects[k % 15] if t in SUBJECT_TYPES else None
+    ds = DocSpec(
+        doc_id=f"p-{t.value}-{k}", doc_type=t, lang="en", bucket=bucket,
+        study=world.study_of(site), site=None if sponsor else site, subject=subject,
         mode="clean" if sponsor else "normal", enabled=cats, **kw,  # type: ignore[arg-type]
-    ), SPEC, words)  # fmt: skip
+    )  # fmt: skip
+    return assemble(ds, SPEC, words)
 
 
 @pytest.mark.parametrize("t", list(DocType), ids=lambda t: t.value)
