@@ -94,9 +94,13 @@ def test_sae_forms_report_real_adverse_events(sample_docs: list) -> None:  # typ
     ):
         sub = subjects[d.world_refs.subjects[0]]
         assert sub.aes
-        onsets = {f for ae in sub.aes for f in date_forms(ae.onset)}
+        ae_dates = {
+            f for ae in sub.aes for x in (ae.onset, ae.resolved) if x for f in date_forms(x)
+        }
         event_dates = [s.value for s in d.spans if s.value_kind == "event_date"]
-        assert not event_dates or event_dates[0] in onsets  # the form's first date is the onset
+        # every event date on the form is one of this subject's real AE dates (partial redaction
+        # may remove the onset, so no positional assumption)
+        assert all(v in ae_dates for v in event_dates), (d.id, event_dates)
 
 
 def test_non_english_docs_are_native_only(sample_docs: list) -> None:  # type: ignore[type-arg]
@@ -156,3 +160,68 @@ def test_depth_subject_dates_are_avoided_by_document_dates() -> None:
             continue
         taken = {f for sid in d.world_refs.subjects for f, _ in subject_dates(subjects[sid])}
         assert not any(n.value in taken for n in d.negatives if n.kind == "non_phi_date"), d.id
+
+
+@pytest.fixture(scope="module")
+def world_and_docs() -> tuple:  # type: ignore[type-arg]
+    from bench.domain import DocType
+
+    world = W.build(SPEC, frozenset(template_vocabulary()))
+    slots_ = corpus.plan(SPEC, world)
+    want = [
+        *[s.idx for s in slots_ if s.doc_type in (DocType.CRF, DocType.DEVIATION)][:16],
+        *[s.idx for s in slots_ if s.partial_redact][:12],
+        *[s.idx for s in slots_ if s.lang != "en" and s.headers_footers][:6],
+    ]
+    return world, corpus.generate(SPEC, POLICY, words, only=sorted(set(want))).docs
+
+
+def test_logs_use_only_world_facts(world_and_docs: tuple) -> None:  # type: ignore[type-arg]
+    """N2: deviation rows are world deviations; N3: CRF rows are distinct (subject, visit)."""
+    from bench.generate.variants import date_forms
+
+    world, docs = world_and_docs
+    subjects = {s.subject_id: s for site in world.sites() for s in site.subjects}
+    for d in docs:
+        if d.doc_type.value == "deviation_log":
+            refs = [subjects[x] for x in d.world_refs.subjects]
+            dev_dates = {f for s in refs for dv in s.deviations for f in date_forms(dv.on)}
+            for sp in d.spans:
+                if sp.value_kind == "event_date" and "ocr_noise" not in d.tags:
+                    assert sp.value in dev_dates, (d.id, sp.value)
+
+
+def test_crf_rows_are_distinct_subject_visits(world_and_docs: tuple) -> None:  # type: ignore[type-arg]
+    """N3: CRF rows are sampled without replacement over (subject, visit)."""
+    from bench.domain import DocType, PiiCategory
+    from bench.generate.documents import VIEWS, ViewRequest
+    from bench.generate.render import DocCtx
+    from bench.generate.seeds import rng
+
+    world, _ = world_and_docs
+    for k, site in enumerate(world.sites()):
+        r = rng(3, "crf", k)
+        ctx = DocCtx(lang="en", rng=r, enabled=frozenset(PiiCategory))
+        req = ViewRequest(DocType.CRF, "en", world.study_of(site), site, None, "normal",
+                          frozenset(PiiCategory), r, {"rows": 60})  # fmt: skip
+        _, data, _ = VIEWS[DocType.CRF](req, ctx)
+        keys = [(row["sub"].subject_id, row["visit"]) for row in data["rows"]]
+        assert len(keys) == len(set(keys)) == 60
+
+
+def test_partial_redaction_mixes_placeholders_with_pii(world_and_docs: tuple) -> None:  # type: ignore[type-arg]
+    """N5: pre-redaction placeholders also occur in PII-bearing documents."""
+    _, docs = world_and_docs
+    partial = [d for d in docs if d.gen_meta.get("partial_redact") == 1]
+    assert partial
+    mixed = [d for d in partial if d.spans and any(n.kind == "pre_redacted" for n in d.negatives)]
+    assert len(mixed) >= len(partial) // 2
+    assert all("pre_redacted" in d.tags for d in mixed)
+
+
+def test_headers_are_localized(world_and_docs: tuple) -> None:  # type: ignore[type-arg]
+    """N6: running header/footer in the document's language."""
+    _, docs = world_and_docs
+    for d in docs:
+        if d.lang != "en" and "headers_footers" in d.tags:
+            assert "Confidential" not in d.text and "Page " not in d.text, d.id

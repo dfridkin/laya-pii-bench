@@ -60,6 +60,7 @@ class Slot:
     subject: W.Subject | None = None
     hard_negative: bool = False
     headers_footers: bool = False
+    partial_redact: bool = False
     post: list[str] = field(
         default_factory=lambda: []
     )  # "table:tab|fixed", "line_wrap", "ocr_noise"
@@ -158,6 +159,14 @@ def plan(spec: GenSpec, world: W.World) -> list[Slot]:
         if s.site is not None and (s.doc_type in SUBJECT_TYPES or s.depth):
             s.subject = s.site.subjects[r.randrange(len(s.site.subjects))]
 
+    # partial redaction: PII-bearing site docs (not depth docs, whose single block must stay PII)
+    partial_pool = [s for s in slots if s.site is not None and s.mode == "normal" and s.enabled
+                    and s.depth is None]  # fmt: skip
+    for s in _take(
+        rng(seed, "partial"), partial_pool, spec.partial_redaction_docs, "partial redaction"
+    ):
+        s.partial_redact = True
+
     # hard negatives, headers/footers, post-resolve perturbations: exact counts
     total = len(slots)
     for s in _take(rng(seed, "hardneg"), slots, spec.hard_negative_count, "hard negatives"):
@@ -184,6 +193,7 @@ def doc_spec(s: Slot, world: W.World) -> DocSpec:
         doc_id=f"d{s.idx:04d}", doc_type=s.doc_type, lang=s.lang, bucket=s.bucket, study=study,
         site=site, subject=s.subject, mode=s.mode, enabled=s.enabled,
         hard_negative=s.hard_negative, headers_footers=s.headers_footers, pii_depth=s.depth,
+        partial_redact=s.partial_redact,
     )  # fmt: skip
 
 
@@ -280,6 +290,8 @@ def v5(spec: GenSpec, docs: Sequence[Document]) -> list[str]:
     n_email = sum(d.doc_type is DocType.SITE_EMAIL for d in docs)
     if sum("email_quoting" in d.tags for d in docs) != n_email:
         out.append("V5 email_quoting must be on every site_correspondence doc")
+    if sum(d.gen_meta.get("partial_redact") == 1 for d in docs) != spec.partial_redaction_docs:
+        out.append("V5 partial_redaction docs count")
     if len([d for d in docs if d.pii_depth]) != spec.pii_depth_docs:
         out.append("V5 pii_depth docs count")
     return out

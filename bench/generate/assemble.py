@@ -34,12 +34,21 @@ TokenCounter = Callable[[str], int]
 PROSE = frozenset({DocType.PROTOCOL, DocType.NARRATIVE, DocType.MONITORING, DocType.SITE_EMAIL})
 # row knob per form type: (tokens per row, estimated; row cap)
 ROWS: dict[DocType, tuple[int, int]] = {
-    DocType.CRF: (32, 60), DocType.DEVIATION: (30, 60), DocType.CONMED: (26, 40),
+    DocType.CRF: (32, 60), DocType.CONMED: (26, 40),
     DocType.LAB: (80, 3),
 }  # fmt: skip
 PII_BLOCK = {  # the single PII paragraph of a depth doc (English: depth docs are long, so English)
     "en": "Note to file: {name} (subject {sid}) attended the visit on {date}; "
     "the source record was reviewed by {staff}.",
+}
+
+
+PARTIAL_RATE = 0.2  # share of enabled PII values redacted in a partially redacted doc
+HEADER = {  # running header/footer in the document's language (audit N6)
+    "en": ("Protocol", "Confidential", "Page"),
+    "de": ("Prüfplan", "Vertraulich", "Seite"),
+    "es": ("Protocolo", "Confidencial", "Página"),
+    "pl": ("Protokół", "Poufne", "Strona"),
 }
 
 
@@ -60,6 +69,7 @@ class DocSpec:
     enabled: frozenset[PiiCategory]
     hard_negative: bool = False
     headers_footers: bool = False
+    partial_redact: bool = False
     pii_depth: PiiDepth | None = None
     extra: dict[str, Any] = field(default_factory=lambda: {})
 
@@ -107,7 +117,8 @@ def _assemble(
         extra["rows"] = min(cap, max(3, int(0.6 * target / per_row * factor)))
 
     ctx = DocCtx(lang=ds.lang, rng=r, enabled=ds.enabled,
-                 mode="clean" if ds.pii_depth else ds.mode)  # fmt: skip
+                 mode="clean" if ds.pii_depth else ds.mode,
+                 partial_redact=PARTIAL_RATE if ds.partial_redact else 0.0)  # fmt: skip
     req = ViewRequest(
         ds.doc_type, ds.lang, ds.study, ds.site, ds.subject, ctx.mode, ds.enabled, r, extra
     )
@@ -151,7 +162,7 @@ def _assemble(
             i = min(max(depth_at or 0, 1), len(paras))  # never before the title line
             raw = "\n\n".join([*paras[:i], pii_block, *paras[i:]])
         if ds.headers_footers and paginate:
-            raw = _paginate(raw, header)
+            raw = _paginate(raw, header, HEADER[ds.lang][2])
         return raw
 
     headers: list[str] = []
@@ -159,7 +170,8 @@ def _assemble(
     def header(page: int) -> str:
         while len(headers) < page:  # one labeled protocol-number negative per page header
             headers.append(
-                f"{spec.world.sponsor} | Protocol {ctx.protocol(ds.study)} | Confidential"
+                f"{spec.world.sponsor} | {HEADER[ds.lang][0]} {ctx.protocol(ds.study)} | "
+                f"{HEADER[ds.lang][1]}"
             )
         return headers[page - 1]
 
@@ -186,14 +198,14 @@ def _assemble(
             id=ds.doc_id, doc_type=ds.doc_type, lang=ds.lang, text=out.text,
             spans=sorted(out.spans, key=lambda s: s.start),
             negatives=sorted(out.negatives, key=lambda x: x.start),
-            tags=tags + (["pre_redacted"] if ds.mode == "redacted" and any(
+            tags=tags + (["pre_redacted"] if any(
                 x.kind == "pre_redacted" for x in out.negatives) else []),
             length_bucket=ds.bucket, pii_depth=ds.pii_depth,
             world_refs=WorldRefs(study=ds.study.protocol_no,
                                  site=ds.site.site_no if ds.site else SPONSOR_SITE,
                                  subjects=subjects),
             gen_meta={"template": template, "mode": ds.mode, "sections": out.sections,
-                      "target_tokens": target},
+                      "target_tokens": target, "partial_redact": int(ds.partial_redact)},
         )  # fmt: skip
         if post is not None:
             doc = post(doc)
@@ -225,7 +237,7 @@ def _assemble(
 PARAS_PER_PAGE = 12
 
 
-def _paginate(raw: str, header: Callable[[int], str]) -> str:
+def _paginate(raw: str, header: Callable[[int], str], page_word: str = "Page") -> str:
     """Repeated page header (with the protocol number) and page footer every PARAS_PER_PAGE
     paragraphs; inserted before resolve so the header negatives are labeled natively."""
     paras = raw.split("\n\n")
@@ -235,8 +247,8 @@ def _paginate(raw: str, header: Callable[[int], str]) -> str:
         out.append(p)
         if k % PARAS_PER_PAGE == 0 and k < len(paras):
             page += 1
-            out += [f"Page {page - 1}", header(page)]
-    out.append(f"Page {page}")
+            out += [f"{page_word} {page - 1}", header(page)]
+    out.append(f"{page_word} {page}")
     return "\n\n".join(out)
 
 

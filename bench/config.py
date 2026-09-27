@@ -180,6 +180,9 @@ class GenSpec(_Cfg):
     length_tokens: dict[LengthBucket, tuple[int, int]]
     hard_negative_rate: float = Field(ge=0, le=1)
     pii_depth_docs: int = Field(ge=0)
+    # PII-bearing docs where some values appear as pre-redaction placeholders (so placeholders are
+    # not a "no PII" cue; M4 gold audit N5)
+    partial_redaction_docs: int = Field(default=0, ge=0)
     pii_depth_positions: dict[PiiDepth, tuple[float, float]]
     perturbations: Perturbations
     paraphrase: Paraphrase

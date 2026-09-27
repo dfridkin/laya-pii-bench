@@ -110,6 +110,10 @@ class DocCtx:
     rng: random.Random
     enabled: frozenset[PiiCategory]
     mode: Mode = "normal"
+    # share of enabled PII values rendered as pre-redaction placeholders instead (audit N5: the
+    # placeholders must not only occur in PII-free documents)
+    partial_redact: float = 0.0
+    _redact_next: bool = False
     slots: list[Slot] = field(default_factory=lambda: [])
     negs: list[Slot] = field(default_factory=lambda: [])
     heads: list[str] = field(default_factory=lambda: [])
@@ -143,10 +147,16 @@ class DocCtx:
     # --- gating -----------------------------------------------------------------------------
 
     def _on(self, category: PiiCategory) -> bool:
-        return self.mode == "normal" and category in self.enabled
+        if self.mode != "normal" or category not in self.enabled:
+            return False
+        if self.partial_redact and self.rng.random() < self.partial_redact:
+            self._redact_next = True
+            return False
+        return True
 
     def _off(self, role: str, alt: str | None) -> str:
-        if self.mode == "redacted":
+        if self.mode == "redacted" or self._redact_next:
+            self._redact_next = False
             return self.neg(self.pick(REDACTIONS), "pre_redacted")
         return alt if alt is not None else ALT[self.lang]["staff" if role == "sponsor" else role]
 

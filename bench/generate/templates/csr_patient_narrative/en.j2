@@ -1,5 +1,5 @@
 {# Patient narrative (CSR section 14.3.3 style). Context: study, site, sub, pi, ae #}
-{{ section("Patient Narrative") }}: Subject {{ subject_id(sub, alt="number not assigned") }}
+{{ section("Patient Narrative") }}: Subject {{ subject_id(sub, alt="number on file") }}
 Protocol {{ protocol(study) }}, site {{ site_no(site.site_no) }}
 
 {% set pc = postcode(sub, alt="") %}

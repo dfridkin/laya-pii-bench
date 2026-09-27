@@ -92,15 +92,26 @@ def _avoid(req: ViewRequest, subs: list[Subject]) -> list[Subject]:
 
 def _sae_subject(r: random.Random, site: Site, sub: Subject) -> tuple[Subject, AdverseEvent]:
     """An SAE form reports a real adverse event from the world (no invented events, so the same
-    subject's dates agree across SAE form, narrative and logs). If the planned subject has no AE,
-    another subject of the same site who has one is reported instead."""
-    if not sub.aes:
-        with_ae = [s for s in site.subjects if s.aes]
-        if not with_ae:
-            raise ValueError(f"site {site.key} has no subject with an adverse event")
-        sub = with_ae[r.randrange(len(with_ae))]
-    serious = [a for a in sub.aes if a.serious]
-    return sub, r.choice(serious or sub.aes)
+    subject's dates agree across SAE form, narrative and logs). Serious events are preferred: the
+    planned subject's if any, else another site subject's; only a site without any serious event
+    falls back to a non-serious one (audit N1)."""
+
+    def serious(x: Subject) -> list[AdverseEvent]:
+        return [a for a in x.aes if a.serious]
+
+    if serious(sub):
+        return sub, r.choice(serious(sub))
+    others = [x for x in site.subjects if serious(x)]
+    if others:
+        pick = others[r.randrange(len(others))]
+        return pick, r.choice(serious(pick))
+    if sub.aes:
+        return sub, r.choice(sub.aes)
+    with_ae = [x for x in site.subjects if x.aes]
+    if not with_ae:
+        raise ValueError(f"site {site.key} has no subject with an adverse event")
+    pick = with_ae[r.randrange(len(with_ae))]
+    return pick, r.choice(pick.aes)
 
 
 def _sae(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
@@ -121,13 +132,13 @@ def _sae(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]
 
 
 def _crf(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    """Vital-signs page: distinct (subject, visit) rows, so no row contradicts another (N3)."""
     assert req.site is not None
     r = req.rng
-    n = int(req.extra.get("rows", r.randint(3, 8)))
+    pairs = [(sub, v) for sub in req.site.subjects for v in range(1, len(sub.visits))]
+    n = min(len(pairs), int(req.extra.get("rows", r.randint(3, 8))))
     rows: list[dict[str, Any]] = []
-    for i in range(n):
-        sub = req.site.subjects[r.randrange(len(req.site.subjects))]
-        v = r.randint(1, len(sub.visits) - 1)
+    for i, (sub, v) in enumerate(sorted(r.sample(pairs, n), key=lambda p: (p[0].subject_id, p[1]))):
         rows.append({"sub": sub, "visit": f"Visit {v + 1}", "date": sub.visits[v],
                      "sbp": r.randint(105, 165), "dbp": r.randint(62, 98),
                      "hr": r.randint(55, 98), "temp": round(r.uniform(36.1, 37.8), 1),
@@ -173,17 +184,15 @@ def _monitoring(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], lis
 
 
 def _deviation(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list[str]]:
+    """The site's real deviations from the world (none invented, N2); length beyond the log comes
+    from filler sections in assembly."""
     assert req.site is not None
     r, site = req.rng, req.site
-    rows: list[dict[str, Any]] = []
-    for sub in site.subjects:
-        rows += [{"sub": sub, "date": d.on, "text": d.description} for d in sub.deviations]
-    n = int(req.extra.get("rows", r.randint(3, 8)))
-    while len(rows) < n:
-        sub = r.choice(site.subjects)
-        rows.append({"sub": sub, "date": sub.visits[r.randint(1, 4)],
-                     "text": "visit performed outside the protocol window"})  # fmt: skip
-    rows = sorted(rows[:n], key=lambda x: (x["date"], x["sub"].subject_id))
+    rows: list[dict[str, Any]] = [
+        {"sub": sub, "date": d.on, "text": d.description}
+        for sub in site.subjects for d in sub.deviations
+    ]  # fmt: skip
+    rows.sort(key=lambda x: (x["date"], x["sub"].subject_id))
     for x in rows:
         x["category"] = r.choice(["minor", "minor", "major"])
         x["reporter"] = site.staff[r.choice(["coordinator", "pi"])]
@@ -247,7 +256,8 @@ def _correspondence(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any],
         "ask_lines": r.sample(ASK, 1),
         "sent": safe_date(
             r, _avoid(req, subs), span_days=40,
-            lo=max((x.visits[1] for x in subs), default=STUDY_START) + timedelta(days=1),
+            lo=max((x.visits[1] for x in _avoid(req, subs)), default=STUDY_START)
+            + timedelta(days=1),
         ),
     }  # fmt: skip
     return f"site_correspondence/{req.lang}.j2", data, sorted(s.subject_id for s in subs)
