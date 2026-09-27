@@ -37,9 +37,11 @@ bench/generate/
   negatives.py     # hard-negative registry + injector
   assemble.py      # length buckets, filler blocks, PII-depth placement
   perturb.py       # perturbations + span remap
-  validate.py      # V1..V6
-  templates/<doc_type>/*.j2
-  filler/          # grammar files for clean filler blocks
+  checks.py        # V1..V4 per document (V2 scanner); V5/V6 corpus-level in corpus.py
+  documents.py     # per-doc-type views (which world entities a doc shows)
+  corpus.py        # planner (exact allocations), generation, manifest
+  templates/<doc_type>/<lang>.j2
+  data/            # filler grammar, hard-negative sentences (YAML; words join the name vocabulary)
 ```
 
 ## Sentinels (the only labeling path)
@@ -103,19 +105,26 @@ Filler default: grammar-generated boilerplate (eligibility, statistical methods,
 An LLM-written filler bank is allowed only if every block passes V2 plus an NER scan and the bank
 is frozen by hash (needs a DECISIONS entry). Never copy real protocol text.
 
-## Perturbations (after resolve, with span remap)
+## Perturbations
 
-Every transform returns `(position, delta)` edits; spans and negatives shift accordingly. A span
-that gains an inserted newline grows but stays labeled. OCR noise that changes a span's characters
-updates the span (still PII).
+Content-adding steps (hard-negative paragraphs, filler sections, repeated headers/footers, the
+PII-depth block) are spliced into the raw rendered text *before* the single sentinel resolve, so
+everything they add is labeled by the same pass and needs no remap. Email quoting is native to the
+correspondence templates. (The original plan remapped these after resolve; a `(position, delta)`
+remap cannot express inserted labeled content, so they moved before resolve. M4, 2026-09-27.)
+
+Character-level transforms run after resolve with span remap: each returns edits
+`(pos, length, new_text)`; an edit never straddles a span/negative boundary, lying either wholly
+inside a labeled value (the value changes and stays labeled) or wholly outside. A span that gains a
+newline grows but stays labeled; OCR noise that changes a span's characters updates the span.
 
 | Perturbation | Rate (gen_spec) |
 |---|---|
 | Line wrap at fixed width | 0.30 |
 | OCR noise (`l↔1`, `O↔0`, drops) | 0.10 |
 | Table rendering (pipe / tab / fixed width) | 0.20 |
-| Repeated headers/footers | 0.40 |
-| Email quoting + signatures | site_correspondence only |
+| Repeated headers/footers (before resolve) | 0.40 |
+| Email quoting + signatures (in templates) | site_correspondence only |
 
 ## Validators (generation fails loudly)
 

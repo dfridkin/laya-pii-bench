@@ -40,3 +40,4 @@ Append entries as `YYYY-MM-DD D-nnn: <change> (by <who>)`.
 - 2026-09-26 D-013 confirmed as written, incl. `--allow-no-meta` only with a fixture_debug calib; OPEN -> DECIDED (by Dmitriy).
 - 2026-09-26 D-019 decided (audit C1): calib frozen in git before scoring, enforced by `bench score`; built in M5 (by Dmitriy).
 - 2026-09-26 D-015 addendum: doc_plan in config/gen_spec.yaml approved as drafted; non-English docs restricted to the short bucket (by Dmitriy).
+- 2026-09-27 D-015 addendum (M4, gate review F3; by Claude, pending owner): gen_spec gained `world.site_locales` (14 en / 4 de / 3 es / 3 pl sites; non-English docs come from sites of their locale) and `partial_redaction_docs: 60` (PII-bearing docs with some values pre-redacted, so placeholders are not a no-PII cue; gold audit N5; 46 of 60 realize a placeholder at the 0.2 per-value rate).

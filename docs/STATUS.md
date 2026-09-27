@@ -1,7 +1,7 @@
 # Status
 
-Active milestone: **M4 Generator**
-Last updated: 2026-09-27 (M4 built; gate review pending)
+Active milestone: **M5 Label + split**
+Last updated: 2026-09-27 (M4 gate passed)
 
 | Milestone | State | Gate passed | Notes |
 |---|---|---|---|
@@ -9,7 +9,7 @@ Last updated: 2026-09-27 (M4 built; gate review pending)
 | M1 Contracts + fixture | done | 2026-09-26 (`reports/audits/M1-gate-20260926.md`) | fixture locked; gold audit 0 errors |
 | M2 Scorer + report on fixture | done | 2026-09-26 (`reports/audits/M2-gate-20260926-pass.md`; review #1 FAIL fixed) | golden metrics exact; hash check exits 2 |
 | M3 Runner, arm A on fixture | done | 2026-09-26 (`reports/audits/M3-gate-20260926-pass.md`; review #1 FAIL fixed) | real laya run on fixture; p50 ~500 ms/unit (qs_v1, mps) |
-| M4 Generator | built, gate review pending | | 600 docs, V1-V6 pass, deterministic; gold audit 0 errors |
+| M4 Generator | done | 2026-09-27 (`reports/audits/M4-gate-20260927.md`; gold: `M4_gold_audit_run3_final.md`) | 600 docs, V1-V6 pass, deterministic; gold audit 0 errors |
 | M5 Label + split | not started | | |
 | M6 Zero-shot arms, calibrate, score, report v1 | not started | | |
 | M7 HUD replay | not started | | |
@@ -219,6 +219,9 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Later (out of current scope, noted for the owning milestone)
 
+- M5: D-019 needs `.gitignore` to stop ignoring calib/ and scores/ (still ignored).
+- M5: stratify the site split on site locale too (language slice), and on doc-type mix.
+
 - Done (audit A9): instead of making `Decision.mode` required (the locked mock decisions lack it),
   `score` rejects any row whose mode doesn't match its run's `meta.json`; meta-less run dirs are
   refused by the runner, and by calibrate/score unless `--allow-no-meta` (fixture debug only).
@@ -257,7 +260,8 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-M4: gold audit done (zero label errors); run `/gate M4`. Audit items C2-C8 before M6 (C1 decided:
+Decide R4/F1 (lexical shortcut: accept with an M6 clean-view slice, or fix now) and record it
+in DECISIONS.md; then `/milestone M5`. Audit items C2-C8 before M6 (C1 decided:
 D-019, built in M5).
 
 ## Session log
@@ -274,3 +278,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-26 C1 decided as D-019 (calib freeze in git, enforced by score); added to M5 build + gate, M6 gate 2 made checkable.
 - 2026-09-27 M4: generator built (4a-4g); make gen 600 docs, V1-V6 pass, deterministic; gold audit + gate review pending.
 - 2026-09-27 M4: gold audit runs 1-3 zero label errors; generator realism fixes between runs; final corpus 3507af1f; gate review next.
+- 2026-09-27 M4: gate PASS (independent review); spec/DECISIONS/MILESTONES updated for F2-F4; R4 decision pending.

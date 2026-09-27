@@ -135,6 +135,8 @@ commit after each.
 4. Hypothesis tests on renderer and span remap pass (≥ 500 examples each).
 5. `gold-auditor` subagent reviews a seeded random sample of 30 docs and reports zero label errors.
    Its report is saved to `reports/audits/M4_gold_audit.md`.
+   *Final-corpus record: `reports/audits/M4_gold_audit_run3_final.md` (runs 1-2 audited earlier
+   corpora; audits are write-once).*
 
 ---
 
