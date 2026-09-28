@@ -78,20 +78,21 @@ def derive_gold(doc: Document, members: Sequence[Span], policy: Policy) -> GoldA
         role = "both"
     elif roles:
         role = "patient" if "patient" in roles else "staff"
-    present = {s.category for s in counted}
+    # category: the most sensitive kind present, from raw presence (D-001: coded ids are not PII
+    # for pii_present/subject_role, but "coded" stays a reachable category answer)
+    present = {s.category for s in members}
     category: CategoryAnswer = "none"
     for c in policy.category_precedence:
         if c in present:
             category = policy.category_answer_map[c]
             break
     doc_kind: DocKindAnswer = policy.doc_kind_map[doc.doc_type]
-    raw_present = {s.category for s in members}
     return GoldAnswers(
         pii_present="A" if counted else "B",
         subject_role=role,
         category=category,
         doc_kind=doc_kind,
-        categories_multi={c: c in raw_present for c in PiiCategory},
+        categories_multi={c: c in present for c in PiiCategory},
     )
 
 

@@ -1,8 +1,8 @@
 # Gold-label policy. Changing this file changes gold answers: rerun `label` onward.
 version: 1
 
-# D-001 (OPEN, provisional): are coded subject / randomization IDs PII?
-coded_id_is_pii: true
+# D-001 (DECIDED 2026-09-27): coded subject / randomization IDs are not PII on their own.
+coded_id_is_pii: false
 
 # Categories that make pii_present = A. coded_id is added automatically iff coded_id_is_pii.
 pii_categories: [phi_direct, phi_quasi, staff_pii]

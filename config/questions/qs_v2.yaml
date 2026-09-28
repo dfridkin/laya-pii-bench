@@ -3,7 +3,7 @@ id: qs_v2
 questions:
   pii_present:
     type: choice
-    instructions: Does this text contain personal identifiers of a real individual (patient or site staff), such as names, contact details, record numbers, birth dates, or study subject numbers?
+    instructions: Does this text contain personal identifiers of a real individual (patient or site staff), such as names, contact details, medical record numbers, or birth dates?
     criteria:
       A: yes, it contains at least one personal identifier
       B: no, it contains no personal identifiers

@@ -27,7 +27,7 @@ def test_state_room_per_question_is_exact(client) -> None:  # type: ignore[no-un
     # laya: [CLS] head [SEP] options [SEP] state [SEP], capped at max_len 512. Pinned values,
     # independently reproduced with laya.common.build_sequence in the M3 gate review.
     assert client._room == {
-        "pii_present": 449,
+        "pii_present": 452,  # 449 before D-001 shortened the question
         "subject_role": 458,
         "category": 420,
         "doc_kind": 459,

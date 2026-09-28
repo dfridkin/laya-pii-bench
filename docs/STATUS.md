@@ -17,9 +17,17 @@ Last updated: 2026-09-27 (M4 gate passed)
 
 ## Provisional defaults in use
 
-- D-001 coded IDs counted as PII.
-- D-002 dev hardware only.
-- D-014 routing on calibrated p(pii); metrics on max p; laya `confidence` stored, unused.
+None. D-001 (no), D-002 (M2 on-device; HF inference fallback), D-008 (amended), D-014 (top
+probability) decided 2026-09-27.
+
+## Audit C-items (before M6)
+
+- C1 decided (D-019), built in M5. C2 done (invariant 6 reworded, D-014). C3 decided (D-008 amended).
+- C4-C8 owned by Claude, no decision needed: C4 probe B3/B4 memory on the M2 before M6 (failure goes
+  to the D-002 fallback); C5 align B2 target (1800 > 1792 budget) and keep long/xl overshoot as the
+  truncated slice; C6 batch-1 vs batched side by side in score/report; C7 score writes a routed
+  JSONL for the HUD; C8 `bench smoke`, split config section, `splits_to_run`, qs_v1 vs qs_v2
+  comparison section, MPS autocast switch detection.
 
 ## M0 evidence
 
@@ -264,7 +272,9 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-Run `/milestone M5` (label + split; includes D-019 calib freeze). Audit items C2-C8 before M6 (C1 decided:
+Run `/milestone M5` (label + split; includes D-019 calib freeze). D-001 changed fixture gold for
+fx04/fx05 under the live policy: regenerate `data/mini` units, the fixture run and fixture reports
+through the stages in M5. Audit items C2-C8 before M6 (C1 decided:
 D-019, built in M5).
 
 ## Session log
@@ -283,3 +293,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-27 M4: gold audit runs 1-3 zero label errors; generator realism fixes between runs; final corpus 3507af1f; gate review next.
 - 2026-09-27 M4: gate PASS (independent review); spec/DECISIONS/MILESTONES updated for F2-F4; R4 decision pending.
 - 2026-09-27 M4: R4 shortcut fixed (D-020), gold audit run 4 zero label errors; corpus 9a88ce5c; ready for M5.
+- 2026-09-27 decisions: D-001 no, D-002 M2 on-device (+HF fallback), D-014 top probability, D-008 amended (C3), invariant 6 reworded (C2).

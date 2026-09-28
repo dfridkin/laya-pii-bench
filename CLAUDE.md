@@ -65,7 +65,9 @@ converted to TS types for the HUD. Change a type there first, then everything do
    can be re-swept without re-running inference.
 5. **No `noul` questions on the English checkpoint.** Use two-option `choice` with neutral keys
    `A`/`B` (known label-following bug). See `docs/specs/laya-runtime.md`.
-6. **Gate on `confidence`, never `action.act_probability`** (carries no signal in current release).
+6. **Gate on calibrated probability, never `action.act_probability`** (no signal in current release).
+   Routing thresholds apply to calibrated p(pii_present = A); calibration metrics use the top
+   probability (laya `answer_confidence`). laya's entropy `confidence` is stored, never gated on (D-014).
 7. **Truncation is never silent.** Count tokens with each checkpoint's own tokenizer; a unit over
    budget is flagged `truncated=true` and reported as its own slice.
 8. **Multilingual long context:** always pass `model="multilingual"` and an explicit `max_len`.

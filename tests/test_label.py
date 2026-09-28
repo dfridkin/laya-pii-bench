@@ -21,6 +21,7 @@ from tests.fixture_expected import FIXTURE_UNIT_OFFSETS, FIXTURE_UNITS
 
 ROOT = Path(__file__).resolve().parent.parent
 POLICY = load_policy(ROOT / "config" / "policy.yaml")
+FIXTURE_POLICY = POLICY.model_copy(update={"coded_id_is_pii": True})
 ARMS = load_arms(ROOT / "config" / "arms.yaml")
 
 
@@ -152,7 +153,9 @@ def test_member_spans_overlap_semantics() -> None:
         ([span(0, 4)], ("A", "patient", "direct")),
         ([span(0, 4, "staff_pii", "staff")], ("A", "staff", "staff")),
         ([span(0, 4, "staff_pii", "sponsor")], ("A", "staff", "staff")),  # D-017
-        ([span(0, 4, "coded_id"), span(5, 9, "staff_pii", "staff")], ("A", "both", "coded")),
+        # D-001: coded ids don't make a unit PII or add a role, but stay the category answer
+        ([span(0, 4, "coded_id"), span(5, 9, "staff_pii", "staff")], ("A", "staff", "coded")),
+        ([span(0, 4, "coded_id")], ("B", "none", "coded")),
         ([span(0, 4, "phi_quasi"), span(5, 9, "phi_direct")], ("A", "patient", "direct")),
     ],
 )
@@ -162,12 +165,12 @@ def test_derive_gold(spans: list[Span], want: tuple[str, str, str]) -> None:
     assert gold.doc_kind == "narrative"
 
 
-def test_coded_id_not_pii_when_policy_says_so() -> None:
-    policy = POLICY.model_copy(update={"coded_id_is_pii": False})
+def test_coded_ids_count_when_policy_says_so() -> None:
+    policy = POLICY.model_copy(update={"coded_id_is_pii": True})  # the D-001 alternative
     spans = [span(0, 4, "coded_id")]
     gold = derive_gold(doc("x" * 20, spans), spans, policy)
-    assert (gold.pii_present, gold.subject_role, gold.category) == ("B", "none", "none")
-    assert gold.categories_multi[PiiCategory.CODED_ID] is True  # raw presence, for qs_v2
+    assert (gold.pii_present, gold.subject_role, gold.category) == ("A", "patient", "coded")
+    assert gold.categories_multi[PiiCategory.CODED_ID] is True
 
 
 def arm(**kw: Any) -> Arm:
@@ -209,9 +212,19 @@ def test_fixture_units_match_hand_gold() -> None:
 
     tok = tokenize.load("english", ROOT / "models.lock.json")
     docs = read_docs(ROOT / "fixtures" / "mini" / "docs.jsonl")
-    units = label_docs(docs, ARMS.arms["A"], POLICY, tok, tok.name)
+    # FIXTURE_UNITS was hand-derived with coded ids counting as PII; pin that policy here so the
+    # hand table (and the golden metric arithmetic built on it) stays valid
+    units = label_docs(docs, ARMS.arms["A"], FIXTURE_POLICY, tok, tok.name)
     got = {u.id: (u.gold, u.split_span) for u in units}
     assert got == FIXTURE_UNITS
+    # the live policy (D-001: no) differs only where coded ids were a unit's only PII
+    live = {u.id: u.gold for u in label_docs(docs, ARMS.arms["A"], POLICY, tok, tok.name)}
+    changed = {k: (g.pii_present, g.subject_role, g.category) for k, g in live.items()
+               if g != FIXTURE_UNITS[k][0]}  # fmt: skip
+    assert changed == {
+        "fx04:chunk:512:0": ("B", "none", "coded"),  # CRF with subject ids only
+        "fx05:chunk:512:0": ("A", "staff", "coded"),  # staff email mentioning a subject id
+    }
     assert {u.id: (u.start, u.end, u.tokens) for u in units} == FIXTURE_UNIT_OFFSETS
     assert all(not u.truncated and u.tokens <= 256 for u in units)
     # units record exactly which tokenizer revision counted them (audit A10)

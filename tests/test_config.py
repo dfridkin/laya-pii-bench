@@ -34,14 +34,14 @@ def dump(tmp_path: Path, name: str, data: Any) -> Path:
 
 def test_policy_loads() -> None:
     p = config.load_policy(CFG / "policy.yaml")
-    assert p.coded_id_is_pii is True  # D-001 provisional
-    assert PiiCategory.CODED_ID in p.effective_pii_categories
+    assert p.coded_id_is_pii is False  # D-001 decided: coded ids alone are not PII
+    assert PiiCategory.CODED_ID not in p.effective_pii_categories
 
 
 def test_policy_coded_id_toggle(tmp_path: Path) -> None:
-    data = raw("policy.yaml") | {"coded_id_is_pii": False}
+    data = raw("policy.yaml") | {"coded_id_is_pii": True}
     p = config.load_policy(dump(tmp_path, "policy.yaml", data))
-    assert PiiCategory.CODED_ID not in p.effective_pii_categories
+    assert PiiCategory.CODED_ID in p.effective_pii_categories
 
 
 def test_gen_spec_loads() -> None:

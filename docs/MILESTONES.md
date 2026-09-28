@@ -184,7 +184,9 @@ commit after each.
    older than the scores' `created_at` (D-019).
 3. `reports/report.md` includes headline operating point, per-question metrics, calibration
    raw vs. calibrated, speed table with hardware label, all slices, bootstrap CIs.
-4. If any headline recall CI half-width > 0.01, STATUS flags D-008 for review.
+4. D-008 (amended): if arm A's test recall point estimate minus its exact 95% lower bound exceeds
+   0.01, STATUS flags D-008 for review. Doc-level arms (B3, B4) are labelled underpowered in the
+   report instead.
 5. `results-analyst` review saved to `reports/audits/M6_results_review.md`.
 
 ---
