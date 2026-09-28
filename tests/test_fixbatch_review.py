@@ -15,6 +15,7 @@ from bench.config import load_policy
 from bench.domain import Answer, CalibParams, Decision, HwInfo, RunMeta
 from bench.label import read_docs, write_units
 from tests.fixture_expected import fixture_units
+from tests.gitutil import commit_file
 
 ROOT = Path(__file__).resolve().parent.parent
 MINI = ROOT / "fixtures" / "mini"
@@ -66,6 +67,7 @@ def test_meta_less_decisions_refused_without_override(tmp_path: Path) -> None:
                   str(MINI / "docs.jsonl"), "--allow-debug-calib"]  # fmt: skip
     r = RUN.invoke(app, score_args)
     assert r.exit_code == 2 and "no meta.json" in r.output
+    commit_file(tmp_path / "c.json")
     r = RUN.invoke(app, [*score_args, "--allow-no-meta"])
     assert r.exit_code == 0
     caveats = json.loads((tmp_path / "s.json").read_text())["caveats"]

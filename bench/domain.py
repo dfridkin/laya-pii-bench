@@ -462,6 +462,9 @@ class RunContext(_Model):
     calib_hash: str
     calib_fit_on: Literal["calib", "fixture_debug"]
     calib_temperature_fallbacks: dict[str, str]
+    # D-019: the git commit that froze the calib file, and its commit time
+    calib_commit: str
+    calib_committed_at: str
     hw: HwInfo | None
     laya_version: str
     checkpoints: list[str]

@@ -648,6 +648,7 @@ def score(
     hw: HwInfo | None,
     hashes: Mapping[str, str],
     extra_caveats: Sequence[str] = (),
+    calib_commit: tuple[str, str] = ("not-verified", ""),
 ) -> Scores:
     unit_map = {u.id: u for u in units}
     doc_map = {d.id: d for d in docs}
@@ -670,6 +671,8 @@ def score(
         calib_hash=calib.content_hash,
         calib_fit_on=calib.fit_on,
         calib_temperature_fallbacks=dict(calib.temperature_fallbacks),
+        calib_commit=calib_commit[0],
+        calib_committed_at=calib_commit[1],
         hw=hw,
         laya_version=hw.laya if hw else "unknown",
         checkpoints=sorted({d.checkpoint for d in live}),
@@ -680,5 +683,9 @@ def score(
         context=context,
         splits=splits,
         speed=speed(decisions, unit_map, hw),
-        caveats=[*extra_caveats, *caveats(splits, calib)],
+        caveats=[
+            *extra_caveats,
+            *(["calib commit not verified (D-019)"] if calib_commit[0] == "not-verified" else []),
+            *caveats(splits, calib),
+        ],
     )

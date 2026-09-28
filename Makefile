@@ -9,7 +9,7 @@ QSETS ?= qs_v1 qs_v2
 BENCH := uv run bench
 
 .PHONY: bootstrap check lint type test schema fixture gen label split run run-all \
-        calibrate score report hud pipeline smoke hw clean-generated
+        calibrate freeze-calib score report hud pipeline smoke hw clean-generated
 
 bootstrap:
 	./scripts/bootstrap.sh
@@ -59,11 +59,16 @@ run:
 run-all:
 	@for a in $(ARMS); do for q in $(QSETS); do $(BENCH) run --arm $$a --qs $$q || exit 1; done; done
 
-calibrate:
-	$(BENCH) calibrate --all
+calibrate:  # fits on the calib split only; then `make freeze-calib` (D-019)
+	$(BENCH) calibrate --decisions runs/$(ARM)/$(QS)/decisions.jsonl --units data/units/$(ARM).jsonl \
+	  --out calib/$(ARM)__$(QS).json
+
+freeze-calib:  # commit calib/*.json with content hashes; score refuses uncommitted calib
+	$(BENCH) freeze-calib calib/*.json
 
 score:
-	$(BENCH) score --all
+	$(BENCH) score --decisions runs/$(ARM)/$(QS)/decisions.jsonl --units data/units/$(ARM).jsonl \
+	  --calib calib/$(ARM)__$(QS).json --out scores/$(ARM)__$(QS).json
 
 report:
 	$(BENCH) report --out reports/report.md --hud hud/public/replay.json
@@ -71,7 +76,7 @@ report:
 hud:
 	cd hud && npm install && npm run build
 
-pipeline: gen label split run-all calibrate score report
+pipeline: gen label split run-all calibrate freeze-calib score report
 
 smoke:
 	$(BENCH) smoke --docs 20 --arm A --qs qs_v1

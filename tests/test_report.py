@@ -12,6 +12,7 @@ from bench.domain import Scores
 from bench.label import write_units
 from bench.report import SECTIONS, render
 from tests.fixture_expected import fixture_units
+from tests.gitutil import commit_file
 
 ROOT = Path(__file__).resolve().parent.parent
 MINI = ROOT / "fixtures" / "mini"
@@ -37,6 +38,7 @@ def pipeline(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     r = RUN.invoke(app, ["calibrate", *common, "--out", str(paths["calib"]), "--debug-fit-all",
                          "--allow-no-meta"])  # fmt: skip
     assert r.exit_code == 0, r.output
+    commit_file(paths["calib"])  # D-019: score reads only committed calib
     r = RUN.invoke(
         app,
         ["score", *common, "--calib", str(paths["calib"]), "--out", str(paths["scores"]),

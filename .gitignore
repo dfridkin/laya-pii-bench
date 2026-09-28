@@ -7,11 +7,10 @@ __pycache__/
 .coverage
 htmlcov/
 
-# Generated artifacts (reproducible from config + seed)
+# Generated artifacts (reproducible from config + seed). calib/ and scores/ are tracked (D-019):
+# calib files are frozen by commit before scoring; scores cite that commit.
 data/
 runs/
-calib/
-scores/
 hw.json
 
 # Keep reports/ tracked (report.md, audits), ignore bulky exports

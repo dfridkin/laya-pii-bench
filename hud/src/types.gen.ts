@@ -484,6 +484,8 @@ export interface RoutingMetrics {
  */
 export interface RunContext {
   arm: string;
+  calib_commit: string;
+  calib_committed_at: string;
   calib_fit_on: "calib" | "fixture_debug";
   calib_hash: string;
   calib_temperature_fallbacks: {

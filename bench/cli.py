@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Any, Literal
 
 import typer
 
@@ -145,12 +145,31 @@ def label(
         typer.echo(f"{name}: {len(units)} units ({n_trunc} truncated) -> {out / name}.jsonl")
 
 
+def _run_meta(decisions: Path) -> Any:
+    from bench.domain import RunMeta
+
+    meta_path = decisions.parent / "meta.json"
+    return RunMeta.model_validate_json(meta_path.read_text()) if meta_path.exists() else None
+
+
+def _load_splits(splits: Path) -> Any:
+    from bench.domain import Splits
+
+    if not splits.exists():
+        typer.echo(f"error: {splits} not found: run `bench split` first", err=True)
+        raise typer.Exit(2)
+    return Splits.model_validate_json(splits.read_text())
+
+
 @app.command()
 def calibrate(
     decisions: Annotated[Path, typer.Option(help="Decisions JSONL for one arm x qs.")],
     units: Annotated[Path, typer.Option(help="Units JSONL (gold answers).")],
     out: Annotated[Path, typer.Option(help="Calib params JSON to write.")],
     policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),
+    splits: Annotated[Path, typer.Option(help="Splits (fit on calib only).")] = Path(
+        "data/splits.json"
+    ),
     debug_fit_all: Annotated[
         bool, typer.Option(help="Fixture only: fit on every unit (no calib split). Labeled.")
     ] = False,
@@ -161,38 +180,45 @@ def calibrate(
         ),
     ] = False,
 ) -> None:
-    """Fit temperatures and routing thresholds on the calib split; write hashed params."""
+    """Fit temperatures and routing thresholds on the calib split only (invariant 3); write
+    hashed params. Commit them with `make freeze-calib` before scoring (D-019)."""
     from bench import calibrate as cal
     from bench.config import load_policy
     from bench.label import read_units
-    from bench.score import read_decisions
+    from bench.score import read_decisions, sha256_file
 
-    if not debug_fit_all:
-        typer.echo("calib split selection arrives with `bench split` (M5); use --debug-fit-all")
-        raise typer.Exit(2)
-    from bench.domain import RunMeta
-    from bench.score import sha256_file
-
-    hashes = {"decisions": sha256_file(decisions), "units": sha256_file(units)}
-    meta_path = decisions.parent / "meta.json"
-    if not meta_path.exists() and not allow_no_meta:  # debug_fit_all is required above
+    meta = _run_meta(decisions)
+    if meta is None and not (debug_fit_all and allow_no_meta):
         typer.echo(
             f"error: no meta.json next to {decisions}; units provenance can't be checked "
             "(fixture-only override: --debug-fit-all --allow-no-meta)",
             err=True,
         )
         raise typer.Exit(2)
-    if meta_path.exists():
-        run_units = RunMeta.model_validate_json(meta_path.read_text()).config_hashes.get("units")
-        if run_units != hashes["units"]:
+    hashes = {"decisions": sha256_file(decisions), "units": sha256_file(units)}
+    if meta is not None:
+        if meta.config_hashes.get("units") != hashes["units"]:
             typer.echo(
                 f"error: {units} differs from the units this run was produced from", err=True
             )
             raise typer.Exit(2)
+        if debug_fit_all and meta.dataset == "main":  # D-013
+            typer.echo("error: --debug-fit-all is refused on the main dataset (D-013)", err=True)
+            raise typer.Exit(2)
     unit_map = {u.id: u for u in read_units(units)}
+    rows = read_decisions(decisions)
+    fit_on: Literal["calib", "fixture_debug"] = "fixture_debug"
+    if not debug_fit_all:
+        sp = _load_splits(splits)
+        if meta is not None and meta.config_hashes.get("splits") not in (None, sha256_file(splits)):
+            typer.echo(f"error: {splits} differs from the splits this run used", err=True)
+            raise typer.Exit(2)
+        calib_units = {k: u for k, u in unit_map.items() if sp.doc_split.get(u.doc_id) == "calib"}
+        rows = [d for d in rows if d.warmup or d.unit_id in calib_units]
+        unit_map = calib_units
+        fit_on = "calib"
     try:
-        params = cal.fit(read_decisions(decisions), unit_map, load_policy(policy), "fixture_debug",
-                         input_hashes=hashes)  # fmt: skip
+        params = cal.fit(rows, unit_map, load_policy(policy), fit_on, input_hashes=hashes)
     except cal.CalibError as e:
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(2) from e
@@ -200,7 +226,28 @@ def calibrate(
     typer.echo(
         f"{params.arm}/{params.qs}: t_low={params.t_low:.4f} "
         f"t_high={'none' if params.t_high is None else f'{params.t_high:.4f}'} "
-        f"fit_on={params.fit_on} hash={params.content_hash[:12]} -> {out}"
+        f"fit_on={params.fit_on} calib docs={len(params.calib_doc_ids)} "
+        f"hash={params.content_hash[:12]} -> {out}"
+    )
+
+
+@app.command("freeze-calib")
+def freeze_calib(
+    paths: Annotated[list[Path], typer.Argument(help="Calib params JSON files to commit.")],
+) -> None:
+    """Commit calib files (content hashes in the message) so `score` can verify them (D-019)."""
+    from bench import calibrate as cal
+    from bench import freeze
+
+    try:
+        for p in paths:
+            cal.load_verified(p, allow_debug=True)  # only intact, hash-valid params get frozen
+        sha = freeze.freeze(paths)
+    except (cal.CalibError, freeze.FreezeError) as e:
+        typer.echo(f"error: {e}", err=True)
+        raise typer.Exit(2) from e
+    typer.echo(
+        "nothing to commit" if sha is None else f"frozen {len(paths)} calib file(s) at {sha}"
     )
 
 
@@ -277,6 +324,9 @@ def run_cmd(
     models_lock: Annotated[Path, typer.Option(help="Pinned checkpoints.")] = Path(
         "models.lock.json"
     ),
+    splits: Annotated[Path, typer.Option(help="Splits (main dataset only).")] = Path(
+        "data/splits.json"
+    ),
 ) -> None:
     """Run one arm x question set over units: raw probabilities, honest timing, resumable."""
     import json
@@ -295,11 +345,6 @@ def run_cmd(
     if arm not in cfg.arms or not cfg.arms[arm].enabled:
         raise typer.BadParameter(f"arm {arm!r} is not an enabled arm in {arms}")
     spec_arm, dataset = cfg.arms[arm], dataset_name(docs)
-    if dataset == "main":
-        typer.echo(
-            "running on the main dataset needs `bench split` (M5) to select splits", err=True
-        )
-        raise typer.Exit(2)
     if batch_size < 1:
         raise typer.BadParameter("batch size must be >= 1")
     units = units or units_dir(docs) / f"{arm}.jsonl"
@@ -317,6 +362,15 @@ def run_cmd(
     missing = sorted({u.doc_id for u in unit_list} - set(doc_map))
     if missing:
         raise typer.BadParameter(f"units reference docs not in {docs}: {missing[:3]}")
+    split_hash: dict[str, str] = {}
+    if dataset == "main":  # only the configured splits; train is never run zero-shot
+        sp = _load_splits(splits)
+        if sp.docs_sha256 != sha256_file(docs):
+            typer.echo(f"error: {splits} was built from different documents", err=True)
+            raise typer.Exit(2)
+        keep = set(cfg.defaults.splits_to_run)
+        unit_list = [u for u in unit_list if sp.doc_split[u.doc_id] in keep]
+        split_hash = {"splits": sha256_file(splits)}
     texts = {u.id: doc_map[u.doc_id].text[u.start : u.end] for u in unit_list}
     arm_json = json.dumps(spec_arm.model_dump(mode="json"), sort_keys=True).encode()
     hashes = {
@@ -324,6 +378,7 @@ def run_cmd(
         "question_set": sha256_file(qs_path),
         "docs": sha256_file(docs),
         "units": sha256_file(units),
+        **split_hash,
     }
     spec = RunSpec(
         arm=arm, qs=qset, questions=questions, checkpoint=spec_arm.checkpoint,
@@ -370,22 +425,25 @@ def score(
         bool,
         typer.Option(help="Fixture only (with --allow-debug-calib): decisions without meta.json."),
     ] = False,
+    splits: Annotated[Path, typer.Option(help="Splits (scores test and holdout).")] = Path(
+        "data/splits.json"
+    ),
 ) -> None:
-    """Score decisions against gold with frozen calib params. Refuses a calib hash mismatch."""
+    """Score decisions against gold with frozen calib params. Refuses a calib hash mismatch and a
+    calib file that isn't committed unmodified at HEAD (D-019)."""
     from bench import calibrate as cal
+    from bench import freeze
     from bench import score as sc
     from bench.config import load_policy
     from bench.domain import HwInfo
     from bench.label import read_docs, read_units
+    from bench.score import sha256_file as sha256_file_
 
     try:
         params = cal.load_verified(calib, allow_debug=allow_debug_calib)
     except cal.CalibError as e:
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(2) from e
-    documents = read_docs(docs)
-    # bench split (M5) replaces this with calib/test/holdout from data/splits.json
-    split_docs = {"fixture": {d.id for d in documents}}
     from bench.domain import RunMeta
 
     meta_path = decisions.parent / "meta.json"
@@ -410,8 +468,27 @@ def score(
         hw_info = meta.hw.model_copy(update={"device": meta.device})
         run_hashes = meta.config_hashes
         run_batch_size: int | None = meta.batch_size
+        if meta.dataset == "main" and params.fit_on == "fixture_debug":  # D-013
+            typer.echo("error: a fixture_debug calib is refused on the main dataset", err=True)
+            raise typer.Exit(2)
+        if params.fit_on == "calib" and run_hashes.get("splits") != sha256_file_(splits):
+            typer.echo(f"error: {splits} differs from the splits this run used", err=True)
+            raise typer.Exit(2)
     elif hw is not None and hw.exists():
         hw_info = HwInfo.model_validate_json(hw.read_text())
+    documents = read_docs(docs)
+    if params.fit_on == "fixture_debug":
+        split_docs = {"fixture": {d.id for d in documents}}
+    else:  # the sealed splits: test (headline) and holdout (IRB letters), never calib or train
+        sp = _load_splits(splits)
+        if sp.docs_sha256 != sha256_file_(docs):
+            typer.echo(f"error: {splits} was built from different documents", err=True)
+            raise typer.Exit(2)
+        split_docs = {
+            s: {d for d, x in sp.doc_split.items() if x == s} for s in ("test", "holdout")
+        }
+        unit_docs = {u.doc_id for u in read_units(units)}
+        split_docs = {k: v for k, v in split_docs.items() if v & unit_docs}
     hashes = {k: sc.sha256_file(p) for k, p in (("docs", docs), ("units", units),
                                                 ("decisions", decisions))}  # fmt: skip
     scored = sc.disjointness_scope(split_docs)
@@ -420,10 +497,11 @@ def score(
         rows = sc.read_decisions(decisions)
         if run_batch_size is not None:
             sc.verify_run_rows(rows, run_batch_size)
+        commit = freeze.require_committed(calib)  # last check: every other refusal comes first
         scores = sc.score(rows, read_units(units), documents, params,
                           load_policy(policy), split_docs, hw_info, hashes,
-                          extra_caveats)  # fmt: skip
-    except sc.ScoreError as e:
+                          extra_caveats, commit)  # fmt: skip
+    except (sc.ScoreError, freeze.FreezeError) as e:
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(2) from e
     out.parent.mkdir(parents=True, exist_ok=True)

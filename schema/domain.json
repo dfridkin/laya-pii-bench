@@ -1316,6 +1316,12 @@
         "arm": {
           "type": "string"
         },
+        "calib_commit": {
+          "type": "string"
+        },
+        "calib_committed_at": {
+          "type": "string"
+        },
         "calib_fit_on": {
           "enum": [
             "calib",
@@ -1389,6 +1395,8 @@
         "calib_hash",
         "calib_fit_on",
         "calib_temperature_fallbacks",
+        "calib_commit",
+        "calib_committed_at",
         "hw",
         "laya_version",
         "checkpoints",
