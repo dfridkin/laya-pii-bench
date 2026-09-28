@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 from typer.testing import CliRunner
 
-from bench import freeze
+from bench import freeze, guard, paths
 from bench import score as sc
 from bench.cli import app
 from bench.domain import CalibParams, HwInfo, RunMeta, Scores, Split, Splits
@@ -128,7 +128,7 @@ def test_score_refuses_splits_other_than_the_runs(run: dict[str, Path]) -> None:
 
 def test_debug_fit_refused_on_main_dataset(tmp_path: Path) -> None:
     p = _run(tmp_path, dataset="main")
-    out = _calibrate(p, "--debug-fit-all", "--docs", str(MINI / "docs.jsonl"))
+    out = _calibrate(p, "--debug-fit-all")
     assert out.startswith("2:") and "D-013" in out and not p["calib"].exists()
 
 
@@ -187,18 +187,13 @@ def test_staged_but_uncommitted_calib_is_refused(run: dict[str, Path]) -> None:
 
 # --- D-013: fixture-only flags never reach the main corpus ---
 
-MAIN = ROOT / "data" / "docs.jsonl"
-needs_main = pytest.mark.skipif(
-    not (ROOT / "data" / "units" / "B4.jsonl").exists(), reason="main corpus not generated"
-)
-
 
 def test_score_refuses_debug_calib_on_main_run_meta(tmp_path: Path) -> None:
     p = _run(tmp_path, dataset="main")
-    assert _calibrate(p, "--debug-fit-all", "--docs", str(DOCS)).startswith("2:")
+    assert _calibrate(p, "--debug-fit-all").startswith("2:")
     (tmp_path / "fx").mkdir()
     q = _run(tmp_path / "fx")  # a fixture_debug calib from a fixture run
-    assert _calibrate(q, "--debug-fit-all", "--docs", str(DOCS)).startswith("0:")
+    assert _calibrate(q, "--debug-fit-all").startswith("0:")
     commit_file(q["calib"])
     p["calib"] = q["calib"]
     r = RUN.invoke(app, ["score", "--decisions", str(p["dec"]), "--units", str(p["units"]),
@@ -207,47 +202,82 @@ def test_score_refuses_debug_calib_on_main_run_meta(tmp_path: Path) -> None:
     assert r.exit_code == 2 and "fixture_debug calib is refused on the main dataset" in r.output
 
 
-def _main_copy(tmp: Path) -> tuple[Path, Path, Path]:
-    """Main-corpus docs copied under another name, a slice of its units, and meta-less decisions."""
-    copy = tmp / "renamed" / "docs.jsonl"
-    copy.parent.mkdir(parents=True)
-    copy.write_bytes(MAIN.read_bytes())
+@pytest.fixture
+def fixture_is_main(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    """A synthetic main corpus (the fixture docs) at a tmp project path, independent of data/."""
+    main = tmp_path / "project" / "data" / "docs.jsonl"
+    main.parent.mkdir(parents=True)
+    main.write_bytes(DOCS.read_bytes())
+    monkeypatch.setattr(paths, "MAIN_DOCS", main)
+    return main
+
+
+def _nometa(tmp: Path) -> tuple[Path, Path]:
     units = tmp / "units.jsonl"
-    lines = (ROOT / "data" / "units" / "B4.jsonl").read_text().splitlines()[:20]
-    units.write_text("\n".join(lines) + "\n")
+    write_units(fixture_units(), units)
     dec = tmp / "nometa" / "decisions.jsonl"
     dec.parent.mkdir()
     dec.write_text(MOCK.read_text())
-    return copy, units, dec
+    return units, dec
 
 
-@needs_main
-def test_calibrate_refuses_debug_flags_on_main_corpus_without_meta(tmp_path: Path) -> None:
-    copy, units, dec = _main_copy(tmp_path)
-    for docs in (MAIN, copy):
-        r = RUN.invoke(app, ["calibrate", "--decisions", str(dec), "--units", str(units),
-                             "--out", str(tmp_path / "c.json"), "--docs", str(docs),
-                             "--debug-fit-all", "--allow-no-meta"])  # fmt: skip
-        assert r.exit_code == 2 and "D-013" in r.output and not (tmp_path / "c.json").exists()
-
-
-@needs_main
-def test_score_refuses_debug_flags_on_main_corpus_without_meta(
-    run: dict[str, Path], tmp_path: Path
+def test_calibrate_refuses_main_units_from_another_cwd(
+    fixture_is_main: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    commit_file(run["calib"])  # a real, committed calib; the units are the problem
-    copy, units, dec = _main_copy(tmp_path)
-    for docs in (MAIN, copy):
+    units, dec = _nometa(tmp_path)
+    monkeypatch.chdir(tmp_path)  # outside the project: the guard must not depend on the cwd
+    r = RUN.invoke(app, ["calibrate", "--decisions", str(dec), "--units", str(units),
+                         "--out", str(tmp_path / "c.json"), "--debug-fit-all",
+                         "--allow-no-meta"])  # fmt: skip
+    assert r.exit_code == 2 and "D-013" in r.output and not (tmp_path / "c.json").exists()
+
+
+def test_score_refuses_main_units_whatever_docs_text_is_passed(
+    run: dict[str, Path], fixture_is_main: Path, tmp_path: Path
+) -> None:
+    commit_file(run["calib"])
+    units, dec = _nometa(tmp_path)
+    fake = tmp_path / "fake" / "docs.jsonl"  # same ids, different texts: must not vouch for units
+    fake.parent.mkdir()
+    fake.write_text("".join(d.model_copy(update={"text": d.text + " "}).model_dump_json() + "\n"
+                            for d in read_docs(DOCS)))  # fmt: skip
+    for docs in (DOCS, fake):
         r = RUN.invoke(app, ["score", "--decisions", str(dec), "--units", str(units), "--calib",
                              str(run["calib"]), "--out", str(tmp_path / "s.json"), "--docs",
                              str(docs), "--allow-debug-calib", "--allow-no-meta"])  # fmt: skip
         assert r.exit_code == 2 and "D-013" in r.output and not (tmp_path / "s.json").exists()
 
 
-@needs_main
-def test_run_refuses_main_corpus_under_another_name(tmp_path: Path) -> None:
-    copy, units, _ = _main_copy(tmp_path)
-    r = RUN.invoke(app, ["run", "--arm", "B4", "--qs", "qs_v1", "--docs", str(copy), "--units",
+def test_guard_fails_closed_without_the_corpus(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(paths, "MAIN_DOCS", tmp_path / "missing" / "docs.jsonl")
+    assert guard.main_doc_ids(["d0007", "fx01", "d12"]) == ["d0007"]  # generator id format
+    units = tmp_path / "units.jsonl"
+    write_units([u.model_copy(update={"doc_id": "d0007"}) for u in fixture_units()], units)
+    dec = tmp_path / "nometa" / "decisions.jsonl"
+    dec.parent.mkdir()
+    dec.write_text(MOCK.read_text())
+    r = RUN.invoke(app, ["calibrate", "--decisions", str(dec), "--units", str(units),
+                         "--out", str(tmp_path / "c.json"), "--debug-fit-all",
+                         "--allow-no-meta"])  # fmt: skip
+    assert r.exit_code == 2 and "D-013" in r.output
+
+
+def test_main_docs_path_is_anchored_to_the_project() -> None:
+    assert paths.MAIN_DOCS.is_absolute() and paths.MAIN_DOCS == ROOT / "data" / "docs.jsonl"
+    assert paths.dataset_name(ROOT / "data" / "docs.jsonl") == "main"
+
+
+def test_generated_ids_match_the_guard_format() -> None:
+    src = (ROOT / "bench" / "generate" / "corpus.py").read_text()
+    assert 'doc_id=f"d{s.idx:04d}"' in src and paths.GENERATED_DOC_ID.fullmatch("d0000")
+
+
+def test_run_refuses_main_corpus_under_another_name(fixture_is_main: Path, tmp_path: Path) -> None:
+    units = tmp_path / "units.jsonl"
+    write_units(fixture_units(), units)
+    r = RUN.invoke(app, ["run", "--arm", "A", "--qs", "qs_v1", "--docs", str(DOCS), "--units",
                          str(units), "--out", str(tmp_path / "run")])  # fmt: skip
-    assert r.exit_code == 2 and "main-corpus documents" in r.output
+    assert r.exit_code == 2 and "main-corpus documents" in r.output  # before any model load
     assert not (tmp_path / "run").exists()

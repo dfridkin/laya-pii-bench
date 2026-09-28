@@ -50,8 +50,6 @@ def test_calibrate_cli_with_unreachable_t_high(tmp_path: Path) -> None:
             "--out",
             str(out),
             "--debug-fit-all",
-            "--docs",
-            str(MINI / "docs.jsonl"),
             "--allow-no-meta",
         ],
     )
@@ -80,8 +78,6 @@ def test_meta_less_decisions_refused_without_override(tmp_path: Path) -> None:
             "--out",
             str(tmp_path / "c.json"),
             "--debug-fit-all",
-            "--docs",
-            str(MINI / "docs.jsonl"),
         ],
     )
     assert r.exit_code == 2 and "no meta.json" in r.output and not (tmp_path / "c.json").exists()
@@ -96,8 +92,6 @@ def test_meta_less_decisions_refused_without_override(tmp_path: Path) -> None:
             "--out",
             str(tmp_path / "c.json"),
             "--debug-fit-all",
-            "--docs",
-            str(MINI / "docs.jsonl"),
             "--allow-no-meta",
         ],
     )
@@ -223,7 +217,7 @@ def test_score_cli_rejects_foreign_mode_rows(tmp_path: Path) -> None:
     c = tmp_path / "c.json"
     dec = str(run_dir / "decisions.jsonl")
     r = RUN.invoke(app, ["calibrate", "--decisions", dec, "--units", str(units), "--out", str(c),
-                         "--debug-fit-all", "--docs", str(MINI / "docs.jsonl")])  # fmt: skip
+                         "--debug-fit-all"])  # fmt: skip
     assert r.exit_code == 0, r.output
     r = RUN.invoke(app, ["score", "--decisions", dec, "--units", str(units), "--calib", str(c),
                          "--out", str(tmp_path / "s.json"), "--docs", str(MINI / "docs.jsonl"),

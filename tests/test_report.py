@@ -43,8 +43,6 @@ def pipeline(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
             "--out",
             str(paths["calib"]),
             "--debug-fit-all",
-            "--docs",
-            str(MINI / "docs.jsonl"),
             "--allow-no-meta",
         ],
     )

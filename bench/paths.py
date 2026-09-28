@@ -7,9 +7,12 @@ its own `data/{name}/units/` and `runs/{name}/{arm}/{qs}`.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
-MAIN_DOCS = Path("data/docs.jsonl")
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+MAIN_DOCS = PROJECT_ROOT / "data" / "docs.jsonl"  # anchored: the cwd never changes what "main" is
+GENERATED_DOC_ID = re.compile(r"d\d{4,}")  # ids `bench gen` writes (generate/corpus.py)
 
 
 def dataset_name(docs: Path) -> str:

@@ -58,8 +58,6 @@ def test_flipped_gold_is_refused_end_to_end(tmp_path: Path) -> None:
                 "--out",
                 str(c),
                 "--debug-fit-all",
-                "--docs",
-                str(MINI / "docs.jsonl"),
                 "--allow-no-meta",
             ],
         ).exit_code
@@ -94,5 +92,5 @@ def test_calibrate_refuses_units_other_than_the_runs(tmp_path: Path) -> None:
     write_units(fixture_units(), units)
     r = RUN.invoke(app, ["calibrate", "--decisions", str(run_dir / "decisions.jsonl"),
                          "--units", str(units), "--out", str(tmp_path / "c.json"),
-                         "--debug-fit-all", "--docs", str(MINI / "docs.jsonl")])  # fmt: skip
+                         "--debug-fit-all"])  # fmt: skip
     assert r.exit_code == 2 and "differs from the units this run was produced from" in r.output

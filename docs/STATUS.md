@@ -208,6 +208,12 @@ under D-001 (7faf571).
   reindented (same content hash) -> exit 2 "differs from its committed version"; committed -> exit 0,
   scores record calib_commit 3b26c12f / 2026-09-27T22:16:16-04:00 = git log of the file. Tests:
   tests/test_freeze.py (8). Fixture arm A rerun (21 laya calls), calib frozen at cceb8775.
+- Gate reviews: #1 FAIL (`reports/audits/M5-gate-20260927-fail.md`: D-013 flags reachable on the
+  main corpus without meta or under another name; calib in another repo; skip-worktree) fixed in
+  9ca1209. #2 FAIL (`M5-gate-20260927-fail2.md`: guard failed open outside the repo cwd and trusted
+  caller-supplied doc text) fixed: the guard now decides by document id only (ids in the
+  project-anchored data/docs.jsonl, or the generator's `d0000` format, so it fails closed without
+  data/); calibrate lost its --docs option. Tests in tests/test_freeze.py run without data/.
 - Split-aware stages: calibrate fits on calib-split units only (fit_on=calib); score scores test and
   holdout and checks the run's splits hash; run on main filters by splits_to_run and hashes splits;
   debug calib flags refused on the main dataset (D-013).
