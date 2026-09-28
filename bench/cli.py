@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+from collections.abc import Mapping
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Annotated, Any, Literal
@@ -150,6 +151,23 @@ def _run_meta(decisions: Path) -> Any:
 
     meta_path = decisions.parent / "meta.json"
     return RunMeta.model_validate_json(meta_path.read_text()) if meta_path.exists() else None
+
+
+def _batched_rows(path: Path, params: Any, hashes: Mapping[str, str]) -> list[Any]:
+    """The batched run of the same arm x qs over the same units and docs (timing only)."""
+    from bench import score as sc
+
+    meta = _run_meta(path)
+    if meta is None:
+        raise sc.ScoreError(f"no meta.json next to {path}")
+    if (meta.arm, meta.qs) != (params.arm, params.qs) or meta.batch_size < 2:
+        raise sc.ScoreError(f"{path} is not a batched run of {params.arm}/{params.qs}")
+    for key in ("units", "docs"):
+        if meta.config_hashes.get(key) != hashes[key]:
+            raise sc.ScoreError(f"batched run {key} differ from the scored run's")
+    rows = sc.read_decisions(path)
+    sc.verify_run_rows(rows, meta.batch_size)
+    return rows
 
 
 def _load_splits(splits: Path) -> Any:
@@ -464,13 +482,24 @@ def score(
     splits: Annotated[Path, typer.Option(help="Splits (scores test and holdout).")] = Path(
         "data/splits.json"
     ),
+    batched_decisions: Annotated[
+        Path | None,
+        typer.Option(help="The arm x qs batched run (`{qs}__batch{n}`): speed only (audit C6)."),
+    ] = None,
+    routed_out: Annotated[
+        Path | None,
+        typer.Option(help="Per-unit routes JSONL (default: next to --out, `.routed.jsonl`)."),
+    ] = None,
+    arms: Annotated[Path, typer.Option(help="Arms config (doc-level label).")] = Path(
+        "config/arms.yaml"
+    ),
 ) -> None:
     """Score decisions against gold with frozen calib params. Refuses a calib hash mismatch and a
     calib file that isn't committed unmodified at HEAD (D-019)."""
     from bench import calibrate as cal
     from bench import freeze
     from bench import score as sc
-    from bench.config import load_policy
+    from bench.config import load_arms, load_policy
     from bench.domain import HwInfo
     from bench.label import read_docs, read_units
     from bench.score import sha256_file as sha256_file_
@@ -537,15 +566,29 @@ def score(
         rows = sc.read_decisions(decisions)
         if run_batch_size is not None:
             sc.verify_run_rows(rows, run_batch_size)
+        batched_rows = []
+        if batched_decisions is not None:
+            batched_rows = _batched_rows(batched_decisions, params, hashes)
+            hashes["batched_decisions"] = sc.sha256_file(batched_decisions)
         commit = freeze.require_committed(calib)  # last check: every other refusal comes first
-        scores = sc.score(rows, read_units(units), documents, params,
-                          load_policy(policy), split_docs, hw_info, hashes,
-                          extra_caveats, commit)  # fmt: skip
+        unit_list, pol = read_units(units), load_policy(policy)
+        arm_cfg = (
+            load_arms(arms, Path("config/questions")).arms.get(params.arm)
+            if arms.exists()
+            else None
+        )
+        scores = sc.score(rows, unit_list, documents, params, pol, split_docs, hw_info, hashes,
+                          extra_caveats, commit, batched_rows,
+                          arm_cfg.doc_level if arm_cfg else False)  # fmt: skip
+        routes = sc.routed(rows, unit_list, documents, params, pol, split_docs)
     except (sc.ScoreError, freeze.FreezeError) as e:
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(2) from e
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(scores.model_dump_json(indent=2) + "\n", encoding="utf-8")
+    routed_path = routed_out or out.with_suffix(".routed.jsonl")
+    routed_path.write_text("".join(r.model_dump_json() + "\n" for r in routes), encoding="utf-8")
+    typer.echo(f"{len(routes)} routed decisions -> {routed_path}")
     for name, sp in scores.splits.items():
         h = sp.headline
         rec = "n/a" if h.recall is None else f"{h.recall.point:.4f}"

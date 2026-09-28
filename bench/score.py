@@ -40,6 +40,7 @@ from bench.domain import (
     QuestionMetrics,
     ReliabilityBin,
     Route,
+    RoutedDecision,
     RoutingMetrics,
     RunContext,
     Scores,
@@ -529,11 +530,26 @@ def split_scores(
     )
 
 
+def autocast_state(decisions: Sequence[Decision]) -> str:
+    seen = {d.autocast for d in decisions}
+    if not seen or seen == {None}:
+        return "unknown"
+    if len(seen - {None}) > 1:
+        return "mixed"
+    return "on" if True in seen else "off"
+
+
 def speed(
-    decisions: Sequence[Decision], units: Mapping[str, Unit], hw: HwInfo | None
+    decisions: Sequence[Decision],
+    units: Mapping[str, Unit],
+    hw: HwInfo | None,
+    batched: Sequence[Decision] = (),
 ) -> SpeedMetrics:
-    live = [d for d in decisions if not d.warmup]
+    """Batch-1 stats from the arm's batch-1 run; batched stats from its batched run (audit C6),
+    which is timing only: its answers never enter a metric."""
+    live = [d for d in [*decisions, *batched] if not d.warmup]
     b1 = [d for d in live if d.mode == "batch1"]
+    bb = [d for d in live if d.mode == "batched"]
     per_doc: dict[str, float] = defaultdict(float)
     for d in b1:
         per_doc[units[d.unit_id].doc_id] += d.latency_ms
@@ -545,14 +561,47 @@ def speed(
     return SpeedMetrics(
         hardware=hardware,
         batch1=latency_stats([d.latency_ms for d in b1]),
-        batched=latency_stats([d.latency_ms for d in live if d.mode == "batched"]),
+        batched=latency_stats([d.latency_ms for d in bb]),
         per_doc_ms=latency_stats(list(per_doc.values())),
-        warmup_excluded=len(decisions) - len(live),
+        warmup_excluded=len(decisions) + len(batched) - len(live),
+        batch1_autocast=autocast_state(b1),
+        batched_autocast=autocast_state(bb),
     )
 
 
-def caveats(splits: Mapping[str, SplitScores], calib: CalibParams) -> list[str]:
+D008_GAP = 0.01  # D-008 amended: point recall minus exact 95% lower bound above this -> review
+
+
+def d008_gap(h: Headline) -> float | None:
+    if h.recall is None or h.recall_exact_lo is None:
+        return None
+    return h.recall.point - h.recall_exact_lo
+
+
+def caveats(
+    splits: Mapping[str, SplitScores], calib: CalibParams, doc_level: bool = False,
+    sp: SpeedMetrics | None = None,
+) -> list[str]:  # fmt: skip
     out: list[str] = []
+    test = splits.get("test")
+    gap = d008_gap(test.headline) if test else None
+    if gap is not None and gap > D008_GAP:
+        assert test is not None and test.headline.recall is not None
+        out.append(
+            f"D-008 review: test recall {test.headline.recall.point:.4f} minus its exact 95% lower "
+            f"bound {test.headline.recall_exact_lo:.4f} = {gap:.4f} > {D008_GAP} "
+            f"({test.headline.n_positive} positives)."
+        )
+    if doc_level:
+        n = test.headline.n_docs if test else 0
+        out.append(
+            f"Doc-level arm: underpowered (D-008 amended); {n} test documents, few units each, "
+            "so recall intervals are wide."
+        )
+    if sp is not None:
+        for mode, state in (("batch-1", sp.batch1_autocast), ("batched", sp.batched_autocast)):
+            if state == "mixed":
+                out.append(f"laya switched autocast off mid-run ({mode}): speed mixes precisions.")
     if calib.fit_on != "calib":
         out.append(
             f"Calibration fit_on={calib.fit_on}: temperatures and thresholds were fit on the "
@@ -649,6 +698,8 @@ def score(
     hashes: Mapping[str, str],
     extra_caveats: Sequence[str] = (),
     calib_commit: tuple[str, str] = ("not-verified", ""),
+    batched: Sequence[Decision] = (),
+    doc_level: bool = False,
 ) -> Scores:
     unit_map = {u.id: u for u in units}
     doc_map = {d.id: d for d in docs}
@@ -673,19 +724,41 @@ def score(
         calib_temperature_fallbacks=dict(calib.temperature_fallbacks),
         calib_commit=calib_commit[0],
         calib_committed_at=calib_commit[1],
+        batched_decisions_sha256=hashes.get("batched_decisions"),
+        doc_level=doc_level,
         hw=hw,
         laya_version=hw.laya if hw else "unknown",
         checkpoints=sorted({d.checkpoint for d in live}),
         checkpoint_revs=sorted({d.checkpoint_rev for d in live}),
         created_at=datetime.now(UTC).isoformat(timespec="microseconds"),  # D-019
     )
+    sp = speed(decisions, unit_map, hw, batched)
     return Scores(
         context=context,
         splits=splits,
-        speed=speed(decisions, unit_map, hw),
+        speed=sp,
         caveats=[
             *extra_caveats,
             *(["calib commit not verified (D-019)"] if calib_commit[0] == "not-verified" else []),
-            *caveats(splits, calib),
+            *caveats(splits, calib, doc_level, sp),
         ],
     )
+
+
+def routed(
+    decisions: Sequence[Decision],
+    units: Sequence[Unit],
+    docs: Sequence[Document],
+    calib: CalibParams,
+    policy: Policy,
+    split_docs: Mapping[str, set[str]],
+) -> list[RoutedDecision]:
+    """Per-unit routes for the scored splits (the HUD replay, audit C7), in run order."""
+    split_of = {d: name for name, ids in split_docs.items() for d in ids}
+    rows = build_rows(decisions, {u.id: u for u in units}, {d.id: d for d in docs}, calib, policy)
+    return [
+        RoutedDecision(decision=r.decision, route=r.route, triggers=r.triggers,
+                       calibrated_probs=r.cal, split=split_of[r.doc.id])
+        for r in rows
+        if r.doc.id in split_of
+    ]  # fmt: skip

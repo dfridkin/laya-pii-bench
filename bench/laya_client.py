@@ -39,6 +39,7 @@ class LayaLike(Protocol):
     def predict(self, state: str) -> tuple[dict[str, Any], int]: ...
     def predict_batch(self, states: Sequence[str]) -> tuple[list[dict[str, Any]], int]: ...
     def state_tokens(self, state: str) -> tuple[int, list[str]]: ...
+    def autocast(self) -> bool | None: ...
 
 
 def to_answers(
@@ -129,6 +130,11 @@ class LayaClient:
         if dev not in get_args(Device):
             raise LayaError(f"unsupported device {dev!r}")
         return cast(Device, dev)
+
+    def autocast(self) -> bool | None:
+        """Whether a call with this question set runs under autocast (laya's rows gate)."""
+        gate: Any = getattr(self._agent, "_amp_enabled_for", None)
+        return None if gate is None else bool(gate(len(self.questions)))
 
     def state_tokens(self, state: str) -> tuple[int, list[str]]:
         ids: list[int] = self._tok(

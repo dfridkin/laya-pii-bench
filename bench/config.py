@@ -307,6 +307,7 @@ class Arm(_Cfg):
     max_len: int = Field(ge=1)  # always explicit (invariant 8)
     head_max_len: int = Field(ge=1)
     enabled: bool = True
+    doc_level: bool = False  # few units per doc: reported as underpowered (D-008 amended)
 
     @model_validator(mode="after")
     def _budget(self) -> Arm:

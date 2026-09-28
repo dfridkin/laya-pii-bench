@@ -26,11 +26,13 @@ arms:
     unit: {kind: section, target_tokens: 3800}
     max_len: 4096
     head_max_len: 256
+    doc_level: true          # D-008 amended: underpowered, labelled in the report
   B4:
     checkpoint: multilingual
     unit: {kind: doc}
     max_len: 8192
     head_max_len: 256
+    doc_level: true
   C:
     checkpoint: finetuned_english     # produced in M8; path set in finetune/output.yaml
     unit: {kind: chunk, size: 256, overlap: 32}

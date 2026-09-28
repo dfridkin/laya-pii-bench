@@ -193,6 +193,9 @@ class Decision(_Model):
     batch_size: int = Field(ge=1)  # states in this call (a batched run's tail may be smaller)
     mode: Literal["batch1", "batched"] = "batch1"  # run mode; speed stats split on this
     device: Device | None = None  # device laya reported after this call
+    # laya's autocast switch after this call (MPS fp16 at >= 5 question rows); laya turns it off
+    # for good after one failed autocast forward, which changes speed mid-run (audit C8)
+    autocast: bool | None = None
     warmup: bool = False
     # State tokens as the checkpoint tokenizes them, and the questions whose input cut the state
     # short (laya's per-question room: max_len - prompt head - specials). Invariant 7.
@@ -207,6 +210,7 @@ class RoutedDecision(_Model):
     route: Route
     triggers: list[str]
     calibrated_probs: dict[str, dict[str, float]]
+    split: str | None = None  # the scored split the unit's document belongs to
 
 
 class HwInfo(_Model):
@@ -450,6 +454,9 @@ class SpeedMetrics(_Model):
     batched: LatencyStats | None
     per_doc_ms: LatencyStats | None  # wall time per document = sum over its units (batch-1)
     warmup_excluded: int
+    # laya autocast per mode: "on", "off", "mixed" (switched mid-run: audit C8) or "unknown"
+    batch1_autocast: str = "unknown"
+    batched_autocast: str = "unknown"
 
 
 class RunContext(_Model):
@@ -465,6 +472,8 @@ class RunContext(_Model):
     # D-019: the git commit that froze the calib file, and its commit time
     calib_commit: str
     calib_committed_at: str
+    batched_decisions_sha256: str | None = None  # the arm's batched run, for speed only (C6)
+    doc_level: bool = False  # doc-level arm (B3, B4): report labels it underpowered (D-008)
     hw: HwInfo | None
     laya_version: str
     checkpoints: list[str]

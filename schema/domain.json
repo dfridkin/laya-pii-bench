@@ -353,6 +353,17 @@
         "arm": {
           "type": "string"
         },
+        "autocast": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "batch_size": {
           "minimum": 1,
           "type": "integer"
@@ -1255,6 +1266,17 @@
         "route": {
           "$ref": "#/$defs/Route"
         },
+        "split": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "triggers": {
           "items": {
             "type": "string"
@@ -1316,6 +1338,17 @@
         "arm": {
           "type": "string"
         },
+        "batched_decisions_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "calib_commit": {
           "type": "string"
         },
@@ -1355,6 +1388,10 @@
         },
         "decisions_sha256": {
           "type": "string"
+        },
+        "doc_level": {
+          "default": false,
+          "type": "boolean"
         },
         "docs_sha256": {
           "type": "string"
@@ -1658,6 +1695,10 @@
             }
           ]
         },
+        "batch1_autocast": {
+          "default": "unknown",
+          "type": "string"
+        },
         "batched": {
           "anyOf": [
             {
@@ -1667,6 +1708,10 @@
               "type": "null"
             }
           ]
+        },
+        "batched_autocast": {
+          "default": "unknown",
+          "type": "string"
         },
         "hardware": {
           "type": "string"

@@ -7,12 +7,14 @@ from pathlib import Path
 
 from bench.domain import (
     CalibrationMetrics,
+    Headline,
     Interval,
     LatencyStats,
     QuestionMetrics,
     Route,
     Scores,
 )
+from bench.score import D008_GAP, d008_gap
 
 SECTIONS = (
     "Run context",
@@ -46,7 +48,16 @@ def _table(header: Sequence[str], rows: Iterable[Sequence[object]]) -> list[str]
 
 
 def _label(s: Scores) -> str:
-    return f"{s.context.arm} / {s.context.qs}"
+    tag = " (doc-level, underpowered)" if s.context.doc_level else ""
+    return f"{s.context.arm} / {s.context.qs}{tag}"
+
+
+def _gap(h: Headline) -> str:
+    """D-008: point recall minus its exact 95% lower bound, flagged above the review gap."""
+    g = d008_gap(h)
+    if g is None:
+        return "n/a"
+    return f"{g:.4f}" + (" **review**" if g > D008_GAP else "")
 
 
 def _run_context(all_scores: Sequence[Scores]) -> list[str]:
@@ -94,6 +105,7 @@ def _headline(all_scores: Sequence[Scores]) -> list[str]:
                     _f(h.t_high) if h.t_high is not None else "none",
                     _ci(h.recall),
                     _f(h.recall_exact_lo),
+                    _gap(h),
                     _f(h.route_recall),
                     _ci(h.forward_rate),
                     h.false_forwards,
@@ -106,7 +118,8 @@ def _headline(all_scores: Sequence[Scores]) -> list[str]:
         "lower bound is Clopper-Pearson on unit counts (ignores clustering within documents; "
         "informative when there are no misses). Route recall counts misses after routing "
         "(1 - false forwards / positives). t_high `none`: no threshold reached the precision "
-        "target, so only the role rule redacts.",
+        f"target, so only the role rule redacts. `point - exact lo` above {D008_GAP} flags "
+        "D-008 for review. Doc-level arms are underpowered (few units per document).",
         "",
         *_table(
             [
@@ -116,6 +129,7 @@ def _headline(all_scores: Sequence[Scores]) -> list[str]:
                 "t_high",
                 "recall",
                 "recall exact lo",
+                "point - exact lo",
                 "route recall",
                 "forward rate",
                 "false forwards",
@@ -159,7 +173,52 @@ def _per_question(all_scores: Sequence[Scores]) -> list[str]:
                         f"{_f(ml.macro_f1)}.", ""]  # fmt: skip
             for q, m in sp.per_question.items():
                 out += [f"Confusion, `{q}`:", "", *_confusion(m)]
-    return out
+    return out + _qs_comparison(all_scores)
+
+
+def _qs_comparison(all_scores: Sequence[Scores]) -> list[str]:
+    """qs_v1 vs qs_v2 on the same arm and split (metrics spec): pii_present identically; the
+    category question as qs_v1 single-label macro-F1 vs qs_v2 multi-label micro/macro-F1."""
+    by: dict[tuple[str, str], dict[str, Scores]] = {}
+    for s in all_scores:
+        for split in s.splits:
+            by.setdefault((s.context.arm, split), {})[s.context.qs] = s
+    rows: list[Sequence[object]] = []
+    for (arm, split), qs in sorted(by.items()):
+        if len(qs) < 2:
+            continue
+        for name in sorted(qs):
+            sp = qs[name].splits[split]
+            pii, h = sp.per_question.get("pii_present"), sp.headline
+            cat = sp.per_question.get("category")
+            ml = sp.multilabel
+            rows.append((arm, split, name, _f(pii.accuracy) if pii else "n/a",
+                         _f(pii.macro_f1) if pii else "n/a", _ci(h.recall), _ci(h.forward_rate),
+                         _f(cat.macro_f1) if cat else "n/a",
+                         f"{_f(ml.micro_f1)} / {_f(ml.macro_f1)}" if ml else "n/a"))  # fmt: skip
+    if not rows:
+        return []
+    return [
+        "### qs_v1 vs qs_v2",
+        "",
+        "Same arm and split under both question sets. `pii_present` is the same question in both; "
+        "categories are single-label in qs_v1 (`category`) and per-category yes/no in qs_v2.",
+        "",
+        *_table(
+            [
+                "arm",
+                "split",
+                "qs",
+                "pii_present acc",
+                "pii_present macro-F1",
+                "recall",
+                "forward rate",
+                "category macro-F1 (qs_v1)",
+                "categories micro / macro-F1 (qs_v2)",
+            ],
+            rows,
+        ),
+    ]
 
 
 def _calibration(all_scores: Sequence[Scores]) -> list[str]:
@@ -232,7 +291,9 @@ def _speed(all_scores: Sequence[Scores]) -> list[str]:
     for s in all_scores:
         sp = s.speed
         out += [f"### {_label(s)}", "", f"Hardware: **{sp.hardware}**. "
-                f"Warmup calls excluded: {sp.warmup_excluded}.", ""]  # fmt: skip
+                f"Warmup calls excluded: {sp.warmup_excluded}. laya autocast: batch-1 "
+                f"{sp.batch1_autocast}, batched {sp.batched_autocast} (on MPS, fp16 autocast "
+                "starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).", ""]  # fmt: skip
         out += _table(
             ["mode", "n", "p50 ms", "p95 ms", "p99 ms", "mean ms", "per sec"],
             [

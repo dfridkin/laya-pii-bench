@@ -46,13 +46,14 @@ class FakeClient:
 
     def __init__(
         self, device: Device = "mps", cut_over: int = 10_000, fall_back_after: int | None = None,
-        revision: str = "rev-abc",
+        revision: str = "rev-abc", amp_off_after: int | None = None,
     ) -> None:  # fmt: skip
         self.device: Device = device
         self.revision = revision
         self.calls = 0
         self.cut_over = cut_over
         self.fall_back_after = fall_back_after
+        self.amp_off_after = amp_off_after
 
     def current_device(self) -> Device:
         if self.fall_back_after is not None and self.calls > self.fall_back_after:
@@ -66,6 +67,9 @@ class FakeClient:
     def predict_batch(self, states: Sequence[str]) -> tuple[list[dict[str, Any]], int]:
         self.calls += 1
         return [fake_result(s) for s in states], 8_000_000
+
+    def autocast(self) -> bool | None:
+        return self.amp_off_after is None or self.calls <= self.amp_off_after
 
     def state_tokens(self, state: str) -> tuple[int, list[str]]:
         n = len(state.split())
@@ -300,3 +304,14 @@ def test_adapter_checks_keys_and_mass() -> None:
         score_res, {"s": {"type": "score", "instructions": "?", "criteria": ["lo", "hi"]}}
     )
     assert s.choice == "1"
+
+
+def test_autocast_recorded_and_switch_warned(tmp_path: Path) -> None:
+    log: list[str] = []
+    c = FakeClient(amp_off_after=6)  # 3 warmup calls, then autocast dies after unit 3
+    run(spec(tmp_path), UNITS, TEXTS, ["w"], lambda: c, HW, log.append)
+    live = [d for d in read_existing(tmp_path / "decisions.jsonl") if not d.warmup]
+    assert [d.autocast for d in live[:3]] == [True] * 3 and all(
+        d.autocast is False for d in live[3:]
+    )
+    assert sum("autocast switched from True to False" in x for x in log) == 1

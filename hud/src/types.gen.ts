@@ -171,6 +171,7 @@ export interface ConfusionMatrix {
 export interface Decision {
   answers: Answer[];
   arm: string;
+  autocast?: boolean | null;
   batch_size: number;
   checkpoint: string;
   checkpoint_rev: string;
@@ -459,6 +460,7 @@ export interface RoutedDecision {
   };
   decision: Decision;
   route: Route;
+  split?: string | null;
   triggers: string[];
 }
 /**
@@ -484,6 +486,7 @@ export interface RoutingMetrics {
  */
 export interface RunContext {
   arm: string;
+  batched_decisions_sha256?: string | null;
   calib_commit: string;
   calib_committed_at: string;
   calib_fit_on: "calib" | "fixture_debug";
@@ -495,6 +498,7 @@ export interface RunContext {
   checkpoints: string[];
   created_at: string;
   decisions_sha256: string;
+  doc_level?: boolean;
   docs_sha256: string;
   hw: HwInfo | null;
   laya_version: string;
@@ -541,7 +545,9 @@ export interface Scores {
  */
 export interface SpeedMetrics {
   batch1: LatencyStats | null;
+  batch1_autocast?: string;
   batched: LatencyStats | null;
+  batched_autocast?: string;
   hardware: string;
   per_doc_ms: LatencyStats | null;
   warmup_excluded: number;

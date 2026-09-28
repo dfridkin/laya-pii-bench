@@ -221,6 +221,7 @@ def run(
         warmup: bool = False,
         state_tokens: int | None = None,
         cut: Sequence[str] = (),
+        autocast: bool | None = None,
     ) -> Decision:
         return Decision(
             unit_id=unit_id,
@@ -235,12 +236,14 @@ def run(
             batch_size=batch_size,
             mode=mode,
             device=device,
+            autocast=autocast,
             warmup=warmup,
             state_tokens=state_tokens,
             truncated_questions=list(cut),
         )
 
     writer = _Writer(decisions_path)
+    amp_seen: list[bool | None] = []
     calls = 0
     t0 = time.perf_counter_ns()
     try:
@@ -264,6 +267,10 @@ def run(
                 results, ns = client.predict_batch(states)
             calls += 1
             dev = check_device()
+            amp = client.autocast()
+            if amp_seen and amp != amp_seen[-1]:
+                log(f"WARN autocast switched from {amp_seen[-1]} to {amp} at {batch[0].id}")
+            amp_seen.append(amp)
             out: list[Decision] = []
             for u, res, (n_tok, cut) in zip(batch, results, seen, strict=True):
                 if cut and not u.truncated:
@@ -275,7 +282,7 @@ def run(
                     log(f"note {u.id}: unit.truncated=true but no question cut the state")
                 out.append(
                     decision(u.id, res, ns / 1e6 / len(batch), (start - t0) / 1e6, len(batch),
-                             dev, state_tokens=n_tok, cut=cut)
+                             dev, state_tokens=n_tok, cut=cut, autocast=amp)
                 )  # fmt: skip
             writer.write(out)
             if (b // spec.batch_size) % 25 == 0:
