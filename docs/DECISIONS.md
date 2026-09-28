@@ -44,3 +44,4 @@ Append entries as `YYYY-MM-DD D-nnn: <change> (by <who>)`.
 - 2026-09-27 D-015 addendum (M4, gate review F3; by Claude, pending owner): gen_spec gained `world.site_locales` (14 en / 4 de / 3 es / 3 pl sites; non-English docs come from sites of their locale) and `partial_redaction_docs: 60` (PII-bearing docs with some values pre-redacted, so placeholders are not a no-PII cue; gold audit N5; 46 of 60 realize a placeholder at the 0.2 per-value rate).
 - 2026-09-27 D-020 decided (owner: fix R4 now); partial_alt_docs added to gen_spec with a V5 guard (by Dmitriy).
 - 2026-09-27 D-020 text corrected after gold audit run 4 (S2, S3): drop rotates within a stratum; 97/100 realized (by Claude).
+- 2026-09-27 D-015 addendum (world.site_locales, partial_redaction_docs) approved by owner (by Dmitriy).
