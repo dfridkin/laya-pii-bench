@@ -1,0 +1,33 @@
+{
+  "arm": "mock",
+  "qs": "qs_v1",
+  "temperatures": {
+    "category:5": 0.7569353164347156,
+    "doc_kind:4": 1.0,
+    "pii_present:2": 0.7313534590698,
+    "subject_role:4": 0.9357849653653632
+  },
+  "temperature_fallbacks": {
+    "doc_kind:4": "calib accuracy 1.0"
+  },
+  "t_low": 0.14044395651145972,
+  "t_high": 0.6613627388985229,
+  "recall_target": 0.995,
+  "precision_target": 0.98,
+  "fit_on": "fixture_debug",
+  "decisions_sha256": "0af837472a733cd02faae60c09b4573cc761b6575855262c60617df8a375ed5c",
+  "units_sha256": "11a4901b0d0b5da77f3e23857eaea26d4f8d40468e227694700334e2b92988a9",
+  "calib_doc_ids": [
+    "fx01",
+    "fx02",
+    "fx03",
+    "fx04",
+    "fx05",
+    "fx06",
+    "fx07",
+    "fx08",
+    "fx09",
+    "fx10"
+  ],
+  "content_hash": "18402b8afa93edf8de9ae9186dff413b5919d432789d939b6216e4f4875d5a3c"
+}
