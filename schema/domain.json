@@ -39,6 +39,109 @@
       "title": "Answer",
       "type": "object"
     },
+    "ArmLabelStats": {
+      "additionalProperties": false,
+      "properties": {
+        "arm": {
+          "type": "string"
+        },
+        "by_split": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "train",
+              "calib",
+              "test",
+              "holdout"
+            ]
+          },
+          "type": "object"
+        },
+        "classes": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              "propertyNames": {
+                "enum": [
+                  "train",
+                  "calib",
+                  "test",
+                  "holdout"
+                ]
+              },
+              "type": "object"
+            },
+            "type": "object"
+          },
+          "type": "object"
+        },
+        "kind": {
+          "enum": [
+            "chunk",
+            "section",
+            "doc"
+          ],
+          "type": "string"
+        },
+        "n_units": {
+          "type": "integer"
+        },
+        "split_span": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "train",
+              "calib",
+              "test",
+              "holdout"
+            ]
+          },
+          "type": "object"
+        },
+        "tokenizer": {
+          "type": "string"
+        },
+        "truncated": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "train",
+              "calib",
+              "test",
+              "holdout"
+            ]
+          },
+          "type": "object"
+        },
+        "units_sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "arm",
+        "kind",
+        "tokenizer",
+        "units_sha256",
+        "n_units",
+        "by_split",
+        "truncated",
+        "split_span",
+        "classes"
+      ],
+      "title": "ArmLabelStats",
+      "type": "object"
+    },
     "CalibParams": {
       "additionalProperties": false,
       "properties": {
@@ -812,6 +915,49 @@
         "n_resamples"
       ],
       "title": "Interval",
+      "type": "object"
+    },
+    "LabelManifest": {
+      "additionalProperties": false,
+      "description": "`data/label_manifest.json` (M5 gates 2-4).",
+      "properties": {
+        "arms": {
+          "additionalProperties": {
+            "$ref": "#/$defs/ArmLabelStats"
+          },
+          "type": "object"
+        },
+        "docs_sha256": {
+          "type": "string"
+        },
+        "holdout_missing": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "missing": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "policy_sha256": {
+          "type": "string"
+        },
+        "splits_sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "docs_sha256",
+        "policy_sha256",
+        "splits_sha256",
+        "arms",
+        "missing",
+        "holdout_missing"
+      ],
+      "title": "LabelManifest",
       "type": "object"
     },
     "LatencyStats": {
@@ -1610,6 +1756,69 @@
         "failures"
       ],
       "title": "SplitScores",
+      "type": "object"
+    },
+    "Splits": {
+      "additionalProperties": false,
+      "description": "`data/splits.json`: every document's split (D-005 amended, D-016, D-018).",
+      "properties": {
+        "config_sha256": {
+          "type": "string"
+        },
+        "counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "train",
+              "calib",
+              "test",
+              "holdout"
+            ]
+          },
+          "type": "object"
+        },
+        "doc_split": {
+          "additionalProperties": {
+            "enum": [
+              "train",
+              "calib",
+              "test",
+              "holdout"
+            ],
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "docs_sha256": {
+          "type": "string"
+        },
+        "groups": {
+          "additionalProperties": {
+            "enum": [
+              "train",
+              "calib",
+              "test",
+              "holdout"
+            ],
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "seed": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "seed",
+        "docs_sha256",
+        "config_sha256",
+        "doc_split",
+        "groups",
+        "counts"
+      ],
+      "title": "Splits",
       "type": "object"
     },
     "SubjectRole": {

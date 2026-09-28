@@ -263,6 +263,45 @@ class CalibParams(_Model):
     content_hash: str
 
 
+# --- splits and label manifest (M5) -------------------------------------------------------------
+
+
+class Splits(_Model):
+    """`data/splits.json`: every document's split (D-005 amended, D-016, D-018)."""
+
+    seed: int
+    docs_sha256: str
+    config_sha256: str
+    doc_split: dict[str, Split]  # doc id -> split
+    groups: dict[str, Split]  # group key -> split: "study/site", "sponsor:<doc id>", "holdout"
+    counts: dict[Split, int]  # documents per split
+
+
+class ArmLabelStats(_Model):
+    arm: str
+    kind: UnitKind
+    tokenizer: str  # checkpoint@revision that counted tokens
+    units_sha256: str
+    n_units: int
+    by_split: dict[Split, int]
+    truncated: dict[Split, int]
+    split_span: dict[Split, int]
+    # question set -> question -> split -> gold class -> units
+    classes: dict[str, dict[str, dict[Split, dict[str, int]]]]
+
+
+class LabelManifest(_Model):
+    """`data/label_manifest.json` (M5 gates 2-4)."""
+
+    docs_sha256: str
+    policy_sha256: str
+    splits_sha256: str
+    arms: dict[str, ArmLabelStats]
+    # "<arm>/<qs>/<question>/<split>: <class>" for every class missing in train/calib/test
+    missing: list[str]
+    holdout_missing: list[str]  # same for holdout (reported, not a gate failure; D-005)
+
+
 # --- generator manifest -----------------------------------------------------------------------
 
 
@@ -449,4 +488,6 @@ EXPORTED: tuple[type[BaseModel], ...] = (
     HwInfo,
     Scores,
     GenManifest,
+    Splits,
+    LabelManifest,
 )

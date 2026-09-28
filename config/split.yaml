@@ -1,0 +1,8 @@
+# Split design (D-005 amended 2026-09-27; D-016; D-018). Changing this reruns split onward.
+seed: 7
+# Among non-holdout documents; D-005 gives 55/15/20 of the whole with a 10% holdout, the holdout is
+# now 5% (30 IRB letters), so these are the same proportions renormalised to the remaining docs.
+ratios: {train: 0.6111, calib: 0.1667, test: 0.2222}
+holdout_doc_type: irb_letter     # all IRB letters, regardless of site (D-005)
+search_iterations: 4000          # seeded assignments tried; best by class coverage then ratio fit
+ratio_tolerance: 0.05            # |realized - target| document share per split

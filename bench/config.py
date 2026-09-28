@@ -332,6 +332,26 @@ class ArmsConfig(_Cfg):
     arms: dict[str, Arm] = Field(min_length=1)
 
 
+# --- split.yaml ----------------------------------------------------------------------------------
+
+
+class SplitConfig(_Cfg):
+    """Split design (D-005 amended, D-016, D-018; audit C8: split settings live in config)."""
+
+    seed: int
+    ratios: dict[Literal["train", "calib", "test"], float]  # among non-holdout docs
+    holdout_doc_type: DocType
+    search_iterations: int = Field(ge=1)
+    ratio_tolerance: float = Field(gt=0, le=0.5)  # accepted |realized - target| per split (docs)
+
+    @model_validator(mode="after")
+    def _ratios(self) -> SplitConfig:
+        if set(self.ratios) != {"train", "calib", "test"}:
+            raise ValueError("ratios must give train, calib and test")
+        _check_mix("ratios", {str(k): v for k, v in self.ratios.items()})
+        return self
+
+
 # --- loaders -----------------------------------------------------------------------------------
 
 _M = TypeVar("_M", bound=BaseModel)
@@ -350,6 +370,10 @@ def load_policy(path: Path = CONFIG_DIR / "policy.yaml") -> Policy:
 
 def load_gen_spec(path: Path = CONFIG_DIR / "gen_spec.yaml") -> GenSpec:
     return _load(path, GenSpec)
+
+
+def load_split(path: Path = CONFIG_DIR / "split.yaml") -> SplitConfig:
+    return _load(path, SplitConfig)
 
 
 def load_arms(path: Path = CONFIG_DIR / "arms.yaml", qs_dir: Path | None = None) -> ArmsConfig:

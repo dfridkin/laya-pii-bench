@@ -67,6 +67,35 @@ export interface Answer {
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "ArmLabelStats".
+ */
+export interface ArmLabelStats {
+  arm: string;
+  by_split: {
+    [k: string]: number;
+  };
+  classes: {
+    [k: string]: {
+      [k: string]: {
+        [k: string]: {
+          [k: string]: number;
+        };
+      };
+    };
+  };
+  kind: "chunk" | "section" | "doc";
+  n_units: number;
+  split_span: {
+    [k: string]: number;
+  };
+  tokenizer: string;
+  truncated: {
+    [k: string]: number;
+  };
+  units_sha256: string;
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
  * via the `definition` "CalibParams".
  */
 export interface CalibParams {
@@ -322,6 +351,22 @@ export interface HwInfo {
   torch: string;
 }
 /**
+ * `data/label_manifest.json` (M5 gates 2-4).
+ *
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "LabelManifest".
+ */
+export interface LabelManifest {
+  arms: {
+    [k: string]: ArmLabelStats;
+  };
+  docs_sha256: string;
+  holdout_missing: string[];
+  missing: string[];
+  policy_sha256: string;
+  splits_sha256: string;
+}
+/**
  * This interface was referenced by `Domain`'s JSON-Schema
  * via the `definition` "LatencyStats".
  */
@@ -536,6 +581,26 @@ export interface SliceRow {
   recall: number | null;
   small_sample: boolean;
   value: string;
+}
+/**
+ * `data/splits.json`: every document's split (D-005 amended, D-016, D-018).
+ *
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "Splits".
+ */
+export interface Splits {
+  config_sha256: string;
+  counts: {
+    [k: string]: number;
+  };
+  doc_split: {
+    [k: string]: "train" | "calib" | "test" | "holdout";
+  };
+  docs_sha256: string;
+  groups: {
+    [k: string]: "train" | "calib" | "test" | "holdout";
+  };
+  seed: number;
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
