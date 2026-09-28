@@ -291,7 +291,8 @@ def _speed(all_scores: Sequence[Scores]) -> list[str]:
     for s in all_scores:
         sp = s.speed
         out += [f"### {_label(s)}", "", f"Hardware: **{sp.hardware}**. "
-                f"Warmup calls excluded: {sp.warmup_excluded}. laya autocast: batch-1 "
+                f"Warmup calls excluded: {sp.warmup_excluded}. Batch-1 outliers (> 5x median): "
+                f"{sp.batch1_outliers}. laya autocast: batch-1 "
                 f"{sp.batch1_autocast}, batched {sp.batched_autocast} (on MPS, fp16 autocast "
                 "starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).", ""]  # fmt: skip
         out += _table(

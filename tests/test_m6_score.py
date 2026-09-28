@@ -135,3 +135,17 @@ def test_report_compares_question_sets(run: dict[str, Path]) -> None:
     assert "| mock | test | qs_v1 |" in table and "| mock | test | qs_v2 |" in table
     assert "### qs_v1 vs qs_v2" not in rep.render([s])
     assert json.loads(s.model_dump_json())["speed"]["batch1_autocast"] == "unknown"
+
+
+def test_latency_outliers_counted_and_caveated() -> None:
+    assert sc.outliers([100.0] * 99 + [600.0]) == 1 and sc.outliers([]) == 0
+    assert sc.outliers([100.0] * 99 + [400.0]) == 0
+    lat = sc.latency_stats([100.0] * 99 + [600.0])
+    sp = sc.SpeedMetrics(hardware="h", batch1=lat, batched=None, per_doc_ms=None,
+                         warmup_excluded=0, batch1_outliers=1)  # fmt: skip
+    cal = sc.CalibParams.model_validate_json(
+        next((Path(__file__).parent.parent / "calib" / "mini").glob("mock*.json")).read_text()
+    )
+    assert any("batch-1 calls took over 5x" in c for c in sc.caveats({}, cal, sp=sp))
+    assert not any("took over" in c for c in sc.caveats({}, cal, sp=sp.model_copy(
+        update={"batch1_outliers": 0})))  # fmt: skip

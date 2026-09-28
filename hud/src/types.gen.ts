@@ -546,6 +546,7 @@ export interface Scores {
 export interface SpeedMetrics {
   batch1: LatencyStats | null;
   batch1_autocast?: string;
+  batch1_outliers?: number;
   batched: LatencyStats | null;
   batched_autocast?: string;
   hardware: string;

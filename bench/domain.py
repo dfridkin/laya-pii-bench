@@ -457,6 +457,9 @@ class SpeedMetrics(_Model):
     # laya autocast per mode: "on", "off", "mixed" (switched mid-run: audit C8) or "unknown"
     batch1_autocast: str = "unknown"
     batched_autocast: str = "unknown"
+    # batch-1 calls slower than OUTLIER_X x the median: a sign of outside interference such as
+    # memory pressure and swapping (invariant 9)
+    batch1_outliers: int = 0
 
 
 class RunContext(_Model):

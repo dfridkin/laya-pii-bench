@@ -1699,6 +1699,10 @@
           "default": "unknown",
           "type": "string"
         },
+        "batch1_outliers": {
+          "default": 0,
+          "type": "integer"
+        },
         "batched": {
           "anyOf": [
             {

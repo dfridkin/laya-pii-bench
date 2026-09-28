@@ -530,6 +530,13 @@ def split_scores(
     )
 
 
+def outliers(ms: Sequence[float]) -> int:
+    if not ms:
+        return 0
+    med = float(np.median(np.array(ms, dtype=float)))
+    return sum(m > OUTLIER_X * med for m in ms)
+
+
 def autocast_state(decisions: Sequence[Decision]) -> str:
     seen = {d.autocast for d in decisions}
     if not seen or seen == {None}:
@@ -565,10 +572,13 @@ def speed(
         per_doc_ms=latency_stats(list(per_doc.values())),
         warmup_excluded=len(decisions) + len(batched) - len(live),
         batch1_autocast=autocast_state(b1),
+        batch1_outliers=outliers([d.latency_ms for d in b1]),
         batched_autocast=autocast_state(bb),
     )
 
 
+OUTLIER_X = 5.0  # a batch-1 call this many times the median counts as an outlier
+OUTLIER_SHARE = 0.005  # above this share of calls, the speed numbers get a caveat
 D008_GAP = 0.01  # D-008 amended: point recall minus exact 95% lower bound above this -> review
 
 
@@ -597,6 +607,15 @@ def caveats(
         out.append(
             f"Doc-level arm: underpowered (D-008 amended); {n} test documents, few units each, "
             "so recall intervals are wide."
+        )
+    if (
+        sp is not None
+        and sp.batch1 is not None
+        and sp.batch1_outliers > OUTLIER_SHARE * sp.batch1.n
+    ):
+        out.append(
+            f"{sp.batch1_outliers} of {sp.batch1.n} batch-1 calls took over {OUTLIER_X:g}x the "
+            "median (outside interference such as swapping?): treat p95/p99 with care."
         )
     if sp is not None:
         for mode, state in (("batch-1", sp.batch1_autocast), ("batched", sp.batched_autocast)):
