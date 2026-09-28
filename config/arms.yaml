@@ -18,7 +18,7 @@ arms:
     head_max_len: 256
   B2:
     checkpoint: multilingual
-    unit: {kind: section, target_tokens: 1800}
+    unit: {kind: section, target_tokens: 1792}   # = state budget 2048-256 (audit C5)
     max_len: 2048
     head_max_len: 256
   B3:

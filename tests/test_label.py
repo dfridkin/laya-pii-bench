@@ -16,6 +16,7 @@ from bench.label import (
     label_docs,
     member_spans,
     read_docs,
+    section_windows,
 )
 from tests.fixture_expected import FIXTURE_UNIT_OFFSETS, FIXTURE_UNITS
 
@@ -201,9 +202,60 @@ def test_empty_doc_rejected() -> None:
         label_docs([doc(" ", [])], arm(), POLICY, fake_offsets, "fake")
 
 
-def test_non_chunk_arm_not_yet() -> None:
-    with pytest.raises(NotImplementedError):
-        label_docs([], ARMS.arms["B4"], POLICY, fake_offsets, "fake")
+def doc_with_sections(text: str, heads: list[int]) -> Document:
+    d = doc(text, [])
+    return d.model_copy(update={"gen_meta": {"sections": heads}})
+
+
+def test_section_windows_merge_and_oversize() -> None:
+    #           section tokens: 4 | 3 | 10 | 2 ; target 8
+    toks = [(i, i + 1) for i in range(19)]
+    bounds = [0, 4, 7, 17]
+    assert section_windows(bounds, 19, toks, 8) == [(0, 7), (7, 17), (17, 19)]
+
+
+def test_section_units_cover_the_document() -> None:
+    text = " ".join(f"s{i}" + " w" * 6 for i in range(10))
+    offs = fake_offsets(text)
+    heads = [text.index(f"s{i} ") for i in range(1, 10)]
+    units = label_docs([doc_with_sections(text, heads)], arm(unit={"kind": "section",
+                       "target_tokens": 16}, max_len=64, head_max_len=16), POLICY, fake_offsets,
+                       "f")  # fmt: skip
+    assert [u.kind for u in units] == ["section"] * len(units) and len(units) > 1
+    assert units[0].start == offs[0][0] and units[-1].end == offs[-1][1]
+    assert all(a.end <= b.start for a, b in pairwise(units))
+    assert sum(u.tokens for u in units) == len(offs)
+    assert all(u.tokens <= 16 for u in units)
+    assert all(u.id == f"d:section:64:{i}" for i, u in enumerate(units))
+
+
+def test_doc_unit_and_truncation() -> None:
+    text = " ".join(["abcdefghi"] * 20)
+    [u] = label_docs([doc(text, [])], arm(unit={"kind": "doc"}, max_len=64, head_max_len=16),
+                     POLICY, fake_offsets, "f")  # fmt: skip
+    assert (u.kind, u.start, u.end, u.tokens) == ("doc", 0, len(text), len(fake_offsets(text)))
+    assert u.truncated  # 60 tokens > budget 48; flagged, not dropped
+
+
+def test_docs_without_section_offsets_are_one_section() -> None:
+    [u] = label_docs([doc("one two three", [])], arm(unit={"kind": "section", "target_tokens": 50}),
+                     POLICY, fake_offsets, "f")  # fmt: skip
+    assert u.tokens == len(fake_offsets("one two three"))
+
+
+@settings(max_examples=300)
+@given(st.lists(st.integers(1, 30), min_size=1, max_size=12), st.integers(5, 60))
+def test_section_windows_partition_tokens(sizes: list[int], target: int) -> None:
+    n = sum(sizes)
+    toks = [(i, i + 1) for i in range(n)]
+    bounds = [sum(sizes[:k]) for k in range(len(sizes))]
+    wins = section_windows(bounds, n, toks, target)
+    assert wins[0][0] == 0 and wins[-1][1] == n
+    assert all(a[1] == b[0] for a, b in pairwise(wins))
+    starts = set(bounds)
+    for a, b in wins:
+        assert a in starts and (b in starts or b == n)  # windows are whole sections
+        assert b - a <= target or ((b in starts or b == n) and not any(a < x < b for x in starts))
 
 
 @pytest.mark.model
