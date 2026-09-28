@@ -161,6 +161,33 @@ def _load_splits(splits: Path) -> Any:
     return Splits.model_validate_json(splits.read_text())
 
 
+def _refuse_main_corpus(docs: Path, unit_doc_ids: set[str], flags: str) -> None:
+    """D-013: fixture-only flags are refused when the units are main-corpus documents (by content,
+    whatever the path or run meta say)."""
+    from bench.guard import main_docs_in
+    from bench.label import read_docs
+
+    if not docs.exists():
+        typer.echo(f"error: {docs} not found: pass the units' --docs", err=True)
+        raise typer.Exit(2)
+    documents = [d for d in read_docs(docs) if d.id in unit_doc_ids]
+    missing = unit_doc_ids - {d.id for d in documents}
+    if missing:
+        typer.echo(
+            f"error: units reference docs not in {docs} (e.g. {sorted(missing)[0]}): pass --docs",
+            err=True,
+        )
+        raise typer.Exit(2)
+    hits = main_docs_in(documents)
+    if hits:
+        typer.echo(
+            f"error: {flags} is fixture-only and these units are main-corpus documents "
+            f"(e.g. {hits[0]}); refused (D-013)",
+            err=True,
+        )
+        raise typer.Exit(2)
+
+
 @app.command()
 def calibrate(
     decisions: Annotated[Path, typer.Option(help="Decisions JSONL for one arm x qs.")],
@@ -169,6 +196,9 @@ def calibrate(
     policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),
     splits: Annotated[Path, typer.Option(help="Splits (fit on calib only).")] = Path(
         "data/splits.json"
+    ),
+    docs: Annotated[Path, typer.Option(help="Documents the units come from.")] = Path(
+        "data/docs.jsonl"
     ),
     debug_fit_all: Annotated[
         bool, typer.Option(help="Fixture only: fit on every unit (no calib split). Labeled.")
@@ -196,6 +226,9 @@ def calibrate(
         )
         raise typer.Exit(2)
     hashes = {"decisions": sha256_file(decisions), "units": sha256_file(units)}
+    unit_list = read_units(units)
+    if debug_fit_all or allow_no_meta:
+        _refuse_main_corpus(docs, {u.doc_id for u in unit_list}, "--debug-fit-all/--allow-no-meta")
     if meta is not None:
         if meta.config_hashes.get("units") != hashes["units"]:
             typer.echo(
@@ -205,7 +238,7 @@ def calibrate(
         if debug_fit_all and meta.dataset == "main":  # D-013
             typer.echo("error: --debug-fit-all is refused on the main dataset (D-013)", err=True)
             raise typer.Exit(2)
-    unit_map = {u.id: u for u in read_units(units)}
+    unit_map = {u.id: u for u in unit_list}
     rows = read_decisions(decisions)
     fit_on: Literal["calib", "fixture_debug"] = "fixture_debug"
     if not debug_fit_all:
@@ -371,6 +404,17 @@ def run_cmd(
     if missing:
         raise typer.BadParameter(f"units reference docs not in {docs}: {missing[:3]}")
     split_hash: dict[str, str] = {}
+    if dataset != "main":
+        from bench.guard import main_docs_in
+
+        hits = main_docs_in(doc_map[i] for i in {u.doc_id for u in unit_list})
+        if hits:
+            typer.echo(
+                f"error: {docs} holds main-corpus documents (e.g. {hits[0]}); run them as "
+                "data/docs.jsonl so the split filter applies (D-013)",
+                err=True,
+            )
+            raise typer.Exit(2)
     if dataset == "main":  # only the configured splits; train is never run zero-shot
         sp = _load_splits(splits)
         if sp.docs_sha256 != sha256_file(docs):
@@ -452,6 +496,10 @@ def score(
     except cal.CalibError as e:
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(2) from e
+    if allow_debug_calib or allow_no_meta or params.fit_on != "calib":
+        _refuse_main_corpus(
+            docs, {u.doc_id for u in read_units(units)}, "--allow-debug-calib/--allow-no-meta"
+        )
     from bench.domain import RunMeta
 
     meta_path = decisions.parent / "meta.json"

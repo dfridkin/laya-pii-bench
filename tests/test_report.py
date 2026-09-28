@@ -35,8 +35,19 @@ def pipeline(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     }
     write_units(fixture_units(), paths["units"])
     common = ["--decisions", str(MINI / "decisions_mock.jsonl"), "--units", str(paths["units"])]
-    r = RUN.invoke(app, ["calibrate", *common, "--out", str(paths["calib"]), "--debug-fit-all",
-                         "--allow-no-meta"])  # fmt: skip
+    r = RUN.invoke(
+        app,
+        [
+            "calibrate",
+            *common,
+            "--out",
+            str(paths["calib"]),
+            "--debug-fit-all",
+            "--docs",
+            str(MINI / "docs.jsonl"),
+            "--allow-no-meta",
+        ],
+    )
     assert r.exit_code == 0, r.output
     commit_file(paths["calib"])  # D-019: score reads only committed calib
     r = RUN.invoke(

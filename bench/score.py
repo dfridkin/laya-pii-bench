@@ -677,7 +677,7 @@ def score(
         laya_version=hw.laya if hw else "unknown",
         checkpoints=sorted({d.checkpoint for d in live}),
         checkpoint_revs=sorted({d.checkpoint_rev for d in live}),
-        created_at=datetime.now(UTC).isoformat(timespec="seconds"),
+        created_at=datetime.now(UTC).isoformat(timespec="microseconds"),  # D-019
     )
     return Scores(
         context=context,

@@ -39,8 +39,22 @@ def flipped_units(path: Path) -> Path:
 def test_calibrate_cli_with_unreachable_t_high(tmp_path: Path) -> None:
     units = flipped_units(tmp_path / "flipped.jsonl")  # no threshold reaches 0.98 precision
     out = tmp_path / "c.json"
-    r = RUN.invoke(app, ["calibrate", "--decisions", str(MOCK), "--units", str(units), "--out",
-                         str(out), "--debug-fit-all", "--allow-no-meta"])  # fmt: skip
+    r = RUN.invoke(
+        app,
+        [
+            "calibrate",
+            "--decisions",
+            str(MOCK),
+            "--units",
+            str(units),
+            "--out",
+            str(out),
+            "--debug-fit-all",
+            "--docs",
+            str(MINI / "docs.jsonl"),
+            "--allow-no-meta",
+        ],
+    )
     assert r.exit_code == 0, r.output
     assert "t_high=none" in r.output
     assert json.loads(out.read_text())["t_high"] is None
@@ -55,12 +69,38 @@ def test_meta_less_decisions_refused_without_override(tmp_path: Path) -> None:
     nometa.mkdir()
     (nometa / "decisions.jsonl").write_text(MOCK.read_text())
     dec = str(nometa / "decisions.jsonl")
-    r = RUN.invoke(app, ["calibrate", "--decisions", dec, "--units", str(units), "--out",
-                         str(tmp_path / "c.json"), "--debug-fit-all"])  # fmt: skip
+    r = RUN.invoke(
+        app,
+        [
+            "calibrate",
+            "--decisions",
+            dec,
+            "--units",
+            str(units),
+            "--out",
+            str(tmp_path / "c.json"),
+            "--debug-fit-all",
+            "--docs",
+            str(MINI / "docs.jsonl"),
+        ],
+    )
     assert r.exit_code == 2 and "no meta.json" in r.output and not (tmp_path / "c.json").exists()
-    r = RUN.invoke(app, ["calibrate", "--decisions", dec, "--units", str(units), "--out",
-                         str(tmp_path / "c.json"), "--debug-fit-all",
-                         "--allow-no-meta"])  # fmt: skip
+    r = RUN.invoke(
+        app,
+        [
+            "calibrate",
+            "--decisions",
+            dec,
+            "--units",
+            str(units),
+            "--out",
+            str(tmp_path / "c.json"),
+            "--debug-fit-all",
+            "--docs",
+            str(MINI / "docs.jsonl"),
+            "--allow-no-meta",
+        ],
+    )
     assert r.exit_code == 0
     score_args = ["score", "--decisions", dec, "--units", str(units), "--calib",
                   str(tmp_path / "c.json"), "--out", str(tmp_path / "s.json"), "--docs",
@@ -183,7 +223,7 @@ def test_score_cli_rejects_foreign_mode_rows(tmp_path: Path) -> None:
     c = tmp_path / "c.json"
     dec = str(run_dir / "decisions.jsonl")
     r = RUN.invoke(app, ["calibrate", "--decisions", dec, "--units", str(units), "--out", str(c),
-                         "--debug-fit-all"])  # fmt: skip
+                         "--debug-fit-all", "--docs", str(MINI / "docs.jsonl")])  # fmt: skip
     assert r.exit_code == 0, r.output
     r = RUN.invoke(app, ["score", "--decisions", dec, "--units", str(units), "--calib", str(c),
                          "--out", str(tmp_path / "s.json"), "--docs", str(MINI / "docs.jsonl"),

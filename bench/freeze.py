@@ -27,13 +27,27 @@ def repo_root(path: Path) -> Path:
     return Path(r.stdout.strip())
 
 
+def project_root() -> Path:
+    """The benchmark's own repository: calib committed anywhere else doesn't count."""
+    return repo_root(Path(__file__))
+
+
 def require_committed(path: Path) -> tuple[str, str]:
-    """(commit sha, commit time) of the committed, unmodified calib file; FreezeError otherwise."""
+    """(commit sha, commit time) of the committed, unmodified calib file; FreezeError otherwise.
+
+    The file must live in the project repository, be tracked at HEAD, and be byte-identical to its
+    HEAD blob (compared directly, so skip-worktree/assume-unchanged flags can't hide an edit)."""
     root = repo_root(path)
-    rel = str(path.resolve().relative_to(root))
+    if root.resolve() != project_root().resolve():
+        raise FreezeError(f"{path} is not in the project repository {project_root()} (D-019)")
+    rel = path.resolve().relative_to(root.resolve()).as_posix()
     if _git(root, "ls-files", "--error-unmatch", rel).returncode != 0:
         raise FreezeError(f"{rel} is not committed; run `make freeze-calib` before scoring (D-019)")
-    if _git(root, "diff", "--quiet", "HEAD", "--", rel).returncode != 0:
+    head = subprocess.run(["git", "show", f"HEAD:{rel}"], cwd=root, capture_output=True,
+                          check=False)  # fmt: skip
+    if head.returncode != 0:
+        raise FreezeError(f"{rel} is not committed; run `make freeze-calib` before scoring (D-019)")
+    if head.stdout != path.read_bytes():
         raise FreezeError(f"{rel} differs from its committed version; commit or restore it (D-019)")
     log = _git(root, "log", "-n", "1", "--format=%H %cI", "--", rel)
     parts = log.stdout.split()
