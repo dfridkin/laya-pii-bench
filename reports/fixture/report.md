@@ -12,15 +12,16 @@
 | question set | qs_v1 |
 | splits | fixture |
 | docs sha256 | `427b466abb995d4d7566741e2eca660e61726727e652e74319f6381ad52acd27` |
-| units sha256 | `382f89964e6b8cde86035e9883c17512de6241c4903d4d780e4f0b1e0a614615` |
+| units sha256 | `11a4901b0d0b5da77f3e23857eaea26d4f8d40468e227694700334e2b92988a9` |
 | decisions sha256 | `0af837472a733cd02faae60c09b4573cc761b6575855262c60617df8a375ed5c` |
-| calib hash / fit_on | `0d763516b65e1552` / fixture_debug |
+| calib hash / fit_on | `18402b8afa93edf8` / fixture_debug |
+| calib commit (D-019) | `3b26c12fc123` 2026-09-27T22:16:16-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: calib accuracy 1.0 |
 | hardware | not recorded |
 | laya version | unknown |
 | checkpoints | english |
 | checkpoint revisions | MOCK |
-| date | 2026-09-26T17:37:40+00:00 |
+| date | 2026-09-28T02:16:30+00:00 |
 
 ## 2. Headline operating point
 
@@ -28,7 +29,7 @@ pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). T
 
 | arm / qs | split | t_low | t_high | recall | recall exact lo | route recall | forward rate | false forwards | precision | units / docs / positives |
 |---|---|---|---|---|---|---|---|---|---|---|
-| mock / qs_v1 | fixture | 0.2189 | 0.6154 | 1.0000 [1.0000, 1.0000] | 0.6306 | 1.0000 | 0.0909 [0.0000, 0.3000] | 0 | 0.8000 | 11 / 10 / 8 |
+| mock / qs_v1 | fixture | 0.1404 | 0.6614 | 1.0000 [1.0000, 1.0000] | 0.5904 | 1.0000 | 0.0909 [0.0000, 0.3000] | 0 | 0.7000 | 11 / 10 / 7 |
 
 ## 3. Per-question
 
@@ -36,8 +37,8 @@ pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). T
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 11 | 0.7273 | 0.6857 | 0.7273 (A) |
-| subject_role | 11 | 0.7273 | 0.7083 | 0.3636 (both) |
+| pii_present | 11 | 0.8182 | 0.8036 | 0.6364 (A) |
+| subject_role | 11 | 0.7273 | 0.7143 | 0.3636 (none) |
 | category | 11 | 0.7273 | 0.5778 | 0.4545 (direct) |
 | doc_kind | 11 | 1.0000 | 1.0000 | 0.3636 (form_table) |
 
@@ -45,17 +46,17 @@ Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 6 | 2 |
-| B | 1 | 2 |
+| A | 6 | 1 |
+| B | 1 | 3 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
-| patient | 2 | 1 | 0 | 0 |
-| staff | 0 | 1 | 0 | 0 |
-| both | 1 | 1 | 2 | 0 |
-| none | 0 | 0 | 0 | 3 |
+| patient | 1 | 1 | 0 | 0 |
+| staff | 0 | 2 | 0 | 0 |
+| both | 1 | 0 | 2 | 0 |
+| none | 1 | 0 | 0 | 3 |
 
 Confusion, `category`:
 
@@ -84,7 +85,7 @@ ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.2800 | 0.2820 | 0.3415 | 0.3404 | 0.7917 | 0.7917 |
+| pii_present | 0.2927 | 0.2585 | 0.2651 | 0.2592 | 0.7778 | 0.7778 |
 | subject_role | 0.0273 | 0.0000 | 0.4473 | 0.4463 | 0.5000 | 0.5000 |
 | category | 0.1273 | 0.0000 | 0.4727 | 0.4525 | 0.5000 | 0.5000 |
 | doc_kind | 0.1500 | 0.1500 | 0.0300 | 0.0300 | n/a | n/a |
@@ -93,13 +94,13 @@ Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.533, 0.600) | 1 | 0.5600 | 0.0000 | 1 | 0.5576 | 0.0000 |
-| [0.600, 0.667) | 2 | 0.6200 | 1.0000 | 2 | 0.6154 | 1.0000 |
-| [0.667, 0.733) | 2 | 0.7150 | 0.5000 | 2 | 0.7074 | 0.5000 |
-| [0.733, 0.800) | 1 | 0.7900 | 0.0000 | 1 | 0.7811 | 0.0000 |
-| [0.800, 0.867) | 1 | 0.8300 | 1.0000 | 2 | 0.8410 | 1.0000 |
-| [0.867, 0.933) | 3 | 0.8867 | 1.0000 | 2 | 0.8867 | 1.0000 |
-| [0.933, 1.000) | 1 | 0.9700 | 1.0000 | 1 | 0.9657 | 1.0000 |
+| [0.533, 0.600) | 1 | 0.5600 | 0.0000 | 1 | 0.5817 | 0.0000 |
+| [0.600, 0.667) | 2 | 0.6200 | 1.0000 | 2 | 0.6614 | 1.0000 |
+| [0.667, 0.733) | 2 | 0.7150 | 1.0000 | 0 | n/a | n/a |
+| [0.733, 0.800) | 1 | 0.7900 | 0.0000 | 2 | 0.7786 | 1.0000 |
+| [0.800, 0.867) | 1 | 0.8300 | 1.0000 | 1 | 0.8596 | 0.0000 |
+| [0.867, 0.933) | 3 | 0.8867 | 1.0000 | 2 | 0.9141 | 1.0000 |
+| [0.933, 1.000) | 1 | 0.9700 | 1.0000 | 3 | 0.9631 | 1.0000 |
 
 Reliability data, `subject_role` (non-empty bins):
 
@@ -126,8 +127,8 @@ Reliability data, `doc_kind` (non-empty bins):
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 7 | 1 | 8 |
-| B | 1 | 0 | 2 | 3 |
+| A | 0 | 6 | 1 | 7 |
+| B | 1 | 1 | 2 | 4 |
 | all | 1 | 7 | 3 | 11 |
 
 | trigger | count |
@@ -158,7 +159,7 @@ Slices with n < 30 are marked `*`.
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | crf_page * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 0.0000 |
+| doc_type | crf_page * | 1 | 1 | 0 | n/a | 0.0000 | 0 | 1.0000 |
 | doc_type | csr_patient_narrative * | 2 | 2 | 2 | 1.0000 | 0.0000 | 0 | 1.0000 |
 | doc_type | delegation_log * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
 | doc_type | lab_report * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
@@ -166,21 +167,21 @@ Slices with n < 30 are marked `*`.
 | doc_type | protocol_section * | 2 | 2 | 0 | n/a | 0.5000 | 0 | 1.0000 |
 | doc_type | sae_cioms * | 1 | 1 | 0 | n/a | 0.0000 | 0 | 0.0000 |
 | doc_type | site_correspondence * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| hard_negative | no * | 9 | 8 | 8 | 1.0000 | 0.1111 | 0 | 0.7778 |
+| hard_negative | no * | 9 | 8 | 7 | 1.0000 | 0.1111 | 0 | 0.8889 |
 | hard_negative | yes * | 2 | 2 | 0 | n/a | 0.0000 | 0 | 0.5000 |
 | lang | de * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| lang | en * | 10 | 9 | 7 | 1.0000 | 0.1000 | 0 | 0.7000 |
-| length_bucket | short * | 11 | 10 | 8 | 1.0000 | 0.0909 | 0 | 0.7273 |
+| lang | en * | 10 | 9 | 6 | 1.0000 | 0.1000 | 0 | 0.8000 |
+| length_bucket | short * | 11 | 10 | 7 | 1.0000 | 0.0909 | 0 | 0.8182 |
 | perturbation | email_quoting * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
 | perturbation | none * | 7 | 6 | 4 | 1.0000 | 0.1429 | 0 | 0.7143 |
 | perturbation | ocr_noise * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| perturbation | table * | 2 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| pii_depth | none * | 11 | 10 | 8 | 1.0000 | 0.0909 | 0 | 0.7273 |
-| pre_redacted | no * | 10 | 9 | 8 | 1.0000 | 0.1000 | 0 | 0.8000 |
+| perturbation | table * | 2 | 2 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| pii_depth | none * | 11 | 10 | 7 | 1.0000 | 0.0909 | 0 | 0.8182 |
+| pre_redacted | no * | 10 | 9 | 7 | 1.0000 | 0.1000 | 0 | 0.9000 |
 | pre_redacted | yes * | 1 | 1 | 0 | n/a | 0.0000 | 0 | 0.0000 |
-| split_span | no * | 10 | 10 | 7 | 1.0000 | 0.1000 | 0 | 0.7000 |
+| split_span | no * | 10 | 10 | 6 | 1.0000 | 0.1000 | 0 | 0.8000 |
 | split_span | yes * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| truncated | no * | 11 | 10 | 8 | 1.0000 | 0.0909 | 0 | 0.7273 |
+| truncated | no * | 11 | 10 | 7 | 1.0000 | 0.0909 | 0 | 0.8182 |
 
 Value kinds of missed spans (false forwards):
 

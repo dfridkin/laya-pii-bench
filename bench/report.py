@@ -65,6 +65,7 @@ def _run_context(all_scores: Sequence[Scores]) -> list[str]:
                 ("units sha256", f"`{c.units_sha256}`"),
                 ("decisions sha256", f"`{c.decisions_sha256}`"),
                 ("calib hash / fit_on", f"`{c.calib_hash[:16]}` / {c.calib_fit_on}"),
+                ("calib commit (D-019)", f"`{c.calib_commit[:12]}` {c.calib_committed_at}"),
                 (
                     "temperature fallbacks (T = 1)",
                     "; ".join(f"{k}: {v}" for k, v in c.calib_temperature_fallbacks.items())

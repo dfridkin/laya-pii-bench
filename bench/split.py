@@ -33,7 +33,9 @@ from bench.domain import (
     Splits,
     Unit,
 )
+from bench.generate import variants as V
 from bench.generate.seeds import rng
+from bench.generate.world import World
 
 MAIN_SPLITS: tuple[Split, ...] = ("train", "calib", "test")
 ALL_SPLITS: tuple[Split, ...] = ("train", "calib", "test", "holdout")
@@ -213,6 +215,18 @@ def leakage(splits: Splits, docs: Sequence[Document]) -> list[str]:
             if len(ss) > 1:
                 problems.append(f"{kind} {key} in {sorted(ss)}")
     return problems
+
+
+def staff_sites(world: World) -> dict[str, str]:
+    """Every distinctive staff value (name forms, email, phone) -> its site key (`study/site`).
+    A value shared by staff of two sites names no one in particular and is left out."""
+    where: dict[str, set[str]] = defaultdict(set)
+    for site in world.sites():
+        for p in site.staff.values():
+            for v in [*V.name_forms(p), p.email, p.phone]:
+                if v:
+                    where[v].add(site.key)
+    return {v: next(iter(ks)) for v, ks in where.items() if len(ks) == 1}
 
 
 def staff_leakage(

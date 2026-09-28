@@ -68,12 +68,8 @@ def test_gate1_no_site_subject_or_staff_across_splits(
     splits, _ = result
     assert sp.leakage(splits, corpus_docs) == []
     world = W.build(SPEC, frozenset(template_vocabulary()))
-    staff_site: dict[str, str] = {}
-    for site in world.sites():
-        for p in site.staff.values():
-            for v in (p.email, p.phone, f"{p.given} {p.family}", f"{p.family.upper()}, {p.given}"):
-                if v:
-                    staff_site[v] = site.key
+    staff_site = sp.staff_sites(world)
+    assert len(staff_site) > 100
     assert sp.staff_leakage(splits, corpus_docs, staff_site) == []
     # and every person's site maps to one split (D-018 makes staff disjointness follow)
     site_split = {k: v for k, v in splits.groups.items() if "/" in k}
@@ -134,3 +130,17 @@ def test_ratios_close_to_config(result: tuple[Splits, dict[str, float]]) -> None
     for s, n in main.items():
         assert abs(n / total - CFG.ratios[s]) <= CFG.ratio_tolerance, (s, n, total)  # type: ignore[index]
     assert summary["max_share_error"] <= CFG.ratio_tolerance
+
+
+def test_staff_leakage_detects_a_crossing(
+    corpus_docs: list[Document], result: tuple[Splits, dict[str, float]]
+) -> None:
+    splits, _ = result
+    staff_site = sp.staff_sites(W.build(SPEC, frozenset(template_vocabulary())))
+    doc = next(
+        d
+        for d in corpus_docs
+        if splits.doc_split[d.id] == "train" and any(s.value in staff_site for s in d.spans)
+    )
+    moved = splits.model_copy(update={"doc_split": {**splits.doc_split, doc.id: "test"}})
+    assert any(p.startswith("staff of ") for p in sp.staff_leakage(moved, corpus_docs, staff_site))

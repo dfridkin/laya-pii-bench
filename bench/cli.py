@@ -260,11 +260,16 @@ def split_cmd(
     arms: Annotated[Path, typer.Option(help="Arms config.")] = Path("config/arms.yaml"),
     qs_dir: Annotated[Path, typer.Option(help="Question sets.")] = Path("config/questions"),
     policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),
+    gen_spec: Annotated[Path, typer.Option(help="Generator spec (world, for staff).")] = Path(
+        "config/gen_spec.yaml"
+    ),
 ) -> None:
     """Assign documents to train/calib/test/holdout (site-grouped, class-complete) and write the
     label manifest. Exits 1 on any leak or any gold class missing from train/calib/test."""
     from bench import split as sp
-    from bench.config import load_arms, load_question_sets, load_split
+    from bench.config import load_arms, load_gen_spec, load_question_sets, load_split
+    from bench.generate.render import template_vocabulary
+    from bench.generate.world import build as build_world
     from bench.label import read_docs, read_units
     from bench.paths import units_dir
     from bench.score import sha256_file
@@ -298,7 +303,10 @@ def split_cmd(
     typer.echo(f"search: {summary}")
     for a, st in man.arms.items():
         typer.echo(f"  {a}: {st.n_units} units {dict(st.by_split)} truncated {dict(st.truncated)}")
-    leaks = sp.leakage(splits, documents)
+    world = build_world(load_gen_spec(gen_spec), frozenset(template_vocabulary()))
+    leaks = sp.leakage(splits, documents) + sp.staff_leakage(
+        splits, documents, sp.staff_sites(world)
+    )
     for x in leaks:
         typer.echo(f"LEAK {x}", err=True)
     for x in man.missing:

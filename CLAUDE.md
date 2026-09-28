@@ -40,10 +40,10 @@ Every stage reads files and writes files. No stage calls another stage in-proces
 |---|---|---|
 | gen | config/gen_spec.yaml, templates | data/docs.jsonl, data/gen_manifest.json |
 | label | docs, config/policy.yaml, config/arms.yaml | data/units/{arm}.jsonl |
-| split | docs | data/splits.json |
+| split | docs, units (class coverage; runs after label) | data/splits.json, data/label_manifest.json |
 | run | units, splits, arm, question set | runs/{arm}/{qs}/decisions.jsonl + meta.json (`{qs}__batch{n}` for batched) |
-| calibrate | calib-split decisions, units | calib/{arm}__{qs}.json (hashed, frozen; records input hashes + calib doc ids) |
-| score | test-split decisions + frozen calib, units, docs, run meta | scores/{arm}__{qs}.json |
+| calibrate | calib-split decisions, units, splits | calib/{arm}__{qs}.json (hashed; records input hashes + calib doc ids); `make freeze-calib` commits it (D-019) |
+| score | test/holdout decisions + committed calib (refused otherwise), units, docs, splits, run meta | scores/{arm}__{qs}.json (records calib commit) |
 | report | scores, decisions | reports/report.md, hud/public/replay.json |
 
 Named datasets other than `data/docs.jsonl` (e.g. the fixture, `--docs fixtures/mini/docs.jsonl`)
