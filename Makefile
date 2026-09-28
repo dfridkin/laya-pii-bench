@@ -48,10 +48,10 @@ gen:
 	$(BENCH) gen --spec config/gen_spec.yaml --out data/docs.jsonl
 
 label:
-	$(BENCH) label --docs data/docs.jsonl --policy config/policy.yaml --arms config/arms.yaml --out data/units/
+	$(BENCH) label --docs data/docs.jsonl --policy config/policy.yaml --arms config/arms.yaml
 
 split:
-	$(BENCH) split --docs data/docs.jsonl --out data/splits.json
+	$(BENCH) split --docs data/docs.jsonl --out data/splits.json  # after label: reads units for class coverage
 
 run:
 	$(BENCH) run --arm $(ARM) --qs $(QS)

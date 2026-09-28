@@ -204,6 +204,63 @@ def calibrate(
     )
 
 
+@app.command("split")
+def split_cmd(
+    docs: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
+    out: Annotated[Path, typer.Option(help="Splits JSON.")] = Path("data/splits.json"),
+    units: Annotated[Path | None, typer.Option(help="Units dir (default: by dataset).")] = None,
+    config: Annotated[Path, typer.Option(help="Split config.")] = Path("config/split.yaml"),
+    arms: Annotated[Path, typer.Option(help="Arms config.")] = Path("config/arms.yaml"),
+    qs_dir: Annotated[Path, typer.Option(help="Question sets.")] = Path("config/questions"),
+    policy: Annotated[Path, typer.Option(help="Label policy.")] = Path("config/policy.yaml"),
+) -> None:
+    """Assign documents to train/calib/test/holdout (site-grouped, class-complete) and write the
+    label manifest. Exits 1 on any leak or any gold class missing from train/calib/test."""
+    from bench import split as sp
+    from bench.config import load_arms, load_question_sets, load_split
+    from bench.label import read_docs, read_units
+    from bench.paths import units_dir
+    from bench.score import sha256_file
+
+    cfg = load_split(config)
+    arm_cfg = load_arms(arms, qs_dir)
+    udir = units or units_dir(docs)
+    enabled = [a for a, spec in arm_cfg.arms.items() if spec.enabled]
+    missing_units = [a for a in enabled if not (udir / f"{a}.jsonl").exists()]
+    if missing_units:
+        typer.echo(
+            f"error: no units for {missing_units} in {udir}: run `bench label` first", err=True
+        )
+        raise typer.Exit(2)
+    documents = read_docs(docs)
+    units_by_arm = {a: read_units(udir / f"{a}.jsonl") for a in enabled}
+    qsets = {
+        q: s for q, s in load_question_sets(qs_dir).items() if q in arm_cfg.defaults.question_sets
+    }
+    splits, summary = sp.build(documents, units_by_arm, qsets, cfg, sha256_file(docs),
+                               sha256_file(config))  # fmt: skip
+    out.parent.mkdir(parents=True, exist_ok=True)
+    body = splits.model_dump_json(indent=2) + "\n"
+    out.write_text(body, encoding="utf-8")
+    man = sp.manifest(units_by_arm, splits, qsets, sha256_file(docs), sha256_file(policy),
+                      sp.sha256_text(body),
+                      {a: sha256_file(udir / f"{a}.jsonl") for a in enabled})  # fmt: skip
+    man_path = out.parent / "label_manifest.json"
+    man_path.write_text(man.model_dump_json(indent=2) + "\n", encoding="utf-8")
+    typer.echo(f"splits {dict(splits.counts)} -> {out}; manifest -> {man_path}")
+    typer.echo(f"search: {summary}")
+    for a, st in man.arms.items():
+        typer.echo(f"  {a}: {st.n_units} units {dict(st.by_split)} truncated {dict(st.truncated)}")
+    leaks = sp.leakage(splits, documents)
+    for x in leaks:
+        typer.echo(f"LEAK {x}", err=True)
+    for x in man.missing:
+        typer.echo(f"MISSING {x}", err=True)
+    typer.echo(f"holdout classes missing (reported, D-005): {len(man.holdout_missing)}")
+    if leaks or man.missing:
+        raise typer.Exit(1)
+
+
 @app.command("run")
 def run_cmd(
     arm: Annotated[str, typer.Option(help="Arm name from config/arms.yaml.")],
