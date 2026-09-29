@@ -180,6 +180,7 @@ export interface Decision {
   max_len: number;
   mode?: "batch1" | "batched";
   qs: string;
+  retried?: boolean;
   state_tokens?: number | null;
   t_offset_ms: number;
   truncated_questions?: string[];
@@ -523,6 +524,7 @@ export interface RunMeta {
   finished_at: string | null;
   hw: HwInfo;
   qs: string;
+  release_every?: number | null;
   sessions: number;
   started_at: string;
   warmup_calls: number;

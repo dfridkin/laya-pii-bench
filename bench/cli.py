@@ -359,6 +359,9 @@ def run_cmd(
     units: Annotated[Path | None, typer.Option(help="Units JSONL (default: by dataset).")] = None,
     out: Annotated[Path | None, typer.Option(help="Run directory (default: by dataset).")] = None,
     batch_size: Annotated[int, typer.Option(help="1 = headline batch-1 mode.")] = 1,
+    release_every: Annotated[
+        int, typer.Option(help="Calls between MPS allocator releases (outside the timer).")
+    ] = 25,
     warmup_docs: Annotated[Path, typer.Option(help="Warmup text source.")] = Path(
         "fixtures/mini/docs.jsonl"
     ),
@@ -438,6 +441,7 @@ def run_cmd(
         arm=arm, qs=qset, questions=questions, checkpoint=spec_arm.checkpoint,
         max_len=spec_arm.max_len, dataset=dataset, out_dir=out, batch_size=batch_size,
         warmup_calls=cfg.defaults.warmup_calls, config_hashes=hashes,
+        release_every=release_every,
     )  # fmt: skip
     device = None if cfg.defaults.device == "auto" else cfg.defaults.device
     out.mkdir(parents=True, exist_ok=True)

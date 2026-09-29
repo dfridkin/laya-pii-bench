@@ -20,7 +20,7 @@ from typing import Any, Literal
 from pydantic import ValidationError
 
 from bench.domain import Decision, Device, HwInfo, QuestionSet, RunMeta, Unit
-from bench.laya_client import LayaLike, to_answers
+from bench.laya_client import LayaError, LayaLike, to_answers
 
 Log = Callable[[str], None]
 
@@ -211,6 +211,7 @@ def run(
         sessions=prev.sessions + 1 if prev else 1,
         started_at=prev.started_at if prev else _now(),
         finished_at=None,
+        release_every=spec.release_every,
     )
     write_atomic(meta_path, meta.model_dump_json(indent=2) + "\n")
 
@@ -225,6 +226,7 @@ def run(
         state_tokens: int | None = None,
         cut: Sequence[str] = (),
         autocast: bool | None = None,
+        retried: bool = False,
     ) -> Decision:
         return Decision(
             unit_id=unit_id,
@@ -240,6 +242,7 @@ def run(
             mode=mode,
             device=device,
             autocast=autocast,
+            retried=retried,
             warmup=warmup,
             state_tokens=state_tokens,
             truncated_questions=list(cut),
@@ -262,13 +265,25 @@ def run(
             batch = todo[b : b + spec.batch_size]
             states = [texts[u.id] for u in batch]
             seen = [client.state_tokens(s) for s in states]  # outside the timer
-            start = time.perf_counter_ns()
-            if spec.batch_size == 1:
-                one, ns = client.predict(states[0])
-                results = [one]
-            else:
-                results, ns = client.predict_batch(states)
-            calls += 1
+            retried = False
+            while True:
+                start = time.perf_counter_ns()
+                if spec.batch_size == 1:
+                    one, ns = client.predict(states[0])
+                    results = [one]
+                else:
+                    results, ns = client.predict_batch(states)
+                calls += 1
+                try:
+                    for r in results:
+                        to_answers(r, spec.questions)
+                    break
+                except LayaError as e:
+                    if retried or "nan" not in str(e):
+                        raise
+                    log(f"WARN laya NaN on {batch[0].id} ({e}); retrying once")
+                    client.release()  # outside the timer
+                    retried = True
             dev = check_device()
             amp = client.autocast()
             if amp_seen and amp != amp_seen[-1]:
@@ -285,7 +300,8 @@ def run(
                     log(f"note {u.id}: unit.truncated=true but no question cut the state")
                 out.append(
                     decision(u.id, res, ns / 1e6 / len(batch), (start - t0) / 1e6, len(batch),
-                             dev, state_tokens=n_tok, cut=cut, autocast=amp)
+                             dev, state_tokens=n_tok, cut=cut, autocast=amp,
+                             retried=retried)
                 )  # fmt: skip
             writer.write(out)
             if spec.release_every and (b // spec.batch_size + 1) % spec.release_every == 0:

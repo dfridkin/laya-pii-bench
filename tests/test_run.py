@@ -55,6 +55,7 @@ class FakeClient:
         self.fall_back_after = fall_back_after
         self.amp_off_after = amp_off_after
         self.releases = 0
+        self.nan_calls: set[int] = set()
 
     def current_device(self) -> Device:
         if self.fall_back_after is not None and self.calls > self.fall_back_after:
@@ -63,7 +64,11 @@ class FakeClient:
 
     def predict(self, state: str) -> tuple[dict[str, Any], int]:
         self.calls += 1
-        return fake_result(state), 5_000_000
+        res = fake_result(state)
+        if self.calls in self.nan_calls:
+            probs = res["answers"]["pii_present"]["probabilities"]
+            res["answers"]["pii_present"]["probabilities"] = {k: float("nan") for k in probs}
+        return res, 5_000_000
 
     def predict_batch(self, states: Sequence[str]) -> tuple[list[dict[str, Any]], int]:
         self.calls += 1
@@ -332,3 +337,22 @@ def test_release_between_calls_outside_the_timer(tmp_path: Path) -> None:
     assert sum("mps_driver_gb=1.50" in x for x in log) == c.releases
     live = [d for d in read_existing(tmp_path / "decisions.jsonl") if not d.warmup]
     assert all(d.latency_ms == 5.0 for d in live)  # releases never land inside a timed call
+
+
+def test_nan_is_retried_once_and_recorded(tmp_path: Path) -> None:
+    log: list[str] = []
+    c = FakeClient()
+    c.nan_calls = {3 + 5}  # 3 warmups, then the 5th unit's first call returns NaN
+    run(spec(tmp_path), UNITS, TEXTS, ["w"], lambda: c, HW, log.append)
+    live = [d for d in read_existing(tmp_path / "decisions.jsonl") if not d.warmup]
+    assert [d.retried for d in live] == [i == 4 for i in range(len(UNITS))]
+    assert c.calls == 3 + len(UNITS) + 1 and sum("retrying once" in x for x in log) == 1
+
+
+def test_nan_twice_fails_loudly(tmp_path: Path) -> None:
+    c = FakeClient()
+    c.nan_calls = {3 + 5, 3 + 6}
+    with pytest.raises(LayaError, match="nan"):
+        run(spec(tmp_path), UNITS, TEXTS, ["w"], lambda: c, HW, print)
+    live = [d for d in read_existing(tmp_path / "decisions.jsonl") if not d.warmup]
+    assert len(live) == 4  # nothing written for the failing unit

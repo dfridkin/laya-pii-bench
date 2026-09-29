@@ -196,6 +196,9 @@ class Decision(_Model):
     # laya's autocast switch after this call (MPS fp16 at >= 5 question rows); laya turns it off
     # for good after one failed autocast forward, which changes speed mid-run (audit C8)
     autocast: bool | None = None
+    # laya returned NaN probabilities on the first call and this is the single retry (M6: seen on
+    # long B4 calls under memory pressure; the same unit is clean in isolation)
+    retried: bool = False
     warmup: bool = False
     # State tokens as the checkpoint tokenizes them, and the questions whose input cut the state
     # short (laya's per-question room: max_len - prompt head - specials). Invariant 7.
@@ -243,6 +246,7 @@ class RunMeta(_Model):
     sessions: int = Field(ge=1)  # 1 + number of resumes that made calls
     started_at: str
     finished_at: str | None
+    release_every: int | None = None  # calls between allocator releases (outside the timer)
 
 
 class CalibParams(_Model):

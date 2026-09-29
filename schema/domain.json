@@ -407,6 +407,10 @@
         "qs": {
           "type": "string"
         },
+        "retried": {
+          "default": false,
+          "type": "boolean"
+        },
         "state_tokens": {
           "anyOf": [
             {
@@ -1491,6 +1495,17 @@
         },
         "qs": {
           "type": "string"
+        },
+        "release_every": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "sessions": {
           "minimum": 1,
