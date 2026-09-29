@@ -41,6 +41,9 @@ class RunSpec:
     batch_size: int
     warmup_calls: int
     config_hashes: Mapping[str, str]
+    # calls between allocator releases (gc + MPS cache), always outside the timer: the MPS cache
+    # otherwise grows over a long run until the process swaps against itself (M6, arm B3)
+    release_every: int = 25
 
 
 def read_existing(path: Path) -> list[Decision]:
@@ -285,7 +288,11 @@ def run(
                              dev, state_tokens=n_tok, cut=cut, autocast=amp)
                 )  # fmt: skip
             writer.write(out)
-            if (b // spec.batch_size) % 25 == 0:
+            if spec.release_every and (b // spec.batch_size + 1) % spec.release_every == 0:
+                gb = client.release()  # between calls: never inside a timed call
+                mem = "" if gb is None else f" mps_driver_gb={gb:.2f}"
+                log(f"progress: {len(done) + b + len(batch)}/{len(units)}{mem}")
+            elif (b // spec.batch_size) % 25 == 0:
                 log(f"progress: {len(done) + b + len(batch)}/{len(units)}")
     finally:
         writer.close()

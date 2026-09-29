@@ -59,8 +59,9 @@ run:
 BATCHED_ARMS ?= A B1 B2   # B3/B4 batch-1 only: batching 4k-8k units exceeds 8 GB (audit C4)
 BATCH ?= 8
 
-run-all:  # batch-1 for every arm x qs, then the batched speed runs; each run resumes
-	@for a in $(ARMS); do for q in $(QSETS); do $(BENCH) run --arm $$a --qs $$q || exit 1; done; done
+run-all:  # batch-1 for every arm x qs, then the batched speed runs; each run resumes. caffeinate:
+	# macOS idle sleep otherwise freezes long runs (perf_counter doesn't count sleep, so timings hold)
+	@caffeinate -i -w $$$$ & for a in $(ARMS); do for q in $(QSETS); do $(BENCH) run --arm $$a --qs $$q || exit 1; done; done
 	@for a in $(BATCHED_ARMS); do for q in $(QSETS); do \
 	  $(BENCH) run --arm $$a --qs $$q --batch-size $(BATCH) || exit 1; done; done
 

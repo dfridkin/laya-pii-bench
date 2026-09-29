@@ -54,6 +54,7 @@ class FakeClient:
         self.cut_over = cut_over
         self.fall_back_after = fall_back_after
         self.amp_off_after = amp_off_after
+        self.releases = 0
 
     def current_device(self) -> Device:
         if self.fall_back_after is not None and self.calls > self.fall_back_after:
@@ -67,6 +68,10 @@ class FakeClient:
     def predict_batch(self, states: Sequence[str]) -> tuple[list[dict[str, Any]], int]:
         self.calls += 1
         return [fake_result(s) for s in states], 8_000_000
+
+    def release(self) -> float | None:
+        self.releases += 1
+        return 1.5
 
     def autocast(self) -> bool | None:
         return self.amp_off_after is None or self.calls <= self.amp_off_after
@@ -315,3 +320,15 @@ def test_autocast_recorded_and_switch_warned(tmp_path: Path) -> None:
         d.autocast is False for d in live[3:]
     )
     assert sum("autocast switched from True to False" in x for x in log) == 1
+
+
+def test_release_between_calls_outside_the_timer(tmp_path: Path) -> None:
+    log: list[str] = []
+    c = FakeClient()
+    s = spec(tmp_path)
+    s = RunSpec(**{**s.__dict__, "release_every": 4})
+    run(s, UNITS, TEXTS, ["w"], lambda: c, HW, log.append)
+    assert c.releases == len(UNITS) // 4
+    assert sum("mps_driver_gb=1.50" in x for x in log) == c.releases
+    live = [d for d in read_existing(tmp_path / "decisions.jsonl") if not d.warmup]
+    assert all(d.latency_ms == 5.0 for d in live)  # releases never land inside a timed call

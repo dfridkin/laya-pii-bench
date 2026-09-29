@@ -40,6 +40,7 @@ class LayaLike(Protocol):
     def predict_batch(self, states: Sequence[str]) -> tuple[list[dict[str, Any]], int]: ...
     def state_tokens(self, state: str) -> tuple[int, list[str]]: ...
     def autocast(self) -> bool | None: ...
+    def release(self) -> float | None: ...
 
 
 def to_answers(
@@ -130,6 +131,19 @@ class LayaClient:
         if dev not in get_args(Device):
             raise LayaError(f"unsupported device {dev!r}")
         return cast(Device, dev)
+
+    def release(self) -> float | None:
+        """Free Python garbage and the MPS allocator cache between calls; returns the MPS driver
+        memory (GB) afterwards, or None off MPS."""
+        import gc
+
+        import torch
+
+        gc.collect()
+        if self.device != "mps":
+            return None
+        torch.mps.empty_cache()
+        return float(torch.mps.driver_allocated_memory()) / 2**30
 
     def autocast(self) -> bool | None:
         """Whether a call with this question set runs under autocast (laya's rows gate)."""
