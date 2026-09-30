@@ -1,0 +1,35 @@
+# qs_v3 (D-021): qs_v1 with a pii_present prompt that names the quasi-identifiers the gold counts.
+# Only pii_present differs from qs_v1. Run on arm A only. Neutral A/B keys (D-006).
+id: qs_v3
+questions:
+  pii_present:
+    type: choice
+    instructions: Does this text contain personal identifiers of an individual (patient or site staff)? Count names, initials, contact details, street addresses or postal codes, medical record numbers, birth dates, dates of visits, procedures or events tied to a person, and ages over 89. Coded subject or randomization numbers alone do not count.
+    criteria:
+      A: yes, it contains at least one personal identifier
+      B: no, it contains no personal identifiers
+  subject_role:
+    type: choice
+    instructions: Whose personal information appears in this text?
+    criteria:
+      patient: a trial participant or patient
+      staff: investigators, coordinators, monitors, or other site staff
+      both: both participants and staff
+      none: no individual's personal information
+  category:
+    type: choice
+    instructions: What is the most sensitive kind of personal information in this text?
+    criteria:
+      direct: direct identifiers such as full names, medical record numbers, phone numbers, emails, addresses, or full birth dates
+      quasi: indirect identifiers such as event dates, initials, ages, or postal codes
+      coded: coded study identifiers such as subject or randomization numbers
+      staff: names or contact details of site staff only
+      none: no personal information
+  doc_kind:
+    type: choice
+    instructions: What kind of document text is this?
+    criteria:
+      narrative: narrative prose describing a case or visit
+      form_table: a form, log, or table
+      correspondence: a letter or email
+      protocol_text: protocol or procedural text

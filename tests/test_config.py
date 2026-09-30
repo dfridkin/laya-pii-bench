@@ -58,7 +58,13 @@ def test_arms_load() -> None:
 
 def test_question_sets_load() -> None:
     qs = config.load_question_sets(CFG / "questions")
-    assert set(qs) == {"qs_v1", "qs_v2"}
+    assert set(qs) == {"qs_v1", "qs_v2", "qs_v3"}
+    # D-021: qs_v3 is qs_v1 except for pii_present's instructions
+    v1, v3 = qs["qs_v1"].questions, qs["qs_v3"].questions
+    assert list(v1) == list(v3)
+    assert all(v1[q] == v3[q] for q in v1 if q != "pii_present")
+    assert v1["pii_present"].criteria == v3["pii_present"].criteria  # type: ignore[union-attr]
+    assert v1["pii_present"].instructions != v3["pii_present"].instructions
 
 
 # --- question sets are answerable from GoldAnswers (contract) -----------------------------------
