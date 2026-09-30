@@ -200,6 +200,7 @@
 - **Some checkpoints barely rank PII.** Test AUROC of calibrated p(pii) below 0.6: B1 / qs_v1 0.379, B1 / qs_v2 0.377, B2 / qs_v1 0.449, B2 / qs_v2 0.445, B3 / qs_v1 (doc-level, underpowered) 0.491, B3 / qs_v2 (doc-level, underpowered) 0.481, B4 / qs_v1 (doc-level, underpowered) 0.473, B4 / qs_v2 (doc-level, underpowered) 0.456. Their high recall comes from answering "PII present" to almost everything, not from detection (option-swap probe: `reports/audits/M6_pii_question_probe-20260929.md`).
 - **The recall target does not transfer from calib to test** for B3 / qs_v2 (doc-level, underpowered) (0.929, exact upper 0.974), B4 / qs_v1 (doc-level, underpowered) (0.963, exact upper 0.992), B4 / qs_v2 (doc-level, underpowered) (0.925, exact upper 0.972); target 0.995.
 - **Quasi-identifiers alone are the hardest positives.** AUROC quasi-only vs direct: A / qs_v1 0.706 vs 0.834, A / qs_v2 0.705 vs 0.832, B2 / qs_v1 0.427 vs 0.539, B2 / qs_v2 0.418 vs 0.540, B3 / qs_v1 (doc-level, underpowered) 0.493 vs 0.562, B3 / qs_v2 (doc-level, underpowered) 0.437 vs 0.551, B4 / qs_v2 (doc-level, underpowered) 0.430 vs 0.505. The pii_present prompt names names, contacts, MRNs and birth dates, not event dates or initials, which the gold counts (phi_quasi).
+- **False forwards are not independent across arms.** Short documents fit in one unit for B2-B4, so those arms see identical text and repeat the same misses: d0352 in 6 runs, d0447 in 3 runs, d0418 in 3 runs (12 of 20 test false forwards).
 - Truncated units were forwarded (the model never saw their tail): B2 / qs_v1 1, B2 / qs_v2 2.
 - qs_v1 vs qs_v2 differences in the same arm are not a question-wording effect: pii_present has the same text in both, qs_v1 runs fp32 and qs_v2 fp16 (5 rows) on MPS, which moves long-input probabilities, and only qs_v1 has the role rule.
 
@@ -1156,24 +1157,24 @@ Same arm and split under both question sets. `pii_present` is the same question 
 
 | arm | split | qs | pii_present acc | pii_present macro-F1 | recall | forward rate | category macro-F1 (qs_v1) | categories micro / macro-F1 (qs_v2) |
 |---|---|---|---|---|---|---|---|---|
-| A | holdout | qs_v1 | 0.9322 | 0.4825 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | 0.3545 | n/a |
-| A | holdout | qs_v2 | 0.9322 | 0.4825 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | n/a | 0.2367 / 0.0662 |
-| A | test | qs_v1 | 0.9362 | 0.6155 | 1.0000 [1.0000, 1.0000] | 0.0045 [0.0019, 0.0078] | 0.3415 | n/a |
-| A | test | qs_v2 | 0.9362 | 0.6155 | 1.0000 [1.0000, 1.0000] | 0.0045 [0.0019, 0.0078] | n/a | 0.2817 / 0.3713 |
-| B1 | holdout | qs_v1 | 0.2121 | 0.1820 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | 0.2648 | n/a |
-| B1 | holdout | qs_v2 | 0.2121 | 0.1820 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | n/a | 0.1034 / 0.0877 |
+| A | holdout | qs_v1 | 0.9322 | 0.4825 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.3545 | n/a |
+| A | holdout | qs_v2 | 0.9322 | 0.4825 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.2367 / 0.0662 |
+| A | test | qs_v1 | 0.9362 | 0.6155 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0045 [0.0019, 0.0078] | 0.3415 | n/a |
+| A | test | qs_v2 | 0.9362 | 0.6155 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0045 [0.0019, 0.0078] | n/a | 0.2817 / 0.3713 |
+| B1 | holdout | qs_v1 | 0.2121 | 0.1820 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.2648 | n/a |
+| B1 | holdout | qs_v2 | 0.2121 | 0.1820 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.1034 / 0.0877 |
 | B1 | test | qs_v1 | 0.1605 | 0.1478 | 0.9900 [0.9667, 1.0000] | 0.0015 [0.0000, 0.0049] | 0.2283 | n/a |
-| B1 | test | qs_v2 | 0.1605 | 0.1478 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | n/a | 0.1496 / 0.1481 |
-| B2 | holdout | qs_v1 | 0.4000 | 0.2857 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | 0.2854 | n/a |
-| B2 | holdout | qs_v2 | 0.4000 | 0.2857 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | n/a | 0.1878 / 0.1471 |
+| B1 | test | qs_v2 | 0.1605 | 0.1478 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.1496 / 0.1481 |
+| B2 | holdout | qs_v1 | 0.4000 | 0.2857 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.2854 | n/a |
+| B2 | holdout | qs_v2 | 0.4000 | 0.2857 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.1878 / 0.1471 |
 | B2 | test | qs_v1 | 0.2750 | 0.2317 | 0.9773 [0.9405, 1.0000] | 0.0094 [0.0000, 0.0224] | 0.2509 | n/a |
 | B2 | test | qs_v2 | 0.2750 | 0.2317 | 0.9773 [0.9405, 1.0000] | 0.0187 [0.0060, 0.0356] | n/a | 0.2626 / 0.2602 |
-| B3 | holdout | qs_v1 | 0.6452 | 0.3922 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | 0.6760 | n/a |
-| B3 | holdout | qs_v2 | 0.6452 | 0.3922 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | n/a | 0.2797 / 0.1961 |
+| B3 | holdout | qs_v1 | 0.6452 | 0.3922 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.6760 | n/a |
+| B3 | holdout | qs_v2 | 0.6452 | 0.3922 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.2797 / 0.1961 |
 | B3 | test | qs_v1 | 0.4278 | 0.3216 | 0.9765 [0.9390, 1.0000] | 0.0160 [0.0000, 0.0363] | 0.2495 | n/a |
 | B3 | test | qs_v2 | 0.4385 | 0.3274 | 0.9294 [0.8690, 0.9775] | 0.0535 [0.0251, 0.0904] | n/a | 0.4171 / 0.4105 |
-| B4 | holdout | qs_v1 | 0.6667 | 0.4000 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | 0.6534 | n/a |
-| B4 | holdout | qs_v2 | 0.6667 | 0.4000 | 1.0000 [1.0000, 1.0000] | 0.0000 [0.0000, 0.0000] | n/a | 0.2857 / 0.2000 |
+| B4 | holdout | qs_v1 | 0.6667 | 0.4000 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.6534 | n/a |
+| B4 | holdout | qs_v2 | 0.6667 | 0.4000 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.2857 / 0.2000 |
 | B4 | test | qs_v1 | 0.5887 | 0.3881 | 0.9625 [0.9146, 1.0000] | 0.0242 [0.0000, 0.0565] | 0.2345 | n/a |
 | B4 | test | qs_v2 | 0.5968 | 0.3917 | 0.9250 [0.8592, 0.9756] | 0.0565 [0.0242, 0.1048] | n/a | 0.5641 / 0.5534 |
 
@@ -2917,7 +2918,7 @@ Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup
 
 ### B2 / qs_v1
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.15x. laya autocast: batch-1 off, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.15x. laya autocast: batch-1 off, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
@@ -2930,7 +2931,7 @@ Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup
 
 ### B2 / qs_v2
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 0.99x. laya autocast: batch-1 on, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 0.99x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
@@ -2943,7 +2944,7 @@ Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup
 
 ### B3 / qs_v1 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.07x. laya autocast: batch-1 off, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.07x. laya autocast: batch-1 off, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
@@ -2956,7 +2957,7 @@ Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup
 
 ### B3 / qs_v2 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.20x. laya autocast: batch-1 on, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.20x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
@@ -2969,7 +2970,7 @@ Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup
 
 ### B4 / qs_v1 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.31x. laya autocast: batch-1 off, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.31x. laya autocast: batch-1 off, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
@@ -2984,7 +2985,7 @@ Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup
 
 ### B4 / qs_v2 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.56x. laya autocast: batch-1 on, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.56x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|

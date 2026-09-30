@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from collections.abc import Iterable, Sequence
 from pathlib import Path
 
@@ -186,6 +187,17 @@ def _findings(all_scores: Sequence[Scores]) -> list[str]:
             + ". The pii_present prompt names names, contacts, MRNs and birth dates, not event "
             "dates or initials, which the gold counts (phi_quasi)."
         )
+    ff: Counter[str] = Counter(
+        f.doc_id for s in all_scores if "test" in s.splits for f in s.splits["test"].failures
+    )
+    shared = [(d, n) for d, n in ff.most_common() if n >= 3]
+    if shared:
+        out.append(
+            "- **False forwards are not independent across arms.** Short documents fit in one "
+            "unit for B2-B4, so those arms see identical text and repeat the same misses: "
+            + ", ".join(f"{d} in {n} runs" for d, n in shared)
+            + f" ({sum(n for _, n in shared)} of {sum(ff.values())} test false forwards)."
+        )
     trunc = [(s, h) for s, h in test if h.truncated_forwarded]
     if trunc:
         out.append(
@@ -283,7 +295,7 @@ def _qs_comparison(all_scores: Sequence[Scores]) -> list[str]:
             cat = sp.per_question.get("category")
             ml = sp.multilabel
             rows.append((arm, split, name, _f(pii.accuracy) if pii else "n/a",
-                         _f(pii.macro_f1) if pii else "n/a", _ci(h.recall), _ci(h.forward_rate),
+                         _f(pii.macro_f1) if pii else "n/a", _recall_ci(h), _ci(h.forward_rate),
                          _f(cat.macro_f1) if cat else "n/a",
                          f"{_f(ml.micro_f1)} / {_f(ml.macro_f1)}" if ml else "n/a"))  # fmt: skip
     if not rows:
@@ -385,11 +397,12 @@ def _speed(all_scores: Sequence[Scores]) -> list[str]:
     for s in all_scores:
         sp = s.speed
         drift = "n/a" if sp.batch1_drift is None else f"{sp.batch1_drift:.2f}x"
+        bauto = sp.batched_autocast if sp.batched is not None else "not run"
         out += [f"### {_label(s)}", "", f"Hardware: **{sp.hardware}**. "
                 f"Warmup calls excluded: {sp.warmup_excluded}. Batch-1 outliers (> 5x the median "
                 f"of similar-length calls): {sp.batch1_outliers}. Batch-1 ms/token, end of run vs "
                 f"start: {drift}. laya autocast: batch-1 {sp.batch1_autocast}, batched "
-                f"{sp.batched_autocast} (on MPS, fp16 autocast starts at 5 question rows, so "
+                f"{bauto} (on MPS, fp16 autocast starts at 5 question rows, so "
                 "qs_v2 runs fp16 and qs_v1 fp32).", ""]  # fmt: skip
         batched = (_lat("per unit, batched (amortized: batch time / batch size)", sp.batched)
                    if sp.batched is not None else

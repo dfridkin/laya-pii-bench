@@ -1,7 +1,7 @@
 # Status
 
-Active milestone: **M6 Zero-shot arms, calibrate, score, report v1**
-Last updated: 2026-09-27 (M5 gate passed)
+Active milestone: **M7 HUD replay**
+Last updated: 2026-09-30 (M6 gate passed)
 
 | Milestone | State | Gate passed | Notes |
 |---|---|---|---|
@@ -11,7 +11,7 @@ Last updated: 2026-09-27 (M5 gate passed)
 | M3 Runner, arm A on fixture | done | 2026-09-26 (`reports/audits/M3-gate-20260926-pass.md`; review #1 FAIL fixed) | real laya run on fixture; p50 ~500 ms/unit (qs_v1, mps) |
 | M4 Generator | done | 2026-09-27 (`reports/audits/M4-gate-20260927.md`; gold: `M4_gold_audit_run4_final.md`; R4 fix after gate, D-020) | 600 docs, V1-V6 pass, deterministic; gold audit 0 errors |
 | M5 Label + split | done | 2026-09-27 (`reports/audits/M5-gate-20260927-pass.md`; reviews #1, #2 FAIL fixed) | 600 docs split 350/96/124/30, no leaks, all classes in every split; calib freeze enforced |
-| M6 Zero-shot arms, calibrate, score, report v1 | in review | | gates 1-4 evidence recorded; results review running |
+| M6 Zero-shot arms, calibrate, score, report v1 | done | 2026-09-30 (`reports/audits/M6-gate-20260930.md`; results review `M6_results_review.md`) | 10 runs; calib frozen 4abf110; D-008 flagged; zero-shot operating point degenerate, multilingual no signal |
 | M7 HUD replay | not started | | |
 | M8 Fine-tuned arm C, report v2 | not started | | |
 
@@ -242,7 +242,7 @@ calib frozen 4abf110; scores + report 54e3512.
   B3 and B4 are labelled doc-level/underpowered in the report.
 - Findings to carry: the multilingual checkpoint (B1-B4) answers pii_present "yes" to ~98% of
   units with at-or-below-chance ranking; not a harness bug (option-swap probe,
-  reports/audits/M6_pii_question_probe-20260929.md). Arm A ranks well (AUROC ~0.88) but the
+  reports/audits/M6_pii_question_probe-20260929.md). Arm A ranks PII (test AUROC 0.78; calib 0.82) but the
   recall-first t_low (0.0054) forwards only 0.45% of test units. Batch-8 is not faster than
   batch-1 on MPS (A 1.09-1.31x slower, B1 0.93-1.18x).
 - Gate 5: `reports/audits/M6_results_review.md`: PASS WITH REQUIRED CAVEATS (integrity: no
@@ -366,12 +366,10 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-Before M6 runs: C4 (probe B3/B4 memory on the M2 8 GB; failure goes to the D-002 HF fallback), then
-C6-C8 (batch-1 vs batched side by side, routed JSONL for the HUD, `bench smoke`, qs_v1 vs qs_v2
-section, MPS autocast switch detection). Then `/milestone M6`: run all arms x question sets on
-calib/test/holdout (`splits_to_run`), `make calibrate` + `make freeze-calib` before any score.
-Known residual (M5 review #3, out of scope for D-013): forging both units and decisions with
-rewritten doc ids bypasses the debug-flag guard; invariant 11 forbids editing those artifacts.
+Owner decisions pending before relying on M6 numbers (see "Questions for the owner"): D-007/D-008
+review (degenerate zero-shot operating point; D-008 flagged), and the pii_present prompt vs gold
+construct. Neither blocks M7. Next milestone: `/milestone M7` (HUD replay from
+`scores/*.routed.jsonl`, audit C7). Long runs: keep the Mac awake and other apps closed.
 
 ## Session log
 
@@ -392,3 +390,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-27 decisions: D-001 no, D-002 M2 on-device (+HF fallback), D-014 top probability, D-008 amended (C3), invariant 6 reworded (C2).
 - 2026-09-27 M5: label (all arms) + split built; gates 1-5 evidence recorded; C1 (D-019 freeze) built.
 - 2026-09-27 M5: gate reviews #1, #2 FAIL (D-013 guard bypasses, calib freeze gaps) fixed; review #3 PASS. Next: C4-C8, then M6.
+- 2026-09-30 M6: 10 zero-shot runs (A, B1-B4 x qs_v1/qs_v2) + batched A/B1; calib frozen 4abf110; scores + report v1; results review and gate PASS. Runner hardened (MPS release, NaN retry, caffeinate). D-008 flagged; D-007 and prompt questions to owner.
