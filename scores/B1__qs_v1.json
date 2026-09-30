@@ -9,15 +9,15 @@
     "docs_sha256": "9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5",
     "units_sha256": "1e606484ae378207a173fb91a613195f4427e3bfb27c73d21d2cb87bae98e071",
     "decisions_sha256": "41138b416d668da920d19684790912d2704d9d0a463a3b6b2faab9fee9410094",
-    "calib_hash": "52d77b199379560b840c7c08643ef88b75f918b90648b535d19f8d6a0bb1ce81",
+    "calib_hash": "1fd8ca4359b5edd4f16e740942ff3b6ec298009b55b8c5c028aba2fbcaf841ac",
     "calib_fit_on": "calib",
     "calib_temperature_fallbacks": {
       "doc_kind:4": "fit hit bound (20)",
       "pii_present:2": "fit hit bound (20)",
       "subject_role:4": "fit hit bound (20)"
     },
-    "calib_commit": "4abf11083d373df146cbda5d25c0fed49fa85ac0",
-    "calib_committed_at": "2026-09-29T19:34:52-04:00",
+    "calib_commit": "98db5e2cd161c5cbe7ff6ce9f130882c5131abe3",
+    "calib_committed_at": "2026-09-30T00:46:28-04:00",
     "batched_decisions_sha256": "f007bacf5e5063a83e40506a189fbcd9ef83080b3369c078d4794dee10a1fab9",
     "doc_level": false,
     "hw": {
@@ -43,7 +43,7 @@
     "checkpoint_revs": [
       "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     ],
-    "created_at": "2026-09-30T03:25:15.849134+00:00"
+    "created_at": "2026-09-30T04:46:34.225611+00:00"
   },
   "splits": {
     "test": {
@@ -1623,6 +1623,58 @@
         "email": 1,
         "person_name": 1
       },
+      "curve": [
+        {
+          "target": 0.9,
+          "t_low": 0.6696,
+          "recall": 0.85,
+          "recall_exact_lo": 0.7646924998510451,
+          "recall_exact_hi": 0.9135456143583515,
+          "forward_rate": 0.03863298662704309,
+          "negatives_forwarded": 0.02443280977312391,
+          "false_forwards": 12
+        },
+        {
+          "target": 0.95,
+          "t_low": 0.5433,
+          "recall": 0.92,
+          "recall_exact_lo": 0.848442364135579,
+          "recall_exact_hi": 0.9648284374818372,
+          "forward_rate": 0.020802377414561663,
+          "negatives_forwarded": 0.013961605584642234,
+          "false_forwards": 6
+        },
+        {
+          "target": 0.98,
+          "t_low": 0.3596,
+          "recall": 0.97,
+          "recall_exact_lo": 0.91482394702572,
+          "recall_exact_hi": 0.9937700284616936,
+          "forward_rate": 0.010401188707280832,
+          "negatives_forwarded": 0.008726003490401396,
+          "false_forwards": 2
+        },
+        {
+          "target": 0.99,
+          "t_low": 0.025000000000000005,
+          "recall": 0.99,
+          "recall_exact_lo": 0.9455406146079194,
+          "recall_exact_hi": 0.9997468539670226,
+          "forward_rate": 0.0014858841010401188,
+          "negatives_forwarded": 0.0,
+          "false_forwards": 1
+        },
+        {
+          "target": 0.995,
+          "t_low": 0.025000000000000005,
+          "recall": 0.99,
+          "recall_exact_lo": 0.9455406146079194,
+          "recall_exact_hi": 0.9997468539670226,
+          "forward_rate": 0.0014858841010401188,
+          "negatives_forwarded": 0.0,
+          "false_forwards": 1
+        }
+      ],
       "failures": [
         {
           "unit_id": "d0310:chunk:1024:15",
@@ -3021,6 +3073,58 @@
         }
       ],
       "false_forward_value_kinds": {},
+      "curve": [
+        {
+          "target": 0.9,
+          "t_low": 0.6696,
+          "recall": 0.95,
+          "recall_exact_lo": 0.7512672372279722,
+          "recall_exact_hi": 0.9987349105020502,
+          "forward_rate": 0.020202020202020204,
+          "negatives_forwarded": 0.012658227848101266,
+          "false_forwards": 1
+        },
+        {
+          "target": 0.95,
+          "t_low": 0.5433,
+          "recall": 1.0,
+          "recall_exact_lo": 0.8315665290169146,
+          "recall_exact_hi": 1.0,
+          "forward_rate": 0.0,
+          "negatives_forwarded": 0.0,
+          "false_forwards": 0
+        },
+        {
+          "target": 0.98,
+          "t_low": 0.3596,
+          "recall": 1.0,
+          "recall_exact_lo": 0.8315665290169146,
+          "recall_exact_hi": 1.0,
+          "forward_rate": 0.0,
+          "negatives_forwarded": 0.0,
+          "false_forwards": 0
+        },
+        {
+          "target": 0.99,
+          "t_low": 0.025000000000000005,
+          "recall": 1.0,
+          "recall_exact_lo": 0.8315665290169146,
+          "recall_exact_hi": 1.0,
+          "forward_rate": 0.0,
+          "negatives_forwarded": 0.0,
+          "false_forwards": 0
+        },
+        {
+          "target": 0.995,
+          "t_low": 0.025000000000000005,
+          "recall": 1.0,
+          "recall_exact_lo": 0.8315665290169146,
+          "recall_exact_hi": 1.0,
+          "forward_rate": 0.0,
+          "negatives_forwarded": 0.0,
+          "false_forwards": 0
+        }
+      ],
       "failures": []
     }
   },

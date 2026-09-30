@@ -12,14 +12,14 @@
 | docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
 | units sha256 | `62022ad2270a5f851f33eb910db19d6ca12afcf49be081c87ae1a189de297dde` |
 | decisions sha256 | `61bc7991d612ce16006e0ace25314cd5bdbe434607bef55f9dc2c178b5f76d54` |
-| calib hash / fit_on | `41df97bee458c285` / calib |
-| calib commit (D-019) | `4abf11083d37` 2026-09-29T19:34:52-04:00 |
+| calib hash / fit_on | `632abe8304393876` / calib |
+| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:25:12.301632+00:00 |
+| date | 2026-09-30T04:46:30.659400+00:00 |
 
 ### A / qs_v2
 
@@ -31,14 +31,14 @@
 | docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
 | units sha256 | `62022ad2270a5f851f33eb910db19d6ca12afcf49be081c87ae1a189de297dde` |
 | decisions sha256 | `d3fa9d456b47ffbe4a50de9b13be8ba48977b96879d1663b5cfe6e501292e6bc` |
-| calib hash / fit_on | `cbcf796e5c2f1499` / calib |
-| calib commit (D-019) | `4abf11083d37` 2026-09-29T19:34:52-04:00 |
+| calib hash / fit_on | `9c1574a1f22dd5cc` / calib |
+| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
 | temperature fallbacks (T = 1) | has_staff_pii:2: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:25:14.542878+00:00 |
+| date | 2026-09-30T04:46:32.919200+00:00 |
 
 ### B1 / qs_v1
 
@@ -50,14 +50,14 @@
 | docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
 | units sha256 | `1e606484ae378207a173fb91a613195f4427e3bfb27c73d21d2cb87bae98e071` |
 | decisions sha256 | `41138b416d668da920d19684790912d2704d9d0a463a3b6b2faab9fee9410094` |
-| calib hash / fit_on | `52d77b199379560b` / calib |
-| calib commit (D-019) | `4abf11083d37` 2026-09-29T19:34:52-04:00 |
+| calib hash / fit_on | `1fd8ca4359b5edd4` / calib |
+| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20); pii_present:2: fit hit bound (20); subject_role:4: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:25:15.849134+00:00 |
+| date | 2026-09-30T04:46:34.225611+00:00 |
 
 ### B1 / qs_v2
 
@@ -69,14 +69,14 @@
 | docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
 | units sha256 | `1e606484ae378207a173fb91a613195f4427e3bfb27c73d21d2cb87bae98e071` |
 | decisions sha256 | `c24e2ddb84b1a182737884bcdb5598715ff0d812cd29feffb401db28baf2fa81` |
-| calib hash / fit_on | `b894b70b9bb76547` / calib |
-| calib commit (D-019) | `4abf11083d37` 2026-09-29T19:34:52-04:00 |
+| calib hash / fit_on | `b072f6f3d6deb9b6` / calib |
+| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
 | temperature fallbacks (T = 1) | has_coded_id:2: fit hit bound (20); has_phi_direct:2: fit hit bound (20); has_phi_quasi:2: fit hit bound (20); has_staff_pii:2: fit hit bound (20); pii_present:2: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:25:17.066398+00:00 |
+| date | 2026-09-30T04:46:35.453409+00:00 |
 
 ### B2 / qs_v1
 
@@ -88,14 +88,14 @@
 | docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
 | units sha256 | `b24f0bbd4da5f5b2a6b217c146e82a1bf1b07e1cebea55068dfc76e3406ddf46` |
 | decisions sha256 | `6de8a1079826349d43a07c673d57cba721b9dd02a5b59f0dfa7436843582545a` |
-| calib hash / fit_on | `ebb6f90ddc687e2a` / calib |
-| calib commit (D-019) | `4abf11083d37` 2026-09-29T19:34:52-04:00 |
+| calib hash / fit_on | `2c7d9fd28e4b3f9d` / calib |
+| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20); pii_present:2: fit hit bound (20); subject_role:4: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:25:18.032090+00:00 |
+| date | 2026-09-30T04:46:36.410334+00:00 |
 
 ### B2 / qs_v2
 
@@ -107,14 +107,14 @@
 | docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
 | units sha256 | `b24f0bbd4da5f5b2a6b217c146e82a1bf1b07e1cebea55068dfc76e3406ddf46` |
 | decisions sha256 | `150a10977a35f61b90e03cf77febfefbc2cdfb96b883a845d50ba111d5a6301a` |
-| calib hash / fit_on | `68a089af2fb0ebf5` / calib |
-| calib commit (D-019) | `4abf11083d37` 2026-09-29T19:34:52-04:00 |
+| calib hash / fit_on | `c127522a2d772348` / calib |
+| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
 | temperature fallbacks (T = 1) | has_coded_id:2: fit hit bound (20); has_phi_direct:2: fit hit bound (20); has_phi_quasi:2: fit hit bound (20); has_staff_pii:2: fit hit bound (20); pii_present:2: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:25:18.972421+00:00 |
+| date | 2026-09-30T04:46:37.346138+00:00 |
 
 ### B3 / qs_v1 (doc-level, underpowered)
 
@@ -126,14 +126,14 @@
 | docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
 | units sha256 | `919a2d7f818d34571eef46ea12e7e272b73b281e63b73737d3deb5fb4671265b` |
 | decisions sha256 | `004516e05ef93d5eacb9583d40b05b58bd5653b12c89210d0123b0b5999bcdee` |
-| calib hash / fit_on | `9b5e40f5589275cc` / calib |
-| calib commit (D-019) | `4abf11083d37` 2026-09-29T19:34:52-04:00 |
+| calib hash / fit_on | `69c9a047da2d5bf7` / calib |
+| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20); pii_present:2: fit hit bound (20); subject_role:4: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:25:19.828990+00:00 |
+| date | 2026-09-30T04:46:38.222251+00:00 |
 
 ### B3 / qs_v2 (doc-level, underpowered)
 
@@ -145,14 +145,14 @@
 | docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
 | units sha256 | `919a2d7f818d34571eef46ea12e7e272b73b281e63b73737d3deb5fb4671265b` |
 | decisions sha256 | `12d374b103db6a1efda64bae5cdaab27b38a5220a74edffc5e14d577fda2d574` |
-| calib hash / fit_on | `2301bb77da9dbf7e` / calib |
-| calib commit (D-019) | `4abf11083d37` 2026-09-29T19:34:52-04:00 |
+| calib hash / fit_on | `c76d71f6c6252233` / calib |
+| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
 | temperature fallbacks (T = 1) | has_coded_id:2: fit hit bound (20); has_phi_direct:2: fit hit bound (20); has_phi_quasi:2: fit hit bound (20); has_staff_pii:2: fit hit bound (20); pii_present:2: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:25:20.681997+00:00 |
+| date | 2026-09-30T04:46:39.061768+00:00 |
 
 ### B4 / qs_v1 (doc-level, underpowered)
 
@@ -164,14 +164,14 @@
 | docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
 | units sha256 | `58504d2de3e5c180f5e49bc843ee1b9b0e361f3b1e662375b6df8e127b054cd3` |
 | decisions sha256 | `602b15214e7c15f4c26c64a5e93e8266a7da11905f33b79c877f41948c20cde5` |
-| calib hash / fit_on | `24bca10e3ff59e18` / calib |
-| calib commit (D-019) | `4abf11083d37` 2026-09-29T19:34:52-04:00 |
+| calib hash / fit_on | `2f39652cffe6ca26` / calib |
+| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:25:21.492895+00:00 |
+| date | 2026-09-30T04:46:39.866459+00:00 |
 
 ### B4 / qs_v2 (doc-level, underpowered)
 
@@ -183,14 +183,14 @@
 | docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
 | units sha256 | `58504d2de3e5c180f5e49bc843ee1b9b0e361f3b1e662375b6df8e127b054cd3` |
 | decisions sha256 | `945769af71f83099b99c8679b09350fef55b8ccdd07bbbe0f62cedac1c07470d` |
-| calib hash / fit_on | `ac94d44f077d6424` / calib |
-| calib commit (D-019) | `4abf11083d37` 2026-09-29T19:34:52-04:00 |
+| calib hash / fit_on | `efdd3181a282c383` / calib |
+| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
 | temperature fallbacks (T = 1) | has_coded_id:2: fit hit bound (20); has_phi_direct:2: fit hit bound (20); has_staff_pii:2: fit hit bound (20) |
 | hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:25:22.298428+00:00 |
+| date | 2026-09-30T04:46:40.666948+00:00 |
 
 ## 2. Headline operating point
 
@@ -201,6 +201,7 @@
 - **The recall target does not transfer from calib to test** for B3 / qs_v2 (doc-level, underpowered) (0.929, exact upper 0.974), B4 / qs_v1 (doc-level, underpowered) (0.963, exact upper 0.992), B4 / qs_v2 (doc-level, underpowered) (0.925, exact upper 0.972); target 0.995.
 - **Quasi-identifiers alone are the hardest positives.** AUROC quasi-only vs direct: A / qs_v1 0.706 vs 0.834, A / qs_v2 0.705 vs 0.832, B2 / qs_v1 0.427 vs 0.539, B2 / qs_v2 0.418 vs 0.540, B3 / qs_v1 (doc-level, underpowered) 0.493 vs 0.562, B3 / qs_v2 (doc-level, underpowered) 0.437 vs 0.551, B4 / qs_v2 (doc-level, underpowered) 0.430 vs 0.505. The pii_present prompt names names, contacts, MRNs and birth dates, not event dates or initials, which the gold counts (phi_quasi).
 - **False forwards are not independent across arms.** Short documents fit in one unit for B2-B4, so those arms see identical text and repeat the same misses: d0352 in 6 runs, d0447 in 3 runs, d0418 in 3 runs (12 of 20 test false forwards).
+- **Trading recall for work saved (calib target 0.95):** A / qs_v1 forwards 6.2% at test recall 0.938 (8 false forwards), A / qs_v2 forwards 6.0% at test recall 0.938 (9 false forwards), B1 / qs_v1 forwards 2.1% at test recall 0.920 (6 false forwards), B1 / qs_v2 forwards 3.0% at test recall 0.940 (6 false forwards), B2 / qs_v1 forwards 2.8% at test recall 0.920 (5 false forwards), B2 / qs_v2 forwards 5.0% at test recall 0.898 (9 false forwards), B3 / qs_v1 (doc-level, underpowered) forwards 4.8% at test recall 0.894 (6 false forwards), B3 / qs_v2 (doc-level, underpowered) forwards 11.2% at test recall 0.847 (13 false forwards), B4 / qs_v1 (doc-level, underpowered) forwards 5.6% at test recall 0.887 (6 false forwards), B4 / qs_v2 (doc-level, underpowered) forwards 14.5% at test recall 0.838 (13 false forwards). See the curve table below.
 - Truncated units were forwarded (the model never saw their tail): B2 / qs_v1 1, B2 / qs_v2 2.
 - qs_v1 vs qs_v2 differences in the same arm are not a question-wording effect: pii_present has the same text in both, qs_v1 runs fp32 and qs_v2 fp16 (5 rows) on MPS, which moves long-input probabilities, and only qs_v1 has the role rule.
 
@@ -220,6 +221,64 @@ pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). E
 | B3 / qs_v2 (doc-level, underpowered) | 0.5142 | 0.9923 | 0.9294 [0.8690, 0.9775] | 0.8527 / 0.9737 | **missed** (upper 0.9737 < 0.995) | 0.0767 | 0.9294 | 0.0535 [0.0251, 0.0904] | 0.0392 | 6 | 0.4805 | 0.4463 | 187 / 124 / 85 |
 | B4 / qs_v1 (doc-level, underpowered) | 0.4425 | 0.7362 | 0.9625 [0.9146, 1.0000] | 0.8943 / 0.9922 | **missed** (upper 0.9922 < 0.995) | 0.0682 | 0.9750 | 0.0242 [0.0000, 0.0565] | 0.0227 | 2 | 0.4729 | 0.6417 | 124 / 124 / 80 |
 | B4 / qs_v2 (doc-level, underpowered) | 0.4841 | none | 0.9250 [0.8592, 0.9756] | 0.8439 / 0.9720 | **missed** (upper 0.9720 < 0.995) | 0.0811 | 0.9250 | 0.0565 [0.0242, 0.1048] | 0.0227 | 6 | 0.4564 | 0.6325 | 124 / 124 / 80 |
+
+
+### Recall vs forward rate on test (D-007 amended)
+
+`t_low` fit on calib for each recall target, then applied to test with the same routing (role rule included). Forward rate is the share of test units passed without review; negatives forwarded is the share of PII-free units passed (the work saved).
+
+| arm / qs | calib target | t_low | test recall | exact lo / hi | forward rate | negatives forwarded | false forwards |
+|---|---|---|---|---|---|---|---|
+| A / qs_v1 | 0.9 | 0.0349 | 0.8472 | 0.7779 / 0.9017 | 30.31% | 0.3153 | 21 |
+| A / qs_v1 | 0.95 | 0.0185 | 0.9375 | 0.8847 / 0.9710 | 6.18% | 0.0623 | 8 |
+| A / qs_v1 | 0.98 | 0.0106 | 0.9931 | 0.9619 / 0.9998 | 1.20% | 0.0124 | 1 |
+| A / qs_v1 | 0.99 | 0.0067 | 1.0000 | 0.9747 / 1.0000 | 0.50% | 0.0054 | 0 |
+| A / qs_v1 | 0.995 | 0.0054 | 1.0000 | 0.9747 / 1.0000 | 0.45% | 0.0048 | 0 |
+| A / qs_v2 | 0.9 | 0.0350 | 0.8403 | 0.7700 / 0.8960 | 31.26% | 0.3244 | 23 |
+| A / qs_v2 | 0.95 | 0.0182 | 0.9375 | 0.8847 / 0.9710 | 5.98% | 0.0596 | 9 |
+| A / qs_v2 | 0.98 | 0.0098 | 0.9931 | 0.9619 / 0.9998 | 1.00% | 0.0102 | 1 |
+| A / qs_v2 | 0.99 | 0.0067 | 1.0000 | 0.9747 / 1.0000 | 0.50% | 0.0054 | 0 |
+| A / qs_v2 | 0.995 | 0.0054 | 1.0000 | 0.9747 / 1.0000 | 0.45% | 0.0048 | 0 |
+| B1 / qs_v1 | 0.9 | 0.6696 | 0.8500 | 0.7647 / 0.9135 | 3.86% | 0.0244 | 12 |
+| B1 / qs_v1 | 0.95 | 0.5433 | 0.9200 | 0.8484 / 0.9648 | 2.08% | 0.0140 | 6 |
+| B1 / qs_v1 | 0.98 | 0.3596 | 0.9700 | 0.9148 / 0.9938 | 1.04% | 0.0087 | 2 |
+| B1 / qs_v1 | 0.99 | 0.0250 | 0.9900 | 0.9455 / 0.9997 | 0.15% | 0.0000 | 1 |
+| B1 / qs_v1 | 0.995 | 0.0250 | 0.9900 | 0.9455 / 0.9997 | 0.15% | 0.0000 | 1 |
+| B1 / qs_v2 | 0.9 | 0.6796 | 0.8500 | 0.7647 / 0.9135 | 6.24% | 0.0471 | 15 |
+| B1 / qs_v2 | 0.95 | 0.5475 | 0.9400 | 0.8740 / 0.9777 | 2.97% | 0.0244 | 6 |
+| B1 / qs_v2 | 0.98 | 0.3630 | 0.9700 | 0.9148 / 0.9938 | 1.49% | 0.0122 | 3 |
+| B1 / qs_v2 | 0.99 | 0.0222 | 1.0000 | 0.9638 / 1.0000 | 0.00% | 0.0000 | 0 |
+| B1 / qs_v2 | 0.995 | 0.0222 | 1.0000 | 0.9638 / 1.0000 | 0.00% | 0.0000 | 0 |
+| B2 / qs_v1 | 0.9 | 0.6829 | 0.8750 | 0.7873 / 0.9359 | 5.00% | 0.0302 | 9 |
+| B2 / qs_v1 | 0.95 | 0.5433 | 0.9205 | 0.8430 / 0.9674 | 2.81% | 0.0172 | 5 |
+| B2 / qs_v1 | 0.98 | 0.4749 | 0.9318 | 0.8575 / 0.9746 | 2.50% | 0.0129 | 5 |
+| B2 / qs_v1 | 0.99 | 0.3457 | 0.9773 | 0.9203 / 0.9972 | 0.94% | 0.0086 | 1 |
+| B2 / qs_v1 | 0.995 | 0.3457 | 0.9773 | 0.9203 / 0.9972 | 0.94% | 0.0086 | 1 |
+| B2 / qs_v2 | 0.9 | 0.6872 | 0.8750 | 0.7873 / 0.9359 | 7.19% | 0.0517 | 11 |
+| B2 / qs_v2 | 0.95 | 0.5865 | 0.8977 | 0.8147 / 0.9522 | 5.00% | 0.0302 | 9 |
+| B2 / qs_v2 | 0.98 | 0.5467 | 0.9205 | 0.8430 / 0.9674 | 4.38% | 0.0302 | 7 |
+| B2 / qs_v2 | 0.99 | 0.3465 | 0.9773 | 0.9203 / 0.9972 | 1.88% | 0.0172 | 2 |
+| B2 / qs_v2 | 0.995 | 0.3465 | 0.9773 | 0.9203 / 0.9972 | 1.88% | 0.0172 | 2 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.9 | 0.6660 | 0.8706 | 0.7802 / 0.9336 | 6.95% | 0.0490 | 8 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.95 | 0.5289 | 0.8941 | 0.8085 / 0.9504 | 4.81% | 0.0294 | 6 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.98 | 0.5010 | 0.9059 | 0.8229 / 0.9585 | 4.28% | 0.0196 | 6 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.99 | 0.1907 | 0.9765 | 0.9176 / 0.9971 | 1.60% | 0.0098 | 2 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.995 | 0.1907 | 0.9765 | 0.9176 / 0.9971 | 1.60% | 0.0098 | 2 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.9 | 0.7025 | 0.8353 | 0.7391 / 0.9069 | 11.76% | 0.0784 | 14 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.95 | 0.6796 | 0.8471 | 0.7527 / 0.9160 | 11.23% | 0.0784 | 13 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.98 | 0.5475 | 0.9176 | 0.8377 / 0.9662 | 5.88% | 0.0392 | 7 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.99 | 0.5142 | 0.9294 | 0.8527 / 0.9737 | 5.35% | 0.0392 | 6 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.995 | 0.5142 | 0.9294 | 0.8527 / 0.9737 | 5.35% | 0.0392 | 6 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.9 | 0.5528 | 0.8375 | 0.7382 / 0.9105 | 8.87% | 0.0455 | 9 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.95 | 0.5145 | 0.8875 | 0.7972 / 0.9472 | 5.65% | 0.0227 | 6 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.98 | 0.5083 | 0.8875 | 0.7972 / 0.9472 | 5.65% | 0.0227 | 6 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.99 | 0.4425 | 0.9625 | 0.8943 / 0.9922 | 2.42% | 0.0227 | 2 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.995 | 0.4425 | 0.9625 | 0.8943 / 0.9922 | 2.42% | 0.0227 | 2 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.9 | 0.5697 | 0.8250 | 0.7238 / 0.9009 | 15.32% | 0.1136 | 14 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.95 | 0.5611 | 0.8375 | 0.7382 / 0.9105 | 14.52% | 0.1136 | 13 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.98 | 0.5156 | 0.9000 | 0.8124 / 0.9558 | 7.26% | 0.0227 | 8 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.99 | 0.4841 | 0.9250 | 0.8439 / 0.9720 | 5.65% | 0.0227 | 6 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.995 | 0.4841 | 0.9250 | 0.8439 / 0.9720 | 5.65% | 0.0227 | 6 |
 
 
 ### Holdout (descriptive only, D-005)

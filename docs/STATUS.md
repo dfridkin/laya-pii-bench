@@ -307,21 +307,11 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 - Staff initials (fx03) labeled `staff_pii`; domain.md says "name + contact". Confirm for the generator.
 - Relative timing ("Day 53", "discharged after nine days") left unlabeled; spec is silent.
 - ~~`config/arms.yaml` B2 target 1800 > budget~~: fixed in M5 (1792, audit C5).
-- **M6: D-007 recall target and D-008 need an owner review** (M6 results review B1, M1, M7):
-  - With under 200 calib positives per arm, the 0.995 target means "no calib misses", so `t_low`
-    is the single lowest-scoring calib positive. The resulting operating point forwards 0-2% of
-    test units (arm A 0.45%): recall is bought by escalating nearly everything, and no zero-shot
-    arm has a useful high-recall forward threshold on this corpus.
-  - D-008 is flagged (gate 4): arm A exact lower bound 0.9747 at 144 positives; reaching 0.99 at
-    zero misses needs >= 368 positives (~2.5x the test split). A larger corpus fixes the bound, not
-    the operating point.
-  - Options to weigh: report a recall-vs-forward-rate curve as the headline instead of one point;
-    lower the target for zero-shot arms; grow the corpus; or accept that zero-shot Laya is a
-    triage aid only and let arm C (M8) carry the operating point.
-- **M6: pii_present prompt vs gold construct** (review M6): the prompt names names, contacts,
-  MRNs and birth dates; gold also counts quasi-identifiers alone (event dates, initials, ZIP),
-  42% of arm A test positives, AUROC 0.71 vs 0.83 for direct. A wording change is a new question
-  set (qs_v3) and a rerun, not an M6 edit.
+- ~~M6: D-007/D-008 review~~ decided 2026-09-30: D-007 amended (curve headline, built: calib
+  frozen 98db5e2, scores/report regenerated), D-008 amended (claim wording; corpus size at M8
+  planning).
+- ~~M6: pii_present prompt vs gold~~ decided 2026-09-30 as D-021 (qs_v3 on arm A). **Pending:
+  owner approval of the qs_v3 wording** before any run.
 
 ## Later (out of current scope, noted for the owning milestone)
 
@@ -391,3 +381,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-27 M5: label (all arms) + split built; gates 1-5 evidence recorded; C1 (D-019 freeze) built.
 - 2026-09-27 M5: gate reviews #1, #2 FAIL (D-013 guard bypasses, calib freeze gaps) fixed; review #3 PASS. Next: C4-C8, then M6.
 - 2026-09-30 M6: 10 zero-shot runs (A, B1-B4 x qs_v1/qs_v2) + batched A/B1; calib frozen 4abf110; scores + report v1; results review and gate PASS. Runner hardened (MPS release, NaN retry, caffeinate). D-008 flagged; D-007 and prompt questions to owner.
+- 2026-09-30 M6 follow-up: D-007/D-008 amended, D-021 recorded; curve headline built (calib refit identical except curve, frozen 98db5e2; rescored). qs_v3 wording awaits approval. Starting M7.
