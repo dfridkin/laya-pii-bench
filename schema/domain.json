@@ -1379,6 +1379,149 @@
       "title": "ReliabilityBin",
       "type": "object"
     },
+    "Replay": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "type": "string"
+        },
+        "docs": {
+          "items": {
+            "$ref": "#/$defs/ReplayDoc"
+          },
+          "type": "array"
+        },
+        "runs": {
+          "items": {
+            "$ref": "#/$defs/ReplayRun"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "created_at",
+        "docs",
+        "runs"
+      ],
+      "title": "Replay",
+      "type": "object"
+    },
+    "ReplayDoc": {
+      "additionalProperties": false,
+      "properties": {
+        "doc_type": {
+          "$ref": "#/$defs/DocType"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "type": "array"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "doc_type",
+        "lang",
+        "text",
+        "spans"
+      ],
+      "title": "ReplayDoc",
+      "type": "object"
+    },
+    "ReplayRun": {
+      "additionalProperties": false,
+      "description": "One scored arm x question set: its routed decisions on one split, in run order.",
+      "properties": {
+        "calib": {
+          "$ref": "#/$defs/CalibParams"
+        },
+        "decisions": {
+          "items": {
+            "$ref": "#/$defs/RoutedDecision"
+          },
+          "type": "array"
+        },
+        "label": {
+          "type": "string"
+        },
+        "meta": {
+          "$ref": "#/$defs/RunMeta"
+        },
+        "scores_sha256": {
+          "type": "string"
+        },
+        "split": {
+          "type": "string"
+        },
+        "t_ms": {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "units": {
+          "items": {
+            "$ref": "#/$defs/ReplayUnit"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "label",
+        "split",
+        "meta",
+        "calib",
+        "scores_sha256",
+        "units",
+        "decisions",
+        "t_ms"
+      ],
+      "title": "ReplayRun",
+      "type": "object"
+    },
+    "ReplayUnit": {
+      "additionalProperties": false,
+      "properties": {
+        "doc_id": {
+          "type": "string"
+        },
+        "end": {
+          "type": "integer"
+        },
+        "gold": {
+          "$ref": "#/$defs/GoldAnswers"
+        },
+        "id": {
+          "type": "string"
+        },
+        "start": {
+          "type": "integer"
+        },
+        "truncated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "doc_id",
+        "start",
+        "end",
+        "truncated",
+        "gold"
+      ],
+      "title": "ReplayUnit",
+      "type": "object"
+    },
     "Route": {
       "enum": [
         "forward",

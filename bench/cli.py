@@ -607,7 +607,8 @@ def report(
         "scores"
     ),
     out: Annotated[Path, typer.Option(help="Report markdown.")] = Path("reports/report.md"),
-    hud: Annotated[Path | None, typer.Option(help="HUD replay export (M7).")] = None,
+    hud: Annotated[Path | None, typer.Option(help="HUD replay JSON to write (M7).")] = None,
+    hud_split: Annotated[str, typer.Option(help="Split the HUD replays.")] = "test",
 ) -> None:
     """Render the markdown report from scores."""
     from bench import report as rep
@@ -619,7 +620,16 @@ def report(
     rep.write(rep.read_scores(paths), out)
     typer.echo(f"wrote {out} from {len(paths)} scores file(s)")
     if hud is not None:
-        typer.echo(f"note: HUD replay export arrives in M7; {hud} not written", err=True)
+        from bench import hud as hud_mod
+
+        try:
+            replay = hud_mod.build(paths, hud_split)
+        except hud_mod.ReplayError as e:
+            typer.echo(f"error: {e}", err=True)
+            raise typer.Exit(2) from e
+        hud_mod.write(replay, hud)
+        n = sum(len(r.decisions) for r in replay.runs)
+        typer.echo(f"wrote {hud}: {len(replay.runs)} runs, {n} decisions, {len(replay.docs)} docs")
 
 
 if __name__ == "__main__":

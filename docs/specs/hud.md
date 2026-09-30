@@ -11,16 +11,31 @@ No framework required; if one is used, Preact. Types from `hud/src/types.gen.ts`
 
 ## Input
 
-`hud/public/replay.json`, exported by `bench report --hud`:
+`hud/public/replay.json`, exported by `bench report --hud` (`bench/hud.py`, type `Replay` in
+`bench/domain.py`, TS in `hud/src/types.gen.ts`). One bundle holds every scored run (the arm/qs
+selector), with documents stored once:
 
 ```ts
 interface Replay {
-  meta: RunMeta; calib: CalibParams;
-  docs: { id: string; doc_type: string; text: string; spans: Span[] }[];  // test docs only
-  units: { id: string; doc_id: string; start: number; end: number; gold: GoldAnswers }[];
-  decisions: RoutedDecision[];   // sorted by t_offset_ms
+  created_at: string;
+  docs: ReplayDoc[];             // every document a run refers to (test split by default)
+  runs: {
+    label: string; split: string; meta: RunMeta; calib: CalibParams; scores_sha256: string;
+    units: ReplayUnit[];         // id, doc_id, start, end, truncated, gold
+    decisions: RoutedDecision[]; // run order, warmups excluded
+    t_ms: number[];              // replay clock: cumulative recorded latency in run order
+  }[];
 }
 ```
+
+The export refuses runs whose decisions, units, docs or calib differ (by hash) from what the scores
+were computed on. Replay time is the sum of recorded `latency_ms` in run order: raw `t_offset_ms`
+restarts per session and includes other splits' units, so it is not used as the clock. Nothing is
+invented.
+
+The build embeds the export gzipped (`hud/data/replay.json.gz`, decompressed in the browser with
+`DecompressionStream`), so `hud/dist/index.html` is one offline file; "load replay" opens any
+other export (`.json` or `.json.gz`).
 
 ## Layout (desktop, dark)
 
@@ -38,6 +53,12 @@ interface Replay {
 ## Controls
 
 Play/pause, speed (0.25×–16×), scrub bar, step, "next false forward", filter by doc type.
+
+## Tests
+
+`make hud`: vitest on the replay engine (`hud/tests/unit`), then Playwright on the built file
+(`hud/tests/e2e`), checking the real export against the UI, with screenshots in
+`reports/audits/M7_hud/`.
 
 ## Anti-patterns
 

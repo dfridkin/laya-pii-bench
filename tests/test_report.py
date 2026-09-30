@@ -130,13 +130,18 @@ def test_calibrate_refuses_without_calib_split(pipeline: dict[str, Path], tmp_pa
     assert r.exit_code != 0 and not (tmp_path / "c.json").exists()
 
 
-def test_report_hud_note_and_empty(pipeline: dict[str, Path], tmp_path: Path) -> None:
+def test_report_hud_refuses_unverifiable_runs_and_empty(
+    pipeline: dict[str, Path], tmp_path: Path
+) -> None:
+    # M7: the export only uses runs whose files match the scores by hash; this tmp mock run is
+    # not under runs/, so no replay is written (the real export is tested in tests/test_hud.py)
     r = RUN.invoke(
         app,
         ["report", "--scores-dir", str(pipeline["scores"].parent), "--out",
-         str(tmp_path / "r.md"), "--hud", str(tmp_path / "replay.json")],
+         str(tmp_path / "r.md"), "--hud", str(tmp_path / "replay.json"), "--hud-split",
+         "fixture"],
     )  # fmt: skip
-    assert r.exit_code == 0 and "M7" in r.output
+    assert r.exit_code == 2 and "is not the file" in r.output
     assert not (tmp_path / "replay.json").exists()
     with pytest.raises(ValueError):
         render([])

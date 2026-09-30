@@ -476,6 +476,42 @@ export interface ScoreQuestion {
   type: "score";
 }
 /**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "Replay".
+ */
+export interface Replay {
+  created_at: string;
+  docs: ReplayDoc[];
+  runs: ReplayRun[];
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "ReplayDoc".
+ */
+export interface ReplayDoc {
+  doc_type: DocType;
+  id: string;
+  lang: string;
+  spans: Span[];
+  text: string;
+}
+/**
+ * One scored arm x question set: its routed decisions on one split, in run order.
+ *
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "ReplayRun".
+ */
+export interface ReplayRun {
+  calib: CalibParams;
+  decisions: RoutedDecision[];
+  label: string;
+  meta: RunMeta;
+  scores_sha256: string;
+  split: string;
+  t_ms: number[];
+  units: ReplayUnit[];
+}
+/**
  * Produced by the score stage only (routing never happens in the runner).
  *
  * This interface was referenced by `Domain`'s JSON-Schema
@@ -491,6 +527,40 @@ export interface RoutedDecision {
   route: Route;
   split?: string | null;
   triggers: string[];
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "RunMeta".
+ */
+export interface RunMeta {
+  arm: string;
+  batch_size: number;
+  checkpoint: string;
+  checkpoint_rev: string;
+  config_hashes: {
+    [k: string]: string;
+  };
+  dataset: string;
+  device: "cuda" | "mps" | "cpu";
+  finished_at: string | null;
+  hw: HwInfo;
+  qs: string;
+  release_every?: number | null;
+  sessions: number;
+  started_at: string;
+  warmup_calls: number;
+}
+/**
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "ReplayUnit".
+ */
+export interface ReplayUnit {
+  doc_id: string;
+  end: number;
+  gold: GoldAnswers;
+  id: string;
+  start: number;
+  truncated: boolean;
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
@@ -534,28 +604,6 @@ export interface RunContext {
   qs: string;
   splits: string[];
   units_sha256: string;
-}
-/**
- * This interface was referenced by `Domain`'s JSON-Schema
- * via the `definition` "RunMeta".
- */
-export interface RunMeta {
-  arm: string;
-  batch_size: number;
-  checkpoint: string;
-  checkpoint_rev: string;
-  config_hashes: {
-    [k: string]: string;
-  };
-  dataset: string;
-  device: "cuda" | "mps" | "cpu";
-  finished_at: string | null;
-  hw: HwInfo;
-  qs: string;
-  release_every?: number | null;
-  sessions: number;
-  started_at: string;
-  warmup_calls: number;
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema

@@ -524,6 +524,47 @@ class Scores(_Model):
     caveats: list[str]
 
 
+# --- HUD replay (docs/specs/hud.md) ------------------------------------------------------------
+
+
+class ReplayDoc(_Model):
+    id: str
+    doc_type: DocType
+    lang: str
+    text: str
+    spans: list[Span]
+
+
+class ReplayUnit(_Model):
+    id: str
+    doc_id: str
+    start: int
+    end: int
+    truncated: bool
+    gold: GoldAnswers
+
+
+class ReplayRun(_Model):
+    """One scored arm x question set: its routed decisions on one split, in run order."""
+
+    label: str  # "A / qs_v1"
+    split: str
+    meta: RunMeta
+    calib: CalibParams
+    scores_sha256: str
+    units: list[ReplayUnit]
+    decisions: list[RoutedDecision]  # run order, warmups excluded
+    # replay clock: each decision starts at the sum of the recorded latencies before it in run
+    # order (t_offset_ms restarts per session and includes other splits' units; nothing invented)
+    t_ms: list[float]
+
+
+class Replay(_Model):
+    created_at: str
+    docs: list[ReplayDoc]  # every document a run in `runs` refers to, stored once
+    runs: list[ReplayRun]
+
+
 # Exported to schema/ and to the HUD.
 EXPORTED: tuple[type[BaseModel], ...] = (
     Document,
@@ -538,4 +579,5 @@ EXPORTED: tuple[type[BaseModel], ...] = (
     GenManifest,
     Splits,
     LabelManifest,
+    Replay,
 )

@@ -95,8 +95,11 @@ score:
 report:
 	$(BENCH) report --scores-dir scores --out reports/report.md
 
-hud:
-	cd hud && npm install && npm run build
+hud:  # M7: export the real replay (test split), embed it gzipped, build one file, test it
+	$(BENCH) report --scores-dir scores --out reports/report.md --hud hud/public/replay.json
+	mkdir -p hud/data && gzip -9 -n -c hud/public/replay.json > hud/data/replay.json.gz
+	cd hud && npm install --no-audit --no-fund && npm test && npm run build
+	cd hud && npx playwright install chromium && npm run e2e
 
 pipeline: gen label split run-all calibrate-all freeze-calib score-all report
 
