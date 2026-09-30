@@ -56,7 +56,7 @@ split:
 run:
 	$(BENCH) run --arm $(ARM) --qs $(QS)
 
-BATCHED_ARMS ?= A B1 B2   # B3/B4 batch-1 only: batching 4k-8k units exceeds 8 GB (audit C4)
+BATCHED_ARMS ?= A B1   # B2-B4 batch-1 only: 8 x 2k-8k states exceed 8 GB (C4; M6: B2 swapped, NaN)
 BATCH ?= 8
 # B4 (8k context) frees the MPS cache after every call (M6: NaN, swap stalls)
 RELEASE_EACH_CALL ?= B4
