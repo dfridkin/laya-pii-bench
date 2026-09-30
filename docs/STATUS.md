@@ -12,7 +12,7 @@ Last updated: 2026-09-30 (M6 gate passed)
 | M4 Generator | done | 2026-09-27 (`reports/audits/M4-gate-20260927.md`; gold: `M4_gold_audit_run4_final.md`; R4 fix after gate, D-020) | 600 docs, V1-V6 pass, deterministic; gold audit 0 errors |
 | M5 Label + split | done | 2026-09-27 (`reports/audits/M5-gate-20260927-pass.md`; reviews #1, #2 FAIL fixed) | 600 docs split 350/96/124/30, no leaks, all classes in every split; calib freeze enforced |
 | M6 Zero-shot arms, calibrate, score, report v1 | done | 2026-09-30 (`reports/audits/M6-gate-20260930.md`; results review `M6_results_review.md`) | 10 runs; calib frozen 4abf110; D-008 flagged; zero-shot operating point degenerate, multilingual no signal |
-| M7 HUD replay | not started | | |
+| M7 HUD replay | in review | | gates 1-3 evidence recorded |
 | M8 Fine-tuned arm C, report v2 | not started | | |
 
 ## Provisional defaults in use
@@ -217,6 +217,27 @@ under D-001 (7faf571).
 - Split-aware stages: calibrate fits on calib-split units only (fit_on=calib); score scores test and
   holdout and checks the run's splits hash; run on main filters by splits_to_run and hashes splits;
   debug calib flags refused on the main dataset (D-013).
+
+## M7 evidence
+
+Build 2d57b2c. `make hud`: export (`bench report --hud`), gzip embed, vitest (5 engine tests), build,
+Playwright (5 tests) in ~14 s.
+
+- Gate 1: `hud/dist/` holds only `index.html` (2.99 MB), 0 external src/href (scripts, CSS and the
+  gzipped replay inlined; `publicDir: false`); the Playwright tests also assert no network
+  requests.
+- Gate 2: the embedded replay equals the export byte for byte (gunzip sha d848895577e3d83e =
+  public/replay.json). 11 runs, 8,626 test decisions, all `meta.dataset == "main"`, each run's
+  `scores_sha256` equals the committed scores file. The exporter refuses runs whose decisions,
+  units, docs or calib differ by hash from the scores (tests/test_hud.py).
+- Gate 3: Playwright on the built file (hud/tests/e2e/replay.spec.ts), checked against the real
+  export: loads (first recorded unit active at t=0, step moves to the second); play/pause (clock
+  advances at 16x, holds when paused; 1x advances far less); scrub to 50% lands on the unit
+  recorded at half the replay time (within 2); next false forward visits recorded false forwards
+  in B3/qs_v2 in order and shows the verdict, red counter and FORWARD route; a run without false
+  forwards says so; doc-type filter. Screenshots: `reports/audits/M7_hud/01..06-*.png`.
+- Replay clock: cumulative recorded `latency_ms` in run order (raw `t_offset_ms` restarts per
+  session and includes calib/holdout units); nothing invented. Spec updated (docs/specs/hud.md).
 
 ## M6 evidence
 
