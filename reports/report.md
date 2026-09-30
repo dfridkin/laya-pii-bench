@@ -40,6 +40,25 @@
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
 | date | 2026-09-30T04:46:32.919200+00:00 |
 
+### A / qs_v3
+
+| field | value |
+|---|---|
+| arm | A |
+| question set | qs_v3 |
+| splits | test, holdout |
+| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
+| units sha256 | `62022ad2270a5f851f33eb910db19d6ca12afcf49be081c87ae1a189de297dde` |
+| decisions sha256 | `60747db5a240a4a7335be3909764614d29ba92d8565d427a9714a1d0b339d211` |
+| calib hash / fit_on | `e7b4fd1f8d83d4c8` / calib |
+| calib commit (D-019) | `7a5d6bb3ad51` 2026-09-30T11:27:55-04:00 |
+| temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20); pii_present:2: fit hit bound (20) |
+| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| laya version | 0.3.20 |
+| checkpoints | english |
+| checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
+| date | 2026-09-30T15:27:57.868845+00:00 |
+
 ### B1 / qs_v1
 
 | field | value |
@@ -196,13 +215,14 @@
 
 ### Key findings
 
-- **The recall-first operating point is nearly degenerate.** At the calib-fit `t_low`, 8 of 10 arm x question-set runs forward under 5% of test units (A / qs_v1 0.45%, A / qs_v2 0.45%, B1 / qs_v1 0.15%, B1 / qs_v2 0.00%, B2 / qs_v1 0.94%, B2 / qs_v2 1.88%, B3 / qs_v1 (doc-level, underpowered) 1.60%, B4 / qs_v1 (doc-level, underpowered) 2.42%). The trivial policy "escalate everything" has recall 1 and forward rate 0, so high recall here says little about work saved. With few calib positives the recall target means "no calib misses": `t_low` is the lowest-scoring calib positive, a single unit.
-- **Some checkpoints barely rank PII.** Test AUROC of calibrated p(pii) below 0.6: B1 / qs_v1 0.379, B1 / qs_v2 0.377, B2 / qs_v1 0.449, B2 / qs_v2 0.445, B3 / qs_v1 (doc-level, underpowered) 0.491, B3 / qs_v2 (doc-level, underpowered) 0.481, B4 / qs_v1 (doc-level, underpowered) 0.473, B4 / qs_v2 (doc-level, underpowered) 0.456. Their high recall comes from answering "PII present" to almost everything, not from detection (option-swap probe: `reports/audits/M6_pii_question_probe-20260929.md`).
+- **The recall-first operating point is nearly degenerate.** At the calib-fit `t_low`, 9 of 11 arm x question-set runs forward under 5% of test units (A / qs_v1 0.45%, A / qs_v2 0.45%, A / qs_v3 0.75%, B1 / qs_v1 0.15%, B1 / qs_v2 0.00%, B2 / qs_v1 0.94%, B2 / qs_v2 1.88%, B3 / qs_v1 (doc-level, underpowered) 1.60%, B4 / qs_v1 (doc-level, underpowered) 2.42%). The trivial policy "escalate everything" has recall 1 and forward rate 0, so high recall here says little about work saved. With few calib positives the recall target means "no calib misses": `t_low` is the lowest-scoring calib positive, a single unit.
+- **Some checkpoints barely rank PII.** Test AUROC of calibrated p(pii) below 0.6: A / qs_v3 0.509, B1 / qs_v1 0.379, B1 / qs_v2 0.377, B2 / qs_v1 0.449, B2 / qs_v2 0.445, B3 / qs_v1 (doc-level, underpowered) 0.491, B3 / qs_v2 (doc-level, underpowered) 0.481, B4 / qs_v1 (doc-level, underpowered) 0.473, B4 / qs_v2 (doc-level, underpowered) 0.456. Their high recall comes from answering "PII present" to almost everything, not from detection (option-swap probe: `reports/audits/M6_pii_question_probe-20260929.md`).
 - **The recall target does not transfer from calib to test** for B3 / qs_v2 (doc-level, underpowered) (0.929, exact upper 0.974), B4 / qs_v1 (doc-level, underpowered) (0.963, exact upper 0.992), B4 / qs_v2 (doc-level, underpowered) (0.925, exact upper 0.972); target 0.995.
-- **Quasi-identifiers alone are the hardest positives.** AUROC quasi-only vs direct: A / qs_v1 0.706 vs 0.834, A / qs_v2 0.705 vs 0.832, B2 / qs_v1 0.427 vs 0.539, B2 / qs_v2 0.418 vs 0.540, B3 / qs_v1 (doc-level, underpowered) 0.493 vs 0.562, B3 / qs_v2 (doc-level, underpowered) 0.437 vs 0.551, B4 / qs_v2 (doc-level, underpowered) 0.430 vs 0.505. The pii_present prompt names names, contacts, MRNs and birth dates, not event dates or initials, which the gold counts (phi_quasi).
-- **False forwards are not independent across arms.** Short documents fit in one unit for B2-B4, so those arms see identical text and repeat the same misses: d0352 in 6 runs, d0447 in 3 runs, d0418 in 3 runs (12 of 20 test false forwards).
-- **Trading recall for work saved (calib target 0.95):** A / qs_v1 forwards 6.2% at test recall 0.938 (8 false forwards), A / qs_v2 forwards 6.0% at test recall 0.938 (9 false forwards), B1 / qs_v1 forwards 2.1% at test recall 0.920 (6 false forwards), B1 / qs_v2 forwards 3.0% at test recall 0.940 (6 false forwards), B2 / qs_v1 forwards 2.8% at test recall 0.920 (5 false forwards), B2 / qs_v2 forwards 5.0% at test recall 0.898 (9 false forwards), B3 / qs_v1 (doc-level, underpowered) forwards 4.8% at test recall 0.894 (6 false forwards), B3 / qs_v2 (doc-level, underpowered) forwards 11.2% at test recall 0.847 (13 false forwards), B4 / qs_v1 (doc-level, underpowered) forwards 5.6% at test recall 0.887 (6 false forwards), B4 / qs_v2 (doc-level, underpowered) forwards 14.5% at test recall 0.838 (13 false forwards). See the curve table below.
+- **Quasi-identifiers alone are the hardest positives.** AUROC quasi-only vs direct: A / qs_v1 0.706 vs 0.834, A / qs_v2 0.705 vs 0.832, A / qs_v3 0.404 vs 0.606, B2 / qs_v1 0.427 vs 0.539, B2 / qs_v2 0.418 vs 0.540, B3 / qs_v1 (doc-level, underpowered) 0.493 vs 0.562, B3 / qs_v2 (doc-level, underpowered) 0.437 vs 0.551, B4 / qs_v2 (doc-level, underpowered) 0.430 vs 0.505. The pii_present prompt names names, contacts, MRNs and birth dates, not event dates or initials, which the gold counts (phi_quasi).
+- **False forwards are not independent across arms.** Short documents fit in one unit for B2-B4, so those arms see identical text and repeat the same misses: d0352 in 6 runs, d0447 in 3 runs, d0418 in 3 runs (12 of 21 test false forwards).
+- **Trading recall for work saved (calib target 0.95):** A / qs_v1 forwards 6.2% at test recall 0.938 (8 false forwards), A / qs_v2 forwards 6.0% at test recall 0.938 (9 false forwards), A / qs_v3 forwards 5.4% at test recall 0.924 (11 false forwards), B1 / qs_v1 forwards 2.1% at test recall 0.920 (6 false forwards), B1 / qs_v2 forwards 3.0% at test recall 0.940 (6 false forwards), B2 / qs_v1 forwards 2.8% at test recall 0.920 (5 false forwards), B2 / qs_v2 forwards 5.0% at test recall 0.898 (9 false forwards), B3 / qs_v1 (doc-level, underpowered) forwards 4.8% at test recall 0.894 (6 false forwards), B3 / qs_v2 (doc-level, underpowered) forwards 11.2% at test recall 0.847 (13 false forwards), B4 / qs_v1 (doc-level, underpowered) forwards 5.6% at test recall 0.887 (6 false forwards), B4 / qs_v2 (doc-level, underpowered) forwards 14.5% at test recall 0.838 (13 false forwards). See the curve table below.
 - Truncated units were forwarded (the model never saw their tail): B2 / qs_v1 1, B2 / qs_v2 2.
+- **qs_v3 (D-021) changes only the pii_present wording, and on arm A it hurts:** test AUROC 0.509 vs 0.778 with qs_v1 (quasi-only positives 0.404 vs 0.706). The longer instruction raises p(PII) for PII-free units as much as for PII units, with or without dates in the text, so separation collapses: the prompt, not only the checkpoint, limits zero-shot detection (`reports/audits/M6_qs_v3_result-20260930.md`).
 - qs_v1 vs qs_v2 differences in the same arm are not a question-wording effect: pii_present has the same text in both, qs_v1 runs fp32 and qs_v2 fp16 (5 rows) on MPS, which moves long-input probabilities, and only qs_v1 has the role rule.
 
 ### Test (headline)
@@ -213,6 +233,7 @@ pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). E
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | A / qs_v1 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9747 / 1.0000 | not rejected (upper 1.0000) | 0.0253 **D-008 review** | 1.0000 | 0.0045 [0.0019, 0.0078] | 0.0048 | 0 | 0.7775 | 0.0721 | 2006 / 124 / 144 |
 | A / qs_v2 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9747 / 1.0000 | not rejected (upper 1.0000) | 0.0253 **D-008 review** | 1.0000 | 0.0045 [0.0019, 0.0078] | 0.0048 | 0 | 0.7767 | 0.0721 | 2006 / 124 / 144 |
+| A / qs_v3 | 0.2676 | none | 0.9931 [0.9767, 1.0000] | 0.9619 / 0.9998 | not rejected (upper 0.9998) | 0.0311 **D-008 review** | 0.9931 | 0.0075 [0.0039, 0.0117] | 0.0075 | 1 | 0.5092 | 0.0718 | 2006 / 124 / 144 |
 | B1 / qs_v1 | 0.0250 | 0.9999 | 0.9900 [0.9667, 1.0000] | 0.9455 / 0.9997 | not rejected (upper 0.9997) | 0.0445 | 0.9900 | 0.0015 [0.0000, 0.0049] | 0.0000 | 1 | 0.3788 | 0.1473 | 673 / 124 / 100 |
 | B1 / qs_v2 | 0.0222 | 0.9999 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9638 / 1.0000 | not rejected (upper 1.0000) | 0.0362 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.3774 | 0.1486 | 673 / 124 / 100 |
 | B2 / qs_v1 | 0.3457 | 0.9965 | 0.9773 [0.9405, 1.0000] | 0.9203 / 0.9972 | not rejected (upper 0.9972) | 0.0570 | 0.9886 | 0.0094 [0.0000, 0.0224] | 0.0086 | 1 | 0.4486 | 0.2730 | 320 / 124 / 88 |
@@ -239,6 +260,11 @@ pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). E
 | A / qs_v2 | 0.98 | 0.0098 | 0.9931 | 0.9619 / 0.9998 | 1.00% | 0.0102 | 1 |
 | A / qs_v2 | 0.99 | 0.0067 | 1.0000 | 0.9747 / 1.0000 | 0.50% | 0.0054 | 0 |
 | A / qs_v2 | 0.995 | 0.0054 | 1.0000 | 0.9747 / 1.0000 | 0.45% | 0.0048 | 0 |
+| A / qs_v3 | 0.9 | 0.4068 | 0.8750 | 0.8097 / 0.9242 | 10.07% | 0.0994 | 17 |
+| A / qs_v3 | 0.95 | 0.3631 | 0.9236 | 0.8674 / 0.9613 | 5.43% | 0.0526 | 11 |
+| A / qs_v3 | 0.98 | 0.2985 | 0.9722 | 0.9304 / 0.9924 | 1.84% | 0.0177 | 4 |
+| A / qs_v3 | 0.99 | 0.2720 | 0.9931 | 0.9619 / 0.9998 | 0.95% | 0.0097 | 1 |
+| A / qs_v3 | 0.995 | 0.2676 | 0.9931 | 0.9619 / 0.9998 | 0.75% | 0.0075 | 1 |
 | B1 / qs_v1 | 0.9 | 0.6696 | 0.8500 | 0.7647 / 0.9135 | 3.86% | 0.0244 | 12 |
 | B1 / qs_v1 | 0.95 | 0.5433 | 0.9200 | 0.8484 / 0.9648 | 2.08% | 0.0140 | 6 |
 | B1 / qs_v1 | 0.98 | 0.3596 | 0.9700 | 0.9148 / 0.9938 | 1.04% | 0.0087 | 2 |
@@ -289,6 +315,7 @@ All IRB letters (one document type, 30 documents, few positives), never part of 
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | A / qs_v1 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5755 | 0.0678 | 295 / 30 / 20 |
 | A / qs_v2 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5769 | 0.0678 | 295 / 30 / 20 |
+| A / qs_v3 | 0.2676 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0034 [0.0000, 0.0117] | 0.0036 | 0 | 0.0445 | 0.0680 | 295 / 30 / 20 |
 | B1 / qs_v1 | 0.0250 | 0.9999 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.2930 | 0.2020 | 99 / 30 / 20 |
 | B1 / qs_v2 | 0.0222 | 0.9999 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.2987 | 0.2020 | 99 / 30 / 20 |
 | B2 / qs_v1 | 0.3457 | 0.9965 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.3967 | 0.4000 | 50 / 30 / 20 |
@@ -481,6 +508,94 @@ Confusion, `has_staff_pii`:
 |---|---|---|
 | A | 20 | 0 |
 | B | 111 | 164 |
+
+### A / qs_v3, test
+
+| question | n | accuracy | macro-F1 | majority baseline |
+|---|---|---|---|---|
+| pii_present | 2006 | 0.3116 | 0.2776 | 0.9282 (B) |
+| subject_role | 2006 | 0.7453 | 0.2501 | 0.9282 (none) |
+| category | 2006 | 0.9103 | 0.3415 | 0.9143 (none) |
+| doc_kind | 2006 | 0.2552 | 0.1485 | 0.3116 (narrative) |
+
+Confusion, `pii_present`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 95 | 49 |
+| B | 1332 | 530 |
+
+Confusion, `subject_role`:
+
+| gold \ pred | patient | staff | both | none |
+|---|---|---|---|---|
+| patient | 9 | 7 | 4 | 57 |
+| staff | 3 | 6 | 1 | 25 |
+| both | 7 | 6 | 0 | 19 |
+| none | 79 | 262 | 41 | 1480 |
+
+Confusion, `category`:
+
+| gold \ pred | direct | quasi | coded | staff | none |
+|---|---|---|---|---|---|
+| direct | 0 | 0 | 12 | 0 | 19 |
+| quasi | 1 | 2 | 25 | 0 | 50 |
+| coded | 0 | 0 | 15 | 0 | 23 |
+| staff | 0 | 0 | 1 | 8 | 16 |
+| none | 2 | 5 | 22 | 4 | 1801 |
+
+Confusion, `doc_kind`:
+
+| gold \ pred | narrative | form_table | correspondence | protocol_text |
+|---|---|---|---|---|
+| narrative | 58 | 2 | 10 | 555 |
+| form_table | 29 | 5 | 9 | 495 |
+| correspondence | 21 | 0 | 8 | 344 |
+| protocol_text | 22 | 2 | 5 | 441 |
+
+### A / qs_v3, holdout
+
+| question | n | accuracy | macro-F1 | majority baseline |
+|---|---|---|---|---|
+| pii_present | 295 | 0.2169 | 0.1783 | 0.9322 (B) |
+| subject_role | 295 | 0.7390 | 0.2348 | 0.9322 (none) |
+| category | 295 | 0.9356 | 0.3545 | 0.9322 (none) |
+| doc_kind | 295 | 0.0305 | 0.0197 | 1.0000 (correspondence) |
+
+Confusion, `pii_present`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 0 | 20 |
+| B | 211 | 64 |
+
+Confusion, `subject_role`:
+
+| gold \ pred | patient | staff | both | none |
+|---|---|---|---|---|
+| patient | 0 | 0 | 0 | 0 |
+| staff | 0 | 3 | 0 | 17 |
+| both | 0 | 0 | 0 | 0 |
+| none | 11 | 43 | 6 | 215 |
+
+Confusion, `category`:
+
+| gold \ pred | direct | quasi | coded | staff | none |
+|---|---|---|---|---|---|
+| direct | 0 | 0 | 0 | 0 | 0 |
+| quasi | 0 | 0 | 0 | 0 | 0 |
+| coded | 0 | 0 | 0 | 0 | 0 |
+| staff | 0 | 0 | 1 | 1 | 18 |
+| none | 0 | 0 | 0 | 0 | 275 |
+
+Confusion, `doc_kind`:
+
+| gold \ pred | narrative | form_table | correspondence | protocol_text |
+|---|---|---|---|---|
+| narrative | 0 | 0 | 0 | 0 |
+| form_table | 0 | 0 | 0 | 0 |
+| correspondence | 15 | 0 | 9 | 271 |
+| protocol_text | 0 | 0 | 0 | 0 |
 
 ### B1 / qs_v1, test
 
@@ -1218,8 +1333,10 @@ Same arm and split under both question sets. `pii_present` is the same question 
 |---|---|---|---|---|---|---|---|---|
 | A | holdout | qs_v1 | 0.9322 | 0.4825 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.3545 | n/a |
 | A | holdout | qs_v2 | 0.9322 | 0.4825 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.2367 / 0.0662 |
+| A | holdout | qs_v3 | 0.2169 | 0.1783 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0034 [0.0000, 0.0117] | 0.3545 | n/a |
 | A | test | qs_v1 | 0.9362 | 0.6155 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0045 [0.0019, 0.0078] | 0.3415 | n/a |
 | A | test | qs_v2 | 0.9362 | 0.6155 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0045 [0.0019, 0.0078] | n/a | 0.2817 / 0.3713 |
+| A | test | qs_v3 | 0.3116 | 0.2776 | 0.9931 [0.9767, 1.0000] | 0.0075 [0.0039, 0.0117] | 0.3415 | n/a |
 | B1 | holdout | qs_v1 | 0.2121 | 0.1820 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.2648 | n/a |
 | B1 | holdout | qs_v2 | 0.2121 | 0.1820 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.1034 / 0.0877 |
 | B1 | test | qs_v1 | 0.1605 | 0.1478 | 0.9900 [0.9667, 1.0000] | 0.0015 [0.0000, 0.0049] | 0.2283 | n/a |
@@ -1527,6 +1644,145 @@ Reliability data, `has_staff_pii` (non-empty bins):
 | [0.800, 0.867) | 18 | 0.8247 | 0.6111 | 18 | 0.8247 | 0.6111 |
 | [0.867, 0.933) | 9 | 0.8987 | 0.2222 | 9 | 0.8987 | 0.2222 |
 | [0.933, 1.000) | 3 | 0.9446 | 0.3333 | 3 | 0.9446 | 0.3333 |
+
+### A / qs_v3, test
+
+| question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
+|---|---|---|---|---|---|---|
+| pii_present = raw (T fallback) | 0.3116 | 0.3116 | 0.6717 | 0.6717 | 0.3473 | 0.3473 |
+| subject_role | 0.2519 | 0.1227 | 0.4834 | 0.4111 | 0.6557 | 0.6635 |
+| category | 0.4396 | 0.0275 | 0.4019 | 0.1491 | 0.8297 | 0.8483 |
+| doc_kind = raw (T fallback) | 0.3956 | 0.3956 | 0.9947 | 0.9947 | 0.5094 | 0.5094 |
+
+Reliability data, `pii_present` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.467, 0.533) | 314 | 0.5174 | 0.4650 | 314 | 0.5174 | 0.4650 |
+| [0.533, 0.600) | 591 | 0.5660 | 0.4061 | 591 | 0.5660 | 0.4061 |
+| [0.600, 0.667) | 506 | 0.6311 | 0.2628 | 506 | 0.6311 | 0.2628 |
+| [0.667, 0.733) | 359 | 0.6978 | 0.1811 | 359 | 0.6978 | 0.1811 |
+| [0.733, 0.800) | 198 | 0.7647 | 0.1313 | 198 | 0.7647 | 0.1313 |
+| [0.800, 0.867) | 30 | 0.8232 | 0.3000 | 30 | 0.8232 | 0.3000 |
+| [0.867, 0.933) | 8 | 0.8970 | 0.7500 | 8 | 0.8970 | 0.7500 |
+
+Reliability data, `subject_role` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.267, 0.333) | 81 | 0.3130 | 0.4691 | 13 | 0.3155 | 0.5385 |
+| [0.333, 0.400) | 268 | 0.3713 | 0.5373 | 79 | 0.3702 | 0.4557 |
+| [0.400, 0.467) | 464 | 0.4350 | 0.7026 | 177 | 0.4352 | 0.4689 |
+| [0.467, 0.533) | 451 | 0.5001 | 0.8137 | 267 | 0.5008 | 0.6442 |
+| [0.533, 0.600) | 402 | 0.5640 | 0.8582 | 275 | 0.5664 | 0.7527 |
+| [0.600, 0.667) | 221 | 0.6295 | 0.8462 | 253 | 0.6348 | 0.7905 |
+| [0.667, 0.733) | 82 | 0.6924 | 0.7927 | 315 | 0.7001 | 0.8317 |
+| [0.733, 0.800) | 20 | 0.7645 | 0.8000 | 273 | 0.7656 | 0.8828 |
+| [0.800, 0.867) | 11 | 0.8197 | 0.6364 | 221 | 0.8323 | 0.8552 |
+| [0.867, 0.933) | 6 | 0.8992 | 0.0000 | 102 | 0.8939 | 0.7843 |
+| [0.933, 1.000) | 0 | n/a | n/a | 31 | 0.9636 | 0.5806 |
+
+Reliability data, `category` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.200, 0.267) | 3 | 0.2580 | 0.3333 | 0 | n/a | n/a |
+| [0.267, 0.333) | 75 | 0.3111 | 0.4133 | 0 | n/a | n/a |
+| [0.333, 0.400) | 222 | 0.3713 | 0.7207 | 5 | 0.3776 | 0.2000 |
+| [0.400, 0.467) | 582 | 0.4368 | 0.9141 | 12 | 0.4444 | 0.0833 |
+| [0.467, 0.533) | 782 | 0.4985 | 0.9795 | 30 | 0.5015 | 0.4667 |
+| [0.533, 0.600) | 308 | 0.5590 | 0.9870 | 38 | 0.5654 | 0.4737 |
+| [0.600, 0.667) | 29 | 0.6210 | 0.9655 | 44 | 0.6318 | 0.5909 |
+| [0.667, 0.733) | 5 | 0.6903 | 0.8000 | 54 | 0.7001 | 0.6852 |
+| [0.733, 0.800) | 0 | n/a | n/a | 80 | 0.7688 | 0.7625 |
+| [0.800, 0.867) | 0 | n/a | n/a | 182 | 0.8386 | 0.8901 |
+| [0.867, 0.933) | 0 | n/a | n/a | 529 | 0.9077 | 0.9263 |
+| [0.933, 1.000) | 0 | n/a | n/a | 1032 | 0.9621 | 0.9845 |
+
+Reliability data, `doc_kind` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.267, 0.333) | 15 | 0.3169 | 0.2667 | 15 | 0.3169 | 0.2667 |
+| [0.333, 0.400) | 116 | 0.3735 | 0.2241 | 116 | 0.3735 | 0.2241 |
+| [0.400, 0.467) | 191 | 0.4346 | 0.2932 | 191 | 0.4346 | 0.2932 |
+| [0.467, 0.533) | 246 | 0.4995 | 0.2358 | 246 | 0.4995 | 0.2358 |
+| [0.533, 0.600) | 255 | 0.5672 | 0.2196 | 255 | 0.5672 | 0.2196 |
+| [0.600, 0.667) | 255 | 0.6324 | 0.2784 | 256 | 0.6325 | 0.2773 |
+| [0.667, 0.733) | 215 | 0.6995 | 0.2651 | 215 | 0.6998 | 0.2651 |
+| [0.733, 0.800) | 246 | 0.7667 | 0.2358 | 245 | 0.7669 | 0.2367 |
+| [0.800, 0.867) | 230 | 0.8308 | 0.3174 | 230 | 0.8308 | 0.3174 |
+| [0.867, 0.933) | 183 | 0.8969 | 0.2186 | 183 | 0.8969 | 0.2186 |
+| [0.933, 1.000) | 54 | 0.9525 | 0.2407 | 54 | 0.9525 | 0.2407 |
+
+### A / qs_v3, holdout
+
+| question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
+|---|---|---|---|---|---|---|
+| pii_present = raw (T fallback) | 0.4092 | 0.4092 | 0.7213 | 0.7213 | 0.2978 | 0.2978 |
+| subject_role | 0.2414 | 0.0988 | 0.4665 | 0.4037 | 0.6335 | 0.6470 |
+| category | 0.4576 | 0.0410 | 0.3909 | 0.1261 | 0.7142 | 0.7288 |
+| doc_kind = raw (T fallback) | 0.6155 | 0.6155 | 1.2329 | 1.2329 | 0.3230 | 0.3225 |
+
+Reliability data, `pii_present` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.467, 0.533) | 43 | 0.5172 | 0.4186 | 43 | 0.5172 | 0.4186 |
+| [0.533, 0.600) | 70 | 0.5700 | 0.2857 | 70 | 0.5700 | 0.2857 |
+| [0.600, 0.667) | 94 | 0.6352 | 0.2128 | 94 | 0.6352 | 0.2128 |
+| [0.667, 0.733) | 65 | 0.6976 | 0.0769 | 65 | 0.6976 | 0.0769 |
+| [0.733, 0.800) | 21 | 0.7544 | 0.0476 | 21 | 0.7544 | 0.0476 |
+| [0.800, 0.867) | 1 | 0.8069 | 0.0000 | 1 | 0.8069 | 0.0000 |
+| [0.867, 0.933) | 1 | 0.8733 | 0.0000 | 1 | 0.8733 | 0.0000 |
+
+Reliability data, `subject_role` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.267, 0.333) | 14 | 0.3082 | 0.2143 | 4 | 0.3111 | 0.0000 |
+| [0.333, 0.400) | 27 | 0.3649 | 0.6667 | 13 | 0.3703 | 0.3846 |
+| [0.400, 0.467) | 67 | 0.4316 | 0.7313 | 16 | 0.4271 | 0.6875 |
+| [0.467, 0.533) | 79 | 0.5014 | 0.7975 | 40 | 0.4991 | 0.7000 |
+| [0.533, 0.600) | 53 | 0.5703 | 0.7170 | 43 | 0.5680 | 0.6512 |
+| [0.600, 0.667) | 33 | 0.6265 | 0.7879 | 33 | 0.6349 | 0.8485 |
+| [0.667, 0.733) | 15 | 0.6946 | 1.0000 | 47 | 0.6996 | 0.7872 |
+| [0.733, 0.800) | 6 | 0.7653 | 0.8333 | 46 | 0.7704 | 0.7609 |
+| [0.800, 0.867) | 1 | 0.8027 | 1.0000 | 29 | 0.8298 | 0.8276 |
+| [0.867, 0.933) | 0 | n/a | n/a | 19 | 0.8969 | 0.8947 |
+| [0.933, 1.000) | 0 | n/a | n/a | 5 | 0.9522 | 1.0000 |
+
+Reliability data, `category` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.267, 0.333) | 4 | 0.3186 | 0.7500 | 0 | n/a | n/a |
+| [0.333, 0.400) | 28 | 0.3726 | 0.8929 | 0 | n/a | n/a |
+| [0.400, 0.467) | 92 | 0.4378 | 0.9022 | 0 | n/a | n/a |
+| [0.467, 0.533) | 109 | 0.4967 | 0.9450 | 2 | 0.4998 | 0.5000 |
+| [0.533, 0.600) | 56 | 0.5552 | 1.0000 | 2 | 0.5594 | 0.5000 |
+| [0.600, 0.667) | 5 | 0.6191 | 1.0000 | 6 | 0.6308 | 1.0000 |
+| [0.667, 0.733) | 1 | 0.6853 | 1.0000 | 5 | 0.7098 | 0.6000 |
+| [0.733, 0.800) | 0 | n/a | n/a | 15 | 0.7719 | 1.0000 |
+| [0.800, 0.867) | 0 | n/a | n/a | 24 | 0.8352 | 0.9167 |
+| [0.867, 0.933) | 0 | n/a | n/a | 79 | 0.9078 | 0.8861 |
+| [0.933, 1.000) | 0 | n/a | n/a | 162 | 0.9622 | 0.9753 |
+
+Reliability data, `doc_kind` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.267, 0.333) | 5 | 0.3214 | 0.0000 | 5 | 0.3214 | 0.0000 |
+| [0.333, 0.400) | 16 | 0.3756 | 0.0625 | 16 | 0.3756 | 0.0625 |
+| [0.400, 0.467) | 24 | 0.4317 | 0.0000 | 24 | 0.4317 | 0.0000 |
+| [0.467, 0.533) | 38 | 0.4974 | 0.1053 | 38 | 0.4974 | 0.1053 |
+| [0.533, 0.600) | 35 | 0.5618 | 0.0000 | 35 | 0.5618 | 0.0000 |
+| [0.600, 0.667) | 41 | 0.6325 | 0.0732 | 41 | 0.6325 | 0.0732 |
+| [0.667, 0.733) | 41 | 0.7021 | 0.0244 | 41 | 0.7021 | 0.0244 |
+| [0.733, 0.800) | 33 | 0.7712 | 0.0000 | 33 | 0.7712 | 0.0000 |
+| [0.800, 0.867) | 35 | 0.8323 | 0.0000 | 35 | 0.8323 | 0.0000 |
+| [0.867, 0.933) | 18 | 0.8991 | 0.0000 | 18 | 0.8991 | 0.0000 |
+| [0.933, 1.000) | 9 | 0.9506 | 0.0000 | 9 | 0.9507 | 0.0000 |
 
 ### B1 / qs_v1, test
 
@@ -2709,6 +2965,36 @@ Reliability data, `has_staff_pii` (non-empty bins):
 |---|---|
 | p_in_escalate_band | 295 |
 
+### A / qs_v3, test
+
+| gold pii_present | forward | redact | escalate | total |
+|---|---|---|---|---|
+| A | 1 | 24 | 119 | 144 |
+| B | 14 | 120 | 1728 | 1862 |
+| all | 15 | 144 | 1847 | 2006 |
+
+| trigger | count |
+|---|---|
+| p_below_t_low | 15 |
+| p_in_escalate_band | 1847 |
+| role_both | 46 |
+| role_patient | 98 |
+
+### A / qs_v3, holdout
+
+| gold pii_present | forward | redact | escalate | total |
+|---|---|---|---|---|
+| A | 0 | 0 | 20 | 20 |
+| B | 1 | 17 | 257 | 275 |
+| all | 1 | 17 | 277 | 295 |
+
+| trigger | count |
+|---|---|
+| p_below_t_low | 1 |
+| p_in_escalate_band | 277 |
+| role_both | 6 |
+| role_patient | 11 |
+
 ### B1 / qs_v1, test
 
 | gold pii_present | forward | redact | escalate | total |
@@ -2953,6 +3239,17 @@ Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup
 | per document (sum of units, batch-1; incl. calib docs) | 250 | 10221.6 | 36889.4 | 49450.5 | 12704.5 | 0.08 |
 | per unit, batch-1, <1k tokens | 3603 | 928.3 | 1078.3 | 1305.2 | 881.5 | 1.13 |
 
+### A / qs_v3
+
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.01x. laya autocast: batch-1 off, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+
+| mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
+|---|---|---|---|---|---|---|
+| per unit, batch-1 | 3603 | 632.4 | 721.1 | 736.5 | 638.0 | 1.57 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 6755.2 | 28206.3 | 33333.6 | 9195.0 | 0.11 |
+| per unit, batch-1, <1k tokens | 3603 | 632.4 | 721.1 | 736.5 | 638.0 | 1.57 |
+
 ### B1 / qs_v1
 
 Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 20. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 0.96x. laya autocast: batch-1 off, batched off (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
@@ -3194,6 +3491,78 @@ none
 | pre_redacted | yes * | 12 | 1 | 1 | 1.0000 | 0.0000 | 0 | 0.9167 |
 | split_span | no | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
 | truncated | no | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
+
+Value kinds of missed spans (false forwards):
+
+none
+
+### A / qs_v3, test
+
+| dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
+|---|---|---|---|---|---|---|---|---|
+| doc_type | conmed_log | 97 | 8 | 10 | 1.0000 | 0.0000 | 0 | 0.1959 |
+| doc_type | crf_page | 113 | 14 | 26 | 1.0000 | 0.0000 | 0 | 0.3628 |
+| doc_type | csr_patient_narrative | 276 | 14 | 23 | 1.0000 | 0.0036 | 0 | 0.3551 |
+| doc_type | delegation_log | 43 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.3256 |
+| doc_type | deviation_log | 106 | 10 | 8 | 1.0000 | 0.0094 | 0 | 0.3679 |
+| doc_type | icf_signature_page * | 28 | 7 | 6 | 1.0000 | 0.0357 | 0 | 0.3571 |
+| doc_type | lab_report | 76 | 11 | 16 | 1.0000 | 0.0395 | 0 | 0.4211 |
+| doc_type | monitoring_visit_report | 349 | 11 | 19 | 1.0000 | 0.0057 | 0 | 0.3295 |
+| doc_type | protocol_section | 470 | 16 | 0 | n/a | 0.0000 | 0 | 0.2553 |
+| doc_type | sae_cioms | 75 | 14 | 18 | 0.9444 | 0.0400 | 1 | 0.3600 |
+| doc_type | site_correspondence | 373 | 14 | 13 | 1.0000 | 0.0107 | 0 | 0.2949 |
+| hard_negative | no | 1512 | 91 | 94 | 1.0000 | 0.0093 | 0 | 0.3022 |
+| hard_negative | yes | 494 | 33 | 50 | 0.9800 | 0.0020 | 1 | 0.3401 |
+| lang | de * | 7 | 4 | 5 | 1.0000 | 0.0000 | 0 | 0.5714 |
+| lang | en | 1975 | 107 | 123 | 1.0000 | 0.0066 | 0 | 0.3078 |
+| lang | es * | 12 | 7 | 8 | 1.0000 | 0.0000 | 0 | 0.5833 |
+| lang | pl * | 12 | 6 | 8 | 0.8750 | 0.1667 | 1 | 0.5000 |
+| length_bucket | long | 743 | 24 | 21 | 1.0000 | 0.0067 | 0 | 0.2948 |
+| length_bucket | medium | 538 | 41 | 64 | 1.0000 | 0.0037 | 0 | 0.3401 |
+| length_bucket | short | 134 | 46 | 45 | 0.9778 | 0.0448 | 1 | 0.3955 |
+| length_bucket | xl | 591 | 13 | 14 | 1.0000 | 0.0034 | 0 | 0.2876 |
+| perturbation | email_quoting | 373 | 14 | 13 | 1.0000 | 0.0107 | 0 | 0.2949 |
+| perturbation | headers_footers | 752 | 52 | 64 | 0.9844 | 0.0080 | 1 | 0.3391 |
+| perturbation | line_wrap | 621 | 31 | 37 | 1.0000 | 0.0064 | 0 | 0.3800 |
+| perturbation | none | 524 | 30 | 26 | 1.0000 | 0.0076 | 0 | 0.2615 |
+| perturbation | ocr_noise | 200 | 14 | 25 | 1.0000 | 0.0050 | 0 | 0.3550 |
+| perturbation | table | 239 | 27 | 40 | 1.0000 | 0.0126 | 0 | 0.3180 |
+| pii_depth | early | 277 | 7 | 10 | 1.0000 | 0.0072 | 0 | 0.3682 |
+| pii_depth | late | 61 | 2 | 2 | 1.0000 | 0.0328 | 0 | 0.3115 |
+| pii_depth | middle | 63 | 2 | 3 | 1.0000 | 0.0159 | 0 | 0.3492 |
+| pii_depth | none | 1605 | 113 | 129 | 0.9922 | 0.0062 | 1 | 0.3003 |
+| pre_redacted | no | 1852 | 109 | 123 | 0.9919 | 0.0070 | 1 | 0.3072 |
+| pre_redacted | yes | 154 | 15 | 21 | 1.0000 | 0.0130 | 0 | 0.3636 |
+| split_span | no | 1999 | 124 | 137 | 0.9927 | 0.0075 | 1 | 0.3102 |
+| split_span | yes * | 7 | 6 | 7 | 1.0000 | 0.0000 | 0 | 0.7143 |
+| truncated | no | 2006 | 124 | 144 | 0.9931 | 0.0075 | 1 | 0.3116 |
+
+Value kinds of missed spans (false forwards):
+
+| value_kind | false forwards |
+|---|---|
+| event_date | 1 |
+| initials | 1 |
+
+### A / qs_v3, holdout
+
+| dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
+|---|---|---|---|---|---|---|---|---|
+| doc_type | irb_letter | 295 | 30 | 20 | 1.0000 | 0.0034 | 0 | 0.2169 |
+| hard_negative | no | 234 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.2308 |
+| hard_negative | yes | 61 | 7 | 5 | 1.0000 | 0.0164 | 0 | 0.1639 |
+| lang | en | 295 | 30 | 20 | 1.0000 | 0.0034 | 0 | 0.2169 |
+| length_bucket | medium | 250 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.2000 |
+| length_bucket | short | 45 | 11 | 5 | 1.0000 | 0.0222 | 0 | 0.3111 |
+| perturbation | headers_footers | 119 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.2605 |
+| perturbation | line_wrap | 79 | 9 | 7 | 1.0000 | 0.0127 | 0 | 0.2405 |
+| perturbation | none | 109 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.1743 |
+| perturbation | ocr_noise | 36 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.1944 |
+| pii_depth | none | 295 | 30 | 20 | 1.0000 | 0.0034 | 0 | 0.2169 |
+| pre_redacted | no | 283 | 29 | 19 | 1.0000 | 0.0035 | 0 | 0.2191 |
+| pre_redacted | yes * | 12 | 1 | 1 | 1.0000 | 0.0000 | 0 | 0.1667 |
+| split_span | no | 295 | 30 | 20 | 1.0000 | 0.0034 | 0 | 0.2169 |
+| truncated | no | 295 | 30 | 20 | 1.0000 | 0.0034 | 0 | 0.2169 |
 
 Value kinds of missed spans (false forwards):
 
@@ -3808,6 +4177,27 @@ none
 ### A / qs_v2, test: 0 false forward(s)
 
 ### A / qs_v2, holdout: 0 false forward(s)
+
+### A / qs_v3, test: 1 false forward(s)
+
+**d0293:chunk:512:1** route forward (p_below_t_low); p(pii) raw 0.2389, calibrated 0.2389; gold role patient, category quasi; missed event_date, initials
+
+> 
+> 
+> I. Informacje o reakcji
+> 1. Inicjały: **A.Ż.**    1a. Uczestnik: 1005-0014
+> 2. Data urodzenia: nie podano    2a. Wiek: 79 lat    3. Płeć: M
+> 4-6. Początek reakcji: **31.05.2025**
+> 7+13. Opis: podwyższona ALT, stopień 2; wymagała hospitalizacji.
+> 
+> V. Zgłaszający
+> 24b. Badacz ośrodka, Centrum Badań Klinicznych Dolna Łąka, tel. w dokumentacji
+> 25a. Data zgłoszenia: 2025-07-08
+> 
+> Strona 1
+> 
+
+### A / qs_v3, holdout: 0 false forward(s)
 
 ### B1 / qs_v1, test: 1 false forward(s)
 
@@ -4739,6 +5129,9 @@ none
 - A / qs_v2: Batch-1 latency per token drifted to 1.38x its start by the end of the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds.
 - A / qs_v2: test: slices with n < 30: doc_type=icf_signature_page (n=28), lang=de (n=7), lang=es (n=12), lang=pl (n=12), split_span=yes (n=7)
 - A / qs_v2: holdout: slices with n < 30: pre_redacted=yes (n=12)
+- A / qs_v3: D-008 review: test recall 0.9931 minus its exact 95% lower bound 0.9619 = 0.0311 > 0.01 (144 positives).
+- A / qs_v3: test: slices with n < 30: doc_type=icf_signature_page (n=28), lang=de (n=7), lang=es (n=12), lang=pl (n=12), split_span=yes (n=7)
+- A / qs_v3: holdout: slices with n < 30: pre_redacted=yes (n=12)
 - B1 / qs_v1: test: slices with n < 30: doc_type=delegation_log (n=15), doc_type=icf_signature_page (n=10), doc_type=lab_report (n=27), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=19), pii_depth=middle (n=20), split_span=yes (n=4)
 - B1 / qs_v1: holdout: slices with n < 30: hard_negative=yes (n=21), length_bucket=short (n=17), perturbation=line_wrap (n=26), perturbation=ocr_noise (n=12), pre_redacted=yes (n=4)
 - B1 / qs_v2: test: slices with n < 30: doc_type=delegation_log (n=15), doc_type=icf_signature_page (n=10), doc_type=lab_report (n=27), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=19), pii_depth=middle (n=20), split_span=yes (n=4)

@@ -310,8 +310,10 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 - ~~M6: D-007/D-008 review~~ decided 2026-09-30: D-007 amended (curve headline, built: calib
   frozen 98db5e2, scores/report regenerated), D-008 amended (claim wording; corpus size at M8
   planning).
-- ~~M6: pii_present prompt vs gold~~ decided 2026-09-30 as D-021 (qs_v3 on arm A). **Pending:
-  owner approval of the qs_v3 wording** before any run.
+- ~~M6: pii_present prompt vs gold~~ decided 2026-09-30 as D-021 (qs_v3 on arm A); wording approved
+  and run. Result: qs_v3 hurts arm A (test AUROC 0.509 vs 0.778; quasi-only 0.404 vs 0.706): the
+  longer prompt lifts p(PII) for all units alike (`reports/audits/M6_qs_v3_result-20260930.md`).
+  qs_v1 stays the best zero-shot prompt; quasi-identifiers are a job for arm C (M8).
 
 ## Later (out of current scope, noted for the owning milestone)
 
@@ -382,3 +384,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-27 M5: gate reviews #1, #2 FAIL (D-013 guard bypasses, calib freeze gaps) fixed; review #3 PASS. Next: C4-C8, then M6.
 - 2026-09-30 M6: 10 zero-shot runs (A, B1-B4 x qs_v1/qs_v2) + batched A/B1; calib frozen 4abf110; scores + report v1; results review and gate PASS. Runner hardened (MPS release, NaN retry, caffeinate). D-008 flagged; D-007 and prompt questions to owner.
 - 2026-09-30 M6 follow-up: D-007/D-008 amended, D-021 recorded; curve headline built (calib refit identical except curve, frozen 98db5e2; rescored). qs_v3 wording awaits approval. Starting M7.
+- 2026-09-30 D-021: qs_v3 run on arm A (calib frozen 7a5d6bb), scored; AUROC 0.509 vs qs_v1 0.778 (general yes-bias, not date-specific); report finding and audit record added.

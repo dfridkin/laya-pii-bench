@@ -217,7 +217,22 @@ def _findings(all_scores: Sequence[Scores]) -> list[str]:
             + ", ".join(f"{_label(s)} {h.truncated_forwarded}" for s, h in trunc)
             + "."
         )
-    if len({s.context.qs for s in all_scores}) > 1:
+    by_arm_qs = {(s.context.arm, s.context.qs): h for s, h in test}
+    for (arm, qs), h3 in sorted(by_arm_qs.items()):
+        h1 = by_arm_qs.get((arm, "qs_v1"))
+        if qs != "qs_v3" or h1 is None or h1.auroc_pii is None or h3.auroc_pii is None:
+            continue
+        q1, q3 = h1.auroc_by_kind.get("quasi_only"), h3.auroc_by_kind.get("quasi_only")
+        out.append(
+            f"- **qs_v3 (D-021) changes only the pii_present wording, and on arm {arm} it hurts:** "
+            f"test AUROC {h3.auroc_pii:.3f} vs {h1.auroc_pii:.3f} with qs_v1"
+            + (f" (quasi-only positives {q3:.3f} vs {q1:.3f})" if q1 and q3 else "")
+            + ". The longer instruction raises p(PII) for PII-free units as much as for PII "
+            "units, with or without dates in the text, so separation collapses: the prompt, not "
+            "only the checkpoint, limits zero-shot detection "
+            "(`reports/audits/M6_qs_v3_result-20260930.md`)."
+        )
+    if {"qs_v1", "qs_v2"} <= {s.context.qs for s in all_scores}:
         out.append(
             "- qs_v1 vs qs_v2 differences in the same arm are not a question-wording effect: "
             "pii_present has the same text in both, qs_v1 runs fp32 and qs_v2 fp16 (5 rows) on "
