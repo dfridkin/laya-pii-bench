@@ -217,3 +217,28 @@ def test_gallery_highlights_only_counted_spans() -> None:
     esc = [sc._md_escape(doc.text[s.start : s.end]) for s in coded]  # pyright: ignore[reportPrivateUsage]
     assert all(f"**{v}**" not in md for v in esc)
     assert any(f"**{v}**" in sc.highlight(row) for v in esc)
+
+
+def test_curve_is_calib_fit_and_matches_headline(run: dict[str, Path]) -> None:
+    from bench.calibrate import CURVE_TARGETS
+    from bench.domain import CalibParams
+
+    params = CalibParams.model_validate_json(run["calib"].read_text())
+    assert set(params.t_low_curve) == {f"{t:g}" for t in (*CURVE_TARGETS, params.recall_target)}
+    ts = [params.t_low_curve[f"{t:g}"] for t in sorted(CURVE_TARGETS)]
+    assert ts == sorted(ts, reverse=True)  # a lower recall target never lowers t_low
+    assert params.t_low_curve[f"{params.recall_target:g}"] == params.t_low
+    assert _score(run)[0] == 0
+    sp = Scores.model_validate_json(run["out"].read_text()).splits["test"]
+    at = next(c for c in sp.curve if c.target == params.recall_target)
+    assert at.t_low == sp.headline.t_low and at.false_forwards == sp.headline.false_forwards
+    assert abs(at.forward_rate - sp.headline.forward_rate.point) < 1e-12
+    fr = [c.forward_rate for c in sorted(sp.curve, key=lambda c: c.target)]
+    assert fr == sorted(fr, reverse=True)
+
+
+def test_calib_files_fit_before_the_curve_still_verify() -> None:
+    from bench import calibrate as cal
+
+    for p in sorted((Path(__file__).parent.parent / "calib" / "mini").glob("*.json")):
+        assert not cal.load_verified(p, allow_debug=True).t_low_curve

@@ -29,6 +29,7 @@ from bench.domain import (
     CalibParams,
     CalibrationMetrics,
     ConfusionMatrix,
+    CurvePoint,
     Decision,
     Document,
     FailureCase,
@@ -563,7 +564,34 @@ def split_scores(
         slices=slices(rows, calib.t_low),
         false_forward_value_kinds=dict(sorted(missed.items())),
         failures=failures(rows, policy),
+        curve=curve(rows, calib, policy),
     )
+
+
+def curve(rows: Sequence[Row], calib: CalibParams, policy: Policy) -> list[CurvePoint]:
+    """D-007 amended: each calib-fit t_low of the curve, routed like the headline."""
+    out: list[CurvePoint] = []
+    pos = [r.positive for r in rows]
+    n_pos, n_neg = sum(pos), len(rows) - sum(pos)
+    for key, t in sorted(calib.t_low_curve.items(), key=lambda kv: float(kv[0])):
+        routes = [
+            route_unit(r.p_pii, _argmax(r.cal["subject_role"]) if "subject_role" in r.cal else None,
+                       t, calib.t_high, policy.routing.patient_role_forces_redact)[0]
+            for r in rows
+        ]  # fmt: skip
+        hits = sum(y and r.p_pii >= t for r, y in zip(rows, pos, strict=True))
+        fwd = [rt is Route.FORWARD for rt in routes]
+        out.append(CurvePoint(
+            target=float(key), t_low=t,
+            recall=hits / n_pos if n_pos else None,
+            recall_exact_lo=exact_recall_lo(hits, n_pos),
+            recall_exact_hi=exact_recall_hi(hits, n_pos),
+            forward_rate=sum(fwd) / len(rows),
+            negatives_forwarded=(sum(f and not y for f, y in zip(fwd, pos, strict=True)) / n_neg
+                                 if n_neg else None),
+            false_forwards=sum(f and y for f, y in zip(fwd, pos, strict=True)),
+        ))  # fmt: skip
+    return out
 
 
 LENGTH_BUCKETS = ((0, 1000, "<1k"), (1000, 2000, "1-2k"), (2000, 4000, "2-4k"),

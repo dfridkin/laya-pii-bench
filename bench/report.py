@@ -198,6 +198,18 @@ def _findings(all_scores: Sequence[Scores]) -> list[str]:
             + ", ".join(f"{d} in {n} runs" for d, n in shared)
             + f" ({sum(n for _, n in shared)} of {sum(ff.values())} test false forwards)."
         )
+    at95 = [(s, c) for s in all_scores if "test" in s.splits
+            for c in s.splits["test"].curve if abs(c.target - 0.95) < 1e-9]  # fmt: skip
+    if at95:
+        out.append(
+            "- **Trading recall for work saved (calib target 0.95):** "
+            + ", ".join(
+                f"{_label(s)} forwards {c.forward_rate:.1%} at test recall "
+                f"{_f(c.recall, 3)} ({c.false_forwards} false forwards)"
+                for s, c in at95
+            )
+            + ". See the curve table below."
+        )
     trunc = [(s, h) for s, h in test if h.truncated_forwarded]
     if trunc:
         out.append(
@@ -232,6 +244,40 @@ def _headline(all_scores: Sequence[Scores]) -> list[str]:
         "Doc-level arms are underpowered (few units per document).",
         "",
         *_table(HEADLINE_COLS, _headline_rows(all_scores, "test")),
+        "",
+        "### Recall vs forward rate on test (D-007 amended)",
+        "",
+        "`t_low` fit on calib for each recall target, then applied to test with the same routing "
+        "(role rule included). Forward rate is the share of test units passed without review; "
+        "negatives forwarded is the share of PII-free units passed (the work saved).",
+        "",
+        *_table(
+            [
+                "arm / qs",
+                "calib target",
+                "t_low",
+                "test recall",
+                "exact lo / hi",
+                "forward rate",
+                "negatives forwarded",
+                "false forwards",
+            ],
+            [
+                (
+                    _label(s),
+                    f"{c.target:g}",
+                    _f(c.t_low),
+                    _f(c.recall),
+                    f"{_f(c.recall_exact_lo)} / {_f(c.recall_exact_hi)}",
+                    f"{c.forward_rate:.2%}",
+                    _f(c.negatives_forwarded),
+                    c.false_forwards,
+                )
+                for s in all_scores
+                if "test" in s.splits
+                for c in s.splits["test"].curve
+            ],
+        ),
         "",
         "### Holdout (descriptive only, D-005)",
         "",

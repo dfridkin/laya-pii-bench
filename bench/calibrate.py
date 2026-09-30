@@ -88,6 +88,9 @@ def fit_temperature(rows: Sequence[Sequence[float]], gold_idx: Sequence[int]) ->
     return math.exp(float(res.x))
 
 
+CURVE_TARGETS = (0.90, 0.95, 0.98, 0.99, 0.995)  # D-007 amended: the headline is this curve
+
+
 def fit_t_low(p_positive: Sequence[float], recall_target: float) -> float:
     if not p_positive:
         raise CalibError("no positive units: cannot fit t_low")
@@ -130,6 +133,8 @@ def calib_key(question: str, n_options: int) -> str:
 
 def content_hash(params: CalibParams) -> str:
     body = params.model_dump(mode="json", exclude={"content_hash"})
+    if not body["t_low_curve"]:  # added in M6 (D-007 amended): files fit before it keep their hash
+        del body["t_low_curve"]
     return hashlib.sha256(
         json.dumps(body, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()
@@ -188,6 +193,9 @@ def fit(
         [p for p, y in zip(p_pii, positive, strict=True) if y], policy.routing.recall_target
     )
     t_high = fit_t_high(p_pii, positive, policy.routing.precision_target, t_low)
+    pos_p = [p for p, y in zip(p_pii, positive, strict=True) if y]
+    curve = {f"{t:g}": fit_t_low(pos_p, t)
+             for t in sorted({*CURVE_TARGETS, policy.routing.recall_target})}  # fmt: skip
 
     params = CalibParams(
         arm=arms.pop(),
@@ -198,6 +206,7 @@ def fit(
         t_high=t_high,
         recall_target=policy.routing.recall_target,
         precision_target=policy.routing.precision_target,
+        t_low_curve=curve,
         fit_on=fit_on,
         decisions_sha256=input_hashes["decisions"],
         units_sha256=input_hashes["units"],

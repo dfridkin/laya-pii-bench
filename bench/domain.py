@@ -268,6 +268,8 @@ class CalibParams(_Model):
     decisions_sha256: str
     units_sha256: str
     calib_doc_ids: list[str]
+    # D-007 amended: t_low fit on calib at each curve target (keys like "0.95")
+    t_low_curve: dict[str, float] = Field(default_factory=lambda: {})
     content_hash: str
 
 
@@ -438,6 +440,20 @@ class FailureCase(_Model):
     missed_value_kinds: list[str]
 
 
+class CurvePoint(_Model):
+    """One point of the recall vs forward-rate curve (D-007 amended): `t_low` fit on calib for
+    `target`, evaluated on this split with the headline's routing."""
+
+    target: float
+    t_low: float
+    recall: float | None
+    recall_exact_lo: float | None
+    recall_exact_hi: float | None
+    forward_rate: float
+    negatives_forwarded: float | None
+    false_forwards: int
+
+
 class SplitScores(_Model):
     coverage_units: int  # units in this split
     coverage_decided: int  # of those, units with a decision
@@ -448,6 +464,7 @@ class SplitScores(_Model):
     routing: RoutingMetrics
     slices: list[SliceRow]
     false_forward_value_kinds: dict[str, int]
+    curve: list[CurvePoint] = Field(default_factory=lambda: [])
     failures: list[FailureCase]
 
 

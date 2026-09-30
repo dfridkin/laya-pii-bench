@@ -189,6 +189,12 @@
         "t_low": {
           "type": "number"
         },
+        "t_low_curve": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        },
         "temperature_fallbacks": {
           "additionalProperties": {
             "type": "string"
@@ -338,6 +344,76 @@
         "counts"
       ],
       "title": "ConfusionMatrix",
+      "type": "object"
+    },
+    "CurvePoint": {
+      "additionalProperties": false,
+      "description": "One point of the recall vs forward-rate curve (D-007 amended): `t_low` fit on calib for\n`target`, evaluated on this split with the headline's routing.",
+      "properties": {
+        "false_forwards": {
+          "type": "integer"
+        },
+        "forward_rate": {
+          "type": "number"
+        },
+        "negatives_forwarded": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recall": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recall_exact_hi": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recall_exact_lo": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "t_low": {
+          "type": "number"
+        },
+        "target": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "target",
+        "t_low",
+        "recall",
+        "recall_exact_lo",
+        "recall_exact_hi",
+        "forward_rate",
+        "negatives_forwarded",
+        "false_forwards"
+      ],
+      "title": "CurvePoint",
       "type": "object"
     },
     "Decision": {
@@ -1851,6 +1927,12 @@
         },
         "coverage_units": {
           "type": "integer"
+        },
+        "curve": {
+          "items": {
+            "$ref": "#/$defs/CurvePoint"
+          },
+          "type": "array"
         },
         "failures": {
           "items": {

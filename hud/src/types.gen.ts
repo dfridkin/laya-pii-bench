@@ -109,6 +109,9 @@ export interface CalibParams {
   recall_target: number;
   t_high: number | null;
   t_low: number;
+  t_low_curve?: {
+    [k: string]: number;
+  };
   temperature_fallbacks?: {
     [k: string]: string;
   };
@@ -161,6 +164,23 @@ export interface ChoiceQuestion {
 export interface ConfusionMatrix {
   counts: number[][];
   labels: string[];
+}
+/**
+ * One point of the recall vs forward-rate curve (D-007 amended): `t_low` fit on calib for
+ * `target`, evaluated on this split with the headline's routing.
+ *
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "CurvePoint".
+ */
+export interface CurvePoint {
+  false_forwards: number;
+  forward_rate: number;
+  negatives_forwarded: number | null;
+  recall: number | null;
+  recall_exact_hi: number | null;
+  recall_exact_lo: number | null;
+  t_low: number;
+  target: number;
 }
 /**
  * One per unit per run; also the HUD trace event.
@@ -577,6 +597,7 @@ export interface SplitScores {
   };
   coverage_decided: number;
   coverage_units: number;
+  curve?: CurvePoint[];
   failures: FailureCase[];
   false_forward_value_kinds: {
     [k: string]: number;
