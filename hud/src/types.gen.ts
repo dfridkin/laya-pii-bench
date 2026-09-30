@@ -602,6 +602,7 @@ export interface RunContext {
   hw: HwInfo | null;
   laya_version: string;
   qs: string;
+  routed_sha256?: string | null;
   splits: string[];
   units_sha256: string;
 }

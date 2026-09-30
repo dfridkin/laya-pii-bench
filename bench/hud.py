@@ -75,6 +75,8 @@ def replay_run(scores_path: Path, split: str, src: Sources) -> tuple[ReplayRun, 
     if calib.content_hash != c.calib_hash:
         raise ReplayError(f"calib for {c.arm}/{c.qs} is not the one {scores_path} cites")
     routed_path = scores_path.with_suffix(".routed.jsonl")
+    if c.routed_sha256 is None or not routed_path.exists() or _sha(routed_path) != c.routed_sha256:
+        raise ReplayError(f"{routed_path} is not the routed file {scores_path} was written with")
     lines = routed_path.read_text(encoding="utf-8").splitlines()
     routed = [RoutedDecision.model_validate_json(line) for line in lines if line.strip()]
     routed = [r for r in routed if r.split == split]

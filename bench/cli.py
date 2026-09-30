@@ -589,9 +589,12 @@ def score(
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(2) from e
     out.parent.mkdir(parents=True, exist_ok=True)
+    routed_body = "".join(r.model_dump_json() + "\n" for r in routes)
+    scores = scores.model_copy(update={"context": scores.context.model_copy(update={
+        "routed_sha256": hashlib.sha256(routed_body.encode()).hexdigest()})})  # fmt: skip
     out.write_text(scores.model_dump_json(indent=2) + "\n", encoding="utf-8")
     routed_path = routed_out or out.with_suffix(".routed.jsonl")
-    routed_path.write_text("".join(r.model_dump_json() + "\n" for r in routes), encoding="utf-8")
+    routed_path.write_text(routed_body, encoding="utf-8")
     typer.echo(f"{len(routes)} routed decisions -> {routed_path}")
     for name, sp in scores.splits.items():
         h = sp.headline

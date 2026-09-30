@@ -75,6 +75,7 @@ svg { width: 100%; height: 100%; }
 .chip.v-correct { border-color: var(--green); color: var(--green); }
 .chip.v-false-forward { border-color: var(--red); color: var(--red); font-weight: bold; }
 .chip.v-over-redact { border-color: var(--amber); color: var(--amber); }
+.chip.v-over-escalate { border-color: var(--dim); color: var(--text); }
 .chip.warn { color: var(--amber); }
 .dim { color: var(--dim); }
 .text { white-space: pre-wrap; line-height: 1.45; margin: 0; }

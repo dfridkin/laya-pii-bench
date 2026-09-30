@@ -21,6 +21,7 @@
     "calib_commit": "98db5e2cd161c5cbe7ff6ce9f130882c5131abe3",
     "calib_committed_at": "2026-09-30T00:46:28-04:00",
     "batched_decisions_sha256": null,
+    "routed_sha256": "7676895dd6b8ccd9355a8bab605355402097be67d13d3116d03ce4860b2bcd52",
     "doc_level": true,
     "hw": {
       "os": "Darwin 24.3.0",
@@ -45,7 +46,7 @@
     "checkpoint_revs": [
       "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     ],
-    "created_at": "2026-09-30T04:46:39.061768+00:00"
+    "created_at": "2026-09-30T18:26:39.069220+00:00"
   },
   "splits": {
     "test": {

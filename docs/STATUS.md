@@ -1,7 +1,7 @@
 # Status
 
-Active milestone: **M7 HUD replay**
-Last updated: 2026-09-30 (M6 gate passed)
+Active milestone: **M8 Fine-tuned arm C, report v2**
+Last updated: 2026-09-30 (M7 gate passed)
 
 | Milestone | State | Gate passed | Notes |
 |---|---|---|---|
@@ -12,7 +12,7 @@ Last updated: 2026-09-30 (M6 gate passed)
 | M4 Generator | done | 2026-09-27 (`reports/audits/M4-gate-20260927.md`; gold: `M4_gold_audit_run4_final.md`; R4 fix after gate, D-020) | 600 docs, V1-V6 pass, deterministic; gold audit 0 errors |
 | M5 Label + split | done | 2026-09-27 (`reports/audits/M5-gate-20260927-pass.md`; reviews #1, #2 FAIL fixed) | 600 docs split 350/96/124/30, no leaks, all classes in every split; calib freeze enforced |
 | M6 Zero-shot arms, calibrate, score, report v1 | done | 2026-09-30 (`reports/audits/M6-gate-20260930.md`; results review `M6_results_review.md`) | 10 runs; calib frozen 4abf110; D-008 flagged; zero-shot operating point degenerate, multilingual no signal |
-| M7 HUD replay | in review | | gates 1-3 evidence recorded |
+| M7 HUD replay | done | 2026-09-30 (`reports/audits/M7-gate-20260930.md`) | single-file HUD (3 MB), real M6 test replay, 7 e2e + 6 unit tests |
 | M8 Fine-tuned arm C, report v2 | not started | | |
 
 ## Provisional defaults in use
@@ -233,9 +233,13 @@ Playwright (5 tests) in ~14 s.
 - Gate 3: Playwright on the built file (hud/tests/e2e/replay.spec.ts), checked against the real
   export: loads (first recorded unit active at t=0, step moves to the second); play/pause (clock
   advances at 16x, holds when paused; 1x advances far less); scrub to 50% lands on the unit
-  recorded at half the replay time (within 2); next false forward visits recorded false forwards
-  in B3/qs_v2 in order and shows the verdict, red counter and FORWARD route; a run without false
-  forwards says so; doc-type filter. Screenshots: `reports/audits/M7_hud/01..06-*.png`.
+  recorded at half the replay time (within 2); next false forward visits the first recorded false forwards of B3/qs_v2 in run order (asserted by
+  unit id) and shows the verdict, red counter and FORWARD route; a run without false
+  forwards says so; doc-type filter shows exactly the crf_page units; raw vs calibrated toggle
+  shows the recorded probabilities; highlighted spans equal the gold spans; load replay reopens an
+  export. Screenshots: `reports/audits/M7_hud/01..07-*.png`.
+- Gate review (`reports/audits/M7-gate-20260930.md`) fixes: scores record `routed_sha256` and the
+  exporter verifies it; role-rule edge labels; over-escalate verdict; stronger e2e tests.
 - Replay clock: cumulative recorded `latency_ms` in run order (raw `t_offset_ms` restarts per
   session and includes calib/holdout units); nothing invented. Spec updated (docs/specs/hud.md).
 
@@ -379,10 +383,9 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-Owner decisions pending before relying on M6 numbers (see "Questions for the owner"): D-007/D-008
-review (degenerate zero-shot operating point; D-008 flagged), and the pii_present prompt vs gold
-construct. Neither blocks M7. Next milestone: `/milestone M7` (HUD replay from
-`scores/*.routed.jsonl`, audit C7). Long runs: keep the Mac awake and other apps closed.
+`/milestone M8` (fine-tuned arm C, report v2). Before building, decide the corpus size for the
+operating-point claim (D-008 amended: "recall >= 0.99" needs >= ~370 test positives) and how arm C
+trains on the train split (350 docs). Long runs: keep the Mac awake and other apps closed.
 
 ## Session log
 
@@ -406,3 +409,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-30 M6: 10 zero-shot runs (A, B1-B4 x qs_v1/qs_v2) + batched A/B1; calib frozen 4abf110; scores + report v1; results review and gate PASS. Runner hardened (MPS release, NaN retry, caffeinate). D-008 flagged; D-007 and prompt questions to owner.
 - 2026-09-30 M6 follow-up: D-007/D-008 amended, D-021 recorded; curve headline built (calib refit identical except curve, frozen 98db5e2; rescored). qs_v3 wording awaits approval. Starting M7.
 - 2026-09-30 D-021: qs_v3 run on arm A (calib frozen 7a5d6bb), scored; AUROC 0.509 vs qs_v1 0.778 (general yes-bias, not date-specific); report finding and audit record added.
+- 2026-09-30 M7: HUD replay built (single file, real M6 test replay, make hud with vitest + Playwright); gate PASS; review fixes applied (routed_sha256 provenance, role labels, over-escalate, stronger e2e).

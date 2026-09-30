@@ -47,8 +47,10 @@ other export (`.json` or `.json.gz`).
   threshold triggers shown as dashed edge labels (`p=0.12 < t_low=0.08`).
 - **Judgments panel:** per-question probability bars, chosen option bold, confidence, raw vs
   calibrated toggle.
-- **Situation report:** the unit text with gold spans highlighted and a verdict chip (correct /
-  false forward / over-redact).
+- **Situation report:** the unit text with gold spans highlighted (coded ids dimmed: not PII under
+  D-001) and a verdict chip: false forward (FORWARD of a PII unit), over-redact (REDACT of a
+  PII-free unit), over-escalate (ESCALATE of a PII-free unit: a human reviews it, no work saved),
+  otherwise correct. When the role rule routed the unit, the edge label names the rule.
 
 ## Controls
 

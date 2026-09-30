@@ -1,7 +1,7 @@
 // Replay engine: pure functions over a recorded run (docs/specs/hud.md). No DOM here.
 import type { Replay, ReplayRun, ReplayDoc, ReplayUnit, RoutedDecision } from "./types.gen";
 
-export type Verdict = "correct" | "false forward" | "over-redact";
+export type Verdict = "correct" | "false forward" | "over-redact" | "over-escalate";
 
 export interface Row {
   i: number;
@@ -13,9 +13,12 @@ export interface Row {
   verdict: Verdict;
 }
 
+/** forward+PII: false forward (the costly miss); redact of PII-free text: over-redact; escalate
+ * of PII-free text: over-escalate (a human reviews it, work not saved); otherwise correct. */
 export function verdict(route: string, positive: boolean): Verdict {
   if (route === "forward") return positive ? "false forward" : "correct";
-  return positive ? "correct" : "over-redact";
+  if (positive) return "correct";
+  return route === "redact" ? "over-redact" : "over-escalate";
 }
 
 export function rows(replay: Replay, run: ReplayRun): Row[] {
@@ -98,6 +101,8 @@ export function stats(rs: Row[], upto: number): Stats {
 export function thresholdLabel(r: Row, t_low: number, t_high: number | null | undefined): string {
   const p = r.d.calibrated_probs["pii_present"]?.["A"] ?? NaN;
   const f = (x: number) => x.toFixed(4);
+  const role = r.d.triggers.find((t) => t.startsWith("role_"));
+  if (role && !(t_high != null && p >= t_high)) return `${role} → redact (p=${f(p)})`;
   if (t_high != null && p >= t_high) return `p=${f(p)} ≥ t_high=${f(t_high)}`;
   if (p < t_low) return `p=${f(p)} < t_low=${f(t_low)}`;
   return `t_low=${f(t_low)} ≤ p=${f(p)}`;

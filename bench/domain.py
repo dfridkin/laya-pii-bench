@@ -509,6 +509,7 @@ class RunContext(_Model):
     calib_commit: str
     calib_committed_at: str
     batched_decisions_sha256: str | None = None  # the arm's batched run, for speed only (C6)
+    routed_sha256: str | None = None  # the routed JSONL written with these scores (HUD provenance)
     doc_level: bool = False  # doc-level arm (B3, B4): report labels it underpowered (D-008)
     hw: HwInfo | None
     laya_version: str

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { activeIndex, duration, nextMatching, percentile, segments, stats, verdict, type Row } from "../../src/replay";
+import { activeIndex, duration, nextMatching, percentile, segments, stats, thresholdLabel, verdict, type Row } from "../../src/replay";
 
 function row(i: number, t: number, latency: number, route: string, positive: boolean): Row {
   return {
@@ -18,6 +18,8 @@ describe("replay engine", () => {
     expect(verdict("forward", true)).toBe("false forward");
     expect(verdict("forward", false)).toBe("correct");
     expect(verdict("redact", false)).toBe("over-redact");
+    expect(verdict("escalate", false)).toBe("over-escalate");
+    expect(verdict("redact", true)).toBe("correct");
     expect(verdict("escalate", true)).toBe("correct");
   });
   it("clock maps to the last started decision", () => {
@@ -51,5 +53,13 @@ describe("replay engine", () => {
     const seg = segments(r);
     expect(seg.map((s) => s.text).join("")).toBe("e Jo Doe id 1001-");
     expect(seg.filter((s) => s.span).map((s) => [s.text, s.span?.counted])).toEqual([["Jo Doe", true], ["1001-", false]]);
+  });
+  it("edge label names the rule that routed the unit", () => {
+    const r = row(0, 0, 1, "redact", true);
+    expect(thresholdLabel(r, 0.05, 0.9)).toBe("t_low=0.0500 ≤ p=0.1000");
+    expect(thresholdLabel(r, 0.2, 0.9)).toBe("p=0.1000 < t_low=0.2000");
+    (r.d as { triggers: string[] }).triggers = ["role_patient"];
+    expect(thresholdLabel(r, 0.2, 0.9)).toBe("role_patient → redact (p=0.1000)");
+    expect(thresholdLabel(r, 0.05, 0.1)).toBe("p=0.1000 ≥ t_high=0.1000");
   });
 });

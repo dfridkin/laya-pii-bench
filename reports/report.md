@@ -19,7 +19,7 @@
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T04:46:30.659400+00:00 |
+| date | 2026-09-30T18:26:30.649485+00:00 |
 
 ### A / qs_v2
 
@@ -38,7 +38,7 @@
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T04:46:32.919200+00:00 |
+| date | 2026-09-30T18:26:32.900879+00:00 |
 
 ### A / qs_v3
 
@@ -57,7 +57,7 @@
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T15:27:57.868845+00:00 |
+| date | 2026-09-30T18:26:42.818658+00:00 |
 
 ### B1 / qs_v1
 
@@ -76,7 +76,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T04:46:34.225611+00:00 |
+| date | 2026-09-30T18:26:34.220135+00:00 |
 
 ### B1 / qs_v2
 
@@ -95,7 +95,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T04:46:35.453409+00:00 |
+| date | 2026-09-30T18:26:35.434631+00:00 |
 
 ### B2 / qs_v1
 
@@ -114,7 +114,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T04:46:36.410334+00:00 |
+| date | 2026-09-30T18:26:36.407667+00:00 |
 
 ### B2 / qs_v2
 
@@ -133,7 +133,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T04:46:37.346138+00:00 |
+| date | 2026-09-30T18:26:37.351406+00:00 |
 
 ### B3 / qs_v1 (doc-level, underpowered)
 
@@ -152,7 +152,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T04:46:38.222251+00:00 |
+| date | 2026-09-30T18:26:38.213642+00:00 |
 
 ### B3 / qs_v2 (doc-level, underpowered)
 
@@ -171,7 +171,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T04:46:39.061768+00:00 |
+| date | 2026-09-30T18:26:39.069220+00:00 |
 
 ### B4 / qs_v1 (doc-level, underpowered)
 
@@ -190,7 +190,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T04:46:39.866459+00:00 |
+| date | 2026-09-30T18:26:39.885072+00:00 |
 
 ### B4 / qs_v2 (doc-level, underpowered)
 
@@ -209,7 +209,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T04:46:40.666948+00:00 |
+| date | 2026-09-30T18:26:40.696108+00:00 |
 
 ## 2. Headline operating point
 

@@ -13,10 +13,22 @@ mkdirSync(SHOTS, { recursive: true });
 interface Run {
   label: string;
   meta: { dataset: string };
-  decisions: { route: string; decision: { unit_id: string; latency_ms: number } }[];
-  units: { id: string; gold: { pii_present: string } }[];
+  decisions: {
+    route: string;
+    calibrated_probs: Record<string, Record<string, number>>;
+    decision: {
+      unit_id: string;
+      latency_ms: number;
+      answers: { question: string; probs: Record<string, number> }[];
+    };
+  }[];
+  units: { id: string; doc_id: string; start: number; end: number; gold: { pii_present: string } }[];
 }
-const replay = JSON.parse(readFileSync(resolve(HUD, "public/replay.json"), "utf-8")) as { runs: Run[] };
+interface Doc { id: string; doc_type: string; text: string; spans: { start: number; end: number; category: string }[] }
+const replay = JSON.parse(readFileSync(resolve(HUD, "public/replay.json"), "utf-8")) as {
+  runs: Run[];
+  docs: Doc[];
+};
 
 const falseForwards = (r: Run) => {
   const gold = new Map(r.units.map((u) => [u.id, u.gold.pii_present]));
@@ -107,16 +119,15 @@ test("next false forward jumps to a real false forward", async ({ page }) => {
     .sort((a, b) => b.ff.length - a.ff.length)[0]!;
   expect(withFF.ff.length).toBeGreaterThan(0);
   await open(page, withFF.r.label);
-  const ids = new Set(withFF.ff.map((d) => d.decision.unit_id));
-  const seen: string[] = [];
-  for (let k = 0; k < Math.min(3, ids.size); k++) {
+  // expected: the recorded false forwards in run order after the first unit (active at t=0)
+  const expected = withFF.ff.map((d) => d.decision.unit_id).filter(
+    (id) => id !== withFF.r.decisions[0]!.decision.unit_id,
+  );
+  for (const want of expected.slice(0, 3)) {
     await page.getByTestId("next-ff").click();
     await expect(page.getByTestId("verdict")).toHaveText("false forward");
-    const id = (await page.getByTestId("unit-id").textContent()) ?? "";
-    expect(ids.has(id), `${id} is a recorded false forward`).toBe(true);
-    seen.push(id);
+    await expect(page.getByTestId("unit-id")).toHaveText(want);
   }
-  expect(new Set(seen).size).toBe(seen.length); // each click moves to the next one
   await expect(page.getByTestId("false-forwards")).toHaveClass(/alarm/);
   await expect(page.getByTestId("route-forward")).toHaveClass(/on/);
   await page.screenshot({ path: `${SHOTS}/04-false-forward.png` });
@@ -130,10 +141,50 @@ test("next false forward jumps to a real false forward", async ({ page }) => {
   }
 });
 
-test("doc type filter restricts the stream", async ({ page }) => {
+test("doc type filter restricts the stream to that type", async ({ page }) => {
   await open(page);
+  const run = replay.runs[0]!;
+  const docType = new Map(replay.docs.map((d) => [d.id, d.doc_type]));
+  const unitDoc = new Map(run.units.map((u) => [u.id, u.doc_id]));
+  const crf = run.decisions.filter((d) => docType.get(unitDoc.get(d.decision.unit_id)!) === "crf_page");
   await page.getByTestId("doctype").selectOption("crf_page");
+  await expect(page.locator("#stream .row")).toHaveCount(crf.length);
+  const shown = await page.locator("#stream .row .uid").allTextContents();
+  expect(shown).toEqual(crf.map((d) => d.decision.unit_id));
   await page.getByTestId("step").click();
   await expect(page.getByTestId("report")).toContainText("crf_page");
   await page.screenshot({ path: `${SHOTS}/06-filter-crf.png` });
+});
+
+test("raw vs calibrated toggle and gold span highlighting", async ({ page }) => {
+  await open(page);
+  const d = replay.runs[0]!.decisions[0]!;
+  const bar = page.locator(".judgments .q").first().locator(".bar").first().locator(".p");
+  await expect(bar).toHaveText(d.calibrated_probs["pii_present"]!["A"]!.toFixed(3));
+  await page.locator("#cal").uncheck();
+  const raw = d.decision.answers.find((a) => a.question === "pii_present")!.probs["A"]!;
+  await expect(bar).toHaveText(raw.toFixed(3));
+  // a PII unit: every highlighted span is a gold span of the document
+  const run = replay.runs[0]!;
+  const doc = new Map(replay.docs.map((x) => [x.id, x]));
+  const k = run.decisions.findIndex((x) => {
+    const u = run.units.find((y) => y.id === x.decision.unit_id)!;
+    return u.gold.pii_present === "A";
+  });
+  const u = run.units.find((y) => y.id === run.decisions[k]!.decision.unit_id)!;
+  const gold = doc.get(u.doc_id)!.spans.filter((s) => s.end > u.start && s.start < u.end)
+    .map((s) => doc.get(u.doc_id)!.text.slice(Math.max(s.start, u.start), Math.min(s.end, u.end)));
+  for (let i = 0; i < k; i++) await page.getByTestId("step").click();
+  await expect(page.getByTestId("unit-id")).toHaveText(u.id);
+  const marks = await page.locator("#report mark").allTextContents();
+  expect(marks.length).toBe(gold.length);
+  expect(marks).toEqual(gold);
+  await page.screenshot({ path: `${SHOTS}/07-raw-probs-gold-spans.png` });
+});
+
+test("load replay opens another export", async ({ page }) => {
+  await open(page);
+  await page.locator("#file").setInputFiles(resolve(HUD, "public/replay.json"));
+  await expect(page.getByTestId("run-select").locator("option")).toHaveCount(replay.runs.length);
+  await expect(page.getByTestId("unit-id")).toHaveText(replay.runs[0]!.decisions[0]!.decision.unit_id);
 });

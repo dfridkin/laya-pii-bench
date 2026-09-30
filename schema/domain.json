@@ -1696,6 +1696,17 @@
         "qs": {
           "type": "string"
         },
+        "routed_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "splits": {
           "items": {
             "type": "string"

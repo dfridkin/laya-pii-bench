@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from bench import hud
-from bench.domain import Decision, RoutedDecision, Scores
+from bench.domain import Decision, Route, RoutedDecision, Scores
 
 ROOT = Path(__file__).resolve().parent.parent
 SCORES = sorted((ROOT / "scores").glob("*.json"))
@@ -76,3 +76,16 @@ def test_build_stores_each_document_once(tmp_path: Path) -> None:
     out = tmp_path / "replay.json"
     hud.write(r, out)
     assert out.stat().st_size > 0
+
+
+@needs_main
+def test_replay_refuses_an_edited_routed_file(tmp_path: Path) -> None:
+    src = ROOT / "scores" / "A__qs_v1.json"
+    (tmp_path / src.name).write_text(src.read_text())
+    lines = src.with_suffix(".routed.jsonl").read_text().splitlines()
+    r = RoutedDecision.model_validate_json(lines[0])
+    flipped = Route.FORWARD if r.route is not Route.FORWARD else Route.ESCALATE
+    lines[0] = r.model_copy(update={"route": flipped}).model_dump_json()  # same row count
+    (tmp_path / src.with_suffix(".routed.jsonl").name).write_text("\n".join(lines) + "\n")
+    with pytest.raises(hud.ReplayError, match="not the routed file"):
+        hud.replay_run(tmp_path / src.name, "test", SRC)
