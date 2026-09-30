@@ -14,7 +14,7 @@ from bench.domain import (
     Route,
     Scores,
 )
-from bench.score import D008_GAP, d008_gap
+from bench.score import D008_ARM, D008_GAP, d008_gap
 
 SECTIONS = (
     "Run context",
@@ -52,14 +52,6 @@ def _label(s: Scores) -> str:
     return f"{s.context.arm} / {s.context.qs}{tag}"
 
 
-def _gap(h: Headline) -> str:
-    """D-008: point recall minus its exact 95% lower bound, flagged above the review gap."""
-    g = d008_gap(h)
-    if g is None:
-        return "n/a"
-    return f"{g:.4f}" + (" **review**" if g > D008_GAP else "")
-
-
 def _run_context(all_scores: Sequence[Scores]) -> list[str]:
     out: list[str] = []
     for s in all_scores:
@@ -92,52 +84,150 @@ def _run_context(all_scores: Sequence[Scores]) -> list[str]:
     return out
 
 
-def _headline(all_scores: Sequence[Scores]) -> list[str]:
+FORWARD_USEFUL = 0.05  # below this test forward rate the operating point saves almost no work
+AUROC_USELESS = 0.6  # below this pii_present discrimination the model barely ranks PII
+
+
+def _recall_ci(h: Headline) -> str:
+    if h.recall is not None and h.false_forwards == 0 and h.recall.point == 1.0:
+        return "1.0000 (no misses; CI n/a, see exact bounds)"
+    return _ci(h.recall)
+
+
+def _target(h: Headline) -> str:
+    if h.recall_target is None or h.recall_exact_hi is None:
+        return "n/a"
+    if h.recall_exact_hi < h.recall_target:
+        return f"**missed** (upper {_f(h.recall_exact_hi)} < {h.recall_target:g})"
+    return f"not rejected (upper {_f(h.recall_exact_hi)})"
+
+
+def _d008(s: Scores, split: str, h: Headline) -> str:
+    g = d008_gap(h)
+    if g is None:
+        return "n/a"
+    flag = s.context.arm == D008_ARM and split == "test" and g > D008_GAP
+    return f"{g:.4f}" + (" **D-008 review**" if flag else "")
+
+
+def _headline_rows(all_scores: Sequence[Scores], split: str) -> list[Sequence[object]]:
     rows: list[Sequence[object]] = []
     for s in all_scores:
-        for split, sp in s.splits.items():
-            h = sp.headline
-            rows.append(
-                (
-                    _label(s),
-                    split,
-                    _f(h.t_low),
-                    _f(h.t_high) if h.t_high is not None else "none",
-                    _ci(h.recall),
-                    _f(h.recall_exact_lo),
-                    _gap(h),
-                    _f(h.route_recall),
-                    _ci(h.forward_rate),
-                    h.false_forwards,
-                    _f(h.precision),
-                    f"{h.n_units} / {h.n_docs} / {h.n_positive}",
-                )
+        if split not in s.splits:
+            continue
+        h = s.splits[split].headline
+        rows.append((_label(s), _f(h.t_low), _f(h.t_high) if h.t_high is not None else "none",
+                     _recall_ci(h), f"{_f(h.recall_exact_lo)} / {_f(h.recall_exact_hi)}",
+                     _target(h), _d008(s, split, h), _f(h.route_recall), _ci(h.forward_rate),
+                     _f(h.specificity), h.false_forwards, _f(h.auroc_pii), _f(h.precision),
+                     f"{h.n_units} / {h.n_docs} / {h.n_positive}"))  # fmt: skip
+    return rows
+
+
+HEADLINE_COLS = ["arm / qs", "t_low", "t_high", "recall", "exact lo / hi", "recall target",
+                 "point - exact lo", "route recall", "forward rate", "negatives forwarded",
+                 "false forwards", "AUROC p(pii)", "PII share at p >= t_low",
+                 "units / docs / positives"]  # fmt: skip
+
+
+def _findings(all_scores: Sequence[Scores]) -> list[str]:
+    """Plain-language findings computed from the scores (M6 results review): what the operating
+    point is worth, not only what it catches."""
+    test = [(s, s.splits["test"].headline) for s in all_scores if "test" in s.splits]
+    if not test:
+        return []
+    out: list[str] = []
+    low = [(s, h) for s, h in test if h.forward_rate.point < FORWARD_USEFUL]
+    if low:
+        out.append(
+            "- **The recall-first operating point is nearly degenerate.** At the calib-fit "
+            f"`t_low`, {len(low)} of {len(test)} arm x question-set runs forward under "
+            f"{FORWARD_USEFUL:.0%} of test units ("
+            + ", ".join(f"{_label(s)} {h.forward_rate.point:.2%}" for s, h in low)
+            + '). The trivial policy "escalate everything" has recall 1 and forward rate 0, '
+            "so high recall here says little about work saved. With few calib positives the "
+            'recall target means "no calib misses": `t_low` is the lowest-scoring calib '
+            "positive, a single unit."
+        )
+    weak = [(s, h) for s, h in test if h.auroc_pii is not None and h.auroc_pii < AUROC_USELESS]
+    if weak:
+        out.append(
+            "- **Some checkpoints barely rank PII.** Test AUROC of calibrated p(pii) below "
+            f"{AUROC_USELESS}: "
+            + ", ".join(f"{_label(s)} {h.auroc_pii:.3f}" for s, h in weak if h.auroc_pii)
+            + '. Their high recall comes from answering "PII present" to almost everything, '
+            "not from detection (option-swap probe: "
+            "`reports/audits/M6_pii_question_probe-20260929.md`)."
+        )
+    missed = [(s, h) for s, h in test
+              if h.recall_exact_hi is not None and h.recall_target is not None
+              and h.recall_exact_hi < h.recall_target]  # fmt: skip
+    if missed:
+        out.append(
+            "- **The recall target does not transfer from calib to test** for "
+            + ", ".join(
+                f"{_label(s)} ({h.recall.point if h.recall else 0:.3f}, exact upper "
+                f"{h.recall_exact_hi:.3f})"
+                for s, h in missed
             )
+            + f"; target {missed[0][1].recall_target:g}."
+        )
+    kinds = [(s, h) for s, h in test
+             if (q := h.auroc_by_kind.get("quasi_only")) is not None
+             and (d := h.auroc_by_kind.get("direct")) is not None and q < d - 0.05]  # fmt: skip
+    if kinds:
+        out.append(
+            "- **Quasi-identifiers alone are the hardest positives.** AUROC quasi-only vs direct: "
+            + ", ".join(
+                f"{_label(s)} {h.auroc_by_kind['quasi_only'] or 0:.3f} vs "
+                f"{h.auroc_by_kind['direct'] or 0:.3f}"
+                for s, h in kinds
+            )
+            + ". The pii_present prompt names names, contacts, MRNs and birth dates, not event "
+            "dates or initials, which the gold counts (phi_quasi)."
+        )
+    trunc = [(s, h) for s, h in test if h.truncated_forwarded]
+    if trunc:
+        out.append(
+            "- Truncated units were forwarded (the model never saw their tail): "
+            + ", ".join(f"{_label(s)} {h.truncated_forwarded}" for s, h in trunc)
+            + "."
+        )
+    if len({s.context.qs for s in all_scores}) > 1:
+        out.append(
+            "- qs_v1 vs qs_v2 differences in the same arm are not a question-wording effect: "
+            "pii_present has the same text in both, qs_v1 runs fp32 and qs_v2 fp16 (5 rows) on "
+            "MPS, which moves long-input probabilities, and only qs_v1 has the role rule."
+        )
+    return out
+
+
+def _headline(all_scores: Sequence[Scores]) -> list[str]:
     return [
-        "pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). The exact "
-        "lower bound is Clopper-Pearson on unit counts (ignores clustering within documents; "
-        "informative when there are no misses). Route recall counts misses after routing "
-        "(1 - false forwards / positives). t_high `none`: no threshold reached the precision "
-        f"target, so only the role rule redacts. `point - exact lo` above {D008_GAP} flags "
-        "D-008 for review. Doc-level arms are underpowered (few units per document).",
+        "### Key findings",
         "",
-        *_table(
-            [
-                "arm / qs",
-                "split",
-                "t_low",
-                "t_high",
-                "recall",
-                "recall exact lo",
-                "point - exact lo",
-                "route recall",
-                "forward rate",
-                "false forwards",
-                "precision",
-                "units / docs / positives",
-            ],
-            rows,
-        ),
+        *_findings(all_scores),
+        "",
+        "### Test (headline)",
+        "",
+        "pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). Exact "
+        "lo / hi are Clopper-Pearson on unit counts (ignore clustering within documents); the "
+        "recall target is `missed` when the exact upper bound is below it. `point - exact lo` "
+        f"above {D008_GAP} flags D-008 for review on arm {D008_ARM} only (D-008 amended). "
+        "Negatives forwarded = forwarded PII-free units / PII-free units (the work saved). "
+        "Route recall counts misses after routing (1 - false forwards / positives). t_high "
+        "`none`: no threshold reached the precision target, so only the role rule redacts. "
+        "Doc-level arms are underpowered (few units per document).",
+        "",
+        *_table(HEADLINE_COLS, _headline_rows(all_scores, "test")),
+        "",
+        "### Holdout (descriptive only, D-005)",
+        "",
+        "All IRB letters (one document type, 30 documents, few positives), never part of the "
+        "headline. With a forward rate of 0, recall here is vacuous. Known limitation (M4 S1): a "
+        "fixed alt-text contact line appears only in PII-free letters, a possible shortcut cue.",
+        "",
+        *_table(HEADLINE_COLS, _headline_rows(all_scores, "holdout")),
     ]
 
 
@@ -224,18 +314,22 @@ def _qs_comparison(all_scores: Sequence[Scores]) -> list[str]:
 def _calibration(all_scores: Sequence[Scores]) -> list[str]:
     out: list[str] = [
         "ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC scores "
-        "correctness by the max probability.",
+        "correctness by the max probability (for pii_present discrimination see section 2). "
+        "`= raw (T fallback)`: the temperature fit hit its bound, so T = 1 and the calibrated "
+        "columns equal raw; calibration did nothing there.",
         "",
     ]
     for s in all_scores:
+        fell = {k.split(":", 1)[0] for k in s.context.calib_temperature_fallbacks}
         for split, sp in s.splits.items():
             out += [f"### {_label(s)}, {split}", ""]
             out += _table(
                 ["question", "ECE raw", "ECE cal", "Brier raw", "Brier cal", "AUROC raw",
                  "AUROC cal"],
                 [
-                    (q, _f(c.ece_raw), _f(c.ece_calibrated), _f(c.brier_raw),
-                     _f(c.brier_calibrated), _f(c.auroc_raw), _f(c.auroc_calibrated))
+                    (q + (" = raw (T fallback)" if q in fell else ""), _f(c.ece_raw),
+                     _f(c.ece_calibrated), _f(c.brier_raw), _f(c.brier_calibrated),
+                     _f(c.auroc_raw), _f(c.auroc_calibrated))
                     for q, c in sp.calibration.items()
                 ],
             )  # fmt: skip
@@ -290,20 +384,34 @@ def _speed(all_scores: Sequence[Scores]) -> list[str]:
     out: list[str] = []
     for s in all_scores:
         sp = s.speed
+        drift = "n/a" if sp.batch1_drift is None else f"{sp.batch1_drift:.2f}x"
         out += [f"### {_label(s)}", "", f"Hardware: **{sp.hardware}**. "
-                f"Warmup calls excluded: {sp.warmup_excluded}. Batch-1 outliers (> 5x median): "
-                f"{sp.batch1_outliers}. laya autocast: batch-1 "
-                f"{sp.batch1_autocast}, batched {sp.batched_autocast} (on MPS, fp16 autocast "
-                "starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).", ""]  # fmt: skip
+                f"Warmup calls excluded: {sp.warmup_excluded}. Batch-1 outliers (> 5x the median "
+                f"of similar-length calls): {sp.batch1_outliers}. Batch-1 ms/token, end of run vs "
+                f"start: {drift}. laya autocast: batch-1 {sp.batch1_autocast}, batched "
+                f"{sp.batched_autocast} (on MPS, fp16 autocast starts at 5 question rows, so "
+                "qs_v2 runs fp16 and qs_v1 fp32).", ""]  # fmt: skip
+        batched = (_lat("per unit, batched (amortized: batch time / batch size)", sp.batched)
+                   if sp.batched is not None else
+                   ("per unit, batched", 0, "not run", "", "", "", ""))  # fmt: skip
         out += _table(
             ["mode", "n", "p50 ms", "p95 ms", "p99 ms", "mean ms", "per sec"],
             [
                 _lat("per unit, batch-1", sp.batch1),
-                _lat("per unit, batched", sp.batched),
-                _lat("per document (sum of units, batch-1)", sp.per_doc_ms),
+                batched,
+                _lat("per document (sum of units, batch-1; incl. calib docs)", sp.per_doc_ms),
+                *(_lat(f"per unit, batch-1, {k} tokens", v)
+                  for k, v in sp.batch1_by_length.items()),
             ],
-        )
-    return out
+        )  # fmt: skip
+    return [
+        "Per-unit latency is not comparable across arms (units range from 256-token chunks to "
+        "whole documents); compare the per-document row or the length rows. Batched runs were "
+        "made for arms A and B1 only: batches of eight 2k-8k-token states exceed the 8 GB M2 "
+        "(swapping, NaN).",
+        "",
+        *out,
+    ]
 
 
 def _slices(all_scores: Sequence[Scores]) -> list[str]:

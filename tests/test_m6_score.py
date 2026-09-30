@@ -12,6 +12,8 @@ from bench import report as rep
 from bench import score as sc
 from bench.cli import app
 from bench.domain import Decision, Headline, Interval, RoutedDecision, RunMeta, Scores
+from bench.label import read_docs
+from tests.fixture_expected import fixture_units
 from tests.gitutil import commit_file
 from tests.test_freeze import DOCS, _calibrate, _run
 
@@ -102,8 +104,7 @@ def _headline(point: float, lo: float | None, n_pos: int = 50) -> Headline:
 
 def test_d008_gap_flags_above_one_point() -> None:
     assert sc.d008_gap(_headline(1.0, 0.95)) == pytest.approx(0.05)
-    assert rep._gap(_headline(1.0, 0.995)).startswith("0.0050")  # pyright: ignore[reportPrivateUsage]
-    assert "**review**" in rep._gap(_headline(1.0, 0.95))  # pyright: ignore[reportPrivateUsage]
+    assert sc.d008_gap(_headline(1.0, 0.995)) == pytest.approx(0.005)
     assert sc.d008_gap(_headline(1.0, None)) is None
 
 
@@ -116,13 +117,10 @@ def test_scores_caveat_d008_and_doc_level(run: dict[str, Path], tmp_path: Path) 
     assert code == 0, out
     s = Scores.model_validate_json(run["out"].read_text())
     assert s.context.doc_level and any(c.startswith("Doc-level arm") for c in s.caveats)
-    h = s.splits["test"].headline
-    gap = sc.d008_gap(h)
-    assert (gap is not None and gap > sc.D008_GAP) == any(
-        c.startswith("D-008 review") for c in s.caveats
-    )
+    assert not any(c.startswith("D-008 review") for c in s.caveats)  # arm mock, not A
     text_md = rep.render([s])
     assert "(doc-level, underpowered)" in text_md and "point - exact lo" in text_md
+    assert "### Holdout (descriptive only, D-005)" not in text_md.split("### Test (headline)")[0]
 
 
 def test_report_compares_question_sets(run: dict[str, Path]) -> None:
@@ -149,3 +147,73 @@ def test_latency_outliers_counted_and_caveated() -> None:
     assert any("batch-1 calls took over 5x" in c for c in sc.caveats({}, cal, sp=sp))
     assert not any("took over" in c for c in sc.caveats({}, cal, sp=sp.model_copy(
         update={"batch1_outliers": 0})))  # fmt: skip
+
+
+def test_exact_upper_bound_and_target() -> None:
+    assert sc.exact_recall_hi(10, 10) == 1.0 and sc.exact_recall_hi(0, 0) is None
+    hi = sc.exact_recall_hi(79, 85)
+    assert hi is not None and 0.97 < hi < 0.98  # the M6 review's B3/qs_v2 figure
+    h = _headline(0.929, 0.85).model_copy(update={"recall_target": 0.995, "recall_exact_hi": hi})
+    assert "**missed**" in rep._target(h)  # pyright: ignore[reportPrivateUsage]
+
+
+def test_d008_flag_only_on_arm_a_test(run: dict[str, Path]) -> None:
+    assert _score(run)[0] == 0
+    s = Scores.model_validate_json(run["out"].read_text())
+    h = _headline(1.0, 0.97)
+    a = s.model_copy(update={"context": s.context.model_copy(update={"arm": "A"})})
+    assert "D-008 review" in rep._d008(a, "test", h)  # pyright: ignore[reportPrivateUsage]
+    assert "D-008 review" not in rep._d008(a, "holdout", h)  # pyright: ignore[reportPrivateUsage]
+    assert "D-008 review" not in rep._d008(s, "test", h)  # pyright: ignore[reportPrivateUsage]
+
+
+def test_outliers_are_judged_within_length_buckets() -> None:
+    ms = [100.0] * 50 + [900.0] * 10  # long units are slow, not outliers
+    toks = [300] * 50 + [6000] * 10
+    assert sc.outliers(ms, toks) == 0 and sc.outliers(ms) == 10
+    assert sc.outliers([*ms, 5000.0], [*toks, 6000]) == 1
+
+
+def test_drift_ratio() -> None:
+    d = Decision.model_validate_json(
+        Path(__file__).parent.parent.joinpath("fixtures/mini/decisions_mock.jsonl")
+        .read_text().splitlines()[0]
+    )  # fmt: skip
+    rows = [d.model_copy(update={"state_tokens": 256, "latency_ms": 100.0 + i}) for i in range(80)]
+    r = sc.drift(rows)
+    assert r is not None and 1.0 < r < 1.8
+    assert sc.drift(rows[:40]) is None
+
+
+def test_findings_name_degenerate_and_weak_runs(run: dict[str, Path]) -> None:
+    assert _score(run)[0] == 0
+    s = Scores.model_validate_json(run["out"].read_text())
+    h = s.splits["test"].headline.model_copy(update={
+        "forward_rate": Interval(point=0.004, lo=0.0, hi=0.01, n_resamples=10),
+        "auroc_pii": 0.4})  # fmt: skip
+    sp = s.splits["test"].model_copy(update={"headline": h})
+    weak = s.model_copy(update={"splits": {**s.splits, "test": sp}})
+    md = rep.render([weak])
+    assert "nearly degenerate" in md and "barely rank PII" in md
+
+
+def test_gallery_highlights_only_counted_spans() -> None:
+    from bench.config import load_policy
+    from bench.domain import PiiCategory, Route
+
+    policy = load_policy(Path(__file__).parent.parent / "config" / "policy.yaml")
+    docs = read_docs(DOCS)
+    doc = next(d for d in docs if any(s.category is PiiCategory.CODED_ID for s in d.spans))
+    unit = next(u for u in fixture_units() if u.doc_id == doc.id)
+    d = Decision.model_validate_json(
+        Path(__file__).parent.parent.joinpath("fixtures/mini/decisions_mock.jsonl")
+        .read_text().splitlines()[0]
+    )  # fmt: skip
+    row = sc.Row(unit, doc, d, {}, {}, Route.FORWARD, [])
+    coded = [s for s in doc.spans if s.category is PiiCategory.CODED_ID
+             and unit.start <= s.start and s.end <= unit.end]  # fmt: skip
+    assert coded
+    md = sc.highlight(row, policy.effective_pii_categories)
+    esc = [sc._md_escape(doc.text[s.start : s.end]) for s in coded]  # pyright: ignore[reportPrivateUsage]
+    assert all(f"**{v}**" not in md for v in esc)
+    assert any(f"**{v}**" in sc.highlight(row) for v in esc)

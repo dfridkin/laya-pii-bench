@@ -309,6 +309,10 @@ export interface ValidatorResult {
  * via the `definition` "Headline".
  */
 export interface Headline {
+  auroc_by_kind?: {
+    [k: string]: number | null;
+  };
+  auroc_pii?: number | null;
   false_forwards: number;
   forward_rate: Interval;
   n_docs: number;
@@ -316,10 +320,14 @@ export interface Headline {
   n_units: number;
   precision: number | null;
   recall: Interval | null;
+  recall_exact_hi?: number | null;
   recall_exact_lo: number | null;
+  recall_target?: number | null;
   route_recall: number | null;
+  specificity?: number | null;
   t_high: number | null;
   t_low: number;
+  truncated_forwarded?: number;
 }
 /**
  * This interface was referenced by `Domain`'s JSON-Schema
@@ -548,6 +556,10 @@ export interface Scores {
 export interface SpeedMetrics {
   batch1: LatencyStats | null;
   batch1_autocast?: string;
+  batch1_by_length?: {
+    [k: string]: LatencyStats;
+  };
+  batch1_drift?: number | null;
   batch1_outliers?: number;
   batched: LatencyStats | null;
   batched_autocast?: string;

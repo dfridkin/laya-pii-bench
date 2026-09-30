@@ -19,7 +19,7 @@
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:07:17.811488+00:00 |
+| date | 2026-09-30T03:25:12.301632+00:00 |
 
 ### A / qs_v2
 
@@ -38,7 +38,7 @@
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:07:21.673116+00:00 |
+| date | 2026-09-30T03:25:14.542878+00:00 |
 
 ### B1 / qs_v1
 
@@ -57,7 +57,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:07:26.288178+00:00 |
+| date | 2026-09-30T03:25:15.849134+00:00 |
 
 ### B1 / qs_v2
 
@@ -76,7 +76,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:07:33.987179+00:00 |
+| date | 2026-09-30T03:25:17.066398+00:00 |
 
 ### B2 / qs_v1
 
@@ -95,7 +95,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:07:36.843048+00:00 |
+| date | 2026-09-30T03:25:18.032090+00:00 |
 
 ### B2 / qs_v2
 
@@ -114,7 +114,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:07:38.783185+00:00 |
+| date | 2026-09-30T03:25:18.972421+00:00 |
 
 ### B3 / qs_v1 (doc-level, underpowered)
 
@@ -133,7 +133,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:07:41.613864+00:00 |
+| date | 2026-09-30T03:25:19.828990+00:00 |
 
 ### B3 / qs_v2 (doc-level, underpowered)
 
@@ -152,7 +152,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:07:43.614125+00:00 |
+| date | 2026-09-30T03:25:20.681997+00:00 |
 
 ### B4 / qs_v1 (doc-level, underpowered)
 
@@ -171,7 +171,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:07:44.663240+00:00 |
+| date | 2026-09-30T03:25:21.492895+00:00 |
 
 ### B4 / qs_v2 (doc-level, underpowered)
 
@@ -190,34 +190,53 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T03:07:45.529181+00:00 |
+| date | 2026-09-30T03:25:22.298428+00:00 |
 
 ## 2. Headline operating point
 
-pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). The exact lower bound is Clopper-Pearson on unit counts (ignores clustering within documents; informative when there are no misses). Route recall counts misses after routing (1 - false forwards / positives). t_high `none`: no threshold reached the precision target, so only the role rule redacts. `point - exact lo` above 0.01 flags D-008 for review. Doc-level arms are underpowered (few units per document).
+### Key findings
 
-| arm / qs | split | t_low | t_high | recall | recall exact lo | point - exact lo | route recall | forward rate | false forwards | precision | units / docs / positives |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| A / qs_v1 | test | 0.0054 | none | 1.0000 [1.0000, 1.0000] | 0.9747 | 0.0253 **review** | 1.0000 | 0.0045 [0.0019, 0.0078] | 0 | 0.0721 | 2006 / 124 / 144 |
-| A / qs_v1 | holdout | 0.0054 | none | 1.0000 [1.0000, 1.0000] | 0.8316 | 0.1684 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.0678 | 295 / 30 / 20 |
-| A / qs_v2 | test | 0.0054 | none | 1.0000 [1.0000, 1.0000] | 0.9747 | 0.0253 **review** | 1.0000 | 0.0045 [0.0019, 0.0078] | 0 | 0.0721 | 2006 / 124 / 144 |
-| A / qs_v2 | holdout | 0.0054 | none | 1.0000 [1.0000, 1.0000] | 0.8316 | 0.1684 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.0678 | 295 / 30 / 20 |
-| B1 / qs_v1 | test | 0.0250 | 0.9999 | 0.9900 [0.9667, 1.0000] | 0.9455 | 0.0445 **review** | 0.9900 | 0.0015 [0.0000, 0.0049] | 1 | 0.1473 | 673 / 124 / 100 |
-| B1 / qs_v1 | holdout | 0.0250 | 0.9999 | 1.0000 [1.0000, 1.0000] | 0.8316 | 0.1684 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.2020 | 99 / 30 / 20 |
-| B1 / qs_v2 | test | 0.0222 | 0.9999 | 1.0000 [1.0000, 1.0000] | 0.9638 | 0.0362 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.1486 | 673 / 124 / 100 |
-| B1 / qs_v2 | holdout | 0.0222 | 0.9999 | 1.0000 [1.0000, 1.0000] | 0.8316 | 0.1684 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.2020 | 99 / 30 / 20 |
-| B2 / qs_v1 | test | 0.3457 | 0.9965 | 0.9773 [0.9405, 1.0000] | 0.9203 | 0.0570 **review** | 0.9886 | 0.0094 [0.0000, 0.0224] | 1 | 0.2730 | 320 / 124 / 88 |
-| B2 / qs_v1 | holdout | 0.3457 | 0.9965 | 1.0000 [1.0000, 1.0000] | 0.8316 | 0.1684 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.4000 | 50 / 30 / 20 |
-| B2 / qs_v2 | test | 0.3465 | 0.9969 | 0.9773 [0.9405, 1.0000] | 0.9203 | 0.0570 **review** | 0.9773 | 0.0187 [0.0060, 0.0356] | 2 | 0.2739 | 320 / 124 / 88 |
-| B2 / qs_v2 | holdout | 0.3465 | 0.9969 | 1.0000 [1.0000, 1.0000] | 0.8316 | 0.1684 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.4000 | 50 / 30 / 20 |
-| B3 / qs_v1 (doc-level, underpowered) | test | 0.1907 | 0.9786 | 0.9765 [0.9390, 1.0000] | 0.9176 | 0.0589 **review** | 0.9765 | 0.0160 [0.0000, 0.0363] | 2 | 0.4511 | 187 / 124 / 85 |
-| B3 / qs_v1 (doc-level, underpowered) | holdout | 0.1907 | 0.9786 | 1.0000 [1.0000, 1.0000] | 0.8316 | 0.1684 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.6452 | 31 / 30 / 20 |
-| B3 / qs_v2 (doc-level, underpowered) | test | 0.5142 | 0.9923 | 0.9294 [0.8690, 0.9775] | 0.8527 | 0.0767 **review** | 0.9294 | 0.0535 [0.0251, 0.0904] | 6 | 0.4463 | 187 / 124 / 85 |
-| B3 / qs_v2 (doc-level, underpowered) | holdout | 0.5142 | 0.9923 | 1.0000 [1.0000, 1.0000] | 0.8316 | 0.1684 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.6452 | 31 / 30 / 20 |
-| B4 / qs_v1 (doc-level, underpowered) | test | 0.4425 | 0.7362 | 0.9625 [0.9146, 1.0000] | 0.8943 | 0.0682 **review** | 0.9750 | 0.0242 [0.0000, 0.0565] | 2 | 0.6417 | 124 / 124 / 80 |
-| B4 / qs_v1 (doc-level, underpowered) | holdout | 0.4425 | 0.7362 | 1.0000 [1.0000, 1.0000] | 0.8316 | 0.1684 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.6667 | 30 / 30 / 20 |
-| B4 / qs_v2 (doc-level, underpowered) | test | 0.4841 | none | 0.9250 [0.8592, 0.9756] | 0.8439 | 0.0811 **review** | 0.9250 | 0.0565 [0.0242, 0.1048] | 6 | 0.6325 | 124 / 124 / 80 |
-| B4 / qs_v2 (doc-level, underpowered) | holdout | 0.4841 | none | 1.0000 [1.0000, 1.0000] | 0.8316 | 0.1684 **review** | 1.0000 | 0.0000 [0.0000, 0.0000] | 0 | 0.6667 | 30 / 30 / 20 |
+- **The recall-first operating point is nearly degenerate.** At the calib-fit `t_low`, 8 of 10 arm x question-set runs forward under 5% of test units (A / qs_v1 0.45%, A / qs_v2 0.45%, B1 / qs_v1 0.15%, B1 / qs_v2 0.00%, B2 / qs_v1 0.94%, B2 / qs_v2 1.88%, B3 / qs_v1 (doc-level, underpowered) 1.60%, B4 / qs_v1 (doc-level, underpowered) 2.42%). The trivial policy "escalate everything" has recall 1 and forward rate 0, so high recall here says little about work saved. With few calib positives the recall target means "no calib misses": `t_low` is the lowest-scoring calib positive, a single unit.
+- **Some checkpoints barely rank PII.** Test AUROC of calibrated p(pii) below 0.6: B1 / qs_v1 0.379, B1 / qs_v2 0.377, B2 / qs_v1 0.449, B2 / qs_v2 0.445, B3 / qs_v1 (doc-level, underpowered) 0.491, B3 / qs_v2 (doc-level, underpowered) 0.481, B4 / qs_v1 (doc-level, underpowered) 0.473, B4 / qs_v2 (doc-level, underpowered) 0.456. Their high recall comes from answering "PII present" to almost everything, not from detection (option-swap probe: `reports/audits/M6_pii_question_probe-20260929.md`).
+- **The recall target does not transfer from calib to test** for B3 / qs_v2 (doc-level, underpowered) (0.929, exact upper 0.974), B4 / qs_v1 (doc-level, underpowered) (0.963, exact upper 0.992), B4 / qs_v2 (doc-level, underpowered) (0.925, exact upper 0.972); target 0.995.
+- **Quasi-identifiers alone are the hardest positives.** AUROC quasi-only vs direct: A / qs_v1 0.706 vs 0.834, A / qs_v2 0.705 vs 0.832, B2 / qs_v1 0.427 vs 0.539, B2 / qs_v2 0.418 vs 0.540, B3 / qs_v1 (doc-level, underpowered) 0.493 vs 0.562, B3 / qs_v2 (doc-level, underpowered) 0.437 vs 0.551, B4 / qs_v2 (doc-level, underpowered) 0.430 vs 0.505. The pii_present prompt names names, contacts, MRNs and birth dates, not event dates or initials, which the gold counts (phi_quasi).
+- Truncated units were forwarded (the model never saw their tail): B2 / qs_v1 1, B2 / qs_v2 2.
+- qs_v1 vs qs_v2 differences in the same arm are not a question-wording effect: pii_present has the same text in both, qs_v1 runs fp32 and qs_v2 fp16 (5 rows) on MPS, which moves long-input probabilities, and only qs_v1 has the role rule.
+
+### Test (headline)
+
+pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). Exact lo / hi are Clopper-Pearson on unit counts (ignore clustering within documents); the recall target is `missed` when the exact upper bound is below it. `point - exact lo` above 0.01 flags D-008 for review on arm A only (D-008 amended). Negatives forwarded = forwarded PII-free units / PII-free units (the work saved). Route recall counts misses after routing (1 - false forwards / positives). t_high `none`: no threshold reached the precision target, so only the role rule redacts. Doc-level arms are underpowered (few units per document).
+
+| arm / qs | t_low | t_high | recall | exact lo / hi | recall target | point - exact lo | route recall | forward rate | negatives forwarded | false forwards | AUROC p(pii) | PII share at p >= t_low | units / docs / positives |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A / qs_v1 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9747 / 1.0000 | not rejected (upper 1.0000) | 0.0253 **D-008 review** | 1.0000 | 0.0045 [0.0019, 0.0078] | 0.0048 | 0 | 0.7775 | 0.0721 | 2006 / 124 / 144 |
+| A / qs_v2 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9747 / 1.0000 | not rejected (upper 1.0000) | 0.0253 **D-008 review** | 1.0000 | 0.0045 [0.0019, 0.0078] | 0.0048 | 0 | 0.7767 | 0.0721 | 2006 / 124 / 144 |
+| B1 / qs_v1 | 0.0250 | 0.9999 | 0.9900 [0.9667, 1.0000] | 0.9455 / 0.9997 | not rejected (upper 0.9997) | 0.0445 | 0.9900 | 0.0015 [0.0000, 0.0049] | 0.0000 | 1 | 0.3788 | 0.1473 | 673 / 124 / 100 |
+| B1 / qs_v2 | 0.0222 | 0.9999 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9638 / 1.0000 | not rejected (upper 1.0000) | 0.0362 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.3774 | 0.1486 | 673 / 124 / 100 |
+| B2 / qs_v1 | 0.3457 | 0.9965 | 0.9773 [0.9405, 1.0000] | 0.9203 / 0.9972 | not rejected (upper 0.9972) | 0.0570 | 0.9886 | 0.0094 [0.0000, 0.0224] | 0.0086 | 1 | 0.4486 | 0.2730 | 320 / 124 / 88 |
+| B2 / qs_v2 | 0.3465 | 0.9969 | 0.9773 [0.9405, 1.0000] | 0.9203 / 0.9972 | not rejected (upper 0.9972) | 0.0570 | 0.9773 | 0.0187 [0.0060, 0.0356] | 0.0172 | 2 | 0.4448 | 0.2739 | 320 / 124 / 88 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.1907 | 0.9786 | 0.9765 [0.9390, 1.0000] | 0.9176 / 0.9971 | not rejected (upper 0.9971) | 0.0589 | 0.9765 | 0.0160 [0.0000, 0.0363] | 0.0098 | 2 | 0.4912 | 0.4511 | 187 / 124 / 85 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.5142 | 0.9923 | 0.9294 [0.8690, 0.9775] | 0.8527 / 0.9737 | **missed** (upper 0.9737 < 0.995) | 0.0767 | 0.9294 | 0.0535 [0.0251, 0.0904] | 0.0392 | 6 | 0.4805 | 0.4463 | 187 / 124 / 85 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.4425 | 0.7362 | 0.9625 [0.9146, 1.0000] | 0.8943 / 0.9922 | **missed** (upper 0.9922 < 0.995) | 0.0682 | 0.9750 | 0.0242 [0.0000, 0.0565] | 0.0227 | 2 | 0.4729 | 0.6417 | 124 / 124 / 80 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.4841 | none | 0.9250 [0.8592, 0.9756] | 0.8439 / 0.9720 | **missed** (upper 0.9720 < 0.995) | 0.0811 | 0.9250 | 0.0565 [0.0242, 0.1048] | 0.0227 | 6 | 0.4564 | 0.6325 | 124 / 124 / 80 |
+
+
+### Holdout (descriptive only, D-005)
+
+All IRB letters (one document type, 30 documents, few positives), never part of the headline. With a forward rate of 0, recall here is vacuous. Known limitation (M4 S1): a fixed alt-text contact line appears only in PII-free letters, a possible shortcut cue.
+
+| arm / qs | t_low | t_high | recall | exact lo / hi | recall target | point - exact lo | route recall | forward rate | negatives forwarded | false forwards | AUROC p(pii) | PII share at p >= t_low | units / docs / positives |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A / qs_v1 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5755 | 0.0678 | 295 / 30 / 20 |
+| A / qs_v2 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5769 | 0.0678 | 295 / 30 / 20 |
+| B1 / qs_v1 | 0.0250 | 0.9999 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.2930 | 0.2020 | 99 / 30 / 20 |
+| B1 / qs_v2 | 0.0222 | 0.9999 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.2987 | 0.2020 | 99 / 30 / 20 |
+| B2 / qs_v1 | 0.3457 | 0.9965 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.3967 | 0.4000 | 50 / 30 / 20 |
+| B2 / qs_v2 | 0.3465 | 0.9969 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.4108 | 0.4000 | 50 / 30 / 20 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.1907 | 0.9786 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5909 | 0.6452 | 31 / 30 / 20 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.5142 | 0.9923 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.6818 | 0.6452 | 31 / 30 / 20 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.4425 | 0.7362 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5700 | 0.6667 | 30 / 30 / 20 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.4841 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.6600 | 0.6667 | 30 / 30 / 20 |
 
 ## 3. Per-question
 
@@ -1160,7 +1179,7 @@ Same arm and split under both question sets. `pii_present` is the same question 
 
 ## 4. Calibration
 
-ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC scores correctness by the max probability.
+ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC scores correctness by the max probability (for pii_present discrimination see section 2). `= raw (T fallback)`: the temperature fit hit its bound, so T = 1 and the calibrated columns equal raw; calibration did nothing there.
 
 ### A / qs_v1, test
 
@@ -1169,7 +1188,7 @@ ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC
 | pii_present | 0.1091 | 0.0162 | 0.1308 | 0.1063 | 0.7451 | 0.7451 |
 | subject_role | 0.2519 | 0.1227 | 0.4834 | 0.4111 | 0.6557 | 0.6635 |
 | category | 0.4396 | 0.0275 | 0.4019 | 0.1491 | 0.8297 | 0.8483 |
-| doc_kind | 0.3956 | 0.3956 | 0.9947 | 0.9947 | 0.5094 | 0.5094 |
+| doc_kind = raw (T fallback) | 0.3956 | 0.3956 | 0.9947 | 0.9947 | 0.5094 | 0.5094 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1240,7 +1259,7 @@ Reliability data, `doc_kind` (non-empty bins):
 | pii_present | 0.0903 | 0.0345 | 0.1443 | 0.1278 | 0.5755 | 0.5755 |
 | subject_role | 0.2414 | 0.0988 | 0.4665 | 0.4037 | 0.6335 | 0.6470 |
 | category | 0.4576 | 0.0410 | 0.3909 | 0.1261 | 0.7142 | 0.7288 |
-| doc_kind | 0.6155 | 0.6155 | 1.2329 | 1.2329 | 0.3230 | 0.3225 |
+| doc_kind = raw (T fallback) | 0.6155 | 0.6155 | 1.2329 | 1.2329 | 0.3230 | 0.3225 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1309,7 +1328,7 @@ Reliability data, `doc_kind` (non-empty bins):
 | has_phi_direct | 0.2194 | 0.0128 | 0.1617 | 0.0591 | 0.8828 | 0.8828 |
 | has_phi_quasi | 0.2623 | 0.0194 | 0.2403 | 0.0965 | 0.7697 | 0.7697 |
 | has_coded_id | 0.2624 | 0.0369 | 0.2466 | 0.1085 | 0.7345 | 0.7345 |
-| has_staff_pii | 0.1432 | 0.1432 | 0.5307 | 0.5307 | 0.4397 | 0.4397 |
+| has_staff_pii = raw (T fallback) | 0.1432 | 0.1432 | 0.5307 | 0.5307 | 0.4397 | 0.4397 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1384,7 +1403,7 @@ Reliability data, `has_staff_pii` (non-empty bins):
 | has_phi_direct | 0.2429 | 0.0223 | 0.1307 | 0.0083 | 0.9974 | 0.9974 |
 | has_phi_quasi | 0.2918 | 0.0488 | 0.2083 | 0.0374 | 0.9416 | 0.9416 |
 | has_coded_id | 0.2968 | 0.0728 | 0.2225 | 0.0530 | 0.8027 | 0.8027 |
-| has_staff_pii | 0.1505 | 0.1505 | 0.5231 | 0.5231 | 0.4374 | 0.4374 |
+| has_staff_pii = raw (T fallback) | 0.1505 | 0.1505 | 0.5231 | 0.5231 | 0.4374 | 0.4374 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1453,10 +1472,10 @@ Reliability data, `has_staff_pii` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.7482 | 0.7482 | 1.4231 | 1.4231 | 0.3587 | 0.3587 |
-| subject_role | 0.4953 | 0.4953 | 1.1482 | 1.1482 | 0.4285 | 0.4285 |
+| pii_present = raw (T fallback) | 0.7482 | 0.7482 | 1.4231 | 1.4231 | 0.3587 | 0.3587 |
+| subject_role = raw (T fallback) | 0.4953 | 0.4953 | 1.1482 | 1.1482 | 0.4285 | 0.4285 |
 | category | 0.1715 | 0.1781 | 0.7060 | 0.6988 | 0.4944 | 0.4896 |
-| doc_kind | 0.3594 | 0.3594 | 1.0035 | 1.0035 | 0.4924 | 0.4924 |
+| doc_kind = raw (T fallback) | 0.3594 | 0.3594 | 1.0035 | 1.0035 | 0.4924 | 0.4924 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1525,10 +1544,10 @@ Reliability data, `doc_kind` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.7023 | 0.7023 | 1.3349 | 1.3349 | 0.2711 | 0.2711 |
-| subject_role | 0.3399 | 0.3398 | 0.9496 | 0.9496 | 0.4696 | 0.4696 |
+| pii_present = raw (T fallback) | 0.7023 | 0.7023 | 1.3349 | 1.3349 | 0.2711 | 0.2711 |
+| subject_role = raw (T fallback) | 0.3399 | 0.3398 | 0.9496 | 0.9496 | 0.4696 | 0.4696 |
 | category | 0.1843 | 0.2241 | 0.5741 | 0.5923 | 0.5788 | 0.5763 |
-| doc_kind | 0.3311 | 0.3311 | 0.8765 | 0.8765 | 0.4103 | 0.4103 |
+| doc_kind = raw (T fallback) | 0.3311 | 0.3311 | 0.8765 | 0.8765 | 0.4103 | 0.4103 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1596,11 +1615,11 @@ Reliability data, `doc_kind` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.7463 | 0.7463 | 1.4237 | 1.4237 | 0.3595 | 0.3595 |
-| has_phi_direct | 0.6755 | 0.6755 | 1.2225 | 1.2225 | 0.3116 | 0.3116 |
-| has_phi_quasi | 0.6455 | 0.6455 | 1.2071 | 1.2071 | 0.3297 | 0.3297 |
-| has_coded_id | 0.6376 | 0.6376 | 1.1688 | 1.1688 | 0.3619 | 0.3619 |
-| has_staff_pii | 0.6807 | 0.6807 | 1.2390 | 1.2390 | 0.2965 | 0.2965 |
+| pii_present = raw (T fallback) | 0.7463 | 0.7463 | 1.4237 | 1.4237 | 0.3595 | 0.3595 |
+| has_phi_direct = raw (T fallback) | 0.6755 | 0.6755 | 1.2225 | 1.2225 | 0.3116 | 0.3116 |
+| has_phi_quasi = raw (T fallback) | 0.6455 | 0.6455 | 1.2071 | 1.2071 | 0.3297 | 0.3297 |
+| has_coded_id = raw (T fallback) | 0.6376 | 0.6376 | 1.1688 | 1.1688 | 0.3619 | 0.3619 |
+| has_staff_pii = raw (T fallback) | 0.6807 | 0.6807 | 1.2390 | 1.2390 | 0.2965 | 0.2965 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1671,11 +1690,11 @@ Reliability data, `has_staff_pii` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.6871 | 0.6871 | 1.3337 | 1.3337 | 0.2766 | 0.2766 |
-| has_phi_direct | 0.7332 | 0.7332 | 1.2728 | 1.2728 | 0.1126 | 0.1126 |
-| has_phi_quasi | 0.7319 | 0.7319 | 1.2838 | 1.2838 | 0.0989 | 0.0989 |
-| has_coded_id | 0.7379 | 0.7379 | 1.2573 | 1.2573 | 0.2599 | 0.2599 |
-| has_staff_pii | 0.5569 | 0.5569 | 1.0783 | 1.0783 | 0.3376 | 0.3376 |
+| pii_present = raw (T fallback) | 0.6871 | 0.6871 | 1.3337 | 1.3337 | 0.2766 | 0.2766 |
+| has_phi_direct = raw (T fallback) | 0.7332 | 0.7332 | 1.2728 | 1.2728 | 0.1126 | 0.1126 |
+| has_phi_quasi = raw (T fallback) | 0.7319 | 0.7319 | 1.2838 | 1.2838 | 0.0989 | 0.0989 |
+| has_coded_id = raw (T fallback) | 0.7379 | 0.7379 | 1.2573 | 1.2573 | 0.2599 | 0.2599 |
+| has_staff_pii = raw (T fallback) | 0.5569 | 0.5569 | 1.0783 | 1.0783 | 0.3376 | 0.3376 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1743,10 +1762,10 @@ Reliability data, `has_staff_pii` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.6113 | 0.6113 | 1.1852 | 1.1852 | 0.4476 | 0.4476 |
-| subject_role | 0.4483 | 0.4483 | 1.0845 | 1.0845 | 0.5250 | 0.5250 |
+| pii_present = raw (T fallback) | 0.6113 | 0.6113 | 1.1852 | 1.1852 | 0.4476 | 0.4476 |
+| subject_role = raw (T fallback) | 0.4483 | 0.4483 | 1.0845 | 1.0845 | 0.5250 | 0.5250 |
 | category | 0.1772 | 0.1318 | 0.7745 | 0.7461 | 0.4900 | 0.4859 |
-| doc_kind | 0.3703 | 0.3703 | 1.0251 | 1.0251 | 0.4609 | 0.4608 |
+| doc_kind = raw (T fallback) | 0.3703 | 0.3703 | 1.0251 | 1.0251 | 0.4609 | 0.4608 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1815,10 +1834,10 @@ Reliability data, `doc_kind` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.4972 | 0.4972 | 0.9926 | 0.9926 | 0.3967 | 0.3967 |
-| subject_role | 0.3519 | 0.3519 | 0.8933 | 0.8933 | 0.3182 | 0.3182 |
+| pii_present = raw (T fallback) | 0.4972 | 0.4972 | 0.9926 | 0.9926 | 0.3967 | 0.3967 |
+| subject_role = raw (T fallback) | 0.3519 | 0.3519 | 0.8933 | 0.8933 | 0.3182 | 0.3182 |
 | category | 0.1662 | 0.1771 | 0.6078 | 0.6225 | 0.5536 | 0.5617 |
-| doc_kind | 0.2644 | 0.2644 | 0.6742 | 0.6742 | 0.3448 | 0.3448 |
+| doc_kind = raw (T fallback) | 0.2644 | 0.2644 | 0.6742 | 0.6742 | 0.3448 | 0.3448 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1880,11 +1899,11 @@ Reliability data, `doc_kind` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.6125 | 0.6125 | 1.1880 | 1.1880 | 0.4475 | 0.4475 |
-| has_phi_direct | 0.6474 | 0.6474 | 1.1205 | 1.1205 | 0.4781 | 0.4781 |
-| has_phi_quasi | 0.5667 | 0.5667 | 1.0560 | 1.0560 | 0.4388 | 0.4388 |
-| has_coded_id | 0.5685 | 0.5685 | 1.0211 | 1.0211 | 0.5178 | 0.5178 |
-| has_staff_pii | 0.6127 | 0.6127 | 1.1056 | 1.1056 | 0.4491 | 0.4491 |
+| pii_present = raw (T fallback) | 0.6125 | 0.6125 | 1.1880 | 1.1880 | 0.4475 | 0.4475 |
+| has_phi_direct = raw (T fallback) | 0.6474 | 0.6474 | 1.1205 | 1.1205 | 0.4781 | 0.4781 |
+| has_phi_quasi = raw (T fallback) | 0.5667 | 0.5667 | 1.0560 | 1.0560 | 0.4388 | 0.4388 |
+| has_coded_id = raw (T fallback) | 0.5685 | 0.5685 | 1.0211 | 1.0211 | 0.5178 | 0.5178 |
+| has_staff_pii = raw (T fallback) | 0.6127 | 0.6127 | 1.1056 | 1.1056 | 0.4491 | 0.4491 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -1955,11 +1974,11 @@ Reliability data, `has_staff_pii` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.4979 | 0.4979 | 0.9922 | 0.9922 | 0.4108 | 0.4108 |
-| has_phi_direct | 0.7963 | 0.7963 | 1.3393 | 1.3393 | 0.0204 | 0.0204 |
-| has_phi_quasi | 0.7639 | 0.7639 | 1.3127 | 1.3127 | 0.0208 | 0.0208 |
-| has_coded_id | 0.7457 | 0.7457 | 1.2587 | 1.2587 | 0.0260 | 0.0260 |
-| has_staff_pii | 0.4106 | 0.4106 | 0.8409 | 0.8409 | 0.3523 | 0.3523 |
+| pii_present = raw (T fallback) | 0.4979 | 0.4979 | 0.9922 | 0.9922 | 0.4108 | 0.4108 |
+| has_phi_direct = raw (T fallback) | 0.7963 | 0.7963 | 1.3393 | 1.3393 | 0.0204 | 0.0204 |
+| has_phi_quasi = raw (T fallback) | 0.7639 | 0.7639 | 1.3127 | 1.3127 | 0.0208 | 0.0208 |
+| has_coded_id = raw (T fallback) | 0.7457 | 0.7457 | 1.2587 | 1.2587 | 0.0260 | 0.0260 |
+| has_staff_pii = raw (T fallback) | 0.4106 | 0.4106 | 0.8409 | 0.8409 | 0.3523 | 0.3523 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -2024,10 +2043,10 @@ Reliability data, `has_staff_pii` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.4353 | 0.4353 | 0.8790 | 0.8790 | 0.5359 | 0.5359 |
-| subject_role | 0.3990 | 0.3990 | 1.0165 | 1.0165 | 0.5295 | 0.5295 |
+| pii_present = raw (T fallback) | 0.4353 | 0.4353 | 0.8790 | 0.8790 | 0.5359 | 0.5359 |
+| subject_role = raw (T fallback) | 0.3990 | 0.3990 | 1.0165 | 1.0165 | 0.5295 | 0.5295 |
 | category | 0.2344 | 0.0993 | 0.8650 | 0.7812 | 0.5159 | 0.5136 |
-| doc_kind | 0.4201 | 0.4201 | 1.0932 | 1.0932 | 0.4162 | 0.4164 |
+| doc_kind = raw (T fallback) | 0.4201 | 0.4201 | 1.0932 | 1.0932 | 0.4162 | 0.4164 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -2096,10 +2115,10 @@ Reliability data, `doc_kind` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.2570 | 0.2570 | 0.5698 | 0.5698 | 0.5909 | 0.5909 |
-| subject_role | 0.2358 | 0.2358 | 0.5983 | 0.5983 | 0.5598 | 0.5598 |
+| pii_present = raw (T fallback) | 0.2570 | 0.2570 | 0.5698 | 0.5698 | 0.5909 | 0.5909 |
+| subject_role = raw (T fallback) | 0.2358 | 0.2358 | 0.5983 | 0.5983 | 0.5598 | 0.5598 |
 | category | 0.2056 | 0.4022 | 0.4956 | 0.6539 | 0.5404 | 0.5505 |
-| doc_kind | 0.2552 | 0.2552 | 0.3412 | 0.3412 | 0.6385 | 0.6385 |
+| doc_kind = raw (T fallback) | 0.2552 | 0.2552 | 0.3412 | 0.3412 | 0.6385 | 0.6385 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -2159,11 +2178,11 @@ Reliability data, `doc_kind` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.4359 | 0.4359 | 0.8993 | 0.8993 | 0.5087 | 0.5087 |
-| has_phi_direct | 0.5110 | 0.5110 | 0.9446 | 0.9446 | 0.4537 | 0.4537 |
-| has_phi_quasi | 0.4507 | 0.4507 | 0.8547 | 0.8547 | 0.5321 | 0.5321 |
-| has_coded_id | 0.3999 | 0.3999 | 0.7879 | 0.7879 | 0.5345 | 0.5345 |
-| has_staff_pii | 0.4443 | 0.4443 | 0.8693 | 0.8693 | 0.4434 | 0.4434 |
+| pii_present = raw (T fallback) | 0.4359 | 0.4359 | 0.8993 | 0.8993 | 0.5087 | 0.5087 |
+| has_phi_direct = raw (T fallback) | 0.5110 | 0.5110 | 0.9446 | 0.9446 | 0.4537 | 0.4537 |
+| has_phi_quasi = raw (T fallback) | 0.4507 | 0.4507 | 0.8547 | 0.8547 | 0.5321 | 0.5321 |
+| has_coded_id = raw (T fallback) | 0.3999 | 0.3999 | 0.7879 | 0.7879 | 0.5345 | 0.5345 |
+| has_staff_pii = raw (T fallback) | 0.4443 | 0.4443 | 0.8693 | 0.8693 | 0.4434 | 0.4434 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -2234,11 +2253,11 @@ Reliability data, `has_staff_pii` (non-empty bins):
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.2679 | 0.2679 | 0.5721 | 0.5721 | 0.6818 | 0.6818 |
-| has_phi_direct | 0.7957 | 0.7957 | 1.2785 | 1.2785 | n/a | n/a |
-| has_phi_quasi | 0.7486 | 0.7486 | 1.2103 | 1.2103 | 0.1000 | 0.1000 |
-| has_coded_id | 0.7583 | 0.7583 | 1.1674 | 1.1674 | n/a | n/a |
-| has_staff_pii | 0.1596 | 0.1596 | 0.4704 | 0.4704 | 0.6955 | 0.6955 |
+| pii_present = raw (T fallback) | 0.2679 | 0.2679 | 0.5721 | 0.5721 | 0.6818 | 0.6818 |
+| has_phi_direct = raw (T fallback) | 0.7957 | 0.7957 | 1.2785 | 1.2785 | n/a | n/a |
+| has_phi_quasi = raw (T fallback) | 0.7486 | 0.7486 | 1.2103 | 1.2103 | 0.1000 | 0.1000 |
+| has_coded_id = raw (T fallback) | 0.7583 | 0.7583 | 1.1674 | 1.1674 | n/a | n/a |
+| has_staff_pii = raw (T fallback) | 0.1596 | 0.1596 | 0.4704 | 0.4704 | 0.6955 | 0.6955 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -2300,7 +2319,7 @@ Reliability data, `has_staff_pii` (non-empty bins):
 | pii_present | 0.2568 | 0.1205 | 0.6152 | 0.4883 | 0.5529 | 0.5529 |
 | subject_role | 0.3259 | 0.0657 | 0.9165 | 0.7341 | 0.5858 | 0.5699 |
 | category | 0.3020 | 0.0595 | 0.9603 | 0.7999 | 0.4920 | 0.4856 |
-| doc_kind | 0.5326 | 0.5326 | 1.1791 | 1.1791 | 0.4080 | 0.4088 |
+| doc_kind = raw (T fallback) | 0.5326 | 0.5326 | 1.1791 | 1.1791 | 0.4080 | 0.4088 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -2373,7 +2392,7 @@ Reliability data, `doc_kind` (non-empty bins):
 | pii_present | 0.2502 | 0.0840 | 0.5431 | 0.4397 | 0.5700 | 0.5700 |
 | subject_role | 0.2489 | 0.2775 | 0.6170 | 0.7075 | 0.5430 | 0.5566 |
 | category | 0.2311 | 0.4399 | 0.5131 | 0.7139 | 0.4974 | 0.5132 |
-| doc_kind | 0.2444 | 0.2444 | 0.3366 | 0.3366 | 0.6640 | 0.6640 |
+| doc_kind = raw (T fallback) | 0.2444 | 0.2444 | 0.3366 | 0.3366 | 0.6640 | 0.6640 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -2439,10 +2458,10 @@ Reliability data, `doc_kind` (non-empty bins):
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
 | pii_present | 0.2712 | 0.0905 | 0.6207 | 0.4873 | 0.5373 | 0.5373 |
-| has_phi_direct | 0.4234 | 0.4234 | 0.8488 | 0.8488 | 0.4548 | 0.4548 |
+| has_phi_direct = raw (T fallback) | 0.4234 | 0.4234 | 0.8488 | 0.8488 | 0.4548 | 0.4548 |
 | has_phi_quasi | 0.3085 | 0.0672 | 0.7019 | 0.5068 | 0.5261 | 0.5261 |
-| has_coded_id | 0.2285 | 0.2285 | 0.6025 | 0.6025 | 0.5438 | 0.5438 |
-| has_staff_pii | 0.3304 | 0.3304 | 0.7506 | 0.7506 | 0.4258 | 0.4258 |
+| has_coded_id = raw (T fallback) | 0.2285 | 0.2285 | 0.6025 | 0.6025 | 0.5438 | 0.5438 |
+| has_staff_pii = raw (T fallback) | 0.3304 | 0.3304 | 0.7506 | 0.7506 | 0.4258 | 0.4258 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -2514,10 +2533,10 @@ Reliability data, `has_staff_pii` (non-empty bins):
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
 | pii_present | 0.2484 | 0.1282 | 0.5450 | 0.4321 | 0.6600 | 0.6600 |
-| has_phi_direct | 0.8004 | 0.8004 | 1.2920 | 1.2920 | n/a | n/a |
+| has_phi_direct = raw (T fallback) | 0.8004 | 0.8004 | 1.2920 | 1.2920 | n/a | n/a |
 | has_phi_quasi | 0.7831 | 0.5424 | 1.2409 | 0.5892 | n/a | n/a |
-| has_coded_id | 0.7629 | 0.7629 | 1.1800 | 1.1800 | n/a | n/a |
-| has_staff_pii | 0.1407 | 0.1407 | 0.4544 | 0.4544 | 0.6600 | 0.6600 |
+| has_coded_id = raw (T fallback) | 0.7629 | 0.7629 | 1.1800 | 1.1800 | n/a | n/a |
+| has_staff_pii = raw (T fallback) | 0.1407 | 0.1407 | 0.4544 | 0.4544 | 0.6600 | 0.6600 |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -2850,105 +2869,133 @@ Reliability data, `has_staff_pii` (non-empty bins):
 
 ## 6. Speed
 
+Per-unit latency is not comparable across arms (units range from 256-token chunks to whole documents); compare the per-document row or the length rows. Batched runs were made for arms A and B1 only: batches of eight 2k-8k-token states exceed the 8 GB M2 (swapping, NaN).
+
 ### A / qs_v1
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 40. Batch-1 outliers (> 5x median): 1. laya autocast: batch-1 off, batched off (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 40. Batch-1 outliers (> 5x the median of similar-length calls): 1. Batch-1 ms/token, end of run vs start: 1.48x. laya autocast: batch-1 off, batched off (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 3603 | 685.8 | 969.6 | 1064.2 | 710.9 | 1.41 |
-| per unit, batched | 3603 | 902.1 | 1412.6 | 1526.6 | 985.9 | 1.01 |
-| per document (sum of units, batch-1) | 250 | 8076.2 | 30341.6 | 39449.5 | 10245.0 | 0.10 |
+| per unit, batched (amortized: batch time / batch size) | 3603 | 902.1 | 1412.6 | 1526.6 | 985.9 | 1.01 |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 8076.2 | 30341.6 | 39449.5 | 10245.0 | 0.10 |
+| per unit, batch-1, <1k tokens | 3603 | 685.8 | 969.6 | 1064.2 | 710.9 | 1.41 |
 
 ### A / qs_v2
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 20. Batch-1 outliers (> 5x median): 0. laya autocast: batch-1 on, batched on (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 20. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.38x. laya autocast: batch-1 on, batched on (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 3603 | 928.3 | 1078.3 | 1305.2 | 881.5 | 1.13 |
-| per unit, batched | 3603 | 1014.1 | 1178.3 | 1619.8 | 1046.6 | 0.96 |
-| per document (sum of units, batch-1) | 250 | 10221.6 | 36889.4 | 49450.5 | 12704.5 | 0.08 |
+| per unit, batched (amortized: batch time / batch size) | 3603 | 1014.1 | 1178.3 | 1619.8 | 1046.6 | 0.96 |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 10221.6 | 36889.4 | 49450.5 | 12704.5 | 0.08 |
+| per unit, batch-1, <1k tokens | 3603 | 928.3 | 1078.3 | 1305.2 | 881.5 | 1.13 |
 
 ### B1 / qs_v1
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 20. Batch-1 outliers (> 5x median): 0. laya autocast: batch-1 off, batched off (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 20. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 0.96x. laya autocast: batch-1 off, batched off (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 1215 | 1088.4 | 1146.4 | 1200.8 | 990.4 | 1.01 |
-| per unit, batched | 1215 | 1011.2 | 1139.8 | 1342.6 | 1033.8 | 0.97 |
-| per document (sum of units, batch-1) | 250 | 3851.5 | 14389.9 | 16929.0 | 4813.4 | 0.21 |
+| per unit, batched (amortized: batch time / batch size) | 1215 | 1011.2 | 1139.8 | 1342.6 | 1033.8 | 0.97 |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 3851.5 | 14389.9 | 16929.0 | 4813.4 | 0.21 |
+| per unit, batch-1, <1k tokens | 1215 | 1088.4 | 1146.4 | 1200.8 | 990.4 | 1.01 |
 
 ### B1 / qs_v2
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 20. Batch-1 outliers (> 5x median): 0. laya autocast: batch-1 on, batched on (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 20. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 0.90x. laya autocast: batch-1 on, batched on (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 1215 | 1056.4 | 1206.7 | 1515.6 | 974.4 | 1.03 |
-| per unit, batched | 1215 | 1241.6 | 1432.1 | 1974.0 | 1278.3 | 0.78 |
-| per document (sum of units, batch-1) | 250 | 3756.7 | 14431.3 | 16844.0 | 4735.6 | 0.21 |
+| per unit, batched (amortized: batch time / batch size) | 1215 | 1241.6 | 1432.1 | 1974.0 | 1278.3 | 0.78 |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 3756.7 | 14431.3 | 16844.0 | 4735.6 | 0.21 |
+| per unit, batch-1, <1k tokens | 1215 | 1056.4 | 1206.7 | 1515.6 | 974.4 | 1.03 |
 
 ### B2 / qs_v1
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x median): 0. laya autocast: batch-1 off, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.15x. laya autocast: batch-1 off, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 593 | 2544.6 | 4104.7 | 4583.7 | 2280.0 | 0.44 |
-| per unit, batched | 0 | n/a | n/a | n/a | n/a | n/a |
-| per document (sum of units, batch-1) | 250 | 4254.3 | 15799.8 | 23391.3 | 5408.2 | 0.18 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 4254.3 | 15799.8 | 23391.3 | 5408.2 | 0.18 |
+| per unit, batch-1, <1k tokens | 182 | 797.4 | 1749.2 | 2114.2 | 892.3 | 1.12 |
+| per unit, batch-1, 1-2k tokens | 403 | 2745.8 | 4246.1 | 4709.4 | 2887.5 | 0.35 |
+| per unit, batch-1, 2-4k tokens | 8 | 3162.3 | 3703.7 | 3754.7 | 3249.4 | 0.31 |
 
 ### B2 / qs_v2
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x median): 0. laya autocast: batch-1 on, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 0.99x. laya autocast: batch-1 on, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 593 | 2024.0 | 2312.1 | 2540.6 | 1645.2 | 0.61 |
-| per unit, batched | 0 | n/a | n/a | n/a | n/a | n/a |
-| per document (sum of units, batch-1) | 250 | 3002.1 | 11941.1 | 13571.1 | 3902.5 | 0.26 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 3002.1 | 11941.1 | 13571.1 | 3902.5 | 0.26 |
+| per unit, batch-1, <1k tokens | 182 | 636.4 | 1091.4 | 1117.9 | 641.0 | 1.56 |
+| per unit, batch-1, 1-2k tokens | 403 | 2136.6 | 2316.0 | 2539.9 | 2081.3 | 0.48 |
+| per unit, batch-1, 2-4k tokens | 8 | 2519.3 | 2562.5 | 2567.8 | 2525.6 | 0.40 |
 
 ### B3 / qs_v1 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x median): 0. laya autocast: batch-1 off, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.07x. laya autocast: batch-1 off, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 345 | 3980.1 | 7169.9 | 8051.5 | 3832.7 | 0.26 |
-| per unit, batched | 0 | n/a | n/a | n/a | n/a | n/a |
-| per document (sum of units, batch-1) | 250 | 3670.7 | 16928.8 | 20078.9 | 5289.2 | 0.19 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 3670.7 | 16928.8 | 20078.9 | 5289.2 | 0.19 |
+| per unit, batch-1, <1k tokens | 112 | 620.4 | 1063.5 | 1239.7 | 639.3 | 1.56 |
+| per unit, batch-1, 1-2k tokens | 26 | 1916.1 | 2669.3 | 2771.4 | 2011.7 | 0.50 |
+| per unit, batch-1, 2-4k tokens | 207 | 6359.9 | 7451.4 | 8932.1 | 5789.3 | 0.17 |
 
 ### B3 / qs_v2 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x median): 0. laya autocast: batch-1 on, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.20x. laya autocast: batch-1 on, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 345 | 4512.9 | 8729.9 | 9496.7 | 4342.8 | 0.23 |
-| per unit, batched | 0 | n/a | n/a | n/a | n/a | n/a |
-| per document (sum of units, batch-1) | 250 | 4497.2 | 18643.7 | 21595.2 | 5993.1 | 0.17 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 4497.2 | 18643.7 | 21595.2 | 5993.1 | 0.17 |
+| per unit, batch-1, <1k tokens | 112 | 741.7 | 1358.5 | 1492.8 | 783.0 | 1.28 |
+| per unit, batch-1, 1-2k tokens | 26 | 2367.9 | 3153.4 | 3360.3 | 2376.0 | 0.42 |
+| per unit, batch-1, 2-4k tokens | 207 | 6831.3 | 8950.9 | 9680.8 | 6516.0 | 0.15 |
 
 ### B4 / qs_v1 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x median): 31. laya autocast: batch-1 off, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.31x. laya autocast: batch-1 off, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 250 | 5532.3 | 38867.8 | 47166.2 | 10332.0 | 0.10 |
-| per unit, batched | 0 | n/a | n/a | n/a | n/a | n/a |
-| per document (sum of units, batch-1) | 250 | 5532.3 | 38867.8 | 47166.2 | 10332.0 | 0.10 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 5532.3 | 38867.8 | 47166.2 | 10332.0 | 0.10 |
+| per unit, batch-1, <1k tokens | 93 | 913.3 | 3407.3 | 4119.9 | 1195.3 | 0.84 |
+| per unit, batch-1, 1-2k tokens | 9 | 2470.1 | 5491.2 | 5786.3 | 3241.2 | 0.31 |
+| per unit, batch-1, 2-4k tokens | 90 | 7047.0 | 12606.6 | 15488.5 | 7673.8 | 0.13 |
+| per unit, batch-1, 4-8k tokens | 40 | 25637.3 | 43228.2 | 47833.1 | 26790.2 | 0.04 |
+| per unit, batch-1, >8k tokens | 18 | 35949.3 | 47777.9 | 48680.9 | 37800.8 | 0.03 |
 
 ### B4 / qs_v2 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x median): 32. laya autocast: batch-1 on, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.56x. laya autocast: batch-1 on, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 250 | 5923.7 | 37433.3 | 43250.8 | 10468.6 | 0.10 |
-| per unit, batched | 0 | n/a | n/a | n/a | n/a | n/a |
-| per document (sum of units, batch-1) | 250 | 5923.7 | 37433.3 | 43250.8 | 10468.6 | 0.10 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 250 | 5923.7 | 37433.3 | 43250.8 | 10468.6 | 0.10 |
+| per unit, batch-1, <1k tokens | 93 | 1061.4 | 3353.1 | 4064.9 | 1300.6 | 0.77 |
+| per unit, batch-1, 1-2k tokens | 9 | 3291.1 | 5542.5 | 5841.7 | 3536.1 | 0.28 |
+| per unit, batch-1, 2-4k tokens | 90 | 7682.3 | 12146.4 | 13570.1 | 7912.5 | 0.13 |
+| per unit, batch-1, 4-8k tokens | 40 | 26160.4 | 41902.0 | 45693.4 | 27152.6 | 0.04 |
+| per unit, batch-1, >8k tokens | 18 | 36991.7 | 43039.5 | 45553.3 | 37008.3 | 0.03 |
 
 ## 7. Slices
 
@@ -3746,7 +3793,7 @@ none
 > N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
 > 
 > I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: **\#30030005**
+> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
 > 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
 > 4-6. Inicio de la reacción: **18/04/2025**
 > 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
@@ -3770,7 +3817,7 @@ none
 > N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
 > 
 > I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: **\#30030005**
+> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
 > 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
 > 4-6. Inicio de la reacción: **18/04/2025**
 > 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
@@ -3786,11 +3833,11 @@ none
 
 > Fenwick Therapeutics \| Prüfplan FTX-5142-018 \| Vertraulich
 > 
-> Patientennarrativ: Prüfungsteilnehmer **Subj 3005-0010**
+> Patientennarrativ: Prüfungsteilnehmer Subj 3005-0010
 > Prüfplan FTX-5142-018, Prüfzentrum 3005
 > 
 > Demografie und Ausgangsbefund
-> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer **R-65247**) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.
+> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer R-65247) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.
 > Die Begleitmedikation wurde von **SCHMIDTKE, Dieter** überprüft.
 > 
 > Unerwünschtes Ereignis
@@ -3816,7 +3863,7 @@ none
 > N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
 > 
 > I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: **\#30030005**
+> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
 > 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
 > 4-6. Inicio de la reacción: **18/04/2025**
 > 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
@@ -3836,64 +3883,64 @@ none
 > Protocol FTX-5142-018    Site 3005
 > 
 > Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> **3005-0001** \| **J-B** \| Visit 2 \| **June 18, 2025** \| 149 \| 75 \| 81 \| 36.6
-> **3005-0001** \| **J-B** \| Visit 3 \| **29JUN2025** \| 120 \| 64 \| 69 \| 37.5
-> **\#30050001** \| **J.B.** \| Visit 4 \| **30-Jul-2025** \| 107 \| 94 \| 92 \| 37.4
-> **\#300S0001** \| **J-B** \| Visit 5 \| **08/27/2025** \| 132 \| 81 \| 58 \| 36.4
-> **3005-0002** \| **S.H.** \| Visit 2 \| **06-May-2025** \| 113 \| 77 \| 59 \| 37.5
-> **Subj 3005-0002** \| **S-H** \| Visit 3 \| **2025-05-20** \| 111 \| 67 \| 98 \| 37.2
-> **Subj 3005-0002** \| **S-H** \| Visit 4 \| **06/18/2025** \| 118 \| 79 \| 81 \| 37.2
-> **3005-0002** \| **S-H** \| Visit 5 \| **13JUL2025** \| 109 \| 78 \| 61 \| 37.6
-> **3005-0003** \| **S.S.** \| Visit 2 \| **23-Sep-2025** \| 127 \| 96 \| 62 \| 36.9
-> **Subj 3005-0003** \| **S.S.** \| Visit 3 \| **10/06/2025** \| 162 \| 91 \| 63 \| 37.7
-> **\#30050003** \| **SS** \| Visit 4 \| **November 6, 2025** \| 164 \| 62 \| 58 \| 37.5
-> **\#30050003** \| **SXS** \| Visit S \| **04DECZ025** \| 111 \| 85 \| 65 \| 37.2
-> **Subj 3005-0004** \| **E-W** \| Visit Z \| **2025-08-18** \| 126 \| 81 \| 64 \| 37.0
-> **\#30050004** \| **E.W.** \| Visit 3 \| **August 28, 2025** \| 135 \| 72 \| 60 \| 37.5
-> **Subj 3005-0004** \| **EXW** \| Visit 4 \| **09/28/2025** \| 143 \| 98 \| 89 \| 37.2
-> **3005-0004** \| **E-W** \| Viit 5 \| **25OCT2O25** \| 124 \| 72 \| 80 \| 37.7
-> **Subj 3005-0005** \| **LXK** \| Visit 2 \| **June 10, 2025** \| 112 \| 83 \| 88 \| 36.8
-> **Subj 3005-0005** \| **LXK** \| Visit 3 \| **June 25, 20Z5** \| 152 \| 97 \| 67 \| 37.1
-> **Subj 3005-0005** \| **L-K** \| Visit 4 \| **25-Jul-2025** \| 155 \| 62 \| 93 \| 37.1
-> **3005-0005** \| **L-K** \| Visit 5 \| **08/22/2025** \| 146 \| 70 \| 72 \| 37.2
-> **Subj 3005-0006** \| **G.P.** \| Visit 2 \| **24-Jul-2025** \| 134 \| 77 \| 86 \| 37.0
-> **Subj 3005-0006** \| **GXP** \| Visit 3 \| **August 11, 2025** \| 158 \| 65 \| 58 \| 37.7
-> **\#30050006** \| **GXP** \| Visit 4 \| **09/06/2025** \| 106 \| 76 \| 77 \| 36.9
-> **3005-0006** \| **G-P** \| Visit 5 \| **04OCT2025** \| 158 \| 85 \| 78 \| 36.7
-> **3005-0007** \| **E-M** \| Visit 2 \| **2025-05-19** \| 118 \| 74 \| 82 \| 37.7
-> **3005-0007** \| **EXM** \| Visit 3 \| **June 2, 2025** \| 111 \| 74 \| 82 \| 37.7
-> **\#30050007** \| **EM** \| Visit 4 \| **30JUN20Z5** \| 143 \| 67 \| 92 \| 37.3
-> **\#30050007** \| **E-M** \| Visit 5 \| **27JUL2025** \| 110 \| 80 \| 94 \| 36.3
-> **Subj 3005-0008** \| **S-K** \| Visit 3 \| **2025-08-03** \| 134 \| 86 \| 78 \| 36.5
-> **3005-0008** \| **SXK** \| Visit 4 \| **2025-09-01** \| 121 \| 71 \| 67 \| 37.0
-> **\#30050008** \| **SXK** \| Visit 5 \| **01-Oct-2025** \| 161 \| 68 \| 83 \| 36.7
-> **Subj 3005-0009** \| **D.E.** \| Visit 2 \| **May 2, 2025** \| 125 \| 81 \| 90 \| 36.3
-> **3005-0009** \| **DE** \| Visit 4 \| **06/14/2025** \| 153 \| 62 \| 86 \| 37.6
-> **\#30050010** \| **PR** \| Visit 2 \| **27APR2025** \| 153 \| 92 \| 88 \| 37.7
-> **Subj 3005-0010** \| **P.R.** \| Visit 3 \| **13-May-2025** \| 112 \| 76 \| 98 \| 36.7
-> **\#30050010** \| **P-R** \| Visit 4 \| **11JUN2025** \| 106 \| 79 \| 95 \| 37.4
-> **\#30050011** \| **D.R.** \| Visit 2 \| **22MAR2025** \| 120 \| 69 \| 68 \| 36.4
-> **Subj 3005-0011** \| **DR** \| Visit 3 \| **03-Apr-2025** \| 136 \| 94 \| 74 \| 36.7
-> **Subj 3005-0011** \| **D.R.** \| Visit 4 \| **2025-04-30** \| 162 \| 66 \| 81 \| 36.7
-> **\#30050011** \| **D-R** \| Visit 5 \| **31MAY2025** \| 149 \| 83 \| 58 \| 37.5
-> **300S-0012** \| **JXG** \| Visit 2 \| **02/24/2025** \| 136 \| 71 \| 65 \| 36.2
-> **Subj 3005-0012** \| **JG** \| Visit 3 \| **March 6, 2025** \| 156 \| 63 \| 62 \| 36.2
-> **\#30050012** \| **J-G** \| Visit 4 \| **05-Apr-2025** \| 161 \| 86 \| 86 \| 36.8
-> **\#3005001Z** \| **JXG** \| Visit 5 \| **01-May-2025** \| 116 \| 98 \| 93 \| 37.0
-> **Subj 3005-0013** \| **S-E** \| Viit 2 \| **July 23, 2025** \| 147 \| 87 \| 63 \| 37.8
-> **Subj 3005-0013** \| **S-E** \| Visit 3 \| **04AUG2025** \| 139 \| 78 \| 66 \| 37.2
-> **3005-0013** \| **S.E.** \| Visit 5 \| **09/30/2025** \| 123 \| 82 \| 84 \| 36.9
-> **\#30050014** \| **SXG** \| Visit 2 \| **February 9, 2025** \| 144 \| 68 \| 89 \| 37.0
-> **\#30050014** \| **S.G.** \| Visit 3 \| **21-Feb-2025** \| 147 \| 69 \| 81 \| 36.4
-> **3005-0014** \| **SG** \| Visit 4 \| **22MAR2025** \| 125 \| 93 \| 69 \| 36.1
-> **\#30050014** \| **SG** \| Visit 5 \| **18APR2025** \| 138 \| 77 \| 59 \| 37.6
-> **Subj 3005-0015** \| **D.M.** \| Visit 2 \| **09-May-2025** \| 151 \| 96 \| 69 \| 37.3
-> **\#30050015** \| **DXM** \| Visit 3 \| **May 25, 2O25** \| 132 \| 84 \| 78 \| 37.3
-> **3005-0O15** \| **D.M.** \| Visit 4 \| **June 20, 2025** \| 107 \| 62 \| 55 \| 37.1
+> 3005-0001 \| **J-B** \| Visit 2 \| **June 18, 2025** \| 149 \| 75 \| 81 \| 36.6
+> 3005-0001 \| **J-B** \| Visit 3 \| **29JUN2025** \| 120 \| 64 \| 69 \| 37.5
+> \#30050001 \| **J.B.** \| Visit 4 \| **30-Jul-2025** \| 107 \| 94 \| 92 \| 37.4
+> \#300S0001 \| **J-B** \| Visit 5 \| **08/27/2025** \| 132 \| 81 \| 58 \| 36.4
+> 3005-0002 \| **S.H.** \| Visit 2 \| **06-May-2025** \| 113 \| 77 \| 59 \| 37.5
+> Subj 3005-0002 \| **S-H** \| Visit 3 \| **2025-05-20** \| 111 \| 67 \| 98 \| 37.2
+> Subj 3005-0002 \| **S-H** \| Visit 4 \| **06/18/2025** \| 118 \| 79 \| 81 \| 37.2
+> 3005-0002 \| **S-H** \| Visit 5 \| **13JUL2025** \| 109 \| 78 \| 61 \| 37.6
+> 3005-0003 \| **S.S.** \| Visit 2 \| **23-Sep-2025** \| 127 \| 96 \| 62 \| 36.9
+> Subj 3005-0003 \| **S.S.** \| Visit 3 \| **10/06/2025** \| 162 \| 91 \| 63 \| 37.7
+> \#30050003 \| **SS** \| Visit 4 \| **November 6, 2025** \| 164 \| 62 \| 58 \| 37.5
+> \#30050003 \| **SXS** \| Visit S \| **04DECZ025** \| 111 \| 85 \| 65 \| 37.2
+> Subj 3005-0004 \| **E-W** \| Visit Z \| **2025-08-18** \| 126 \| 81 \| 64 \| 37.0
+> \#30050004 \| **E.W.** \| Visit 3 \| **August 28, 2025** \| 135 \| 72 \| 60 \| 37.5
+> Subj 3005-0004 \| **EXW** \| Visit 4 \| **09/28/2025** \| 143 \| 98 \| 89 \| 37.2
+> 3005-0004 \| **E-W** \| Viit 5 \| **25OCT2O25** \| 124 \| 72 \| 80 \| 37.7
+> Subj 3005-0005 \| **LXK** \| Visit 2 \| **June 10, 2025** \| 112 \| 83 \| 88 \| 36.8
+> Subj 3005-0005 \| **LXK** \| Visit 3 \| **June 25, 20Z5** \| 152 \| 97 \| 67 \| 37.1
+> Subj 3005-0005 \| **L-K** \| Visit 4 \| **25-Jul-2025** \| 155 \| 62 \| 93 \| 37.1
+> 3005-0005 \| **L-K** \| Visit 5 \| **08/22/2025** \| 146 \| 70 \| 72 \| 37.2
+> Subj 3005-0006 \| **G.P.** \| Visit 2 \| **24-Jul-2025** \| 134 \| 77 \| 86 \| 37.0
+> Subj 3005-0006 \| **GXP** \| Visit 3 \| **August 11, 2025** \| 158 \| 65 \| 58 \| 37.7
+> \#30050006 \| **GXP** \| Visit 4 \| **09/06/2025** \| 106 \| 76 \| 77 \| 36.9
+> 3005-0006 \| **G-P** \| Visit 5 \| **04OCT2025** \| 158 \| 85 \| 78 \| 36.7
+> 3005-0007 \| **E-M** \| Visit 2 \| **2025-05-19** \| 118 \| 74 \| 82 \| 37.7
+> 3005-0007 \| **EXM** \| Visit 3 \| **June 2, 2025** \| 111 \| 74 \| 82 \| 37.7
+> \#30050007 \| **EM** \| Visit 4 \| **30JUN20Z5** \| 143 \| 67 \| 92 \| 37.3
+> \#30050007 \| **E-M** \| Visit 5 \| **27JUL2025** \| 110 \| 80 \| 94 \| 36.3
+> Subj 3005-0008 \| **S-K** \| Visit 3 \| **2025-08-03** \| 134 \| 86 \| 78 \| 36.5
+> 3005-0008 \| **SXK** \| Visit 4 \| **2025-09-01** \| 121 \| 71 \| 67 \| 37.0
+> \#30050008 \| **SXK** \| Visit 5 \| **01-Oct-2025** \| 161 \| 68 \| 83 \| 36.7
+> Subj 3005-0009 \| **D.E.** \| Visit 2 \| **May 2, 2025** \| 125 \| 81 \| 90 \| 36.3
+> 3005-0009 \| **DE** \| Visit 4 \| **06/14/2025** \| 153 \| 62 \| 86 \| 37.6
+> \#30050010 \| **PR** \| Visit 2 \| **27APR2025** \| 153 \| 92 \| 88 \| 37.7
+> Subj 3005-0010 \| **P.R.** \| Visit 3 \| **13-May-2025** \| 112 \| 76 \| 98 \| 36.7
+> \#30050010 \| **P-R** \| Visit 4 \| **11JUN2025** \| 106 \| 79 \| 95 \| 37.4
+> \#30050011 \| **D.R.** \| Visit 2 \| **22MAR2025** \| 120 \| 69 \| 68 \| 36.4
+> Subj 3005-0011 \| **DR** \| Visit 3 \| **03-Apr-2025** \| 136 \| 94 \| 74 \| 36.7
+> Subj 3005-0011 \| **D.R.** \| Visit 4 \| **2025-04-30** \| 162 \| 66 \| 81 \| 36.7
+> \#30050011 \| **D-R** \| Visit 5 \| **31MAY2025** \| 149 \| 83 \| 58 \| 37.5
+> 300S-0012 \| **JXG** \| Visit 2 \| **02/24/2025** \| 136 \| 71 \| 65 \| 36.2
+> Subj 3005-0012 \| **JG** \| Visit 3 \| **March 6, 2025** \| 156 \| 63 \| 62 \| 36.2
+> \#30050012 \| **J-G** \| Visit 4 \| **05-Apr-2025** \| 161 \| 86 \| 86 \| 36.8
+> \#3005001Z \| **JXG** \| Visit 5 \| **01-May-2025** \| 116 \| 98 \| 93 \| 37.0
+> Subj 3005-0013 \| **S-E** \| Viit 2 \| **July 23, 2025** \| 147 \| 87 \| 63 \| 37.8
+> Subj 3005-0013 \| **S-E** \| Visit 3 \| **04AUG2025** \| 139 \| 78 \| 66 \| 37.2
+> 3005-0013 \| **S.E.** \| Visit 5 \| **09/30/2025** \| 123 \| 82 \| 84 \| 36.9
+> \#30050014 \| **SXG** \| Visit 2 \| **February 9, 2025** \| 144 \| 68 \| 89 \| 37.0
+> \#30050014 \| **S.G.** \| Visit 3 \| **21-Feb-2025** \| 147 \| 69 \| 81 \| 36.4
+> 3005-0014 \| **SG** \| Visit 4 \| **22MAR2025** \| 125 \| 93 \| 69 \| 36.1
+> \#30050014 \| **SG** \| Visit 5 \| **18APR2025** \| 138 \| 77 \| 59 \| 37.6
+> Subj 3005-0015 \| **D.M.** \| Visit 2 \| **09-May-2025** \| 151 \| 96 \| 69 \| 37.3
+> \#30050015 \| **DXM** \| Visit 3 \| **May 25, 2O25** \| 132 \| 84 \| 78 \| 37.3
+> 3005-0O15 \| **D.M.** \| Visit 4 \| **June 20, 2025** \| 107 \| 62 \| 55 \| 37.1
 > 
 > Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 16O mmHg within 15 minutes.
 > Entered by: **AXW**
-> Source verified against medical record (source on file) for subject **3005-0001**.
+> Source verified against medical record (source on file) for subject 3005-0001.
 > 
 > Events are coded to MedDRA preferred term 10586823; the target dose is 150 mg. Agreement between central and local readigs is shown in Bland-Altman plots. Secondary endpoints are compard with the Wilcoxon test with Bonferroni correction; sparse tables use Fisher's exact test.
 > 
@@ -3941,16 +3988,16 @@ none
 > Protocol FTX-9990-002    Site 2003
 > 
 > Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> **Subj 2003-0001** \| **TW** \| Visit 5 \| **2025-05-12** \| 141 \| 85 \| 84 \| 37.0
-> **\#20030004** \| **K.C.** \| Visit 5 \| **15SEP2025** \| 135 \| 89 \| 95 \| 36.1
-> **Subj 2003-0006** \| **AXC** \| Visit 2 \| **2025-08-07** \| 111 \| 70 \| 61 \| 37.2
-> **Subj 2003-0008** \| **LXH** \| Visit 2 \| **2025-03-20** \| 159 \| 63 \| 94 \| 36.2
-> **Subj 2003-0010** \| **SO** \| Visit 4 \| **03JUL2025** \| 143 \| 69 \| 76 \| 37.7
-> **2003-0014** \| **EH** \| Visit 5 \| **06/14/2025** \| 119 \| 89 \| 77 \| 36.6
+> Subj 2003-0001 \| **TW** \| Visit 5 \| **2025-05-12** \| 141 \| 85 \| 84 \| 37.0
+> \#20030004 \| **K.C.** \| Visit 5 \| **15SEP2025** \| 135 \| 89 \| 95 \| 36.1
+> Subj 2003-0006 \| **AXC** \| Visit 2 \| **2025-08-07** \| 111 \| 70 \| 61 \| 37.2
+> Subj 2003-0008 \| **LXH** \| Visit 2 \| **2025-03-20** \| 159 \| 63 \| 94 \| 36.2
+> Subj 2003-0010 \| **SO** \| Visit 4 \| **03JUL2025** \| 143 \| 69 \| 76 \| 37.7
+> 2003-0014 \| **EH** \| Visit 5 \| **06/14/2025** \| 119 \| 89 \| 77 \| 36.6
 > 
 > Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
 > Entered by: site staff
-> Source verified against medical record (source on file) for subject **Subj 2003-0001**.
+> Source verified against medical record (source on file) for subject Subj 2003-0001.
 > 
 > Laboratory Assessments
 > Blood samples are collected after an overnight fast and processed within two hours. Samples are shipped at ambient temperature to the central laboratory with the requisition form. Clinically significant laboratory abnormalities are recorded as adverse events. Reference ranges are provided by the laboratory and updated when changed.
@@ -3977,15 +4024,15 @@ none
 > Protocol FTX-5142-018    Site 3003
 > 
 > Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> **\#30030002** \| **S-I** \| Visit 3 \| **08/23/2025** \| 130 \| 79 \| 84 \| 36.1
-> **\#30030007** \| **YXC** \| Visit 4 \| **09/18/2025** \| 154 \| 91 \| 96 \| 36.2
-> **\#30030013** \| **PR** \| Visit 4 \| **July 20, 2025** \| 153 \| 78 \| 59 \| 37.6
-> **3003-0014** \| **A-B** \| Visit 4 \| **03-Aug-2025** \| 107 \| 97 \| 55 \| 37.6
-> **Subj 3003-0015** \| **C-L** \| Visit 2 \| **04/17/2025** \| 152 \| 77 \| 58 \| 36.3
+> \#30030002 \| **S-I** \| Visit 3 \| **08/23/2025** \| 130 \| 79 \| 84 \| 36.1
+> \#30030007 \| **YXC** \| Visit 4 \| **09/18/2025** \| 154 \| 91 \| 96 \| 36.2
+> \#30030013 \| **PR** \| Visit 4 \| **July 20, 2025** \| 153 \| 78 \| 59 \| 37.6
+> 3003-0014 \| **A-B** \| Visit 4 \| **03-Aug-2025** \| 107 \| 97 \| 55 \| 37.6
+> Subj 3003-0015 \| **C-L** \| Visit 2 \| **04/17/2025** \| 152 \| 77 \| 58 \| 36.3
 > 
 > Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
 > Entered by: site staff
-> Source verified against medical record (source on file) for subject **\#30030002**.
+> Source verified against medical record (source on file) for subject \#30030002.
 > 
 > Drug Accountability
 > Dispensing and returns are recorded on the accountability log at each visit. Temperature excursions must be reported to the sponsor immediately. Tablet counts are compared with the dosing diary to assess compliance. Investigational product is stored in a secure, temperature-monitored area with access limited to authorised staff. Tablet counts are reconciled against the dosing diary to assess compliance. Investigational product is stored in a secure, temperature-monitored area with access limited to authorised staff.
@@ -4012,56 +4059,56 @@ none
 > Protocol FTX-8191-011    Site 1005
 > 
 > Subject	Initials	Visit	Visit date	SBP	DBP	HR	Temp
-> **1005-0001**	**J.K.**	Visit 2	**2025-06-24**	158	62	98	37.6
-> **\#10050001**	**JK**	Visit 4	**August 5, 2025**	160	70	55	36.3
-> **\#10050001**	**J.K.**	Visit 5	**2025-08-31**	123	95	59	36.8
-> **1005-0002**	**D.W.**	Visit 2	**2025-06-18**	151	74	70	36.1
-> **1005-0002**	**D-W**	Visit 3	**02JUL2025**	132	70	71	36.8
-> **Subj 1005-0002**	**DW**	Visit 4	**27-Jul-2025**	129	74	94	36.4
-> **Subj 1005-0002**	**D.W.**	Visit 5	**August 26, 2025**	137	76	59	36.7
-> **Subj 1005-0003**	**R.S.**	Visit 2	**08/16/2025**	115	78	70	36.6
-> **Subj 1005-0003**	**RS**	Visit 3	**2025-08-27**	163	80	75	37.4
-> **1005-0003**	**R-S**	Visit 5	**October 22, 2025**	145	86	63	37.6
-> **Subj 1005-0004**	**A-J**	Visit 2	**2025-02-28**	147	86	73	36.7
-> **1005-0004**	**AJ**	Visit 3	**13-Mar-2025**	156	79	83	37.2
-> **\#10050004**	**AJ**	Visit 4	**April 9, 2025**	150	64	60	37.7
-> **1005-0004**	**A.J.**	Visit 5	**08-May-2025**	136	66	96	36.5
-> **Subj 1005-0005**	**A-S**	Visit 3	**23MAR2025**	119	87	90	37.0
-> **Subj 1005-0005**	**AS**	Visit 4	**04/19/2025**	119	85	83	36.6
-> **1005-0006**	**TXP**	Visit 2	**April 19, 2025**	135	68	55	37.7
-> **Subj 1005-0006**	**TP**	Visit 5	**25JUN2025**	125	69	92	36.7
-> **1005-0007**	**AXG**	Visit 2	**2025-02-12**	162	86	79	36.9
-> **Subj 1005-0007**	**AXG**	Visit 3	**February 24, 2025**	140	76	60	36.3
-> **\#10050007**	**AG**	Visit 4	**March 23, 2025**	120	88	88	36.5
-> **Subj 1005-0007**	**A-G**	Visit 5	**April 20, 2025**	154	84	67	36.6
-> **Subj 1005-0008**	**F-T**	Visit 2	**07-Jun-2025**	121	81	78	37.4
-> **\#10050008**	**F-T**	Visit 3	**2025-06-24**	129	83	88	37.6
-> **Subj 1005-0008**	**FT**	Visit 5	**August 19, 2025**	154	96	66	36.4
-> **1005-0009**	**S-P**	Visit 3	**September 28, 2025**	117	86	58	36.8
-> **1005-0009**	**SP**	Visit 4	**October 23, 2025**	139	96	59	37.3
-> **Subj 1005-0009**	**SP**	Visit 5	**2025-11-21**	151	87	56	37.0
-> **\#10050010**	**EK**	Visit 4	**10/22/2025**	106	86	92	37.7
-> **1005-0010**	**E-K**	Visit 5	**November 17, 2025**	118	97	62	37.6
-> **\#10050011**	**H-L**	Visit 2	**February 27, 2025**	112	93	80	36.5
-> **\#10050011**	**HXL**	Visit 3	**2025-03-12**	160	77	78	36.2
-> **\#10050011**	**HXL**	Visit 5	**09MAY2025**	113	65	77	37.7
-> **\#10050012**	**D-S**	Visit 3	**05/01/2025**	126	75	59	36.8
-> **\#10050012**	**D-S**	Visit 5	**25-Jun-2025**	125	94	96	36.1
-> **\#10050013**	**S.K.**	Visit 2	**2025-02-18**	146	70	69	36.3
-> **\#10050013**	**S.K.**	Visit 3	**04-Mar-2025**	124	81	92	36.6
-> **Subj 1005-0013**	**S.K.**	Visit 4	**04/01/2025**	154	88	71	36.9
-> **Subj 1005-0013**	**SXK**	Visit 5	**2025-04-26**	150	88	81	37.2
-> **\#10050014**	**AŻ**	Visit 2	**05APR2025**	140	81	60	37.2
-> **Subj 1005-0014**	**A-Ż**	Visit 4	**May 18, 2025**	145	74	78	37.3
-> **Subj 1005-0014**	**AXŻ**	Visit 5	**06/16/2025**	158	70	95	36.4
-> **\#10050015**	**J-C**	Visit 2	**06/02/2025**	119	81	78	37.5
-> **\#10050015**	**J.C.**	Visit 3	**19JUN2025**	121	82	93	36.8
-> **1005-0015**	**JC**	Visit 4	**2025-07-18**	128	81	97	36.6
-> **1005-0015**	**JC**	Visit 5	**August 14, 2025**	165	81	85	37.0
+> 1005-0001	**J.K.**	Visit 2	**2025-06-24**	158	62	98	37.6
+> \#10050001	**JK**	Visit 4	**August 5, 2025**	160	70	55	36.3
+> \#10050001	**J.K.**	Visit 5	**2025-08-31**	123	95	59	36.8
+> 1005-0002	**D.W.**	Visit 2	**2025-06-18**	151	74	70	36.1
+> 1005-0002	**D-W**	Visit 3	**02JUL2025**	132	70	71	36.8
+> Subj 1005-0002	**DW**	Visit 4	**27-Jul-2025**	129	74	94	36.4
+> Subj 1005-0002	**D.W.**	Visit 5	**August 26, 2025**	137	76	59	36.7
+> Subj 1005-0003	**R.S.**	Visit 2	**08/16/2025**	115	78	70	36.6
+> Subj 1005-0003	**RS**	Visit 3	**2025-08-27**	163	80	75	37.4
+> 1005-0003	**R-S**	Visit 5	**October 22, 2025**	145	86	63	37.6
+> Subj 1005-0004	**A-J**	Visit 2	**2025-02-28**	147	86	73	36.7
+> 1005-0004	**AJ**	Visit 3	**13-Mar-2025**	156	79	83	37.2
+> \#10050004	**AJ**	Visit 4	**April 9, 2025**	150	64	60	37.7
+> 1005-0004	**A.J.**	Visit 5	**08-May-2025**	136	66	96	36.5
+> Subj 1005-0005	**A-S**	Visit 3	**23MAR2025**	119	87	90	37.0
+> Subj 1005-0005	**AS**	Visit 4	**04/19/2025**	119	85	83	36.6
+> 1005-0006	**TXP**	Visit 2	**April 19, 2025**	135	68	55	37.7
+> Subj 1005-0006	**TP**	Visit 5	**25JUN2025**	125	69	92	36.7
+> 1005-0007	**AXG**	Visit 2	**2025-02-12**	162	86	79	36.9
+> Subj 1005-0007	**AXG**	Visit 3	**February 24, 2025**	140	76	60	36.3
+> \#10050007	**AG**	Visit 4	**March 23, 2025**	120	88	88	36.5
+> Subj 1005-0007	**A-G**	Visit 5	**April 20, 2025**	154	84	67	36.6
+> Subj 1005-0008	**F-T**	Visit 2	**07-Jun-2025**	121	81	78	37.4
+> \#10050008	**F-T**	Visit 3	**2025-06-24**	129	83	88	37.6
+> Subj 1005-0008	**FT**	Visit 5	**August 19, 2025**	154	96	66	36.4
+> 1005-0009	**S-P**	Visit 3	**September 28, 2025**	117	86	58	36.8
+> 1005-0009	**SP**	Visit 4	**October 23, 2025**	139	96	59	37.3
+> Subj 1005-0009	**SP**	Visit 5	**2025-11-21**	151	87	56	37.0
+> \#10050010	**EK**	Visit 4	**10/22/2025**	106	86	92	37.7
+> 1005-0010	**E-K**	Visit 5	**November 17, 2025**	118	97	62	37.6
+> \#10050011	**H-L**	Visit 2	**February 27, 2025**	112	93	80	36.5
+> \#10050011	**HXL**	Visit 3	**2025-03-12**	160	77	78	36.2
+> \#10050011	**HXL**	Visit 5	**09MAY2025**	113	65	77	37.7
+> \#10050012	**D-S**	Visit 3	**05/01/2025**	126	75	59	36.8
+> \#10050012	**D-S**	Visit 5	**25-Jun-2025**	125	94	96	36.1
+> \#10050013	**S.K.**	Visit 2	**2025-02-18**	146	70	69	36.3
+> \#10050013	**S.K.**	Visit 3	**04-Mar-2025**	124	81	92	36.6
+> Subj 1005-0013	**S.K.**	Visit 4	**04/01/2025**	154	88	71	36.9
+> Subj 1005-0013	**SXK**	Visit 5	**2025-04-26**	150	88	81	37.2
+> \#10050014	**AŻ**	Visit 2	**05APR2025**	140	81	60	37.2
+> Subj 1005-0014	**A-Ż**	Visit 4	**May 18, 2025**	145	74	78	37.3
+> Subj 1005-0014	**AXŻ**	Visit 5	**06/16/2025**	158	70	95	36.4
+> \#10050015	**J-C**	Visit 2	**06/02/2025**	119	81	78	37.5
+> \#10050015	**J.C.**	Visit 3	**19JUN2025**	121	82	93	36.8
+> 1005-0015	**JC**	Visit 4	**2025-07-18**	128	81	97	36.6
+> 1005-0015	**JC**	Visit 5	**August 14, 2025**	165	81	85	37.0
 > 
 > Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
 > Entered by: site staff
-> Source verified against medical record (source on file) for subject **\#10050001**.
+> Source verified against medical record (source on file) for subject \#10050001.
 > 
 > Investigational product FTX-8191 lot LT-246523-C was dispensed from kit K-042791 within the Day 8 ±1 visit window. Time-to-event endpoints are estimated with the Kaplan-Meier method and compared with a Mantel-Haenszel test stratified by region. Agreement between central and local readings is shown in Bland-Altman plots.
 > 
@@ -4113,7 +4160,7 @@ none
 > N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
 > 
 > I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: **\#30030005**
+> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
 > 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
 > 4-6. Inicio de la reacción: **18/04/2025**
 > 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
@@ -4129,12 +4176,12 @@ none
 
 > Von: **Dieter Schmidtke** \<**d.schmidtke@niederheide-crc.example.org**\>
 > An: **Riza Scheel** \<**r.scheel@fenwick-tx.example.com**\>
-> Betreff: AW: Datenklärung zu Teilnehmer **3005-0010**
+> Betreff: AW: Datenklärung zu Teilnehmer 3005-0010
 > Hallo **Riza**,
 > 
 > die offenen Fragen wurden bearbeitet und die Einträge im eCRF korrigiert.
 > Die korrigierten Seiten liegen im Prüfarztordner; die Quelldokumente wurden erneut abgeglichen. Bitte geben Sie kurz Bescheid, ob weitere Anfragen offen sind.
-> Teilnehmer **\#30050010**: Daten der Visite 2 (**27. April 2025**) korrigiert.
+> Teilnehmer \#30050010: Daten der Visite 2 (**27. April 2025**) korrigiert.
 > Die Papierquelle für diesen Teilnehmer liegt im Teilnehmerordner.
 > 
 > Viele Grüße
@@ -4153,11 +4200,11 @@ none
 
 > Fenwick Therapeutics \| Prüfplan FTX-5142-018 \| Vertraulich
 > 
-> Patientennarrativ: Prüfungsteilnehmer **Subj 3005-0010**
+> Patientennarrativ: Prüfungsteilnehmer Subj 3005-0010
 > Prüfplan FTX-5142-018, Prüfzentrum 3005
 > 
 > Demografie und Ausgangsbefund
-> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer **R-65247**) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.
+> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer R-65247) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.
 > Die Begleitmedikation wurde von **SCHMIDTKE, Dieter** überprüft.
 > 
 > Unerwünschtes Ereignis
@@ -4183,7 +4230,7 @@ none
 > N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
 > 
 > I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: **\#30030005**
+> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
 > 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
 > 4-6. Inicio de la reacción: **18/04/2025**
 > 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
@@ -4203,64 +4250,64 @@ none
 > Protocol FTX-5142-018    Site 3005
 > 
 > Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> **3005-0001** \| **J-B** \| Visit 2 \| **June 18, 2025** \| 149 \| 75 \| 81 \| 36.6
-> **3005-0001** \| **J-B** \| Visit 3 \| **29JUN2025** \| 120 \| 64 \| 69 \| 37.5
-> **\#30050001** \| **J.B.** \| Visit 4 \| **30-Jul-2025** \| 107 \| 94 \| 92 \| 37.4
-> **\#300S0001** \| **J-B** \| Visit 5 \| **08/27/2025** \| 132 \| 81 \| 58 \| 36.4
-> **3005-0002** \| **S.H.** \| Visit 2 \| **06-May-2025** \| 113 \| 77 \| 59 \| 37.5
-> **Subj 3005-0002** \| **S-H** \| Visit 3 \| **2025-05-20** \| 111 \| 67 \| 98 \| 37.2
-> **Subj 3005-0002** \| **S-H** \| Visit 4 \| **06/18/2025** \| 118 \| 79 \| 81 \| 37.2
-> **3005-0002** \| **S-H** \| Visit 5 \| **13JUL2025** \| 109 \| 78 \| 61 \| 37.6
-> **3005-0003** \| **S.S.** \| Visit 2 \| **23-Sep-2025** \| 127 \| 96 \| 62 \| 36.9
-> **Subj 3005-0003** \| **S.S.** \| Visit 3 \| **10/06/2025** \| 162 \| 91 \| 63 \| 37.7
-> **\#30050003** \| **SS** \| Visit 4 \| **November 6, 2025** \| 164 \| 62 \| 58 \| 37.5
-> **\#30050003** \| **SXS** \| Visit S \| **04DECZ025** \| 111 \| 85 \| 65 \| 37.2
-> **Subj 3005-0004** \| **E-W** \| Visit Z \| **2025-08-18** \| 126 \| 81 \| 64 \| 37.0
-> **\#30050004** \| **E.W.** \| Visit 3 \| **August 28, 2025** \| 135 \| 72 \| 60 \| 37.5
-> **Subj 3005-0004** \| **EXW** \| Visit 4 \| **09/28/2025** \| 143 \| 98 \| 89 \| 37.2
-> **3005-0004** \| **E-W** \| Viit 5 \| **25OCT2O25** \| 124 \| 72 \| 80 \| 37.7
-> **Subj 3005-0005** \| **LXK** \| Visit 2 \| **June 10, 2025** \| 112 \| 83 \| 88 \| 36.8
-> **Subj 3005-0005** \| **LXK** \| Visit 3 \| **June 25, 20Z5** \| 152 \| 97 \| 67 \| 37.1
-> **Subj 3005-0005** \| **L-K** \| Visit 4 \| **25-Jul-2025** \| 155 \| 62 \| 93 \| 37.1
-> **3005-0005** \| **L-K** \| Visit 5 \| **08/22/2025** \| 146 \| 70 \| 72 \| 37.2
-> **Subj 3005-0006** \| **G.P.** \| Visit 2 \| **24-Jul-2025** \| 134 \| 77 \| 86 \| 37.0
-> **Subj 3005-0006** \| **GXP** \| Visit 3 \| **August 11, 2025** \| 158 \| 65 \| 58 \| 37.7
-> **\#30050006** \| **GXP** \| Visit 4 \| **09/06/2025** \| 106 \| 76 \| 77 \| 36.9
-> **3005-0006** \| **G-P** \| Visit 5 \| **04OCT2025** \| 158 \| 85 \| 78 \| 36.7
-> **3005-0007** \| **E-M** \| Visit 2 \| **2025-05-19** \| 118 \| 74 \| 82 \| 37.7
-> **3005-0007** \| **EXM** \| Visit 3 \| **June 2, 2025** \| 111 \| 74 \| 82 \| 37.7
-> **\#30050007** \| **EM** \| Visit 4 \| **30JUN20Z5** \| 143 \| 67 \| 92 \| 37.3
-> **\#30050007** \| **E-M** \| Visit 5 \| **27JUL2025** \| 110 \| 80 \| 94 \| 36.3
-> **Subj 3005-0008** \| **S-K** \| Visit 3 \| **2025-08-03** \| 134 \| 86 \| 78 \| 36.5
-> **3005-0008** \| **SXK** \| Visit 4 \| **2025-09-01** \| 121 \| 71 \| 67 \| 37.0
-> **\#30050008** \| **SXK** \| Visit 5 \| **01-Oct-2025** \| 161 \| 68 \| 83 \| 36.7
-> **Subj 3005-0009** \| **D.E.** \| Visit 2 \| **May 2, 2025** \| 125 \| 81 \| 90 \| 36.3
-> **3005-0009** \| **DE** \| Visit 4 \| **06/14/2025** \| 153 \| 62 \| 86 \| 37.6
-> **\#30050010** \| **PR** \| Visit 2 \| **27APR2025** \| 153 \| 92 \| 88 \| 37.7
-> **Subj 3005-0010** \| **P.R.** \| Visit 3 \| **13-May-2025** \| 112 \| 76 \| 98 \| 36.7
-> **\#30050010** \| **P-R** \| Visit 4 \| **11JUN2025** \| 106 \| 79 \| 95 \| 37.4
-> **\#30050011** \| **D.R.** \| Visit 2 \| **22MAR2025** \| 120 \| 69 \| 68 \| 36.4
-> **Subj 3005-0011** \| **DR** \| Visit 3 \| **03-Apr-2025** \| 136 \| 94 \| 74 \| 36.7
-> **Subj 3005-0011** \| **D.R.** \| Visit 4 \| **2025-04-30** \| 162 \| 66 \| 81 \| 36.7
-> **\#30050011** \| **D-R** \| Visit 5 \| **31MAY2025** \| 149 \| 83 \| 58 \| 37.5
-> **300S-0012** \| **JXG** \| Visit 2 \| **02/24/2025** \| 136 \| 71 \| 65 \| 36.2
-> **Subj 3005-0012** \| **JG** \| Visit 3 \| **March 6, 2025** \| 156 \| 63 \| 62 \| 36.2
-> **\#30050012** \| **J-G** \| Visit 4 \| **05-Apr-2025** \| 161 \| 86 \| 86 \| 36.8
-> **\#3005001Z** \| **JXG** \| Visit 5 \| **01-May-2025** \| 116 \| 98 \| 93 \| 37.0
-> **Subj 3005-0013** \| **S-E** \| Viit 2 \| **July 23, 2025** \| 147 \| 87 \| 63 \| 37.8
-> **Subj 3005-0013** \| **S-E** \| Visit 3 \| **04AUG2025** \| 139 \| 78 \| 66 \| 37.2
-> **3005-0013** \| **S.E.** \| Visit 5 \| **09/30/2025** \| 123 \| 82 \| 84 \| 36.9
-> **\#30050014** \| **SXG** \| Visit 2 \| **February 9, 2025** \| 144 \| 68 \| 89 \| 37.0
-> **\#30050014** \| **S.G.** \| Visit 3 \| **21-Feb-2025** \| 147 \| 69 \| 81 \| 36.4
-> **3005-0014** \| **SG** \| Visit 4 \| **22MAR2025** \| 125 \| 93 \| 69 \| 36.1
-> **\#30050014** \| **SG** \| Visit 5 \| **18APR2025** \| 138 \| 77 \| 59 \| 37.6
-> **Subj 3005-0015** \| **D.M.** \| Visit 2 \| **09-May-2025** \| 151 \| 96 \| 69 \| 37.3
-> **\#30050015** \| **DXM** \| Visit 3 \| **May 25, 2O25** \| 132 \| 84 \| 78 \| 37.3
-> **3005-0O15** \| **D.M.** \| Visit 4 \| **June 20, 2025** \| 107 \| 62 \| 55 \| 37.1
+> 3005-0001 \| **J-B** \| Visit 2 \| **June 18, 2025** \| 149 \| 75 \| 81 \| 36.6
+> 3005-0001 \| **J-B** \| Visit 3 \| **29JUN2025** \| 120 \| 64 \| 69 \| 37.5
+> \#30050001 \| **J.B.** \| Visit 4 \| **30-Jul-2025** \| 107 \| 94 \| 92 \| 37.4
+> \#300S0001 \| **J-B** \| Visit 5 \| **08/27/2025** \| 132 \| 81 \| 58 \| 36.4
+> 3005-0002 \| **S.H.** \| Visit 2 \| **06-May-2025** \| 113 \| 77 \| 59 \| 37.5
+> Subj 3005-0002 \| **S-H** \| Visit 3 \| **2025-05-20** \| 111 \| 67 \| 98 \| 37.2
+> Subj 3005-0002 \| **S-H** \| Visit 4 \| **06/18/2025** \| 118 \| 79 \| 81 \| 37.2
+> 3005-0002 \| **S-H** \| Visit 5 \| **13JUL2025** \| 109 \| 78 \| 61 \| 37.6
+> 3005-0003 \| **S.S.** \| Visit 2 \| **23-Sep-2025** \| 127 \| 96 \| 62 \| 36.9
+> Subj 3005-0003 \| **S.S.** \| Visit 3 \| **10/06/2025** \| 162 \| 91 \| 63 \| 37.7
+> \#30050003 \| **SS** \| Visit 4 \| **November 6, 2025** \| 164 \| 62 \| 58 \| 37.5
+> \#30050003 \| **SXS** \| Visit S \| **04DECZ025** \| 111 \| 85 \| 65 \| 37.2
+> Subj 3005-0004 \| **E-W** \| Visit Z \| **2025-08-18** \| 126 \| 81 \| 64 \| 37.0
+> \#30050004 \| **E.W.** \| Visit 3 \| **August 28, 2025** \| 135 \| 72 \| 60 \| 37.5
+> Subj 3005-0004 \| **EXW** \| Visit 4 \| **09/28/2025** \| 143 \| 98 \| 89 \| 37.2
+> 3005-0004 \| **E-W** \| Viit 5 \| **25OCT2O25** \| 124 \| 72 \| 80 \| 37.7
+> Subj 3005-0005 \| **LXK** \| Visit 2 \| **June 10, 2025** \| 112 \| 83 \| 88 \| 36.8
+> Subj 3005-0005 \| **LXK** \| Visit 3 \| **June 25, 20Z5** \| 152 \| 97 \| 67 \| 37.1
+> Subj 3005-0005 \| **L-K** \| Visit 4 \| **25-Jul-2025** \| 155 \| 62 \| 93 \| 37.1
+> 3005-0005 \| **L-K** \| Visit 5 \| **08/22/2025** \| 146 \| 70 \| 72 \| 37.2
+> Subj 3005-0006 \| **G.P.** \| Visit 2 \| **24-Jul-2025** \| 134 \| 77 \| 86 \| 37.0
+> Subj 3005-0006 \| **GXP** \| Visit 3 \| **August 11, 2025** \| 158 \| 65 \| 58 \| 37.7
+> \#30050006 \| **GXP** \| Visit 4 \| **09/06/2025** \| 106 \| 76 \| 77 \| 36.9
+> 3005-0006 \| **G-P** \| Visit 5 \| **04OCT2025** \| 158 \| 85 \| 78 \| 36.7
+> 3005-0007 \| **E-M** \| Visit 2 \| **2025-05-19** \| 118 \| 74 \| 82 \| 37.7
+> 3005-0007 \| **EXM** \| Visit 3 \| **June 2, 2025** \| 111 \| 74 \| 82 \| 37.7
+> \#30050007 \| **EM** \| Visit 4 \| **30JUN20Z5** \| 143 \| 67 \| 92 \| 37.3
+> \#30050007 \| **E-M** \| Visit 5 \| **27JUL2025** \| 110 \| 80 \| 94 \| 36.3
+> Subj 3005-0008 \| **S-K** \| Visit 3 \| **2025-08-03** \| 134 \| 86 \| 78 \| 36.5
+> 3005-0008 \| **SXK** \| Visit 4 \| **2025-09-01** \| 121 \| 71 \| 67 \| 37.0
+> \#30050008 \| **SXK** \| Visit 5 \| **01-Oct-2025** \| 161 \| 68 \| 83 \| 36.7
+> Subj 3005-0009 \| **D.E.** \| Visit 2 \| **May 2, 2025** \| 125 \| 81 \| 90 \| 36.3
+> 3005-0009 \| **DE** \| Visit 4 \| **06/14/2025** \| 153 \| 62 \| 86 \| 37.6
+> \#30050010 \| **PR** \| Visit 2 \| **27APR2025** \| 153 \| 92 \| 88 \| 37.7
+> Subj 3005-0010 \| **P.R.** \| Visit 3 \| **13-May-2025** \| 112 \| 76 \| 98 \| 36.7
+> \#30050010 \| **P-R** \| Visit 4 \| **11JUN2025** \| 106 \| 79 \| 95 \| 37.4
+> \#30050011 \| **D.R.** \| Visit 2 \| **22MAR2025** \| 120 \| 69 \| 68 \| 36.4
+> Subj 3005-0011 \| **DR** \| Visit 3 \| **03-Apr-2025** \| 136 \| 94 \| 74 \| 36.7
+> Subj 3005-0011 \| **D.R.** \| Visit 4 \| **2025-04-30** \| 162 \| 66 \| 81 \| 36.7
+> \#30050011 \| **D-R** \| Visit 5 \| **31MAY2025** \| 149 \| 83 \| 58 \| 37.5
+> 300S-0012 \| **JXG** \| Visit 2 \| **02/24/2025** \| 136 \| 71 \| 65 \| 36.2
+> Subj 3005-0012 \| **JG** \| Visit 3 \| **March 6, 2025** \| 156 \| 63 \| 62 \| 36.2
+> \#30050012 \| **J-G** \| Visit 4 \| **05-Apr-2025** \| 161 \| 86 \| 86 \| 36.8
+> \#3005001Z \| **JXG** \| Visit 5 \| **01-May-2025** \| 116 \| 98 \| 93 \| 37.0
+> Subj 3005-0013 \| **S-E** \| Viit 2 \| **July 23, 2025** \| 147 \| 87 \| 63 \| 37.8
+> Subj 3005-0013 \| **S-E** \| Visit 3 \| **04AUG2025** \| 139 \| 78 \| 66 \| 37.2
+> 3005-0013 \| **S.E.** \| Visit 5 \| **09/30/2025** \| 123 \| 82 \| 84 \| 36.9
+> \#30050014 \| **SXG** \| Visit 2 \| **February 9, 2025** \| 144 \| 68 \| 89 \| 37.0
+> \#30050014 \| **S.G.** \| Visit 3 \| **21-Feb-2025** \| 147 \| 69 \| 81 \| 36.4
+> 3005-0014 \| **SG** \| Visit 4 \| **22MAR2025** \| 125 \| 93 \| 69 \| 36.1
+> \#30050014 \| **SG** \| Visit 5 \| **18APR2025** \| 138 \| 77 \| 59 \| 37.6
+> Subj 3005-0015 \| **D.M.** \| Visit 2 \| **09-May-2025** \| 151 \| 96 \| 69 \| 37.3
+> \#30050015 \| **DXM** \| Visit 3 \| **May 25, 2O25** \| 132 \| 84 \| 78 \| 37.3
+> 3005-0O15 \| **D.M.** \| Visit 4 \| **June 20, 2025** \| 107 \| 62 \| 55 \| 37.1
 > 
 > Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 16O mmHg within 15 minutes.
 > Entered by: **AXW**
-> Source verified against medical record (source on file) for subject **3005-0001**.
+> Source verified against medical record (source on file) for subject 3005-0001.
 > 
 > Events are coded to MedDRA preferred term 10586823; the target dose is 150 mg. Agreement between central and local readigs is shown in Bland-Altman plots. Secondary endpoints are compard with the Wilcoxon test with Bonferroni correction; sparse tables use Fisher's exact test.
 > 
@@ -4316,16 +4363,16 @@ none
 > Protocol FTX-9990-002    Site 2003
 > 
 > Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> **Subj 2003-0001** \| **TW** \| Visit 5 \| **2025-05-12** \| 141 \| 85 \| 84 \| 37.0
-> **\#20030004** \| **K.C.** \| Visit 5 \| **15SEP2025** \| 135 \| 89 \| 95 \| 36.1
-> **Subj 2003-0006** \| **AXC** \| Visit 2 \| **2025-08-07** \| 111 \| 70 \| 61 \| 37.2
-> **Subj 2003-0008** \| **LXH** \| Visit 2 \| **2025-03-20** \| 159 \| 63 \| 94 \| 36.2
-> **Subj 2003-0010** \| **SO** \| Visit 4 \| **03JUL2025** \| 143 \| 69 \| 76 \| 37.7
-> **2003-0014** \| **EH** \| Visit 5 \| **06/14/2025** \| 119 \| 89 \| 77 \| 36.6
+> Subj 2003-0001 \| **TW** \| Visit 5 \| **2025-05-12** \| 141 \| 85 \| 84 \| 37.0
+> \#20030004 \| **K.C.** \| Visit 5 \| **15SEP2025** \| 135 \| 89 \| 95 \| 36.1
+> Subj 2003-0006 \| **AXC** \| Visit 2 \| **2025-08-07** \| 111 \| 70 \| 61 \| 37.2
+> Subj 2003-0008 \| **LXH** \| Visit 2 \| **2025-03-20** \| 159 \| 63 \| 94 \| 36.2
+> Subj 2003-0010 \| **SO** \| Visit 4 \| **03JUL2025** \| 143 \| 69 \| 76 \| 37.7
+> 2003-0014 \| **EH** \| Visit 5 \| **06/14/2025** \| 119 \| 89 \| 77 \| 36.6
 > 
 > Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
 > Entered by: site staff
-> Source verified against medical record (source on file) for subject **Subj 2003-0001**.
+> Source verified against medical record (source on file) for subject Subj 2003-0001.
 > 
 > Laboratory Assessments
 > Blood samples are collected after an overnight fast and processed within two hours. Samples are shipped at ambient temperature to the central laboratory with the requisition form. Clinically significant laboratory abnormalities are recorded as adverse events. Reference ranges are provided by the laboratory and updated when changed.
@@ -4350,56 +4397,56 @@ none
 > Protocol FTX-8191-011    Site 1005
 > 
 > Subject	Initials	Visit	Visit date	SBP	DBP	HR	Temp
-> **1005-0001**	**J.K.**	Visit 2	**2025-06-24**	158	62	98	37.6
-> **\#10050001**	**JK**	Visit 4	**August 5, 2025**	160	70	55	36.3
-> **\#10050001**	**J.K.**	Visit 5	**2025-08-31**	123	95	59	36.8
-> **1005-0002**	**D.W.**	Visit 2	**2025-06-18**	151	74	70	36.1
-> **1005-0002**	**D-W**	Visit 3	**02JUL2025**	132	70	71	36.8
-> **Subj 1005-0002**	**DW**	Visit 4	**27-Jul-2025**	129	74	94	36.4
-> **Subj 1005-0002**	**D.W.**	Visit 5	**August 26, 2025**	137	76	59	36.7
-> **Subj 1005-0003**	**R.S.**	Visit 2	**08/16/2025**	115	78	70	36.6
-> **Subj 1005-0003**	**RS**	Visit 3	**2025-08-27**	163	80	75	37.4
-> **1005-0003**	**R-S**	Visit 5	**October 22, 2025**	145	86	63	37.6
-> **Subj 1005-0004**	**A-J**	Visit 2	**2025-02-28**	147	86	73	36.7
-> **1005-0004**	**AJ**	Visit 3	**13-Mar-2025**	156	79	83	37.2
-> **\#10050004**	**AJ**	Visit 4	**April 9, 2025**	150	64	60	37.7
-> **1005-0004**	**A.J.**	Visit 5	**08-May-2025**	136	66	96	36.5
-> **Subj 1005-0005**	**A-S**	Visit 3	**23MAR2025**	119	87	90	37.0
-> **Subj 1005-0005**	**AS**	Visit 4	**04/19/2025**	119	85	83	36.6
-> **1005-0006**	**TXP**	Visit 2	**April 19, 2025**	135	68	55	37.7
-> **Subj 1005-0006**	**TP**	Visit 5	**25JUN2025**	125	69	92	36.7
-> **1005-0007**	**AXG**	Visit 2	**2025-02-12**	162	86	79	36.9
-> **Subj 1005-0007**	**AXG**	Visit 3	**February 24, 2025**	140	76	60	36.3
-> **\#10050007**	**AG**	Visit 4	**March 23, 2025**	120	88	88	36.5
-> **Subj 1005-0007**	**A-G**	Visit 5	**April 20, 2025**	154	84	67	36.6
-> **Subj 1005-0008**	**F-T**	Visit 2	**07-Jun-2025**	121	81	78	37.4
-> **\#10050008**	**F-T**	Visit 3	**2025-06-24**	129	83	88	37.6
-> **Subj 1005-0008**	**FT**	Visit 5	**August 19, 2025**	154	96	66	36.4
-> **1005-0009**	**S-P**	Visit 3	**September 28, 2025**	117	86	58	36.8
-> **1005-0009**	**SP**	Visit 4	**October 23, 2025**	139	96	59	37.3
-> **Subj 1005-0009**	**SP**	Visit 5	**2025-11-21**	151	87	56	37.0
-> **\#10050010**	**EK**	Visit 4	**10/22/2025**	106	86	92	37.7
-> **1005-0010**	**E-K**	Visit 5	**November 17, 2025**	118	97	62	37.6
-> **\#10050011**	**H-L**	Visit 2	**February 27, 2025**	112	93	80	36.5
-> **\#10050011**	**HXL**	Visit 3	**2025-03-12**	160	77	78	36.2
-> **\#10050011**	**HXL**	Visit 5	**09MAY2025**	113	65	77	37.7
-> **\#10050012**	**D-S**	Visit 3	**05/01/2025**	126	75	59	36.8
-> **\#10050012**	**D-S**	Visit 5	**25-Jun-2025**	125	94	96	36.1
-> **\#10050013**	**S.K.**	Visit 2	**2025-02-18**	146	70	69	36.3
-> **\#10050013**	**S.K.**	Visit 3	**04-Mar-2025**	124	81	92	36.6
-> **Subj 1005-0013**	**S.K.**	Visit 4	**04/01/2025**	154	88	71	36.9
-> **Subj 1005-0013**	**SXK**	Visit 5	**2025-04-26**	150	88	81	37.2
-> **\#10050014**	**AŻ**	Visit 2	**05APR2025**	140	81	60	37.2
-> **Subj 1005-0014**	**A-Ż**	Visit 4	**May 18, 2025**	145	74	78	37.3
-> **Subj 1005-0014**	**AXŻ**	Visit 5	**06/16/2025**	158	70	95	36.4
-> **\#10050015**	**J-C**	Visit 2	**06/02/2025**	119	81	78	37.5
-> **\#10050015**	**J.C.**	Visit 3	**19JUN2025**	121	82	93	36.8
-> **1005-0015**	**JC**	Visit 4	**2025-07-18**	128	81	97	36.6
-> **1005-0015**	**JC**	Visit 5	**August 14, 2025**	165	81	85	37.0
+> 1005-0001	**J.K.**	Visit 2	**2025-06-24**	158	62	98	37.6
+> \#10050001	**JK**	Visit 4	**August 5, 2025**	160	70	55	36.3
+> \#10050001	**J.K.**	Visit 5	**2025-08-31**	123	95	59	36.8
+> 1005-0002	**D.W.**	Visit 2	**2025-06-18**	151	74	70	36.1
+> 1005-0002	**D-W**	Visit 3	**02JUL2025**	132	70	71	36.8
+> Subj 1005-0002	**DW**	Visit 4	**27-Jul-2025**	129	74	94	36.4
+> Subj 1005-0002	**D.W.**	Visit 5	**August 26, 2025**	137	76	59	36.7
+> Subj 1005-0003	**R.S.**	Visit 2	**08/16/2025**	115	78	70	36.6
+> Subj 1005-0003	**RS**	Visit 3	**2025-08-27**	163	80	75	37.4
+> 1005-0003	**R-S**	Visit 5	**October 22, 2025**	145	86	63	37.6
+> Subj 1005-0004	**A-J**	Visit 2	**2025-02-28**	147	86	73	36.7
+> 1005-0004	**AJ**	Visit 3	**13-Mar-2025**	156	79	83	37.2
+> \#10050004	**AJ**	Visit 4	**April 9, 2025**	150	64	60	37.7
+> 1005-0004	**A.J.**	Visit 5	**08-May-2025**	136	66	96	36.5
+> Subj 1005-0005	**A-S**	Visit 3	**23MAR2025**	119	87	90	37.0
+> Subj 1005-0005	**AS**	Visit 4	**04/19/2025**	119	85	83	36.6
+> 1005-0006	**TXP**	Visit 2	**April 19, 2025**	135	68	55	37.7
+> Subj 1005-0006	**TP**	Visit 5	**25JUN2025**	125	69	92	36.7
+> 1005-0007	**AXG**	Visit 2	**2025-02-12**	162	86	79	36.9
+> Subj 1005-0007	**AXG**	Visit 3	**February 24, 2025**	140	76	60	36.3
+> \#10050007	**AG**	Visit 4	**March 23, 2025**	120	88	88	36.5
+> Subj 1005-0007	**A-G**	Visit 5	**April 20, 2025**	154	84	67	36.6
+> Subj 1005-0008	**F-T**	Visit 2	**07-Jun-2025**	121	81	78	37.4
+> \#10050008	**F-T**	Visit 3	**2025-06-24**	129	83	88	37.6
+> Subj 1005-0008	**FT**	Visit 5	**August 19, 2025**	154	96	66	36.4
+> 1005-0009	**S-P**	Visit 3	**September 28, 2025**	117	86	58	36.8
+> 1005-0009	**SP**	Visit 4	**October 23, 2025**	139	96	59	37.3
+> Subj 1005-0009	**SP**	Visit 5	**2025-11-21**	151	87	56	37.0
+> \#10050010	**EK**	Visit 4	**10/22/2025**	106	86	92	37.7
+> 1005-0010	**E-K**	Visit 5	**November 17, 2025**	118	97	62	37.6
+> \#10050011	**H-L**	Visit 2	**February 27, 2025**	112	93	80	36.5
+> \#10050011	**HXL**	Visit 3	**2025-03-12**	160	77	78	36.2
+> \#10050011	**HXL**	Visit 5	**09MAY2025**	113	65	77	37.7
+> \#10050012	**D-S**	Visit 3	**05/01/2025**	126	75	59	36.8
+> \#10050012	**D-S**	Visit 5	**25-Jun-2025**	125	94	96	36.1
+> \#10050013	**S.K.**	Visit 2	**2025-02-18**	146	70	69	36.3
+> \#10050013	**S.K.**	Visit 3	**04-Mar-2025**	124	81	92	36.6
+> Subj 1005-0013	**S.K.**	Visit 4	**04/01/2025**	154	88	71	36.9
+> Subj 1005-0013	**SXK**	Visit 5	**2025-04-26**	150	88	81	37.2
+> \#10050014	**AŻ**	Visit 2	**05APR2025**	140	81	60	37.2
+> Subj 1005-0014	**A-Ż**	Visit 4	**May 18, 2025**	145	74	78	37.3
+> Subj 1005-0014	**AXŻ**	Visit 5	**06/16/2025**	158	70	95	36.4
+> \#10050015	**J-C**	Visit 2	**06/02/2025**	119	81	78	37.5
+> \#10050015	**J.C.**	Visit 3	**19JUN2025**	121	82	93	36.8
+> 1005-0015	**JC**	Visit 4	**2025-07-18**	128	81	97	36.6
+> 1005-0015	**JC**	Visit 5	**August 14, 2025**	165	81	85	37.0
 > 
 > Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
 > Entered by: site staff
-> Source verified against medical record (source on file) for subject **\#10050001**.
+> Source verified against medical record (source on file) for subject \#10050001.
 > 
 > Investigational product FTX-8191 lot LT-246523-C was dispensed from kit K-042791 within the Day 8 ±1 visit window. Time-to-event endpoints are estimated with the Kaplan-Meier method and compared with a Mantel-Haenszel test stratified by region. Agreement between central and local readings is shown in Bland-Altman plots.
 > 
@@ -4451,7 +4498,7 @@ none
 > N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
 > 
 > I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: **\#30030005**
+> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
 > 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
 > 4-6. Inicio de la reacción: **18/04/2025**
 > 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
@@ -4467,12 +4514,12 @@ none
 
 > Von: **Dieter Schmidtke** \<**d.schmidtke@niederheide-crc.example.org**\>
 > An: **Riza Scheel** \<**r.scheel@fenwick-tx.example.com**\>
-> Betreff: AW: Datenklärung zu Teilnehmer **3005-0010**
+> Betreff: AW: Datenklärung zu Teilnehmer 3005-0010
 > Hallo **Riza**,
 > 
 > die offenen Fragen wurden bearbeitet und die Einträge im eCRF korrigiert.
 > Die korrigierten Seiten liegen im Prüfarztordner; die Quelldokumente wurden erneut abgeglichen. Bitte geben Sie kurz Bescheid, ob weitere Anfragen offen sind.
-> Teilnehmer **\#30050010**: Daten der Visite 2 (**27. April 2025**) korrigiert.
+> Teilnehmer \#30050010: Daten der Visite 2 (**27. April 2025**) korrigiert.
 > Die Papierquelle für diesen Teilnehmer liegt im Teilnehmerordner.
 > 
 > Viele Grüße
@@ -4495,64 +4542,64 @@ none
 > Protocol FTX-5142-018    Site 3005
 > 
 > Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> **3005-0001** \| **J-B** \| Visit 2 \| **June 18, 2025** \| 149 \| 75 \| 81 \| 36.6
-> **3005-0001** \| **J-B** \| Visit 3 \| **29JUN2025** \| 120 \| 64 \| 69 \| 37.5
-> **\#30050001** \| **J.B.** \| Visit 4 \| **30-Jul-2025** \| 107 \| 94 \| 92 \| 37.4
-> **\#300S0001** \| **J-B** \| Visit 5 \| **08/27/2025** \| 132 \| 81 \| 58 \| 36.4
-> **3005-0002** \| **S.H.** \| Visit 2 \| **06-May-2025** \| 113 \| 77 \| 59 \| 37.5
-> **Subj 3005-0002** \| **S-H** \| Visit 3 \| **2025-05-20** \| 111 \| 67 \| 98 \| 37.2
-> **Subj 3005-0002** \| **S-H** \| Visit 4 \| **06/18/2025** \| 118 \| 79 \| 81 \| 37.2
-> **3005-0002** \| **S-H** \| Visit 5 \| **13JUL2025** \| 109 \| 78 \| 61 \| 37.6
-> **3005-0003** \| **S.S.** \| Visit 2 \| **23-Sep-2025** \| 127 \| 96 \| 62 \| 36.9
-> **Subj 3005-0003** \| **S.S.** \| Visit 3 \| **10/06/2025** \| 162 \| 91 \| 63 \| 37.7
-> **\#30050003** \| **SS** \| Visit 4 \| **November 6, 2025** \| 164 \| 62 \| 58 \| 37.5
-> **\#30050003** \| **SXS** \| Visit S \| **04DECZ025** \| 111 \| 85 \| 65 \| 37.2
-> **Subj 3005-0004** \| **E-W** \| Visit Z \| **2025-08-18** \| 126 \| 81 \| 64 \| 37.0
-> **\#30050004** \| **E.W.** \| Visit 3 \| **August 28, 2025** \| 135 \| 72 \| 60 \| 37.5
-> **Subj 3005-0004** \| **EXW** \| Visit 4 \| **09/28/2025** \| 143 \| 98 \| 89 \| 37.2
-> **3005-0004** \| **E-W** \| Viit 5 \| **25OCT2O25** \| 124 \| 72 \| 80 \| 37.7
-> **Subj 3005-0005** \| **LXK** \| Visit 2 \| **June 10, 2025** \| 112 \| 83 \| 88 \| 36.8
-> **Subj 3005-0005** \| **LXK** \| Visit 3 \| **June 25, 20Z5** \| 152 \| 97 \| 67 \| 37.1
-> **Subj 3005-0005** \| **L-K** \| Visit 4 \| **25-Jul-2025** \| 155 \| 62 \| 93 \| 37.1
-> **3005-0005** \| **L-K** \| Visit 5 \| **08/22/2025** \| 146 \| 70 \| 72 \| 37.2
-> **Subj 3005-0006** \| **G.P.** \| Visit 2 \| **24-Jul-2025** \| 134 \| 77 \| 86 \| 37.0
-> **Subj 3005-0006** \| **GXP** \| Visit 3 \| **August 11, 2025** \| 158 \| 65 \| 58 \| 37.7
-> **\#30050006** \| **GXP** \| Visit 4 \| **09/06/2025** \| 106 \| 76 \| 77 \| 36.9
-> **3005-0006** \| **G-P** \| Visit 5 \| **04OCT2025** \| 158 \| 85 \| 78 \| 36.7
-> **3005-0007** \| **E-M** \| Visit 2 \| **2025-05-19** \| 118 \| 74 \| 82 \| 37.7
-> **3005-0007** \| **EXM** \| Visit 3 \| **June 2, 2025** \| 111 \| 74 \| 82 \| 37.7
-> **\#30050007** \| **EM** \| Visit 4 \| **30JUN20Z5** \| 143 \| 67 \| 92 \| 37.3
-> **\#30050007** \| **E-M** \| Visit 5 \| **27JUL2025** \| 110 \| 80 \| 94 \| 36.3
-> **Subj 3005-0008** \| **S-K** \| Visit 3 \| **2025-08-03** \| 134 \| 86 \| 78 \| 36.5
-> **3005-0008** \| **SXK** \| Visit 4 \| **2025-09-01** \| 121 \| 71 \| 67 \| 37.0
-> **\#30050008** \| **SXK** \| Visit 5 \| **01-Oct-2025** \| 161 \| 68 \| 83 \| 36.7
-> **Subj 3005-0009** \| **D.E.** \| Visit 2 \| **May 2, 2025** \| 125 \| 81 \| 90 \| 36.3
-> **3005-0009** \| **DE** \| Visit 4 \| **06/14/2025** \| 153 \| 62 \| 86 \| 37.6
-> **\#30050010** \| **PR** \| Visit 2 \| **27APR2025** \| 153 \| 92 \| 88 \| 37.7
-> **Subj 3005-0010** \| **P.R.** \| Visit 3 \| **13-May-2025** \| 112 \| 76 \| 98 \| 36.7
-> **\#30050010** \| **P-R** \| Visit 4 \| **11JUN2025** \| 106 \| 79 \| 95 \| 37.4
-> **\#30050011** \| **D.R.** \| Visit 2 \| **22MAR2025** \| 120 \| 69 \| 68 \| 36.4
-> **Subj 3005-0011** \| **DR** \| Visit 3 \| **03-Apr-2025** \| 136 \| 94 \| 74 \| 36.7
-> **Subj 3005-0011** \| **D.R.** \| Visit 4 \| **2025-04-30** \| 162 \| 66 \| 81 \| 36.7
-> **\#30050011** \| **D-R** \| Visit 5 \| **31MAY2025** \| 149 \| 83 \| 58 \| 37.5
-> **300S-0012** \| **JXG** \| Visit 2 \| **02/24/2025** \| 136 \| 71 \| 65 \| 36.2
-> **Subj 3005-0012** \| **JG** \| Visit 3 \| **March 6, 2025** \| 156 \| 63 \| 62 \| 36.2
-> **\#30050012** \| **J-G** \| Visit 4 \| **05-Apr-2025** \| 161 \| 86 \| 86 \| 36.8
-> **\#3005001Z** \| **JXG** \| Visit 5 \| **01-May-2025** \| 116 \| 98 \| 93 \| 37.0
-> **Subj 3005-0013** \| **S-E** \| Viit 2 \| **July 23, 2025** \| 147 \| 87 \| 63 \| 37.8
-> **Subj 3005-0013** \| **S-E** \| Visit 3 \| **04AUG2025** \| 139 \| 78 \| 66 \| 37.2
-> **3005-0013** \| **S.E.** \| Visit 5 \| **09/30/2025** \| 123 \| 82 \| 84 \| 36.9
-> **\#30050014** \| **SXG** \| Visit 2 \| **February 9, 2025** \| 144 \| 68 \| 89 \| 37.0
-> **\#30050014** \| **S.G.** \| Visit 3 \| **21-Feb-2025** \| 147 \| 69 \| 81 \| 36.4
-> **3005-0014** \| **SG** \| Visit 4 \| **22MAR2025** \| 125 \| 93 \| 69 \| 36.1
-> **\#30050014** \| **SG** \| Visit 5 \| **18APR2025** \| 138 \| 77 \| 59 \| 37.6
-> **Subj 3005-0015** \| **D.M.** \| Visit 2 \| **09-May-2025** \| 151 \| 96 \| 69 \| 37.3
-> **\#30050015** \| **DXM** \| Visit 3 \| **May 25, 2O25** \| 132 \| 84 \| 78 \| 37.3
-> **3005-0O15** \| **D.M.** \| Visit 4 \| **June 20, 2025** \| 107 \| 62 \| 55 \| 37.1
+> 3005-0001 \| **J-B** \| Visit 2 \| **June 18, 2025** \| 149 \| 75 \| 81 \| 36.6
+> 3005-0001 \| **J-B** \| Visit 3 \| **29JUN2025** \| 120 \| 64 \| 69 \| 37.5
+> \#30050001 \| **J.B.** \| Visit 4 \| **30-Jul-2025** \| 107 \| 94 \| 92 \| 37.4
+> \#300S0001 \| **J-B** \| Visit 5 \| **08/27/2025** \| 132 \| 81 \| 58 \| 36.4
+> 3005-0002 \| **S.H.** \| Visit 2 \| **06-May-2025** \| 113 \| 77 \| 59 \| 37.5
+> Subj 3005-0002 \| **S-H** \| Visit 3 \| **2025-05-20** \| 111 \| 67 \| 98 \| 37.2
+> Subj 3005-0002 \| **S-H** \| Visit 4 \| **06/18/2025** \| 118 \| 79 \| 81 \| 37.2
+> 3005-0002 \| **S-H** \| Visit 5 \| **13JUL2025** \| 109 \| 78 \| 61 \| 37.6
+> 3005-0003 \| **S.S.** \| Visit 2 \| **23-Sep-2025** \| 127 \| 96 \| 62 \| 36.9
+> Subj 3005-0003 \| **S.S.** \| Visit 3 \| **10/06/2025** \| 162 \| 91 \| 63 \| 37.7
+> \#30050003 \| **SS** \| Visit 4 \| **November 6, 2025** \| 164 \| 62 \| 58 \| 37.5
+> \#30050003 \| **SXS** \| Visit S \| **04DECZ025** \| 111 \| 85 \| 65 \| 37.2
+> Subj 3005-0004 \| **E-W** \| Visit Z \| **2025-08-18** \| 126 \| 81 \| 64 \| 37.0
+> \#30050004 \| **E.W.** \| Visit 3 \| **August 28, 2025** \| 135 \| 72 \| 60 \| 37.5
+> Subj 3005-0004 \| **EXW** \| Visit 4 \| **09/28/2025** \| 143 \| 98 \| 89 \| 37.2
+> 3005-0004 \| **E-W** \| Viit 5 \| **25OCT2O25** \| 124 \| 72 \| 80 \| 37.7
+> Subj 3005-0005 \| **LXK** \| Visit 2 \| **June 10, 2025** \| 112 \| 83 \| 88 \| 36.8
+> Subj 3005-0005 \| **LXK** \| Visit 3 \| **June 25, 20Z5** \| 152 \| 97 \| 67 \| 37.1
+> Subj 3005-0005 \| **L-K** \| Visit 4 \| **25-Jul-2025** \| 155 \| 62 \| 93 \| 37.1
+> 3005-0005 \| **L-K** \| Visit 5 \| **08/22/2025** \| 146 \| 70 \| 72 \| 37.2
+> Subj 3005-0006 \| **G.P.** \| Visit 2 \| **24-Jul-2025** \| 134 \| 77 \| 86 \| 37.0
+> Subj 3005-0006 \| **GXP** \| Visit 3 \| **August 11, 2025** \| 158 \| 65 \| 58 \| 37.7
+> \#30050006 \| **GXP** \| Visit 4 \| **09/06/2025** \| 106 \| 76 \| 77 \| 36.9
+> 3005-0006 \| **G-P** \| Visit 5 \| **04OCT2025** \| 158 \| 85 \| 78 \| 36.7
+> 3005-0007 \| **E-M** \| Visit 2 \| **2025-05-19** \| 118 \| 74 \| 82 \| 37.7
+> 3005-0007 \| **EXM** \| Visit 3 \| **June 2, 2025** \| 111 \| 74 \| 82 \| 37.7
+> \#30050007 \| **EM** \| Visit 4 \| **30JUN20Z5** \| 143 \| 67 \| 92 \| 37.3
+> \#30050007 \| **E-M** \| Visit 5 \| **27JUL2025** \| 110 \| 80 \| 94 \| 36.3
+> Subj 3005-0008 \| **S-K** \| Visit 3 \| **2025-08-03** \| 134 \| 86 \| 78 \| 36.5
+> 3005-0008 \| **SXK** \| Visit 4 \| **2025-09-01** \| 121 \| 71 \| 67 \| 37.0
+> \#30050008 \| **SXK** \| Visit 5 \| **01-Oct-2025** \| 161 \| 68 \| 83 \| 36.7
+> Subj 3005-0009 \| **D.E.** \| Visit 2 \| **May 2, 2025** \| 125 \| 81 \| 90 \| 36.3
+> 3005-0009 \| **DE** \| Visit 4 \| **06/14/2025** \| 153 \| 62 \| 86 \| 37.6
+> \#30050010 \| **PR** \| Visit 2 \| **27APR2025** \| 153 \| 92 \| 88 \| 37.7
+> Subj 3005-0010 \| **P.R.** \| Visit 3 \| **13-May-2025** \| 112 \| 76 \| 98 \| 36.7
+> \#30050010 \| **P-R** \| Visit 4 \| **11JUN2025** \| 106 \| 79 \| 95 \| 37.4
+> \#30050011 \| **D.R.** \| Visit 2 \| **22MAR2025** \| 120 \| 69 \| 68 \| 36.4
+> Subj 3005-0011 \| **DR** \| Visit 3 \| **03-Apr-2025** \| 136 \| 94 \| 74 \| 36.7
+> Subj 3005-0011 \| **D.R.** \| Visit 4 \| **2025-04-30** \| 162 \| 66 \| 81 \| 36.7
+> \#30050011 \| **D-R** \| Visit 5 \| **31MAY2025** \| 149 \| 83 \| 58 \| 37.5
+> 300S-0012 \| **JXG** \| Visit 2 \| **02/24/2025** \| 136 \| 71 \| 65 \| 36.2
+> Subj 3005-0012 \| **JG** \| Visit 3 \| **March 6, 2025** \| 156 \| 63 \| 62 \| 36.2
+> \#30050012 \| **J-G** \| Visit 4 \| **05-Apr-2025** \| 161 \| 86 \| 86 \| 36.8
+> \#3005001Z \| **JXG** \| Visit 5 \| **01-May-2025** \| 116 \| 98 \| 93 \| 37.0
+> Subj 3005-0013 \| **S-E** \| Viit 2 \| **July 23, 2025** \| 147 \| 87 \| 63 \| 37.8
+> Subj 3005-0013 \| **S-E** \| Visit 3 \| **04AUG2025** \| 139 \| 78 \| 66 \| 37.2
+> 3005-0013 \| **S.E.** \| Visit 5 \| **09/30/2025** \| 123 \| 82 \| 84 \| 36.9
+> \#30050014 \| **SXG** \| Visit 2 \| **February 9, 2025** \| 144 \| 68 \| 89 \| 37.0
+> \#30050014 \| **S.G.** \| Visit 3 \| **21-Feb-2025** \| 147 \| 69 \| 81 \| 36.4
+> 3005-0014 \| **SG** \| Visit 4 \| **22MAR2025** \| 125 \| 93 \| 69 \| 36.1
+> \#30050014 \| **SG** \| Visit 5 \| **18APR2025** \| 138 \| 77 \| 59 \| 37.6
+> Subj 3005-0015 \| **D.M.** \| Visit 2 \| **09-May-2025** \| 151 \| 96 \| 69 \| 37.3
+> \#30050015 \| **DXM** \| Visit 3 \| **May 25, 2O25** \| 132 \| 84 \| 78 \| 37.3
+> 3005-0O15 \| **D.M.** \| Visit 4 \| **June 20, 2025** \| 107 \| 62 \| 55 \| 37.1
 > 
 > Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 16O mmHg within 15 minutes.
 > Entered by: **AXW**
-> Source verified against medical record (source on file) for subject **3005-0001**.
+> Source verified against medical record (source on file) for subject 3005-0001.
 > 
 > Events are coded to MedDRA preferred term 10586823; the target dose is 150 mg. Agreement between central and local readigs is shown in Bland-Altman plots. Secondary endpoints are compard with the Wilcoxon test with Bonferroni correction; sparse tables use Fisher's exact test.
 > 
@@ -4602,11 +4649,11 @@ none
 
 > Fenwick Therapeutics \| Prüfplan FTX-5142-018 \| Vertraulich
 > 
-> Patientennarrativ: Prüfungsteilnehmer **Subj 3005-0010**
+> Patientennarrativ: Prüfungsteilnehmer Subj 3005-0010
 > Prüfplan FTX-5142-018, Prüfzentrum 3005
 > 
 > Demografie und Ausgangsbefund
-> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer **R-65247**) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.
+> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer R-65247) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.
 > Die Begleitmedikation wurde von **SCHMIDTKE, Dieter** überprüft.
 > 
 > Unerwünschtes Ereignis
@@ -4625,38 +4672,32 @@ none
 ## 9. Caveats
 
 - A / qs_v1: D-008 review: test recall 1.0000 minus its exact 95% lower bound 0.9747 = 0.0253 > 0.01 (144 positives).
+- A / qs_v1: Batch-1 latency per token drifted to 1.48x its start by the end of the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds.
 - A / qs_v1: test: slices with n < 30: doc_type=icf_signature_page (n=28), lang=de (n=7), lang=es (n=12), lang=pl (n=12), split_span=yes (n=7)
 - A / qs_v1: holdout: slices with n < 30: pre_redacted=yes (n=12)
 - A / qs_v2: D-008 review: test recall 1.0000 minus its exact 95% lower bound 0.9747 = 0.0253 > 0.01 (144 positives).
+- A / qs_v2: Batch-1 latency per token drifted to 1.38x its start by the end of the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds.
 - A / qs_v2: test: slices with n < 30: doc_type=icf_signature_page (n=28), lang=de (n=7), lang=es (n=12), lang=pl (n=12), split_span=yes (n=7)
 - A / qs_v2: holdout: slices with n < 30: pre_redacted=yes (n=12)
-- B1 / qs_v1: D-008 review: test recall 0.9900 minus its exact 95% lower bound 0.9455 = 0.0445 > 0.01 (100 positives).
 - B1 / qs_v1: test: slices with n < 30: doc_type=delegation_log (n=15), doc_type=icf_signature_page (n=10), doc_type=lab_report (n=27), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=19), pii_depth=middle (n=20), split_span=yes (n=4)
 - B1 / qs_v1: holdout: slices with n < 30: hard_negative=yes (n=21), length_bucket=short (n=17), perturbation=line_wrap (n=26), perturbation=ocr_noise (n=12), pre_redacted=yes (n=4)
-- B1 / qs_v2: D-008 review: test recall 1.0000 minus its exact 95% lower bound 0.9638 = 0.0362 > 0.01 (100 positives).
 - B1 / qs_v2: test: slices with n < 30: doc_type=delegation_log (n=15), doc_type=icf_signature_page (n=10), doc_type=lab_report (n=27), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=19), pii_depth=middle (n=20), split_span=yes (n=4)
 - B1 / qs_v2: holdout: slices with n < 30: hard_negative=yes (n=21), length_bucket=short (n=17), perturbation=line_wrap (n=26), perturbation=ocr_noise (n=12), pre_redacted=yes (n=4)
-- B2 / qs_v1: D-008 review: test recall 0.9773 minus its exact 95% lower bound 0.9203 = 0.0570 > 0.01 (88 positives).
 - B2 / qs_v1: test: slices with n < 30: doc_type=conmed_log (n=17), doc_type=crf_page (n=23), doc_type=delegation_log (n=8), doc_type=deviation_log (n=18), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=15), doc_type=sae_cioms (n=18), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=8), pii_depth=middle (n=9), pre_redacted=yes (n=29), truncated=yes (n=6)
 - B2 / qs_v1: holdout: slices with n < 30: hard_negative=yes (n=11), length_bucket=short (n=11), perturbation=headers_footers (n=21), perturbation=line_wrap (n=14), perturbation=none (n=17), perturbation=ocr_noise (n=7), pre_redacted=yes (n=2)
-- B2 / qs_v2: D-008 review: test recall 0.9773 minus its exact 95% lower bound 0.9203 = 0.0570 > 0.01 (88 positives).
 - B2 / qs_v2: test: slices with n < 30: doc_type=conmed_log (n=17), doc_type=crf_page (n=23), doc_type=delegation_log (n=8), doc_type=deviation_log (n=18), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=15), doc_type=sae_cioms (n=18), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=8), pii_depth=middle (n=9), pre_redacted=yes (n=29), truncated=yes (n=6)
 - B2 / qs_v2: holdout: slices with n < 30: hard_negative=yes (n=11), length_bucket=short (n=11), perturbation=headers_footers (n=21), perturbation=line_wrap (n=14), perturbation=none (n=17), perturbation=ocr_noise (n=7), pre_redacted=yes (n=2)
-- B3 / qs_v1 (doc-level, underpowered): D-008 review: test recall 0.9765 minus its exact 95% lower bound 0.9176 = 0.0589 > 0.01 (85 positives).
 - B3 / qs_v1 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 124 test documents, few units each, so recall intervals are wide.
 - B3 / qs_v1 (doc-level, underpowered): test: slices with n < 30: doc_type=conmed_log (n=10), doc_type=crf_page (n=16), doc_type=csr_patient_narrative (n=25), doc_type=delegation_log (n=5), doc_type=deviation_log (n=11), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=11), doc_type=monitoring_visit_report (n=25), doc_type=sae_cioms (n=14), doc_type=site_correspondence (n=29), lang=de (n=4), lang=es (n=7), lang=pl (n=6), perturbation=email_quoting (n=29), perturbation=ocr_noise (n=20), perturbation=table (n=29), pii_depth=early (n=19), pii_depth=late (n=5), pii_depth=middle (n=5), pre_redacted=yes (n=18)
 - B3 / qs_v1 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=no (n=24), hard_negative=yes (n=7), length_bucket=medium (n=20), length_bucket=short (n=11), perturbation=headers_footers (n=13), perturbation=line_wrap (n=9), perturbation=none (n=10), perturbation=ocr_noise (n=4), pre_redacted=yes (n=1)
-- B3 / qs_v2 (doc-level, underpowered): D-008 review: test recall 0.9294 minus its exact 95% lower bound 0.8527 = 0.0767 > 0.01 (85 positives).
 - B3 / qs_v2 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 124 test documents, few units each, so recall intervals are wide.
 - B3 / qs_v2 (doc-level, underpowered): test: slices with n < 30: doc_type=conmed_log (n=10), doc_type=crf_page (n=16), doc_type=csr_patient_narrative (n=25), doc_type=delegation_log (n=5), doc_type=deviation_log (n=11), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=11), doc_type=monitoring_visit_report (n=25), doc_type=sae_cioms (n=14), doc_type=site_correspondence (n=29), lang=de (n=4), lang=es (n=7), lang=pl (n=6), perturbation=email_quoting (n=29), perturbation=ocr_noise (n=20), perturbation=table (n=29), pii_depth=early (n=19), pii_depth=late (n=5), pii_depth=middle (n=5), pre_redacted=yes (n=18)
 - B3 / qs_v2 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=no (n=24), hard_negative=yes (n=7), length_bucket=medium (n=20), length_bucket=short (n=11), perturbation=headers_footers (n=13), perturbation=line_wrap (n=9), perturbation=none (n=10), perturbation=ocr_noise (n=4), pre_redacted=yes (n=1)
-- B4 / qs_v1 (doc-level, underpowered): D-008 review: test recall 0.9625 minus its exact 95% lower bound 0.8943 = 0.0682 > 0.01 (80 positives).
 - B4 / qs_v1 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 124 test documents, few units each, so recall intervals are wide.
-- B4 / qs_v1 (doc-level, underpowered): 31 of 250 batch-1 calls took over 5x the median (outside interference such as swapping?): treat p95/p99 with care.
+- B4 / qs_v1 (doc-level, underpowered): Batch-1 latency per token drifted to 1.31x its start by the end of the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds.
 - B4 / qs_v1 (doc-level, underpowered): test: slices with n < 30: doc_type=conmed_log (n=8), doc_type=crf_page (n=14), doc_type=csr_patient_narrative (n=14), doc_type=delegation_log (n=5), doc_type=deviation_log (n=10), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=11), doc_type=monitoring_visit_report (n=11), doc_type=protocol_section (n=16), doc_type=sae_cioms (n=14), doc_type=site_correspondence (n=14), lang=de (n=4), lang=es (n=7), lang=pl (n=6), length_bucket=long (n=24), length_bucket=xl (n=13), perturbation=email_quoting (n=14), perturbation=ocr_noise (n=14), perturbation=table (n=27), pii_depth=early (n=7), pii_depth=late (n=2), pii_depth=middle (n=2), pre_redacted=yes (n=15), truncated=yes (n=13)
 - B4 / qs_v1 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=no (n=23), hard_negative=yes (n=7), length_bucket=medium (n=19), length_bucket=short (n=11), perturbation=headers_footers (n=12), perturbation=line_wrap (n=9), perturbation=none (n=10), perturbation=ocr_noise (n=4), pre_redacted=no (n=29), pre_redacted=yes (n=1)
-- B4 / qs_v2 (doc-level, underpowered): D-008 review: test recall 0.9250 minus its exact 95% lower bound 0.8439 = 0.0811 > 0.01 (80 positives).
 - B4 / qs_v2 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 124 test documents, few units each, so recall intervals are wide.
-- B4 / qs_v2 (doc-level, underpowered): 32 of 250 batch-1 calls took over 5x the median (outside interference such as swapping?): treat p95/p99 with care.
+- B4 / qs_v2 (doc-level, underpowered): Batch-1 latency per token drifted to 1.56x its start by the end of the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds.
 - B4 / qs_v2 (doc-level, underpowered): test: slices with n < 30: doc_type=conmed_log (n=8), doc_type=crf_page (n=14), doc_type=csr_patient_narrative (n=14), doc_type=delegation_log (n=5), doc_type=deviation_log (n=10), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=11), doc_type=monitoring_visit_report (n=11), doc_type=protocol_section (n=16), doc_type=sae_cioms (n=14), doc_type=site_correspondence (n=14), lang=de (n=4), lang=es (n=7), lang=pl (n=6), length_bucket=long (n=24), length_bucket=xl (n=13), perturbation=email_quoting (n=14), perturbation=ocr_noise (n=14), perturbation=table (n=27), pii_depth=early (n=7), pii_depth=late (n=2), pii_depth=middle (n=2), pre_redacted=yes (n=15), truncated=yes (n=13)
 - B4 / qs_v2 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=no (n=23), hard_negative=yes (n=7), length_bucket=medium (n=19), length_bucket=short (n=11), perturbation=headers_footers (n=12), perturbation=line_wrap (n=9), perturbation=none (n=10), perturbation=ocr_noise (n=4), pre_redacted=no (n=29), pre_redacted=yes (n=1)

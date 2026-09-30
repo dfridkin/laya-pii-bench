@@ -43,7 +43,7 @@
     "checkpoint_revs": [
       "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     ],
-    "created_at": "2026-09-30T03:07:26.288178+00:00"
+    "created_at": "2026-09-30T03:25:15.849134+00:00"
   },
   "splits": {
     "test": {
@@ -70,7 +70,17 @@
           "n_resamples": 2000
         },
         "false_forwards": 1,
-        "precision": 0.14732142857142858
+        "precision": 0.14732142857142858,
+        "recall_target": 0.995,
+        "recall_exact_hi": 0.9997468539670226,
+        "specificity": 0.0,
+        "auroc_pii": 0.37884816753926703,
+        "auroc_by_kind": {
+          "direct": 0.39916618188869496,
+          "staff": 0.312199378538288,
+          "quasi_only": 0.44709860383944156
+        },
+        "truncated_forwarded": 0
       },
       "per_question": {
         "pii_present": {
@@ -1715,7 +1725,17 @@
           "n_resamples": 2000
         },
         "false_forwards": 0,
-        "precision": 0.20202020202020202
+        "precision": 0.20202020202020202,
+        "recall_target": 0.995,
+        "recall_exact_hi": 1.0,
+        "specificity": 0.0,
+        "auroc_pii": 0.2930379746835443,
+        "auroc_by_kind": {
+          "direct": null,
+          "staff": 0.2930379746835443,
+          "quasi_only": null
+        },
+        "truncated_forwarded": 0
       },
       "per_question": {
         "pii_present": {
@@ -3033,10 +3053,20 @@
     "warmup_excluded": 20,
     "batch1_autocast": "off",
     "batched_autocast": "off",
-    "batch1_outliers": 0
+    "batch1_outliers": 0,
+    "batch1_by_length": {
+      "<1k": {
+        "n": 1215,
+        "p50_ms": 1088.417,
+        "p95_ms": 1146.4333706,
+        "p99_ms": 1200.807873,
+        "mean_ms": 990.4174364888887,
+        "units_per_sec": 1.0096752774719742
+      }
+    },
+    "batch1_drift": 0.9574185986471692
   },
   "caveats": [
-    "D-008 review: test recall 0.9900 minus its exact 95% lower bound 0.9455 = 0.0445 > 0.01 (100 positives).",
     "test: slices with n < 30: doc_type=delegation_log (n=15), doc_type=icf_signature_page (n=10), doc_type=lab_report (n=27), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=19), pii_depth=middle (n=20), split_span=yes (n=4)",
     "holdout: slices with n < 30: hard_negative=yes (n=21), length_bucket=short (n=17), perturbation=line_wrap (n=26), perturbation=ocr_noise (n=12), pre_redacted=yes (n=4)"
   ]

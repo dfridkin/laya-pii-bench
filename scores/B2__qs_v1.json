@@ -43,7 +43,7 @@
     "checkpoint_revs": [
       "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     ],
-    "created_at": "2026-09-30T03:07:36.843048+00:00"
+    "created_at": "2026-09-30T03:25:18.032090+00:00"
   },
   "splits": {
     "test": {
@@ -70,7 +70,17 @@
           "n_resamples": 2000
         },
         "false_forwards": 1,
-        "precision": 0.273015873015873
+        "precision": 0.273015873015873,
+        "recall_target": 0.995,
+        "recall_exact_hi": 0.9972356729238302,
+        "specificity": 0.008620689655172414,
+        "auroc_pii": 0.4485942398119122,
+        "auroc_by_kind": {
+          "direct": 0.5390325670498084,
+          "staff": 0.3998107653490328,
+          "quasi_only": 0.42650862068965517
+        },
+        "truncated_forwarded": 1
       },
       "per_question": {
         "pii_present": {
@@ -1620,7 +1630,7 @@
         {
           "unit_id": "d0352:section:2048:0",
           "doc_id": "d0352",
-          "text_markdown": "> Fenwick Therapeutics \\| Protocolo FTX-5142-018 \\| Confidencial\n> \n> CIOMS I: notificación de sospecha de reacción adversa\n> N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003\n> \n> I. Información de la reacción\n> 1. Iniciales: **PA**    1a. Sujeto: **\\#30030005**\n> 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F\n> 4-6. Inicio de la reacción: **18/04/2025**\n> 7+13. Descripción: fatiga, grado 2; requirió hospitalización.\n> \n> V. Notificador\n> 24b. **A. Marcos**, Centro de Investigación Clínica Llanodorado, tel. **+34 555 019 6055**\n> 25a. Fecha de este informe: 01/05/2025\n> \n> Página 1\n> ",
+          "text_markdown": "> Fenwick Therapeutics \\| Protocolo FTX-5142-018 \\| Confidencial\n> \n> CIOMS I: notificación de sospecha de reacción adversa\n> N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003\n> \n> I. Información de la reacción\n> 1. Iniciales: **PA**    1a. Sujeto: \\#30030005\n> 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F\n> 4-6. Inicio de la reacción: **18/04/2025**\n> 7+13. Descripción: fatiga, grado 2; requirió hospitalización.\n> \n> V. Notificador\n> 24b. **A. Marcos**, Centro de Investigación Clínica Llanodorado, tel. **+34 555 019 6055**\n> 25a. Fecha de este informe: 01/05/2025\n> \n> Página 1\n> ",
           "route": "forward",
           "triggers": [
             "p_below_t_low"
@@ -1721,7 +1731,17 @@
           "n_resamples": 2000
         },
         "false_forwards": 0,
-        "precision": 0.4
+        "precision": 0.4,
+        "recall_target": 0.995,
+        "recall_exact_hi": 1.0,
+        "specificity": 0.0,
+        "auroc_pii": 0.39666666666666667,
+        "auroc_by_kind": {
+          "direct": null,
+          "staff": 0.39666666666666667,
+          "quasi_only": null
+        },
+        "truncated_forwarded": 0
       },
       "per_question": {
         "pii_present": {
@@ -3029,10 +3049,36 @@
     "warmup_excluded": 10,
     "batch1_autocast": "off",
     "batched_autocast": "unknown",
-    "batch1_outliers": 0
+    "batch1_outliers": 0,
+    "batch1_by_length": {
+      "<1k": {
+        "n": 182,
+        "p50_ms": 797.3649375,
+        "p95_ms": 1749.2322797999996,
+        "p99_ms": 2114.18840202,
+        "mean_ms": 892.3247626318681,
+        "units_per_sec": 1.1206682161890802
+      },
+      "1-2k": {
+        "n": 403,
+        "p50_ms": 2745.84275,
+        "p95_ms": 4246.1341294,
+        "p99_ms": 4709.41758232,
+        "mean_ms": 2887.4687419404463,
+        "units_per_sec": 0.34632409538327213
+      },
+      "2-4k": {
+        "n": 8,
+        "p50_ms": 3162.2895209999997,
+        "p95_ms": 3703.6880101,
+        "p99_ms": 3754.6534348200003,
+        "mean_ms": 3249.413177125,
+        "units_per_sec": 0.3077478749208419
+      }
+    },
+    "batch1_drift": 1.152636294094559
   },
   "caveats": [
-    "D-008 review: test recall 0.9773 minus its exact 95% lower bound 0.9203 = 0.0570 > 0.01 (88 positives).",
     "test: slices with n < 30: doc_type=conmed_log (n=17), doc_type=crf_page (n=23), doc_type=delegation_log (n=8), doc_type=deviation_log (n=18), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=15), doc_type=sae_cioms (n=18), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=8), pii_depth=middle (n=9), pre_redacted=yes (n=29), truncated=yes (n=6)",
     "holdout: slices with n < 30: hard_negative=yes (n=11), length_bucket=short (n=11), perturbation=headers_footers (n=21), perturbation=line_wrap (n=14), perturbation=none (n=17), perturbation=ocr_noise (n=7), pre_redacted=yes (n=2)"
   ]

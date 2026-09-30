@@ -355,6 +355,14 @@ class Headline(_Model):
     forward_rate: Interval
     false_forwards: int
     precision: float | None  # of p(pii) >= t_low; None if nothing is above t_low
+    # M6 review: what the operating point is worth, not only what it catches
+    recall_target: float | None = None  # the calib-fit target (D-007)
+    recall_exact_hi: float | None = None  # exact 95% upper bound: < target -> target missed
+    specificity: float | None = None  # forwarded negatives / negatives
+    auroc_pii: float | None = None  # discrimination: calibrated p(pii) vs gold pii_present
+    # AUROC of each positive type (direct > staff > quasi-only) against all negatives
+    auroc_by_kind: dict[str, float | None] = Field(default_factory=lambda: {})
+    truncated_forwarded: int = 0  # forwarded units whose tail the model never saw
 
 
 class ConfusionMatrix(_Model):
@@ -464,6 +472,10 @@ class SpeedMetrics(_Model):
     # batch-1 calls slower than OUTLIER_X x the median: a sign of outside interference such as
     # memory pressure and swapping (invariant 9)
     batch1_outliers: int = 0
+    # batch-1 per-unit latency by state length (units differ in size across and within arms)
+    batch1_by_length: dict[str, LatencyStats] = Field(default_factory=lambda: {})
+    # median ms/token in the last eighth of the run over the first (> 1: latency drifted up)
+    batch1_drift: float | None = None
 
 
 class RunContext(_Model):

@@ -32,11 +32,13 @@ from bench.domain import (
     Decision,
     Document,
     FailureCase,
+    GoldAnswers,
     Headline,
     HwInfo,
     Interval,
     LatencyStats,
     MultiLabelMetrics,
+    PiiCategory,
     QuestionMetrics,
     ReliabilityBin,
     Route,
@@ -155,6 +157,24 @@ def auroc(scores: Sequence[float], labels: Sequence[bool]) -> float | None:
 def recall_at(p: Sequence[float], positive: Sequence[bool], t_low: float) -> float | None:
     pos = [q for q, y in zip(p, positive, strict=True) if y]
     return sum(q >= t_low for q in pos) / len(pos) if pos else None
+
+
+def exact_recall_hi(hits: int, n: int) -> float | None:
+    """Clopper-Pearson two-sided 95% upper bound for hits/n (1 when there are no misses)."""
+    if n == 0:
+        return None
+    if hits == n:
+        return 1.0
+    return float(beta.ppf(0.975, hits + 1, n - hits))  # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType]
+
+
+def positive_kind(gold: GoldAnswers) -> str:
+    c = gold.categories_multi
+    if c[PiiCategory.PHI_DIRECT]:
+        return "direct"
+    if c[PiiCategory.STAFF_PII]:
+        return "staff"
+    return "quasi_only"
 
 
 def exact_recall_lo(hits: int, n: int) -> float | None:
@@ -338,7 +358,19 @@ def headline(rows: Sequence[Row], calib: CalibParams, policy: Policy) -> Headlin
         forward_rate=fwd,
         false_forwards=false_fwd,
         precision=sum(r.positive for r in above) / len(above) if above else None,
-    )
+        recall_target=calib.recall_target,
+        recall_exact_hi=exact_recall_hi(hits, n_pos),
+        specificity=(sum(not r.positive and r.route is Route.FORWARD for r in rows)
+                     / max(1, len(rows) - n_pos)) if len(rows) > n_pos else None,
+        auroc_pii=auroc([r.p_pii for r in rows], [r.positive for r in rows]),
+        auroc_by_kind={
+            k: auroc([r.p_pii for r in rows if not r.positive or positive_kind(r.unit.gold) == k],
+                     [r.positive for r in rows
+                      if not r.positive or positive_kind(r.unit.gold) == k])
+            for k in ("direct", "staff", "quasi_only")
+        },
+        truncated_forwarded=sum(_truncated(r) and r.route is Route.FORWARD for r in rows),
+    )  # fmt: skip
 
 
 def question_metrics(rows: Sequence[Row], q: str) -> QuestionMetrics:
@@ -476,12 +508,16 @@ def _md_escape(text: str) -> str:
     return "".join("\\" + c if c in "\\`*_[]<>|#" else c for c in text)
 
 
-def highlight(r: Row) -> str:
-    """Unit text as a markdown blockquote, gold spans (clipped to the unit) in bold."""
+def highlight(r: Row, counted: frozenset[PiiCategory] | None = None) -> str:
+    """Unit text as a markdown blockquote; gold spans that count toward pii_present (clipped to
+    the unit) in bold. Coded ids are not PII under D-001, so they are not bolded."""
     u, text = r.unit, r.doc.text
     parts: list[str] = []
     pos = u.start
-    for s in sorted(member_spans(r.doc.spans, u.start, u.end), key=lambda s: s.start):
+    spans = member_spans(r.doc.spans, u.start, u.end)
+    if counted is not None:
+        spans = [s for s in spans if s.category in counted]
+    for s in sorted(spans, key=lambda s: s.start):
         a, b = max(s.start, u.start), min(s.end, u.end)
         parts.append(_md_escape(text[pos:a]))
         parts.append(f"**{_md_escape(text[a:b])}**")
@@ -495,7 +531,7 @@ def failures(rows: Sequence[Row], policy: Policy) -> list[FailureCase]:
         FailureCase(
             unit_id=r.unit.id,
             doc_id=r.doc.id,
-            text_markdown=highlight(r),
+            text_markdown=highlight(r, policy.effective_pii_categories),
             route=r.route,
             triggers=r.triggers,
             gold=r.unit.gold,
@@ -530,11 +566,43 @@ def split_scores(
     )
 
 
-def outliers(ms: Sequence[float]) -> int:
+LENGTH_BUCKETS = ((0, 1000, "<1k"), (1000, 2000, "1-2k"), (2000, 4000, "2-4k"),
+                  (4000, 8200, "4-8k"), (8200, 10**9, ">8k"))  # fmt: skip
+
+
+def length_bucket(tokens: int | None) -> str:
+    t = tokens or 0
+    return next(name for lo, hi, name in LENGTH_BUCKETS if lo <= t < hi)
+
+
+def outliers(ms: Sequence[float], tokens: Sequence[int | None] | None = None) -> int:
+    """Calls slower than OUTLIER_X x the median of calls of similar length (M6 review: long units
+    are slow by nature, so the median is taken within each length bucket)."""
     if not ms:
         return 0
-    med = float(np.median(np.array(ms, dtype=float)))
-    return sum(m > OUTLIER_X * med for m in ms)
+    keys = [length_bucket(t) for t in tokens] if tokens is not None else ["all"] * len(ms)
+    out = 0
+    for k in set(keys):
+        group = [m for m, g in zip(ms, keys, strict=True) if g == k]
+        med = float(np.median(np.array(group, dtype=float)))
+        out += sum(m > OUTLIER_X * med for m in group)
+    return out
+
+
+def drift(decisions: Sequence[Decision]) -> float | None:
+    """Median ms/token of the last eighth of a run over the first eighth (run order), within the
+    run's most common length bucket so that length mix along the run order can't fake a drift."""
+    rows = [d for d in decisions if d.state_tokens]
+    if not rows:
+        return None
+    modal = Counter(length_bucket(d.state_tokens) for d in rows).most_common(1)[0][0]
+    rows = [d for d in rows if length_bucket(d.state_tokens) == modal]
+    k = len(rows) // 8
+    if k < 10:
+        return None
+    rate = [d.latency_ms / max(d.state_tokens or 1, 100) for d in rows]
+    first, last = float(np.median(rate[:k])), float(np.median(rate[-k:]))
+    return last / first if first else None
 
 
 def autocast_state(decisions: Sequence[Decision]) -> str:
@@ -572,14 +640,27 @@ def speed(
         per_doc_ms=latency_stats(list(per_doc.values())),
         warmup_excluded=len(decisions) + len(batched) - len(live),
         batch1_autocast=autocast_state(b1),
-        batch1_outliers=outliers([d.latency_ms for d in b1]),
+        batch1_outliers=outliers([d.latency_ms for d in b1], [d.state_tokens for d in b1]),
+        batch1_by_length={
+            name: s
+            for _, _, name in LENGTH_BUCKETS
+            if (
+                s := latency_stats(
+                    [d.latency_ms for d in b1 if length_bucket(d.state_tokens) == name]
+                )
+            )
+            is not None
+        },
+        batch1_drift=drift(b1),
         batched_autocast=autocast_state(bb),
     )
 
 
 OUTLIER_X = 5.0  # a batch-1 call this many times the median counts as an outlier
 OUTLIER_SHARE = 0.005  # above this share of calls, the speed numbers get a caveat
+D008_ARM = "A"  # D-008 amended: the review trigger applies to arm A's test recall only
 D008_GAP = 0.01  # D-008 amended: point recall minus exact 95% lower bound above this -> review
+DRIFT_MAX = 1.25  # batch-1 ms/token end/start above this gets a caveat
 
 
 def d008_gap(h: Headline) -> float | None:
@@ -595,7 +676,7 @@ def caveats(
     out: list[str] = []
     test = splits.get("test")
     gap = d008_gap(test.headline) if test else None
-    if gap is not None and gap > D008_GAP:
+    if calib.arm == D008_ARM and gap is not None and gap > D008_GAP:
         assert test is not None and test.headline.recall is not None
         out.append(
             f"D-008 review: test recall {test.headline.recall.point:.4f} minus its exact 95% lower "
@@ -615,7 +696,13 @@ def caveats(
     ):
         out.append(
             f"{sp.batch1_outliers} of {sp.batch1.n} batch-1 calls took over {OUTLIER_X:g}x the "
-            "median (outside interference such as swapping?): treat p95/p99 with care."
+            "median of calls of similar length: treat p95/p99 with care."
+        )
+    if sp is not None and sp.batch1_drift is not None and sp.batch1_drift > DRIFT_MAX:
+        out.append(
+            f"Batch-1 latency per token drifted to {sp.batch1_drift:.2f}x its start by the end of "
+            "the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it "
+            "between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds."
         )
     if sp is not None:
         for mode, state in (("batch-1", sp.batch1_autocast), ("batched", sp.batched_autocast)):

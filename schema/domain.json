@@ -746,6 +746,30 @@
     "Headline": {
       "additionalProperties": false,
       "properties": {
+        "auroc_by_kind": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": "object"
+        },
+        "auroc_pii": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "false_forwards": {
           "type": "integer"
         },
@@ -781,6 +805,17 @@
             }
           ]
         },
+        "recall_exact_hi": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "recall_exact_lo": {
           "anyOf": [
             {
@@ -791,6 +826,17 @@
             }
           ]
         },
+        "recall_target": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "route_recall": {
           "anyOf": [
             {
@@ -800,6 +846,17 @@
               "type": "null"
             }
           ]
+        },
+        "specificity": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "t_high": {
           "anyOf": [
@@ -813,6 +870,10 @@
         },
         "t_low": {
           "type": "number"
+        },
+        "truncated_forwarded": {
+          "default": 0,
+          "type": "integer"
         }
       },
       "required": [
@@ -1713,6 +1774,23 @@
         "batch1_autocast": {
           "default": "unknown",
           "type": "string"
+        },
+        "batch1_by_length": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LatencyStats"
+          },
+          "type": "object"
+        },
+        "batch1_drift": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "batch1_outliers": {
           "default": 0,

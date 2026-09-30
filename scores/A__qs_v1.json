@@ -41,7 +41,7 @@
     "checkpoint_revs": [
       "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     ],
-    "created_at": "2026-09-30T03:07:17.811488+00:00"
+    "created_at": "2026-09-30T03:25:12.301632+00:00"
   },
   "splits": {
     "test": {
@@ -68,7 +68,17 @@
           "n_resamples": 2000
         },
         "false_forwards": 0,
-        "precision": 0.07210816224336505
+        "precision": 0.07210816224336505,
+        "recall_target": 0.995,
+        "recall_exact_hi": 1.0,
+        "specificity": 0.004833512352309345,
+        "auroc_pii": 0.7775428153717627,
+        "auroc_by_kind": {
+          "direct": 0.8336076366030283,
+          "staff": 0.8282140791539288,
+          "quasi_only": 0.7058556813579616
+        },
+        "truncated_forwarded": 0
       },
       "per_question": {
         "pii_present": {
@@ -1634,7 +1644,17 @@
           "n_resamples": 2000
         },
         "false_forwards": 0,
-        "precision": 0.06779661016949153
+        "precision": 0.06779661016949153,
+        "recall_target": 0.995,
+        "recall_exact_hi": 1.0,
+        "specificity": 0.0,
+        "auroc_pii": 0.5755454545454546,
+        "auroc_by_kind": {
+          "direct": null,
+          "staff": 0.5755454545454546,
+          "quasi_only": null
+        },
+        "truncated_forwarded": 0
       },
       "per_question": {
         "pii_present": {
@@ -2950,10 +2970,22 @@
     "warmup_excluded": 40,
     "batch1_autocast": "off",
     "batched_autocast": "off",
-    "batch1_outliers": 1
+    "batch1_outliers": 1,
+    "batch1_by_length": {
+      "<1k": {
+        "n": 3603,
+        "p50_ms": 685.8405,
+        "p95_ms": 969.5975752999999,
+        "p99_ms": 1064.22503584,
+        "mean_ms": 710.8691849369969,
+        "units_per_sec": 1.4067285812770576
+      }
+    },
+    "batch1_drift": 1.48052136375052
   },
   "caveats": [
     "D-008 review: test recall 1.0000 minus its exact 95% lower bound 0.9747 = 0.0253 > 0.01 (144 positives).",
+    "Batch-1 latency per token drifted to 1.48x its start by the end of the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds.",
     "test: slices with n < 30: doc_type=icf_signature_page (n=28), lang=de (n=7), lang=es (n=12), lang=pl (n=12), split_span=yes (n=7)",
     "holdout: slices with n < 30: pre_redacted=yes (n=12)"
   ]

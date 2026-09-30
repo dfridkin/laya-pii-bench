@@ -25,11 +25,23 @@
 
 ## 2. Headline operating point
 
-pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). The exact lower bound is Clopper-Pearson on unit counts (ignores clustering within documents; informative when there are no misses). Route recall counts misses after routing (1 - false forwards / positives). t_high `none`: no threshold reached the precision target, so only the role rule redacts.
+### Key findings
 
-| arm / qs | split | t_low | t_high | recall | recall exact lo | route recall | forward rate | false forwards | precision | units / docs / positives |
-|---|---|---|---|---|---|---|---|---|---|---|
-| mock / qs_v1 | fixture | 0.1404 | 0.6614 | 1.0000 [1.0000, 1.0000] | 0.5904 | 1.0000 | 0.0909 [0.0000, 0.3000] | 0 | 0.7000 | 11 / 10 / 7 |
+
+### Test (headline)
+
+pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). Exact lo / hi are Clopper-Pearson on unit counts (ignore clustering within documents); the recall target is `missed` when the exact upper bound is below it. `point - exact lo` above 0.01 flags D-008 for review on arm A only (D-008 amended). Negatives forwarded = forwarded PII-free units / PII-free units (the work saved). Route recall counts misses after routing (1 - false forwards / positives). t_high `none`: no threshold reached the precision target, so only the role rule redacts. Doc-level arms are underpowered (few units per document).
+
+| arm / qs | t_low | t_high | recall | exact lo / hi | recall target | point - exact lo | route recall | forward rate | negatives forwarded | false forwards | AUROC p(pii) | PII share at p >= t_low | units / docs / positives |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+
+
+### Holdout (descriptive only, D-005)
+
+All IRB letters (one document type, 30 documents, few positives), never part of the headline. With a forward rate of 0, recall here is vacuous. Known limitation (M4 S1): a fixed alt-text contact line appears only in PII-free letters, a possible shortcut cue.
+
+| arm / qs | t_low | t_high | recall | exact lo / hi | recall target | point - exact lo | route recall | forward rate | negatives forwarded | false forwards | AUROC p(pii) | PII share at p >= t_low | units / docs / positives |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 
 ## 3. Per-question
 
@@ -79,7 +91,7 @@ Confusion, `doc_kind`:
 
 ## 4. Calibration
 
-ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC scores correctness by the max probability.
+ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC scores correctness by the max probability (for pii_present discrimination see section 2). `= raw (T fallback)`: the temperature fit hit its bound, so T = 1 and the calibrated columns equal raw; calibration did nothing there.
 
 ### mock / qs_v1, fixture
 
@@ -88,7 +100,7 @@ ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC
 | pii_present | 0.2927 | 0.2585 | 0.2651 | 0.2592 | 0.7778 | 0.7778 |
 | subject_role | 0.0273 | 0.0000 | 0.4473 | 0.4463 | 0.5000 | 0.5000 |
 | category | 0.1273 | 0.0000 | 0.4727 | 0.4525 | 0.5000 | 0.5000 |
-| doc_kind | 0.1500 | 0.1500 | 0.0300 | 0.0300 | n/a | n/a |
+| doc_kind = raw (T fallback) | 0.1500 | 0.1500 | 0.0300 | 0.0300 | n/a | n/a |
 
 Reliability data, `pii_present` (non-empty bins):
 
@@ -141,15 +153,17 @@ Reliability data, `doc_kind` (non-empty bins):
 
 ## 6. Speed
 
+Per-unit latency is not comparable across arms (units range from 256-token chunks to whole documents); compare the per-document row or the length rows. Batched runs were made for arms A and B1 only: batches of eight 2k-8k-token states exceed the 8 GB M2 (swapping, NaN).
+
 ### mock / qs_v1
 
-Hardware: **unknown hardware (no hw.json)**. Warmup calls excluded: 2.
+Hardware: **unknown hardware (no hw.json)**. Warmup calls excluded: 2. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: n/a. laya autocast: batch-1 unknown, batched unknown (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 11 | 60.2 | 67.5 | 69.8 | 61.2 | 16.34 |
-| per unit, batched | 0 | n/a | n/a | n/a | n/a | n/a |
-| per document (sum of units, batch-1) | 10 | 60.0 | 102.5 | 128.6 | 67.3 | 14.85 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 10 | 60.0 | 102.5 | 128.6 | 67.3 | 14.85 |
 
 ## 7. Slices
 

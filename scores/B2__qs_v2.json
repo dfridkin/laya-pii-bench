@@ -45,7 +45,7 @@
     "checkpoint_revs": [
       "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     ],
-    "created_at": "2026-09-30T03:07:38.783185+00:00"
+    "created_at": "2026-09-30T03:25:18.972421+00:00"
   },
   "splits": {
     "test": {
@@ -72,7 +72,17 @@
           "n_resamples": 2000
         },
         "false_forwards": 2,
-        "precision": 0.27388535031847133
+        "precision": 0.27388535031847133,
+        "recall_target": 0.995,
+        "recall_exact_hi": 0.9972356729238302,
+        "specificity": 0.017241379310344827,
+        "auroc_pii": 0.4448226880877743,
+        "auroc_by_kind": {
+          "direct": 0.5396711366538953,
+          "staff": 0.395605550883095,
+          "quasi_only": 0.41767241379310344
+        },
+        "truncated_forwarded": 2
       },
       "per_question": {
         "pii_present": {
@@ -1815,7 +1825,7 @@
         {
           "unit_id": "d0352:section:2048:0",
           "doc_id": "d0352",
-          "text_markdown": "> Fenwick Therapeutics \\| Protocolo FTX-5142-018 \\| Confidencial\n> \n> CIOMS I: notificación de sospecha de reacción adversa\n> N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003\n> \n> I. Información de la reacción\n> 1. Iniciales: **PA**    1a. Sujeto: **\\#30030005**\n> 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F\n> 4-6. Inicio de la reacción: **18/04/2025**\n> 7+13. Descripción: fatiga, grado 2; requirió hospitalización.\n> \n> V. Notificador\n> 24b. **A. Marcos**, Centro de Investigación Clínica Llanodorado, tel. **+34 555 019 6055**\n> 25a. Fecha de este informe: 01/05/2025\n> \n> Página 1\n> ",
+          "text_markdown": "> Fenwick Therapeutics \\| Protocolo FTX-5142-018 \\| Confidencial\n> \n> CIOMS I: notificación de sospecha de reacción adversa\n> N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003\n> \n> I. Información de la reacción\n> 1. Iniciales: **PA**    1a. Sujeto: \\#30030005\n> 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F\n> 4-6. Inicio de la reacción: **18/04/2025**\n> 7+13. Descripción: fatiga, grado 2; requirió hospitalización.\n> \n> V. Notificador\n> 24b. **A. Marcos**, Centro de Investigación Clínica Llanodorado, tel. **+34 555 019 6055**\n> 25a. Fecha de este informe: 01/05/2025\n> \n> Página 1\n> ",
           "route": "forward",
           "triggers": [
             "p_below_t_low"
@@ -1887,7 +1897,7 @@
         {
           "unit_id": "d0447:section:2048:0",
           "doc_id": "d0447",
-          "text_markdown": "> Fenwick Therapeutics \\| Prüfplan FTX-5142-018 \\| Vertraulich\n> \n> Patientennarrativ: Prüfungsteilnehmer **Subj 3005-0010**\n> Prüfplan FTX-5142-018, Prüfzentrum 3005\n> \n> Demografie und Ausgangsbefund\n> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer **R-65247**) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.\n> Die Begleitmedikation wurde von **SCHMIDTKE, Dieter** überprüft.\n> \n> Unerwünschtes Ereignis\n> Während der Behandlungsphase wurden keine unerwünschten Ereignisse gemeldet.\n> \n> Ereigniszeitanalysen verwenden die Kaplan-Meier-Methode; die Kreatinin-Clearance wird nach Cockcroft-Gault berechnet. Prüfpräparat FTX-5142, Charge LT-255487-A, wurde aus Kit K-954687 im Visitenfenster Day 29 ±3 ausgegeben. Prüfplan FTX-5142-018 (NCT99608180; EudraCT 2031-854061-77), Amendment A5, gültig ab 2025-04-03.\n> \n> Verlauf\n> Die Teilnahme wurde gemäß Prüfplan fortgesetzt.\n> \n> Seite 1\n> ",
+          "text_markdown": "> Fenwick Therapeutics \\| Prüfplan FTX-5142-018 \\| Vertraulich\n> \n> Patientennarrativ: Prüfungsteilnehmer Subj 3005-0010\n> Prüfplan FTX-5142-018, Prüfzentrum 3005\n> \n> Demografie und Ausgangsbefund\n> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer R-65247) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.\n> Die Begleitmedikation wurde von **SCHMIDTKE, Dieter** überprüft.\n> \n> Unerwünschtes Ereignis\n> Während der Behandlungsphase wurden keine unerwünschten Ereignisse gemeldet.\n> \n> Ereigniszeitanalysen verwenden die Kaplan-Meier-Methode; die Kreatinin-Clearance wird nach Cockcroft-Gault berechnet. Prüfpräparat FTX-5142, Charge LT-255487-A, wurde aus Kit K-954687 im Visitenfenster Day 29 ±3 ausgegeben. Prüfplan FTX-5142-018 (NCT99608180; EudraCT 2031-854061-77), Amendment A5, gültig ab 2025-04-03.\n> \n> Verlauf\n> Die Teilnahme wurde gemäß Prüfplan fortgesetzt.\n> \n> Seite 1\n> ",
           "route": "forward",
           "triggers": [
             "p_below_t_low"
@@ -1984,7 +1994,17 @@
           "n_resamples": 2000
         },
         "false_forwards": 0,
-        "precision": 0.4
+        "precision": 0.4,
+        "recall_target": 0.995,
+        "recall_exact_hi": 1.0,
+        "specificity": 0.0,
+        "auroc_pii": 0.41083333333333333,
+        "auroc_by_kind": {
+          "direct": null,
+          "staff": 0.41083333333333333,
+          "quasi_only": null
+        },
+        "truncated_forwarded": 0
       },
       "per_question": {
         "pii_present": {
@@ -3486,10 +3506,36 @@
     "warmup_excluded": 10,
     "batch1_autocast": "on",
     "batched_autocast": "unknown",
-    "batch1_outliers": 0
+    "batch1_outliers": 0,
+    "batch1_by_length": {
+      "<1k": {
+        "n": 182,
+        "p50_ms": 636.3714165,
+        "p95_ms": 1091.3684673,
+        "p99_ms": 1117.94732696,
+        "mean_ms": 640.9927525494505,
+        "units_per_sec": 1.5600800415022684
+      },
+      "1-2k": {
+        "n": 403,
+        "p50_ms": 2136.572709,
+        "p95_ms": 2316.0395542,
+        "p99_ms": 2539.9034721600005,
+        "mean_ms": 2081.2832470992557,
+        "units_per_sec": 0.4804728051281481
+      },
+      "2-4k": {
+        "n": 8,
+        "p50_ms": 2519.260542,
+        "p95_ms": 2562.49758935,
+        "p99_ms": 2567.79111787,
+        "mean_ms": 2525.58934375,
+        "units_per_sec": 0.3959471885145025
+      }
+    },
+    "batch1_drift": 0.9896943527277885
   },
   "caveats": [
-    "D-008 review: test recall 0.9773 minus its exact 95% lower bound 0.9203 = 0.0570 > 0.01 (88 positives).",
     "test: slices with n < 30: doc_type=conmed_log (n=17), doc_type=crf_page (n=23), doc_type=delegation_log (n=8), doc_type=deviation_log (n=18), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=15), doc_type=sae_cioms (n=18), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=8), pii_depth=middle (n=9), pre_redacted=yes (n=29), truncated=yes (n=6)",
     "holdout: slices with n < 30: hard_negative=yes (n=11), length_bucket=short (n=11), perturbation=headers_footers (n=21), perturbation=line_wrap (n=14), perturbation=none (n=17), perturbation=ocr_noise (n=7), pre_redacted=yes (n=2)"
   ]

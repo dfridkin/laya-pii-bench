@@ -11,7 +11,7 @@ Last updated: 2026-09-27 (M5 gate passed)
 | M3 Runner, arm A on fixture | done | 2026-09-26 (`reports/audits/M3-gate-20260926-pass.md`; review #1 FAIL fixed) | real laya run on fixture; p50 ~500 ms/unit (qs_v1, mps) |
 | M4 Generator | done | 2026-09-27 (`reports/audits/M4-gate-20260927.md`; gold: `M4_gold_audit_run4_final.md`; R4 fix after gate, D-020) | 600 docs, V1-V6 pass, deterministic; gold audit 0 errors |
 | M5 Label + split | done | 2026-09-27 (`reports/audits/M5-gate-20260927-pass.md`; reviews #1, #2 FAIL fixed) | 600 docs split 350/96/124/30, no leaks, all classes in every split; calib freeze enforced |
-| M6 Zero-shot arms, calibrate, score, report v1 | not started | | |
+| M6 Zero-shot arms, calibrate, score, report v1 | in review | | gates 1-4 evidence recorded; results review running |
 | M7 HUD replay | not started | | |
 | M8 Fine-tuned arm C, report v2 | not started | | |
 
@@ -218,6 +218,51 @@ under D-001 (7faf571).
   holdout and checks the run's splits hash; run on main filters by splits_to_run and hashes splits;
   debug calib flags refused on the main dataset (D-013).
 
+## M6 evidence
+
+Sub-steps: 6a score/report additions (96a71da: C4 probe record, C6 batched speed input, C7 routed
+JSONL, C8 autocast per decision, D-008 column, doc-level label, qs_v1 vs qs_v2 table); 6b latency
+outlier caveat (87e74ce); 6c Makefile loops (859dcce); runner fixes during the runs (8e004bb MPS
+release + caffeinate; 16d664a NaN retry + per-call release for B4; f262ce3; 1b0ba0b batched arms);
+calib frozen 4abf110; scores + report 54e3512.
+
+- C4: B4 longest unit fits on the M2 in isolation (reports/audits/C4_memprobe-20260928.md). In
+  long runs B3/B4 grew the MPS cache until the process swapped (latency 3x, NaN); fixed by
+  releasing the cache between calls (every 25; every call for B4), outside the timer.
+- Gate 1: all 10 batch-1 runs cover 100% of calib/test/holdout units (A 3603, B1 1215, B2 593,
+  B3 345, B4 250 per qs), finished, no retried decisions. Batched (speed only): A and B1 x 2 qs.
+- Gate 2: all 10 calib files frozen in 4abf110 (fit_on=calib, 96 calib docs) before any scores;
+  every scores file cites 4abf110, which is an ancestor of the scores commit 54e3512 and older
+  than each created_at (checked by script against git).
+- Gate 3: reports/report.md has sections 1-9 (headline with bootstrap CIs and exact bound,
+  per-question, calibration raw vs calibrated, routing, speed with hardware label and batch-1 vs
+  batched, slices, failures, caveats) and the qs_v1 vs qs_v2 table.
+- Gate 4: **D-008 flagged for review**: arm A test recall 1.0000, exact 95% lower bound 0.9747,
+  gap 0.0253 > 0.01 (144 positives; the bound cannot pass 0.99 at this n even with zero misses).
+  B3 and B4 are labelled doc-level/underpowered in the report.
+- Findings to carry: the multilingual checkpoint (B1-B4) answers pii_present "yes" to ~98% of
+  units with at-or-below-chance ranking; not a harness bug (option-swap probe,
+  reports/audits/M6_pii_question_probe-20260929.md). Arm A ranks well (AUROC ~0.88) but the
+  recall-first t_low (0.0054) forwards only 0.45% of test units. Batch-8 is not faster than
+  batch-1 on MPS (A 1.09-1.31x slower, B1 0.93-1.18x).
+- Gate 5: `reports/audits/M6_results_review.md`: PASS WITH REQUIRED CAVEATS (integrity: no
+  leakage, no test peeking, calib-only fits reproduced, freeze order verified, all 20 headline
+  rows match). Required presentation fixes applied in bench/score.py and bench/report.py and the
+  report regenerated: key-findings block (degenerate operating point, multilingual no-signal,
+  target missed on test for B3/qs_v2 and B4, quasi-only hardest, truncated forwards, qs_v1 vs
+  qs_v2 numerics), test headline with exact lo/hi, target check, negatives forwarded,
+  discrimination AUROC; holdout in its own descriptive table (D-005); D-008 flag on arm A test
+  only; `= raw (T fallback)` marks; length-bucketed latency and outliers; length-controlled drift
+  caveat (arm A batch-1 1.48x/1.38x: timing upper bounds, not rerun); failure gallery bolds only
+  counted spans. Probe audit corrected (addendum), probe script in scripts/.
+- Known gaps: A/B1/B2 batch-1 metas have no `release_every` (runs predate the field: no release);
+  B3 released every 25 calls (8e004bb) but its meta predates the field; B4 every call.
+- Operational record (all timings kept honest): external memory pressure and a full disk polluted
+  A/qs_v2, B2/qs_v2, B3 (x2) and partial B4 runs; each was moved to scratch and redone on a quiet
+  machine. A/qs_v1 kept: 3 calls > 2 s of 3603. macOS idle/lid sleep froze runs (perf_counter
+  excludes sleep, so recorded latencies were unaffected). laya returned transient NaN on long B4
+  and batched B2 calls (clean in isolation); the runner now retries once and marks it.
+
 ## Audit fix batch (2026-09-26)
 
 Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8d6292b:
@@ -261,8 +306,22 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 - Staff initials (fx03) labeled `staff_pii`; domain.md says "name + contact". Confirm for the generator.
 - Relative timing ("Day 53", "discharged after nine days") left unlabeled; spec is silent.
-- `config/arms.yaml` B2: `target_tokens: 1800` exceeds the state budget 2048-256 = 1792, so full-size
-  sections would be flagged truncated. Lower to <= 1792 or accept.
+- ~~`config/arms.yaml` B2 target 1800 > budget~~: fixed in M5 (1792, audit C5).
+- **M6: D-007 recall target and D-008 need an owner review** (M6 results review B1, M1, M7):
+  - With under 200 calib positives per arm, the 0.995 target means "no calib misses", so `t_low`
+    is the single lowest-scoring calib positive. The resulting operating point forwards 0-2% of
+    test units (arm A 0.45%): recall is bought by escalating nearly everything, and no zero-shot
+    arm has a useful high-recall forward threshold on this corpus.
+  - D-008 is flagged (gate 4): arm A exact lower bound 0.9747 at 144 positives; reaching 0.99 at
+    zero misses needs >= 368 positives (~2.5x the test split). A larger corpus fixes the bound, not
+    the operating point.
+  - Options to weigh: report a recall-vs-forward-rate curve as the headline instead of one point;
+    lower the target for zero-shot arms; grow the corpus; or accept that zero-shot Laya is a
+    triage aid only and let arm C (M8) carry the operating point.
+- **M6: pii_present prompt vs gold construct** (review M6): the prompt names names, contacts,
+  MRNs and birth dates; gold also counts quasi-identifiers alone (event dates, initials, ZIP),
+  42% of arm A test positives, AUROC 0.71 vs 0.83 for direct. A wording change is a new question
+  set (qs_v3) and a rerun, not an M6 edit.
 
 ## Later (out of current scope, noted for the owning milestone)
 
