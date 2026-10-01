@@ -35,8 +35,11 @@ PROSE = frozenset({DocType.PROTOCOL, DocType.NARRATIVE, DocType.MONITORING, DocT
 # row knob per form type: (tokens per row, estimated; row cap)
 ROWS: dict[DocType, tuple[int, int]] = {
     DocType.CRF: (32, 60), DocType.CONMED: (26, 40),
-    DocType.LAB: (80, 3),
+    DocType.LAB: (80, 3), DocType.DEVIATION: (40, 40),
 }  # fmt: skip
+# forms whose row cap applies in the short bucket too: a site's real deviation log can outgrow a
+# short page (M8 scale-up, 63 sites); the cap keeps the earliest real rows, none invented
+CAPPED_WHEN_SHORT = frozenset({DocType.DEVIATION})
 PII_BLOCK = {  # the single PII paragraph of a depth doc (English: depth docs are long, so English)
     "en": "Note to file: {name} (subject {sid}) attended the visit on {date}; "
     "the source record was reviewed by {staff}.",
@@ -114,7 +117,9 @@ def _assemble(
     extra = dict(ds.extra)
     if ds.pii_depth and ds.subject is not None:  # document dates must avoid the depth subject too
         extra["avoid_dates_of"] = [ds.subject]
-    if ds.doc_type in ROWS and ds.bucket is not LengthBucket.SHORT:
+    if ds.doc_type in ROWS and (
+        ds.bucket is not LengthBucket.SHORT or ds.doc_type in CAPPED_WHEN_SHORT
+    ):
         per_row, cap = ROWS[ds.doc_type]
         extra["rows"] = min(cap, max(3, int(0.6 * target / per_row * factor)))
 

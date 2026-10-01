@@ -46,7 +46,7 @@ def test_policy_coded_id_toggle(tmp_path: Path) -> None:
 
 def test_gen_spec_loads() -> None:
     g = config.load_gen_spec(CFG / "gen_spec.yaml")
-    assert g.total_docs == 600  # D-008
+    assert g.total_docs == 1600  # D-022 (was 600, D-008)
 
 
 def test_arms_load() -> None:
@@ -220,8 +220,8 @@ def test_arms_missing_question_set(tmp_path: Path) -> None:
 
 def test_gen_spec_derived_counts() -> None:
     g = config.load_gen_spec(CFG / "gen_spec.yaml")
-    assert g.bucket_counts == {"short": 210, "medium": 210, "long": 132, "xl": 48}
-    assert g.hard_negative_count == 150
+    assert g.bucket_counts == {"short": 560, "medium": 560, "long": 352, "xl": 128}  # D-022
+    assert g.hard_negative_count == 400
     assert config.largest_remainder(10, {"a": 0.34, "b": 0.33, "c": 0.33}) == {
         "a": 4,
         "b": 3,

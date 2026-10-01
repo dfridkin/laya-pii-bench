@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import random
+import re
 from collections import Counter, defaultdict
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
@@ -223,7 +224,25 @@ def doc_spec(s: Slot, world: W.World) -> DocSpec:
     )  # fmt: skip
 
 
-def post_process(doc: Document, s: Slot, seed: int) -> Document:
+def name_tokens(world: W.World) -> frozenset[str]:
+    """Lowercased word tokens (3+ letters) of every world person's name and contact forms."""
+    return frozenset(
+        w.lower()
+        for text, _ in checks.world_forms(world)
+        for w in re.findall(r"[^\W\d_]{3,}", text)
+    )
+
+
+def _post(s: Slot, seed: int, protected: frozenset[str]) -> Callable[[Document], Document]:
+    def run(doc: Document) -> Document:
+        return post_process(doc, s, seed, protected)
+
+    return run
+
+
+def post_process(
+    doc: Document, s: Slot, seed: int, protected: frozenset[str] = frozenset()
+) -> Document:
     """Character-level perturbations after resolve (span remap)."""
     for step in s.post:
         if step.startswith("table:"):
@@ -232,7 +251,7 @@ def post_process(doc: Document, s: Slot, seed: int) -> Document:
             doc = perturb.apply(doc, perturb.line_wrap(doc, WRAP_WIDTH), "line_wrap")
         elif step == "ocr_noise":
             doc = perturb.apply(
-                doc, perturb.ocr_noise(doc, rng(seed, "ocr", doc.id), 0.01), "ocr_noise"
+                doc, perturb.ocr_noise(doc, rng(seed, "ocr", doc.id), 0.01, protected), "ocr_noise"
             )
     return doc
 
@@ -247,13 +266,14 @@ def generate(spec: GenSpec, policy: Policy, count: TokenCounter,
              only: Sequence[int] | None = None) -> Result:  # fmt: skip
     world = W.build(spec, frozenset(template_vocabulary()))
     scanner = checks.Scanner(world)
+    protected = name_tokens(world)
     slots = plan(spec, world)
     docs: list[Document] = []
     problems: dict[str, list[str]] = defaultdict(list)
     for s in slots if only is None else [slots[i] for i in only]:
         ds = doc_spec(s, world)
         try:
-            doc = assemble(ds, spec, count, post=lambda d, s=s: post_process(d, s, spec.seed))
+            doc = assemble(ds, spec, count, post=_post(s, spec.seed, protected))
         except Exception as e:
             problems[ds.doc_id].append(f"ASSEMBLY {type(e).__name__}: {e}")
             continue

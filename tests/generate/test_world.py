@@ -24,8 +24,10 @@ def test_deterministic(world: W.World) -> None:
 def test_shape(world: W.World) -> None:
     assert len(world.studies) == 3
     sites = world.sites()
-    assert len(sites) == 24 and sum(len(s.subjects) for s in sites) == 360
-    assert Counter(s.lang for s in sites) == {"en": 14, "de": 4, "es": 3, "pl": 3}
+    n_sites = SPEC.world.studies * SPEC.world.sites_per_study
+    assert len(sites) == n_sites
+    assert sum(len(s.subjects) for s in sites) == n_sites * SPEC.world.subjects_per_site
+    assert Counter(s.lang for s in sites) == SPEC.world.site_locales
 
 
 def test_site_keys_unique_and_study_scoped(world: W.World) -> None:

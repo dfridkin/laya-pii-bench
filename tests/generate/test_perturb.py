@@ -108,7 +108,7 @@ def words(text: str) -> int:
 
 def gen(world: W.World, t: DocType, bucket: LengthBucket, k: int, **kw: object) -> Document:
     plan = SPEC.doc_plan[t]
-    site = world.sites()[k % 24]
+    site = world.sites()[k % len(world.sites())]
     cats = frozenset(c for c in PiiCategory if getattr(plan.pii, c.value) > 0)
     sponsor = plan.level == "sponsor"
     subject = site.subjects[k % 15] if t in SUBJECT_TYPES else None

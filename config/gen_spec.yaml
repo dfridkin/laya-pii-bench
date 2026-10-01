@@ -5,25 +5,25 @@ world:
   sponsor: Fenwick Therapeutics
   compound_prefix: FTX
   studies: 3
-  sites_per_study: 8
+  sites_per_study: 21          # D-022: x 8/3 (was 8)
   subjects_per_site: 15
-  site_locales: {en: 14, de: 4, es: 3, pl: 3}   # non-English docs come from sites of that locale
+  site_locales: {en: 37, de: 10, es: 8, pl: 8}   # non-English docs come from sites of that locale
 
-doc_types:                  # exact counts; total 600
-  csr_patient_narrative: 70
-  sae_cioms: 60
-  crf_page: 70
-  lab_report: 50
-  monitoring_visit_report: 50
-  deviation_log: 40
-  conmed_log: 40
-  delegation_log: 30
-  site_correspondence: 60
-  icf_signature_page: 30
-  protocol_section: 70
-  irb_letter: 30
+doc_types:                  # exact counts; total 1,600 (D-022: 600 x 8/3)
+  csr_patient_narrative: 187
+  sae_cioms: 160
+  crf_page: 187
+  lab_report: 133
+  monitoring_visit_report: 133
+  deviation_log: 107
+  conmed_log: 107
+  delegation_log: 80
+  site_correspondence: 160
+  icf_signature_page: 80
+  protocol_section: 186
+  irb_letter: 80
 
-lang_counts: {en: 540, de: 24, es: 18, pl: 18}   # exact (D-015)
+lang_counts: {en: 1440, de: 64, es: 48, pl: 48}   # exact (D-015)
 non_english_buckets: [short]    # non-English docs stay < 1k tokens: no de/es/pl filler (D-015)
 locales: {en: en_US, de: de_DE, es: es_ES, pl: pl_PL}
 
@@ -35,9 +35,9 @@ length_tokens:              # multilingual tokenizer counts
   xl: [8200, 11000]
 
 hard_negative_rate: 0.25
-pii_depth_docs: 60          # sparse long docs with one PII block at controlled depth
-partial_redaction_docs: 60  # PII-bearing docs with some values pre-redacted (gold audit N5)
-partial_alt_docs: 100       # PII-bearing docs with some values shown as neutral alt text (gold audit R4)
+pii_depth_docs: 160         # sparse long docs with one PII block at controlled depth
+partial_redaction_docs: 160 # PII-bearing docs with some values pre-redacted (gold audit N5)
+partial_alt_docs: 267      # PII-bearing docs with some values shown as neutral alt text (gold audit R4)
 pii_depth_positions: {early: [0.0, 0.2], middle: [0.4, 0.6], late: [0.8, 1.0]}
 
 perturbations:

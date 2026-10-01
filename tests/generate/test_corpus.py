@@ -66,7 +66,11 @@ def test_irb_holdout_and_staff_only_types_carry_no_patient_data(slots: list[corp
 
 
 def test_sample_generates_cleanly_and_deterministically() -> None:
-    sample = list(range(0, 600, 37))  # 17 docs across types and buckets
+    # 17 English docs spread across the corpus (native non-English docs fall below the short
+    # bucket under the word counter used here)
+    en = [s.idx for s in corpus.plan(SPEC, W.build(SPEC, frozenset(template_vocabulary())))
+          if s.lang == "en"]  # fmt: skip
+    sample = en[:: len(en) // 17][:17]
     a = corpus.generate(SPEC, POLICY, words, only=sample)
     assert a.problems == {}
     b = corpus.generate(SPEC, POLICY, words, only=sample)
@@ -121,20 +125,24 @@ def test_document_dates_follow_the_events(sample_docs: list) -> None:  # type: i
 
     from bench.generate.variants import date_forms
 
-    parse: dict[str, date] = {}
+    seen: dict[str, set[date]] = {}
     d0 = date(2024, 6, 1)
     for k in range(900):
         d = d0 + timedelta(days=k)
         for f in date_forms(d):
-            parse.setdefault(f, d)  # ambiguous forms keep the first; checked docs avoid them
+            seen.setdefault(f, set()).add(d)
+    # only forms with one reading are checked ("07/04/2025" is 4 July or 7 April: skipped)
+    parse = {f: next(iter(ds)) for f, ds in seen.items() if len(ds) == 1}
     checked = 0
     for d in sample_docs:
         if d.gen_meta["mode"] != "normal":
             continue
-        doc_dates = [
-            parse[n.value] for n in d.negatives if n.kind == "non_phi_date" and n.value in parse
-        ]
-        ev = [parse[s.value] for s in d.spans if s.value_kind == "event_date" and s.value in parse]
+        raw_doc = [n.value for n in d.negatives if n.kind == "non_phi_date"]
+        raw_ev = [s.value for s in d.spans if s.value_kind == "event_date"]
+        if any(v not in parse for v in raw_doc + raw_ev):
+            continue  # an ambiguous date: order checks would compare the wrong dates
+        doc_dates = [parse[v] for v in raw_doc if v]
+        ev = [parse[v] for v in raw_ev if v]
         if d.doc_type.value == "sae_cioms" and doc_dates and ev:
             assert doc_dates[-1] > ev[0], d.id  # report date (last) after onset (first event)
             checked += 1

@@ -218,15 +218,27 @@ def leakage(splits: Splits, docs: Sequence[Document]) -> list[str]:
 
 
 def staff_sites(world: World) -> dict[str, str]:
-    """Every distinctive staff value (name forms, email, phone) -> its site key (`study/site`).
-    A value shared by staff of two sites names no one in particular and is left out."""
-    where: dict[str, set[str]] = defaultdict(set)
+    """Every staff value that names exactly one person (name surfaces, email, phone) -> that
+    person's site key (`study/site`). Ownership is per person over every person in the world,
+    lone given names included: "Martin" as one person's surname and another's first name names
+    no one in particular and is left out (M8 scale-up false positive)."""
+    owners: dict[str, set[str]] = defaultdict(set)
+    staff_site: dict[str, str] = {}
     for site in world.sites():
-        for p in site.staff.values():
-            for v in [*V.name_forms(p), p.email, p.phone]:
+        people = [(p, True) for p in site.staff.values()] + [
+            (s.person, False) for s in site.subjects
+        ]
+        for p, is_staff in people:
+            if is_staff:
+                staff_site[p.id] = site.key
+            for v in [*(V.name(p, x) for x in V.NAME_SURFACES), p.email, p.phone]:
                 if v:
-                    where[v].add(site.key)
-    return {v: next(iter(ks)) for v, ks in where.items() if len(ks) == 1}
+                    owners[v].add(p.id)
+    return {
+        v: staff_site[next(iter(ids))]
+        for v, ids in owners.items()
+        if len(ids) == 1 and next(iter(ids)) in staff_site
+    }
 
 
 def staff_leakage(

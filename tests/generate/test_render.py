@@ -87,7 +87,8 @@ def test_every_subject_narrative_passes_v1_v2(world: W.World, scanner: checks.Sc
             assert checks.check(doc, POLICY, scanner) == [], doc.text
             assert {s.category for s in doc.spans} == set(PiiCategory)
             n += 1
-    assert n == 360
+    w = SPEC.world
+    assert n == w.studies * w.sites_per_study * w.subjects_per_site
 
 
 def test_languages_render(world: W.World) -> None:

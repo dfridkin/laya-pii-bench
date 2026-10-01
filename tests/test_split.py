@@ -144,3 +144,16 @@ def test_staff_leakage_detects_a_crossing(
     )
     moved = splits.model_copy(update={"doc_split": {**splits.doc_split, doc.id: "test"}})
     assert any(p.startswith("staff of ") for p in sp.staff_leakage(moved, corpus_docs, staff_site))
+
+
+def test_staff_value_shared_with_another_persons_given_name_is_not_a_site_marker() -> None:
+    world = W.build(SPEC, frozenset(template_vocabulary()))
+    ss = sp.staff_sites(world)
+    owners: dict[str, set[str]] = {}
+    for site in world.sites():
+        people = list(site.staff.values()) + [s.person for s in site.subjects]
+        for p in people:
+            owners.setdefault(p.given, set()).add(p.id)
+            owners.setdefault(p.family, set()).add(p.id)
+    shared = {v for v, ids in owners.items() if len(ids) > 1}
+    assert shared and not (shared & set(ss))  # ambiguous words never decide a staff site

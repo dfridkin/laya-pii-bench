@@ -33,7 +33,7 @@ def scanner(world: W.World) -> checks.Scanner:
 
 def spec_for(world: W.World, t: DocType, bucket: LengthBucket, k: int, **kw: object) -> DocSpec:
     plan = SPEC.doc_plan[t]
-    site = world.sites()[k % 24]
+    site = world.sites()[k % len(world.sites())]
     sponsor = plan.level == "sponsor"
     cats = frozenset(c for c in PiiCategory if getattr(plan.pii, c.value) > 0)
     base: dict[str, object] = dict(

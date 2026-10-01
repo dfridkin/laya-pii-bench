@@ -193,6 +193,8 @@ def _deviation(req: ViewRequest, ctx: DocCtx) -> tuple[str, dict[str, Any], list
         for sub in site.subjects for d in sub.deviations
     ]  # fmt: skip
     rows.sort(key=lambda x: (x["date"], x["sub"].subject_id))
+    if "rows" in req.extra:  # a page of the log: the earliest real rows (assembly's cap)
+        rows = rows[: max(1, int(req.extra["rows"]))]
     for x in rows:
         x["category"] = r.choice(["minor", "minor", "major"])
         x["reporter"] = site.staff[r.choice(["coordinator", "pi"])]

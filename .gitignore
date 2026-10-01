@@ -29,3 +29,6 @@ finetune/checkpoints/
 .env
 .DS_Store
 .claude/settings.local.json
+
+# Archived generated artifacts of earlier corpora (D-022)
+archive/

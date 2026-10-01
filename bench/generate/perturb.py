@@ -122,10 +122,29 @@ def line_wrap(doc: Document, width: int) -> list[Edit]:
     return edits
 
 
-def ocr_noise(doc: Document, r: random.Random, rate: float = 0.01) -> list[Edit]:
+def _word_at(text: str, i: int) -> tuple[int, int]:
+    a, b = i, i + 1
+    while a > 0 and text[a - 1].isalpha():
+        a -= 1
+    while b < len(text) and text[b].isalpha():
+        b += 1
+    return a, b
+
+
+def ocr_noise(
+    doc: Document, r: random.Random, rate: float = 0.01,
+    protected: frozenset[str] = frozenset(),
+) -> list[Edit]:  # fmt: skip
     """Character confusions (l/1, O/0, Z/2, S/5, B/8) and dropped letters. Drops stay away from
-    labeled-value edges and never empty a value; spans keep their labels."""
+    labeled-value edges and never empty a value; spans keep their labels. An edit that would turn
+    a word into a `protected` word (a world person's name token, lowercased) is skipped, so noise
+    never fabricates an unlabeled name ("Samples" -> "Sales", M8 scale-up)."""
     text = doc.text
+
+    def makes_name(i: int, new: str) -> bool:
+        a, b = _word_at(text, i)
+        return (text[a:i] + new + text[i + 1 : b]).lower() in protected
+
     edges = {p for s, e in _intervals(doc) for p in (s, e - 1)}
     inside = [(s, e) for s, e in _intervals(doc)]
     edits: list[Edit] = []
@@ -133,7 +152,8 @@ def ocr_noise(doc: Document, r: random.Random, rate: float = 0.01) -> list[Edit]
         if r.random() >= rate:
             continue
         if ch in OCR_SUBS:
-            edits.append(Edit(i, 1, OCR_SUBS[ch]))
+            if not makes_name(i, OCR_SUBS[ch]):
+                edits.append(Edit(i, 1, OCR_SUBS[ch]))
         elif (
             ch.isalpha()
             and i not in edges
@@ -143,6 +163,8 @@ def ocr_noise(doc: Document, r: random.Random, rate: float = 0.01) -> list[Edit]
         ):
             if any(s <= i < e and e - s <= 3 for s, e in inside):
                 continue  # never shrink a short value toward empty
+            if makes_name(i, ""):
+                continue
             edits.append(Edit(i, 1, ""))
     return edits
 
