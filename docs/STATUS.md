@@ -13,7 +13,7 @@ Last updated: 2026-09-30 (M7 gate passed)
 | M5 Label + split | done | 2026-09-27 (`reports/audits/M5-gate-20260927-pass.md`; reviews #1, #2 FAIL fixed) | 600 docs split 350/96/124/30, no leaks, all classes in every split; calib freeze enforced |
 | M6 Zero-shot arms, calibrate, score, report v1 | done | 2026-09-30 (`reports/audits/M6-gate-20260930.md`; results review `M6_results_review.md`) | 10 runs; calib frozen 4abf110; D-008 flagged; zero-shot operating point degenerate, multilingual no signal |
 | M7 HUD replay | done | 2026-09-30 (`reports/audits/M7-gate-20260930.md`) | single-file HUD (3 MB), real M6 test replay, 7 e2e + 6 unit tests |
-| M8 Fine-tuned arm C, report v2 | not started | | |
+| M8 Fine-tuned arm C, report v2 | in progress | | corpus 1,600 docs (D-022); waiting on owner's Kaggle run |
 
 ## Provisional defaults in use
 
@@ -383,17 +383,28 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-M8 paused before building, at the owner's request. Done so far:
-- An outcomes report (M0-M7, with a general summary) is drafted as a shared doc
-  (https://claude.ai/code/artifact/14d0fcf2-1adb-4e98-8698-b1e2a0e90dc2).
-- The HUD is open locally (`hud/dist/index.html`).
+**Owner: run arm C training and the accuracy runs on Kaggle (D-022).**
 
-Decided: arm C trains on Kaggle 2x T4. The owner runs it on their own account; Claude prepares the
-notebook and a train-split dataset; nothing is pushed to the Hub, and the checkpoint is pinned by
-hash.
+1. Upload `kaggle/laya-pii-bundle.zip` as a private Kaggle dataset.
+   - Make it with `./scripts/kaggle_bundle.sh`.
+   - sha256 3b6d57dd78e28cfc997167b581ca722e41d100387e38642b3032ec6bb17f0d9e.
+2. Import `finetune/kaggle_m8.ipynb` and set it up:
+   - Accelerator: GPU T4 x2.
+   - Internet: On.
+   - Add the dataset as input.
+3. Run all cells. Allow about 1.5-2 h. Then download `m8_outputs.zip` from the Output panel.
 
-Still open: corpus size. The recommendation is to keep 600 docs, train C, and scale up only if C
-shows a real operating point (D-008 amended).
+Then Claude, on the M2:
+
+1. Unpack the outputs into `runs/` and `finetune/output/`.
+2. Pin the checkpoint and check it against the Kaggle hash.
+3. Run C timing-only.
+4. Calibrate and freeze (calib only), then score.
+5. Write report v2 and the HUD, then run the gate review.
+
+Corpus 55dbb36f: train/calib/test/holdout = 927/256/337/80 docs, with 419 test PII units for arm A.
+The 600-doc state is under tag `v1-600docs` plus `archive/v1-600docs/`. That tag predates the
+commit of `bench/generate/data/*.yaml`, so the archive holds the exact v1 corpus.
 
 ## Session log
 
@@ -419,3 +430,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-30 D-021: qs_v3 run on arm A (calib frozen 7a5d6bb), scored; AUROC 0.509 vs qs_v1 0.778 (general yes-bias, not date-specific); report finding and audit record added.
 - 2026-09-30 M7: HUD replay built (single file, real M6 test replay, make hud with vitest + Playwright); gate PASS; review fixes applied (routed_sha256 provenance, role labels, over-escalate, stronger e2e).
 - 2026-09-30 M8 planning: training on Kaggle (owner runs it); corpus size pending; outcomes report drafted as a shared doc and the HUD opened locally, both before any fine-tuning (owner request).
+- 2026-09-30 M8: corpus scaled to 1,600 docs (D-022); gold audit PASS + 3 generator fixes; train-only fine-tune data (32,536 records) + Kaggle notebook/bundle rehearsed locally; waiting on the owner's Kaggle run.
