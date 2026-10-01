@@ -27,11 +27,42 @@ REQUIRED = ("rl_agent_config.json", "model.safetensors", "tokenizer/tokenizer.js
 SUBFOLDER = {"english": "", "multilingual": "multilingual"}
 
 
+LOCAL = "local"  # a checkpoint trained here (arm C): `path` + `revision` = sha256 of its weights
+
+
+def weights_sha256(directory: Path) -> str:
+    import hashlib
+
+    h = hashlib.sha256()
+    with (directory / "model.safetensors").open("rb") as f:
+        for block in iter(lambda: f.read(1 << 20), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def _local(name: str, entry: dict[str, str], models_lock: Path) -> Pinned:
+    base = Path(entry["path"])
+    if not base.is_absolute():
+        base = models_lock.resolve().parent / base
+    missing = [f for f in REQUIRED if not (base / f).exists()]
+    if missing:
+        raise FileNotFoundError(f"{name}: {base} is missing {missing}")
+    got = weights_sha256(base)
+    if got != entry["revision"]:
+        raise FileNotFoundError(
+            f"{name}: weights in {base} hash to {got[:12]}, the lock pins {entry['revision'][:12]}"
+        )
+    return Pinned(name, LOCAL, entry["revision"], base)
+
+
 def pinned(name: str, models_lock: Path = MODELS_LOCK) -> Pinned:
-    """Snapshot of the locked revision in the local HF cache (offline, no revision resolution)."""
+    """Snapshot of the locked revision in the local HF cache (offline, no revision resolution);
+    a local checkpoint (arm C) is verified against its pinned weights hash."""
     import huggingface_hub
 
     entry: dict[str, str] = json.loads(models_lock.read_text())[name]
+    if entry["repo"] == LOCAL:
+        return _local(name, entry, models_lock)
     try:
         scan: Any = getattr(huggingface_hub, "scan_cache_dir")()  # noqa: B009 (untyped result)
     except Exception as e:

@@ -21,7 +21,11 @@ from bench.models import pinned
 os.environ.setdefault("USE_TF", "0")
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
-LOADABLE = {"english": None, "multilingual": "multilingual"}  # checkpoint -> repo subfolder
+LOADABLE = {  # checkpoint -> repo subfolder (a local checkpoint is its own directory)
+    "english": None,
+    "multilingual": "multilingual",
+    "finetuned_english": None,
+}
 
 
 class LayaError(RuntimeError):

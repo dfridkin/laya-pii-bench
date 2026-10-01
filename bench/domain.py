@@ -525,6 +525,45 @@ class Scores(_Model):
     caveats: list[str]
 
 
+# --- fine-tuning (arm C, M8) ---------------------------------------------------------------------
+
+
+class FinetuneRecord(_Model):
+    """One training decision: a train-split unit's text, one question, its one-hot gold target."""
+
+    unit_id: str
+    doc_id: str
+    question: str
+    qtype: Literal["choice", "score"]
+    instructions: str
+    criteria: dict[str, str] | list[str]
+    target: dict[str, float]  # option key -> gold probability (one-hot)
+    label: str  # gold option key
+
+
+class FinetuneManifest(_Model):
+    """Proof of what arm C was trained on (M8 gate 1): train-split documents only."""
+
+    created_at: str
+    unit_arm: str  # the arm whose unit spec C shares (A: 256-token chunks)
+    question_sets: list[str]
+    docs_sha256: str
+    units_sha256: str
+    splits_sha256: str
+    records_sha256: str
+    texts_sha256: str  # texts.jsonl: {unit_id, text}, one line per training unit
+    n_records: int
+    n_units: int
+    n_units_pii: int
+    n_units_clean: int  # after sampling: clean units kept (see clean_per_pii)
+    clean_per_pii: float  # clean units kept per PII unit, sampled per document type (seeded)
+    duplicates_removed: int  # identical (unit, question) asked by both question sets
+    doc_ids: list[str]  # every training document; all `train` in splits.json
+    # train docs held out of gradient steps to fit the checkpoint's own temperatures (the
+    # notebook's calibration slice), by document; our calib split is never used here
+    temperature_holdout_doc_ids: list[str]
+
+
 # --- HUD replay (docs/specs/hud.md) ------------------------------------------------------------
 
 
@@ -581,4 +620,6 @@ EXPORTED: tuple[type[BaseModel], ...] = (
     Splits,
     LabelManifest,
     Replay,
+    FinetuneRecord,
+    FinetuneManifest,
 )

@@ -1,0 +1,64 @@
+# Clean boilerplate for length filler (docs/specs/generator.md). No people, places, dates or IDs.
+# {a|b|c} picks one alternative. Every word here joins the name-collision vocabulary.
+topics:
+  safety_reporting:
+    titles: ["Safety Reporting", "Adverse Event Reporting", "Reporting of Safety Events"]
+    sentences:
+      - "{All|Any} serious adverse events {must be|are} reported to the sponsor within {24|48} hours of the {site becoming aware|investigator becoming aware} of the event."
+      - "Non-serious adverse events are recorded in the {case report form|electronic data capture system} {at each visit|throughout the treatment period}."
+      - "The {investigator|responsible physician} assesses {severity|intensity} using the common terminology criteria and documents the assessment in the source record."
+      - "Events that {begin|start} after the first dose and {up to|until} {28|30} days after the last dose are {considered treatment-emergent|summarised as treatment-emergent}."
+      - "Pregnancy {in a participant|occurring during the study} is reported {on the dedicated form|using the pregnancy notification form} within {24 hours|one working day}."
+      - "Follow-up information {is|must be} provided until the event {resolves|stabilises} or the participant is lost to follow-up."
+      - "The sponsor {reviews|evaluates} each report for expectedness against the reference safety information."
+  statistics:
+    titles: ["Statistical Considerations", "Analysis Methods", "Handling of Missing Data"]
+    sentences:
+      - "Continuous variables are summarised with the number of observations, mean, standard deviation, median and range."
+      - "Categorical variables are presented as counts and percentages {of the analysis set|within each treatment group}."
+      - "Missing data are {handled by multiple imputation|not imputed unless stated otherwise} {under a missing-at-random assumption|in the primary analysis}."
+      - "Sensitivity analyses {explore|assess} the robustness of the primary result to {alternative assumptions|protocol deviations}."
+      - "All tests are two-sided with a significance level of {5|2.5} percent unless otherwise specified."
+      - "Subgroup analyses by {age group|baseline severity|geographic region} are {exploratory|descriptive} and not adjusted for multiplicity."
+      - "The statistical analysis plan is finalised before database lock and {describes|specifies} all derived variables."
+  gcp:
+    titles: ["Ethical and Regulatory Considerations", "Good Clinical Practice", "Quality Assurance"]
+    sentences:
+      - "The study {is conducted|will be conducted} in accordance with the principles of good clinical practice and applicable regulatory requirements."
+      - "The {protocol|informed consent form} and any amendments {are|must be} approved by the ethics committee before implementation."
+      - "Essential documents are retained for at least {15|25} years after the end of the study {or longer if required by local regulations|as required}."
+      - "The sponsor {may|reserves the right to} conduct audits of study sites and vendors to verify compliance."
+      - "Participants may withdraw consent at any time without {penalty|consequences for their medical care}."
+      - "Confidentiality of participant information is protected {in line with applicable data protection law|at all times}."
+  monitoring_procedures:
+    titles: ["Monitoring Procedures", "Source Data Verification", "Site Management"]
+    sentences:
+      - "On-site and remote monitoring visits are scheduled {according to the monitoring plan|based on enrollment and risk indicators}."
+      - "Source data verification {focuses on|prioritises} eligibility, informed consent, primary endpoints and serious adverse events."
+      - "Findings are documented in the visit report and followed up until {resolution|closure}."
+      - "The investigator site file is reviewed {for completeness|for currency of essential documents} at each visit."
+      - "Queries are raised in the data capture system and {resolved by site staff|answered by the site} within {five|ten} working days."
+      - "Protocol deviations are {classified as minor or major|assessed for impact on participant safety and data integrity}."
+  data_management:
+    titles: ["Data Management", "Data Handling and Record Keeping", "Database Procedures"]
+    sentences:
+      - "Data are entered into a validated {electronic data capture system|clinical database} with an audit trail."
+      - "Edit checks {flag|identify} missing, inconsistent or out-of-range values {at entry|during cleaning}."
+      - "Medical history and adverse events are coded with {a standard dictionary|standard terminology} {before database lock|during the study}."
+      - "Reconciliation of {laboratory|safety} data with the clinical database is performed {periodically|before each data cut}."
+      - "Access to the database is restricted to authorised personnel {with role-based permissions|according to the access matrix}."
+  drug_accountability:
+    titles: ["Investigational Product Management", "Drug Accountability", "Storage and Handling"]
+    sentences:
+      - "Investigational product is stored in a secure, temperature-monitored area with access limited to authorised staff."
+      - "Temperature excursions {are|must be} reported to the sponsor {before further use of the affected supply|immediately}."
+      - "Dispensing and returns are recorded on the accountability log {at each visit|at every dispensing visit}."
+      - "Unused product is {returned to the sponsor|destroyed according to local procedures} after reconciliation."
+      - "Tablet counts {are compared with|are reconciled against} the dosing diary to assess compliance."
+  sample_handling:
+    titles: ["Laboratory Assessments", "Sample Collection and Handling", "Central Laboratory Procedures"]
+    sentences:
+      - "Blood samples are collected {after an overnight fast|in the morning} and processed {within two hours|according to the laboratory manual}."
+      - "Samples are shipped {frozen on dry ice|at ambient temperature} to the central laboratory {with the requisition form|with a completed manifest}."
+      - "Clinically significant laboratory abnormalities {are|should be} recorded as adverse events."
+      - "Reference ranges are provided by the laboratory and {filed in the investigator site file|updated when changed}."

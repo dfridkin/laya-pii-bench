@@ -1,0 +1,24 @@
+# Hard-negative sentence templates per language. {field} names are defined in negatives.FIELDS;
+# eponym fields (ep_*) draw from a pool that fits the sentence (negatives.EPONYM_POOLS).
+en:
+  - "Protocol {protocol} ({nct}; EudraCT {eudract}), Amendment {amendment}, effective {date}."
+  - "Investigational product {compound} lot {lot} was dispensed from kit {kit} within the {window} visit window."
+  - "Time-to-event endpoints are estimated with the {ep_tte} method and compared with a {ep_stratified} test stratified by region."
+  - "Creatinine clearance is calculated with the {ep_renal} formula; participants with a history of {ep_disease} lymphoma are excluded."
+  - "Secondary endpoints are compared with the {ep_rank} test with {ep_correction} correction; sparse tables use {ep_exact}'s exact test."
+  - "Agreement between central and local readings is shown in {ep_agreement} plots."
+  - "The excipient reference standard (CAS {cas}) was released on {date}."
+  - "Events are coded to MedDRA preferred term {meddra}; the target dose is {dose}."
+  - "The laboratory reference range for this assay is {range} U/L as of {date}."
+de:
+  - "Prüfplan {protocol} ({nct}; EudraCT {eudract}), Amendment {amendment}, gültig ab {date}."
+  - "Prüfpräparat {compound}, Charge {lot}, wurde aus Kit {kit} im Visitenfenster {window} ausgegeben."
+  - "Ereigniszeitanalysen verwenden die {ep_tte}-Methode; die Kreatinin-Clearance wird nach {ep_renal} berechnet."
+es:
+  - "Protocolo {protocol} ({nct}; EudraCT {eudract}), enmienda {amendment}, vigente desde {date}."
+  - "El producto en investigación {compound}, lote {lot}, se dispensó del kit {kit} en la ventana {window}."
+  - "El tiempo hasta el evento se estima con el método de {ep_tte}; el aclaramiento de creatinina, con la fórmula de {ep_renal}."
+pl:
+  - "Protokół {protocol} ({nct}; EudraCT {eudract}), poprawka {amendment}, obowiązuje od {date}."
+  - "Badany produkt {compound}, seria {lot}, wydano z zestawu {kit} w oknie wizyty {window}."
+  - "Czas do zdarzenia szacuje się metodą {ep_tte}; klirens kreatyniny oblicza się wzorem {ep_renal}."

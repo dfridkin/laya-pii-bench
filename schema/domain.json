@@ -708,6 +708,151 @@
       "title": "FailureCase",
       "type": "object"
     },
+    "FinetuneManifest": {
+      "additionalProperties": false,
+      "description": "Proof of what arm C was trained on (M8 gate 1): train-split documents only.",
+      "properties": {
+        "clean_per_pii": {
+          "type": "number"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "doc_ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "docs_sha256": {
+          "type": "string"
+        },
+        "duplicates_removed": {
+          "type": "integer"
+        },
+        "n_records": {
+          "type": "integer"
+        },
+        "n_units": {
+          "type": "integer"
+        },
+        "n_units_clean": {
+          "type": "integer"
+        },
+        "n_units_pii": {
+          "type": "integer"
+        },
+        "question_sets": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "records_sha256": {
+          "type": "string"
+        },
+        "splits_sha256": {
+          "type": "string"
+        },
+        "temperature_holdout_doc_ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "texts_sha256": {
+          "type": "string"
+        },
+        "unit_arm": {
+          "type": "string"
+        },
+        "units_sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "unit_arm",
+        "question_sets",
+        "docs_sha256",
+        "units_sha256",
+        "splits_sha256",
+        "records_sha256",
+        "texts_sha256",
+        "n_records",
+        "n_units",
+        "n_units_pii",
+        "n_units_clean",
+        "clean_per_pii",
+        "duplicates_removed",
+        "doc_ids",
+        "temperature_holdout_doc_ids"
+      ],
+      "title": "FinetuneManifest",
+      "type": "object"
+    },
+    "FinetuneRecord": {
+      "additionalProperties": false,
+      "description": "One training decision: a train-split unit's text, one question, its one-hot gold target.",
+      "properties": {
+        "criteria": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ]
+        },
+        "doc_id": {
+          "type": "string"
+        },
+        "instructions": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "qtype": {
+          "enum": [
+            "choice",
+            "score"
+          ],
+          "type": "string"
+        },
+        "question": {
+          "type": "string"
+        },
+        "target": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        },
+        "unit_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit_id",
+        "doc_id",
+        "question",
+        "qtype",
+        "instructions",
+        "criteria",
+        "target",
+        "label"
+      ],
+      "title": "FinetuneRecord",
+      "type": "object"
+    },
     "GenManifest": {
       "additionalProperties": false,
       "properties": {

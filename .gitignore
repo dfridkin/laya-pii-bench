@@ -9,8 +9,8 @@ htmlcov/
 
 # Generated artifacts (reproducible from config + seed). calib/ and scores/ are tracked (D-019):
 # calib files are frozen by commit before scoring; scores cite that commit.
-data/
-runs/
+/data/
+/runs/
 hw.json
 
 # Keep reports/ tracked (report.md, audits), ignore bulky exports
@@ -32,3 +32,6 @@ finetune/checkpoints/
 
 # Archived generated artifacts of earlier corpora (D-022)
 archive/
+finetune/data/*.jsonl
+kaggle/bundle/
+kaggle/*.zip

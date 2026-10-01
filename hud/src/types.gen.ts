@@ -295,6 +295,52 @@ export interface GoldAnswers {
   subject_role: "patient" | "staff" | "both" | "none";
 }
 /**
+ * Proof of what arm C was trained on (M8 gate 1): train-split documents only.
+ *
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "FinetuneManifest".
+ */
+export interface FinetuneManifest {
+  clean_per_pii: number;
+  created_at: string;
+  doc_ids: string[];
+  docs_sha256: string;
+  duplicates_removed: number;
+  n_records: number;
+  n_units: number;
+  n_units_clean: number;
+  n_units_pii: number;
+  question_sets: string[];
+  records_sha256: string;
+  splits_sha256: string;
+  temperature_holdout_doc_ids: string[];
+  texts_sha256: string;
+  unit_arm: string;
+  units_sha256: string;
+}
+/**
+ * One training decision: a train-split unit's text, one question, its one-hot gold target.
+ *
+ * This interface was referenced by `Domain`'s JSON-Schema
+ * via the `definition` "FinetuneRecord".
+ */
+export interface FinetuneRecord {
+  criteria:
+    | {
+        [k: string]: string;
+      }
+    | string[];
+  doc_id: string;
+  instructions: string;
+  label: string;
+  qtype: "choice" | "score";
+  question: string;
+  target: {
+    [k: string]: number;
+  };
+  unit_id: string;
+}
+/**
  * This interface was referenced by `Domain`'s JSON-Schema
  * via the `definition` "GenManifest".
  */

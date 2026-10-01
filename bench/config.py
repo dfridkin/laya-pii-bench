@@ -307,7 +307,14 @@ class Arm(_Cfg):
     max_len: int = Field(ge=1)  # always explicit (invariant 8)
     head_max_len: int = Field(ge=1)
     enabled: bool = True
-    doc_level: bool = False  # few units per doc: reported as underpowered (D-008 amended)
+    doc_level: bool = False
+
+    @property
+    def trained(self) -> bool:
+        """Arm C: a checkpoint fine-tuned in this project (labeled and run after training)."""
+        return self.checkpoint.startswith(
+            "finetuned"
+        )  # few units per doc: reported as underpowered (D-008 amended)
 
     @model_validator(mode="after")
     def _budget(self) -> Arm:

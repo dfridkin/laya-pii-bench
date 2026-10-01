@@ -34,8 +34,9 @@ arms:
     head_max_len: 256
     doc_level: true
   C:
-    checkpoint: finetuned_english     # produced in M8; path set in finetune/output.yaml
+    checkpoint: finetuned_english     # trained in M8 on Kaggle; pinned by weights hash in
+                                      # models.lock.json (`bench pin-checkpoint`)
     unit: {kind: chunk, size: 256, overlap: 32}
     max_len: 512
     head_max_len: 192
-    enabled: false                    # flipped by M8
+    enabled: true                     # M8; labeled and run after training (trained arm)

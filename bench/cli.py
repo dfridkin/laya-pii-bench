@@ -137,7 +137,8 @@ def label(
     out = out or units_dir(docs)
 
     cfg, pol, documents = load_arms(arms), load_policy(policy), read_docs(docs)
-    for name in arm or [n for n, a in cfg.arms.items() if a.enabled]:
+    # fine-tuned arms are labeled explicitly once their checkpoint is pinned (`--arm C`)
+    for name in arm or [n for n, a in cfg.arms.items() if a.enabled and not a.trained]:
         spec = cfg.arms[name]
         tok = tokenize.load(spec.checkpoint)
         units = label_docs(documents, spec, pol, tok, tok.name)
@@ -286,6 +287,75 @@ def freeze_calib(
     )
 
 
+@app.command("finetune-data")
+def finetune_data(
+    out: Annotated[Path, typer.Option(help="Output directory.")] = Path("finetune/data"),
+    unit_arm: Annotated[str, typer.Option(help="Arm whose units C trains on.")] = "A",
+    qs: Annotated[list[str] | None, typer.Option(help="Question sets.")] = None,
+    docs: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
+    splits: Annotated[Path, typer.Option(help="Splits.")] = Path("data/splits.json"),
+    qs_dir: Annotated[Path, typer.Option(help="Question sets.")] = Path("config/questions"),
+    clean_per_pii: Annotated[float, typer.Option(help="Clean units kept per PII unit.")] = 3.0,
+) -> None:
+    """Arm C training records from train-split units only, plus a manifest (M8 gate 1)."""
+    from bench import finetune as ft
+    from bench.config import load_question_set
+    from bench.paths import units_dir
+
+    qsets = [load_question_set(qs_dir / f"{q}.yaml") for q in (qs or ["qs_v1", "qs_v2"])]
+    try:
+        m = ft.build(units_dir(docs) / f"{unit_arm}.jsonl", docs, splits, qsets, unit_arm, out,
+                     clean_per_pii)  # fmt: skip
+    except ft.FinetuneError as e:
+        typer.echo(f"error: {e}", err=True)
+        raise typer.Exit(2) from e
+    typer.echo(f"{m.n_records} records from {m.n_units} train units ({m.n_units_pii} PII, "
+               f"{m.n_units_clean} clean) in {len(m.doc_ids)} docs "
+               f"({m.duplicates_removed} duplicate questions dropped; "
+               f"{len(m.temperature_holdout_doc_ids)} docs held out for checkpoint temperatures) "
+               f"-> {out}")  # fmt: skip
+
+
+@app.command("finetune-verify")
+def finetune_verify(
+    data: Annotated[Path, typer.Option(help="finetune-data output.")] = Path("finetune/data"),
+    splits: Annotated[Path, typer.Option(help="Splits.")] = Path("data/splits.json"),
+) -> None:
+    """Re-prove that every training record and document is train-split (M8 gate 1)."""
+    from bench import finetune as ft
+
+    try:
+        m = ft.verify(data, splits)
+    except ft.FinetuneError as e:
+        typer.echo(f"error: {e}", err=True)
+        raise typer.Exit(2) from e
+    typer.echo(f"OK: {m.n_records} records, {len(m.doc_ids)} docs, all train-split")
+
+
+@app.command("pin-checkpoint")
+def pin_checkpoint(
+    path: Annotated[Path, typer.Option(help="Checkpoint directory (model.safetensors, ...).")],
+    name: Annotated[str, typer.Option(help="Checkpoint name in models.lock.json.")] = (
+        "finetuned_english"
+    ),
+    models_lock: Annotated[Path, typer.Option(help="Lock file.")] = Path("models.lock.json"),
+) -> None:
+    """Pin a locally trained checkpoint by the sha256 of its weights (M8 gate 3)."""
+    import json
+
+    from bench.models import LOCAL, REQUIRED, weights_sha256
+
+    missing = [f for f in REQUIRED if not (path / f).exists()]
+    if missing:
+        typer.echo(f"error: {path} is missing {missing}", err=True)
+        raise typer.Exit(2)
+    lock: dict[str, Any] = json.loads(models_lock.read_text()) if models_lock.exists() else {}
+    rel = path.resolve().relative_to(models_lock.resolve().parent).as_posix()
+    lock[name] = {"repo": LOCAL, "subfolder": "", "revision": weights_sha256(path), "path": rel}
+    models_lock.write_text(json.dumps(lock, indent=2) + "\n")
+    typer.echo(f"pinned {name} = {rel} @ {lock[name]['revision'][:12]}")
+
+
 @app.command("split")
 def split_cmd(
     docs: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
@@ -312,7 +382,8 @@ def split_cmd(
     cfg = load_split(config)
     arm_cfg = load_arms(arms, qs_dir)
     udir = units or units_dir(docs)
-    enabled = [a for a, spec in arm_cfg.arms.items() if spec.enabled]
+    # the split is decided on the zero-shot arms; a trained arm shares its base arm's unit spec
+    enabled = [a for a, spec in arm_cfg.arms.items() if spec.enabled and not spec.trained]
     missing_units = [a for a in enabled if not (udir / f"{a}.jsonl").exists()]
     if missing_units:
         typer.echo(

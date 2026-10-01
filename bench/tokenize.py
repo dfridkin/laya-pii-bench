@@ -14,7 +14,11 @@ from tokenizers import Tokenizer
 
 from bench.models import MODELS_LOCK, pinned
 
-_SUBDIR = {"english": "tokenizer", "multilingual": "multilingual/tokenizer"}
+_SUBDIR = {
+    "english": "tokenizer",
+    "multilingual": "multilingual/tokenizer",
+    "finetuned_english": "tokenizer",
+}
 
 
 class Offsets(Protocol):

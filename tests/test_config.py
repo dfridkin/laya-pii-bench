@@ -53,7 +53,8 @@ def test_arms_load() -> None:
     a = config.load_arms(CFG / "arms.yaml")
     assert a.arms["A"].state_budget == 320
     assert a.arms["B1"].state_budget == 768
-    assert a.arms["C"].enabled is False
+    assert a.arms["C"].enabled is True and a.arms["C"].trained  # M8
+    assert not any(a.arms[n].trained for n in ("A", "B1", "B2", "B3", "B4"))
 
 
 def test_question_sets_load() -> None:
