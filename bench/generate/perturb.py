@@ -136,15 +136,11 @@ def ocr_noise(
     protected: frozenset[str] = frozenset(),
 ) -> list[Edit]:  # fmt: skip
     """Character confusions (l/1, O/0, Z/2, S/5, B/8) and dropped letters. Drops stay away from
-    labeled-value edges and never empty a value; spans keep their labels. An edit that would turn
-    a word into a `protected` word (a world person's name token, lowercased) is skipped, so noise
-    never fabricates an unlabeled name ("Samples" -> "Sales", M8 scale-up)."""
+    labeled-value edges and never empty a value; spans keep their labels. If the edits in a word
+    together turn it into a `protected` word (a world person's name token, lowercased), all of
+    that word's edits are dropped, so noise never fabricates an unlabeled name ("Samples" ->
+    "Sales" by two drops; M8 scale-up, gold audit). The random draws are unchanged."""
     text = doc.text
-
-    def makes_name(i: int, new: str) -> bool:
-        a, b = _word_at(text, i)
-        return (text[a:i] + new + text[i + 1 : b]).lower() in protected
-
     edges = {p for s, e in _intervals(doc) for p in (s, e - 1)}
     inside = [(s, e) for s, e in _intervals(doc)]
     edits: list[Edit] = []
@@ -152,8 +148,7 @@ def ocr_noise(
         if r.random() >= rate:
             continue
         if ch in OCR_SUBS:
-            if not makes_name(i, OCR_SUBS[ch]):
-                edits.append(Edit(i, 1, OCR_SUBS[ch]))
+            edits.append(Edit(i, 1, OCR_SUBS[ch]))
         elif (
             ch.isalpha()
             and i not in edges
@@ -163,10 +158,24 @@ def ocr_noise(
         ):
             if any(s <= i < e and e - s <= 3 for s, e in inside):
                 continue  # never shrink a short value toward empty
-            if makes_name(i, ""):
-                continue
             edits.append(Edit(i, 1, ""))
-    return edits
+    if not protected:
+        return edits
+    by_word: dict[tuple[int, int], list[Edit]] = {}
+    for e in edits:
+        if text[e.pos].isalpha():
+            by_word.setdefault(_word_at(text, e.pos), []).append(e)
+    dropped: set[int] = set()
+    for (a, b), group in by_word.items():
+        word: list[str] = []
+        pos = a
+        for e in sorted(group, key=lambda x: x.pos):
+            word.append(text[pos : e.pos] + e.new)
+            pos = e.pos + e.length
+        word.append(text[pos:b])
+        if "".join(word).lower() in protected:
+            dropped |= {id(e) for e in group}
+    return [e for e in edits if id(e) not in dropped]
 
 
 def _table_blocks(text: str) -> list[list[tuple[int, str]]]:

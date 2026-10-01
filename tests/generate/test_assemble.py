@@ -101,3 +101,20 @@ def test_real_tokenizer_xl_exceeds_8192(world: W.World) -> None:
     )
     short = assemble(spec_for(world, DocType.ICF, LengthBucket.SHORT, 2), SPEC, count)
     assert 120 <= count(short.text) <= 1000
+
+
+def test_depth_block_renders_real_values_whatever_the_doc_enables(
+    world: W.World, scanner: checks.Scanner
+) -> None:
+    """M8 gold audit: with coded ids / quasi dates disabled for the doc, the block still names a
+    real subject id and visit date, never "(subject the participant) ... on the participant"."""
+    spec = spec_for(world, DocType.SITE_EMAIL, LengthBucket.LONG, 3, pii_depth=PiiDepth.MIDDLE,
+                    enabled=frozenset({PiiCategory.PHI_DIRECT}))  # fmt: skip
+    doc = assemble(spec, SPEC, words)
+    block = next(p for p in doc.text.split("\n\n") if p.startswith("Note to file"))
+    assert "the participant" not in block
+    a = doc.text.index(block)
+    cats = {s.category for s in doc.spans if a <= s.start < a + len(block)}
+    assert cats == {PiiCategory.PHI_DIRECT, PiiCategory.CODED_ID, PiiCategory.PHI_QUASI,
+                    PiiCategory.STAFF_PII}  # fmt: skip
+    assert checks.check(doc, POLICY, scanner) == []

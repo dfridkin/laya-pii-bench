@@ -227,10 +227,20 @@ class _Names:
         raise RuntimeError(f"could not draw a unique name for {key}")
 
 
+# composed place names must not echo Nazi camps or other atrocity sites ("Birken" + "au" made
+# "Birkenau" at 63 sites, M8 gold audit)
+BLOCKED_PLACES = ("auschwitz", "birkenau", "dachau", "treblinka", "sobibor", "majdanek", "belzec",
+                  "buchenwald", "ravensbr", "theresienstadt", "mauthausen", "sachsenhausen",
+                  "flossenb", "neuengamme", "bergen-belsen", "stutthof", "chelmno", "gross-rosen",
+                  "katyn", "srebrenica")  # fmt: skip
+
+
 def _place(lang: str, r: random.Random, used: set[str]) -> str:
     pre, suf = PLACE_STEMS[lang]
     for _ in range(100):
         name = r.choice(pre) + r.choice(suf)
+        if any(b in name.lower() for b in BLOCKED_PLACES):
+            continue
         if name not in used:
             used.add(name)
             return name

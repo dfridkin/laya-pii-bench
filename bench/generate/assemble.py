@@ -40,6 +40,9 @@ ROWS: dict[DocType, tuple[int, int]] = {
 # forms whose row cap applies in the short bucket too: a site's real deviation log can outgrow a
 # short page (M8 scale-up, 63 sites); the cap keeps the earliest real rows, none invented
 CAPPED_WHEN_SHORT = frozenset({DocType.DEVIATION})
+# the depth block's slots: name, subject id, visit date, investigator
+BLOCK_CATEGORIES = (PiiCategory.PHI_DIRECT, PiiCategory.CODED_ID, PiiCategory.PHI_QUASI,
+                    PiiCategory.STAFF_PII)  # fmt: skip
 PII_BLOCK = {  # the single PII paragraph of a depth doc (English: depth docs are long, so English)
     "en": "Note to file: {name} (subject {sid}) attended the visit on {date}; "
     "the source record was reviewed by {staff}.",
@@ -146,12 +149,16 @@ def _assemble(
         if ds.subject is None or ds.site is None:
             raise AssemblyError(f"{ds.doc_id}: depth docs need a site and subject")
         ctx.mode = "normal"
+        # the block's own slots are always real values: a disabled category would render its
+        # neutral alt phrase ("attended the visit on the participant", M8 gold audit)
+        doc_enabled, ctx.enabled = ctx.enabled, frozenset(BLOCK_CATEGORIES)
         sub = ds.subject
         pii_block = PII_BLOCK["en"].format(
             name=ctx.name(sub.person, "first_last"), sid=ctx.subject_id(sub, "plain"),
             date=ctx.event_date(sub.visits[1]), staff=ctx.name(ds.site.staff["pi"], "title_last"),
         )  # fmt: skip
         ctx.mode = "clean"
+        ctx.enabled = doc_enabled
         subjects = sorted({*subjects, sub.subject_id})
 
     sections: list[str] = []

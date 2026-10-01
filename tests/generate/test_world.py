@@ -80,3 +80,9 @@ def test_fictional_identifiers(world: W.World) -> None:
     for p in world.persons():
         assert p.phone is None or "555" in p.phone
         assert p.email is None or p.email.endswith((".example.org", ".example.com"))
+
+
+def test_no_place_name_echoes_an_atrocity_site() -> None:
+    world = W.build(SPEC, frozenset())
+    places = {s.city for s in world.sites()} | {s.institution for s in world.sites()}
+    assert not any(b in p.lower() for p in places for b in W.BLOCKED_PLACES)

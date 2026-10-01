@@ -153,3 +153,29 @@ def test_headers_footers_and_email_quoting(world: W.World, scanner: checks.Scann
     assert checks.check(doc, POLICY, scanner) == []
     mail = gen(world, DocType.SITE_EMAIL, LengthBucket.SHORT, 1)
     assert "email_quoting" in mail.tags and "\n> " in mail.text
+
+
+class _Draws:
+    """Stands in for random.Random: random() returns 0 (edit) at the listed text positions."""
+
+    def __init__(self, hits: set[int]) -> None:
+        self.hits, self.i = hits, -1
+
+    def random(self) -> float:
+        self.i += 1
+        return 0.0 if self.i in self.hits else 1.0
+
+
+def test_ocr_never_fabricates_a_name_from_several_drops() -> None:
+    from bench.domain import Document, LengthBucket, WorldRefs
+
+    text = "Samples are shipped cold. Tablets ship warm."
+    doc = Document(id="x", doc_type="protocol_section", lang="en", text=text, spans=[],
+                   negatives=[], tags=[], length_bucket=LengthBucket.SHORT, pii_depth=None,
+                   world_refs=WorldRefs(study="S", site="SPONSOR", subjects=[]),
+                   gen_meta={})  # fmt: skip
+    m, p, b = text.index("m"), text.index("p"), text.index("b")  # Sa[m][p]les, Ta[b]lets
+    edits = perturb.ocr_noise(doc, _Draws({m, p, b}), 0.01, frozenset({"sales"}))  # type: ignore[arg-type]
+    assert [e.pos for e in edits] == [b]  # "Sales" would be a name: both of its drops are gone
+    all_edits = perturb.ocr_noise(doc, _Draws({m, p, b}), 0.01)  # type: ignore[arg-type]
+    assert sorted(e.pos for e in all_edits) == [m, p, b]
