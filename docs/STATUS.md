@@ -383,9 +383,17 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-`/milestone M8` (fine-tuned arm C, report v2). Before building, decide the corpus size for the
-operating-point claim (D-008 amended: "recall >= 0.99" needs >= ~370 test positives) and how arm C
-trains on the train split (350 docs). Long runs: keep the Mac awake and other apps closed.
+M8 paused before building, at the owner's request. Done so far:
+- An outcomes report (M0-M7, with a general summary) is drafted as a shared doc
+  (https://claude.ai/code/artifact/14d0fcf2-1adb-4e98-8698-b1e2a0e90dc2).
+- The HUD is open locally (`hud/dist/index.html`).
+
+Decided: arm C trains on Kaggle 2x T4. The owner runs it on their own account; Claude prepares the
+notebook and a train-split dataset; nothing is pushed to the Hub, and the checkpoint is pinned by
+hash.
+
+Still open: corpus size. The recommendation is to keep 600 docs, train C, and scale up only if C
+shows a real operating point (D-008 amended).
 
 ## Session log
 
@@ -410,3 +418,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-30 M6 follow-up: D-007/D-008 amended, D-021 recorded; curve headline built (calib refit identical except curve, frozen 98db5e2; rescored). qs_v3 wording awaits approval. Starting M7.
 - 2026-09-30 D-021: qs_v3 run on arm A (calib frozen 7a5d6bb), scored; AUROC 0.509 vs qs_v1 0.778 (general yes-bias, not date-specific); report finding and audit record added.
 - 2026-09-30 M7: HUD replay built (single file, real M6 test replay, make hud with vitest + Playwright); gate PASS; review fixes applied (routed_sha256 provenance, role labels, over-escalate, stronger e2e).
+- 2026-09-30 M8 planning: training on Kaggle (owner runs it); corpus size pending; outcomes report drafted as a shared doc and the HUD opened locally, both before any fine-tuning (owner request).
