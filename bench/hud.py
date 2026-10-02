@@ -15,6 +15,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
+from bench.baseline import ARM as BASELINE_ARMS
 from bench.calibrate import load_verified
 from bench.domain import (
     Decision,
@@ -101,6 +102,8 @@ def build(scores_paths: Sequence[Path], split: str = "test", src: Sources | None
     runs: list[ReplayRun] = []
     doc_ids: set[str] = set()
     for p in sorted(scores_paths):
+        if p.name.split("__", 1)[0] in BASELINE_ARMS.values():
+            continue  # lexical baselines are report rows, not Laya runs to replay (M8)
         run, ids = replay_run(p, split, src)
         runs.append(run)
         doc_ids |= ids
