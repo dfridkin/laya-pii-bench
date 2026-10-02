@@ -1,27 +1,21 @@
 {
-  "arm": "B1",
+  "arm": "C",
   "qs": "qs_v2",
   "temperatures": {
-    "has_coded_id:2": 1.0,
-    "has_phi_direct:2": 1.0,
-    "has_phi_quasi:2": 1.0,
-    "has_staff_pii:2": 1.0,
-    "pii_present:2": 1.0
+    "has_coded_id:2": 0.846885763106847,
+    "has_phi_direct:2": 0.9073715601139883,
+    "has_phi_quasi:2": 0.9841207915051078,
+    "has_staff_pii:2": 0.872484492039408,
+    "pii_present:2": 0.9351048702197966
   },
-  "temperature_fallbacks": {
-    "has_coded_id:2": "fit hit bound (20)",
-    "has_phi_direct:2": "fit hit bound (20)",
-    "has_phi_quasi:2": "fit hit bound (20)",
-    "has_staff_pii:2": "fit hit bound (20)",
-    "pii_present:2": "fit hit bound (20)"
-  },
-  "t_low": 0.06860000000000002,
-  "t_high": 0.9999990000010001,
+  "temperature_fallbacks": {},
+  "t_low": 0.9700938424292987,
+  "t_high": 0.9700938424292987,
   "recall_target": 0.995,
   "precision_target": 0.98,
   "fit_on": "calib",
-  "decisions_sha256": "e9b31c2f45224c4b9eaaab265f75b761088f4a537e9840c1bd5f9a09169f2932",
-  "units_sha256": "bac3fbb8d1079e1953d43e2fccde3ad5ddf3d94db2ec21cda91c0485940227ba",
+  "decisions_sha256": "c967f19a8d25baecd4e8088f8a462069f3cc8fb7d83807ef04c17af0e761b96f",
+  "units_sha256": "22fa9af3b4ac6fd43a9c18e06e13732fefa629902caa8facc3e885f84219e604",
   "calib_doc_ids": [
     "d0005",
     "d0006",
@@ -281,12 +275,12 @@
     "d1595"
   ],
   "t_low_curve": {
-    "0.9": 0.6609999999999999,
-    "0.95": 0.4477,
-    "0.98": 0.2278,
-    "0.99": 0.1169,
-    "0.995": 0.06860000000000002
+    "0.9": 0.9986298582952291,
+    "0.95": 0.9985599184437643,
+    "0.98": 0.9980644742768339,
+    "0.99": 0.9967542103425702,
+    "0.995": 0.9700938424292987
   },
-  "calib_auroc_pii": 0.3804535894281519,
-  "content_hash": "a5c68d1191d886a27ea90fe968e4b4cfff7ca91cbee3012eaa1fce2b420640d5"
+  "calib_auroc_pii": 0.999929897641739,
+  "content_hash": "5cbb5b26d7940c57fae6eebd0fe320c9107ddcb4bfd9ab7b67a41124b1271f9a"
 }

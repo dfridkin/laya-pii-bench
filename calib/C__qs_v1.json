@@ -1,27 +1,20 @@
 {
-  "arm": "B1",
-  "qs": "qs_v2",
+  "arm": "C",
+  "qs": "qs_v1",
   "temperatures": {
-    "has_coded_id:2": 1.0,
-    "has_phi_direct:2": 1.0,
-    "has_phi_quasi:2": 1.0,
-    "has_staff_pii:2": 1.0,
-    "pii_present:2": 1.0
+    "category:5": 0.8765496711582115,
+    "doc_kind:4": 1.163712395292383,
+    "pii_present:2": 0.9351383228489224,
+    "subject_role:4": 0.8843770888671152
   },
-  "temperature_fallbacks": {
-    "has_coded_id:2": "fit hit bound (20)",
-    "has_phi_direct:2": "fit hit bound (20)",
-    "has_phi_quasi:2": "fit hit bound (20)",
-    "has_staff_pii:2": "fit hit bound (20)",
-    "pii_present:2": "fit hit bound (20)"
-  },
-  "t_low": 0.06860000000000002,
-  "t_high": 0.9999990000010001,
+  "temperature_fallbacks": {},
+  "t_low": 0.9697435557017623,
+  "t_high": 0.9697435557017623,
   "recall_target": 0.995,
   "precision_target": 0.98,
   "fit_on": "calib",
-  "decisions_sha256": "e9b31c2f45224c4b9eaaab265f75b761088f4a537e9840c1bd5f9a09169f2932",
-  "units_sha256": "bac3fbb8d1079e1953d43e2fccde3ad5ddf3d94db2ec21cda91c0485940227ba",
+  "decisions_sha256": "609cb5644398aeb8a7f6be7ef1982678254793f42455eeea9c74f2e225d669c3",
+  "units_sha256": "22fa9af3b4ac6fd43a9c18e06e13732fefa629902caa8facc3e885f84219e604",
   "calib_doc_ids": [
     "d0005",
     "d0006",
@@ -281,12 +274,12 @@
     "d1595"
   ],
   "t_low_curve": {
-    "0.9": 0.6609999999999999,
-    "0.95": 0.4477,
-    "0.98": 0.2278,
-    "0.99": 0.1169,
-    "0.995": 0.06860000000000002
+    "0.9": 0.9986295356258317,
+    "0.95": 0.9985595818924973,
+    "0.98": 0.9980640426352904,
+    "0.99": 0.9968274626013768,
+    "0.995": 0.9697435557017623
   },
-  "calib_auroc_pii": 0.3804535894281519,
-  "content_hash": "a5c68d1191d886a27ea90fe968e4b4cfff7ca91cbee3012eaa1fce2b420640d5"
+  "calib_auroc_pii": 0.999930338537074,
+  "content_hash": "c8bdfb9f3c48d975fa630c99217f4779d511c1b07a4ff36f2842b4f4fdc613c9"
 }
