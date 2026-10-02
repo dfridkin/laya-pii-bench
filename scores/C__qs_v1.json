@@ -43,7 +43,7 @@
     "checkpoint_revs": [
       "6809676153aa2bb747a0054ed30835e45b3d8e976cdfe31fa956185e9aee661c"
     ],
-    "created_at": "2026-10-02T04:15:05.027187+00:00"
+    "created_at": "2026-10-02T04:34:55.632837+00:00"
   },
   "splits": {
     "test": {
@@ -1626,42 +1626,42 @@
         {
           "target": 0.9,
           "t_low": 0.9986295356258317,
-          "recall": 0.9976133651551312,
-          "recall_exact_lo": 0.9867748387437515,
-          "recall_exact_hi": 0.9999395774627841,
-          "forward_rate": 0.9257833012427796,
-          "negatives_forwarded": 0.9988666414809217,
-          "false_forwards": 1
+          "recall": 0.9689737470167065,
+          "recall_exact_lo": 0.9475285057347589,
+          "recall_exact_hi": 0.9833784838959219,
+          "forward_rate": 0.9282338526168388,
+          "negatives_forwarded": 0.9992444276539478,
+          "false_forwards": 13
         },
         {
           "target": 0.95,
           "t_low": 0.9985595818924973,
-          "recall": 0.9976133651551312,
-          "recall_exact_lo": 0.9867748387437515,
-          "recall_exact_hi": 0.9999395774627841,
-          "forward_rate": 0.9257833012427796,
-          "negatives_forwarded": 0.9988666414809217,
-          "false_forwards": 1
+          "recall": 0.9713603818615751,
+          "recall_exact_lo": 0.950507101572101,
+          "recall_exact_hi": 0.9851157650441456,
+          "forward_rate": 0.9280588132329775,
+          "negatives_forwarded": 0.9992444276539478,
+          "false_forwards": 12
         },
         {
           "target": 0.98,
           "t_low": 0.9980640426352904,
-          "recall": 0.9976133651551312,
-          "recall_exact_lo": 0.9867748387437515,
-          "recall_exact_hi": 0.9999395774627841,
-          "forward_rate": 0.9257833012427796,
-          "negatives_forwarded": 0.9988666414809217,
-          "false_forwards": 1
+          "recall": 0.9928400954653938,
+          "recall_exact_lo": 0.9792192937996034,
+          "recall_exact_hi": 0.9985210146689574,
+          "forward_rate": 0.9264834587782251,
+          "negatives_forwarded": 0.9992444276539478,
+          "false_forwards": 3
         },
         {
           "target": 0.99,
           "t_low": 0.9968274626013768,
-          "recall": 0.9976133651551312,
-          "recall_exact_lo": 0.9867748387437515,
-          "recall_exact_hi": 0.9999395774627841,
-          "forward_rate": 0.9257833012427796,
-          "negatives_forwarded": 0.9988666414809217,
-          "false_forwards": 1
+          "recall": 0.9952267303102625,
+          "recall_exact_lo": 0.9828644777414561,
+          "recall_exact_hi": 0.9994214112574122,
+          "forward_rate": 0.9263084193943637,
+          "negatives_forwarded": 0.9992444276539478,
+          "false_forwards": 2
         },
         {
           "target": 0.995,
@@ -3075,22 +3075,22 @@
         {
           "target": 0.9,
           "t_low": 0.9986295356258317,
-          "recall": 1.0,
-          "recall_exact_lo": 0.9362499033376378,
-          "recall_exact_hi": 1.0,
-          "forward_rate": 0.9171270718232044,
+          "recall": 0.9285714285714286,
+          "recall_exact_lo": 0.8270953018606302,
+          "recall_exact_hi": 0.9801960684911702,
+          "forward_rate": 0.9226519337016574,
           "negatives_forwarded": 0.9940119760479041,
-          "false_forwards": 0
+          "false_forwards": 4
         },
         {
           "target": 0.95,
           "t_low": 0.9985595818924973,
-          "recall": 1.0,
-          "recall_exact_lo": 0.9362499033376378,
-          "recall_exact_hi": 1.0,
-          "forward_rate": 0.9171270718232044,
+          "recall": 0.9642857142857143,
+          "recall_exact_lo": 0.8768681925420042,
+          "recall_exact_hi": 0.9956451872589474,
+          "forward_rate": 0.919889502762431,
           "negatives_forwarded": 0.9940119760479041,
-          "false_forwards": 0
+          "false_forwards": 2
         },
         {
           "target": 0.98,
@@ -3165,6 +3165,10 @@
     "timing_drift": null
   },
   "caveats": [
-    "test: slices with n < 30: lang=es (n=7), lang=pl (n=18), split_span=yes (n=18)"
+    "Accuracy run on Tesla T4 (Kaggle, D-022), not the Apple M2. Accuracy does not depend on the hardware (D-002); this run's latency is not the M2 headline (see the timing-only run where present).",
+    "test: slice recall from fewer than 30 positives: doc_type=delegation_log (14), doc_type=deviation_log (23), doc_type=icf_signature_page (17), lang=de (26), lang=es (6), lang=pl (14), pii_depth=early (11), pii_depth=late (21), pii_depth=middle (11), split_span=yes (17)",
+    "test: slice forward rate from fewer than 30 negatives: lang=de (7), lang=es (1), lang=pl (4), split_span=yes (1)",
+    "holdout: slice recall from fewer than 30 positives: hard_negative=yes (14), length_bucket=short (22), perturbation=headers_footers (25), perturbation=line_wrap (19), perturbation=none (19), perturbation=ocr_noise (6), pre_redacted=yes (5)",
+    "Fine-tuned on 4067 train-split units from 859 documents: every PII unit plus 3 clean units per PII unit, so training prevalence is 25.0%; test prevalence is 7.3%. 792 of 859 training documents are English; no training documents of type irb_letter. Same generator as the test set (templates, filler, Faker world; disjoint sites and persons): in-distribution evidence only."
   ]
 }

@@ -49,7 +49,7 @@
     "checkpoint_revs": [
       "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     ],
-    "created_at": "2026-10-02T04:14:57.174425+00:00"
+    "created_at": "2026-10-02T04:34:47.930841+00:00"
   },
   "splits": {
     "test": {
@@ -3479,8 +3479,11 @@
     "timing_drift": null
   },
   "caveats": [
+    "Accuracy run on Tesla T4 (Kaggle, D-022), not the Apple M2. Accuracy does not depend on the hardware (D-002); this run's latency is not the M2 headline (see the timing-only run where present).",
     "Doc-level arm: underpowered (D-008 amended); 337 test documents, few units each, so recall intervals are wide.",
-    "test: slices with n < 30: doc_type=delegation_log (n=15), doc_type=deviation_log (n=26), doc_type=icf_signature_page (n=19), lang=de (n=22), lang=es (n=6), lang=pl (n=11), pii_depth=early (n=21), pii_depth=middle (n=24)",
-    "holdout: slices with n < 30: hard_negative=yes (n=18), perturbation=line_wrap (n=27), perturbation=ocr_noise (n=7), pre_redacted=yes (n=6)"
+    "test: slice recall from fewer than 30 positives: doc_type=conmed_log (12), doc_type=crf_page (23), doc_type=delegation_log (14), doc_type=deviation_log (13), doc_type=icf_signature_page (14), doc_type=lab_report (21), doc_type=site_correspondence (22), lang=de (19), lang=es (5), lang=pl (9), length_bucket=xl (22), perturbation=email_quoting (22), perturbation=ocr_noise (26), pii_depth=early (8), pii_depth=late (16), pii_depth=middle (10), pre_redacted=yes (28)",
+    "test: slice forward rate from fewer than 30 negatives: doc_type=conmed_log (20), doc_type=crf_page (25), doc_type=delegation_log (1), doc_type=deviation_log (13), doc_type=icf_signature_page (5), doc_type=lab_report (9), doc_type=sae_cioms (6), lang=de (3), lang=es (1), lang=pl (2), pii_depth=early (13), pii_depth=late (24), pii_depth=middle (14), pre_redacted=yes (17)",
+    "holdout: slice recall from fewer than 30 positives: hard_negative=yes (14), length_bucket=short (22), perturbation=headers_footers (25), perturbation=line_wrap (19), perturbation=none (19), perturbation=ocr_noise (6), pre_redacted=yes (5)",
+    "holdout: slice forward rate from fewer than 30 negatives: doc_type=irb_letter (28), hard_negative=no (24), hard_negative=yes (4), lang=en (28), length_bucket=medium (17), length_bucket=short (11), perturbation=headers_footers (11), perturbation=line_wrap (8), perturbation=none (11), perturbation=ocr_noise (1), pii_depth=none (28), pre_redacted=no (27), pre_redacted=yes (1), split_span=no (28), truncated=no (28)"
   ]
 }

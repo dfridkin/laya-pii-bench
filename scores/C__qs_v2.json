@@ -43,7 +43,7 @@
     "checkpoint_revs": [
       "6809676153aa2bb747a0054ed30835e45b3d8e976cdfe31fa956185e9aee661c"
     ],
-    "created_at": "2026-10-02T04:15:10.351973+00:00"
+    "created_at": "2026-10-02T04:35:00.706795+00:00"
   },
   "splits": {
     "test": {
@@ -1817,42 +1817,42 @@
         {
           "target": 0.9,
           "t_low": 0.9986298582952291,
-          "recall": 0.9952267303102625,
-          "recall_exact_lo": 0.9828644777414561,
-          "recall_exact_hi": 0.9994214112574122,
-          "forward_rate": 0.9263084193943637,
-          "negatives_forwarded": 0.9992444276539478,
-          "false_forwards": 2
+          "recall": 0.9116945107398569,
+          "recall_exact_lo": 0.8803372497267182,
+          "recall_exact_hi": 0.9370627955560149,
+          "forward_rate": 0.9329599159810957,
+          "negatives_forwarded": 0.999811106913487,
+          "false_forwards": 37
         },
         {
           "target": 0.95,
           "t_low": 0.9985599184437643,
-          "recall": 0.9952267303102625,
-          "recall_exact_lo": 0.9828644777414561,
-          "recall_exact_hi": 0.9994214112574122,
-          "forward_rate": 0.9263084193943637,
-          "negatives_forwarded": 0.9992444276539478,
-          "false_forwards": 2
+          "recall": 0.9307875894988067,
+          "recall_exact_lo": 0.9021097941071138,
+          "recall_exact_hi": 0.9531606472904076,
+          "forward_rate": 0.9315596009102048,
+          "negatives_forwarded": 0.999811106913487,
+          "false_forwards": 29
         },
         {
           "target": 0.98,
           "t_low": 0.9980644742768339,
-          "recall": 0.9952267303102625,
-          "recall_exact_lo": 0.9828644777414561,
-          "recall_exact_hi": 0.9994214112574122,
-          "forward_rate": 0.9263084193943637,
-          "negatives_forwarded": 0.9992444276539478,
-          "false_forwards": 2
+          "recall": 0.9761336515513126,
+          "recall_exact_lo": 0.9565478817077953,
+          "recall_exact_hi": 0.9884971781753977,
+          "forward_rate": 0.9282338526168388,
+          "negatives_forwarded": 0.999811106913487,
+          "false_forwards": 10
         },
         {
           "target": 0.99,
           "t_low": 0.9967542103425702,
-          "recall": 0.9952267303102625,
-          "recall_exact_lo": 0.9828644777414561,
-          "recall_exact_hi": 0.9994214112574122,
-          "forward_rate": 0.9263084193943637,
-          "negatives_forwarded": 0.9992444276539478,
-          "false_forwards": 2
+          "recall": 0.9880668257756563,
+          "recall_exact_lo": 0.9723729728561107,
+          "recall_exact_hi": 0.9961142878113303,
+          "forward_rate": 0.9271836163136705,
+          "negatives_forwarded": 0.9996222138269739,
+          "false_forwards": 5
         },
         {
           "target": 0.995,
@@ -3518,22 +3518,22 @@
         {
           "target": 0.9,
           "t_low": 0.9986298582952291,
-          "recall": 1.0,
-          "recall_exact_lo": 0.9362499033376378,
-          "recall_exact_hi": 1.0,
-          "forward_rate": 0.9185082872928176,
-          "negatives_forwarded": 0.9955089820359282,
-          "false_forwards": 0
+          "recall": 0.9285714285714286,
+          "recall_exact_lo": 0.8270953018606302,
+          "recall_exact_hi": 0.9801960684911702,
+          "forward_rate": 0.9281767955801105,
+          "negatives_forwarded": 1.0,
+          "false_forwards": 4
         },
         {
           "target": 0.95,
           "t_low": 0.9985599184437643,
-          "recall": 1.0,
-          "recall_exact_lo": 0.9362499033376378,
-          "recall_exact_hi": 1.0,
-          "forward_rate": 0.9185082872928176,
-          "negatives_forwarded": 0.9955089820359282,
-          "false_forwards": 0
+          "recall": 0.9642857142857143,
+          "recall_exact_lo": 0.8768681925420042,
+          "recall_exact_hi": 0.9956451872589474,
+          "forward_rate": 0.925414364640884,
+          "negatives_forwarded": 1.0,
+          "false_forwards": 2
         },
         {
           "target": 0.98,
@@ -3541,8 +3541,8 @@
           "recall": 1.0,
           "recall_exact_lo": 0.9362499033376378,
           "recall_exact_hi": 1.0,
-          "forward_rate": 0.9185082872928176,
-          "negatives_forwarded": 0.9955089820359282,
+          "forward_rate": 0.9226519337016574,
+          "negatives_forwarded": 1.0,
           "false_forwards": 0
         },
         {
@@ -3551,8 +3551,8 @@
           "recall": 1.0,
           "recall_exact_lo": 0.9362499033376378,
           "recall_exact_hi": 1.0,
-          "forward_rate": 0.9185082872928176,
-          "negatives_forwarded": 0.9955089820359282,
+          "forward_rate": 0.9212707182320442,
+          "negatives_forwarded": 0.9985029940119761,
           "false_forwards": 0
         },
         {
@@ -3608,6 +3608,10 @@
     "timing_drift": null
   },
   "caveats": [
-    "test: slices with n < 30: lang=es (n=7), lang=pl (n=18), split_span=yes (n=18)"
+    "Accuracy run on Tesla T4 (Kaggle, D-022), not the Apple M2. Accuracy does not depend on the hardware (D-002); this run's latency is not the M2 headline (see the timing-only run where present).",
+    "test: slice recall from fewer than 30 positives: doc_type=delegation_log (14), doc_type=deviation_log (23), doc_type=icf_signature_page (17), lang=de (26), lang=es (6), lang=pl (14), pii_depth=early (11), pii_depth=late (21), pii_depth=middle (11), split_span=yes (17)",
+    "test: slice forward rate from fewer than 30 negatives: lang=de (7), lang=es (1), lang=pl (4), split_span=yes (1)",
+    "holdout: slice recall from fewer than 30 positives: hard_negative=yes (14), length_bucket=short (22), perturbation=headers_footers (25), perturbation=line_wrap (19), perturbation=none (19), perturbation=ocr_noise (6), pre_redacted=yes (5)",
+    "Fine-tuned on 4067 train-split units from 859 documents: every PII unit plus 3 clean units per PII unit, so training prevalence is 25.0%; test prevalence is 7.3%. 792 of 859 training documents are English; no training documents of type irb_letter. Same generator as the test set (templates, filler, Faker world; disjoint sites and persons): in-distribution evidence only."
   ]
 }

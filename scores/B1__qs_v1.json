@@ -47,7 +47,7 @@
     "checkpoint_revs": [
       "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     ],
-    "created_at": "2026-10-02T04:14:48.545997+00:00"
+    "created_at": "2026-10-02T04:34:39.323548+00:00"
   },
   "splits": {
     "test": {
@@ -3094,7 +3094,10 @@
     "timing_drift": null
   },
   "caveats": [
-    "test: slices with n < 30: doc_type=icf_signature_page (n=23), lang=de (n=22), lang=es (n=6), lang=pl (n=11), split_span=yes (n=17)",
-    "holdout: slices with n < 30: perturbation=ocr_noise (n=15), pre_redacted=yes (n=17)"
+    "Accuracy run on Tesla T4 (Kaggle, D-022), not the Apple M2. Accuracy does not depend on the hardware (D-002); this run's latency is not the M2 headline (see the timing-only run where present).",
+    "test: slice recall from fewer than 30 positives: doc_type=conmed_log (21), doc_type=delegation_log (14), doc_type=deviation_log (18), doc_type=icf_signature_page (14), doc_type=lab_report (23), doc_type=site_correspondence (23), lang=de (19), lang=es (5), lang=pl (9), length_bucket=xl (29), perturbation=email_quoting (23), pii_depth=early (8), pii_depth=late (18), pii_depth=middle (11), split_span=yes (16)",
+    "test: slice forward rate from fewer than 30 negatives: doc_type=icf_signature_page (9), lang=de (3), lang=es (1), lang=pl (2), split_span=yes (1)",
+    "holdout: slice recall from fewer than 30 positives: hard_negative=yes (14), length_bucket=short (22), perturbation=headers_footers (25), perturbation=line_wrap (19), perturbation=none (19), perturbation=ocr_noise (6), pre_redacted=yes (5)",
+    "holdout: slice forward rate from fewer than 30 negatives: perturbation=ocr_noise (9), pre_redacted=yes (12)"
   ]
 }

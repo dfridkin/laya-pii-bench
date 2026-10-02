@@ -45,7 +45,7 @@
     "checkpoint_revs": [
       "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     ],
-    "created_at": "2026-10-02T04:14:45.598524+00:00"
+    "created_at": "2026-10-02T04:34:36.450678+00:00"
   },
   "splits": {
     "test": {
@@ -3472,6 +3472,9 @@
     "timing_drift": null
   },
   "caveats": [
-    "test: slices with n < 30: lang=es (n=7), lang=pl (n=18), split_span=yes (n=18)"
+    "Accuracy run on Tesla T4 (Kaggle, D-022), not the Apple M2. Accuracy does not depend on the hardware (D-002); this run's latency is not the M2 headline (see the timing-only run where present).",
+    "test: slice recall from fewer than 30 positives: doc_type=delegation_log (14), doc_type=deviation_log (23), doc_type=icf_signature_page (17), lang=de (26), lang=es (6), lang=pl (14), pii_depth=early (11), pii_depth=late (21), pii_depth=middle (11), split_span=yes (17)",
+    "test: slice forward rate from fewer than 30 negatives: lang=de (7), lang=es (1), lang=pl (4), split_span=yes (1)",
+    "holdout: slice recall from fewer than 30 positives: hard_negative=yes (14), length_bucket=short (22), perturbation=headers_footers (25), perturbation=line_wrap (19), perturbation=none (19), perturbation=ocr_noise (6), pre_redacted=yes (5)"
   ]
 }

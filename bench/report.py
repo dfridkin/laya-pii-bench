@@ -315,6 +315,13 @@ def _in_distribution(by_arm_qs: dict[tuple[str, str], Headline]) -> list[str]:
             "calib target, so most of the gain over zero-shot A reflects how learnable this "
             "corpus is, not general PII detection."
         )
+        hc = by_arm_qs.get(("C", "qs_v1"))
+        if hc is not None:
+            lex += (
+                f" C's margin over it is operational: at that target C forwards "
+                f"{hc.forward_rate.point:.1%} of test units ({hc.false_forwards} PII units "
+                "forwarded), so far fewer clean units go to review."
+            )
     return [
         "- **Arm C is in-distribution evidence only.** It is trained and tested on the same "
         "synthetic generator (same templates, filler and Faker world; disjoint sites and "
@@ -469,8 +476,16 @@ def _holdout_note(all_scores: Sequence[Scores]) -> str:
         + (fwd or "see the table")
         + ". Weak evidence of transfer: holdout PII is names and e-mail addresses in letter "
         "headers; many letters name a PI who also appears in training documents (D-018: 33 of "
-        f"56 positive units for arm C, {REVIEW}); and the lexical baselines also score "
-        "near-perfect AUROC here. Known limitation (M4 S1): a fixed alt-text contact line "
+        f"56 positive units for arm C, {REVIEW}); and the lexical baselines score AUROC "
+        + (
+            ", ".join(
+                f"{s.context.arm} {h.auroc_pii:.3f}"
+                for s, h in hs
+                if s.context.arm in BASELINES and h.auroc_pii is not None
+            )
+            or "n/a"
+        )
+        + " here. Known limitation (M4 S1): a fixed alt-text contact line "
         "appears only in PII-free letters, a possible shortcut cue (C's holdout AUROC is "
         "unchanged without those units, same review)."
     )
