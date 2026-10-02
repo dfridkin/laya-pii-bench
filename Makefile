@@ -6,10 +6,15 @@ ARM ?= A
 QS ?= qs_v1
 ARMS ?= A B1 B2 B3 B4 C
 QSETS ?= qs_v1 qs_v2
+# lexical baselines on arm C's training units (M8 results review B1), qs_v1 only; they score
+# arm A's units
+BASELINES ?= LW LC
+UNIT_ARM = $(if $(filter $(ARM),$(BASELINES)),A,$(ARM))
+TIMING ?= 1000
 BENCH := uv run bench
 
 .PHONY: bootstrap check lint type test schema fixture gen label split run run-all \
-        calibrate calibrate-all freeze-calib score score-all report hud pipeline smoke hw clean-generated
+        baselines calibrate calibrate-all freeze-calib score score-all report hud pipeline smoke hw clean-generated
 
 bootstrap:
 	./scripts/bootstrap.sh
@@ -73,24 +78,32 @@ run-all:  # batch-1 for every arm x qs, then the batched speed runs; each run re
 calibrate-all:
 	@for a in $(ARMS); do for q in $(QSETS); do $(MAKE) --no-print-directory calibrate ARM=$$a QS=$$q \
 	  || exit 1; done; done
+	@for a in $(BASELINES); do $(MAKE) --no-print-directory calibrate ARM=$$a QS=qs_v1 || exit 1; done
+
+baselines:  # CPU, seconds; needs finetune/data (bench finetune-data)
+	$(BENCH) baseline --kind word
+	$(BENCH) baseline --kind char
 
 score-all:
 	@for a in $(ARMS); do for q in $(QSETS); do $(MAKE) --no-print-directory score ARM=$$a QS=$$q \
 	  || exit 1; done; done
+	@for a in $(BASELINES); do $(MAKE) --no-print-directory score ARM=$$a QS=qs_v1 || exit 1; done
 
 calibrate:  # fits on the calib split only; then `make freeze-calib` (D-019)
-	$(BENCH) calibrate --decisions runs/$(ARM)/$(QS)/decisions.jsonl --units data/units/$(ARM).jsonl \
+	$(BENCH) calibrate --decisions runs/$(ARM)/$(QS)/decisions.jsonl --units data/units/$(UNIT_ARM).jsonl \
 	  --out calib/$(ARM)__$(QS).json
 
 freeze-calib:  # commit calib/*.json with content hashes; score refuses uncommitted calib
 	$(BENCH) freeze-calib calib/*.json
 
 BATCHED_RUN = runs/$(ARM)/$(QS)__batch$(BATCH)/decisions.jsonl
+TIMING_RUN = runs/$(ARM)/$(QS)__timing$(TIMING)/decisions.jsonl
 
 score:
-	$(BENCH) score --decisions runs/$(ARM)/$(QS)/decisions.jsonl --units data/units/$(ARM).jsonl \
+	$(BENCH) score --decisions runs/$(ARM)/$(QS)/decisions.jsonl --units data/units/$(UNIT_ARM).jsonl \
 	  --calib calib/$(ARM)__$(QS).json --out scores/$(ARM)__$(QS).json \
-	  $(if $(wildcard $(BATCHED_RUN)),--batched-decisions $(BATCHED_RUN))
+	  $(if $(wildcard $(BATCHED_RUN)),--batched-decisions $(BATCHED_RUN)) \
+	  $(if $(wildcard $(TIMING_RUN)),--timing-decisions $(TIMING_RUN))
 
 report:
 	$(BENCH) report --scores-dir scores --out reports/report.md
@@ -101,7 +114,7 @@ hud:  # M7: export the real replay (test split), embed it gzipped, build one fil
 	cd hud && npm install --no-audit --no-fund && npm test && npm run build
 	cd hud && npx playwright install chromium && npm run e2e
 
-pipeline: gen label split run-all calibrate-all freeze-calib score-all report
+pipeline: gen label split run-all baselines calibrate-all freeze-calib score-all report
 
 smoke:
 	$(BENCH) smoke --docs 20 --arm A --qs qs_v1

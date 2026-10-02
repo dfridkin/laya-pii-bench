@@ -569,16 +569,18 @@ def split_scores(
 
 
 def curve(rows: Sequence[Row], calib: CalibParams, policy: Policy) -> list[CurvePoint]:
-    """D-007 amended: each calib-fit t_low of the curve, routed like the headline. Recall here is
-    route recall (PII units not forwarded / PII units): with saturated scores a stricter t_low can
-    sit above t_high, and the units between are redacted, not missed (M8, arm C)."""
+    """D-007 amended: each calib-fit t_low of the curve, routed like the headline. Recall is route
+    recall (PII units not forwarded / PII units). Each point raises t_high to at least its t_low,
+    as `fit_t_high` does for the headline: with a fixed t_high a stricter t_low only moved units
+    into the redact band and every point equaled the headline (M8 results review M1)."""
     out: list[CurvePoint] = []
     pos = [r.positive for r in rows]
     n_pos, n_neg = sum(pos), len(rows) - sum(pos)
     for key, t in sorted(calib.t_low_curve.items(), key=lambda kv: float(kv[0])):
+        th = None if calib.t_high is None else max(calib.t_high, t)
         routes = [
             route_unit(r.p_pii, _argmax(r.cal["subject_role"]) if "subject_role" in r.cal else None,
-                       t, calib.t_high, policy.routing.patient_role_forces_redact)[0]
+                       t, th, policy.routing.patient_role_forces_redact)[0]
             for r in rows
         ]  # fmt: skip
         fwd = [rt is Route.FORWARD for rt in routes]
@@ -749,9 +751,17 @@ def caveats(
     for name, s in splits.items():
         if s.coverage_decided < s.coverage_units:
             out.append(f"{name}: {s.coverage_decided}/{s.coverage_units} units have a decision.")
-        small = [f"{r.dimension}={r.value} (n={r.n_units})" for r in s.slices if r.small_sample]
-        if small:
-            out.append(f"{name}: slices with n < {SMALL_SLICE}: " + ", ".join(small))
+        # review M8 minor: recall rests on positives, forward rate on negatives
+        few_pos = [f"{r.dimension}={r.value} ({r.n_positive})" for r in s.slices
+                   if 0 < r.n_positive < SMALL_SLICE]  # fmt: skip
+        few_neg = [f"{r.dimension}={r.value} ({r.n_units - r.n_positive})" for r in s.slices
+                   if r.n_units - r.n_positive < SMALL_SLICE]  # fmt: skip
+        if few_pos:
+            out.append(f"{name}: slice recall from fewer than {SMALL_SLICE} positives: "
+                       + ", ".join(few_pos))  # fmt: skip
+        if few_neg:
+            out.append(f"{name}: slice forward rate from fewer than {SMALL_SLICE} negatives: "
+                       + ", ".join(few_neg))  # fmt: skip
     return out
 
 

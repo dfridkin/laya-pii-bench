@@ -6,6 +6,7 @@ from collections import Counter
 from collections.abc import Iterable, Sequence
 from pathlib import Path
 
+from bench.baseline import ARM as BASELINE_ARMS
 from bench.domain import (
     CalibrationMetrics,
     Headline,
@@ -15,7 +16,17 @@ from bench.domain import (
     Route,
     Scores,
 )
-from bench.score import D008_ARM, D008_GAP, d008_gap
+from bench.score import (
+    D008_ARM,
+    D008_GAP,
+    SMALL_SLICE,
+    d008_gap,
+    exact_recall_hi,
+    exact_recall_lo,
+)
+
+BASELINES = {BASELINE_ARMS["word"]: "word 1-2-gram", BASELINE_ARMS["char"]: "char 2-5-gram"}
+REVIEW = "`reports/audits/M8_results_review.md`"
 
 SECTIONS = (
     "Run context",
@@ -222,14 +233,8 @@ def _findings(all_scores: Sequence[Scores]) -> list[str]:
         ha = by_arm_qs.get(("A", qs))
         if arm != "C" or ha is None or ha.auroc_pii is None or hc.auroc_pii is None:
             continue
-        out.append(
-            f"- **Fine-tuning (arm C, {qs}) changes discrimination from AUROC {ha.auroc_pii:.3f} "
-            f"(zero-shot A) to {hc.auroc_pii:.3f}.** At the 99.5% target C forwards "
-            f"{hc.forward_rate.point:.1%} of test units (A {ha.forward_rate.point:.1%}) with "
-            f"{hc.false_forwards} PII units forwarded (A {ha.false_forwards}); test recall "
-            f"{_recall_ci(hc)}, exact 95% bounds {_f(hc.recall_exact_lo)} / "
-            f"{_f(hc.recall_exact_hi)}."
-        )
+        out.append(_c_finding(qs, ha, hc))
+    out += _in_distribution(by_arm_qs)
     for (arm, qs), h3 in sorted(by_arm_qs.items()):
         h1 = by_arm_qs.get((arm, "qs_v1"))
         if qs != "qs_v3" or h1 is None or h1.auroc_pii is None or h3.auroc_pii is None:
@@ -245,7 +250,8 @@ def _findings(all_scores: Sequence[Scores]) -> list[str]:
             "(`reports/audits/M6_qs_v3_result-20260930.md`)."
         )
     if {"qs_v1", "qs_v2"} <= {s.context.qs for s in all_scores}:
-        devices = {s.context.hw.device for s in all_scores if s.context.hw}
+        devices = {s.context.hw.device for s in all_scores
+                   if s.context.hw and s.context.arm not in BASELINES}  # fmt: skip
         numerics = (
             "qs_v1 runs fp32 and qs_v2 fp16 (5 rows) on MPS, which moves long-input probabilities"
             if devices == {"mps"}
@@ -256,6 +262,67 @@ def _findings(all_scores: Sequence[Scores]) -> list[str]:
             f"pii_present has the same text in both; {numerics}; and only qs_v1 has the role rule."
         )
     return out
+
+
+def _route_bounds(h: Headline) -> tuple[float | None, float | None]:
+    hits = h.n_positive - h.false_forwards
+    return exact_recall_lo(hits, h.n_positive), exact_recall_hi(hits, h.n_positive)
+
+
+def _verdict(lo: float | None, hi: float | None, target: float | None) -> str:
+    if lo is None or hi is None or target is None:
+        return "untested"
+    if hi < target:
+        return "missed"
+    return "demonstrated" if lo >= target else "not rejected, not demonstrated"
+
+
+def _c_finding(qs: str, ha: Headline, hc: Headline) -> str:
+    """Arm C on one question set (review M3): route recall with exact bounds, one metric."""
+    lo, hi = _route_bounds(hc)
+    target = hc.recall_target
+    band = (
+        f" C has no review band: `t_low` = `t_high` = {hc.t_low:.4f}, so every unit is forwarded "
+        "or redacted, and the operating point rests on the lowest-scoring calib positives (see "
+        "the curve for stricter targets)."
+        if hc.t_high is not None and abs(hc.t_high - hc.t_low) < 1e-12
+        else ""
+    )
+    return (
+        f"- **Fine-tuning (arm C, {qs}) raises test AUROC of p(pii) from {ha.auroc_pii:.3f} "
+        f"(zero-shot A) to {hc.auroc_pii:.4f}.** At the {target or 0:g} calib target C forwards "
+        f"{hc.forward_rate.point:.1%} of test units (A {ha.forward_rate.point:.1%}). Route recall "
+        f"{_f(hc.route_recall)}: {hc.false_forwards} of {hc.n_positive} PII units forwarded "
+        f"(exact 95% {_f(lo)} to {_f(hi)}); the {target or 0:g} target is "
+        f"{_verdict(lo, hi, target)} (D-008).{band}"
+    )
+
+
+def _in_distribution(by_arm_qs: dict[tuple[str, str], Headline]) -> list[str]:
+    """Review B1: what a bag-of-words model gets from the same training units."""
+    if not any(a == "C" for a, _ in by_arm_qs):
+        return []
+    base = [(a, h) for (a, _), h in sorted(by_arm_qs.items())
+            if a in BASELINES and h.auroc_pii is not None]  # fmt: skip
+    if not base:
+        lex = "No lexical baseline was scored, so how learnable the corpus is was not measured."
+    else:
+        a, h = max(base, key=lambda ah: ah[1].auroc_pii or 0.0)
+        lex = (
+            f"A bag-of-words classifier trained on the same units ({BASELINES[a]} TF-IDF + "
+            f"logistic regression, arm {a}) reaches test AUROC {h.auroc_pii:.4f} and forwards "
+            f"{h.forward_rate.point:.1%} with {h.false_forwards} PII units forwarded at the same "
+            "calib target, so most of the gain over zero-shot A reflects how learnable this "
+            "corpus is, not general PII detection."
+        )
+    return [
+        "- **Arm C is in-distribution evidence only.** It is trained and tested on the same "
+        "synthetic generator (same templates, filler and Faker world; disjoint sites and "
+        f"persons). {lex} C's advantage over the baseline is concentrated in hard negatives and "
+        "name-only units, and C's misses are single quasi-identifiers embedded in boilerplate "
+        f"(strata in {REVIEW}). These results do not transfer to real documents without an "
+        "out-of-generator test."
+    ]
 
 
 def best_b(all_scores: Sequence[Scores], qs: str) -> Scores | None:
@@ -279,13 +346,15 @@ def _comparison(all_scores: Sequence[Scores]) -> list[str]:
         for s, role in ((by.get(("A", qs)), "A, zero-shot English"),
                         (b, f"best B ({b.context.arm if b else '-'}), by calib AUROC "
                             f"{_f(b.context.calib_auroc_pii, 3) if b else 'n/a'}"),
+                        *((by.get((a, qs)), f"{a}, lexical baseline ({k})")
+                          for a, k in BASELINES.items()),
                         (by.get(("C", qs)), "C, fine-tuned English")):  # fmt: skip
             if s is None:
                 continue
             h, sp = s.splits["test"].headline, s.speed
             m2 = sp.timing.p50_ms if sp.timing else None
-            rows.append((qs, role, _recall_ci(h),
-                         f"{_f(h.recall_exact_lo)} / {_f(h.recall_exact_hi)}",
+            lo, hi = _route_bounds(h)
+            rows.append((qs, role, f"{_f(h.route_recall)} [{_f(lo)}, {_f(hi)}]",
                          f"{h.forward_rate.point:.2%}", _f(h.specificity), h.false_forwards,
                          _f(h.auroc_pii), _at(s, 0.95), _at(s, 0.9),
                          "not timed" if m2 is None else f"{m2:.0f}"))  # fmt: skip
@@ -294,17 +363,20 @@ def _comparison(all_scores: Sequence[Scores]) -> list[str]:
     return [
         "### Arm comparison: A vs best B vs fine-tuned C (report v2)",
         "",
-        "Same test documents for every arm; A and C score identical units (same unit spec). "
-        "Best B is chosen on the calibration split, never on test. Thresholds are fit on "
-        "calibration at each recall target. M2 latency is the p50 of a timing-only run on a "
-        "seeded sample of test units (D-022); accuracy runs ran on Kaggle T4 GPUs.",
+        "Same test documents for every arm; A, C and the lexical baselines score identical units "
+        "(same unit spec). Best B is chosen on the calibration split, never on test. The lexical "
+        "baselines (M8 results review B1) are TF-IDF + logistic regression models trained on "
+        "C's own training units, calibrated and scored like an arm (pii_present only, no role "
+        "rule). Thresholds are fit on calibration at each recall target. Route recall = 1 - "
+        "false forwards / PII units, with exact 95% bounds. M2 latency is the p50 of a "
+        "timing-only run on a seeded sample of test units (D-022); accuracy runs ran on Kaggle "
+        "T4 GPUs.",
         "",
         *_table(
             [
                 "qs",
                 "arm",
-                "recall @ 99.5% target",
-                "exact lo / hi",
+                "route recall @ 99.5% target [exact 95%]",
                 "forwarded",
                 "negatives forwarded",
                 "false forwards",
@@ -343,8 +415,10 @@ def _headline(all_scores: Sequence[Scores]) -> list[str]:
         "",
         "`t_low` fit on calib for each recall target, then applied to test with the same routing "
         "(role rule included). Test recall here is route recall: PII units not forwarded / PII "
-        "units. Forward rate is the share of test units passed without review; negatives "
-        "forwarded is the share of PII-free units passed (the work saved).",
+        "units. Each point raises `t_high` to at least its `t_low`, as the headline fit does "
+        "(D-007 note, M8). Forward rate is the share of test units passed without review; "
+        "negatives forwarded is the share of PII-free units passed (the work saved). Saturated "
+        "scores (arm C) leave few distinct thresholds, so neighbouring targets can coincide.",
         "",
         *_table(
             [
@@ -376,12 +450,30 @@ def _headline(all_scores: Sequence[Scores]) -> list[str]:
         "",
         "### Holdout (descriptive only, D-005)",
         "",
-        "All IRB letters (one document type, 30 documents, few positives), never part of the "
-        "headline. With a forward rate of 0, recall here is vacuous. Known limitation (M4 S1): a "
-        "fixed alt-text contact line appears only in PII-free letters, a possible shortcut cue.",
+        _holdout_note(all_scores),
         "",
         *_table(HEADLINE_COLS, _headline_rows(all_scores, "holdout")),
     ]
+
+
+def _holdout_note(all_scores: Sequence[Scores]) -> str:
+    hs = [(s, s.splits["holdout"].headline) for s in all_scores if "holdout" in s.splits]
+    if not hs:
+        return "No holdout split was scored."
+    h0 = hs[0][1]
+    fwd = ", ".join(f"{_label(s)} {h.forward_rate.point:.1%}" for s, h in hs
+                    if s.context.arm == "C" or s.context.arm in BASELINES)  # fmt: skip
+    return (
+        f"All IRB letters ({h0.n_docs} documents, {h0.n_positive} PII units of {h0.n_units}; "
+        "one document type), never part of the headline. Forwarded: "
+        + (fwd or "see the table")
+        + ". Weak evidence of transfer: holdout PII is names and e-mail addresses in letter "
+        "headers; many letters name a PI who also appears in training documents (D-018: 33 of "
+        f"56 positive units for arm C, {REVIEW}); and the lexical baselines also score "
+        "near-perfect AUROC here. Known limitation (M4 S1): a fixed alt-text contact line "
+        "appears only in PII-free letters, a possible shortcut cue (C's holdout AUROC is "
+        "unchanged without those units, same review)."
+    )
 
 
 def _confusion(m: QuestionMetrics) -> list[str]:
@@ -466,8 +558,9 @@ def _qs_comparison(all_scores: Sequence[Scores]) -> list[str]:
 
 def _calibration(all_scores: Sequence[Scores]) -> list[str]:
     out: list[str] = [
-        "ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC scores "
-        "correctness by the max probability (for pii_present discrimination see section 2). "
+        "ECE uses 15 equal-width bins on the max probability. Brier is multi-class. Correctness "
+        "AUROC: how well the max probability separates right from wrong answers (not PII "
+        "discrimination; for p(pii) AUROC see section 2). "
         "`= raw (T fallback)`: the temperature fit hit its bound, so T = 1 and the calibrated "
         "columns equal raw; calibration did nothing there.",
         "",
@@ -477,8 +570,8 @@ def _calibration(all_scores: Sequence[Scores]) -> list[str]:
         for split, sp in s.splits.items():
             out += [f"### {_label(s)}, {split}", ""]
             out += _table(
-                ["question", "ECE raw", "ECE cal", "Brier raw", "Brier cal", "AUROC raw",
-                 "AUROC cal"],
+                ["question", "ECE raw", "ECE cal", "Brier raw", "Brier cal",
+                 "correctness AUROC raw", "correctness AUROC cal"],
                 [
                     (q + (" = raw (T fallback)" if q in fell else ""), _f(c.ece_raw),
                      _f(c.ece_calibrated), _f(c.brier_raw), _f(c.brier_calibrated),
@@ -539,12 +632,13 @@ def _speed(all_scores: Sequence[Scores]) -> list[str]:
         sp = s.speed
         drift = "n/a" if sp.batch1_drift is None else f"{sp.batch1_drift:.2f}x"
         bauto = sp.batched_autocast if sp.batched is not None else "not run"
+        mps = (" (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 "
+               "fp32)." if _device(s) == "mps" else ".")  # fmt: skip
         out += [f"### {_label(s)}", "", f"Hardware: **{sp.hardware}**. "
                 f"Warmup calls excluded: {sp.warmup_excluded}. Batch-1 outliers (> 5x the median "
                 f"of similar-length calls): {sp.batch1_outliers}. Batch-1 ms/token, end of run vs "
                 f"start: {drift}. laya autocast: batch-1 {sp.batch1_autocast}, batched "
-                f"{bauto} (on MPS, fp16 autocast starts at 5 question rows, so "
-                "qs_v2 runs fp16 and qs_v1 fp32).", ""]  # fmt: skip
+                f"{bauto}{mps}", ""]  # fmt: skip
         batched = (_lat("per unit, batched (amortized: batch time / batch size)", sp.batched)
                    if sp.batched is not None else
                    ("per unit, batched", 0, "not run", "", "", "", ""))  # fmt: skip
@@ -560,18 +654,35 @@ def _speed(all_scores: Sequence[Scores]) -> list[str]:
                   for k, v in sp.batch1_by_length.items()),
             ],
         )  # fmt: skip
+    batched_arms = sorted({s.context.arm for s in all_scores if s.speed.batched is not None})
+    devices = sorted({d for s in all_scores if (d := _device(s))})
     return [
         "Per-unit latency is not comparable across arms (units range from 256-token chunks to "
-        "whole documents); compare the per-document row or the length rows. Batched runs were "
-        "made for arms A and B1 only: batches of eight 2k-8k-token states exceed the 8 GB M2 "
-        "(swapping, NaN).",
+        "whole documents); compare the per-document row or the length rows. Devices in these "
+        f"runs: {', '.join(devices) or 'not recorded'}. Batched runs: "
+        + (f"arms {', '.join(batched_arms)}." if batched_arms else "none in these scores.")
+        + (
+            " On the 8 GB M2, batches of eight 2k-8k-token states swap (NaN), so batching is "
+            "limited there."
+            if "mps" in devices
+            else ""
+        )
+        + " Lexical baselines are scored in one CPU batch; their latency is not comparable.",
         "",
         *out,
     ]
 
 
+def _device(s: Scores) -> str | None:
+    return s.context.hw.device if s.context.hw else None
+
+
 def _slices(all_scores: Sequence[Scores]) -> list[str]:
-    out: list[str] = ["Slices with n < 30 are marked `*`.", ""]
+    out: list[str] = [
+        f"Recall marked `*`: fewer than {SMALL_SLICE} positives in the slice. Forward rate "
+        f"marked `*`: fewer than {SMALL_SLICE} PII-free units.",
+        "",
+    ]
     for s in all_scores:
         for split, sp in s.splits.items():
             out += [f"### {_label(s)}, {split}", ""]
@@ -579,9 +690,11 @@ def _slices(all_scores: Sequence[Scores]) -> list[str]:
                 ["dimension", "value", "units", "docs", "positives", "recall", "forward rate",
                  "false fwd", "pii acc"],
                 [
-                    (r.dimension, r.value + (" *" if r.small_sample else ""), r.n_units, r.n_docs,
-                     r.n_positive, _f(r.recall), _f(r.forward_rate), r.false_forwards,
-                     _f(r.pii_accuracy))
+                    (r.dimension, r.value, r.n_units, r.n_docs, r.n_positive,
+                     _f(r.recall) + (" *" if 0 < r.n_positive < SMALL_SLICE else ""),
+                     _f(r.forward_rate)
+                     + (" *" if r.n_units - r.n_positive < SMALL_SLICE else ""),
+                     r.false_forwards, _f(r.pii_accuracy))
                     for r in sp.slices
                 ],
             )  # fmt: skip

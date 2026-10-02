@@ -566,7 +566,9 @@ class FinetuneManifest(_Model):
     n_units_pii: int
     n_units_clean: int  # after sampling: clean units kept (see clean_per_pii)
     clean_per_pii: float  # clean units kept per PII unit, sampled per document type (seeded)
-    duplicates_removed: int  # identical (unit, question) asked by both question sets
+    # identical (unit, question) asked by both question sets; equals n_units because pii_present
+    # has the same text in qs_v1 and qs_v2 and is kept once per unit
+    duplicates_removed: int
     doc_ids: list[str]  # every training document; all `train` in splits.json
     # train docs held out of gradient steps to fit the checkpoint's own temperatures (the
     # notebook's calibration slice), by document; our calib split is never used here

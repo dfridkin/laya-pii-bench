@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import hashlib
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Annotated, Any, Literal
@@ -376,6 +376,44 @@ def pin_checkpoint(
     typer.echo(f"pinned {name} = {rel} @ {lock[name]['revision'][:12]}")
 
 
+@app.command()
+def baseline(
+    kind: Annotated[str, typer.Option(help="word | char TF-IDF + logistic regression.")],
+    unit_arm: Annotated[str, typer.Option(help="Arm whose units the baseline scores.")] = "A",
+    data: Annotated[Path, typer.Option(help="Arm C training data.")] = Path("finetune/data"),
+    docs: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
+    splits: Annotated[Path, typer.Option(help="Splits.")] = Path("data/splits.json"),
+    arms: Annotated[Path, typer.Option(help="Arms config.")] = Path("config/arms.yaml"),
+    models_lock: Annotated[Path, typer.Option(help="For the hw fingerprint.")] = Path(
+        "models.lock.json"
+    ),
+) -> None:
+    """Lexical baseline trained on arm C's training units (M8 results review B1)."""
+    from bench import baseline as bl
+    from bench import finetune as ft
+    from bench import hw as hw_mod
+    from bench.config import load_arms
+    from bench.label import read_docs, read_units
+    from bench.paths import units_dir
+    from bench.score import sha256_file
+
+    if kind not in ("word", "char"):
+        raise typer.BadParameter("kind must be word or char")
+    ft.verify(data, splits)  # trained on train-split units only, or nothing runs
+    cfg = load_arms(arms)
+    sp = _load_splits(splits)
+    units_path = units_dir(docs) / f"{unit_arm}.jsonl"
+    keep = set(cfg.defaults.splits_to_run)
+    doc_map = {d.id: d for d in read_docs(docs)}
+    units = [u for u in read_units(units_path) if sp.doc_split[u.doc_id] in keep]
+    texts = {u.id: doc_map[u.doc_id].text[u.start : u.end] for u in units}
+    hashes = {"docs": sha256_file(docs), "units": sha256_file(units_path),
+              "splits": sha256_file(splits)}  # fmt: skip
+    out = Path("runs") / bl.ARM[kind] / "qs_v1"  # type: ignore[index]
+    meta = bl.run(kind, data, texts, out, hw_mod.collect(models_lock), hashes)  # type: ignore[arg-type]
+    typer.echo(f"{meta.arm}: {len(texts)} units scored ({meta.checkpoint_rev}) -> {out}")
+
+
 @app.command("split")
 def split_cmd(
     docs: Annotated[Path, typer.Option(help="Documents JSONL.")] = Path("data/docs.jsonl"),
@@ -569,6 +607,49 @@ def run_cmd(
         log_file.close()
 
 
+def _run_caveats(meta: Any) -> list[str]:
+    """Hardware and arm-kind caveats from the run's meta (M8 results review M5, B1)."""
+    out: list[str] = []
+    if meta.checkpoint.startswith("baseline-"):
+        out.append(
+            "Lexical baseline, not a Laya arm: TF-IDF + logistic regression trained on arm C's "
+            "own training units (pii_present only; no role rule, no other questions). Latency is "
+            "CPU batch scoring, amortized per unit, and not comparable to the model arms."
+        )
+    elif meta.device == "cuda":
+        out.append(
+            f"Accuracy run on {meta.hw.device_name} (Kaggle, D-022), not the Apple M2. Accuracy "
+            "does not depend on the hardware (D-002); this run's latency is not the M2 headline "
+            "(see the timing-only run where present)."
+        )
+    return out
+
+
+def _training_caveat(manifest_path: Path, documents: Sequence[Any], scores: Any) -> str:
+    """How the fine-tuned arm's training set differs from the scored data (review M5)."""
+    from bench.domain import FinetuneManifest
+
+    m = FinetuneManifest.model_validate_json(manifest_path.read_text())
+    by_id = {d.id: d for d in documents}
+    train_docs = [by_id[d] for d in m.doc_ids if d in by_id]
+    n_en = sum(d.lang == "en" for d in train_docs)
+    types = sorted(
+        {d.doc_type.value for d in by_id.values()} - {d.doc_type.value for d in train_docs}
+    )
+    test = scores.splits.get("test")
+    prev = (f"; test prevalence is {test.headline.n_positive / test.headline.n_units:.1%}"
+            if test and test.headline.n_units else "")  # fmt: skip
+    return (
+        f"Fine-tuned on {m.n_units} train-split units from {len(train_docs)} documents: every "
+        f"PII unit plus {m.clean_per_pii:g} clean units per PII unit, so training prevalence is "
+        f"{m.n_units_pii / m.n_units:.1%}{prev}. {n_en} of {len(train_docs)} training documents "
+        "are English"
+        + (f"; no training documents of type {', '.join(types)}" if types else "")
+        + ". Same generator as the test set (templates, filler, Faker world; disjoint sites and "
+        "persons): in-distribution evidence only."
+    )
+
+
 @app.command()
 def score(
     decisions: Annotated[Path, typer.Option(help="Decisions JSONL for one arm x qs.")],
@@ -606,6 +687,9 @@ def score(
         Path | None,
         typer.Option(help="Timing-only run of this arm x qs (`--timing-sample`): speed only."),
     ] = None,
+    finetune_manifest: Annotated[
+        Path, typer.Option(help="Training manifest of the fine-tuned arm (caveats only).")
+    ] = Path("finetune/data/manifest.json"),
 ) -> None:
     """Score decisions against gold with frozen calib params. Refuses a calib hash mismatch and a
     calib file that isn't committed unmodified at HEAD (D-019)."""
@@ -656,6 +740,7 @@ def score(
         if params.fit_on == "calib" and run_hashes.get("splits") != sha256_file_(splits):
             typer.echo(f"error: {splits} differs from the splits this run used", err=True)
             raise typer.Exit(2)
+        extra_caveats += _run_caveats(meta)
     elif hw is not None and hw.exists():
         hw_info = HwInfo.model_validate_json(hw.read_text())
     documents = read_docs(docs)
@@ -701,6 +786,9 @@ def score(
         routes = sc.routed(rows, unit_list, documents, params, pol, split_docs)
         if timing_rows:
             scores = sc.with_timing(scores, timing_rows, timing_hw, hashes["timing_decisions"])
+        if arm_cfg is not None and arm_cfg.trained and finetune_manifest.exists():
+            trained = _training_caveat(finetune_manifest, documents, scores)
+            scores = scores.model_copy(update={"caveats": [*scores.caveats, trained]})
     except (sc.ScoreError, freeze.FreezeError) as e:
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(2) from e
