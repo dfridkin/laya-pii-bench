@@ -732,6 +732,8 @@ def score(
     if meta_path.exists():  # the run's own hardware, with the device it actually used
         meta = RunMeta.model_validate_json(meta_path.read_text())
         hw_info = meta.hw.model_copy(update={"device": meta.device})
+        if meta.device != meta.hw.device:  # e.g. a CPU baseline on a host whose fingerprint is MPS
+            hw_info = hw_info.model_copy(update={"device_name": meta.device.upper()})
         run_hashes = meta.config_hashes
         run_batch_size: int | None = meta.batch_size
         if meta.dataset == "main" and params.fit_on == "fixture_debug":  # D-013

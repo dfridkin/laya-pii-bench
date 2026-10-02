@@ -19,7 +19,7 @@
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T14:46:57.778313+00:00 |
+| date | 2026-10-02T14:56:18.657993+00:00 |
 
 ### A / qs_v2
 
@@ -38,7 +38,7 @@
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T04:34:36.450678+00:00 |
+| date | 2026-10-02T14:56:24.982763+00:00 |
 
 ### B1 / qs_v1
 
@@ -57,7 +57,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T04:34:39.323548+00:00 |
+| date | 2026-10-02T14:56:27.750555+00:00 |
 
 ### B1 / qs_v2
 
@@ -76,7 +76,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T04:34:41.819291+00:00 |
+| date | 2026-10-02T14:56:30.227499+00:00 |
 
 ### B2 / qs_v1
 
@@ -95,7 +95,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T04:34:43.499065+00:00 |
+| date | 2026-10-02T14:56:31.904994+00:00 |
 
 ### B2 / qs_v2
 
@@ -114,7 +114,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T04:34:45.153146+00:00 |
+| date | 2026-10-02T14:56:33.557378+00:00 |
 
 ### B3 / qs_v1 (doc-level, underpowered)
 
@@ -133,7 +133,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T04:34:46.552396+00:00 |
+| date | 2026-10-02T14:56:34.936787+00:00 |
 
 ### B3 / qs_v2 (doc-level, underpowered)
 
@@ -152,7 +152,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T04:34:47.930841+00:00 |
+| date | 2026-10-02T14:56:36.266494+00:00 |
 
 ### B4 / qs_v1 (doc-level, underpowered)
 
@@ -171,7 +171,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T04:34:49.165733+00:00 |
+| date | 2026-10-02T14:56:37.463628+00:00 |
 
 ### B4 / qs_v2 (doc-level, underpowered)
 
@@ -190,7 +190,7 @@
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T04:34:50.370088+00:00 |
+| date | 2026-10-02T14:56:38.653089+00:00 |
 
 ### C / qs_v1
 
@@ -209,7 +209,7 @@
 | laya version | 0.3.20 |
 | checkpoints | finetuned_english |
 | checkpoint revisions | 6809676153aa2bb747a0054ed30835e45b3d8e976cdfe31fa956185e9aee661c |
-| date | 2026-10-02T14:47:03.475985+00:00 |
+| date | 2026-10-02T14:56:44.023692+00:00 |
 
 ### C / qs_v2
 
@@ -228,7 +228,7 @@
 | laya version | 0.3.20 |
 | checkpoints | finetuned_english |
 | checkpoint revisions | 6809676153aa2bb747a0054ed30835e45b3d8e976cdfe31fa956185e9aee661c |
-| date | 2026-10-02T04:35:00.706795+00:00 |
+| date | 2026-10-02T14:56:49.144502+00:00 |
 
 ### LC / qs_v1
 
@@ -247,7 +247,7 @@
 | laya version | 0.3.20 |
 | checkpoints | baseline-char |
 | checkpoint revisions | char-tfidf-lr@2fdd6558eced |
-| date | 2026-10-02T04:35:09.265661+00:00 |
+| date | 2026-10-02T14:56:57.536067+00:00 |
 
 ### LW / qs_v1
 
@@ -266,7 +266,7 @@
 | laya version | 0.3.20 |
 | checkpoints | baseline-word |
 | checkpoint revisions | word-tfidf-lr@2fdd6558eced |
-| date | 2026-10-02T04:35:05.036085+00:00 |
+| date | 2026-10-02T14:56:53.448775+00:00 |
 
 ## 2. Headline operating point
 
@@ -277,7 +277,7 @@
 - **Trading recall for work saved (calib target 0.95):** A / qs_v1 forwards 5.9% at test recall 0.976 (10 false forwards), A / qs_v2 forwards 6.5% at test recall 0.971 (12 false forwards), B1 / qs_v1 forwards 1.2% at test recall 0.964 (11 false forwards), B1 / qs_v2 forwards 1.8% at test recall 0.951 (15 false forwards), B2 / qs_v1 forwards 2.3% at test recall 0.948 (12 false forwards), B2 / qs_v2 forwards 3.3% at test recall 0.923 (18 false forwards), B3 / qs_v1 (doc-level, underpowered) forwards 1.9% at test recall 0.965 (8 false forwards), B3 / qs_v2 (doc-level, underpowered) forwards 2.9% at test recall 0.948 (12 false forwards), B4 / qs_v1 (doc-level, underpowered) forwards 1.5% at test recall 0.981 (4 false forwards), B4 / qs_v2 (doc-level, underpowered) forwards 2.7% at test recall 0.967 (7 false forwards), C / qs_v1 forwards 92.8% at test recall 0.971 (12 false forwards), C / qs_v2 forwards 93.2% at test recall 0.931 (29 false forwards), LC / qs_v1 forwards 88.3% at test recall 0.950 (21 false forwards), LW / qs_v1 forwards 88.0% at test recall 0.938 (26 false forwards). See the curve table below.
 - **Fine-tuning (arm C, qs_v1) raises test AUROC of p(pii) from 0.786 (zero-shot A) to 0.9999.** At the 0.995 calib target C forwards 92.6% of test units (A 0.5%). Route recall 0.9976: 1 of 419 PII units forwarded (exact 95% 0.9868 to 0.9999); the 0.995 target is not rejected, not demonstrated (D-008). C has no review band: `t_low` = `t_high` = 0.9697, so every unit is forwarded or redacted, and the operating point rests on the lowest-scoring calib positives (see the curve for stricter targets).
 - **Fine-tuning (arm C, qs_v2) raises test AUROC of p(pii) from 0.786 (zero-shot A) to 0.9999.** At the 0.995 calib target C forwards 92.6% of test units (A 0.5%). Route recall 0.9952: 2 of 419 PII units forwarded (exact 95% 0.9829 to 0.9994); the 0.995 target is not rejected, not demonstrated (D-008). C has no review band: `t_low` = `t_high` = 0.9701, so every unit is forwarded or redacted, and the operating point rests on the lowest-scoring calib positives (see the curve for stricter targets).
-- **Arm C is in-distribution evidence only.** It is trained and tested on the same synthetic generator (same templates, filler and Faker world; disjoint sites and persons). A bag-of-words classifier trained on the same units (char 2-5-gram TF-IDF + logistic regression, arm LC) reaches test AUROC 0.9864 and forwards 60.8% with 2 PII units forwarded at the same calib target, so most of the gain over zero-shot A reflects how learnable this corpus is, not general PII detection. C's margin over it is operational: at that target C forwards 92.6% of test units (1 PII units forwarded), so far fewer clean units go to review. C's advantage over the baseline is concentrated in hard negatives and name-only units, and C's misses are single quasi-identifiers embedded in boilerplate (strata in `reports/audits/M8_results_review.md`). These results do not transfer to real documents without an out-of-generator test.
+- **Arm C is in-distribution evidence only.** It is trained and tested on the same synthetic generator (same templates, filler and Faker world; disjoint sites and persons). A bag-of-words classifier trained on the same units (char 2-5-gram TF-IDF + logistic regression, arm LC) reaches test AUROC 0.9864 and forwards 60.8% with 2 PII units forwarded at the same calib target, so most of the gain over zero-shot A reflects how learnable this corpus is, not general PII detection. C's margin over it is operational: at that target C forwards 92.6% of test units (1 PII unit forwarded), so far fewer clean units go to review. The results review's own analysis (`reports/audits/M8_results_review.md`; its scratch baseline, not LW/LC) found C's advantage concentrated in hard negatives and name-only units, and C's misses to be single quasi-identifiers embedded in boilerplate. These results do not transfer to real documents without an out-of-generator test.
 - qs_v1 vs qs_v2 differences in the same arm are not a question-wording effect: pii_present has the same text in both; these runs ran on cuda; and only qs_v1 has the role rule.
 
 ### Arm comparison: A vs best B vs fine-tuned C (report v2)
@@ -3728,7 +3728,7 @@ Reliability data, `pii_present` (non-empty bins):
 
 ## 6. Speed
 
-Per-unit latency is not comparable across arms (units range from 256-token chunks to whole documents); compare the per-document row or the length rows. Devices in these runs: cpu, cuda. Batched runs: none in these scores. Lexical baselines are scored in one CPU batch; their latency is not comparable.
+Per-unit latency is not comparable across arms (units range from 256-token chunks to whole documents); compare the per-document row or the length rows. Devices in these runs: cpu, cuda, mps (timing runs). Batched runs: none in these scores. Lexical baselines are scored in one CPU batch; their latency is not comparable.
 
 ### A / qs_v1
 
@@ -3882,7 +3882,7 @@ Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4),
 
 ### LC / qs_v1
 
-Hardware: **Apple M2, 8.0 GB RAM, device cpu (Apple MPS), torch 2.14.0**. Warmup calls excluded: 0. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: n/a. laya autocast: batch-1 unknown, batched not run.
+Hardware: **Apple M2, 8.0 GB RAM, device cpu (CPU), torch 2.14.0**. Warmup calls excluded: 0. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: n/a. laya autocast: batch-1 unknown, batched not run.
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
@@ -3893,7 +3893,7 @@ Hardware: **Apple M2, 8.0 GB RAM, device cpu (Apple MPS), torch 2.14.0**. Warmup
 
 ### LW / qs_v1
 
-Hardware: **Apple M2, 8.0 GB RAM, device cpu (Apple MPS), torch 2.14.0**. Warmup calls excluded: 0. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: n/a. laya autocast: batch-1 unknown, batched not run.
+Hardware: **Apple M2, 8.0 GB RAM, device cpu (CPU), torch 2.14.0**. Warmup calls excluded: 0. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: n/a. laya autocast: batch-1 unknown, batched not run.
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|

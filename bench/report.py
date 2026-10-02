@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from collections import Counter
 from collections.abc import Iterable, Sequence
 from pathlib import Path
@@ -234,7 +235,8 @@ def _findings(all_scores: Sequence[Scores]) -> list[str]:
         if arm != "C" or ha is None or ha.auroc_pii is None or hc.auroc_pii is None:
             continue
         out.append(_c_finding(qs, ha, hc))
-    out += _in_distribution(by_arm_qs)
+    calib_auroc = {s.context.arm: s.context.calib_auroc_pii for s, _ in test}
+    out += _in_distribution(by_arm_qs, calib_auroc)
     for (arm, qs), h3 in sorted(by_arm_qs.items()):
         h1 = by_arm_qs.get((arm, "qs_v1"))
         if qs != "qs_v3" or h1 is None or h1.auroc_pii is None or h3.auroc_pii is None:
@@ -292,14 +294,21 @@ def _c_finding(qs: str, ha: Headline, hc: Headline) -> str:
         f"- **Fine-tuning (arm C, {qs}) raises test AUROC of p(pii) from {ha.auroc_pii:.3f} "
         f"(zero-shot A) to {hc.auroc_pii:.4f}.** At the {target or 0:g} calib target C forwards "
         f"{hc.forward_rate.point:.1%} of test units (A {ha.forward_rate.point:.1%}). Route recall "
-        f"{_f(hc.route_recall)}: {hc.false_forwards} of {hc.n_positive} PII units forwarded "
+        f"{_f(hc.route_recall)}: {hc.false_forwards} of {_pii(hc.n_positive)} forwarded "
         f"(exact 95% {_f(lo)} to {_f(hi)}); the {target or 0:g} target is "
         f"{_verdict(lo, hi, target)} (D-008).{band}"
     )
 
 
-def _in_distribution(by_arm_qs: dict[tuple[str, str], Headline]) -> list[str]:
-    """Review B1: what a bag-of-words model gets from the same training units."""
+def _pii(n: int) -> str:
+    return f"{n} PII unit{'' if n == 1 else 's'}"
+
+
+def _in_distribution(
+    by_arm_qs: dict[tuple[str, str], Headline], calib_auroc: dict[str, float | None] | None = None
+) -> list[str]:
+    """Review B1: what a bag-of-words model gets from the same training units. The baseline cited
+    is the one with the best calib-split AUROC (no selection on test)."""
     if not any(a == "C" for a, _ in by_arm_qs):
         return []
     base = [(a, h) for (a, _), h in sorted(by_arm_qs.items())
@@ -307,11 +316,11 @@ def _in_distribution(by_arm_qs: dict[tuple[str, str], Headline]) -> list[str]:
     if not base:
         lex = "No lexical baseline was scored, so how learnable the corpus is was not measured."
     else:
-        a, h = max(base, key=lambda ah: ah[1].auroc_pii or 0.0)
+        a, h = max(base, key=lambda ah: (calib_auroc or {}).get(ah[0]) or 0.0)
         lex = (
             f"A bag-of-words classifier trained on the same units ({BASELINES[a]} TF-IDF + "
             f"logistic regression, arm {a}) reaches test AUROC {h.auroc_pii:.4f} and forwards "
-            f"{h.forward_rate.point:.1%} with {h.false_forwards} PII units forwarded at the same "
+            f"{h.forward_rate.point:.1%} with {_pii(h.false_forwards)} forwarded at the same "
             "calib target, so most of the gain over zero-shot A reflects how learnable this "
             "corpus is, not general PII detection."
         )
@@ -319,15 +328,16 @@ def _in_distribution(by_arm_qs: dict[tuple[str, str], Headline]) -> list[str]:
         if hc is not None:
             lex += (
                 f" C's margin over it is operational: at that target C forwards "
-                f"{hc.forward_rate.point:.1%} of test units ({hc.false_forwards} PII units "
+                f"{hc.forward_rate.point:.1%} of test units ({_pii(hc.false_forwards)} "
                 "forwarded), so far fewer clean units go to review."
             )
     return [
         "- **Arm C is in-distribution evidence only.** It is trained and tested on the same "
         "synthetic generator (same templates, filler and Faker world; disjoint sites and "
-        f"persons). {lex} C's advantage over the baseline is concentrated in hard negatives and "
-        "name-only units, and C's misses are single quasi-identifiers embedded in boilerplate "
-        f"(strata in {REVIEW}). These results do not transfer to real documents without an "
+        f"persons). {lex} The results review's own analysis ({REVIEW}; its scratch baseline, "
+        "not LW/LC) found C's advantage concentrated in hard negatives and name-only units, and "
+        "C's misses to be single quasi-identifiers embedded in boilerplate. These results do "
+        "not transfer to real documents without an "
         "out-of-generator test."
     ]
 
@@ -671,7 +681,12 @@ def _speed(all_scores: Sequence[Scores]) -> list[str]:
             ],
         )  # fmt: skip
     batched_arms = sorted({s.context.arm for s in all_scores if s.speed.batched is not None})
-    devices = sorted({d for s in all_scores if (d := _device(s))})
+    timed = {
+        f"{m.group(1)} (timing runs)"
+        for s in all_scores
+        if s.speed.timing and (m := re.search(r"device (\w+)", s.speed.timing_hardware))
+    }
+    devices = sorted({d for s in all_scores if (d := _device(s))} | timed)  # fmt: skip
     return [
         "Per-unit latency is not comparable across arms (units range from 256-token chunks to "
         "whole documents); compare the per-document row or the length rows. Devices in these "

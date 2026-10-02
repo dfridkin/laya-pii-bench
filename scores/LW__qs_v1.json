@@ -28,7 +28,7 @@
       "torch": "2.14.0",
       "laya": "0.3.20",
       "device": "cpu",
-      "device_name": "Apple MPS",
+      "device_name": "CPU",
       "checkpoints": {
         "english": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
         "multilingual": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
@@ -43,7 +43,7 @@
     "checkpoint_revs": [
       "word-tfidf-lr@2fdd6558eced"
     ],
-    "created_at": "2026-10-02T04:35:05.036085+00:00"
+    "created_at": "2026-10-02T14:56:53.448775+00:00"
   },
   "splits": {
     "test": {
@@ -1443,7 +1443,7 @@
     }
   },
   "speed": {
-    "hardware": "Apple M2, 8.0 GB RAM, device cpu (Apple MPS), torch 2.14.0",
+    "hardware": "Apple M2, 8.0 GB RAM, device cpu (CPU), torch 2.14.0",
     "batch1": {
       "n": 10427,
       "p50_ms": 0.09543617934209264,

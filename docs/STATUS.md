@@ -13,7 +13,7 @@ Last updated: 2026-09-30 (M7 gate passed)
 | M5 Label + split | done | 2026-09-27 (`reports/audits/M5-gate-20260927-pass.md`; reviews #1, #2 FAIL fixed) | 600 docs split 350/96/124/30, no leaks, all classes in every split; calib freeze enforced |
 | M6 Zero-shot arms, calibrate, score, report v1 | done | 2026-09-30 (`reports/audits/M6-gate-20260930.md`; results review `M6_results_review.md`) | 10 runs; calib frozen 4abf110; D-008 flagged; zero-shot operating point degenerate, multilingual no signal |
 | M7 HUD replay | done | 2026-09-30 (`reports/audits/M7-gate-20260930.md`) | single-file HUD (3 MB), real M6 test replay, 7 e2e + 6 unit tests |
-| M8 Fine-tuned arm C, report v2 | in progress | | corpus 1,600 docs (D-022); C scored (calib 047aad7); review fixes + baselines in; M2 timing done; gate pending |
+| M8 Fine-tuned arm C, report v2 | done | 2026-10-02 (`reports/audits/M8-gate-20261002.md`; results review `M8_results_review.md`) | 1,600 docs (D-022); C test AUROC 0.9999, forwards 92.6%, route recall 418/419; lexical baselines 0.986; in-distribution only; D-007 addendum pending owner |
 
 ## Provisional defaults in use
 
@@ -383,7 +383,7 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-**Claude: independent gate review (`/gate M8`), then close out.**
+**M8 gate passed 2026-10-02. Owner: sign off the D-007 curve addendum (DECISIONS 2026-10-02); optionally a counterbalanced timing rerun (C first). Next milestone per MILESTONES.md.**
 
 M2 timing runs done 2026-10-02 (`runs/{A,C}/qs_v1__timing1000`, same 1,000 seeded test units,
 10 warmups discarded, A then C back to back): p50 A 622 ms, C 708 ms per unit. Same architecture
@@ -439,3 +439,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-30 M8: corpus scaled to 1,600 docs (D-022); gold audit PASS + 3 generator fixes; train-only fine-tune data (32,536 records) + Kaggle notebook/bundle rehearsed locally; waiting on the owner's Kaggle run.
 - 2026-10-02 M8: Kaggle outputs verified; C pinned (4db54bd), calib frozen (047aad7), scored (f7d5ce4); results review PASS WITH REQUIRED CAVEATS; fixes + lexical baselines (cfb6a34, calib b9836b9); rescored, report regenerated. Next: M2 timing runs, HUD, gate.
 - 2026-10-02 M8: M2 timing runs A/C (p50 622 / 708 ms); A, C rescored; HUD rebuilt. Next: gate.
+- 2026-10-02 M8 gate PASS (independent review, 7 minors: 4 fixed, 1 disclosed, 1 kept, 1 owner sign-off). M8 done.
