@@ -376,8 +376,9 @@ def _comparison(all_scores: Sequence[Scores]) -> list[str]:
         "C's own training units, calibrated and scored like an arm (pii_present only, no role "
         "rule). Thresholds are fit on calibration at each recall target. Route recall = 1 - "
         "false forwards / PII units, with exact 95% bounds. M2 latency is the p50 of a "
-        "timing-only run on a seeded sample of test units (D-022); accuracy runs ran on Kaggle "
-        "T4 GPUs.",
+        "timing-only run on a seeded sample of test units (D-022), the same units for every "
+        "timed arm, run one after another (order not counterbalanced, so heat build-up may "
+        "favour the first); accuracy runs ran on Kaggle T4 GPUs.",
         "",
         *_table(
             [

@@ -13,7 +13,7 @@ Last updated: 2026-09-30 (M7 gate passed)
 | M5 Label + split | done | 2026-09-27 (`reports/audits/M5-gate-20260927-pass.md`; reviews #1, #2 FAIL fixed) | 600 docs split 350/96/124/30, no leaks, all classes in every split; calib freeze enforced |
 | M6 Zero-shot arms, calibrate, score, report v1 | done | 2026-09-30 (`reports/audits/M6-gate-20260930.md`; results review `M6_results_review.md`) | 10 runs; calib frozen 4abf110; D-008 flagged; zero-shot operating point degenerate, multilingual no signal |
 | M7 HUD replay | done | 2026-09-30 (`reports/audits/M7-gate-20260930.md`) | single-file HUD (3 MB), real M6 test replay, 7 e2e + 6 unit tests |
-| M8 Fine-tuned arm C, report v2 | in progress | | corpus 1,600 docs (D-022); C scored (calib 047aad7); results review fixes in; M2 timing runs + gate pending |
+| M8 Fine-tuned arm C, report v2 | in progress | | corpus 1,600 docs (D-022); C scored (calib 047aad7); review fixes + baselines in; M2 timing done; gate pending |
 
 ## Provisional defaults in use
 
@@ -383,11 +383,13 @@ Fixes for `reports/audits/M0-M3-audit-20260926.md` section A, commits 1ff3956..8
 
 ## Next action
 
-**Claude, on the M2 (after the owner closes Firefox and says go):**
+**Claude: independent gate review (`/gate M8`), then close out.**
 
-1. Timing-only runs, A and C, qs_v1: `bench run --arm {A,C} --qs qs_v1 --timing-sample 1000`.
-2. `make score-all` (picks up `runs/{arm}/qs_v1__timing1000` automatically), `make hud`.
-3. `make check`, commit, gate review (`/gate M8`).
+M2 timing runs done 2026-10-02 (`runs/{A,C}/qs_v1__timing1000`, same 1,000 seeded test units,
+10 warmups discarded, A then C back to back): p50 A 622 ms, C 708 ms per unit. Same architecture
+and F16 weights; the order was not counterbalanced, so part of C's gap may be heat build-up
+(noted in the report). A and C qs_v1 rescored with `--timing-decisions`; HUD rebuilt (12 Laya
+runs; the baselines are report rows only), 6 unit + 7 e2e tests pass.
 
 Optional, recommended by the results review: a counterfactual insert/remove probe on C, and
 eventually an out-of-generator test set (the D-011 trigger now holds for C).
@@ -436,3 +438,4 @@ Append one line per session: `YYYY-MM-DD M<n>: what moved, what's blocked`.
 - 2026-09-30 M8 planning: training on Kaggle (owner runs it); corpus size pending; outcomes report drafted as a shared doc and the HUD opened locally, both before any fine-tuning (owner request).
 - 2026-09-30 M8: corpus scaled to 1,600 docs (D-022); gold audit PASS + 3 generator fixes; train-only fine-tune data (32,536 records) + Kaggle notebook/bundle rehearsed locally; waiting on the owner's Kaggle run.
 - 2026-10-02 M8: Kaggle outputs verified; C pinned (4db54bd), calib frozen (047aad7), scored (f7d5ce4); results review PASS WITH REQUIRED CAVEATS; fixes + lexical baselines (cfb6a34, calib b9836b9); rescored, report regenerated. Next: M2 timing runs, HUD, gate.
+- 2026-10-02 M8: M2 timing runs A/C (p50 622 / 708 ms); A, C rescored; HUD rebuilt. Next: gate.

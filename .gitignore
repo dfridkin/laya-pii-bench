@@ -35,3 +35,4 @@ archive/
 finetune/data/*.jsonl
 kaggle/bundle/
 kaggle/*.zip
+/logs/

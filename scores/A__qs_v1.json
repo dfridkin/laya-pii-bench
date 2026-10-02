@@ -18,7 +18,7 @@
     "calib_committed_at": "2026-10-02T00:11:35-04:00",
     "batched_decisions_sha256": null,
     "routed_sha256": "6d63302ff95aa0eac4651cf994e848e514120ce3531d8b25b6982a469480f3e6",
-    "timing_decisions_sha256": null,
+    "timing_decisions_sha256": "1096e0449d160eb9ffcc416b2e4dc1b0c5f6f8aa376d70892b5988bb8469eca6",
     "calib_auroc_pii": 0.7423905874136727,
     "doc_level": false,
     "hw": {
@@ -45,7 +45,7 @@
     "checkpoint_revs": [
       "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
     ],
-    "created_at": "2026-10-02T04:34:29.931771+00:00"
+    "created_at": "2026-10-02T14:46:57.778313+00:00"
   },
   "splits": {
     "test": {
@@ -3085,9 +3085,16 @@
       }
     },
     "batch1_drift": 0.9812380648471392,
-    "timing": null,
-    "timing_hardware": "",
-    "timing_drift": null
+    "timing": {
+      "n": 1000,
+      "p50_ms": 621.9206664999999,
+      "p95_ms": 685.2240527499999,
+      "p99_ms": 693.13168309,
+      "mean_ms": 617.1647821629999,
+      "units_per_sec": 1.6203128060795424
+    },
+    "timing_hardware": "Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0",
+    "timing_drift": 1.0993361022233405
   },
   "caveats": [
     "Accuracy run on Tesla T4 (Kaggle, D-022), not the Apple M2. Accuracy does not depend on the hardware (D-002); this run's latency is not the M2 headline (see the timing-only run where present).",

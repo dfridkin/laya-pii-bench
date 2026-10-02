@@ -19,7 +19,7 @@
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-10-02T04:34:29.931771+00:00 |
+| date | 2026-10-02T14:46:57.778313+00:00 |
 
 ### A / qs_v2
 
@@ -209,7 +209,7 @@
 | laya version | 0.3.20 |
 | checkpoints | finetuned_english |
 | checkpoint revisions | 6809676153aa2bb747a0054ed30835e45b3d8e976cdfe31fa956185e9aee661c |
-| date | 2026-10-02T04:34:55.632837+00:00 |
+| date | 2026-10-02T14:47:03.475985+00:00 |
 
 ### C / qs_v2
 
@@ -282,15 +282,15 @@
 
 ### Arm comparison: A vs best B vs fine-tuned C (report v2)
 
-Same test documents for every arm; A, C and the lexical baselines score identical units (same unit spec). Best B is chosen on the calibration split, never on test. The lexical baselines (M8 results review B1) are TF-IDF + logistic regression models trained on C's own training units, calibrated and scored like an arm (pii_present only, no role rule). Thresholds are fit on calibration at each recall target. Route recall = 1 - false forwards / PII units, with exact 95% bounds. M2 latency is the p50 of a timing-only run on a seeded sample of test units (D-022); accuracy runs ran on Kaggle T4 GPUs.
+Same test documents for every arm; A, C and the lexical baselines score identical units (same unit spec). Best B is chosen on the calibration split, never on test. The lexical baselines (M8 results review B1) are TF-IDF + logistic regression models trained on C's own training units, calibrated and scored like an arm (pii_present only, no role rule). Thresholds are fit on calibration at each recall target. Route recall = 1 - false forwards / PII units, with exact 95% bounds. M2 latency is the p50 of a timing-only run on a seeded sample of test units (D-022), the same units for every timed arm, run one after another (order not counterbalanced, so heat build-up may favour the first); accuracy runs ran on Kaggle T4 GPUs.
 
 | qs | arm | route recall @ 99.5% target [exact 95%] | forwarded | negatives forwarded | false forwards | AUROC p(pii) | at 95% target | at 90% target | M2 p50 ms/unit |
 |---|---|---|---|---|---|---|---|---|---|
-| qs_v1 | A, zero-shot English | 1.0000 [0.9912, 1.0000] | 0.51% | 0.0055 | 0 | 0.7861 | 5.9% at recall 0.976 | 13.8% at recall 0.947 | not timed |
+| qs_v1 | A, zero-shot English | 1.0000 [0.9912, 1.0000] | 0.51% | 0.0055 | 0 | 0.7861 | 5.9% at recall 0.976 | 13.8% at recall 0.947 | 622 |
 | qs_v1 | best B (B4), by calib AUROC 0.486 | 1.0000 [0.9830, 1.0000] | 0.00% | 0.0000 | 0 | 0.4662 | 1.5% at recall 0.981 | 4.5% at recall 0.944 | not timed |
 | qs_v1 | LW, lexical baseline (word 1-2-gram) | 0.9976 [0.9868, 0.9999] | 51.18% | 0.5521 | 1 | 0.9848 | 88.0% at recall 0.938 | 89.6% at recall 0.883 | not timed |
 | qs_v1 | LC, lexical baseline (char 2-5-gram) | 0.9952 [0.9829, 0.9994] | 60.79% | 0.6556 | 2 | 0.9864 | 88.3% at recall 0.950 | 90.6% at recall 0.876 | not timed |
-| qs_v1 | C, fine-tuned English | 0.9976 [0.9868, 0.9999] | 92.58% | 0.9989 | 1 | 0.9999 | 92.8% at recall 0.971 | 92.8% at recall 0.969 | not timed |
+| qs_v1 | C, fine-tuned English | 0.9976 [0.9868, 0.9999] | 92.58% | 0.9989 | 1 | 0.9999 | 92.8% at recall 0.971 | 92.8% at recall 0.969 | 708 |
 | qs_v2 | A, zero-shot English | 1.0000 [0.9912, 1.0000] | 0.53% | 0.0057 | 0 | 0.7861 | 6.5% at recall 0.971 | 14.7% at recall 0.933 | not timed |
 | qs_v2 | best B (B4), by calib AUROC 0.486 | 1.0000 [0.9830, 1.0000] | 0.00% | 0.0000 | 0 | 0.4662 | 2.7% at recall 0.967 | 7.7% at recall 0.912 | not timed |
 | qs_v2 | C, fine-tuned English | 0.9952 [0.9829, 0.9994] | 92.63% | 0.9992 | 2 | 0.9999 | 93.2% at recall 0.931 | 93.3% at recall 0.912 | not timed |
@@ -3737,6 +3737,7 @@ Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4),
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 10427 | 131.6 | 137.2 | 142.8 | 129.6 | 7.71 |
+| per unit, timing run on Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0 | 1000 | 621.9 | 685.2 | 693.1 | 617.2 | 1.62 |
 | per unit, batched | 0 | not run |  |  |  |  |
 | per document (sum of units, batch-1; incl. calib docs) | 673 | 1405.2 | 6027.2 | 6718.8 | 2008.6 | 0.50 |
 | per unit, batch-1, <1k tokens | 10427 | 131.6 | 137.2 | 142.8 | 129.6 | 7.71 |
@@ -3863,6 +3864,7 @@ Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4),
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
 | per unit, batch-1 | 10427 | 127.3 | 130.7 | 132.8 | 125.0 | 8.00 |
+| per unit, timing run on Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0 | 1000 | 707.7 | 725.5 | 727.9 | 693.2 | 1.44 |
 | per unit, batched | 0 | not run |  |  |  |  |
 | per document (sum of units, batch-1; incl. calib docs) | 673 | 1344.6 | 5885.5 | 6537.1 | 1936.7 | 0.52 |
 | per unit, batch-1, <1k tokens | 10427 | 127.3 | 130.7 | 132.8 | 125.0 | 8.00 |
