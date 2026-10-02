@@ -9,17 +9,17 @@
 | arm | A |
 | question set | qs_v1 |
 | splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `62022ad2270a5f851f33eb910db19d6ca12afcf49be081c87ae1a189de297dde` |
-| decisions sha256 | `61bc7991d612ce16006e0ace25314cd5bdbe434607bef55f9dc2c178b5f76d54` |
-| calib hash / fit_on | `632abe8304393876` / calib |
-| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `34448a266437afdb7ff011330c0c6d583cc947c22ac0bf6e5c48f10a8a1bea37` |
+| decisions sha256 | `93756859affdf29422d744413a7faabc4a00fb97ef51d23d16752182b791cfdf` |
+| calib hash / fit_on | `288ba59c38d2f84f` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:30.649485+00:00 |
+| date | 2026-10-02T04:14:38.918635+00:00 |
 
 ### A / qs_v2
 
@@ -28,36 +28,17 @@
 | arm | A |
 | question set | qs_v2 |
 | splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `62022ad2270a5f851f33eb910db19d6ca12afcf49be081c87ae1a189de297dde` |
-| decisions sha256 | `d3fa9d456b47ffbe4a50de9b13be8ba48977b96879d1663b5cfe6e501292e6bc` |
-| calib hash / fit_on | `9c1574a1f22dd5cc` / calib |
-| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `34448a266437afdb7ff011330c0c6d583cc947c22ac0bf6e5c48f10a8a1bea37` |
+| decisions sha256 | `f666240f2691f715589da214343636860fffd06fd8d26913eb93c06f77a8c096` |
+| calib hash / fit_on | `3b308aff6a979319` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
 | temperature fallbacks (T = 1) | has_staff_pii:2: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
 | laya version | 0.3.20 |
 | checkpoints | english |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:32.900879+00:00 |
-
-### A / qs_v3
-
-| field | value |
-|---|---|
-| arm | A |
-| question set | qs_v3 |
-| splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `62022ad2270a5f851f33eb910db19d6ca12afcf49be081c87ae1a189de297dde` |
-| decisions sha256 | `60747db5a240a4a7335be3909764614d29ba92d8565d427a9714a1d0b339d211` |
-| calib hash / fit_on | `e7b4fd1f8d83d4c8` / calib |
-| calib commit (D-019) | `7a5d6bb3ad51` 2026-09-30T11:27:55-04:00 |
-| temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20); pii_present:2: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
-| laya version | 0.3.20 |
-| checkpoints | english |
-| checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:42.818658+00:00 |
+| date | 2026-10-02T04:14:45.598524+00:00 |
 
 ### B1 / qs_v1
 
@@ -66,17 +47,17 @@
 | arm | B1 |
 | question set | qs_v1 |
 | splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `1e606484ae378207a173fb91a613195f4427e3bfb27c73d21d2cb87bae98e071` |
-| decisions sha256 | `41138b416d668da920d19684790912d2704d9d0a463a3b6b2faab9fee9410094` |
-| calib hash / fit_on | `1fd8ca4359b5edd4` / calib |
-| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `bac3fbb8d1079e1953d43e2fccde3ad5ddf3d94db2ec21cda91c0485940227ba` |
+| decisions sha256 | `9cac04e2ab4070bc96c80750648a325b0be9f47555f942db99fc49eb664aa265` |
+| calib hash / fit_on | `79416e04b4d54010` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20); pii_present:2: fit hit bound (20); subject_role:4: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:34.220135+00:00 |
+| date | 2026-10-02T04:14:48.545997+00:00 |
 
 ### B1 / qs_v2
 
@@ -85,17 +66,17 @@
 | arm | B1 |
 | question set | qs_v2 |
 | splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `1e606484ae378207a173fb91a613195f4427e3bfb27c73d21d2cb87bae98e071` |
-| decisions sha256 | `c24e2ddb84b1a182737884bcdb5598715ff0d812cd29feffb401db28baf2fa81` |
-| calib hash / fit_on | `b072f6f3d6deb9b6` / calib |
-| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `bac3fbb8d1079e1953d43e2fccde3ad5ddf3d94db2ec21cda91c0485940227ba` |
+| decisions sha256 | `e9b31c2f45224c4b9eaaab265f75b761088f4a537e9840c1bd5f9a09169f2932` |
+| calib hash / fit_on | `a5c68d1191d886a2` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
 | temperature fallbacks (T = 1) | has_coded_id:2: fit hit bound (20); has_phi_direct:2: fit hit bound (20); has_phi_quasi:2: fit hit bound (20); has_staff_pii:2: fit hit bound (20); pii_present:2: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:35.434631+00:00 |
+| date | 2026-10-02T04:14:51.054515+00:00 |
 
 ### B2 / qs_v1
 
@@ -104,17 +85,17 @@
 | arm | B2 |
 | question set | qs_v1 |
 | splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `b24f0bbd4da5f5b2a6b217c146e82a1bf1b07e1cebea55068dfc76e3406ddf46` |
-| decisions sha256 | `6de8a1079826349d43a07c673d57cba721b9dd02a5b59f0dfa7436843582545a` |
-| calib hash / fit_on | `2c7d9fd28e4b3f9d` / calib |
-| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `2b48e5b58cc96f2c81ee8b65163a6ab1c2ba4d5872716db81569cdb7bca67de6` |
+| decisions sha256 | `cd404d84282e80ba643429af1236f60f22fdbe9f0e4fa3daadee21126f8bb7c6` |
+| calib hash / fit_on | `86626c80002d062d` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20); pii_present:2: fit hit bound (20); subject_role:4: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:36.407667+00:00 |
+| date | 2026-10-02T04:14:52.763014+00:00 |
 
 ### B2 / qs_v2
 
@@ -123,17 +104,17 @@
 | arm | B2 |
 | question set | qs_v2 |
 | splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `b24f0bbd4da5f5b2a6b217c146e82a1bf1b07e1cebea55068dfc76e3406ddf46` |
-| decisions sha256 | `150a10977a35f61b90e03cf77febfefbc2cdfb96b883a845d50ba111d5a6301a` |
-| calib hash / fit_on | `c127522a2d772348` / calib |
-| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `2b48e5b58cc96f2c81ee8b65163a6ab1c2ba4d5872716db81569cdb7bca67de6` |
+| decisions sha256 | `b5dfbd58cf7f722e2f9d3e4b06608b7ccec152abd2b475f7144accd29cec93a4` |
+| calib hash / fit_on | `c871b4224f7c0eca` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
 | temperature fallbacks (T = 1) | has_coded_id:2: fit hit bound (20); has_phi_direct:2: fit hit bound (20); has_phi_quasi:2: fit hit bound (20); has_staff_pii:2: fit hit bound (20); pii_present:2: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:37.351406+00:00 |
+| date | 2026-10-02T04:14:54.446040+00:00 |
 
 ### B3 / qs_v1 (doc-level, underpowered)
 
@@ -142,17 +123,17 @@
 | arm | B3 |
 | question set | qs_v1 |
 | splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `919a2d7f818d34571eef46ea12e7e272b73b281e63b73737d3deb5fb4671265b` |
-| decisions sha256 | `004516e05ef93d5eacb9583d40b05b58bd5653b12c89210d0123b0b5999bcdee` |
-| calib hash / fit_on | `69c9a047da2d5bf7` / calib |
-| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `3171cc64cfe0d6e63c0b4ddeb6ac608cf66fce2ba97dcbbeed0ea7b62486ed5b` |
+| decisions sha256 | `d6092a9f308cf8a1b3ff550e793de48be3e178d20067bf7ebe6c662576cf4767` |
+| calib hash / fit_on | `53d8a53f43d9dd38` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20); pii_present:2: fit hit bound (20); subject_role:4: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:38.213642+00:00 |
+| date | 2026-10-02T04:14:55.835353+00:00 |
 
 ### B3 / qs_v2 (doc-level, underpowered)
 
@@ -161,17 +142,17 @@
 | arm | B3 |
 | question set | qs_v2 |
 | splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `919a2d7f818d34571eef46ea12e7e272b73b281e63b73737d3deb5fb4671265b` |
-| decisions sha256 | `12d374b103db6a1efda64bae5cdaab27b38a5220a74edffc5e14d577fda2d574` |
-| calib hash / fit_on | `c76d71f6c6252233` / calib |
-| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `3171cc64cfe0d6e63c0b4ddeb6ac608cf66fce2ba97dcbbeed0ea7b62486ed5b` |
+| decisions sha256 | `28baf7740926bd85a2227ea03311d6bc9caea96b463b765b015fe0bc9c083b57` |
+| calib hash / fit_on | `3b72ba16f52793d2` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
 | temperature fallbacks (T = 1) | has_coded_id:2: fit hit bound (20); has_phi_direct:2: fit hit bound (20); has_phi_quasi:2: fit hit bound (20); has_staff_pii:2: fit hit bound (20); pii_present:2: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:39.069220+00:00 |
+| date | 2026-10-02T04:14:57.174425+00:00 |
 
 ### B4 / qs_v1 (doc-level, underpowered)
 
@@ -180,17 +161,17 @@
 | arm | B4 |
 | question set | qs_v1 |
 | splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `58504d2de3e5c180f5e49bc843ee1b9b0e361f3b1e662375b6df8e127b054cd3` |
-| decisions sha256 | `602b15214e7c15f4c26c64a5e93e8266a7da11905f33b79c877f41948c20cde5` |
-| calib hash / fit_on | `2f39652cffe6ca26` / calib |
-| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `0bacb96a3e0c5e7e4e55e2b671c85df92e31d0919b861bfc9a386703c214e1a0` |
+| decisions sha256 | `2aacf6ae0291b66a4a859f5e77ab4f240da4ca8e83364171ba0a2ad385a488a5` |
+| calib hash / fit_on | `568089575b3bafa3` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
 | temperature fallbacks (T = 1) | doc_kind:4: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:39.885072+00:00 |
+| date | 2026-10-02T04:14:58.403527+00:00 |
 
 ### B4 / qs_v2 (doc-level, underpowered)
 
@@ -199,31 +180,80 @@
 | arm | B4 |
 | question set | qs_v2 |
 | splits | test, holdout |
-| docs sha256 | `9a88ce5c4c5b4a8559ef9b624d720dd823dd4fb0fdbf68115fae84b6894fada5` |
-| units sha256 | `58504d2de3e5c180f5e49bc843ee1b9b0e361f3b1e662375b6df8e127b054cd3` |
-| decisions sha256 | `945769af71f83099b99c8679b09350fef55b8ccdd07bbbe0f62cedac1c07470d` |
-| calib hash / fit_on | `efdd3181a282c383` / calib |
-| calib commit (D-019) | `98db5e2cd161` 2026-09-30T00:46:28-04:00 |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `0bacb96a3e0c5e7e4e55e2b671c85df92e31d0919b861bfc9a386703c214e1a0` |
+| decisions sha256 | `5ac550431a8859bca8e4215d56ccfdc1a75113632929dab5444dc401a2c6e01d` |
+| calib hash / fit_on | `f942cfef8068f118` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
 | temperature fallbacks (T = 1) | has_coded_id:2: fit hit bound (20); has_phi_direct:2: fit hit bound (20); has_staff_pii:2: fit hit bound (20) |
-| hardware | Apple M2, 8.0 GB, mps, Darwin 24.3.0 |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
 | laya version | 0.3.20 |
 | checkpoints | multilingual |
 | checkpoint revisions | 55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851 |
-| date | 2026-09-30T18:26:40.696108+00:00 |
+| date | 2026-10-02T04:14:59.707448+00:00 |
+
+### C / qs_v1
+
+| field | value |
+|---|---|
+| arm | C |
+| question set | qs_v1 |
+| splits | test, holdout |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `22fa9af3b4ac6fd43a9c18e06e13732fefa629902caa8facc3e885f84219e604` |
+| decisions sha256 | `609cb5644398aeb8a7f6be7ef1982678254793f42455eeea9c74f2e225d669c3` |
+| calib hash / fit_on | `c8bdfb9f3c48d975` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
+| temperature fallbacks (T = 1) | none |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
+| laya version | 0.3.20 |
+| checkpoints | finetuned_english |
+| checkpoint revisions | 6809676153aa2bb747a0054ed30835e45b3d8e976cdfe31fa956185e9aee661c |
+| date | 2026-10-02T04:15:05.027187+00:00 |
+
+### C / qs_v2
+
+| field | value |
+|---|---|
+| arm | C |
+| question set | qs_v2 |
+| splits | test, holdout |
+| docs sha256 | `55dbb36fe63f9c1b1d0cb485d6d63382e72cf168bd2fded2ee590dc1bad3bf05` |
+| units sha256 | `22fa9af3b4ac6fd43a9c18e06e13732fefa629902caa8facc3e885f84219e604` |
+| decisions sha256 | `c967f19a8d25baecd4e8088f8a462069f3cc8fb7d83807ef04c17af0e761b96f` |
+| calib hash / fit_on | `5cbb5b26d7940c57` / calib |
+| calib commit (D-019) | `047aad790893` 2026-10-02T00:11:35-04:00 |
+| temperature fallbacks (T = 1) | none |
+| hardware | Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB, cuda, Linux 6.12.90+ |
+| laya version | 0.3.20 |
+| checkpoints | finetuned_english |
+| checkpoint revisions | 6809676153aa2bb747a0054ed30835e45b3d8e976cdfe31fa956185e9aee661c |
+| date | 2026-10-02T04:15:10.351973+00:00 |
 
 ## 2. Headline operating point
 
 ### Key findings
 
-- **The recall-first operating point is nearly degenerate.** At the calib-fit `t_low`, 9 of 11 arm x question-set runs forward under 5% of test units (A / qs_v1 0.45%, A / qs_v2 0.45%, A / qs_v3 0.75%, B1 / qs_v1 0.15%, B1 / qs_v2 0.00%, B2 / qs_v1 0.94%, B2 / qs_v2 1.88%, B3 / qs_v1 (doc-level, underpowered) 1.60%, B4 / qs_v1 (doc-level, underpowered) 2.42%). The trivial policy "escalate everything" has recall 1 and forward rate 0, so high recall here says little about work saved. With few calib positives the recall target means "no calib misses": `t_low` is the lowest-scoring calib positive, a single unit.
-- **Some checkpoints barely rank PII.** Test AUROC of calibrated p(pii) below 0.6: A / qs_v3 0.509, B1 / qs_v1 0.379, B1 / qs_v2 0.377, B2 / qs_v1 0.449, B2 / qs_v2 0.445, B3 / qs_v1 (doc-level, underpowered) 0.491, B3 / qs_v2 (doc-level, underpowered) 0.481, B4 / qs_v1 (doc-level, underpowered) 0.473, B4 / qs_v2 (doc-level, underpowered) 0.456. Their high recall comes from answering "PII present" to almost everything, not from detection (option-swap probe: `reports/audits/M6_pii_question_probe-20260929.md`).
-- **The recall target does not transfer from calib to test** for B3 / qs_v2 (doc-level, underpowered) (0.929, exact upper 0.974), B4 / qs_v1 (doc-level, underpowered) (0.963, exact upper 0.992), B4 / qs_v2 (doc-level, underpowered) (0.925, exact upper 0.972); target 0.995.
-- **Quasi-identifiers alone are the hardest positives.** AUROC quasi-only vs direct: A / qs_v1 0.706 vs 0.834, A / qs_v2 0.705 vs 0.832, A / qs_v3 0.404 vs 0.606, B2 / qs_v1 0.427 vs 0.539, B2 / qs_v2 0.418 vs 0.540, B3 / qs_v1 (doc-level, underpowered) 0.493 vs 0.562, B3 / qs_v2 (doc-level, underpowered) 0.437 vs 0.551, B4 / qs_v2 (doc-level, underpowered) 0.430 vs 0.505. The pii_present prompt names names, contacts, MRNs and birth dates, not event dates or initials, which the gold counts (phi_quasi).
-- **False forwards are not independent across arms.** Short documents fit in one unit for B2-B4, so those arms see identical text and repeat the same misses: d0352 in 6 runs, d0447 in 3 runs, d0418 in 3 runs (12 of 21 test false forwards).
-- **Trading recall for work saved (calib target 0.95):** A / qs_v1 forwards 6.2% at test recall 0.938 (8 false forwards), A / qs_v2 forwards 6.0% at test recall 0.938 (9 false forwards), A / qs_v3 forwards 5.4% at test recall 0.924 (11 false forwards), B1 / qs_v1 forwards 2.1% at test recall 0.920 (6 false forwards), B1 / qs_v2 forwards 3.0% at test recall 0.940 (6 false forwards), B2 / qs_v1 forwards 2.8% at test recall 0.920 (5 false forwards), B2 / qs_v2 forwards 5.0% at test recall 0.898 (9 false forwards), B3 / qs_v1 (doc-level, underpowered) forwards 4.8% at test recall 0.894 (6 false forwards), B3 / qs_v2 (doc-level, underpowered) forwards 11.2% at test recall 0.847 (13 false forwards), B4 / qs_v1 (doc-level, underpowered) forwards 5.6% at test recall 0.887 (6 false forwards), B4 / qs_v2 (doc-level, underpowered) forwards 14.5% at test recall 0.838 (13 false forwards). See the curve table below.
-- Truncated units were forwarded (the model never saw their tail): B2 / qs_v1 1, B2 / qs_v2 2.
-- **qs_v3 (D-021) changes only the pii_present wording, and on arm A it hurts:** test AUROC 0.509 vs 0.778 with qs_v1 (quasi-only positives 0.404 vs 0.706). The longer instruction raises p(PII) for PII-free units as much as for PII units, with or without dates in the text, so separation collapses: the prompt, not only the checkpoint, limits zero-shot detection (`reports/audits/M6_qs_v3_result-20260930.md`).
-- qs_v1 vs qs_v2 differences in the same arm are not a question-wording effect: pii_present has the same text in both, qs_v1 runs fp32 and qs_v2 fp16 (5 rows) on MPS, which moves long-input probabilities, and only qs_v1 has the role rule.
+- **The recall-first operating point is nearly degenerate.** At the calib-fit `t_low`, 10 of 12 arm x question-set runs forward under 5% of test units (A / qs_v1 0.51%, A / qs_v2 0.53%, B1 / qs_v1 0.10%, B1 / qs_v2 0.26%, B2 / qs_v1 0.11%, B2 / qs_v2 0.11%, B3 / qs_v1 (doc-level, underpowered) 0.19%, B3 / qs_v2 (doc-level, underpowered) 0.19%, B4 / qs_v1 (doc-level, underpowered) 0.00%, B4 / qs_v2 (doc-level, underpowered) 0.00%). The trivial policy "escalate everything" has recall 1 and forward rate 0, so high recall here says little about work saved. With few calib positives the recall target means "no calib misses": `t_low` is the lowest-scoring calib positive, a single unit.
+- **Some checkpoints barely rank PII.** Test AUROC of calibrated p(pii) below 0.6: B1 / qs_v1 0.399, B1 / qs_v2 0.399, B2 / qs_v1 0.436, B2 / qs_v2 0.436, B3 / qs_v1 (doc-level, underpowered) 0.456, B3 / qs_v2 (doc-level, underpowered) 0.456, B4 / qs_v1 (doc-level, underpowered) 0.466, B4 / qs_v2 (doc-level, underpowered) 0.466. Their high recall comes from answering "PII present" to almost everything, not from detection (option-swap probe: `reports/audits/M6_pii_question_probe-20260929.md`).
+- **Trading recall for work saved (calib target 0.95):** A / qs_v1 forwards 5.9% at test recall 0.976 (10 false forwards), A / qs_v2 forwards 6.5% at test recall 0.971 (12 false forwards), B1 / qs_v1 forwards 1.2% at test recall 0.964 (11 false forwards), B1 / qs_v2 forwards 1.8% at test recall 0.951 (15 false forwards), B2 / qs_v1 forwards 2.3% at test recall 0.948 (12 false forwards), B2 / qs_v2 forwards 3.3% at test recall 0.923 (18 false forwards), B3 / qs_v1 (doc-level, underpowered) forwards 1.9% at test recall 0.965 (8 false forwards), B3 / qs_v2 (doc-level, underpowered) forwards 2.9% at test recall 0.948 (12 false forwards), B4 / qs_v1 (doc-level, underpowered) forwards 1.5% at test recall 0.981 (4 false forwards), B4 / qs_v2 (doc-level, underpowered) forwards 2.7% at test recall 0.967 (7 false forwards), C / qs_v1 forwards 92.6% at test recall 0.998 (1 false forwards), C / qs_v2 forwards 92.6% at test recall 0.995 (2 false forwards). See the curve table below.
+- **Fine-tuning (arm C, qs_v1) changes discrimination from AUROC 0.786 (zero-shot A) to 1.000.** At the 99.5% target C forwards 92.6% of test units (A 0.5%) with 1 PII units forwarded (A 0); test recall 0.9952 [0.9878, 1.0000], exact 95% bounds 0.9829 / 0.9994.
+- **Fine-tuning (arm C, qs_v2) changes discrimination from AUROC 0.786 (zero-shot A) to 1.000.** At the 99.5% target C forwards 92.6% of test units (A 0.5%) with 2 PII units forwarded (A 0); test recall 0.9952 [0.9878, 1.0000], exact 95% bounds 0.9829 / 0.9994.
+- qs_v1 vs qs_v2 differences in the same arm are not a question-wording effect: pii_present has the same text in both; these runs ran on cuda; and only qs_v1 has the role rule.
+
+### Arm comparison: A vs best B vs fine-tuned C (report v2)
+
+Same test documents for every arm; A and C score identical units (same unit spec). Best B is chosen on the calibration split, never on test. Thresholds are fit on calibration at each recall target. M2 latency is the p50 of a timing-only run on a seeded sample of test units (D-022); accuracy runs ran on Kaggle T4 GPUs.
+
+| qs | arm | recall @ 99.5% target | exact lo / hi | forwarded | negatives forwarded | false forwards | AUROC p(pii) | at 95% target | at 90% target | M2 p50 ms/unit |
+|---|---|---|---|---|---|---|---|---|---|---|
+| qs_v1 | A, zero-shot English | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9912 / 1.0000 | 0.51% | 0.0055 | 0 | 0.7861 | 5.9% at recall 0.976 | 13.8% at recall 0.947 | not timed |
+| qs_v1 | best B (B4), by calib AUROC 0.486 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9830 / 1.0000 | 0.00% | 0.0000 | 0 | 0.4662 | 1.5% at recall 0.981 | 4.5% at recall 0.944 | not timed |
+| qs_v1 | C, fine-tuned English | 0.9952 [0.9878, 1.0000] | 0.9829 / 0.9994 | 92.58% | 0.9989 | 1 | 0.9999 | 92.6% at recall 0.998 | 92.6% at recall 0.998 | not timed |
+| qs_v2 | A, zero-shot English | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9912 / 1.0000 | 0.53% | 0.0057 | 0 | 0.7861 | 6.5% at recall 0.971 | 14.7% at recall 0.933 | not timed |
+| qs_v2 | best B (B4), by calib AUROC 0.486 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9830 / 1.0000 | 0.00% | 0.0000 | 0 | 0.4662 | 2.7% at recall 0.967 | 7.7% at recall 0.912 | not timed |
+| qs_v2 | C, fine-tuned English | 0.9952 [0.9878, 1.0000] | 0.9829 / 0.9994 | 92.63% | 0.9992 | 2 | 0.9999 | 92.6% at recall 0.995 | 92.6% at recall 0.995 | not timed |
+
 
 ### Test (headline)
 
@@ -231,80 +261,86 @@ pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). E
 
 | arm / qs | t_low | t_high | recall | exact lo / hi | recall target | point - exact lo | route recall | forward rate | negatives forwarded | false forwards | AUROC p(pii) | PII share at p >= t_low | units / docs / positives |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| A / qs_v1 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9747 / 1.0000 | not rejected (upper 1.0000) | 0.0253 **D-008 review** | 1.0000 | 0.0045 [0.0019, 0.0078] | 0.0048 | 0 | 0.7775 | 0.0721 | 2006 / 124 / 144 |
-| A / qs_v2 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9747 / 1.0000 | not rejected (upper 1.0000) | 0.0253 **D-008 review** | 1.0000 | 0.0045 [0.0019, 0.0078] | 0.0048 | 0 | 0.7767 | 0.0721 | 2006 / 124 / 144 |
-| A / qs_v3 | 0.2676 | none | 0.9931 [0.9767, 1.0000] | 0.9619 / 0.9998 | not rejected (upper 0.9998) | 0.0311 **D-008 review** | 0.9931 | 0.0075 [0.0039, 0.0117] | 0.0075 | 1 | 0.5092 | 0.0718 | 2006 / 124 / 144 |
-| B1 / qs_v1 | 0.0250 | 0.9999 | 0.9900 [0.9667, 1.0000] | 0.9455 / 0.9997 | not rejected (upper 0.9997) | 0.0445 | 0.9900 | 0.0015 [0.0000, 0.0049] | 0.0000 | 1 | 0.3788 | 0.1473 | 673 / 124 / 100 |
-| B1 / qs_v2 | 0.0222 | 0.9999 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9638 / 1.0000 | not rejected (upper 1.0000) | 0.0362 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.3774 | 0.1486 | 673 / 124 / 100 |
-| B2 / qs_v1 | 0.3457 | 0.9965 | 0.9773 [0.9405, 1.0000] | 0.9203 / 0.9972 | not rejected (upper 0.9972) | 0.0570 | 0.9886 | 0.0094 [0.0000, 0.0224] | 0.0086 | 1 | 0.4486 | 0.2730 | 320 / 124 / 88 |
-| B2 / qs_v2 | 0.3465 | 0.9969 | 0.9773 [0.9405, 1.0000] | 0.9203 / 0.9972 | not rejected (upper 0.9972) | 0.0570 | 0.9773 | 0.0187 [0.0060, 0.0356] | 0.0172 | 2 | 0.4448 | 0.2739 | 320 / 124 / 88 |
-| B3 / qs_v1 (doc-level, underpowered) | 0.1907 | 0.9786 | 0.9765 [0.9390, 1.0000] | 0.9176 / 0.9971 | not rejected (upper 0.9971) | 0.0589 | 0.9765 | 0.0160 [0.0000, 0.0363] | 0.0098 | 2 | 0.4912 | 0.4511 | 187 / 124 / 85 |
-| B3 / qs_v2 (doc-level, underpowered) | 0.5142 | 0.9923 | 0.9294 [0.8690, 0.9775] | 0.8527 / 0.9737 | **missed** (upper 0.9737 < 0.995) | 0.0767 | 0.9294 | 0.0535 [0.0251, 0.0904] | 0.0392 | 6 | 0.4805 | 0.4463 | 187 / 124 / 85 |
-| B4 / qs_v1 (doc-level, underpowered) | 0.4425 | 0.7362 | 0.9625 [0.9146, 1.0000] | 0.8943 / 0.9922 | **missed** (upper 0.9922 < 0.995) | 0.0682 | 0.9750 | 0.0242 [0.0000, 0.0565] | 0.0227 | 2 | 0.4729 | 0.6417 | 124 / 124 / 80 |
-| B4 / qs_v2 (doc-level, underpowered) | 0.4841 | none | 0.9250 [0.8592, 0.9756] | 0.8439 / 0.9720 | **missed** (upper 0.9720 < 0.995) | 0.0811 | 0.9250 | 0.0565 [0.0242, 0.1048] | 0.0227 | 6 | 0.4564 | 0.6325 | 124 / 124 / 80 |
+| A / qs_v1 | 0.0084 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9912 / 1.0000 | not rejected (upper 1.0000) | 0.0088 | 1.0000 | 0.0051 [0.0033, 0.0072] | 0.0055 | 0 | 0.7861 | 0.0737 | 5713 / 337 / 419 |
+| A / qs_v2 | 0.0084 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9912 / 1.0000 | not rejected (upper 1.0000) | 0.0088 | 1.0000 | 0.0053 [0.0034, 0.0073] | 0.0057 | 0 | 0.7861 | 0.0737 | 5713 / 337 / 419 |
+| B1 / qs_v1 | 0.0683 | 1.0000 | 0.9967 [0.9897, 1.0000] | 0.9819 / 0.9999 | not rejected (upper 0.9999) | 0.0148 | 1.0000 | 0.0010 [0.0000, 0.0027] | 0.0012 | 0 | 0.3995 | 0.1594 | 1919 / 337 / 306 |
+| B1 / qs_v2 | 0.0686 | 1.0000 | 0.9967 [0.9897, 1.0000] | 0.9819 / 0.9999 | not rejected (upper 0.9999) | 0.0148 | 0.9967 | 0.0026 [0.0005, 0.0050] | 0.0025 | 1 | 0.3994 | 0.1594 | 1919 / 337 / 306 |
+| B2 / qs_v1 | 0.0578 | 0.9963 | 0.9957 [0.9861, 1.0000] | 0.9763 / 0.9999 | not rejected (upper 0.9999) | 0.0194 | 0.9957 | 0.0011 [0.0000, 0.0036] | 0.0000 | 1 | 0.4364 | 0.2547 | 912 / 337 / 233 |
+| B2 / qs_v2 | 0.0578 | 0.9963 | 0.9957 [0.9861, 1.0000] | 0.9763 / 0.9999 | not rejected (upper 0.9999) | 0.0194 | 0.9957 | 0.0011 [0.0000, 0.0036] | 0.0000 | 1 | 0.4365 | 0.2547 | 912 / 337 / 233 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.0578 | 0.9963 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9841 / 1.0000 | not rejected (upper 1.0000) | 0.0159 | 1.0000 | 0.0019 [0.0000, 0.0059] | 0.0034 | 0 | 0.4563 | 0.4389 | 525 / 337 / 230 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.0578 | 0.9963 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9841 / 1.0000 | not rejected (upper 1.0000) | 0.0159 | 1.0000 | 0.0019 [0.0000, 0.0059] | 0.0034 | 0 | 0.4562 | 0.4389 | 525 / 337 / 230 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.3310 | 0.8038 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9830 / 1.0000 | not rejected (upper 1.0000) | 0.0170 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.4662 | 0.6380 | 337 / 337 / 215 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.3311 | 0.8038 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9830 / 1.0000 | not rejected (upper 1.0000) | 0.0170 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.4662 | 0.6380 | 337 / 337 / 215 |
+| C / qs_v1 | 0.9697 | 0.9697 | 0.9952 [0.9878, 1.0000] | 0.9829 / 0.9994 | not rejected (upper 0.9994) | 0.0124 | 0.9976 | 0.9258 [0.9130, 0.9369] | 0.9989 | 1 | 0.9999 | 0.9905 | 5713 / 337 / 419 |
+| C / qs_v2 | 0.9701 | 0.9701 | 0.9952 [0.9878, 1.0000] | 0.9829 / 0.9994 | not rejected (upper 0.9994) | 0.0124 | 0.9952 | 0.9263 [0.9135, 0.9374] | 0.9992 | 2 | 0.9999 | 0.9905 | 5713 / 337 / 419 |
 
 
 ### Recall vs forward rate on test (D-007 amended)
 
-`t_low` fit on calib for each recall target, then applied to test with the same routing (role rule included). Forward rate is the share of test units passed without review; negatives forwarded is the share of PII-free units passed (the work saved).
+`t_low` fit on calib for each recall target, then applied to test with the same routing (role rule included). Test recall here is route recall: PII units not forwarded / PII units. Forward rate is the share of test units passed without review; negatives forwarded is the share of PII-free units passed (the work saved).
 
 | arm / qs | calib target | t_low | test recall | exact lo / hi | forward rate | negatives forwarded | false forwards |
 |---|---|---|---|---|---|---|---|
-| A / qs_v1 | 0.9 | 0.0349 | 0.8472 | 0.7779 / 0.9017 | 30.31% | 0.3153 | 21 |
-| A / qs_v1 | 0.95 | 0.0185 | 0.9375 | 0.8847 / 0.9710 | 6.18% | 0.0623 | 8 |
-| A / qs_v1 | 0.98 | 0.0106 | 0.9931 | 0.9619 / 0.9998 | 1.20% | 0.0124 | 1 |
-| A / qs_v1 | 0.99 | 0.0067 | 1.0000 | 0.9747 / 1.0000 | 0.50% | 0.0054 | 0 |
-| A / qs_v1 | 0.995 | 0.0054 | 1.0000 | 0.9747 / 1.0000 | 0.45% | 0.0048 | 0 |
-| A / qs_v2 | 0.9 | 0.0350 | 0.8403 | 0.7700 / 0.8960 | 31.26% | 0.3244 | 23 |
-| A / qs_v2 | 0.95 | 0.0182 | 0.9375 | 0.8847 / 0.9710 | 5.98% | 0.0596 | 9 |
-| A / qs_v2 | 0.98 | 0.0098 | 0.9931 | 0.9619 / 0.9998 | 1.00% | 0.0102 | 1 |
-| A / qs_v2 | 0.99 | 0.0067 | 1.0000 | 0.9747 / 1.0000 | 0.50% | 0.0054 | 0 |
-| A / qs_v2 | 0.995 | 0.0054 | 1.0000 | 0.9747 / 1.0000 | 0.45% | 0.0048 | 0 |
-| A / qs_v3 | 0.9 | 0.4068 | 0.8750 | 0.8097 / 0.9242 | 10.07% | 0.0994 | 17 |
-| A / qs_v3 | 0.95 | 0.3631 | 0.9236 | 0.8674 / 0.9613 | 5.43% | 0.0526 | 11 |
-| A / qs_v3 | 0.98 | 0.2985 | 0.9722 | 0.9304 / 0.9924 | 1.84% | 0.0177 | 4 |
-| A / qs_v3 | 0.99 | 0.2720 | 0.9931 | 0.9619 / 0.9998 | 0.95% | 0.0097 | 1 |
-| A / qs_v3 | 0.995 | 0.2676 | 0.9931 | 0.9619 / 0.9998 | 0.75% | 0.0075 | 1 |
-| B1 / qs_v1 | 0.9 | 0.6696 | 0.8500 | 0.7647 / 0.9135 | 3.86% | 0.0244 | 12 |
-| B1 / qs_v1 | 0.95 | 0.5433 | 0.9200 | 0.8484 / 0.9648 | 2.08% | 0.0140 | 6 |
-| B1 / qs_v1 | 0.98 | 0.3596 | 0.9700 | 0.9148 / 0.9938 | 1.04% | 0.0087 | 2 |
-| B1 / qs_v1 | 0.99 | 0.0250 | 0.9900 | 0.9455 / 0.9997 | 0.15% | 0.0000 | 1 |
-| B1 / qs_v1 | 0.995 | 0.0250 | 0.9900 | 0.9455 / 0.9997 | 0.15% | 0.0000 | 1 |
-| B1 / qs_v2 | 0.9 | 0.6796 | 0.8500 | 0.7647 / 0.9135 | 6.24% | 0.0471 | 15 |
-| B1 / qs_v2 | 0.95 | 0.5475 | 0.9400 | 0.8740 / 0.9777 | 2.97% | 0.0244 | 6 |
-| B1 / qs_v2 | 0.98 | 0.3630 | 0.9700 | 0.9148 / 0.9938 | 1.49% | 0.0122 | 3 |
-| B1 / qs_v2 | 0.99 | 0.0222 | 1.0000 | 0.9638 / 1.0000 | 0.00% | 0.0000 | 0 |
-| B1 / qs_v2 | 0.995 | 0.0222 | 1.0000 | 0.9638 / 1.0000 | 0.00% | 0.0000 | 0 |
-| B2 / qs_v1 | 0.9 | 0.6829 | 0.8750 | 0.7873 / 0.9359 | 5.00% | 0.0302 | 9 |
-| B2 / qs_v1 | 0.95 | 0.5433 | 0.9205 | 0.8430 / 0.9674 | 2.81% | 0.0172 | 5 |
-| B2 / qs_v1 | 0.98 | 0.4749 | 0.9318 | 0.8575 / 0.9746 | 2.50% | 0.0129 | 5 |
-| B2 / qs_v1 | 0.99 | 0.3457 | 0.9773 | 0.9203 / 0.9972 | 0.94% | 0.0086 | 1 |
-| B2 / qs_v1 | 0.995 | 0.3457 | 0.9773 | 0.9203 / 0.9972 | 0.94% | 0.0086 | 1 |
-| B2 / qs_v2 | 0.9 | 0.6872 | 0.8750 | 0.7873 / 0.9359 | 7.19% | 0.0517 | 11 |
-| B2 / qs_v2 | 0.95 | 0.5865 | 0.8977 | 0.8147 / 0.9522 | 5.00% | 0.0302 | 9 |
-| B2 / qs_v2 | 0.98 | 0.5467 | 0.9205 | 0.8430 / 0.9674 | 4.38% | 0.0302 | 7 |
-| B2 / qs_v2 | 0.99 | 0.3465 | 0.9773 | 0.9203 / 0.9972 | 1.88% | 0.0172 | 2 |
-| B2 / qs_v2 | 0.995 | 0.3465 | 0.9773 | 0.9203 / 0.9972 | 1.88% | 0.0172 | 2 |
-| B3 / qs_v1 (doc-level, underpowered) | 0.9 | 0.6660 | 0.8706 | 0.7802 / 0.9336 | 6.95% | 0.0490 | 8 |
-| B3 / qs_v1 (doc-level, underpowered) | 0.95 | 0.5289 | 0.8941 | 0.8085 / 0.9504 | 4.81% | 0.0294 | 6 |
-| B3 / qs_v1 (doc-level, underpowered) | 0.98 | 0.5010 | 0.9059 | 0.8229 / 0.9585 | 4.28% | 0.0196 | 6 |
-| B3 / qs_v1 (doc-level, underpowered) | 0.99 | 0.1907 | 0.9765 | 0.9176 / 0.9971 | 1.60% | 0.0098 | 2 |
-| B3 / qs_v1 (doc-level, underpowered) | 0.995 | 0.1907 | 0.9765 | 0.9176 / 0.9971 | 1.60% | 0.0098 | 2 |
-| B3 / qs_v2 (doc-level, underpowered) | 0.9 | 0.7025 | 0.8353 | 0.7391 / 0.9069 | 11.76% | 0.0784 | 14 |
-| B3 / qs_v2 (doc-level, underpowered) | 0.95 | 0.6796 | 0.8471 | 0.7527 / 0.9160 | 11.23% | 0.0784 | 13 |
-| B3 / qs_v2 (doc-level, underpowered) | 0.98 | 0.5475 | 0.9176 | 0.8377 / 0.9662 | 5.88% | 0.0392 | 7 |
-| B3 / qs_v2 (doc-level, underpowered) | 0.99 | 0.5142 | 0.9294 | 0.8527 / 0.9737 | 5.35% | 0.0392 | 6 |
-| B3 / qs_v2 (doc-level, underpowered) | 0.995 | 0.5142 | 0.9294 | 0.8527 / 0.9737 | 5.35% | 0.0392 | 6 |
-| B4 / qs_v1 (doc-level, underpowered) | 0.9 | 0.5528 | 0.8375 | 0.7382 / 0.9105 | 8.87% | 0.0455 | 9 |
-| B4 / qs_v1 (doc-level, underpowered) | 0.95 | 0.5145 | 0.8875 | 0.7972 / 0.9472 | 5.65% | 0.0227 | 6 |
-| B4 / qs_v1 (doc-level, underpowered) | 0.98 | 0.5083 | 0.8875 | 0.7972 / 0.9472 | 5.65% | 0.0227 | 6 |
-| B4 / qs_v1 (doc-level, underpowered) | 0.99 | 0.4425 | 0.9625 | 0.8943 / 0.9922 | 2.42% | 0.0227 | 2 |
-| B4 / qs_v1 (doc-level, underpowered) | 0.995 | 0.4425 | 0.9625 | 0.8943 / 0.9922 | 2.42% | 0.0227 | 2 |
-| B4 / qs_v2 (doc-level, underpowered) | 0.9 | 0.5697 | 0.8250 | 0.7238 / 0.9009 | 15.32% | 0.1136 | 14 |
-| B4 / qs_v2 (doc-level, underpowered) | 0.95 | 0.5611 | 0.8375 | 0.7382 / 0.9105 | 14.52% | 0.1136 | 13 |
-| B4 / qs_v2 (doc-level, underpowered) | 0.98 | 0.5156 | 0.9000 | 0.8124 / 0.9558 | 7.26% | 0.0227 | 8 |
-| B4 / qs_v2 (doc-level, underpowered) | 0.99 | 0.4841 | 0.9250 | 0.8439 / 0.9720 | 5.65% | 0.0227 | 6 |
-| B4 / qs_v2 (doc-level, underpowered) | 0.995 | 0.4841 | 0.9250 | 0.8439 / 0.9720 | 5.65% | 0.0227 | 6 |
+| A / qs_v1 | 0.9 | 0.0255 | 0.9475 | 0.9216 / 0.9668 | 13.76% | 0.1443 | 22 |
+| A / qs_v1 | 0.95 | 0.0193 | 0.9761 | 0.9565 / 0.9885 | 5.90% | 0.0618 | 10 |
+| A / qs_v1 | 0.98 | 0.0132 | 0.9905 | 0.9757 / 0.9974 | 1.93% | 0.0200 | 4 |
+| A / qs_v1 | 0.99 | 0.0086 | 0.9952 | 0.9829 / 0.9994 | 0.58% | 0.0059 | 2 |
+| A / qs_v1 | 0.995 | 0.0084 | 1.0000 | 0.9912 / 1.0000 | 0.51% | 0.0055 | 0 |
+| A / qs_v2 | 0.9 | 0.0257 | 0.9332 | 0.9049 / 0.9551 | 14.65% | 0.1528 | 28 |
+| A / qs_v2 | 0.95 | 0.0197 | 0.9714 | 0.9505 / 0.9851 | 6.46% | 0.0674 | 12 |
+| A / qs_v2 | 0.98 | 0.0131 | 0.9881 | 0.9724 / 0.9961 | 2.03% | 0.0210 | 5 |
+| A / qs_v2 | 0.99 | 0.0086 | 0.9952 | 0.9829 / 0.9994 | 0.61% | 0.0062 | 2 |
+| A / qs_v2 | 0.995 | 0.0084 | 1.0000 | 0.9912 / 1.0000 | 0.53% | 0.0057 | 0 |
+| B1 / qs_v1 | 0.9 | 0.6621 | 0.9020 | 0.8630 / 0.9329 | 3.60% | 0.0242 | 30 |
+| B1 / qs_v1 | 0.95 | 0.4470 | 0.9641 | 0.9366 / 0.9819 | 1.20% | 0.0074 | 11 |
+| B1 / qs_v1 | 0.98 | 0.2261 | 0.9935 | 0.9766 / 0.9992 | 0.31% | 0.0025 | 2 |
+| B1 / qs_v1 | 0.99 | 0.1162 | 1.0000 | 0.9880 / 1.0000 | 0.16% | 0.0019 | 0 |
+| B1 / qs_v1 | 0.995 | 0.0683 | 1.0000 | 0.9880 / 1.0000 | 0.10% | 0.0012 | 0 |
+| B1 / qs_v2 | 0.9 | 0.6610 | 0.8758 | 0.8336 / 0.9106 | 5.00% | 0.0360 | 38 |
+| B1 / qs_v2 | 0.95 | 0.4477 | 0.9510 | 0.9204 / 0.9723 | 1.77% | 0.0118 | 15 |
+| B1 / qs_v2 | 0.98 | 0.2278 | 0.9869 | 0.9669 / 0.9964 | 0.52% | 0.0037 | 4 |
+| B1 / qs_v2 | 0.99 | 0.1169 | 0.9967 | 0.9819 / 0.9999 | 0.31% | 0.0031 | 1 |
+| B1 / qs_v2 | 0.995 | 0.0686 | 0.9967 | 0.9819 / 0.9999 | 0.26% | 0.0025 | 1 |
+| B2 / qs_v1 | 0.9 | 0.6697 | 0.9099 | 0.8655 / 0.9433 | 4.50% | 0.0295 | 21 |
+| B2 / qs_v1 | 0.95 | 0.5146 | 0.9485 | 0.9118 / 0.9731 | 2.30% | 0.0133 | 12 |
+| B2 / qs_v1 | 0.98 | 0.2786 | 0.9871 | 0.9628 / 0.9973 | 0.44% | 0.0015 | 3 |
+| B2 / qs_v1 | 0.99 | 0.0683 | 0.9957 | 0.9763 / 0.9999 | 0.11% | 0.0000 | 1 |
+| B2 / qs_v1 | 0.995 | 0.0578 | 0.9957 | 0.9763 / 0.9999 | 0.11% | 0.0000 | 1 |
+| B2 / qs_v2 | 0.9 | 0.6697 | 0.8798 | 0.8310 / 0.9186 | 6.25% | 0.0427 | 28 |
+| B2 / qs_v2 | 0.95 | 0.5146 | 0.9227 | 0.8807 / 0.9536 | 3.29% | 0.0177 | 18 |
+| B2 / qs_v2 | 0.98 | 0.2773 | 0.9828 | 0.9566 / 0.9953 | 0.55% | 0.0015 | 4 |
+| B2 / qs_v2 | 0.99 | 0.0686 | 0.9957 | 0.9763 / 0.9999 | 0.11% | 0.0000 | 1 |
+| B2 / qs_v2 | 0.995 | 0.0578 | 0.9957 | 0.9763 / 0.9999 | 0.11% | 0.0000 | 1 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.9 | 0.6697 | 0.9174 | 0.8740 / 0.9495 | 5.14% | 0.0271 | 19 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.95 | 0.4834 | 0.9652 | 0.9326 / 0.9849 | 1.90% | 0.0068 | 8 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.98 | 0.2306 | 0.9826 | 0.9561 / 0.9952 | 0.95% | 0.0034 | 4 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.99 | 0.0683 | 1.0000 | 0.9841 / 1.0000 | 0.19% | 0.0034 | 0 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.995 | 0.0578 | 1.0000 | 0.9841 / 1.0000 | 0.19% | 0.0034 | 0 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.9 | 0.6697 | 0.8870 | 0.8388 / 0.9248 | 7.62% | 0.0475 | 26 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.95 | 0.4834 | 0.9478 | 0.9106 / 0.9728 | 2.86% | 0.0102 | 12 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.98 | 0.2306 | 0.9783 | 0.9500 / 0.9929 | 1.14% | 0.0034 | 5 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.99 | 0.0686 | 1.0000 | 0.9841 / 1.0000 | 0.19% | 0.0034 | 0 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.995 | 0.0578 | 1.0000 | 0.9841 / 1.0000 | 0.19% | 0.0034 | 0 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.9 | 0.5258 | 0.9442 | 0.9045 / 0.9708 | 4.45% | 0.0246 | 12 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.95 | 0.4866 | 0.9814 | 0.9531 / 0.9949 | 1.48% | 0.0082 | 4 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.98 | 0.4247 | 0.9860 | 0.9598 / 0.9971 | 0.89% | 0.0000 | 3 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.99 | 0.3410 | 1.0000 | 0.9830 / 1.0000 | 0.00% | 0.0000 | 0 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.995 | 0.3310 | 1.0000 | 0.9830 / 1.0000 | 0.00% | 0.0000 | 0 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.9 | 0.5258 | 0.9116 | 0.8654 / 0.9460 | 7.72% | 0.0574 | 19 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.95 | 0.4868 | 0.9674 | 0.9341 / 0.9868 | 2.67% | 0.0164 | 7 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.98 | 0.4247 | 0.9814 | 0.9531 / 0.9949 | 1.19% | 0.0000 | 4 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.99 | 0.3414 | 1.0000 | 0.9830 / 1.0000 | 0.00% | 0.0000 | 0 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.995 | 0.3311 | 1.0000 | 0.9830 / 1.0000 | 0.00% | 0.0000 | 0 |
+| C / qs_v1 | 0.9 | 0.9986 | 0.9976 | 0.9868 / 0.9999 | 92.58% | 0.9989 | 1 |
+| C / qs_v1 | 0.95 | 0.9986 | 0.9976 | 0.9868 / 0.9999 | 92.58% | 0.9989 | 1 |
+| C / qs_v1 | 0.98 | 0.9981 | 0.9976 | 0.9868 / 0.9999 | 92.58% | 0.9989 | 1 |
+| C / qs_v1 | 0.99 | 0.9968 | 0.9976 | 0.9868 / 0.9999 | 92.58% | 0.9989 | 1 |
+| C / qs_v1 | 0.995 | 0.9697 | 0.9976 | 0.9868 / 0.9999 | 92.58% | 0.9989 | 1 |
+| C / qs_v2 | 0.9 | 0.9986 | 0.9952 | 0.9829 / 0.9994 | 92.63% | 0.9992 | 2 |
+| C / qs_v2 | 0.95 | 0.9986 | 0.9952 | 0.9829 / 0.9994 | 92.63% | 0.9992 | 2 |
+| C / qs_v2 | 0.98 | 0.9981 | 0.9952 | 0.9829 / 0.9994 | 92.63% | 0.9992 | 2 |
+| C / qs_v2 | 0.99 | 0.9968 | 0.9952 | 0.9829 / 0.9994 | 92.63% | 0.9992 | 2 |
+| C / qs_v2 | 0.995 | 0.9701 | 0.9952 | 0.9829 / 0.9994 | 92.63% | 0.9992 | 2 |
 
 
 ### Holdout (descriptive only, D-005)
@@ -313,17 +349,18 @@ All IRB letters (one document type, 30 documents, few positives), never part of 
 
 | arm / qs | t_low | t_high | recall | exact lo / hi | recall target | point - exact lo | route recall | forward rate | negatives forwarded | false forwards | AUROC p(pii) | PII share at p >= t_low | units / docs / positives |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| A / qs_v1 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5755 | 0.0678 | 295 / 30 / 20 |
-| A / qs_v2 | 0.0054 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5769 | 0.0678 | 295 / 30 / 20 |
-| A / qs_v3 | 0.2676 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0034 [0.0000, 0.0117] | 0.0036 | 0 | 0.0445 | 0.0680 | 295 / 30 / 20 |
-| B1 / qs_v1 | 0.0250 | 0.9999 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.2930 | 0.2020 | 99 / 30 / 20 |
-| B1 / qs_v2 | 0.0222 | 0.9999 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.2987 | 0.2020 | 99 / 30 / 20 |
-| B2 / qs_v1 | 0.3457 | 0.9965 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.3967 | 0.4000 | 50 / 30 / 20 |
-| B2 / qs_v2 | 0.3465 | 0.9969 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.4108 | 0.4000 | 50 / 30 / 20 |
-| B3 / qs_v1 (doc-level, underpowered) | 0.1907 | 0.9786 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5909 | 0.6452 | 31 / 30 / 20 |
-| B3 / qs_v2 (doc-level, underpowered) | 0.5142 | 0.9923 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.6818 | 0.6452 | 31 / 30 / 20 |
-| B4 / qs_v1 (doc-level, underpowered) | 0.4425 | 0.7362 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5700 | 0.6667 | 30 / 30 / 20 |
-| B4 / qs_v2 (doc-level, underpowered) | 0.4841 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.8316 / 1.0000 | not rejected (upper 1.0000) | 0.1684 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.6600 | 0.6667 | 30 / 30 / 20 |
+| A / qs_v1 | 0.0084 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.0014 [0.0000, 0.0045] | 0.0015 | 0 | 0.6295 | 0.0775 | 724 / 80 / 56 |
+| A / qs_v2 | 0.0084 | none | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.0014 [0.0000, 0.0045] | 0.0015 | 0 | 0.6290 | 0.0775 | 724 / 80 / 56 |
+| B1 / qs_v1 | 0.0683 | 1.0000 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.2767 | 0.2249 | 249 / 80 / 56 |
+| B1 / qs_v2 | 0.0686 | 1.0000 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.2763 | 0.2249 | 249 / 80 / 56 |
+| B2 / qs_v1 | 0.0578 | 0.9963 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.4247 | 0.4308 | 130 / 80 / 56 |
+| B2 / qs_v2 | 0.0578 | 0.9963 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.4245 | 0.4308 | 130 / 80 / 56 |
+| B3 / qs_v1 (doc-level, underpowered) | 0.0578 | 0.9963 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5300 | 0.6667 | 84 / 80 / 56 |
+| B3 / qs_v2 (doc-level, underpowered) | 0.0578 | 0.9963 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5290 | 0.6667 | 84 / 80 / 56 |
+| B4 / qs_v1 (doc-level, underpowered) | 0.3310 | 0.8038 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5432 | 0.7000 | 80 / 80 / 56 |
+| B4 / qs_v2 (doc-level, underpowered) | 0.3311 | 0.8038 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.0000 [0.0000, 0.0000] | 0.0000 | 0 | 0.5428 | 0.7000 | 80 / 80 / 56 |
+| C / qs_v1 | 0.9697 | 0.9697 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.9171 [0.9018, 0.9303] | 0.9940 | 0 | 1.0000 | 0.9492 | 724 / 80 / 56 |
+| C / qs_v2 | 0.9701 | 0.9701 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9362 / 1.0000 | not rejected (upper 1.0000) | 0.0638 | 1.0000 | 0.9185 [0.9032, 0.9315] | 0.9955 | 0 | 1.0000 | 0.9492 | 724 / 80 / 56 |
 
 ## 3. Per-question
 
@@ -331,70 +368,70 @@ All IRB letters (one document type, 30 documents, few positives), never part of 
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 2006 | 0.9362 | 0.6155 | 0.9282 (B) |
-| subject_role | 2006 | 0.7453 | 0.2501 | 0.9282 (none) |
-| category | 2006 | 0.9103 | 0.3415 | 0.9143 (none) |
-| doc_kind | 2006 | 0.2552 | 0.1485 | 0.3116 (narrative) |
+| pii_present | 5713 | 0.9319 | 0.5940 | 0.9267 (B) |
+| subject_role | 5713 | 0.7329 | 0.2501 | 0.9267 (none) |
+| category | 5713 | 0.9120 | 0.3458 | 0.9146 (none) |
+| doc_kind | 5713 | 0.2486 | 0.1542 | 0.3413 (narrative) |
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 23 | 121 |
-| B | 7 | 1855 |
+| A | 56 | 363 |
+| B | 26 | 5268 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
-| patient | 9 | 7 | 4 | 57 |
-| staff | 3 | 6 | 1 | 25 |
-| both | 7 | 6 | 0 | 19 |
-| none | 79 | 262 | 41 | 1480 |
+| patient | 26 | 12 | 10 | 176 |
+| staff | 3 | 22 | 1 | 51 |
+| both | 25 | 9 | 0 | 84 |
+| none | 222 | 820 | 113 | 4139 |
 
 Confusion, `category`:
 
 | gold \ pred | direct | quasi | coded | staff | none |
 |---|---|---|---|---|---|
-| direct | 0 | 0 | 12 | 0 | 19 |
-| quasi | 1 | 2 | 25 | 0 | 50 |
-| coded | 0 | 0 | 15 | 0 | 23 |
-| staff | 0 | 0 | 1 | 8 | 16 |
-| none | 2 | 5 | 22 | 4 | 1801 |
+| direct | 0 | 1 | 46 | 0 | 67 |
+| quasi | 5 | 3 | 80 | 2 | 138 |
+| coded | 0 | 0 | 44 | 0 | 38 |
+| staff | 0 | 1 | 4 | 21 | 38 |
+| none | 11 | 11 | 56 | 5 | 5142 |
 
 Confusion, `doc_kind`:
 
 | gold \ pred | narrative | form_table | correspondence | protocol_text |
 |---|---|---|---|---|
-| narrative | 58 | 2 | 10 | 555 |
-| form_table | 29 | 5 | 9 | 495 |
-| correspondence | 21 | 0 | 8 | 344 |
-| protocol_text | 22 | 2 | 5 | 441 |
+| narrative | 194 | 0 | 12 | 1744 |
+| form_table | 74 | 19 | 28 | 1407 |
+| correspondence | 59 | 3 | 34 | 899 |
+| protocol_text | 56 | 0 | 11 | 1173 |
 
 ### A / qs_v1, holdout
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 295 | 0.9322 | 0.4825 | 0.9322 (B) |
-| subject_role | 295 | 0.7390 | 0.2348 | 0.9322 (none) |
-| category | 295 | 0.9356 | 0.3545 | 0.9322 (none) |
-| doc_kind | 295 | 0.0305 | 0.0197 | 1.0000 (correspondence) |
+| pii_present | 724 | 0.9227 | 0.4799 | 0.9227 (B) |
+| subject_role | 724 | 0.7196 | 0.2177 | 0.9227 (none) |
+| category | 724 | 0.9199 | 0.2570 | 0.9227 (none) |
+| doc_kind | 724 | 0.0470 | 0.0299 | 1.0000 (correspondence) |
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 0 | 20 |
-| B | 0 | 275 |
+| A | 0 | 56 |
+| B | 0 | 668 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
 | patient | 0 | 0 | 0 | 0 |
-| staff | 0 | 3 | 0 | 17 |
+| staff | 0 | 3 | 0 | 53 |
 | both | 0 | 0 | 0 | 0 |
-| none | 11 | 43 | 6 | 215 |
+| none | 20 | 115 | 15 | 518 |
 
 Confusion, `category`:
 
@@ -403,8 +440,8 @@ Confusion, `category`:
 | direct | 0 | 0 | 0 | 0 | 0 |
 | quasi | 0 | 0 | 0 | 0 | 0 |
 | coded | 0 | 0 | 0 | 0 | 0 |
-| staff | 0 | 0 | 1 | 1 | 18 |
-| none | 0 | 0 | 0 | 0 | 275 |
+| staff | 0 | 0 | 1 | 2 | 53 |
+| none | 0 | 2 | 2 | 0 | 664 |
 
 Confusion, `doc_kind`:
 
@@ -412,259 +449,171 @@ Confusion, `doc_kind`:
 |---|---|---|---|---|
 | narrative | 0 | 0 | 0 | 0 |
 | form_table | 0 | 0 | 0 | 0 |
-| correspondence | 15 | 0 | 9 | 271 |
+| correspondence | 34 | 0 | 34 | 656 |
 | protocol_text | 0 | 0 | 0 | 0 |
 
 ### A / qs_v2, test
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 2006 | 0.9362 | 0.6155 | 0.9282 (B) |
-| has_phi_direct | 2006 | 0.9611 | 0.6150 | 0.9845 (B) |
-| has_phi_quasi | 2006 | 0.9397 | 0.7410 | 0.9487 (B) |
-| has_coded_id | 2006 | 0.9397 | 0.7904 | 0.9457 (B) |
-| has_staff_pii | 2006 | 0.5952 | 0.4230 | 0.9666 (B) |
+| pii_present | 5713 | 0.9319 | 0.5940 | 0.9267 (B) |
+| has_phi_direct | 5713 | 0.9587 | 0.6339 | 0.9800 (B) |
+| has_phi_quasi | 5713 | 0.9421 | 0.7612 | 0.9443 (B) |
+| has_coded_id | 5713 | 0.9303 | 0.7661 | 0.9457 (B) |
+| has_staff_pii | 5713 | 0.5815 | 0.4153 | 0.9659 (B) |
 
-Multi-label categories: micro-F1 0.2817, macro-F1 0.3713.
+Multi-label categories: micro-F1 0.2808, macro-F1 0.3790.
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 23 | 121 |
-| B | 7 | 1855 |
+| A | 56 | 363 |
+| B | 26 | 5268 |
 
 Confusion, `has_phi_direct`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 13 | 18 |
-| B | 60 | 1915 |
+| A | 48 | 66 |
+| B | 170 | 5429 |
 
 Confusion, `has_phi_quasi`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 64 | 39 |
-| B | 82 | 1821 |
+| A | 205 | 113 |
+| B | 218 | 5177 |
 
 Confusion, `has_coded_id`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 96 | 13 |
-| B | 108 | 1789 |
+| A | 264 | 46 |
+| B | 352 | 5051 |
 
 Confusion, `has_staff_pii`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 49 | 18 |
-| B | 794 | 1145 |
+| A | 138 | 57 |
+| B | 2334 | 3184 |
 
 ### A / qs_v2, holdout
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 295 | 0.9322 | 0.4825 | 0.9322 (B) |
-| has_phi_direct | 295 | 0.9932 | 0.4983 | 1.0000 (B) |
-| has_phi_quasi | 295 | 0.9729 | 0.4931 | 1.0000 (B) |
-| has_coded_id | 295 | 0.9729 | 0.4931 | 1.0000 (B) |
-| has_staff_pii | 295 | 0.6237 | 0.5060 | 0.9322 (B) |
+| pii_present | 724 | 0.9227 | 0.4799 | 0.9227 (B) |
+| has_phi_direct | 724 | 0.9986 | 0.4997 | 1.0000 (B) |
+| has_phi_quasi | 724 | 0.9765 | 0.4941 | 1.0000 (B) |
+| has_coded_id | 724 | 0.9641 | 0.4909 | 1.0000 (B) |
+| has_staff_pii | 724 | 0.6188 | 0.5109 | 0.9227 (B) |
 
-Multi-label categories: micro-F1 0.2367, macro-F1 0.0662.
+Multi-label categories: micro-F1 0.2523, macro-F1 0.0703.
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 0 | 20 |
-| B | 0 | 275 |
+| A | 0 | 56 |
+| B | 0 | 668 |
 
 Confusion, `has_phi_direct`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 2 | 293 |
+| B | 1 | 723 |
 
 Confusion, `has_phi_quasi`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 8 | 287 |
+| B | 17 | 707 |
 
 Confusion, `has_coded_id`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 8 | 287 |
+| B | 26 | 698 |
 
 Confusion, `has_staff_pii`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 111 | 164 |
-
-### A / qs_v3, test
-
-| question | n | accuracy | macro-F1 | majority baseline |
-|---|---|---|---|---|
-| pii_present | 2006 | 0.3116 | 0.2776 | 0.9282 (B) |
-| subject_role | 2006 | 0.7453 | 0.2501 | 0.9282 (none) |
-| category | 2006 | 0.9103 | 0.3415 | 0.9143 (none) |
-| doc_kind | 2006 | 0.2552 | 0.1485 | 0.3116 (narrative) |
-
-Confusion, `pii_present`:
-
-| gold \ pred | A | B |
-|---|---|---|
-| A | 95 | 49 |
-| B | 1332 | 530 |
-
-Confusion, `subject_role`:
-
-| gold \ pred | patient | staff | both | none |
-|---|---|---|---|---|
-| patient | 9 | 7 | 4 | 57 |
-| staff | 3 | 6 | 1 | 25 |
-| both | 7 | 6 | 0 | 19 |
-| none | 79 | 262 | 41 | 1480 |
-
-Confusion, `category`:
-
-| gold \ pred | direct | quasi | coded | staff | none |
-|---|---|---|---|---|---|
-| direct | 0 | 0 | 12 | 0 | 19 |
-| quasi | 1 | 2 | 25 | 0 | 50 |
-| coded | 0 | 0 | 15 | 0 | 23 |
-| staff | 0 | 0 | 1 | 8 | 16 |
-| none | 2 | 5 | 22 | 4 | 1801 |
-
-Confusion, `doc_kind`:
-
-| gold \ pred | narrative | form_table | correspondence | protocol_text |
-|---|---|---|---|---|
-| narrative | 58 | 2 | 10 | 555 |
-| form_table | 29 | 5 | 9 | 495 |
-| correspondence | 21 | 0 | 8 | 344 |
-| protocol_text | 22 | 2 | 5 | 441 |
-
-### A / qs_v3, holdout
-
-| question | n | accuracy | macro-F1 | majority baseline |
-|---|---|---|---|---|
-| pii_present | 295 | 0.2169 | 0.1783 | 0.9322 (B) |
-| subject_role | 295 | 0.7390 | 0.2348 | 0.9322 (none) |
-| category | 295 | 0.9356 | 0.3545 | 0.9322 (none) |
-| doc_kind | 295 | 0.0305 | 0.0197 | 1.0000 (correspondence) |
-
-Confusion, `pii_present`:
-
-| gold \ pred | A | B |
-|---|---|---|
-| A | 0 | 20 |
-| B | 211 | 64 |
-
-Confusion, `subject_role`:
-
-| gold \ pred | patient | staff | both | none |
-|---|---|---|---|---|
-| patient | 0 | 0 | 0 | 0 |
-| staff | 0 | 3 | 0 | 17 |
-| both | 0 | 0 | 0 | 0 |
-| none | 11 | 43 | 6 | 215 |
-
-Confusion, `category`:
-
-| gold \ pred | direct | quasi | coded | staff | none |
-|---|---|---|---|---|---|
-| direct | 0 | 0 | 0 | 0 | 0 |
-| quasi | 0 | 0 | 0 | 0 | 0 |
-| coded | 0 | 0 | 0 | 0 | 0 |
-| staff | 0 | 0 | 1 | 1 | 18 |
-| none | 0 | 0 | 0 | 0 | 275 |
-
-Confusion, `doc_kind`:
-
-| gold \ pred | narrative | form_table | correspondence | protocol_text |
-|---|---|---|---|---|
-| narrative | 0 | 0 | 0 | 0 |
-| form_table | 0 | 0 | 0 | 0 |
-| correspondence | 15 | 0 | 9 | 271 |
-| protocol_text | 0 | 0 | 0 | 0 |
+| A | 54 | 2 |
+| B | 274 | 394 |
 
 ### B1 / qs_v1, test
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 673 | 0.1605 | 0.1478 | 0.8514 (B) |
-| subject_role | 673 | 0.1783 | 0.1227 | 0.8514 (none) |
-| category | 673 | 0.4933 | 0.2283 | 0.8217 (none) |
-| doc_kind | 673 | 0.2571 | 0.2423 | 0.3046 (form_table) |
+| pii_present | 1919 | 0.1641 | 0.1489 | 0.8405 (B) |
+| subject_role | 1919 | 0.1662 | 0.1125 | 0.8405 (none) |
+| category | 1919 | 0.4924 | 0.2279 | 0.8161 (none) |
+| doc_kind | 1919 | 0.2626 | 0.2347 | 0.3246 (narrative) |
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 95 | 5 |
-| B | 560 | 13 |
+| A | 286 | 20 |
+| B | 1584 | 29 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
-| patient | 12 | 17 | 1 | 12 |
-| staff | 4 | 15 | 0 | 7 |
-| both | 13 | 11 | 1 | 7 |
-| none | 154 | 309 | 18 | 92 |
+| patient | 37 | 51 | 5 | 38 |
+| staff | 3 | 34 | 0 | 20 |
+| both | 64 | 33 | 2 | 19 |
+| none | 449 | 865 | 53 | 246 |
 
 Confusion, `category`:
 
 | gold \ pred | direct | quasi | coded | staff | none |
 |---|---|---|---|---|---|
-| direct | 1 | 1 | 5 | 5 | 15 |
-| quasi | 0 | 4 | 8 | 11 | 24 |
-| coded | 2 | 2 | 9 | 1 | 15 |
-| staff | 0 | 0 | 0 | 9 | 8 |
-| none | 13 | 5 | 33 | 193 | 309 |
+| direct | 0 | 4 | 15 | 32 | 55 |
+| quasi | 4 | 13 | 36 | 46 | 44 |
+| coded | 0 | 2 | 27 | 10 | 19 |
+| staff | 0 | 2 | 1 | 27 | 16 |
+| none | 32 | 16 | 90 | 550 | 878 |
 
 Confusion, `doc_kind`:
 
 | gold \ pred | narrative | form_table | correspondence | protocol_text |
 |---|---|---|---|---|
-| narrative | 71 | 12 | 75 | 43 |
-| form_table | 63 | 23 | 94 | 25 |
-| correspondence | 45 | 6 | 55 | 11 |
-| protocol_text | 67 | 13 | 46 | 24 |
+| narrative | 288 | 28 | 212 | 95 |
+| form_table | 198 | 56 | 271 | 63 |
+| correspondence | 144 | 33 | 96 | 44 |
+| protocol_text | 176 | 34 | 117 | 64 |
 
 ### B1 / qs_v1, holdout
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 99 | 0.2121 | 0.1820 | 0.7980 (B) |
-| subject_role | 99 | 0.3030 | 0.1731 | 0.7980 (none) |
-| category | 99 | 0.5960 | 0.2648 | 0.7980 (none) |
-| doc_kind | 99 | 0.3535 | 0.1306 | 1.0000 (correspondence) |
+| pii_present | 249 | 0.2249 | 0.1836 | 0.7751 (B) |
+| subject_role | 249 | 0.3293 | 0.1917 | 0.7751 (none) |
+| category | 249 | 0.6265 | 0.2335 | 0.7751 (none) |
+| doc_kind | 249 | 0.3253 | 0.1227 | 1.0000 (correspondence) |
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 78 | 1 |
+| A | 56 | 0 |
+| B | 193 | 0 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
 | patient | 0 | 0 | 0 | 0 |
-| staff | 6 | 12 | 0 | 2 |
+| staff | 4 | 44 | 0 | 8 |
 | both | 0 | 0 | 0 | 0 |
-| none | 18 | 41 | 2 | 18 |
+| none | 56 | 96 | 3 | 38 |
 
 Confusion, `category`:
 
@@ -673,8 +622,8 @@ Confusion, `category`:
 | direct | 0 | 0 | 0 | 0 | 0 |
 | quasi | 0 | 0 | 0 | 0 | 0 |
 | coded | 0 | 0 | 0 | 0 | 0 |
-| staff | 0 | 1 | 0 | 9 | 10 |
-| none | 4 | 1 | 0 | 24 | 50 |
+| staff | 0 | 1 | 0 | 31 | 24 |
+| none | 6 | 3 | 4 | 55 | 125 |
 
 Confusion, `doc_kind`:
 
@@ -682,171 +631,171 @@ Confusion, `doc_kind`:
 |---|---|---|---|---|
 | narrative | 0 | 0 | 0 | 0 |
 | form_table | 0 | 0 | 0 | 0 |
-| correspondence | 31 | 8 | 35 | 25 |
+| correspondence | 84 | 27 | 81 | 57 |
 | protocol_text | 0 | 0 | 0 | 0 |
 
 ### B1 / qs_v2, test
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 673 | 0.1605 | 0.1478 | 0.8514 (B) |
-| has_phi_direct | 673 | 0.1352 | 0.1317 | 0.9599 (B) |
-| has_phi_quasi | 673 | 0.1798 | 0.1798 | 0.8945 (B) |
-| has_coded_id | 673 | 0.1768 | 0.1763 | 0.8692 (B) |
-| has_staff_pii | 673 | 0.1471 | 0.1470 | 0.9138 (B) |
+| pii_present | 1919 | 0.1647 | 0.1495 | 0.8405 (B) |
+| has_phi_direct | 1919 | 0.1360 | 0.1348 | 0.9448 (B) |
+| has_phi_quasi | 1919 | 0.1777 | 0.1774 | 0.8791 (B) |
+| has_coded_id | 1919 | 0.1720 | 0.1712 | 0.8713 (B) |
+| has_staff_pii | 1919 | 0.1485 | 0.1485 | 0.9088 (B) |
 
-Multi-label categories: micro-F1 0.1496, macro-F1 0.1481.
+Multi-label categories: micro-F1 0.1619, macro-F1 0.1610.
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 95 | 5 |
-| B | 560 | 13 |
+| A | 286 | 20 |
+| B | 1583 | 30 |
 
 Confusion, `has_phi_direct`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 24 | 3 |
-| B | 579 | 67 |
+| A | 94 | 12 |
+| B | 1646 | 167 |
 
 Confusion, `has_phi_quasi`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 61 | 10 |
-| B | 542 | 60 |
+| A | 189 | 43 |
+| B | 1535 | 152 |
 
 Confusion, `has_coded_id`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 68 | 20 |
-| B | 534 | 51 |
+| A | 194 | 53 |
+| B | 1536 | 136 |
 
 Confusion, `has_staff_pii`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 46 | 12 |
-| B | 562 | 53 |
+| A | 147 | 28 |
+| B | 1606 | 138 |
 
 ### B1 / qs_v2, holdout
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 99 | 0.2121 | 0.1820 | 0.7980 (B) |
-| has_phi_direct | 99 | 0.0808 | 0.0748 | 1.0000 (B) |
-| has_phi_quasi | 99 | 0.1010 | 0.0917 | 1.0000 (B) |
-| has_coded_id | 99 | 0.0606 | 0.0571 | 1.0000 (B) |
-| has_staff_pii | 99 | 0.2525 | 0.2350 | 0.7980 (B) |
+| pii_present | 249 | 0.2249 | 0.1836 | 0.7751 (B) |
+| has_phi_direct | 249 | 0.0321 | 0.0311 | 1.0000 (B) |
+| has_phi_quasi | 249 | 0.0643 | 0.0604 | 1.0000 (B) |
+| has_coded_id | 249 | 0.0442 | 0.0423 | 1.0000 (B) |
+| has_staff_pii | 249 | 0.2570 | 0.2331 | 0.7751 (B) |
 
-Multi-label categories: micro-F1 0.1034, macro-F1 0.0877.
+Multi-label categories: micro-F1 0.1075, macro-F1 0.0922.
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 78 | 1 |
+| A | 56 | 0 |
+| B | 193 | 0 |
 
 Confusion, `has_phi_direct`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 91 | 8 |
+| B | 241 | 8 |
 
 Confusion, `has_phi_quasi`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 89 | 10 |
+| B | 233 | 16 |
 
 Confusion, `has_coded_id`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 93 | 6 |
+| B | 238 | 11 |
 
 Confusion, `has_staff_pii`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 74 | 5 |
+| A | 54 | 2 |
+| B | 183 | 10 |
 
 ### B2 / qs_v1, test
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 320 | 0.2750 | 0.2317 | 0.7250 (B) |
-| subject_role | 320 | 0.2094 | 0.1823 | 0.7250 (none) |
-| category | 320 | 0.4156 | 0.2509 | 0.6937 (none) |
-| doc_kind | 320 | 0.2906 | 0.2708 | 0.3312 (form_table) |
+| pii_present | 912 | 0.2500 | 0.2105 | 0.7445 (B) |
+| subject_role | 912 | 0.1612 | 0.1286 | 0.7445 (none) |
+| category | 912 | 0.3991 | 0.2328 | 0.7105 (none) |
+| doc_kind | 912 | 0.2818 | 0.2350 | 0.3421 (form_table) |
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 82 | 6 |
-| B | 226 | 6 |
+| A | 216 | 17 |
+| B | 667 | 12 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
-| patient | 15 | 11 | 0 | 4 |
-| staff | 2 | 15 | 0 | 9 |
-| both | 12 | 12 | 1 | 7 |
-| none | 46 | 140 | 10 | 36 |
+| patient | 24 | 28 | 0 | 18 |
+| staff | 4 | 34 | 0 | 11 |
+| both | 58 | 39 | 2 | 15 |
+| none | 172 | 391 | 29 | 87 |
 
 Confusion, `category`:
 
 | gold \ pred | direct | quasi | coded | staff | none |
 |---|---|---|---|---|---|
-| direct | 3 | 0 | 5 | 5 | 14 |
-| quasi | 0 | 2 | 7 | 13 | 13 |
-| coded | 0 | 0 | 6 | 7 | 7 |
-| staff | 0 | 0 | 2 | 9 | 5 |
-| none | 2 | 2 | 11 | 94 | 113 |
+| direct | 0 | 4 | 20 | 31 | 45 |
+| quasi | 3 | 10 | 30 | 19 | 22 |
+| coded | 0 | 3 | 20 | 7 | 12 |
+| staff | 0 | 1 | 2 | 25 | 10 |
+| none | 13 | 1 | 43 | 282 | 309 |
 
 Confusion, `doc_kind`:
 
 | gold \ pred | narrative | form_table | correspondence | protocol_text |
 |---|---|---|---|---|
-| narrative | 40 | 2 | 41 | 9 |
-| form_table | 23 | 10 | 62 | 11 |
-| correspondence | 19 | 4 | 31 | 1 |
-| protocol_text | 36 | 2 | 17 | 12 |
+| narrative | 159 | 8 | 86 | 29 |
+| form_table | 70 | 22 | 198 | 22 |
+| correspondence | 78 | 2 | 60 | 4 |
+| protocol_text | 100 | 3 | 55 | 16 |
 
 ### B2 / qs_v1, holdout
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 50 | 0.4000 | 0.2857 | 0.6000 (B) |
-| subject_role | 50 | 0.4400 | 0.2920 | 0.6000 (none) |
-| category | 50 | 0.5600 | 0.2854 | 0.6000 (none) |
-| doc_kind | 50 | 0.5800 | 0.2447 | 1.0000 (correspondence) |
+| pii_present | 130 | 0.4308 | 0.3011 | 0.5692 (B) |
+| subject_role | 130 | 0.4385 | 0.2148 | 0.5692 (none) |
+| category | 130 | 0.5923 | 0.3960 | 0.5692 (none) |
+| doc_kind | 130 | 0.5769 | 0.1829 | 1.0000 (correspondence) |
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 30 | 0 |
+| A | 56 | 0 |
+| B | 74 | 0 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
 | patient | 0 | 0 | 0 | 0 |
-| staff | 3 | 16 | 0 | 1 |
+| staff | 3 | 46 | 1 | 6 |
 | both | 0 | 0 | 0 | 0 |
-| none | 2 | 22 | 0 | 6 |
+| none | 13 | 47 | 3 | 11 |
 
 Confusion, `category`:
 
@@ -855,8 +804,8 @@ Confusion, `category`:
 | direct | 0 | 0 | 0 | 0 | 0 |
 | quasi | 0 | 0 | 0 | 0 | 0 |
 | coded | 0 | 0 | 0 | 0 | 0 |
-| staff | 0 | 1 | 1 | 13 | 5 |
-| none | 0 | 0 | 0 | 15 | 15 |
+| staff | 0 | 0 | 0 | 36 | 20 |
+| none | 1 | 0 | 0 | 32 | 41 |
 
 Confusion, `doc_kind`:
 
@@ -864,171 +813,171 @@ Confusion, `doc_kind`:
 |---|---|---|---|---|
 | narrative | 0 | 0 | 0 | 0 |
 | form_table | 0 | 0 | 0 | 0 |
-| correspondence | 16 | 0 | 29 | 5 |
+| correspondence | 26 | 9 | 75 | 20 |
 | protocol_text | 0 | 0 | 0 | 0 |
 
 ### B2 / qs_v2, test
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 320 | 0.2750 | 0.2317 | 0.7250 (B) |
-| has_phi_direct | 320 | 0.1469 | 0.1468 | 0.9156 (B) |
-| has_phi_quasi | 320 | 0.2375 | 0.2324 | 0.8156 (B) |
-| has_coded_id | 320 | 0.2250 | 0.2127 | 0.7812 (B) |
-| has_staff_pii | 320 | 0.1969 | 0.1860 | 0.8187 (B) |
+| pii_present | 912 | 0.2500 | 0.2105 | 0.7445 (B) |
+| has_phi_direct | 912 | 0.1678 | 0.1673 | 0.8904 (B) |
+| has_phi_quasi | 912 | 0.2248 | 0.2186 | 0.8169 (B) |
+| has_coded_id | 912 | 0.2368 | 0.2272 | 0.7917 (B) |
+| has_staff_pii | 912 | 0.2127 | 0.2053 | 0.8213 (B) |
 
-Multi-label categories: micro-F1 0.2626, macro-F1 0.2602.
+Multi-label categories: micro-F1 0.2690, macro-F1 0.2675.
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 82 | 6 |
-| B | 226 | 6 |
+| A | 216 | 17 |
+| B | 667 | 12 |
 
 Confusion, `has_phi_direct`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 25 | 2 |
-| B | 271 | 22 |
+| A | 87 | 13 |
+| B | 746 | 66 |
 
 Confusion, `has_phi_quasi`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 51 | 8 |
-| B | 236 | 25 |
+| A | 143 | 24 |
+| B | 683 | 62 |
 
 Confusion, `has_coded_id`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 56 | 14 |
-| B | 234 | 16 |
+| A | 159 | 31 |
+| B | 665 | 57 |
 
 Confusion, `has_staff_pii`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 50 | 8 |
-| B | 249 | 13 |
+| A | 141 | 22 |
+| B | 696 | 53 |
 
 ### B2 / qs_v2, holdout
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 50 | 0.4000 | 0.2857 | 0.6000 (B) |
-| has_phi_direct | 50 | 0.0200 | 0.0196 | 1.0000 (B) |
-| has_phi_quasi | 50 | 0.0400 | 0.0385 | 1.0000 (B) |
-| has_coded_id | 50 | 0.0400 | 0.0385 | 1.0000 (B) |
-| has_staff_pii | 50 | 0.4400 | 0.3566 | 0.6000 (B) |
+| pii_present | 130 | 0.4308 | 0.3011 | 0.5692 (B) |
+| has_phi_direct | 130 | 0.0154 | 0.0152 | 1.0000 (B) |
+| has_phi_quasi | 130 | 0.0538 | 0.0511 | 1.0000 (B) |
+| has_coded_id | 130 | 0.0308 | 0.0299 | 1.0000 (B) |
+| has_staff_pii | 130 | 0.4462 | 0.3407 | 0.5692 (B) |
 
-Multi-label categories: micro-F1 0.1878, macro-F1 0.1471.
+Multi-label categories: micro-F1 0.1968, macro-F1 0.1511.
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 30 | 0 |
+| A | 56 | 0 |
+| B | 74 | 0 |
 
 Confusion, `has_phi_direct`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 49 | 1 |
+| B | 128 | 2 |
 
 Confusion, `has_phi_quasi`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 48 | 2 |
+| B | 123 | 7 |
 
 Confusion, `has_coded_id`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 48 | 2 |
+| B | 126 | 4 |
 
 Confusion, `has_staff_pii`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 28 | 2 |
+| A | 55 | 1 |
+| B | 71 | 3 |
 
 ### B3 / qs_v1 (doc-level, underpowered), test
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 187 | 0.4278 | 0.3216 | 0.5455 (B) |
-| subject_role | 187 | 0.2941 | 0.2626 | 0.5455 (none) |
-| category | 187 | 0.3369 | 0.2495 | 0.4973 (none) |
-| doc_kind | 187 | 0.3155 | 0.3062 | 0.3957 (form_table) |
+| pii_present | 525 | 0.4152 | 0.3039 | 0.5619 (B) |
+| subject_role | 525 | 0.2038 | 0.1779 | 0.5619 (none) |
+| category | 525 | 0.3752 | 0.2657 | 0.5143 (none) |
+| doc_kind | 525 | 0.2781 | 0.2526 | 0.3962 (form_table) |
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 77 | 8 |
-| B | 99 | 3 |
+| A | 214 | 16 |
+| B | 291 | 4 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
-| patient | 16 | 9 | 0 | 4 |
-| staff | 1 | 18 | 2 | 4 |
-| both | 12 | 12 | 1 | 6 |
-| none | 22 | 53 | 7 | 20 |
+| patient | 27 | 26 | 1 | 16 |
+| staff | 2 | 36 | 0 | 10 |
+| both | 59 | 39 | 1 | 13 |
+| none | 66 | 168 | 18 | 43 |
 
 Confusion, `category`:
 
 | gold \ pred | direct | quasi | coded | staff | none |
 |---|---|---|---|---|---|
-| direct | 2 | 1 | 6 | 6 | 12 |
-| quasi | 0 | 3 | 7 | 10 | 13 |
-| coded | 0 | 0 | 7 | 5 | 7 |
-| staff | 0 | 1 | 2 | 8 | 4 |
-| none | 0 | 2 | 14 | 34 | 43 |
+| direct | 0 | 3 | 26 | 24 | 47 |
+| quasi | 4 | 12 | 30 | 14 | 22 |
+| coded | 0 | 3 | 19 | 4 | 10 |
+| staff | 0 | 0 | 0 | 28 | 9 |
+| none | 2 | 5 | 40 | 85 | 138 |
 
 Confusion, `doc_kind`:
 
 | gold \ pred | narrative | form_table | correspondence | protocol_text |
 |---|---|---|---|---|
-| narrative | 27 | 0 | 19 | 4 |
-| form_table | 4 | 8 | 54 | 8 |
-| correspondence | 12 | 1 | 16 | 0 |
-| protocol_text | 20 | 1 | 5 | 8 |
+| narrative | 78 | 2 | 55 | 14 |
+| form_table | 13 | 14 | 169 | 12 |
+| correspondence | 32 | 2 | 43 | 1 |
+| protocol_text | 50 | 3 | 26 | 11 |
 
 ### B3 / qs_v1 (doc-level, underpowered), holdout
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 31 | 0.6452 | 0.3922 | 0.6452 (A) |
-| subject_role | 31 | 0.5806 | 0.2547 | 0.6452 (staff) |
-| category | 31 | 0.7097 | 0.6760 | 0.6452 (staff) |
-| doc_kind | 31 | 0.8387 | 0.3041 | 1.0000 (correspondence) |
+| pii_present | 84 | 0.6667 | 0.4000 | 0.6667 (A) |
+| subject_role | 84 | 0.5714 | 0.2103 | 0.6667 (staff) |
+| category | 84 | 0.6548 | 0.6212 | 0.6667 (staff) |
+| doc_kind | 84 | 0.7024 | 0.2063 | 1.0000 (correspondence) |
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 11 | 0 |
+| A | 56 | 0 |
+| B | 28 | 0 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
 | patient | 0 | 0 | 0 | 0 |
-| staff | 3 | 16 | 1 | 0 |
+| staff | 3 | 46 | 1 | 6 |
 | both | 0 | 0 | 0 | 0 |
-| none | 0 | 9 | 0 | 2 |
+| none | 2 | 24 | 0 | 2 |
 
 Confusion, `category`:
 
@@ -1037,8 +986,8 @@ Confusion, `category`:
 | direct | 0 | 0 | 0 | 0 | 0 |
 | quasi | 0 | 0 | 0 | 0 | 0 |
 | coded | 0 | 0 | 0 | 0 | 0 |
-| staff | 0 | 0 | 0 | 16 | 4 |
-| none | 0 | 0 | 0 | 5 | 6 |
+| staff | 0 | 0 | 0 | 40 | 16 |
+| none | 0 | 0 | 0 | 13 | 15 |
 
 Confusion, `doc_kind`:
 
@@ -1046,171 +995,171 @@ Confusion, `doc_kind`:
 |---|---|---|---|---|
 | narrative | 0 | 0 | 0 | 0 |
 | form_table | 0 | 0 | 0 | 0 |
-| correspondence | 1 | 0 | 26 | 4 |
+| correspondence | 6 | 2 | 59 | 17 |
 | protocol_text | 0 | 0 | 0 | 0 |
 
 ### B3 / qs_v2 (doc-level, underpowered), test
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 187 | 0.4385 | 0.3274 | 0.5455 (B) |
-| has_phi_direct | 187 | 0.2620 | 0.2620 | 0.8556 (B) |
-| has_phi_quasi | 187 | 0.3422 | 0.3169 | 0.6952 (B) |
-| has_coded_id | 187 | 0.3690 | 0.3302 | 0.6310 (B) |
-| has_staff_pii | 187 | 0.3369 | 0.3156 | 0.7005 (B) |
+| pii_present | 525 | 0.4152 | 0.3039 | 0.5619 (B) |
+| has_phi_direct | 525 | 0.2514 | 0.2466 | 0.8095 (B) |
+| has_phi_quasi | 525 | 0.3390 | 0.3087 | 0.6857 (B) |
+| has_coded_id | 525 | 0.3543 | 0.3121 | 0.6495 (B) |
+| has_staff_pii | 525 | 0.3352 | 0.3081 | 0.6952 (B) |
 
-Multi-label categories: micro-F1 0.4171, macro-F1 0.4105.
+Multi-label categories: micro-F1 0.4256, macro-F1 0.4220.
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 79 | 6 |
-| B | 99 | 3 |
+| A | 214 | 16 |
+| B | 291 | 4 |
 
 Confusion, `has_phi_direct`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 25 | 2 |
-| B | 136 | 24 |
+| A | 87 | 13 |
+| B | 380 | 45 |
 
 Confusion, `has_phi_quasi`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 50 | 7 |
-| B | 116 | 14 |
+| A | 144 | 21 |
+| B | 326 | 34 |
 
 Confusion, `has_coded_id`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 57 | 12 |
-| B | 106 | 12 |
+| A | 158 | 26 |
+| B | 313 | 28 |
 
 Confusion, `has_staff_pii`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 48 | 8 |
-| B | 116 | 15 |
+| A | 140 | 20 |
+| B | 329 | 36 |
 
 ### B3 / qs_v2 (doc-level, underpowered), holdout
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 31 | 0.6452 | 0.3922 | 0.6452 (A) |
-| has_phi_direct | 31 | 0.0000 | 0.0000 | 1.0000 (B) |
-| has_phi_quasi | 31 | 0.0323 | 0.0312 | 1.0000 (B) |
-| has_coded_id | 31 | 0.0000 | 0.0000 | 1.0000 (B) |
-| has_staff_pii | 31 | 0.6452 | 0.3922 | 0.6452 (A) |
+| pii_present | 84 | 0.6667 | 0.4000 | 0.6667 (A) |
+| has_phi_direct | 84 | 0.0119 | 0.0118 | 1.0000 (B) |
+| has_phi_quasi | 84 | 0.0357 | 0.0345 | 1.0000 (B) |
+| has_coded_id | 84 | 0.0238 | 0.0233 | 1.0000 (B) |
+| has_staff_pii | 84 | 0.6786 | 0.4660 | 0.6667 (A) |
 
-Multi-label categories: micro-F1 0.2797, macro-F1 0.1961.
+Multi-label categories: micro-F1 0.2872, macro-F1 0.2007.
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 11 | 0 |
+| A | 56 | 0 |
+| B | 28 | 0 |
 
 Confusion, `has_phi_direct`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 31 | 0 |
+| B | 83 | 1 |
 
 Confusion, `has_phi_quasi`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 30 | 1 |
+| B | 81 | 3 |
 
 Confusion, `has_coded_id`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 31 | 0 |
+| B | 82 | 2 |
 
 Confusion, `has_staff_pii`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 11 | 0 |
+| A | 55 | 1 |
+| B | 26 | 2 |
 
 ### B4 / qs_v1 (doc-level, underpowered), test
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 124 | 0.5887 | 0.3881 | 0.6452 (A) |
-| subject_role | 124 | 0.3468 | 0.3168 | 0.3548 (none) |
-| category | 124 | 0.2742 | 0.2345 | 0.2903 (none) |
-| doc_kind | 124 | 0.2984 | 0.3371 | 0.5565 (form_table) |
+| pii_present | 337 | 0.6053 | 0.3973 | 0.6380 (A) |
+| subject_role | 337 | 0.2463 | 0.2287 | 0.3620 (none) |
+| category | 337 | 0.2819 | 0.2494 | 0.2967 (direct) |
+| doc_kind | 337 | 0.2493 | 0.2707 | 0.5638 (form_table) |
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 72 | 8 |
-| B | 43 | 1 |
+| A | 201 | 14 |
+| B | 119 | 3 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
-| patient | 17 | 7 | 0 | 4 |
-| staff | 1 | 14 | 2 | 4 |
-| both | 11 | 12 | 1 | 7 |
-| none | 8 | 20 | 5 | 11 |
+| patient | 29 | 22 | 1 | 15 |
+| staff | 2 | 28 | 0 | 7 |
+| both | 60 | 39 | 1 | 11 |
+| none | 28 | 55 | 14 | 25 |
 
 Confusion, `category`:
 
 | gold \ pred | direct | quasi | coded | staff | none |
 |---|---|---|---|---|---|
-| direct | 1 | 1 | 9 | 5 | 11 |
-| quasi | 0 | 4 | 8 | 9 | 11 |
-| coded | 0 | 0 | 9 | 6 | 4 |
-| staff | 0 | 0 | 2 | 4 | 4 |
-| none | 0 | 2 | 11 | 7 | 16 |
+| direct | 0 | 4 | 36 | 26 | 34 |
+| quasi | 4 | 11 | 31 | 11 | 21 |
+| coded | 0 | 3 | 16 | 6 | 9 |
+| staff | 0 | 0 | 1 | 18 | 6 |
+| none | 1 | 4 | 30 | 15 | 50 |
 
 Confusion, `doc_kind`:
 
 | gold \ pred | narrative | form_table | correspondence | protocol_text |
 |---|---|---|---|---|
-| narrative | 11 | 0 | 12 | 2 |
-| form_table | 1 | 7 | 53 | 8 |
-| correspondence | 1 | 0 | 13 | 0 |
-| protocol_text | 4 | 0 | 6 | 6 |
+| narrative | 36 | 1 | 28 | 6 |
+| form_table | 7 | 8 | 163 | 12 |
+| correspondence | 2 | 0 | 33 | 0 |
+| protocol_text | 14 | 0 | 20 | 7 |
 
 ### B4 / qs_v1 (doc-level, underpowered), holdout
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 30 | 0.6667 | 0.4000 | 0.6667 (A) |
-| subject_role | 30 | 0.5667 | 0.2232 | 0.6667 (staff) |
-| category | 30 | 0.7000 | 0.6534 | 0.6667 (staff) |
-| doc_kind | 30 | 0.8333 | 0.3030 | 1.0000 (correspondence) |
+| pii_present | 80 | 0.7000 | 0.4118 | 0.7000 (A) |
+| subject_role | 80 | 0.6000 | 0.2182 | 0.7000 (staff) |
+| category | 80 | 0.6375 | 0.5827 | 0.7000 (staff) |
+| doc_kind | 80 | 0.7250 | 0.2101 | 1.0000 (correspondence) |
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 10 | 0 |
+| A | 56 | 0 |
+| B | 24 | 0 |
 
 Confusion, `subject_role`:
 
 | gold \ pred | patient | staff | both | none |
 |---|---|---|---|---|
 | patient | 0 | 0 | 0 | 0 |
-| staff | 3 | 16 | 1 | 0 |
+| staff | 3 | 46 | 1 | 6 |
 | both | 0 | 0 | 0 | 0 |
-| none | 0 | 9 | 0 | 1 |
+| none | 1 | 21 | 0 | 2 |
 
 Confusion, `category`:
 
@@ -1219,8 +1168,8 @@ Confusion, `category`:
 | direct | 0 | 0 | 0 | 0 | 0 |
 | quasi | 0 | 0 | 0 | 0 | 0 |
 | coded | 0 | 0 | 0 | 0 | 0 |
-| staff | 0 | 0 | 0 | 16 | 4 |
-| none | 0 | 0 | 0 | 5 | 5 |
+| staff | 0 | 0 | 0 | 40 | 16 |
+| none | 0 | 0 | 0 | 13 | 11 |
 
 Confusion, `doc_kind`:
 
@@ -1228,102 +1177,284 @@ Confusion, `doc_kind`:
 |---|---|---|---|---|
 | narrative | 0 | 0 | 0 | 0 |
 | form_table | 0 | 0 | 0 | 0 |
-| correspondence | 1 | 0 | 25 | 4 |
+| correspondence | 4 | 2 | 58 | 16 |
 | protocol_text | 0 | 0 | 0 | 0 |
 
 ### B4 / qs_v2 (doc-level, underpowered), test
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 124 | 0.5968 | 0.3917 | 0.6452 (A) |
-| has_phi_direct | 124 | 0.3468 | 0.3447 | 0.7823 (B) |
-| has_phi_quasi | 124 | 0.4758 | 0.4183 | 0.5484 (B) |
-| has_coded_id | 124 | 0.5323 | 0.4414 | 0.5565 (A) |
-| has_staff_pii | 124 | 0.4516 | 0.4125 | 0.5806 (B) |
+| pii_present | 337 | 0.6053 | 0.3973 | 0.6380 (A) |
+| has_phi_direct | 337 | 0.3739 | 0.3598 | 0.7033 (B) |
+| has_phi_quasi | 337 | 0.4866 | 0.4149 | 0.5223 (B) |
+| has_coded_id | 337 | 0.5193 | 0.4137 | 0.5401 (A) |
+| has_staff_pii | 337 | 0.4599 | 0.4043 | 0.5608 (B) |
 
-Multi-label categories: micro-F1 0.5641, macro-F1 0.5534.
+Multi-label categories: micro-F1 0.5868, macro-F1 0.5809.
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 73 | 7 |
-| B | 43 | 1 |
+| A | 201 | 14 |
+| B | 119 | 3 |
 
 Confusion, `has_phi_direct`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 25 | 2 |
-| B | 79 | 18 |
+| A | 88 | 12 |
+| B | 199 | 38 |
 
 Confusion, `has_phi_quasi`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 49 | 7 |
-| B | 58 | 10 |
+| A | 141 | 20 |
+| B | 153 | 23 |
 
 Confusion, `has_coded_id`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 58 | 11 |
-| B | 47 | 8 |
+| A | 159 | 23 |
+| B | 139 | 16 |
 
 Confusion, `has_staff_pii`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 44 | 8 |
-| B | 60 | 12 |
+| A | 129 | 19 |
+| B | 163 | 26 |
 
 ### B4 / qs_v2 (doc-level, underpowered), holdout
 
 | question | n | accuracy | macro-F1 | majority baseline |
 |---|---|---|---|---|
-| pii_present | 30 | 0.6667 | 0.4000 | 0.6667 (A) |
-| has_phi_direct | 30 | 0.0000 | 0.0000 | 1.0000 (B) |
-| has_phi_quasi | 30 | 0.0000 | 0.0000 | 1.0000 (B) |
-| has_coded_id | 30 | 0.0000 | 0.0000 | 1.0000 (B) |
-| has_staff_pii | 30 | 0.6667 | 0.4000 | 0.6667 (A) |
+| pii_present | 80 | 0.7000 | 0.4118 | 0.7000 (A) |
+| has_phi_direct | 80 | 0.0125 | 0.0123 | 1.0000 (B) |
+| has_phi_quasi | 80 | 0.0250 | 0.0244 | 1.0000 (B) |
+| has_coded_id | 80 | 0.0125 | 0.0123 | 1.0000 (B) |
+| has_staff_pii | 80 | 0.7000 | 0.4489 | 0.7000 (A) |
 
-Multi-label categories: micro-F1 0.2857, macro-F1 0.2000.
+Multi-label categories: micro-F1 0.2973, macro-F1 0.2052.
 
 Confusion, `pii_present`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 10 | 0 |
+| A | 56 | 0 |
+| B | 24 | 0 |
 
 Confusion, `has_phi_direct`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 30 | 0 |
+| B | 79 | 1 |
 
 Confusion, `has_phi_quasi`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 30 | 0 |
+| B | 78 | 2 |
 
 Confusion, `has_coded_id`:
 
 | gold \ pred | A | B |
 |---|---|---|
 | A | 0 | 0 |
-| B | 30 | 0 |
+| B | 79 | 1 |
 
 Confusion, `has_staff_pii`:
 
 | gold \ pred | A | B |
 |---|---|---|
-| A | 20 | 0 |
-| B | 10 | 0 |
+| A | 55 | 1 |
+| B | 23 | 1 |
+
+### C / qs_v1, test
+
+| question | n | accuracy | macro-F1 | majority baseline |
+|---|---|---|---|---|
+| pii_present | 5713 | 0.9988 | 0.9955 | 0.9267 (B) |
+| subject_role | 5713 | 0.9975 | 0.9761 | 0.9267 (none) |
+| category | 5713 | 0.9977 | 0.9853 | 0.9146 (none) |
+| doc_kind | 5713 | 0.4558 | 0.3254 | 0.3413 (narrative) |
+
+Confusion, `pii_present`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 418 | 1 |
+| B | 6 | 5288 |
+
+Confusion, `subject_role`:
+
+| gold \ pred | patient | staff | both | none |
+|---|---|---|---|---|
+| patient | 222 | 0 | 1 | 1 |
+| staff | 0 | 73 | 4 | 0 |
+| both | 2 | 2 | 114 | 0 |
+| none | 4 | 0 | 0 | 5290 |
+
+Confusion, `category`:
+
+| gold \ pred | direct | quasi | coded | staff | none |
+|---|---|---|---|---|---|
+| direct | 112 | 0 | 0 | 2 | 0 |
+| quasi | 0 | 225 | 1 | 1 | 1 |
+| coded | 0 | 0 | 82 | 0 | 0 |
+| staff | 0 | 0 | 0 | 63 | 1 |
+| none | 0 | 6 | 0 | 1 | 5218 |
+
+Confusion, `doc_kind`:
+
+| gold \ pred | narrative | form_table | correspondence | protocol_text |
+|---|---|---|---|---|
+| narrative | 1886 | 43 | 0 | 21 |
+| form_table | 951 | 576 | 0 | 1 |
+| correspondence | 905 | 40 | 43 | 7 |
+| protocol_text | 1110 | 31 | 0 | 99 |
+
+### C / qs_v1, holdout
+
+| question | n | accuracy | macro-F1 | majority baseline |
+|---|---|---|---|---|
+| pii_present | 724 | 0.9834 | 0.9471 | 0.9227 (B) |
+| subject_role | 724 | 0.9793 | 0.4720 | 0.9227 (none) |
+| category | 724 | 0.9738 | 0.6591 | 0.9227 (none) |
+| doc_kind | 724 | 0.1105 | 0.0498 | 1.0000 (correspondence) |
+
+Confusion, `pii_present`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 56 | 0 |
+| B | 12 | 656 |
+
+Confusion, `subject_role`:
+
+| gold \ pred | patient | staff | both | none |
+|---|---|---|---|---|
+| patient | 0 | 0 | 0 | 0 |
+| staff | 0 | 45 | 11 | 0 |
+| both | 0 | 0 | 0 | 0 |
+| none | 4 | 0 | 0 | 664 |
+
+Confusion, `category`:
+
+| gold \ pred | direct | quasi | coded | staff | none |
+|---|---|---|---|---|---|
+| direct | 0 | 0 | 0 | 0 | 0 |
+| quasi | 0 | 0 | 0 | 0 | 0 |
+| coded | 0 | 0 | 0 | 0 | 0 |
+| staff | 0 | 1 | 0 | 55 | 0 |
+| none | 0 | 18 | 0 | 0 | 650 |
+
+Confusion, `doc_kind`:
+
+| gold \ pred | narrative | form_table | correspondence | protocol_text |
+|---|---|---|---|---|
+| narrative | 0 | 0 | 0 | 0 |
+| form_table | 0 | 0 | 0 | 0 |
+| correspondence | 568 | 72 | 80 | 4 |
+| protocol_text | 0 | 0 | 0 | 0 |
+
+### C / qs_v2, test
+
+| question | n | accuracy | macro-F1 | majority baseline |
+|---|---|---|---|---|
+| pii_present | 5713 | 0.9988 | 0.9955 | 0.9267 (B) |
+| has_phi_direct | 5713 | 0.9993 | 0.9909 | 0.9800 (B) |
+| has_phi_quasi | 5713 | 0.9965 | 0.9836 | 0.9443 (B) |
+| has_coded_id | 5713 | 0.9991 | 0.9957 | 0.9457 (B) |
+| has_staff_pii | 5713 | 0.9996 | 0.9973 | 0.9659 (B) |
+
+Multi-label categories: micro-F1 0.9835, macro-F1 0.9845.
+
+Confusion, `pii_present`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 418 | 1 |
+| B | 6 | 5288 |
+
+Confusion, `has_phi_direct`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 110 | 4 |
+| B | 0 | 5599 |
+
+Confusion, `has_phi_quasi`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 313 | 5 |
+| B | 15 | 5380 |
+
+Confusion, `has_coded_id`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 308 | 2 |
+| B | 3 | 5400 |
+
+Confusion, `has_staff_pii`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 194 | 1 |
+| B | 1 | 5517 |
+
+### C / qs_v2, holdout
+
+| question | n | accuracy | macro-F1 | majority baseline |
+|---|---|---|---|---|
+| pii_present | 724 | 0.9834 | 0.9471 | 0.9227 (B) |
+| has_phi_direct | 724 | 1.0000 | 1.0000 | 1.0000 (B) |
+| has_phi_quasi | 724 | 0.9268 | 0.4810 | 1.0000 (B) |
+| has_coded_id | 724 | 1.0000 | 1.0000 | 1.0000 (B) |
+| has_staff_pii | 724 | 1.0000 | 1.0000 | 0.9227 (B) |
+
+Multi-label categories: micro-F1 0.6788, macro-F1 0.2500.
+
+Confusion, `pii_present`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 56 | 0 |
+| B | 12 | 656 |
+
+Confusion, `has_phi_direct`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 0 | 0 |
+| B | 0 | 724 |
+
+Confusion, `has_phi_quasi`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 0 | 0 |
+| B | 53 | 671 |
+
+Confusion, `has_coded_id`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 0 | 0 |
+| B | 0 | 724 |
+
+Confusion, `has_staff_pii`:
+
+| gold \ pred | A | B |
+|---|---|---|
+| A | 56 | 0 |
+| B | 0 | 668 |
 
 ### qs_v1 vs qs_v2
 
@@ -1331,28 +1462,30 @@ Same arm and split under both question sets. `pii_present` is the same question 
 
 | arm | split | qs | pii_present acc | pii_present macro-F1 | recall | forward rate | category macro-F1 (qs_v1) | categories micro / macro-F1 (qs_v2) |
 |---|---|---|---|---|---|---|---|---|
-| A | holdout | qs_v1 | 0.9322 | 0.4825 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.3545 | n/a |
-| A | holdout | qs_v2 | 0.9322 | 0.4825 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.2367 / 0.0662 |
-| A | holdout | qs_v3 | 0.2169 | 0.1783 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0034 [0.0000, 0.0117] | 0.3545 | n/a |
-| A | test | qs_v1 | 0.9362 | 0.6155 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0045 [0.0019, 0.0078] | 0.3415 | n/a |
-| A | test | qs_v2 | 0.9362 | 0.6155 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0045 [0.0019, 0.0078] | n/a | 0.2817 / 0.3713 |
-| A | test | qs_v3 | 0.3116 | 0.2776 | 0.9931 [0.9767, 1.0000] | 0.0075 [0.0039, 0.0117] | 0.3415 | n/a |
-| B1 | holdout | qs_v1 | 0.2121 | 0.1820 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.2648 | n/a |
-| B1 | holdout | qs_v2 | 0.2121 | 0.1820 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.1034 / 0.0877 |
-| B1 | test | qs_v1 | 0.1605 | 0.1478 | 0.9900 [0.9667, 1.0000] | 0.0015 [0.0000, 0.0049] | 0.2283 | n/a |
-| B1 | test | qs_v2 | 0.1605 | 0.1478 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.1496 / 0.1481 |
-| B2 | holdout | qs_v1 | 0.4000 | 0.2857 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.2854 | n/a |
-| B2 | holdout | qs_v2 | 0.4000 | 0.2857 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.1878 / 0.1471 |
-| B2 | test | qs_v1 | 0.2750 | 0.2317 | 0.9773 [0.9405, 1.0000] | 0.0094 [0.0000, 0.0224] | 0.2509 | n/a |
-| B2 | test | qs_v2 | 0.2750 | 0.2317 | 0.9773 [0.9405, 1.0000] | 0.0187 [0.0060, 0.0356] | n/a | 0.2626 / 0.2602 |
-| B3 | holdout | qs_v1 | 0.6452 | 0.3922 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.6760 | n/a |
-| B3 | holdout | qs_v2 | 0.6452 | 0.3922 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.2797 / 0.1961 |
-| B3 | test | qs_v1 | 0.4278 | 0.3216 | 0.9765 [0.9390, 1.0000] | 0.0160 [0.0000, 0.0363] | 0.2495 | n/a |
-| B3 | test | qs_v2 | 0.4385 | 0.3274 | 0.9294 [0.8690, 0.9775] | 0.0535 [0.0251, 0.0904] | n/a | 0.4171 / 0.4105 |
-| B4 | holdout | qs_v1 | 0.6667 | 0.4000 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.6534 | n/a |
-| B4 | holdout | qs_v2 | 0.6667 | 0.4000 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.2857 / 0.2000 |
-| B4 | test | qs_v1 | 0.5887 | 0.3881 | 0.9625 [0.9146, 1.0000] | 0.0242 [0.0000, 0.0565] | 0.2345 | n/a |
-| B4 | test | qs_v2 | 0.5968 | 0.3917 | 0.9250 [0.8592, 0.9756] | 0.0565 [0.0242, 0.1048] | n/a | 0.5641 / 0.5534 |
+| A | holdout | qs_v1 | 0.9227 | 0.4799 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0014 [0.0000, 0.0045] | 0.2570 | n/a |
+| A | holdout | qs_v2 | 0.9227 | 0.4799 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0014 [0.0000, 0.0045] | n/a | 0.2523 / 0.0703 |
+| A | test | qs_v1 | 0.9319 | 0.5940 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0051 [0.0033, 0.0072] | 0.3458 | n/a |
+| A | test | qs_v2 | 0.9319 | 0.5940 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0053 [0.0034, 0.0073] | n/a | 0.2808 / 0.3790 |
+| B1 | holdout | qs_v1 | 0.2249 | 0.1836 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.2335 | n/a |
+| B1 | holdout | qs_v2 | 0.2249 | 0.1836 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.1075 / 0.0922 |
+| B1 | test | qs_v1 | 0.1641 | 0.1489 | 0.9967 [0.9897, 1.0000] | 0.0010 [0.0000, 0.0027] | 0.2279 | n/a |
+| B1 | test | qs_v2 | 0.1647 | 0.1495 | 0.9967 [0.9897, 1.0000] | 0.0026 [0.0005, 0.0050] | n/a | 0.1619 / 0.1610 |
+| B2 | holdout | qs_v1 | 0.4308 | 0.3011 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.3960 | n/a |
+| B2 | holdout | qs_v2 | 0.4308 | 0.3011 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.1968 / 0.1511 |
+| B2 | test | qs_v1 | 0.2500 | 0.2105 | 0.9957 [0.9861, 1.0000] | 0.0011 [0.0000, 0.0036] | 0.2328 | n/a |
+| B2 | test | qs_v2 | 0.2500 | 0.2105 | 0.9957 [0.9861, 1.0000] | 0.0011 [0.0000, 0.0036] | n/a | 0.2690 / 0.2675 |
+| B3 | holdout | qs_v1 | 0.6667 | 0.4000 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.6212 | n/a |
+| B3 | holdout | qs_v2 | 0.6667 | 0.4000 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.2872 / 0.2007 |
+| B3 | test | qs_v1 | 0.4152 | 0.3039 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0019 [0.0000, 0.0059] | 0.2657 | n/a |
+| B3 | test | qs_v2 | 0.4152 | 0.3039 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0019 [0.0000, 0.0059] | n/a | 0.4256 / 0.4220 |
+| B4 | holdout | qs_v1 | 0.7000 | 0.4118 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.5827 | n/a |
+| B4 | holdout | qs_v2 | 0.7000 | 0.4118 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.2973 / 0.2052 |
+| B4 | test | qs_v1 | 0.6053 | 0.3973 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | 0.2494 | n/a |
+| B4 | test | qs_v2 | 0.6053 | 0.3973 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.0000 [0.0000, 0.0000] | n/a | 0.5868 / 0.5809 |
+| C | holdout | qs_v1 | 0.9834 | 0.9471 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9171 [0.9018, 0.9303] | 0.6591 | n/a |
+| C | holdout | qs_v2 | 0.9834 | 0.9471 | 1.0000 (no misses; CI n/a, see exact bounds) | 0.9185 [0.9032, 0.9315] | n/a | 0.6788 / 0.2500 |
+| C | test | qs_v1 | 0.9988 | 0.9955 | 0.9952 [0.9878, 1.0000] | 0.9258 [0.9130, 0.9369] | 0.9853 | n/a |
+| C | test | qs_v2 | 0.9988 | 0.9955 | 0.9952 [0.9878, 1.0000] | 0.9263 [0.9135, 0.9374] | n/a | 0.9835 / 0.9845 |
 
 ## 4. Calibration
 
@@ -1362,1552 +1495,1667 @@ ECE uses 15 equal-width bins on the max probability. Brier is multi-class. AUROC
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.1091 | 0.0162 | 0.1308 | 0.1063 | 0.7451 | 0.7451 |
-| subject_role | 0.2519 | 0.1227 | 0.4834 | 0.4111 | 0.6557 | 0.6635 |
-| category | 0.4396 | 0.0275 | 0.4019 | 0.1491 | 0.8297 | 0.8483 |
-| doc_kind = raw (T fallback) | 0.3956 | 0.3956 | 0.9947 | 0.9947 | 0.5094 | 0.5094 |
+| pii_present | 0.1102 | 0.0179 | 0.1317 | 0.1084 | 0.7675 | 0.7675 |
+| subject_role | 0.2364 | 0.0922 | 0.4891 | 0.4171 | 0.6449 | 0.6584 |
+| category | 0.4426 | 0.0364 | 0.4031 | 0.1477 | 0.8149 | 0.8378 |
+| doc_kind = raw (T fallback) | 0.4039 | 0.4039 | 1.0044 | 1.0044 | 0.4929 | 0.4929 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 21 | 0.5171 | 0.6190 | 11 | 0.5182 | 0.6364 |
-| [0.533, 0.600) | 31 | 0.5705 | 0.5484 | 19 | 0.5588 | 0.4737 |
-| [0.600, 0.667) | 39 | 0.6377 | 0.6154 | 19 | 0.6397 | 0.6316 |
-| [0.667, 0.733) | 78 | 0.7070 | 0.7564 | 20 | 0.6997 | 0.6500 |
-| [0.733, 0.800) | 265 | 0.7751 | 0.9094 | 35 | 0.7666 | 0.7143 |
-| [0.800, 0.867) | 982 | 0.8382 | 0.9735 | 77 | 0.8399 | 0.7403 |
-| [0.867, 0.933) | 572 | 0.8884 | 0.9633 | 380 | 0.9108 | 0.9289 |
-| [0.933, 1.000) | 18 | 0.9472 | 0.9444 | 1445 | 0.9620 | 0.9702 |
+| [0.467, 0.533) | 33 | 0.5188 | 0.5152 | 17 | 0.5209 | 0.4706 |
+| [0.533, 0.600) | 86 | 0.5661 | 0.3721 | 45 | 0.5665 | 0.4222 |
+| [0.600, 0.667) | 131 | 0.6349 | 0.6031 | 55 | 0.6329 | 0.3818 |
+| [0.667, 0.733) | 254 | 0.7063 | 0.7795 | 75 | 0.7030 | 0.5867 |
+| [0.733, 0.800) | 735 | 0.7742 | 0.8966 | 109 | 0.7700 | 0.6514 |
+| [0.800, 0.867) | 2742 | 0.8383 | 0.9697 | 258 | 0.8392 | 0.8140 |
+| [0.867, 0.933) | 1688 | 0.8879 | 0.9704 | 1107 | 0.9107 | 0.9214 |
+| [0.933, 1.000) | 44 | 0.9425 | 0.9545 | 4047 | 0.9612 | 0.9713 |
 
 Reliability data, `subject_role` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.267, 0.333) | 81 | 0.3130 | 0.4691 | 13 | 0.3155 | 0.5385 |
-| [0.333, 0.400) | 268 | 0.3713 | 0.5373 | 79 | 0.3702 | 0.4557 |
-| [0.400, 0.467) | 464 | 0.4350 | 0.7026 | 177 | 0.4352 | 0.4689 |
-| [0.467, 0.533) | 451 | 0.5001 | 0.8137 | 267 | 0.5008 | 0.6442 |
-| [0.533, 0.600) | 402 | 0.5640 | 0.8582 | 275 | 0.5664 | 0.7527 |
-| [0.600, 0.667) | 221 | 0.6295 | 0.8462 | 253 | 0.6348 | 0.7905 |
-| [0.667, 0.733) | 82 | 0.6924 | 0.7927 | 315 | 0.7001 | 0.8317 |
-| [0.733, 0.800) | 20 | 0.7645 | 0.8000 | 273 | 0.7656 | 0.8828 |
-| [0.800, 0.867) | 11 | 0.8197 | 0.6364 | 221 | 0.8323 | 0.8552 |
-| [0.867, 0.933) | 6 | 0.8992 | 0.0000 | 102 | 0.8939 | 0.7843 |
-| [0.933, 1.000) | 0 | n/a | n/a | 31 | 0.9636 | 0.5806 |
+| [0.200, 0.267) | 2 | 0.2648 | 0.0000 | 0 | n/a | n/a |
+| [0.267, 0.333) | 263 | 0.3105 | 0.4259 | 55 | 0.3149 | 0.4364 |
+| [0.333, 0.400) | 710 | 0.3713 | 0.5944 | 216 | 0.3707 | 0.4306 |
+| [0.400, 0.467) | 1354 | 0.4360 | 0.6713 | 403 | 0.4374 | 0.5459 |
+| [0.467, 0.533) | 1297 | 0.4998 | 0.7772 | 692 | 0.5016 | 0.6084 |
+| [0.533, 0.600) | 1133 | 0.5648 | 0.8429 | 764 | 0.5665 | 0.6780 |
+| [0.600, 0.667) | 637 | 0.6289 | 0.8352 | 749 | 0.6349 | 0.7490 |
+| [0.667, 0.733) | 217 | 0.6922 | 0.8111 | 779 | 0.7007 | 0.8062 |
+| [0.733, 0.800) | 68 | 0.7594 | 0.7941 | 858 | 0.7671 | 0.8520 |
+| [0.800, 0.867) | 25 | 0.8286 | 0.7200 | 685 | 0.8315 | 0.8467 |
+| [0.867, 0.933) | 4 | 0.8903 | 0.2500 | 402 | 0.8933 | 0.8209 |
+| [0.933, 1.000) | 3 | 0.9401 | 0.0000 | 110 | 0.9586 | 0.7364 |
 
 Reliability data, `category` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 3 | 0.2580 | 0.3333 | 0 | n/a | n/a |
-| [0.267, 0.333) | 75 | 0.3111 | 0.4133 | 0 | n/a | n/a |
-| [0.333, 0.400) | 222 | 0.3713 | 0.7207 | 5 | 0.3776 | 0.2000 |
-| [0.400, 0.467) | 582 | 0.4368 | 0.9141 | 12 | 0.4444 | 0.0833 |
-| [0.467, 0.533) | 782 | 0.4985 | 0.9795 | 30 | 0.5015 | 0.4667 |
-| [0.533, 0.600) | 308 | 0.5590 | 0.9870 | 38 | 0.5654 | 0.4737 |
-| [0.600, 0.667) | 29 | 0.6210 | 0.9655 | 44 | 0.6318 | 0.5909 |
-| [0.667, 0.733) | 5 | 0.6903 | 0.8000 | 54 | 0.7001 | 0.6852 |
-| [0.733, 0.800) | 0 | n/a | n/a | 80 | 0.7688 | 0.7625 |
-| [0.800, 0.867) | 0 | n/a | n/a | 182 | 0.8386 | 0.8901 |
-| [0.867, 0.933) | 0 | n/a | n/a | 529 | 0.9077 | 0.9263 |
-| [0.933, 1.000) | 0 | n/a | n/a | 1032 | 0.9621 | 0.9845 |
+| [0.200, 0.267) | 17 | 0.2588 | 0.1765 | 0 | n/a | n/a |
+| [0.267, 0.333) | 219 | 0.3080 | 0.4658 | 2 | 0.3280 | 0.0000 |
+| [0.333, 0.400) | 668 | 0.3717 | 0.7365 | 19 | 0.3681 | 0.2632 |
+| [0.400, 0.467) | 1641 | 0.4371 | 0.9311 | 53 | 0.4415 | 0.3585 |
+| [0.467, 0.533) | 2145 | 0.4988 | 0.9725 | 96 | 0.5001 | 0.4479 |
+| [0.533, 0.600) | 916 | 0.5568 | 0.9771 | 96 | 0.5682 | 0.5521 |
+| [0.600, 0.667) | 102 | 0.6196 | 0.9804 | 117 | 0.6360 | 0.5214 |
+| [0.667, 0.733) | 5 | 0.6839 | 0.8000 | 185 | 0.7040 | 0.6811 |
+| [0.733, 0.800) | 0 | n/a | n/a | 298 | 0.7690 | 0.7886 |
+| [0.800, 0.867) | 0 | n/a | n/a | 564 | 0.8380 | 0.9007 |
+| [0.867, 0.933) | 0 | n/a | n/a | 1618 | 0.9064 | 0.9580 |
+| [0.933, 1.000) | 0 | n/a | n/a | 2665 | 0.9597 | 0.9794 |
 
 Reliability data, `doc_kind` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.267, 0.333) | 15 | 0.3169 | 0.2667 | 15 | 0.3169 | 0.2667 |
-| [0.333, 0.400) | 116 | 0.3735 | 0.2241 | 116 | 0.3735 | 0.2241 |
-| [0.400, 0.467) | 191 | 0.4346 | 0.2932 | 191 | 0.4346 | 0.2932 |
-| [0.467, 0.533) | 246 | 0.4995 | 0.2358 | 246 | 0.4995 | 0.2358 |
-| [0.533, 0.600) | 255 | 0.5672 | 0.2196 | 255 | 0.5672 | 0.2196 |
-| [0.600, 0.667) | 255 | 0.6324 | 0.2784 | 256 | 0.6325 | 0.2773 |
-| [0.667, 0.733) | 215 | 0.6995 | 0.2651 | 215 | 0.6998 | 0.2651 |
-| [0.733, 0.800) | 246 | 0.7667 | 0.2358 | 245 | 0.7669 | 0.2367 |
-| [0.800, 0.867) | 230 | 0.8308 | 0.3174 | 230 | 0.8308 | 0.3174 |
-| [0.867, 0.933) | 183 | 0.8969 | 0.2186 | 183 | 0.8969 | 0.2186 |
-| [0.933, 1.000) | 54 | 0.9525 | 0.2407 | 54 | 0.9525 | 0.2407 |
+| [0.267, 0.333) | 61 | 0.3123 | 0.1475 | 61 | 0.3123 | 0.1475 |
+| [0.333, 0.400) | 320 | 0.3735 | 0.2437 | 320 | 0.3735 | 0.2437 |
+| [0.400, 0.467) | 568 | 0.4357 | 0.2518 | 568 | 0.4357 | 0.2518 |
+| [0.467, 0.533) | 661 | 0.5003 | 0.2799 | 661 | 0.5003 | 0.2799 |
+| [0.533, 0.600) | 662 | 0.5664 | 0.2417 | 662 | 0.5664 | 0.2417 |
+| [0.600, 0.667) | 685 | 0.6328 | 0.2569 | 685 | 0.6328 | 0.2569 |
+| [0.667, 0.733) | 733 | 0.6992 | 0.2483 | 733 | 0.6992 | 0.2483 |
+| [0.733, 0.800) | 705 | 0.7661 | 0.2355 | 705 | 0.7661 | 0.2355 |
+| [0.800, 0.867) | 649 | 0.8317 | 0.2496 | 649 | 0.8317 | 0.2496 |
+| [0.867, 0.933) | 496 | 0.8968 | 0.2500 | 496 | 0.8968 | 0.2500 |
+| [0.933, 1.000) | 173 | 0.9541 | 0.2023 | 173 | 0.9541 | 0.2023 |
 
 ### A / qs_v1, holdout
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.0903 | 0.0345 | 0.1443 | 0.1278 | 0.5755 | 0.5755 |
-| subject_role | 0.2414 | 0.0988 | 0.4665 | 0.4037 | 0.6335 | 0.6470 |
-| category | 0.4576 | 0.0410 | 0.3909 | 0.1261 | 0.7142 | 0.7288 |
-| doc_kind = raw (T fallback) | 0.6155 | 0.6155 | 1.2329 | 1.2329 | 0.3230 | 0.3225 |
+| pii_present | 0.0801 | 0.0285 | 0.1542 | 0.1426 | 0.6295 | 0.6295 |
+| subject_role | 0.2240 | 0.0728 | 0.4733 | 0.4029 | 0.6629 | 0.6819 |
+| category | 0.4463 | 0.0209 | 0.4020 | 0.1484 | 0.7560 | 0.7598 |
+| doc_kind = raw (T fallback) | 0.5990 | 0.5990 | 1.2214 | 1.2214 | 0.3025 | 0.3024 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.600, 0.667) | 3 | 0.6446 | 1.0000 | 0 | n/a | n/a |
-| [0.667, 0.733) | 8 | 0.7132 | 0.8750 | 1 | 0.7004 | 1.0000 |
-| [0.733, 0.800) | 38 | 0.7792 | 0.9211 | 3 | 0.7699 | 1.0000 |
-| [0.800, 0.867) | 155 | 0.8389 | 0.9226 | 8 | 0.8455 | 0.8750 |
-| [0.867, 0.933) | 88 | 0.8894 | 0.9545 | 54 | 0.9127 | 0.9444 |
-| [0.933, 1.000) | 3 | 0.9412 | 1.0000 | 229 | 0.9618 | 0.9301 |
+| [0.533, 0.600) | 1 | 0.5875 | 1.0000 | 0 | n/a | n/a |
+| [0.600, 0.667) | 4 | 0.6398 | 1.0000 | 1 | 0.6512 | 1.0000 |
+| [0.667, 0.733) | 12 | 0.7114 | 0.7500 | 2 | 0.7244 | 1.0000 |
+| [0.733, 0.800) | 93 | 0.7724 | 0.8925 | 4 | 0.7654 | 1.0000 |
+| [0.800, 0.867) | 373 | 0.8381 | 0.9169 | 16 | 0.8482 | 0.7500 |
+| [0.867, 0.933) | 238 | 0.8867 | 0.9496 | 143 | 0.9095 | 0.8811 |
+| [0.933, 1.000) | 3 | 0.9427 | 1.0000 | 558 | 0.9608 | 0.9373 |
 
 Reliability data, `subject_role` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.267, 0.333) | 14 | 0.3082 | 0.2143 | 4 | 0.3111 | 0.0000 |
-| [0.333, 0.400) | 27 | 0.3649 | 0.6667 | 13 | 0.3703 | 0.3846 |
-| [0.400, 0.467) | 67 | 0.4316 | 0.7313 | 16 | 0.4271 | 0.6875 |
-| [0.467, 0.533) | 79 | 0.5014 | 0.7975 | 40 | 0.4991 | 0.7000 |
-| [0.533, 0.600) | 53 | 0.5703 | 0.7170 | 43 | 0.5680 | 0.6512 |
-| [0.600, 0.667) | 33 | 0.6265 | 0.7879 | 33 | 0.6349 | 0.8485 |
-| [0.667, 0.733) | 15 | 0.6946 | 1.0000 | 47 | 0.6996 | 0.7872 |
-| [0.733, 0.800) | 6 | 0.7653 | 0.8333 | 46 | 0.7704 | 0.7609 |
-| [0.800, 0.867) | 1 | 0.8027 | 1.0000 | 29 | 0.8298 | 0.8276 |
-| [0.867, 0.933) | 0 | n/a | n/a | 19 | 0.8969 | 0.8947 |
-| [0.933, 1.000) | 0 | n/a | n/a | 5 | 0.9522 | 1.0000 |
+| [0.267, 0.333) | 39 | 0.3099 | 0.3846 | 9 | 0.3200 | 0.2222 |
+| [0.333, 0.400) | 86 | 0.3684 | 0.6047 | 35 | 0.3730 | 0.4286 |
+| [0.400, 0.467) | 167 | 0.4338 | 0.6766 | 47 | 0.4329 | 0.4894 |
+| [0.467, 0.533) | 178 | 0.5006 | 0.6966 | 82 | 0.5038 | 0.6341 |
+| [0.533, 0.600) | 138 | 0.5632 | 0.8261 | 91 | 0.5637 | 0.7473 |
+| [0.600, 0.667) | 75 | 0.6300 | 0.8933 | 104 | 0.6342 | 0.6635 |
+| [0.667, 0.733) | 28 | 0.6913 | 0.9286 | 105 | 0.6969 | 0.7238 |
+| [0.733, 0.800) | 11 | 0.7670 | 0.7273 | 107 | 0.7674 | 0.8411 |
+| [0.800, 0.867) | 2 | 0.8028 | 1.0000 | 80 | 0.8325 | 0.8500 |
+| [0.867, 0.933) | 0 | n/a | n/a | 50 | 0.8938 | 0.9400 |
+| [0.933, 1.000) | 0 | n/a | n/a | 14 | 0.9539 | 0.7857 |
 
 Reliability data, `category` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.267, 0.333) | 4 | 0.3186 | 0.7500 | 0 | n/a | n/a |
-| [0.333, 0.400) | 28 | 0.3726 | 0.8929 | 0 | n/a | n/a |
-| [0.400, 0.467) | 92 | 0.4378 | 0.9022 | 0 | n/a | n/a |
-| [0.467, 0.533) | 109 | 0.4967 | 0.9450 | 2 | 0.4998 | 0.5000 |
-| [0.533, 0.600) | 56 | 0.5552 | 1.0000 | 2 | 0.5594 | 0.5000 |
-| [0.600, 0.667) | 5 | 0.6191 | 1.0000 | 6 | 0.6308 | 1.0000 |
-| [0.667, 0.733) | 1 | 0.6853 | 1.0000 | 5 | 0.7098 | 0.6000 |
-| [0.733, 0.800) | 0 | n/a | n/a | 15 | 0.7719 | 1.0000 |
-| [0.800, 0.867) | 0 | n/a | n/a | 24 | 0.8352 | 0.9167 |
-| [0.867, 0.933) | 0 | n/a | n/a | 79 | 0.9078 | 0.8861 |
-| [0.933, 1.000) | 0 | n/a | n/a | 162 | 0.9622 | 0.9753 |
+| [0.267, 0.333) | 17 | 0.3082 | 0.7059 | 0 | n/a | n/a |
+| [0.333, 0.400) | 71 | 0.3787 | 0.7606 | 0 | n/a | n/a |
+| [0.400, 0.467) | 245 | 0.4379 | 0.9184 | 6 | 0.4397 | 0.5000 |
+| [0.467, 0.533) | 261 | 0.4996 | 0.9387 | 5 | 0.5031 | 0.6000 |
+| [0.533, 0.600) | 118 | 0.5561 | 1.0000 | 7 | 0.5593 | 0.7143 |
+| [0.600, 0.667) | 11 | 0.6168 | 1.0000 | 7 | 0.6370 | 0.8571 |
+| [0.667, 0.733) | 1 | 0.6761 | 1.0000 | 13 | 0.7019 | 0.6923 |
+| [0.733, 0.800) | 0 | n/a | n/a | 30 | 0.7675 | 0.7667 |
+| [0.800, 0.867) | 0 | n/a | n/a | 91 | 0.8362 | 0.8681 |
+| [0.867, 0.933) | 0 | n/a | n/a | 244 | 0.9057 | 0.9262 |
+| [0.933, 1.000) | 0 | n/a | n/a | 321 | 0.9608 | 0.9720 |
 
 Reliability data, `doc_kind` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.267, 0.333) | 5 | 0.3214 | 0.0000 | 5 | 0.3214 | 0.0000 |
-| [0.333, 0.400) | 16 | 0.3756 | 0.0625 | 16 | 0.3756 | 0.0625 |
-| [0.400, 0.467) | 24 | 0.4317 | 0.0000 | 24 | 0.4317 | 0.0000 |
-| [0.467, 0.533) | 38 | 0.4974 | 0.1053 | 38 | 0.4974 | 0.1053 |
-| [0.533, 0.600) | 35 | 0.5618 | 0.0000 | 35 | 0.5618 | 0.0000 |
-| [0.600, 0.667) | 41 | 0.6325 | 0.0732 | 41 | 0.6325 | 0.0732 |
-| [0.667, 0.733) | 41 | 0.7021 | 0.0244 | 41 | 0.7021 | 0.0244 |
-| [0.733, 0.800) | 33 | 0.7712 | 0.0000 | 33 | 0.7712 | 0.0000 |
-| [0.800, 0.867) | 35 | 0.8323 | 0.0000 | 35 | 0.8323 | 0.0000 |
-| [0.867, 0.933) | 18 | 0.8991 | 0.0000 | 18 | 0.8991 | 0.0000 |
-| [0.933, 1.000) | 9 | 0.9506 | 0.0000 | 9 | 0.9507 | 0.0000 |
+| [0.267, 0.333) | 2 | 0.3131 | 0.0000 | 2 | 0.3131 | 0.0000 |
+| [0.333, 0.400) | 32 | 0.3715 | 0.0312 | 32 | 0.3715 | 0.0312 |
+| [0.400, 0.467) | 70 | 0.4310 | 0.0857 | 71 | 0.4315 | 0.0845 |
+| [0.467, 0.533) | 103 | 0.5007 | 0.1068 | 102 | 0.5010 | 0.1078 |
+| [0.533, 0.600) | 109 | 0.5654 | 0.0734 | 109 | 0.5654 | 0.0734 |
+| [0.600, 0.667) | 88 | 0.6310 | 0.0455 | 88 | 0.6310 | 0.0455 |
+| [0.667, 0.733) | 84 | 0.6991 | 0.0119 | 84 | 0.6990 | 0.0119 |
+| [0.733, 0.800) | 78 | 0.7653 | 0.0128 | 78 | 0.7653 | 0.0128 |
+| [0.800, 0.867) | 85 | 0.8342 | 0.0235 | 85 | 0.8341 | 0.0235 |
+| [0.867, 0.933) | 49 | 0.8981 | 0.0000 | 49 | 0.8981 | 0.0000 |
+| [0.933, 1.000) | 24 | 0.9552 | 0.0000 | 24 | 0.9552 | 0.0000 |
 
 ### A / qs_v2, test
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.1091 | 0.0164 | 0.1308 | 0.1062 | 0.7442 | 0.7442 |
-| has_phi_direct | 0.2194 | 0.0128 | 0.1617 | 0.0591 | 0.8828 | 0.8828 |
-| has_phi_quasi | 0.2623 | 0.0194 | 0.2403 | 0.0965 | 0.7697 | 0.7697 |
-| has_coded_id | 0.2624 | 0.0369 | 0.2466 | 0.1085 | 0.7345 | 0.7345 |
-| has_staff_pii = raw (T fallback) | 0.1432 | 0.1432 | 0.5307 | 0.5307 | 0.4397 | 0.4397 |
+| pii_present | 0.1100 | 0.0184 | 0.1317 | 0.1085 | 0.7675 | 0.7675 |
+| has_phi_direct | 0.2180 | 0.0061 | 0.1646 | 0.0637 | 0.8570 | 0.8570 |
+| has_phi_quasi | 0.2632 | 0.0160 | 0.2410 | 0.0983 | 0.7680 | 0.7680 |
+| has_coded_id | 0.2552 | 0.0207 | 0.2530 | 0.1197 | 0.7290 | 0.7290 |
+| has_staff_pii = raw (T fallback) | 0.1294 | 0.1294 | 0.5366 | 0.5366 | 0.4337 | 0.4337 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 23 | 0.5182 | 0.6087 | 13 | 0.5205 | 0.6923 |
-| [0.533, 0.600) | 29 | 0.5740 | 0.5517 | 17 | 0.5597 | 0.4118 |
-| [0.600, 0.667) | 39 | 0.6379 | 0.6154 | 18 | 0.6416 | 0.6111 |
-| [0.667, 0.733) | 76 | 0.7062 | 0.7500 | 23 | 0.7014 | 0.6522 |
-| [0.733, 0.800) | 267 | 0.7747 | 0.9139 | 33 | 0.7680 | 0.7273 |
-| [0.800, 0.867) | 979 | 0.8380 | 0.9724 | 75 | 0.8394 | 0.7467 |
-| [0.867, 0.933) | 574 | 0.8881 | 0.9634 | 380 | 0.9105 | 0.9263 |
-| [0.933, 1.000) | 19 | 0.9463 | 0.9474 | 1447 | 0.9619 | 0.9703 |
+| [0.467, 0.533) | 33 | 0.5187 | 0.5152 | 16 | 0.5199 | 0.5000 |
+| [0.533, 0.600) | 85 | 0.5661 | 0.3647 | 45 | 0.5655 | 0.4222 |
+| [0.600, 0.667) | 131 | 0.6344 | 0.6107 | 56 | 0.6325 | 0.3571 |
+| [0.667, 0.733) | 256 | 0.7062 | 0.7734 | 76 | 0.7035 | 0.5921 |
+| [0.733, 0.800) | 731 | 0.7741 | 0.8974 | 108 | 0.7705 | 0.6574 |
+| [0.800, 0.867) | 2744 | 0.8382 | 0.9698 | 262 | 0.8396 | 0.8092 |
+| [0.867, 0.933) | 1688 | 0.8879 | 0.9704 | 1106 | 0.9109 | 0.9231 |
+| [0.933, 1.000) | 45 | 0.9423 | 0.9556 | 4044 | 0.9613 | 0.9713 |
 
 Reliability data, `has_phi_direct` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 36 | 0.5185 | 0.5278 | 9 | 0.5198 | 0.5556 |
-| [0.533, 0.600) | 84 | 0.5683 | 0.6786 | 15 | 0.5716 | 0.4000 |
-| [0.600, 0.667) | 172 | 0.6405 | 0.8953 | 21 | 0.6283 | 0.6190 |
-| [0.667, 0.733) | 495 | 0.7043 | 0.9859 | 25 | 0.7005 | 0.6400 |
-| [0.733, 0.800) | 796 | 0.7662 | 0.9925 | 29 | 0.7666 | 0.8276 |
-| [0.800, 0.867) | 372 | 0.8253 | 0.9919 | 47 | 0.8366 | 0.6383 |
-| [0.867, 0.933) | 46 | 0.8906 | 1.0000 | 110 | 0.9091 | 0.9182 |
-| [0.933, 1.000) | 5 | 0.9594 | 1.0000 | 1750 | 0.9852 | 0.9903 |
+| [0.467, 0.533) | 96 | 0.5177 | 0.4896 | 19 | 0.5184 | 0.6316 |
+| [0.533, 0.600) | 245 | 0.5675 | 0.7020 | 48 | 0.5643 | 0.4792 |
+| [0.600, 0.667) | 496 | 0.6409 | 0.8931 | 60 | 0.6343 | 0.4833 |
+| [0.667, 0.733) | 1438 | 0.7056 | 0.9791 | 75 | 0.6997 | 0.6800 |
+| [0.733, 0.800) | 2234 | 0.7655 | 0.9915 | 75 | 0.7702 | 0.7067 |
+| [0.800, 0.867) | 1028 | 0.8260 | 0.9922 | 118 | 0.8352 | 0.7712 |
+| [0.867, 0.933) | 167 | 0.8876 | 0.9760 | 324 | 0.9088 | 0.9012 |
+| [0.933, 1.000) | 9 | 0.9453 | 1.0000 | 4994 | 0.9857 | 0.9864 |
 
 Reliability data, `has_phi_quasi` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 59 | 0.5186 | 0.4915 | 10 | 0.5147 | 0.6000 |
-| [0.533, 0.600) | 208 | 0.5648 | 0.7981 | 25 | 0.5671 | 0.3600 |
-| [0.600, 0.667) | 513 | 0.6364 | 0.9649 | 43 | 0.6384 | 0.6047 |
-| [0.667, 0.733) | 761 | 0.6985 | 0.9763 | 61 | 0.7036 | 0.7213 |
-| [0.733, 0.800) | 395 | 0.7595 | 0.9772 | 70 | 0.7676 | 0.8429 |
-| [0.800, 0.867) | 61 | 0.8223 | 0.9672 | 78 | 0.8407 | 0.9103 |
-| [0.867, 0.933) | 7 | 0.8915 | 0.7143 | 285 | 0.9050 | 0.9579 |
-| [0.933, 1.000) | 2 | 0.9567 | 1.0000 | 1434 | 0.9773 | 0.9742 |
+| [0.467, 0.533) | 197 | 0.5163 | 0.6091 | 49 | 0.5164 | 0.5306 |
+| [0.533, 0.600) | 623 | 0.5705 | 0.8443 | 83 | 0.5653 | 0.5542 |
+| [0.600, 0.667) | 1488 | 0.6374 | 0.9469 | 104 | 0.6357 | 0.7212 |
+| [0.667, 0.733) | 2137 | 0.6996 | 0.9761 | 123 | 0.7002 | 0.7967 |
+| [0.733, 0.800) | 1061 | 0.7602 | 0.9764 | 186 | 0.7698 | 0.8280 |
+| [0.800, 0.867) | 192 | 0.8230 | 0.9896 | 316 | 0.8364 | 0.8987 |
+| [0.867, 0.933) | 13 | 0.8851 | 1.0000 | 780 | 0.9059 | 0.9385 |
+| [0.933, 1.000) | 2 | 0.9467 | 1.0000 | 4072 | 0.9774 | 0.9742 |
 
 Reliability data, `has_coded_id` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 67 | 0.5160 | 0.5821 | 18 | 0.5184 | 0.5000 |
-| [0.533, 0.600) | 238 | 0.5725 | 0.8824 | 38 | 0.5612 | 0.5789 |
-| [0.600, 0.667) | 529 | 0.6369 | 0.9357 | 42 | 0.6355 | 0.7857 |
-| [0.667, 0.733) | 759 | 0.6997 | 0.9802 | 62 | 0.7022 | 0.8226 |
-| [0.733, 0.800) | 329 | 0.7585 | 0.9605 | 115 | 0.7682 | 0.9217 |
-| [0.800, 0.867) | 73 | 0.8272 | 0.9589 | 202 | 0.8388 | 0.9010 |
-| [0.867, 0.933) | 9 | 0.8933 | 1.0000 | 434 | 0.9053 | 0.9562 |
-| [0.933, 1.000) | 2 | 0.9725 | 1.0000 | 1095 | 0.9680 | 0.9744 |
+| [0.467, 0.533) | 214 | 0.5166 | 0.6075 | 59 | 0.5192 | 0.5763 |
+| [0.533, 0.600) | 631 | 0.5716 | 0.8320 | 99 | 0.5663 | 0.5758 |
+| [0.600, 0.667) | 1543 | 0.6374 | 0.9345 | 117 | 0.6337 | 0.6923 |
+| [0.667, 0.733) | 2180 | 0.6988 | 0.9702 | 153 | 0.7038 | 0.8170 |
+| [0.733, 0.800) | 937 | 0.7588 | 0.9712 | 228 | 0.7715 | 0.8728 |
+| [0.800, 0.867) | 178 | 0.8247 | 0.9494 | 413 | 0.8374 | 0.8692 |
+| [0.867, 0.933) | 29 | 0.8905 | 0.8276 | 1064 | 0.9057 | 0.9389 |
+| [0.933, 1.000) | 1 | 0.9409 | 0.0000 | 3580 | 0.9719 | 0.9668 |
 
 Reliability data, `has_staff_pii` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 358 | 0.5160 | 0.5084 | 358 | 0.5160 | 0.5084 |
-| [0.533, 0.600) | 623 | 0.5662 | 0.6902 | 623 | 0.5662 | 0.6902 |
-| [0.600, 0.667) | 496 | 0.6303 | 0.7137 | 496 | 0.6303 | 0.7137 |
-| [0.667, 0.733) | 281 | 0.6956 | 0.5587 | 281 | 0.6956 | 0.5587 |
-| [0.733, 0.800) | 141 | 0.7602 | 0.3191 | 141 | 0.7602 | 0.3191 |
-| [0.800, 0.867) | 67 | 0.8264 | 0.3134 | 67 | 0.8264 | 0.3134 |
-| [0.867, 0.933) | 36 | 0.8882 | 0.1389 | 36 | 0.8882 | 0.1389 |
-| [0.933, 1.000) | 4 | 0.9443 | 0.0000 | 4 | 0.9443 | 0.0000 |
+| [0.467, 0.533) | 953 | 0.5167 | 0.5467 | 953 | 0.5167 | 0.5467 |
+| [0.533, 0.600) | 1834 | 0.5659 | 0.6570 | 1834 | 0.5659 | 0.6570 |
+| [0.600, 0.667) | 1381 | 0.6306 | 0.6749 | 1381 | 0.6306 | 0.6749 |
+| [0.667, 0.733) | 846 | 0.6960 | 0.5508 | 846 | 0.6960 | 0.5508 |
+| [0.733, 0.800) | 433 | 0.7633 | 0.3372 | 433 | 0.7633 | 0.3372 |
+| [0.800, 0.867) | 182 | 0.8309 | 0.2143 | 182 | 0.8309 | 0.2143 |
+| [0.867, 0.933) | 74 | 0.8936 | 0.1622 | 74 | 0.8936 | 0.1622 |
+| [0.933, 1.000) | 10 | 0.9513 | 0.1000 | 10 | 0.9513 | 0.1000 |
 
 ### A / qs_v2, holdout
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.0903 | 0.0345 | 0.1443 | 0.1278 | 0.5769 | 0.5769 |
-| has_phi_direct | 0.2429 | 0.0223 | 0.1307 | 0.0083 | 0.9974 | 0.9974 |
-| has_phi_quasi | 0.2918 | 0.0488 | 0.2083 | 0.0374 | 0.9416 | 0.9416 |
-| has_coded_id | 0.2968 | 0.0728 | 0.2225 | 0.0530 | 0.8027 | 0.8027 |
-| has_staff_pii = raw (T fallback) | 0.1505 | 0.1505 | 0.5231 | 0.5231 | 0.4374 | 0.4374 |
+| pii_present | 0.0801 | 0.0285 | 0.1542 | 0.1426 | 0.6290 | 0.6290 |
+| has_phi_direct | 0.2480 | 0.0238 | 0.1341 | 0.0068 | 0.9931 | 0.9931 |
+| has_phi_quasi | 0.2921 | 0.0417 | 0.2106 | 0.0376 | 0.9685 | 0.9685 |
+| has_coded_id | 0.2864 | 0.0497 | 0.2288 | 0.0638 | 0.8615 | 0.8615 |
+| has_staff_pii = raw (T fallback) | 0.1532 | 0.1532 | 0.5214 | 0.5214 | 0.4293 | 0.4293 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.600, 0.667) | 3 | 0.6448 | 1.0000 | 0 | n/a | n/a |
-| [0.667, 0.733) | 8 | 0.7136 | 0.8750 | 1 | 0.6984 | 1.0000 |
-| [0.733, 0.800) | 38 | 0.7793 | 0.9211 | 3 | 0.7726 | 1.0000 |
-| [0.800, 0.867) | 156 | 0.8389 | 0.9231 | 8 | 0.8453 | 0.8750 |
-| [0.867, 0.933) | 87 | 0.8897 | 0.9540 | 54 | 0.9128 | 0.9444 |
-| [0.933, 1.000) | 3 | 0.9414 | 1.0000 | 229 | 0.9618 | 0.9301 |
+| [0.533, 0.600) | 1 | 0.5881 | 1.0000 | 0 | n/a | n/a |
+| [0.600, 0.667) | 4 | 0.6396 | 1.0000 | 1 | 0.6522 | 1.0000 |
+| [0.667, 0.733) | 12 | 0.7113 | 0.7500 | 2 | 0.7238 | 1.0000 |
+| [0.733, 0.800) | 93 | 0.7724 | 0.8925 | 4 | 0.7652 | 1.0000 |
+| [0.800, 0.867) | 374 | 0.8382 | 0.9171 | 17 | 0.8492 | 0.7059 |
+| [0.867, 0.933) | 237 | 0.8868 | 0.9494 | 140 | 0.9094 | 0.8857 |
+| [0.933, 1.000) | 3 | 0.9427 | 1.0000 | 560 | 0.9608 | 0.9375 |
 
 Reliability data, `has_phi_direct` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 3 | 0.5150 | 0.3333 | 2 | 0.5272 | 0.5000 |
-| [0.533, 0.600) | 1 | 0.5799 | 1.0000 | 0 | n/a | n/a |
-| [0.600, 0.667) | 21 | 0.6433 | 1.0000 | 1 | 0.6238 | 0.0000 |
-| [0.667, 0.733) | 87 | 0.7066 | 1.0000 | 0 | n/a | n/a |
-| [0.733, 0.800) | 113 | 0.7646 | 1.0000 | 1 | 0.7845 | 1.0000 |
-| [0.800, 0.867) | 52 | 0.8260 | 1.0000 | 3 | 0.8555 | 1.0000 |
-| [0.867, 0.933) | 18 | 0.8876 | 1.0000 | 14 | 0.9158 | 1.0000 |
-| [0.933, 1.000) | 0 | n/a | n/a | 274 | 0.9852 | 1.0000 |
+| [0.467, 0.533) | 3 | 0.5118 | 1.0000 | 2 | 0.5203 | 1.0000 |
+| [0.533, 0.600) | 12 | 0.5734 | 0.9167 | 0 | n/a | n/a |
+| [0.600, 0.667) | 65 | 0.6449 | 1.0000 | 1 | 0.6022 | 1.0000 |
+| [0.667, 0.733) | 198 | 0.7057 | 1.0000 | 5 | 0.7106 | 0.8000 |
+| [0.733, 0.800) | 278 | 0.7643 | 1.0000 | 3 | 0.7787 | 1.0000 |
+| [0.800, 0.867) | 135 | 0.8252 | 1.0000 | 9 | 0.8382 | 1.0000 |
+| [0.867, 0.933) | 31 | 0.8906 | 1.0000 | 42 | 0.9132 | 1.0000 |
+| [0.933, 1.000) | 2 | 0.9544 | 1.0000 | 662 | 0.9854 | 1.0000 |
 
 Reliability data, `has_phi_quasi` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 10 | 0.5168 | 0.4000 | 3 | 0.5235 | 0.0000 |
-| [0.533, 0.600) | 22 | 0.5764 | 0.9545 | 4 | 0.5824 | 0.7500 |
-| [0.600, 0.667) | 77 | 0.6408 | 1.0000 | 3 | 0.6130 | 0.3333 |
-| [0.667, 0.733) | 110 | 0.6996 | 0.9909 | 4 | 0.7134 | 1.0000 |
-| [0.733, 0.800) | 55 | 0.7573 | 1.0000 | 7 | 0.7648 | 0.8571 |
-| [0.800, 0.867) | 16 | 0.8158 | 1.0000 | 17 | 0.8489 | 1.0000 |
-| [0.867, 0.933) | 5 | 0.8802 | 1.0000 | 34 | 0.9129 | 1.0000 |
-| [0.933, 1.000) | 0 | n/a | n/a | 223 | 0.9777 | 0.9955 |
+| [0.467, 0.533) | 19 | 0.5140 | 0.4737 | 6 | 0.5150 | 0.5000 |
+| [0.533, 0.600) | 63 | 0.5725 | 0.9206 | 8 | 0.5629 | 0.3750 |
+| [0.600, 0.667) | 194 | 0.6372 | 0.9897 | 8 | 0.6343 | 0.6250 |
+| [0.667, 0.733) | 257 | 0.7001 | 1.0000 | 13 | 0.6994 | 0.9231 |
+| [0.733, 0.800) | 155 | 0.7593 | 1.0000 | 16 | 0.7720 | 0.9375 |
+| [0.800, 0.867) | 30 | 0.8226 | 1.0000 | 35 | 0.8383 | 0.9429 |
+| [0.867, 0.933) | 6 | 0.8905 | 1.0000 | 106 | 0.9058 | 0.9811 |
+| [0.933, 1.000) | 0 | n/a | n/a | 532 | 0.9787 | 1.0000 |
 
 Reliability data, `has_coded_id` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 7 | 0.5112 | 0.4286 | 3 | 0.5222 | 0.0000 |
-| [0.533, 0.600) | 28 | 0.5773 | 0.9286 | 4 | 0.5541 | 0.7500 |
-| [0.600, 0.667) | 92 | 0.6396 | 1.0000 | 1 | 0.6467 | 1.0000 |
-| [0.667, 0.733) | 111 | 0.6994 | 0.9910 | 6 | 0.7029 | 0.8333 |
-| [0.733, 0.800) | 43 | 0.7636 | 0.9767 | 15 | 0.7615 | 0.9333 |
-| [0.800, 0.867) | 14 | 0.8240 | 1.0000 | 29 | 0.8348 | 1.0000 |
-| [0.867, 0.933) | 0 | n/a | n/a | 71 | 0.9017 | 1.0000 |
-| [0.933, 1.000) | 0 | n/a | n/a | 166 | 0.9660 | 0.9880 |
+| [0.467, 0.533) | 28 | 0.5157 | 0.5714 | 7 | 0.5105 | 0.4286 |
+| [0.533, 0.600) | 70 | 0.5723 | 0.9429 | 15 | 0.5667 | 0.5333 |
+| [0.600, 0.667) | 206 | 0.6370 | 0.9660 | 15 | 0.6357 | 0.8667 |
+| [0.667, 0.733) | 271 | 0.6983 | 0.9926 | 12 | 0.7056 | 0.8333 |
+| [0.733, 0.800) | 114 | 0.7577 | 0.9912 | 26 | 0.7706 | 1.0000 |
+| [0.800, 0.867) | 30 | 0.8252 | 1.0000 | 61 | 0.8392 | 0.9344 |
+| [0.867, 0.933) | 5 | 0.9041 | 1.0000 | 126 | 0.9053 | 0.9683 |
+| [0.933, 1.000) | 0 | n/a | n/a | 462 | 0.9714 | 0.9935 |
 
 Reliability data, `has_staff_pii` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 42 | 0.5171 | 0.5952 | 42 | 0.5171 | 0.5952 |
-| [0.533, 0.600) | 90 | 0.5698 | 0.6667 | 90 | 0.5698 | 0.6667 |
-| [0.600, 0.667) | 61 | 0.6287 | 0.7541 | 61 | 0.6287 | 0.7541 |
-| [0.667, 0.733) | 43 | 0.6941 | 0.6744 | 43 | 0.6941 | 0.6744 |
-| [0.733, 0.800) | 29 | 0.7637 | 0.3448 | 29 | 0.7637 | 0.3448 |
-| [0.800, 0.867) | 18 | 0.8247 | 0.6111 | 18 | 0.8247 | 0.6111 |
-| [0.867, 0.933) | 9 | 0.8987 | 0.2222 | 9 | 0.8987 | 0.2222 |
-| [0.933, 1.000) | 3 | 0.9446 | 0.3333 | 3 | 0.9446 | 0.3333 |
-
-### A / qs_v3, test
-
-| question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
-|---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.3116 | 0.3116 | 0.6717 | 0.6717 | 0.3473 | 0.3473 |
-| subject_role | 0.2519 | 0.1227 | 0.4834 | 0.4111 | 0.6557 | 0.6635 |
-| category | 0.4396 | 0.0275 | 0.4019 | 0.1491 | 0.8297 | 0.8483 |
-| doc_kind = raw (T fallback) | 0.3956 | 0.3956 | 0.9947 | 0.9947 | 0.5094 | 0.5094 |
-
-Reliability data, `pii_present` (non-empty bins):
-
-| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
-|---|---|---|---|---|---|---|
-| [0.467, 0.533) | 314 | 0.5174 | 0.4650 | 314 | 0.5174 | 0.4650 |
-| [0.533, 0.600) | 591 | 0.5660 | 0.4061 | 591 | 0.5660 | 0.4061 |
-| [0.600, 0.667) | 506 | 0.6311 | 0.2628 | 506 | 0.6311 | 0.2628 |
-| [0.667, 0.733) | 359 | 0.6978 | 0.1811 | 359 | 0.6978 | 0.1811 |
-| [0.733, 0.800) | 198 | 0.7647 | 0.1313 | 198 | 0.7647 | 0.1313 |
-| [0.800, 0.867) | 30 | 0.8232 | 0.3000 | 30 | 0.8232 | 0.3000 |
-| [0.867, 0.933) | 8 | 0.8970 | 0.7500 | 8 | 0.8970 | 0.7500 |
-
-Reliability data, `subject_role` (non-empty bins):
-
-| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
-|---|---|---|---|---|---|---|
-| [0.267, 0.333) | 81 | 0.3130 | 0.4691 | 13 | 0.3155 | 0.5385 |
-| [0.333, 0.400) | 268 | 0.3713 | 0.5373 | 79 | 0.3702 | 0.4557 |
-| [0.400, 0.467) | 464 | 0.4350 | 0.7026 | 177 | 0.4352 | 0.4689 |
-| [0.467, 0.533) | 451 | 0.5001 | 0.8137 | 267 | 0.5008 | 0.6442 |
-| [0.533, 0.600) | 402 | 0.5640 | 0.8582 | 275 | 0.5664 | 0.7527 |
-| [0.600, 0.667) | 221 | 0.6295 | 0.8462 | 253 | 0.6348 | 0.7905 |
-| [0.667, 0.733) | 82 | 0.6924 | 0.7927 | 315 | 0.7001 | 0.8317 |
-| [0.733, 0.800) | 20 | 0.7645 | 0.8000 | 273 | 0.7656 | 0.8828 |
-| [0.800, 0.867) | 11 | 0.8197 | 0.6364 | 221 | 0.8323 | 0.8552 |
-| [0.867, 0.933) | 6 | 0.8992 | 0.0000 | 102 | 0.8939 | 0.7843 |
-| [0.933, 1.000) | 0 | n/a | n/a | 31 | 0.9636 | 0.5806 |
-
-Reliability data, `category` (non-empty bins):
-
-| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
-|---|---|---|---|---|---|---|
-| [0.200, 0.267) | 3 | 0.2580 | 0.3333 | 0 | n/a | n/a |
-| [0.267, 0.333) | 75 | 0.3111 | 0.4133 | 0 | n/a | n/a |
-| [0.333, 0.400) | 222 | 0.3713 | 0.7207 | 5 | 0.3776 | 0.2000 |
-| [0.400, 0.467) | 582 | 0.4368 | 0.9141 | 12 | 0.4444 | 0.0833 |
-| [0.467, 0.533) | 782 | 0.4985 | 0.9795 | 30 | 0.5015 | 0.4667 |
-| [0.533, 0.600) | 308 | 0.5590 | 0.9870 | 38 | 0.5654 | 0.4737 |
-| [0.600, 0.667) | 29 | 0.6210 | 0.9655 | 44 | 0.6318 | 0.5909 |
-| [0.667, 0.733) | 5 | 0.6903 | 0.8000 | 54 | 0.7001 | 0.6852 |
-| [0.733, 0.800) | 0 | n/a | n/a | 80 | 0.7688 | 0.7625 |
-| [0.800, 0.867) | 0 | n/a | n/a | 182 | 0.8386 | 0.8901 |
-| [0.867, 0.933) | 0 | n/a | n/a | 529 | 0.9077 | 0.9263 |
-| [0.933, 1.000) | 0 | n/a | n/a | 1032 | 0.9621 | 0.9845 |
-
-Reliability data, `doc_kind` (non-empty bins):
-
-| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
-|---|---|---|---|---|---|---|
-| [0.267, 0.333) | 15 | 0.3169 | 0.2667 | 15 | 0.3169 | 0.2667 |
-| [0.333, 0.400) | 116 | 0.3735 | 0.2241 | 116 | 0.3735 | 0.2241 |
-| [0.400, 0.467) | 191 | 0.4346 | 0.2932 | 191 | 0.4346 | 0.2932 |
-| [0.467, 0.533) | 246 | 0.4995 | 0.2358 | 246 | 0.4995 | 0.2358 |
-| [0.533, 0.600) | 255 | 0.5672 | 0.2196 | 255 | 0.5672 | 0.2196 |
-| [0.600, 0.667) | 255 | 0.6324 | 0.2784 | 256 | 0.6325 | 0.2773 |
-| [0.667, 0.733) | 215 | 0.6995 | 0.2651 | 215 | 0.6998 | 0.2651 |
-| [0.733, 0.800) | 246 | 0.7667 | 0.2358 | 245 | 0.7669 | 0.2367 |
-| [0.800, 0.867) | 230 | 0.8308 | 0.3174 | 230 | 0.8308 | 0.3174 |
-| [0.867, 0.933) | 183 | 0.8969 | 0.2186 | 183 | 0.8969 | 0.2186 |
-| [0.933, 1.000) | 54 | 0.9525 | 0.2407 | 54 | 0.9525 | 0.2407 |
-
-### A / qs_v3, holdout
-
-| question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
-|---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.4092 | 0.4092 | 0.7213 | 0.7213 | 0.2978 | 0.2978 |
-| subject_role | 0.2414 | 0.0988 | 0.4665 | 0.4037 | 0.6335 | 0.6470 |
-| category | 0.4576 | 0.0410 | 0.3909 | 0.1261 | 0.7142 | 0.7288 |
-| doc_kind = raw (T fallback) | 0.6155 | 0.6155 | 1.2329 | 1.2329 | 0.3230 | 0.3225 |
-
-Reliability data, `pii_present` (non-empty bins):
-
-| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
-|---|---|---|---|---|---|---|
-| [0.467, 0.533) | 43 | 0.5172 | 0.4186 | 43 | 0.5172 | 0.4186 |
-| [0.533, 0.600) | 70 | 0.5700 | 0.2857 | 70 | 0.5700 | 0.2857 |
-| [0.600, 0.667) | 94 | 0.6352 | 0.2128 | 94 | 0.6352 | 0.2128 |
-| [0.667, 0.733) | 65 | 0.6976 | 0.0769 | 65 | 0.6976 | 0.0769 |
-| [0.733, 0.800) | 21 | 0.7544 | 0.0476 | 21 | 0.7544 | 0.0476 |
-| [0.800, 0.867) | 1 | 0.8069 | 0.0000 | 1 | 0.8069 | 0.0000 |
-| [0.867, 0.933) | 1 | 0.8733 | 0.0000 | 1 | 0.8733 | 0.0000 |
-
-Reliability data, `subject_role` (non-empty bins):
-
-| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
-|---|---|---|---|---|---|---|
-| [0.267, 0.333) | 14 | 0.3082 | 0.2143 | 4 | 0.3111 | 0.0000 |
-| [0.333, 0.400) | 27 | 0.3649 | 0.6667 | 13 | 0.3703 | 0.3846 |
-| [0.400, 0.467) | 67 | 0.4316 | 0.7313 | 16 | 0.4271 | 0.6875 |
-| [0.467, 0.533) | 79 | 0.5014 | 0.7975 | 40 | 0.4991 | 0.7000 |
-| [0.533, 0.600) | 53 | 0.5703 | 0.7170 | 43 | 0.5680 | 0.6512 |
-| [0.600, 0.667) | 33 | 0.6265 | 0.7879 | 33 | 0.6349 | 0.8485 |
-| [0.667, 0.733) | 15 | 0.6946 | 1.0000 | 47 | 0.6996 | 0.7872 |
-| [0.733, 0.800) | 6 | 0.7653 | 0.8333 | 46 | 0.7704 | 0.7609 |
-| [0.800, 0.867) | 1 | 0.8027 | 1.0000 | 29 | 0.8298 | 0.8276 |
-| [0.867, 0.933) | 0 | n/a | n/a | 19 | 0.8969 | 0.8947 |
-| [0.933, 1.000) | 0 | n/a | n/a | 5 | 0.9522 | 1.0000 |
-
-Reliability data, `category` (non-empty bins):
-
-| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
-|---|---|---|---|---|---|---|
-| [0.267, 0.333) | 4 | 0.3186 | 0.7500 | 0 | n/a | n/a |
-| [0.333, 0.400) | 28 | 0.3726 | 0.8929 | 0 | n/a | n/a |
-| [0.400, 0.467) | 92 | 0.4378 | 0.9022 | 0 | n/a | n/a |
-| [0.467, 0.533) | 109 | 0.4967 | 0.9450 | 2 | 0.4998 | 0.5000 |
-| [0.533, 0.600) | 56 | 0.5552 | 1.0000 | 2 | 0.5594 | 0.5000 |
-| [0.600, 0.667) | 5 | 0.6191 | 1.0000 | 6 | 0.6308 | 1.0000 |
-| [0.667, 0.733) | 1 | 0.6853 | 1.0000 | 5 | 0.7098 | 0.6000 |
-| [0.733, 0.800) | 0 | n/a | n/a | 15 | 0.7719 | 1.0000 |
-| [0.800, 0.867) | 0 | n/a | n/a | 24 | 0.8352 | 0.9167 |
-| [0.867, 0.933) | 0 | n/a | n/a | 79 | 0.9078 | 0.8861 |
-| [0.933, 1.000) | 0 | n/a | n/a | 162 | 0.9622 | 0.9753 |
-
-Reliability data, `doc_kind` (non-empty bins):
-
-| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
-|---|---|---|---|---|---|---|
-| [0.267, 0.333) | 5 | 0.3214 | 0.0000 | 5 | 0.3214 | 0.0000 |
-| [0.333, 0.400) | 16 | 0.3756 | 0.0625 | 16 | 0.3756 | 0.0625 |
-| [0.400, 0.467) | 24 | 0.4317 | 0.0000 | 24 | 0.4317 | 0.0000 |
-| [0.467, 0.533) | 38 | 0.4974 | 0.1053 | 38 | 0.4974 | 0.1053 |
-| [0.533, 0.600) | 35 | 0.5618 | 0.0000 | 35 | 0.5618 | 0.0000 |
-| [0.600, 0.667) | 41 | 0.6325 | 0.0732 | 41 | 0.6325 | 0.0732 |
-| [0.667, 0.733) | 41 | 0.7021 | 0.0244 | 41 | 0.7021 | 0.0244 |
-| [0.733, 0.800) | 33 | 0.7712 | 0.0000 | 33 | 0.7712 | 0.0000 |
-| [0.800, 0.867) | 35 | 0.8323 | 0.0000 | 35 | 0.8323 | 0.0000 |
-| [0.867, 0.933) | 18 | 0.8991 | 0.0000 | 18 | 0.8991 | 0.0000 |
-| [0.933, 1.000) | 9 | 0.9506 | 0.0000 | 9 | 0.9507 | 0.0000 |
+| [0.467, 0.533) | 100 | 0.5174 | 0.5900 | 100 | 0.5174 | 0.5900 |
+| [0.533, 0.600) | 218 | 0.5677 | 0.6789 | 218 | 0.5677 | 0.6789 |
+| [0.600, 0.667) | 170 | 0.6313 | 0.7353 | 170 | 0.6313 | 0.7353 |
+| [0.667, 0.733) | 111 | 0.6966 | 0.5586 | 111 | 0.6966 | 0.5586 |
+| [0.733, 0.800) | 66 | 0.7620 | 0.4697 | 66 | 0.7620 | 0.4697 |
+| [0.800, 0.867) | 40 | 0.8283 | 0.4500 | 40 | 0.8283 | 0.4500 |
+| [0.867, 0.933) | 18 | 0.8923 | 0.2778 | 18 | 0.8923 | 0.2778 |
+| [0.933, 1.000) | 1 | 0.9517 | 0.0000 | 1 | 0.9517 | 0.0000 |
 
 ### B1 / qs_v1, test
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.7482 | 0.7482 | 1.4231 | 1.4231 | 0.3587 | 0.3587 |
-| subject_role = raw (T fallback) | 0.4953 | 0.4953 | 1.1482 | 1.1482 | 0.4285 | 0.4285 |
-| category | 0.1715 | 0.1781 | 0.7060 | 0.6988 | 0.4944 | 0.4896 |
-| doc_kind = raw (T fallback) | 0.3594 | 0.3594 | 1.0035 | 1.0035 | 0.4924 | 0.4924 |
+| pii_present = raw (T fallback) | 0.7398 | 0.7398 | 1.4105 | 1.4105 | 0.3955 | 0.3955 |
+| subject_role = raw (T fallback) | 0.5073 | 0.5073 | 1.1733 | 1.1733 | 0.3941 | 0.3941 |
+| category | 0.1788 | 0.1713 | 0.7157 | 0.7043 | 0.4769 | 0.4716 |
+| doc_kind = raw (T fallback) | 0.3662 | 0.3662 | 1.0147 | 1.0147 | 0.4949 | 0.4948 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 4 | 0.5136 | 0.7500 | 4 | 0.5136 | 0.7500 |
-| [0.533, 0.600) | 14 | 0.5752 | 0.6429 | 14 | 0.5752 | 0.6429 |
-| [0.600, 0.667) | 10 | 0.6393 | 0.4000 | 10 | 0.6393 | 0.4000 |
-| [0.667, 0.733) | 17 | 0.6928 | 0.2353 | 17 | 0.6928 | 0.2353 |
-| [0.733, 0.800) | 33 | 0.7745 | 0.2121 | 33 | 0.7745 | 0.2121 |
-| [0.800, 0.867) | 52 | 0.8400 | 0.3077 | 52 | 0.8400 | 0.3077 |
-| [0.867, 0.933) | 192 | 0.9049 | 0.1615 | 192 | 0.9049 | 0.1615 |
-| [0.933, 1.000) | 351 | 0.9587 | 0.0969 | 351 | 0.9587 | 0.0969 |
+| [0.467, 0.533) | 13 | 0.5184 | 0.4615 | 13 | 0.5184 | 0.4615 |
+| [0.533, 0.600) | 33 | 0.5731 | 0.5152 | 33 | 0.5731 | 0.5152 |
+| [0.600, 0.667) | 28 | 0.6293 | 0.3571 | 28 | 0.6293 | 0.3571 |
+| [0.667, 0.733) | 56 | 0.6991 | 0.2857 | 56 | 0.6991 | 0.2857 |
+| [0.733, 0.800) | 68 | 0.7697 | 0.2500 | 68 | 0.7697 | 0.2500 |
+| [0.800, 0.867) | 180 | 0.8407 | 0.2111 | 180 | 0.8407 | 0.2111 |
+| [0.867, 0.933) | 546 | 0.9063 | 0.1484 | 546 | 0.9063 | 0.1484 |
+| [0.933, 1.000) | 995 | 0.9586 | 0.1307 | 995 | 0.9586 | 0.1307 |
 
 Reliability data, `subject_role` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.267, 0.333) | 18 | 0.3098 | 0.3333 | 18 | 0.3099 | 0.3333 |
-| [0.333, 0.400) | 54 | 0.3702 | 0.2222 | 54 | 0.3702 | 0.2222 |
-| [0.400, 0.467) | 68 | 0.4341 | 0.2500 | 68 | 0.4341 | 0.2500 |
-| [0.467, 0.533) | 75 | 0.4993 | 0.1733 | 75 | 0.4993 | 0.1733 |
-| [0.533, 0.600) | 81 | 0.5700 | 0.1852 | 81 | 0.5700 | 0.1852 |
-| [0.600, 0.667) | 48 | 0.6373 | 0.1667 | 48 | 0.6373 | 0.1667 |
-| [0.667, 0.733) | 54 | 0.6963 | 0.1111 | 54 | 0.6963 | 0.1111 |
-| [0.733, 0.800) | 48 | 0.7670 | 0.1250 | 48 | 0.7670 | 0.1250 |
-| [0.800, 0.867) | 53 | 0.8350 | 0.2642 | 53 | 0.8350 | 0.2642 |
-| [0.867, 0.933) | 66 | 0.8983 | 0.1818 | 66 | 0.8983 | 0.1818 |
-| [0.933, 1.000) | 108 | 0.9746 | 0.1019 | 108 | 0.9746 | 0.1019 |
+| [0.267, 0.333) | 49 | 0.3119 | 0.2857 | 49 | 0.3119 | 0.2857 |
+| [0.333, 0.400) | 143 | 0.3679 | 0.2657 | 143 | 0.3679 | 0.2657 |
+| [0.400, 0.467) | 203 | 0.4353 | 0.2069 | 203 | 0.4353 | 0.2069 |
+| [0.467, 0.533) | 218 | 0.5000 | 0.2477 | 218 | 0.5000 | 0.2477 |
+| [0.533, 0.600) | 195 | 0.5667 | 0.1385 | 195 | 0.5667 | 0.1385 |
+| [0.600, 0.667) | 178 | 0.6333 | 0.1685 | 178 | 0.6333 | 0.1685 |
+| [0.667, 0.733) | 154 | 0.6979 | 0.1494 | 154 | 0.6979 | 0.1494 |
+| [0.733, 0.800) | 130 | 0.7645 | 0.1692 | 130 | 0.7645 | 0.1692 |
+| [0.800, 0.867) | 161 | 0.8319 | 0.0683 | 161 | 0.8319 | 0.0683 |
+| [0.867, 0.933) | 170 | 0.9011 | 0.1529 | 170 | 0.9011 | 0.1529 |
+| [0.933, 1.000) | 318 | 0.9748 | 0.1006 | 318 | 0.9748 | 0.1006 |
 
 Reliability data, `category` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 13 | 0.2537 | 0.3846 | 25 | 0.2495 | 0.3600 |
-| [0.267, 0.333) | 61 | 0.3062 | 0.4754 | 141 | 0.3058 | 0.5177 |
-| [0.333, 0.400) | 137 | 0.3679 | 0.4672 | 149 | 0.3646 | 0.4765 |
-| [0.400, 0.467) | 107 | 0.4351 | 0.5234 | 101 | 0.4282 | 0.6337 |
-| [0.467, 0.533) | 79 | 0.5014 | 0.6076 | 76 | 0.4975 | 0.4079 |
-| [0.533, 0.600) | 61 | 0.5685 | 0.5082 | 50 | 0.5651 | 0.5200 |
-| [0.600, 0.667) | 44 | 0.6270 | 0.3636 | 41 | 0.6298 | 0.4634 |
-| [0.667, 0.733) | 47 | 0.6957 | 0.6170 | 24 | 0.7050 | 0.3333 |
-| [0.733, 0.800) | 37 | 0.7618 | 0.4054 | 24 | 0.7632 | 0.4583 |
-| [0.800, 0.867) | 29 | 0.8402 | 0.3793 | 18 | 0.8311 | 0.5556 |
-| [0.867, 0.933) | 29 | 0.9007 | 0.5517 | 7 | 0.8922 | 0.4286 |
-| [0.933, 1.000) | 29 | 0.9760 | 0.4138 | 17 | 0.9683 | 0.4118 |
+| [0.200, 0.267) | 40 | 0.2513 | 0.4750 | 96 | 0.2491 | 0.4062 |
+| [0.267, 0.333) | 186 | 0.3050 | 0.4086 | 406 | 0.3033 | 0.5123 |
+| [0.333, 0.400) | 322 | 0.3682 | 0.5342 | 399 | 0.3647 | 0.5439 |
+| [0.400, 0.467) | 271 | 0.4315 | 0.5609 | 305 | 0.4322 | 0.5311 |
+| [0.467, 0.533) | 238 | 0.5003 | 0.5252 | 233 | 0.4989 | 0.4850 |
+| [0.533, 0.600) | 197 | 0.5639 | 0.5127 | 145 | 0.5638 | 0.4276 |
+| [0.600, 0.667) | 165 | 0.6300 | 0.4606 | 105 | 0.6331 | 0.4857 |
+| [0.667, 0.733) | 141 | 0.6949 | 0.4823 | 78 | 0.6967 | 0.5000 |
+| [0.733, 0.800) | 104 | 0.7666 | 0.4808 | 69 | 0.7705 | 0.3333 |
+| [0.800, 0.867) | 92 | 0.8316 | 0.5109 | 32 | 0.8316 | 0.4375 |
+| [0.867, 0.933) | 84 | 0.8989 | 0.3571 | 26 | 0.9081 | 0.3462 |
+| [0.933, 1.000) | 79 | 0.9697 | 0.3671 | 25 | 0.9558 | 0.3200 |
 
 Reliability data, `doc_kind` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 9 | 0.2604 | 0.3333 | 9 | 0.2604 | 0.3333 |
-| [0.267, 0.333) | 51 | 0.3090 | 0.2353 | 51 | 0.3090 | 0.2353 |
-| [0.333, 0.400) | 92 | 0.3700 | 0.2500 | 92 | 0.3700 | 0.2500 |
-| [0.400, 0.467) | 79 | 0.4332 | 0.2152 | 79 | 0.4332 | 0.2152 |
-| [0.467, 0.533) | 64 | 0.4980 | 0.2656 | 64 | 0.4980 | 0.2656 |
-| [0.533, 0.600) | 72 | 0.5630 | 0.3472 | 72 | 0.5630 | 0.3472 |
-| [0.600, 0.667) | 57 | 0.6323 | 0.2632 | 57 | 0.6322 | 0.2632 |
-| [0.667, 0.733) | 41 | 0.7013 | 0.2683 | 41 | 0.7013 | 0.2683 |
-| [0.733, 0.800) | 34 | 0.7664 | 0.2647 | 34 | 0.7664 | 0.2647 |
-| [0.800, 0.867) | 31 | 0.8305 | 0.3548 | 31 | 0.8305 | 0.3548 |
-| [0.867, 0.933) | 37 | 0.9037 | 0.3243 | 37 | 0.9038 | 0.3243 |
-| [0.933, 1.000) | 106 | 0.9885 | 0.1698 | 106 | 0.9885 | 0.1698 |
+| [0.200, 0.267) | 18 | 0.2591 | 0.3333 | 18 | 0.2591 | 0.3333 |
+| [0.267, 0.333) | 116 | 0.3067 | 0.2328 | 116 | 0.3067 | 0.2328 |
+| [0.333, 0.400) | 237 | 0.3676 | 0.2489 | 237 | 0.3676 | 0.2489 |
+| [0.400, 0.467) | 234 | 0.4305 | 0.2308 | 234 | 0.4305 | 0.2308 |
+| [0.467, 0.533) | 226 | 0.4987 | 0.2965 | 226 | 0.4987 | 0.2965 |
+| [0.533, 0.600) | 189 | 0.5665 | 0.3016 | 189 | 0.5665 | 0.3016 |
+| [0.600, 0.667) | 155 | 0.6320 | 0.2581 | 155 | 0.6320 | 0.2581 |
+| [0.667, 0.733) | 113 | 0.7005 | 0.2743 | 114 | 0.7008 | 0.2719 |
+| [0.733, 0.800) | 90 | 0.7674 | 0.3000 | 89 | 0.7678 | 0.3034 |
+| [0.800, 0.867) | 96 | 0.8302 | 0.3750 | 96 | 0.8302 | 0.3750 |
+| [0.867, 0.933) | 105 | 0.9023 | 0.3429 | 105 | 0.9023 | 0.3429 |
+| [0.933, 1.000) | 340 | 0.9872 | 0.1882 | 340 | 0.9872 | 0.1882 |
 
 ### B1 / qs_v1, holdout
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.7023 | 0.7023 | 1.3349 | 1.3349 | 0.2711 | 0.2711 |
-| subject_role = raw (T fallback) | 0.3399 | 0.3398 | 0.9496 | 0.9496 | 0.4696 | 0.4696 |
-| category | 0.1843 | 0.2241 | 0.5741 | 0.5923 | 0.5788 | 0.5763 |
-| doc_kind = raw (T fallback) | 0.3311 | 0.3311 | 0.8765 | 0.8765 | 0.4103 | 0.4103 |
+| pii_present = raw (T fallback) | 0.6835 | 0.6835 | 1.3265 | 1.3265 | 0.2767 | 0.2767 |
+| subject_role = raw (T fallback) | 0.3178 | 0.3178 | 0.9247 | 0.9247 | 0.4412 | 0.4412 |
+| category | 0.1720 | 0.2212 | 0.5562 | 0.5868 | 0.5896 | 0.5906 |
+| doc_kind = raw (T fallback) | 0.2694 | 0.2694 | 0.8424 | 0.8424 | 0.5220 | 0.5220 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.533, 0.600) | 1 | 0.5810 | 0.0000 | 1 | 0.5810 | 0.0000 |
-| [0.600, 0.667) | 2 | 0.6303 | 1.0000 | 2 | 0.6303 | 1.0000 |
-| [0.667, 0.733) | 3 | 0.6877 | 0.3333 | 3 | 0.6877 | 0.3333 |
-| [0.733, 0.800) | 7 | 0.7688 | 0.2857 | 7 | 0.7688 | 0.2857 |
-| [0.800, 0.867) | 11 | 0.8439 | 0.4545 | 11 | 0.8439 | 0.4545 |
-| [0.867, 0.933) | 29 | 0.9054 | 0.2414 | 29 | 0.9054 | 0.2414 |
-| [0.933, 1.000) | 46 | 0.9613 | 0.0870 | 46 | 0.9613 | 0.0870 |
+| [0.533, 0.600) | 1 | 0.5946 | 0.0000 | 1 | 0.5946 | 0.0000 |
+| [0.600, 0.667) | 3 | 0.6346 | 0.6667 | 3 | 0.6346 | 0.6667 |
+| [0.667, 0.733) | 5 | 0.7057 | 0.6000 | 5 | 0.7057 | 0.6000 |
+| [0.733, 0.800) | 11 | 0.7722 | 0.2727 | 11 | 0.7722 | 0.2727 |
+| [0.800, 0.867) | 34 | 0.8389 | 0.4706 | 34 | 0.8389 | 0.4706 |
+| [0.867, 0.933) | 75 | 0.9079 | 0.2800 | 75 | 0.9079 | 0.2800 |
+| [0.933, 1.000) | 120 | 0.9573 | 0.0917 | 120 | 0.9573 | 0.0917 |
 
 Reliability data, `subject_role` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.267, 0.333) | 2 | 0.3246 | 0.5000 | 2 | 0.3247 | 0.5000 |
-| [0.333, 0.400) | 13 | 0.3706 | 0.3077 | 13 | 0.3706 | 0.3077 |
-| [0.400, 0.467) | 12 | 0.4322 | 0.2500 | 12 | 0.4322 | 0.2500 |
-| [0.467, 0.533) | 10 | 0.5054 | 0.3000 | 10 | 0.5054 | 0.3000 |
-| [0.533, 0.600) | 11 | 0.5723 | 0.2727 | 11 | 0.5723 | 0.2727 |
-| [0.600, 0.667) | 11 | 0.6331 | 0.4545 | 11 | 0.6331 | 0.4545 |
-| [0.667, 0.733) | 8 | 0.7035 | 0.5000 | 8 | 0.7035 | 0.5000 |
-| [0.733, 0.800) | 9 | 0.7731 | 0.2222 | 9 | 0.7731 | 0.2222 |
-| [0.800, 0.867) | 6 | 0.8383 | 0.3333 | 6 | 0.8383 | 0.3333 |
-| [0.867, 0.933) | 3 | 0.8917 | 0.3333 | 3 | 0.8917 | 0.3333 |
-| [0.933, 1.000) | 14 | 0.9777 | 0.1429 | 14 | 0.9777 | 0.1429 |
+| [0.267, 0.333) | 4 | 0.3047 | 0.0000 | 4 | 0.3047 | 0.0000 |
+| [0.333, 0.400) | 15 | 0.3657 | 0.4000 | 15 | 0.3657 | 0.4000 |
+| [0.400, 0.467) | 38 | 0.4355 | 0.3947 | 38 | 0.4355 | 0.3947 |
+| [0.467, 0.533) | 31 | 0.4990 | 0.3871 | 31 | 0.4990 | 0.3871 |
+| [0.533, 0.600) | 29 | 0.5626 | 0.2414 | 29 | 0.5626 | 0.2414 |
+| [0.600, 0.667) | 26 | 0.6353 | 0.4615 | 26 | 0.6353 | 0.4615 |
+| [0.667, 0.733) | 25 | 0.6981 | 0.4000 | 25 | 0.6981 | 0.4000 |
+| [0.733, 0.800) | 19 | 0.7730 | 0.3684 | 19 | 0.7730 | 0.3684 |
+| [0.800, 0.867) | 18 | 0.8303 | 0.3333 | 18 | 0.8303 | 0.3333 |
+| [0.867, 0.933) | 16 | 0.8977 | 0.2500 | 16 | 0.8977 | 0.2500 |
+| [0.933, 1.000) | 28 | 0.9676 | 0.1071 | 28 | 0.9676 | 0.1071 |
 
 Reliability data, `category` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 0 | n/a | n/a | 1 | 0.2529 | 0.0000 |
-| [0.267, 0.333) | 9 | 0.3125 | 0.4444 | 24 | 0.3064 | 0.5417 |
-| [0.333, 0.400) | 20 | 0.3629 | 0.6000 | 16 | 0.3719 | 0.4375 |
-| [0.400, 0.467) | 11 | 0.4425 | 0.3636 | 17 | 0.4220 | 0.6471 |
-| [0.467, 0.533) | 16 | 0.4918 | 0.5625 | 18 | 0.4933 | 0.7778 |
-| [0.533, 0.600) | 14 | 0.5772 | 0.8571 | 5 | 0.5835 | 0.2000 |
-| [0.600, 0.667) | 6 | 0.6181 | 0.6667 | 8 | 0.6300 | 0.8750 |
-| [0.667, 0.733) | 9 | 0.7130 | 0.4444 | 2 | 0.6945 | 0.5000 |
-| [0.733, 0.800) | 4 | 0.7782 | 1.0000 | 5 | 0.7580 | 0.6000 |
-| [0.800, 0.867) | 4 | 0.8399 | 0.5000 | 2 | 0.8210 | 1.0000 |
-| [0.867, 0.933) | 5 | 0.8975 | 0.8000 | 1 | 0.8749 | 0.0000 |
-| [0.933, 1.000) | 1 | 0.9543 | 0.0000 | 0 | n/a | n/a |
+| [0.200, 0.267) | 7 | 0.2413 | 0.1429 | 16 | 0.2458 | 0.4375 |
+| [0.267, 0.333) | 25 | 0.3059 | 0.5600 | 61 | 0.3058 | 0.5246 |
+| [0.333, 0.400) | 50 | 0.3660 | 0.5200 | 52 | 0.3621 | 0.6538 |
+| [0.400, 0.467) | 36 | 0.4254 | 0.6667 | 38 | 0.4292 | 0.6579 |
+| [0.467, 0.533) | 35 | 0.4999 | 0.6857 | 29 | 0.5031 | 0.7931 |
+| [0.533, 0.600) | 16 | 0.5589 | 0.6250 | 22 | 0.5609 | 0.5909 |
+| [0.600, 0.667) | 24 | 0.6332 | 0.8333 | 12 | 0.6402 | 0.8333 |
+| [0.667, 0.733) | 20 | 0.6932 | 0.6000 | 10 | 0.6968 | 0.7000 |
+| [0.733, 0.800) | 11 | 0.7594 | 0.7273 | 5 | 0.7579 | 0.2000 |
+| [0.800, 0.867) | 15 | 0.8281 | 0.8000 | 2 | 0.8169 | 1.0000 |
+| [0.867, 0.933) | 7 | 0.8973 | 0.2857 | 2 | 0.8868 | 1.0000 |
+| [0.933, 1.000) | 3 | 0.9609 | 1.0000 | 0 | n/a | n/a |
 
 Reliability data, `doc_kind` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 1 | 0.2553 | 1.0000 | 1 | 0.2553 | 1.0000 |
-| [0.267, 0.333) | 4 | 0.3164 | 0.5000 | 4 | 0.3164 | 0.5000 |
-| [0.333, 0.400) | 10 | 0.3679 | 0.1000 | 10 | 0.3679 | 0.1000 |
-| [0.400, 0.467) | 12 | 0.4256 | 0.5833 | 12 | 0.4256 | 0.5833 |
-| [0.467, 0.533) | 11 | 0.5064 | 0.3636 | 11 | 0.5064 | 0.3636 |
-| [0.533, 0.600) | 13 | 0.5641 | 0.3077 | 13 | 0.5641 | 0.3077 |
-| [0.600, 0.667) | 8 | 0.6266 | 0.6250 | 8 | 0.6266 | 0.6250 |
-| [0.667, 0.733) | 10 | 0.7058 | 0.4000 | 10 | 0.7058 | 0.4000 |
-| [0.733, 0.800) | 8 | 0.7655 | 0.5000 | 8 | 0.7655 | 0.5000 |
-| [0.800, 0.867) | 9 | 0.8299 | 0.2222 | 9 | 0.8299 | 0.2222 |
-| [0.867, 0.933) | 7 | 0.9033 | 0.1429 | 7 | 0.9033 | 0.1429 |
-| [0.933, 1.000) | 6 | 0.9735 | 0.0000 | 6 | 0.9735 | 0.0000 |
+| [0.200, 0.267) | 4 | 0.2597 | 0.0000 | 4 | 0.2597 | 0.0000 |
+| [0.267, 0.333) | 12 | 0.3013 | 0.1667 | 12 | 0.3013 | 0.1667 |
+| [0.333, 0.400) | 41 | 0.3704 | 0.2927 | 41 | 0.3704 | 0.2927 |
+| [0.400, 0.467) | 24 | 0.4334 | 0.2500 | 24 | 0.4334 | 0.2500 |
+| [0.467, 0.533) | 28 | 0.5027 | 0.4286 | 28 | 0.5027 | 0.4286 |
+| [0.533, 0.600) | 21 | 0.5726 | 0.4286 | 21 | 0.5726 | 0.4286 |
+| [0.600, 0.667) | 26 | 0.6338 | 0.4231 | 26 | 0.6338 | 0.4231 |
+| [0.667, 0.733) | 27 | 0.7046 | 0.3333 | 27 | 0.7046 | 0.3333 |
+| [0.733, 0.800) | 21 | 0.7725 | 0.3333 | 21 | 0.7725 | 0.3333 |
+| [0.800, 0.867) | 21 | 0.8319 | 0.3810 | 21 | 0.8319 | 0.3810 |
+| [0.867, 0.933) | 7 | 0.8842 | 0.2857 | 7 | 0.8842 | 0.2857 |
+| [0.933, 1.000) | 17 | 0.9621 | 0.1765 | 17 | 0.9621 | 0.1765 |
 
 ### B1 / qs_v2, test
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.7463 | 0.7463 | 1.4237 | 1.4237 | 0.3595 | 0.3595 |
-| has_phi_direct = raw (T fallback) | 0.6755 | 0.6755 | 1.2225 | 1.2225 | 0.3116 | 0.3116 |
-| has_phi_quasi = raw (T fallback) | 0.6455 | 0.6455 | 1.2071 | 1.2071 | 0.3297 | 0.3297 |
-| has_coded_id = raw (T fallback) | 0.6376 | 0.6376 | 1.1688 | 1.1688 | 0.3619 | 0.3619 |
-| has_staff_pii = raw (T fallback) | 0.6807 | 0.6807 | 1.2390 | 1.2390 | 0.2965 | 0.2965 |
+| pii_present = raw (T fallback) | 0.7396 | 0.7396 | 1.4105 | 1.4105 | 0.3938 | 0.3938 |
+| has_phi_direct = raw (T fallback) | 0.6770 | 0.6770 | 1.2202 | 1.2202 | 0.3148 | 0.3148 |
+| has_phi_quasi = raw (T fallback) | 0.6464 | 0.6464 | 1.1987 | 1.1987 | 0.3315 | 0.3315 |
+| has_coded_id = raw (T fallback) | 0.6455 | 0.6455 | 1.1765 | 1.1765 | 0.3828 | 0.3828 |
+| has_staff_pii = raw (T fallback) | 0.6765 | 0.6765 | 1.2332 | 1.2332 | 0.3418 | 0.3418 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 3 | 0.5114 | 0.6667 | 3 | 0.5114 | 0.6667 |
-| [0.533, 0.600) | 13 | 0.5749 | 0.6154 | 13 | 0.5749 | 0.6154 |
-| [0.600, 0.667) | 11 | 0.6315 | 0.6364 | 11 | 0.6315 | 0.6364 |
-| [0.667, 0.733) | 19 | 0.6969 | 0.1579 | 19 | 0.6969 | 0.1579 |
-| [0.733, 0.800) | 28 | 0.7760 | 0.2143 | 28 | 0.7760 | 0.2143 |
-| [0.800, 0.867) | 60 | 0.8383 | 0.2667 | 60 | 0.8383 | 0.2667 |
-| [0.867, 0.933) | 190 | 0.9067 | 0.1632 | 190 | 0.9067 | 0.1632 |
-| [0.933, 1.000) | 349 | 0.9589 | 0.1003 | 349 | 0.9589 | 0.1003 |
+| [0.467, 0.533) | 13 | 0.5181 | 0.5385 | 13 | 0.5181 | 0.5385 |
+| [0.533, 0.600) | 32 | 0.5725 | 0.5312 | 32 | 0.5725 | 0.5312 |
+| [0.600, 0.667) | 29 | 0.6284 | 0.3448 | 29 | 0.6284 | 0.3448 |
+| [0.667, 0.733) | 56 | 0.6990 | 0.2857 | 56 | 0.6990 | 0.2857 |
+| [0.733, 0.800) | 68 | 0.7697 | 0.2500 | 68 | 0.7697 | 0.2500 |
+| [0.800, 0.867) | 179 | 0.8406 | 0.2123 | 179 | 0.8406 | 0.2123 |
+| [0.867, 0.933) | 548 | 0.9062 | 0.1478 | 548 | 0.9062 | 0.1478 |
+| [0.933, 1.000) | 994 | 0.9587 | 0.1308 | 994 | 0.9587 | 0.1308 |
 
 Reliability data, `has_phi_direct` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 21 | 0.5158 | 0.4286 | 21 | 0.5158 | 0.4286 |
-| [0.533, 0.600) | 41 | 0.5684 | 0.4146 | 41 | 0.5684 | 0.4146 |
-| [0.600, 0.667) | 39 | 0.6327 | 0.2821 | 39 | 0.6327 | 0.2821 |
-| [0.667, 0.733) | 71 | 0.7029 | 0.1972 | 71 | 0.7029 | 0.1972 |
-| [0.733, 0.800) | 83 | 0.7708 | 0.0602 | 83 | 0.7708 | 0.0602 |
-| [0.800, 0.867) | 135 | 0.8387 | 0.0963 | 135 | 0.8387 | 0.0963 |
-| [0.867, 0.933) | 186 | 0.8995 | 0.0699 | 186 | 0.8995 | 0.0699 |
-| [0.933, 1.000) | 97 | 0.9523 | 0.0928 | 97 | 0.9523 | 0.0928 |
+| [0.467, 0.533) | 50 | 0.5175 | 0.4800 | 50 | 0.5175 | 0.4800 |
+| [0.533, 0.600) | 76 | 0.5710 | 0.4211 | 76 | 0.5710 | 0.4211 |
+| [0.600, 0.667) | 147 | 0.6358 | 0.2653 | 147 | 0.6358 | 0.2653 |
+| [0.667, 0.733) | 168 | 0.7015 | 0.1845 | 168 | 0.7015 | 0.1845 |
+| [0.733, 0.800) | 293 | 0.7716 | 0.1331 | 293 | 0.7716 | 0.1331 |
+| [0.800, 0.867) | 415 | 0.8363 | 0.0819 | 415 | 0.8363 | 0.0819 |
+| [0.867, 0.933) | 527 | 0.9012 | 0.0778 | 527 | 0.9012 | 0.0778 |
+| [0.933, 1.000) | 243 | 0.9527 | 0.0864 | 243 | 0.9527 | 0.0864 |
 
 Reliability data, `has_phi_quasi` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 12 | 0.5165 | 0.5000 | 12 | 0.5165 | 0.5000 |
-| [0.533, 0.600) | 32 | 0.5672 | 0.5000 | 32 | 0.5672 | 0.5000 |
-| [0.600, 0.667) | 47 | 0.6382 | 0.3830 | 47 | 0.6382 | 0.3830 |
-| [0.667, 0.733) | 58 | 0.6999 | 0.2759 | 58 | 0.6999 | 0.2759 |
-| [0.733, 0.800) | 73 | 0.7646 | 0.1781 | 73 | 0.7646 | 0.1781 |
-| [0.800, 0.867) | 130 | 0.8363 | 0.1154 | 130 | 0.8363 | 0.1154 |
-| [0.867, 0.933) | 192 | 0.9007 | 0.1042 | 192 | 0.9007 | 0.1042 |
-| [0.933, 1.000) | 129 | 0.9539 | 0.1318 | 129 | 0.9539 | 0.1318 |
+| [0.467, 0.533) | 34 | 0.5156 | 0.4118 | 34 | 0.5156 | 0.4118 |
+| [0.533, 0.600) | 80 | 0.5648 | 0.4125 | 80 | 0.5648 | 0.4125 |
+| [0.600, 0.667) | 123 | 0.6346 | 0.3496 | 123 | 0.6346 | 0.3496 |
+| [0.667, 0.733) | 172 | 0.7007 | 0.3081 | 172 | 0.7007 | 0.3081 |
+| [0.733, 0.800) | 232 | 0.7693 | 0.2112 | 232 | 0.7693 | 0.2112 |
+| [0.800, 0.867) | 411 | 0.8367 | 0.1387 | 411 | 0.8367 | 0.1387 |
+| [0.867, 0.933) | 567 | 0.9019 | 0.1093 | 567 | 0.9019 | 0.1093 |
+| [0.933, 1.000) | 300 | 0.9546 | 0.1000 | 300 | 0.9546 | 0.1000 |
 
 Reliability data, `has_coded_id` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 18 | 0.5137 | 0.5556 | 18 | 0.5137 | 0.5556 |
-| [0.533, 0.600) | 36 | 0.5655 | 0.3333 | 36 | 0.5655 | 0.3333 |
-| [0.600, 0.667) | 41 | 0.6355 | 0.3171 | 41 | 0.6355 | 0.3171 |
-| [0.667, 0.733) | 73 | 0.6968 | 0.2877 | 73 | 0.6968 | 0.2877 |
-| [0.733, 0.800) | 86 | 0.7675 | 0.1395 | 86 | 0.7675 | 0.1395 |
-| [0.800, 0.867) | 133 | 0.8350 | 0.1203 | 133 | 0.8350 | 0.1203 |
-| [0.867, 0.933) | 183 | 0.9009 | 0.1038 | 183 | 0.9009 | 0.1038 |
-| [0.933, 1.000) | 103 | 0.9529 | 0.1553 | 103 | 0.9529 | 0.1553 |
+| [0.467, 0.533) | 34 | 0.5183 | 0.4118 | 34 | 0.5183 | 0.4118 |
+| [0.533, 0.600) | 90 | 0.5686 | 0.3778 | 90 | 0.5686 | 0.3778 |
+| [0.600, 0.667) | 133 | 0.6360 | 0.3158 | 133 | 0.6360 | 0.3158 |
+| [0.667, 0.733) | 157 | 0.7023 | 0.2166 | 157 | 0.7023 | 0.2166 |
+| [0.733, 0.800) | 287 | 0.7702 | 0.1882 | 287 | 0.7702 | 0.1882 |
+| [0.800, 0.867) | 403 | 0.8351 | 0.1017 | 403 | 0.8351 | 0.1017 |
+| [0.867, 0.933) | 553 | 0.9002 | 0.1392 | 553 | 0.9002 | 0.1392 |
+| [0.933, 1.000) | 262 | 0.9532 | 0.1298 | 262 | 0.9532 | 0.1298 |
 
 Reliability data, `has_staff_pii` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 17 | 0.5150 | 0.6471 | 17 | 0.5150 | 0.6471 |
-| [0.533, 0.600) | 31 | 0.5729 | 0.4516 | 31 | 0.5729 | 0.4516 |
-| [0.600, 0.667) | 45 | 0.6355 | 0.2444 | 45 | 0.6355 | 0.2444 |
-| [0.667, 0.733) | 57 | 0.7028 | 0.2456 | 57 | 0.7028 | 0.2456 |
-| [0.733, 0.800) | 78 | 0.7695 | 0.1667 | 78 | 0.7695 | 0.1667 |
-| [0.800, 0.867) | 140 | 0.8357 | 0.0714 | 140 | 0.8357 | 0.0714 |
-| [0.867, 0.933) | 190 | 0.8995 | 0.0842 | 190 | 0.8995 | 0.0842 |
-| [0.933, 1.000) | 115 | 0.9521 | 0.0870 | 115 | 0.9521 | 0.0870 |
+| [0.467, 0.533) | 36 | 0.5157 | 0.4722 | 36 | 0.5157 | 0.4722 |
+| [0.533, 0.600) | 86 | 0.5678 | 0.4070 | 86 | 0.5678 | 0.4070 |
+| [0.600, 0.667) | 102 | 0.6357 | 0.3333 | 102 | 0.6357 | 0.3333 |
+| [0.667, 0.733) | 161 | 0.7044 | 0.2112 | 161 | 0.7044 | 0.2112 |
+| [0.733, 0.800) | 255 | 0.7688 | 0.1529 | 255 | 0.7688 | 0.1529 |
+| [0.800, 0.867) | 401 | 0.8349 | 0.1047 | 401 | 0.8349 | 0.1047 |
+| [0.867, 0.933) | 589 | 0.9018 | 0.0866 | 589 | 0.9018 | 0.0866 |
+| [0.933, 1.000) | 289 | 0.9536 | 0.1142 | 289 | 0.9536 | 0.1142 |
 
 ### B1 / qs_v2, holdout
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.6871 | 0.6871 | 1.3337 | 1.3337 | 0.2766 | 0.2766 |
-| has_phi_direct = raw (T fallback) | 0.7332 | 0.7332 | 1.2728 | 1.2728 | 0.1126 | 0.1126 |
-| has_phi_quasi = raw (T fallback) | 0.7319 | 0.7319 | 1.2838 | 1.2838 | 0.0989 | 0.0989 |
-| has_coded_id = raw (T fallback) | 0.7379 | 0.7379 | 1.2573 | 1.2573 | 0.2599 | 0.2599 |
-| has_staff_pii = raw (T fallback) | 0.5569 | 0.5569 | 1.0783 | 1.0783 | 0.3376 | 0.3376 |
+| pii_present = raw (T fallback) | 0.6835 | 0.6835 | 1.3265 | 1.3265 | 0.2763 | 0.2763 |
+| has_phi_direct = raw (T fallback) | 0.7938 | 0.7938 | 1.3651 | 1.3651 | 0.1732 | 0.1732 |
+| has_phi_quasi = raw (T fallback) | 0.7630 | 0.7630 | 1.3389 | 1.3389 | 0.1172 | 0.1172 |
+| has_coded_id = raw (T fallback) | 0.7749 | 0.7749 | 1.3372 | 1.3372 | 0.1895 | 0.1895 |
+| has_staff_pii = raw (T fallback) | 0.5686 | 0.5686 | 1.0965 | 1.0965 | 0.3568 | 0.3568 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.533, 0.600) | 2 | 0.5781 | 0.5000 | 2 | 0.5781 | 0.5000 |
-| [0.667, 0.733) | 4 | 0.6844 | 0.5000 | 4 | 0.6844 | 0.5000 |
-| [0.733, 0.800) | 7 | 0.7725 | 0.2857 | 7 | 0.7725 | 0.2857 |
-| [0.800, 0.867) | 11 | 0.8432 | 0.4545 | 11 | 0.8432 | 0.4545 |
-| [0.867, 0.933) | 30 | 0.9061 | 0.2333 | 30 | 0.9061 | 0.2333 |
-| [0.933, 1.000) | 45 | 0.9614 | 0.0889 | 45 | 0.9614 | 0.0889 |
+| [0.533, 0.600) | 1 | 0.5946 | 0.0000 | 1 | 0.5946 | 0.0000 |
+| [0.600, 0.667) | 3 | 0.6345 | 0.6667 | 3 | 0.6345 | 0.6667 |
+| [0.667, 0.733) | 5 | 0.7058 | 0.6000 | 5 | 0.7058 | 0.6000 |
+| [0.733, 0.800) | 11 | 0.7720 | 0.2727 | 11 | 0.7720 | 0.2727 |
+| [0.800, 0.867) | 34 | 0.8389 | 0.4706 | 34 | 0.8389 | 0.4706 |
+| [0.867, 0.933) | 75 | 0.9079 | 0.2800 | 75 | 0.9079 | 0.2800 |
+| [0.933, 1.000) | 120 | 0.9573 | 0.0917 | 120 | 0.9573 | 0.0917 |
 
 Reliability data, `has_phi_direct` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 1 | 0.5088 | 1.0000 | 1 | 0.5088 | 1.0000 |
-| [0.533, 0.600) | 7 | 0.5567 | 0.2857 | 7 | 0.5567 | 0.2857 |
-| [0.600, 0.667) | 3 | 0.6511 | 0.3333 | 3 | 0.6511 | 0.3333 |
-| [0.667, 0.733) | 16 | 0.7011 | 0.1250 | 16 | 0.7011 | 0.1250 |
-| [0.733, 0.800) | 15 | 0.7748 | 0.1333 | 15 | 0.7748 | 0.1333 |
-| [0.800, 0.867) | 23 | 0.8354 | 0.0000 | 23 | 0.8354 | 0.0000 |
-| [0.867, 0.933) | 22 | 0.8984 | 0.0000 | 22 | 0.8984 | 0.0000 |
-| [0.933, 1.000) | 12 | 0.9527 | 0.0000 | 12 | 0.9527 | 0.0000 |
+| [0.467, 0.533) | 5 | 0.5225 | 0.0000 | 5 | 0.5225 | 0.0000 |
+| [0.533, 0.600) | 10 | 0.5694 | 0.3000 | 10 | 0.5694 | 0.3000 |
+| [0.600, 0.667) | 13 | 0.6274 | 0.0000 | 13 | 0.6274 | 0.0000 |
+| [0.667, 0.733) | 15 | 0.7044 | 0.1333 | 15 | 0.7044 | 0.1333 |
+| [0.733, 0.800) | 41 | 0.7725 | 0.0488 | 41 | 0.7725 | 0.0488 |
+| [0.800, 0.867) | 55 | 0.8349 | 0.0000 | 55 | 0.8349 | 0.0000 |
+| [0.867, 0.933) | 72 | 0.8984 | 0.0139 | 72 | 0.8984 | 0.0139 |
+| [0.933, 1.000) | 38 | 0.9567 | 0.0000 | 38 | 0.9567 | 0.0000 |
 
 Reliability data, `has_phi_quasi` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 7 | 0.5176 | 0.7143 | 7 | 0.5176 | 0.7143 |
-| [0.600, 0.667) | 8 | 0.6291 | 0.3750 | 8 | 0.6291 | 0.3750 |
-| [0.667, 0.733) | 13 | 0.7079 | 0.0000 | 13 | 0.7079 | 0.0000 |
-| [0.733, 0.800) | 13 | 0.7647 | 0.0000 | 13 | 0.7647 | 0.0000 |
-| [0.800, 0.867) | 19 | 0.8419 | 0.1053 | 19 | 0.8419 | 0.1053 |
-| [0.867, 0.933) | 27 | 0.9056 | 0.0000 | 27 | 0.9056 | 0.0000 |
-| [0.933, 1.000) | 12 | 0.9545 | 0.0000 | 12 | 0.9545 | 0.0000 |
+| [0.467, 0.533) | 6 | 0.5163 | 0.6667 | 6 | 0.5163 | 0.6667 |
+| [0.533, 0.600) | 13 | 0.5704 | 0.3077 | 13 | 0.5704 | 0.3077 |
+| [0.600, 0.667) | 16 | 0.6290 | 0.1875 | 16 | 0.6290 | 0.1875 |
+| [0.667, 0.733) | 20 | 0.7071 | 0.0000 | 20 | 0.7071 | 0.0000 |
+| [0.733, 0.800) | 35 | 0.7700 | 0.0857 | 35 | 0.7700 | 0.0857 |
+| [0.800, 0.867) | 44 | 0.8366 | 0.0455 | 44 | 0.8366 | 0.0455 |
+| [0.867, 0.933) | 75 | 0.9001 | 0.0000 | 75 | 0.9001 | 0.0000 |
+| [0.933, 1.000) | 40 | 0.9548 | 0.0000 | 40 | 0.9548 | 0.0000 |
 
 Reliability data, `has_coded_id` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 3 | 0.5184 | 0.3333 | 3 | 0.5184 | 0.3333 |
-| [0.533, 0.600) | 5 | 0.5790 | 0.2000 | 5 | 0.5790 | 0.2000 |
-| [0.600, 0.667) | 4 | 0.6268 | 0.5000 | 4 | 0.6268 | 0.5000 |
-| [0.667, 0.733) | 17 | 0.6994 | 0.0000 | 17 | 0.6994 | 0.0000 |
-| [0.733, 0.800) | 13 | 0.7647 | 0.0000 | 13 | 0.7647 | 0.0000 |
-| [0.800, 0.867) | 26 | 0.8407 | 0.0385 | 26 | 0.8407 | 0.0385 |
-| [0.867, 0.933) | 20 | 0.8960 | 0.0500 | 20 | 0.8960 | 0.0500 |
-| [0.933, 1.000) | 11 | 0.9539 | 0.0000 | 11 | 0.9539 | 0.0000 |
+| [0.467, 0.533) | 3 | 0.5203 | 0.0000 | 3 | 0.5203 | 0.0000 |
+| [0.533, 0.600) | 15 | 0.5601 | 0.2000 | 15 | 0.5601 | 0.2000 |
+| [0.600, 0.667) | 11 | 0.6295 | 0.1818 | 11 | 0.6295 | 0.1818 |
+| [0.667, 0.733) | 24 | 0.7007 | 0.1667 | 24 | 0.7007 | 0.1667 |
+| [0.733, 0.800) | 39 | 0.7732 | 0.0000 | 39 | 0.7732 | 0.0000 |
+| [0.800, 0.867) | 44 | 0.8352 | 0.0227 | 44 | 0.8352 | 0.0227 |
+| [0.867, 0.933) | 82 | 0.8991 | 0.0122 | 82 | 0.8991 | 0.0122 |
+| [0.933, 1.000) | 31 | 0.9551 | 0.0000 | 31 | 0.9551 | 0.0000 |
 
 Reliability data, `has_staff_pii` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 6 | 0.5200 | 0.5000 | 6 | 0.5200 | 0.5000 |
-| [0.533, 0.600) | 3 | 0.5825 | 0.3333 | 3 | 0.5825 | 0.3333 |
-| [0.600, 0.667) | 2 | 0.6221 | 0.5000 | 2 | 0.6221 | 0.5000 |
-| [0.667, 0.733) | 14 | 0.7032 | 0.2857 | 14 | 0.7032 | 0.2857 |
-| [0.733, 0.800) | 11 | 0.7739 | 0.0909 | 11 | 0.7739 | 0.0909 |
-| [0.800, 0.867) | 24 | 0.8266 | 0.4583 | 24 | 0.8266 | 0.4583 |
-| [0.867, 0.933) | 27 | 0.9030 | 0.1481 | 27 | 0.9030 | 0.1481 |
-| [0.933, 1.000) | 12 | 0.9540 | 0.0000 | 12 | 0.9540 | 0.0000 |
+| [0.467, 0.533) | 4 | 0.5157 | 0.5000 | 4 | 0.5157 | 0.5000 |
+| [0.533, 0.600) | 11 | 0.5605 | 0.4545 | 11 | 0.5605 | 0.4545 |
+| [0.600, 0.667) | 9 | 0.6339 | 0.4444 | 9 | 0.6339 | 0.4444 |
+| [0.667, 0.733) | 24 | 0.7001 | 0.3333 | 24 | 0.7001 | 0.3333 |
+| [0.733, 0.800) | 35 | 0.7728 | 0.2571 | 35 | 0.7728 | 0.2571 |
+| [0.800, 0.867) | 62 | 0.8346 | 0.3548 | 62 | 0.8346 | 0.3548 |
+| [0.867, 0.933) | 71 | 0.9081 | 0.1127 | 71 | 0.9081 | 0.1127 |
+| [0.933, 1.000) | 33 | 0.9572 | 0.1818 | 33 | 0.9572 | 0.1818 |
 
 ### B2 / qs_v1, test
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.6113 | 0.6113 | 1.1852 | 1.1852 | 0.4476 | 0.4476 |
-| subject_role = raw (T fallback) | 0.4483 | 0.4483 | 1.0845 | 1.0845 | 0.5250 | 0.5250 |
-| category | 0.1772 | 0.1318 | 0.7745 | 0.7461 | 0.4900 | 0.4859 |
-| doc_kind = raw (T fallback) | 0.3703 | 0.3703 | 1.0251 | 1.0251 | 0.4609 | 0.4608 |
+| pii_present = raw (T fallback) | 0.6320 | 0.6320 | 1.2085 | 1.2085 | 0.4489 | 0.4489 |
+| subject_role = raw (T fallback) | 0.4983 | 0.4983 | 1.1566 | 1.1566 | 0.4539 | 0.4539 |
+| category | 0.1755 | 0.1189 | 0.7820 | 0.7423 | 0.4874 | 0.4812 |
+| doc_kind = raw (T fallback) | 0.3836 | 0.3836 | 1.0482 | 1.0482 | 0.4546 | 0.4546 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 2 | 0.5183 | 0.5000 | 2 | 0.5183 | 0.5000 |
-| [0.533, 0.600) | 7 | 0.5703 | 0.5714 | 7 | 0.5703 | 0.5714 |
-| [0.600, 0.667) | 8 | 0.6319 | 0.2500 | 8 | 0.6319 | 0.2500 |
-| [0.667, 0.733) | 9 | 0.7072 | 0.5556 | 9 | 0.7072 | 0.5556 |
-| [0.733, 0.800) | 10 | 0.7758 | 0.4000 | 10 | 0.7758 | 0.4000 |
-| [0.800, 0.867) | 48 | 0.8382 | 0.3333 | 48 | 0.8382 | 0.3333 |
-| [0.867, 0.933) | 126 | 0.9044 | 0.2063 | 126 | 0.9044 | 0.2063 |
-| [0.933, 1.000) | 110 | 0.9563 | 0.2727 | 110 | 0.9563 | 0.2727 |
+| [0.467, 0.533) | 11 | 0.5158 | 0.5455 | 11 | 0.5158 | 0.5455 |
+| [0.533, 0.600) | 17 | 0.5612 | 0.4706 | 17 | 0.5612 | 0.4706 |
+| [0.600, 0.667) | 19 | 0.6279 | 0.2632 | 19 | 0.6279 | 0.2632 |
+| [0.667, 0.733) | 30 | 0.6981 | 0.2667 | 30 | 0.6981 | 0.2667 |
+| [0.733, 0.800) | 48 | 0.7715 | 0.3958 | 48 | 0.7715 | 0.3958 |
+| [0.800, 0.867) | 136 | 0.8390 | 0.2426 | 136 | 0.8390 | 0.2426 |
+| [0.867, 0.933) | 341 | 0.9047 | 0.2141 | 341 | 0.9047 | 0.2141 |
+| [0.933, 1.000) | 310 | 0.9547 | 0.2452 | 310 | 0.9547 | 0.2452 |
 
 Reliability data, `subject_role` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.267, 0.333) | 10 | 0.3131 | 0.3000 | 10 | 0.3131 | 0.3000 |
-| [0.333, 0.400) | 27 | 0.3680 | 0.1852 | 27 | 0.3680 | 0.1852 |
-| [0.400, 0.467) | 38 | 0.4286 | 0.2368 | 38 | 0.4286 | 0.2368 |
-| [0.467, 0.533) | 42 | 0.5003 | 0.1190 | 42 | 0.5003 | 0.1190 |
-| [0.533, 0.600) | 34 | 0.5604 | 0.2059 | 34 | 0.5604 | 0.2059 |
-| [0.600, 0.667) | 22 | 0.6306 | 0.1818 | 22 | 0.6306 | 0.1818 |
-| [0.667, 0.733) | 15 | 0.6909 | 0.1333 | 15 | 0.6909 | 0.1333 |
-| [0.733, 0.800) | 32 | 0.7694 | 0.2500 | 32 | 0.7694 | 0.2500 |
-| [0.800, 0.867) | 18 | 0.8338 | 0.2778 | 18 | 0.8338 | 0.2778 |
-| [0.867, 0.933) | 36 | 0.9001 | 0.1944 | 36 | 0.9001 | 0.1944 |
-| [0.933, 1.000) | 46 | 0.9728 | 0.2609 | 46 | 0.9728 | 0.2609 |
+| [0.267, 0.333) | 24 | 0.3148 | 0.2917 | 24 | 0.3148 | 0.2917 |
+| [0.333, 0.400) | 79 | 0.3708 | 0.2025 | 79 | 0.3708 | 0.2025 |
+| [0.400, 0.467) | 119 | 0.4340 | 0.2521 | 119 | 0.4340 | 0.2521 |
+| [0.467, 0.533) | 107 | 0.4997 | 0.1589 | 107 | 0.4997 | 0.1589 |
+| [0.533, 0.600) | 77 | 0.5654 | 0.1169 | 77 | 0.5654 | 0.1169 |
+| [0.600, 0.667) | 75 | 0.6337 | 0.0933 | 75 | 0.6337 | 0.0933 |
+| [0.667, 0.733) | 77 | 0.7019 | 0.1169 | 77 | 0.7019 | 0.1169 |
+| [0.733, 0.800) | 68 | 0.7657 | 0.0882 | 68 | 0.7657 | 0.0882 |
+| [0.800, 0.867) | 75 | 0.8346 | 0.0667 | 75 | 0.8346 | 0.0667 |
+| [0.867, 0.933) | 77 | 0.9011 | 0.1948 | 77 | 0.9011 | 0.1948 |
+| [0.933, 1.000) | 134 | 0.9730 | 0.1940 | 134 | 0.9730 | 0.1940 |
 
 Reliability data, `category` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 5 | 0.2455 | 0.6000 | 13 | 0.2463 | 0.3846 |
-| [0.267, 0.333) | 36 | 0.3124 | 0.3333 | 75 | 0.2985 | 0.4133 |
-| [0.333, 0.400) | 43 | 0.3652 | 0.4419 | 66 | 0.3652 | 0.4545 |
-| [0.400, 0.467) | 49 | 0.4350 | 0.4694 | 54 | 0.4270 | 0.3704 |
-| [0.467, 0.533) | 39 | 0.4992 | 0.4103 | 47 | 0.4928 | 0.5106 |
-| [0.533, 0.600) | 37 | 0.5645 | 0.3514 | 18 | 0.5572 | 0.3333 |
-| [0.600, 0.667) | 33 | 0.6330 | 0.5455 | 12 | 0.6366 | 0.5000 |
-| [0.667, 0.733) | 24 | 0.6981 | 0.4167 | 15 | 0.6999 | 0.4000 |
-| [0.733, 0.800) | 10 | 0.7680 | 0.4000 | 7 | 0.7509 | 0.2857 |
-| [0.800, 0.867) | 15 | 0.8376 | 0.3333 | 5 | 0.8175 | 0.4000 |
-| [0.867, 0.933) | 17 | 0.8967 | 0.4706 | 4 | 0.8902 | 0.0000 |
-| [0.933, 1.000) | 12 | 0.9749 | 0.1667 | 4 | 0.9753 | 0.2500 |
+| [0.200, 0.267) | 15 | 0.2525 | 0.2000 | 84 | 0.2490 | 0.3095 |
+| [0.267, 0.333) | 76 | 0.3067 | 0.3026 | 283 | 0.2986 | 0.4417 |
+| [0.333, 0.400) | 160 | 0.3701 | 0.4562 | 246 | 0.3630 | 0.4187 |
+| [0.400, 0.467) | 118 | 0.4330 | 0.4237 | 115 | 0.4286 | 0.4174 |
+| [0.467, 0.533) | 143 | 0.4983 | 0.3986 | 65 | 0.4983 | 0.3846 |
+| [0.533, 0.600) | 109 | 0.5666 | 0.4587 | 49 | 0.5628 | 0.2857 |
+| [0.600, 0.667) | 71 | 0.6333 | 0.4085 | 31 | 0.6342 | 0.3548 |
+| [0.667, 0.733) | 50 | 0.7007 | 0.4400 | 15 | 0.6980 | 0.2667 |
+| [0.733, 0.800) | 42 | 0.7658 | 0.4286 | 10 | 0.7618 | 0.5000 |
+| [0.800, 0.867) | 54 | 0.8314 | 0.2778 | 8 | 0.8283 | 0.2500 |
+| [0.867, 0.933) | 40 | 0.9020 | 0.3000 | 5 | 0.8871 | 0.0000 |
+| [0.933, 1.000) | 34 | 0.9695 | 0.3529 | 1 | 0.9688 | 1.0000 |
 
 Reliability data, `doc_kind` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 3 | 0.2589 | 0.0000 | 3 | 0.2589 | 0.0000 |
-| [0.267, 0.333) | 19 | 0.3114 | 0.3158 | 19 | 0.3114 | 0.3158 |
-| [0.333, 0.400) | 29 | 0.3706 | 0.3103 | 29 | 0.3706 | 0.3103 |
-| [0.400, 0.467) | 39 | 0.4336 | 0.2821 | 39 | 0.4336 | 0.2821 |
-| [0.467, 0.533) | 36 | 0.5004 | 0.3611 | 36 | 0.5004 | 0.3611 |
-| [0.533, 0.600) | 23 | 0.5658 | 0.3913 | 23 | 0.5658 | 0.3913 |
-| [0.600, 0.667) | 26 | 0.6332 | 0.3462 | 26 | 0.6332 | 0.3462 |
-| [0.667, 0.733) | 20 | 0.6969 | 0.3000 | 20 | 0.6969 | 0.3000 |
-| [0.733, 0.800) | 22 | 0.7671 | 0.2727 | 22 | 0.7671 | 0.2727 |
-| [0.800, 0.867) | 14 | 0.8376 | 0.2143 | 14 | 0.8376 | 0.2143 |
-| [0.867, 0.933) | 14 | 0.9012 | 0.3571 | 14 | 0.9012 | 0.3571 |
-| [0.933, 1.000) | 75 | 0.9910 | 0.2133 | 75 | 0.9910 | 0.2133 |
+| [0.200, 0.267) | 8 | 0.2595 | 0.3750 | 8 | 0.2595 | 0.3750 |
+| [0.267, 0.333) | 39 | 0.3059 | 0.2051 | 39 | 0.3059 | 0.2051 |
+| [0.333, 0.400) | 95 | 0.3700 | 0.2947 | 95 | 0.3700 | 0.2947 |
+| [0.400, 0.467) | 112 | 0.4306 | 0.3125 | 112 | 0.4306 | 0.3125 |
+| [0.467, 0.533) | 103 | 0.5016 | 0.3107 | 103 | 0.5016 | 0.3107 |
+| [0.533, 0.600) | 82 | 0.5648 | 0.2439 | 82 | 0.5648 | 0.2439 |
+| [0.600, 0.667) | 60 | 0.6350 | 0.4000 | 60 | 0.6350 | 0.4000 |
+| [0.667, 0.733) | 63 | 0.6986 | 0.3968 | 63 | 0.6986 | 0.3968 |
+| [0.733, 0.800) | 44 | 0.7639 | 0.3636 | 44 | 0.7639 | 0.3636 |
+| [0.800, 0.867) | 39 | 0.8329 | 0.3590 | 39 | 0.8329 | 0.3590 |
+| [0.867, 0.933) | 38 | 0.9009 | 0.2105 | 38 | 0.9009 | 0.2105 |
+| [0.933, 1.000) | 229 | 0.9921 | 0.1921 | 229 | 0.9921 | 0.1921 |
 
 ### B2 / qs_v1, holdout
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.4972 | 0.4972 | 0.9926 | 0.9926 | 0.3967 | 0.3967 |
-| subject_role = raw (T fallback) | 0.3519 | 0.3519 | 0.8933 | 0.8933 | 0.3182 | 0.3182 |
-| category | 0.1662 | 0.1771 | 0.6078 | 0.6225 | 0.5536 | 0.5617 |
-| doc_kind = raw (T fallback) | 0.2644 | 0.2644 | 0.6742 | 0.6742 | 0.3448 | 0.3448 |
+| pii_present = raw (T fallback) | 0.4776 | 0.4776 | 0.9494 | 0.9494 | 0.4247 | 0.4247 |
+| subject_role = raw (T fallback) | 0.2480 | 0.2480 | 0.7796 | 0.7796 | 0.5201 | 0.5202 |
+| category | 0.1141 | 0.2273 | 0.5552 | 0.6205 | 0.5675 | 0.5648 |
+| doc_kind = raw (T fallback) | 0.2203 | 0.2203 | 0.6314 | 0.6314 | 0.4390 | 0.4390 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.600, 0.667) | 1 | 0.6610 | 0.0000 | 1 | 0.6610 | 0.0000 |
-| [0.667, 0.733) | 1 | 0.7292 | 0.0000 | 1 | 0.7292 | 0.0000 |
-| [0.733, 0.800) | 2 | 0.7586 | 0.5000 | 2 | 0.7586 | 0.5000 |
-| [0.800, 0.867) | 6 | 0.8334 | 0.6667 | 6 | 0.8334 | 0.6667 |
-| [0.867, 0.933) | 24 | 0.9034 | 0.4167 | 24 | 0.9034 | 0.4167 |
-| [0.933, 1.000) | 16 | 0.9544 | 0.3125 | 16 | 0.9544 | 0.3125 |
+| [0.600, 0.667) | 2 | 0.6289 | 1.0000 | 2 | 0.6289 | 1.0000 |
+| [0.667, 0.733) | 2 | 0.6846 | 0.0000 | 2 | 0.6846 | 0.0000 |
+| [0.733, 0.800) | 6 | 0.7792 | 0.5000 | 6 | 0.7792 | 0.5000 |
+| [0.800, 0.867) | 21 | 0.8487 | 0.5238 | 21 | 0.8487 | 0.5238 |
+| [0.867, 0.933) | 57 | 0.9049 | 0.4386 | 57 | 0.9049 | 0.4386 |
+| [0.933, 1.000) | 42 | 0.9499 | 0.3571 | 42 | 0.9499 | 0.3571 |
 
 Reliability data, `subject_role` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.333, 0.400) | 5 | 0.3786 | 0.8000 | 5 | 0.3786 | 0.8000 |
-| [0.400, 0.467) | 6 | 0.4428 | 0.3333 | 6 | 0.4428 | 0.3333 |
-| [0.467, 0.533) | 4 | 0.5022 | 0.7500 | 4 | 0.5022 | 0.7500 |
-| [0.533, 0.600) | 8 | 0.5605 | 0.5000 | 8 | 0.5605 | 0.5000 |
-| [0.600, 0.667) | 5 | 0.6287 | 0.6000 | 5 | 0.6287 | 0.6000 |
-| [0.667, 0.733) | 3 | 0.7008 | 0.3333 | 3 | 0.7009 | 0.3333 |
-| [0.733, 0.800) | 4 | 0.7706 | 0.0000 | 4 | 0.7706 | 0.0000 |
-| [0.800, 0.867) | 3 | 0.8420 | 0.3333 | 3 | 0.8420 | 0.3333 |
-| [0.867, 0.933) | 3 | 0.8812 | 0.3333 | 3 | 0.8812 | 0.3333 |
-| [0.933, 1.000) | 9 | 0.9844 | 0.3333 | 9 | 0.9844 | 0.3333 |
+| [0.267, 0.333) | 3 | 0.3009 | 0.0000 | 3 | 0.3009 | 0.0000 |
+| [0.333, 0.400) | 10 | 0.3638 | 0.3000 | 10 | 0.3638 | 0.3000 |
+| [0.400, 0.467) | 20 | 0.4381 | 0.6000 | 20 | 0.4381 | 0.6000 |
+| [0.467, 0.533) | 11 | 0.4904 | 0.3636 | 11 | 0.4903 | 0.3636 |
+| [0.533, 0.600) | 20 | 0.5644 | 0.3000 | 20 | 0.5644 | 0.3000 |
+| [0.600, 0.667) | 13 | 0.6324 | 0.4615 | 13 | 0.6324 | 0.4615 |
+| [0.667, 0.733) | 8 | 0.7012 | 0.5000 | 8 | 0.7013 | 0.5000 |
+| [0.733, 0.800) | 11 | 0.7628 | 0.6364 | 11 | 0.7628 | 0.6364 |
+| [0.800, 0.867) | 11 | 0.8353 | 0.3636 | 11 | 0.8353 | 0.3636 |
+| [0.867, 0.933) | 13 | 0.8997 | 0.6154 | 13 | 0.8997 | 0.6154 |
+| [0.933, 1.000) | 10 | 0.9675 | 0.3000 | 10 | 0.9675 | 0.3000 |
 
 Reliability data, `category` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.267, 0.333) | 1 | 0.3331 | 1.0000 | 11 | 0.3085 | 0.5455 |
-| [0.333, 0.400) | 9 | 0.3666 | 0.4444 | 11 | 0.3735 | 0.3636 |
-| [0.400, 0.467) | 7 | 0.4440 | 0.5714 | 14 | 0.4356 | 0.6429 |
-| [0.467, 0.533) | 6 | 0.4970 | 0.3333 | 4 | 0.5001 | 0.7500 |
-| [0.533, 0.600) | 12 | 0.5683 | 0.6667 | 2 | 0.5813 | 0.5000 |
-| [0.600, 0.667) | 3 | 0.6271 | 0.3333 | 4 | 0.6304 | 0.7500 |
-| [0.667, 0.733) | 2 | 0.6907 | 1.0000 | 1 | 0.6757 | 1.0000 |
-| [0.733, 0.800) | 4 | 0.7771 | 0.7500 | 3 | 0.7584 | 0.3333 |
-| [0.800, 0.867) | 3 | 0.8414 | 0.6667 | 0 | n/a | n/a |
-| [0.867, 0.933) | 3 | 0.9181 | 0.3333 | 0 | n/a | n/a |
+| [0.200, 0.267) | 1 | 0.2469 | 0.0000 | 13 | 0.2537 | 0.6154 |
+| [0.267, 0.333) | 12 | 0.3098 | 0.6667 | 41 | 0.2979 | 0.5366 |
+| [0.333, 0.400) | 24 | 0.3644 | 0.5000 | 36 | 0.3606 | 0.5000 |
+| [0.400, 0.467) | 15 | 0.4310 | 0.6000 | 23 | 0.4363 | 0.6957 |
+| [0.467, 0.533) | 24 | 0.4991 | 0.5000 | 11 | 0.4886 | 0.6364 |
+| [0.533, 0.600) | 11 | 0.5571 | 0.5455 | 3 | 0.5552 | 1.0000 |
+| [0.600, 0.667) | 14 | 0.6320 | 0.6429 | 3 | 0.6269 | 1.0000 |
+| [0.667, 0.733) | 15 | 0.7014 | 0.5333 | 0 | n/a | n/a |
+| [0.733, 0.800) | 8 | 0.7681 | 0.8750 | 0 | n/a | n/a |
+| [0.800, 0.867) | 4 | 0.8366 | 1.0000 | 0 | n/a | n/a |
+| [0.867, 0.933) | 2 | 0.9100 | 1.0000 | 0 | n/a | n/a |
 
 Reliability data, `doc_kind` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.333, 0.400) | 5 | 0.3670 | 0.6000 | 5 | 0.3671 | 0.6000 |
-| [0.400, 0.467) | 3 | 0.4467 | 1.0000 | 3 | 0.4467 | 1.0000 |
-| [0.467, 0.533) | 6 | 0.4851 | 0.5000 | 6 | 0.4851 | 0.5000 |
-| [0.533, 0.600) | 7 | 0.5609 | 0.8571 | 7 | 0.5610 | 0.8571 |
-| [0.600, 0.667) | 9 | 0.6272 | 0.5556 | 9 | 0.6272 | 0.5556 |
-| [0.667, 0.733) | 4 | 0.7012 | 0.7500 | 4 | 0.7013 | 0.7500 |
-| [0.733, 0.800) | 8 | 0.7561 | 0.3750 | 8 | 0.7562 | 0.3750 |
-| [0.800, 0.867) | 2 | 0.8217 | 0.5000 | 2 | 0.8218 | 0.5000 |
-| [0.867, 0.933) | 3 | 0.9123 | 0.6667 | 3 | 0.9123 | 0.6667 |
-| [0.933, 1.000) | 3 | 0.9872 | 0.0000 | 3 | 0.9872 | 0.0000 |
+| [0.267, 0.333) | 4 | 0.3060 | 0.7500 | 4 | 0.3060 | 0.7500 |
+| [0.333, 0.400) | 12 | 0.3688 | 0.5833 | 12 | 0.3689 | 0.5833 |
+| [0.400, 0.467) | 16 | 0.4362 | 0.5625 | 16 | 0.4362 | 0.5625 |
+| [0.467, 0.533) | 19 | 0.5040 | 0.7895 | 19 | 0.5040 | 0.7895 |
+| [0.533, 0.600) | 15 | 0.5745 | 0.4667 | 15 | 0.5745 | 0.4667 |
+| [0.600, 0.667) | 12 | 0.6382 | 0.5833 | 12 | 0.6382 | 0.5833 |
+| [0.667, 0.733) | 14 | 0.7020 | 0.3571 | 14 | 0.7019 | 0.3571 |
+| [0.733, 0.800) | 17 | 0.7665 | 0.7059 | 17 | 0.7665 | 0.7059 |
+| [0.800, 0.867) | 6 | 0.8244 | 0.5000 | 6 | 0.8244 | 0.5000 |
+| [0.867, 0.933) | 9 | 0.8882 | 0.6667 | 9 | 0.8882 | 0.6667 |
+| [0.933, 1.000) | 6 | 0.9615 | 0.1667 | 6 | 0.9615 | 0.1667 |
 
 ### B2 / qs_v2, test
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.6125 | 0.6125 | 1.1880 | 1.1880 | 0.4475 | 0.4475 |
-| has_phi_direct = raw (T fallback) | 0.6474 | 0.6474 | 1.1205 | 1.1205 | 0.4781 | 0.4781 |
-| has_phi_quasi = raw (T fallback) | 0.5667 | 0.5667 | 1.0560 | 1.0560 | 0.4388 | 0.4388 |
-| has_coded_id = raw (T fallback) | 0.5685 | 0.5685 | 1.0211 | 1.0211 | 0.5178 | 0.5178 |
-| has_staff_pii = raw (T fallback) | 0.6127 | 0.6127 | 1.1056 | 1.1056 | 0.4491 | 0.4491 |
+| pii_present = raw (T fallback) | 0.6319 | 0.6319 | 1.2085 | 1.2085 | 0.4489 | 0.4489 |
+| has_phi_direct = raw (T fallback) | 0.6261 | 0.6261 | 1.1137 | 1.1137 | 0.4027 | 0.4027 |
+| has_phi_quasi = raw (T fallback) | 0.5768 | 0.5768 | 1.0632 | 1.0632 | 0.4188 | 0.4188 |
+| has_coded_id = raw (T fallback) | 0.5635 | 0.5635 | 1.0424 | 1.0424 | 0.4384 | 0.4384 |
+| has_staff_pii = raw (T fallback) | 0.5921 | 0.5921 | 1.0840 | 1.0840 | 0.4330 | 0.4330 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 2 | 0.5127 | 0.5000 | 2 | 0.5127 | 0.5000 |
-| [0.533, 0.600) | 8 | 0.5718 | 0.5000 | 8 | 0.5718 | 0.5000 |
-| [0.600, 0.667) | 7 | 0.6405 | 0.4286 | 7 | 0.6405 | 0.4286 |
-| [0.667, 0.733) | 7 | 0.6975 | 0.4286 | 7 | 0.6975 | 0.4286 |
-| [0.733, 0.800) | 11 | 0.7699 | 0.4545 | 11 | 0.7699 | 0.4545 |
-| [0.800, 0.867) | 49 | 0.8378 | 0.3061 | 49 | 0.8378 | 0.3061 |
-| [0.867, 0.933) | 125 | 0.9067 | 0.2240 | 125 | 0.9067 | 0.2240 |
-| [0.933, 1.000) | 111 | 0.9566 | 0.2613 | 111 | 0.9566 | 0.2613 |
+| [0.467, 0.533) | 11 | 0.5157 | 0.5455 | 11 | 0.5157 | 0.5455 |
+| [0.533, 0.600) | 17 | 0.5611 | 0.4706 | 17 | 0.5611 | 0.4706 |
+| [0.600, 0.667) | 19 | 0.6277 | 0.2632 | 19 | 0.6277 | 0.2632 |
+| [0.667, 0.733) | 30 | 0.6982 | 0.2667 | 30 | 0.6982 | 0.2667 |
+| [0.733, 0.800) | 48 | 0.7714 | 0.3958 | 48 | 0.7714 | 0.3958 |
+| [0.800, 0.867) | 136 | 0.8390 | 0.2426 | 136 | 0.8390 | 0.2426 |
+| [0.867, 0.933) | 341 | 0.9047 | 0.2141 | 341 | 0.9047 | 0.2141 |
+| [0.933, 1.000) | 310 | 0.9547 | 0.2452 | 310 | 0.9547 | 0.2452 |
 
 Reliability data, `has_phi_direct` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 7 | 0.5168 | 0.2857 | 7 | 0.5168 | 0.2857 |
-| [0.533, 0.600) | 14 | 0.5684 | 0.2857 | 14 | 0.5684 | 0.2857 |
-| [0.600, 0.667) | 23 | 0.6322 | 0.1304 | 23 | 0.6322 | 0.1304 |
-| [0.667, 0.733) | 41 | 0.7007 | 0.1707 | 41 | 0.7007 | 0.1707 |
-| [0.733, 0.800) | 60 | 0.7696 | 0.1000 | 60 | 0.7696 | 0.1000 |
-| [0.800, 0.867) | 80 | 0.8361 | 0.1125 | 80 | 0.8361 | 0.1125 |
-| [0.867, 0.933) | 78 | 0.8979 | 0.1795 | 78 | 0.8979 | 0.1795 |
-| [0.933, 1.000) | 17 | 0.9535 | 0.1176 | 17 | 0.9535 | 0.1176 |
+| [0.467, 0.533) | 25 | 0.5142 | 0.3200 | 25 | 0.5142 | 0.3200 |
+| [0.533, 0.600) | 47 | 0.5652 | 0.4043 | 47 | 0.5652 | 0.4043 |
+| [0.600, 0.667) | 63 | 0.6382 | 0.2540 | 63 | 0.6382 | 0.2540 |
+| [0.667, 0.733) | 103 | 0.7062 | 0.2039 | 103 | 0.7062 | 0.2039 |
+| [0.733, 0.800) | 174 | 0.7700 | 0.1437 | 174 | 0.7700 | 0.1437 |
+| [0.800, 0.867) | 224 | 0.8332 | 0.1116 | 224 | 0.8332 | 0.1116 |
+| [0.867, 0.933) | 220 | 0.8983 | 0.1136 | 220 | 0.8983 | 0.1136 |
+| [0.933, 1.000) | 56 | 0.9544 | 0.2500 | 56 | 0.9544 | 0.2500 |
 
 Reliability data, `has_phi_quasi` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 8 | 0.5176 | 0.5000 | 8 | 0.5176 | 0.5000 |
-| [0.533, 0.600) | 15 | 0.5630 | 0.5333 | 15 | 0.5630 | 0.5333 |
-| [0.600, 0.667) | 18 | 0.6303 | 0.3333 | 18 | 0.6303 | 0.3333 |
-| [0.667, 0.733) | 35 | 0.7036 | 0.2571 | 35 | 0.7036 | 0.2571 |
-| [0.733, 0.800) | 44 | 0.7730 | 0.1818 | 44 | 0.7730 | 0.1818 |
-| [0.800, 0.867) | 90 | 0.8341 | 0.1556 | 90 | 0.8341 | 0.1556 |
-| [0.867, 0.933) | 86 | 0.8933 | 0.2209 | 86 | 0.8933 | 0.2209 |
-| [0.933, 1.000) | 24 | 0.9538 | 0.3333 | 24 | 0.9538 | 0.3333 |
+| [0.467, 0.533) | 13 | 0.5172 | 0.5385 | 13 | 0.5172 | 0.5385 |
+| [0.533, 0.600) | 45 | 0.5669 | 0.3333 | 45 | 0.5669 | 0.3333 |
+| [0.600, 0.667) | 72 | 0.6330 | 0.3750 | 72 | 0.6330 | 0.3750 |
+| [0.667, 0.733) | 96 | 0.7008 | 0.2917 | 96 | 0.7008 | 0.2917 |
+| [0.733, 0.800) | 166 | 0.7699 | 0.1988 | 166 | 0.7699 | 0.1988 |
+| [0.800, 0.867) | 210 | 0.8355 | 0.1571 | 210 | 0.8355 | 0.1571 |
+| [0.867, 0.933) | 235 | 0.8974 | 0.1915 | 235 | 0.8974 | 0.1915 |
+| [0.933, 1.000) | 75 | 0.9499 | 0.2267 | 75 | 0.9499 | 0.2267 |
 
 Reliability data, `has_coded_id` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 11 | 0.5136 | 0.3636 | 11 | 0.5136 | 0.3636 |
-| [0.533, 0.600) | 9 | 0.5739 | 0.1111 | 9 | 0.5739 | 0.1111 |
-| [0.600, 0.667) | 28 | 0.6329 | 0.3571 | 28 | 0.6329 | 0.3571 |
-| [0.667, 0.733) | 37 | 0.6978 | 0.1622 | 37 | 0.6978 | 0.1622 |
-| [0.733, 0.800) | 59 | 0.7705 | 0.2203 | 59 | 0.7705 | 0.2203 |
-| [0.800, 0.867) | 82 | 0.8376 | 0.1341 | 82 | 0.8376 | 0.1341 |
-| [0.867, 0.933) | 72 | 0.8957 | 0.2778 | 72 | 0.8957 | 0.2778 |
-| [0.933, 1.000) | 22 | 0.9520 | 0.3182 | 22 | 0.9520 | 0.3182 |
+| [0.467, 0.533) | 15 | 0.5162 | 0.4667 | 15 | 0.5162 | 0.4667 |
+| [0.533, 0.600) | 52 | 0.5666 | 0.4231 | 52 | 0.5666 | 0.4231 |
+| [0.600, 0.667) | 56 | 0.6372 | 0.3750 | 56 | 0.6372 | 0.3750 |
+| [0.667, 0.733) | 92 | 0.7021 | 0.2283 | 92 | 0.7021 | 0.2283 |
+| [0.733, 0.800) | 164 | 0.7716 | 0.2073 | 164 | 0.7716 | 0.2073 |
+| [0.800, 0.867) | 244 | 0.8342 | 0.2008 | 244 | 0.8342 | 0.2008 |
+| [0.867, 0.933) | 227 | 0.8956 | 0.1938 | 227 | 0.8956 | 0.1938 |
+| [0.933, 1.000) | 62 | 0.9521 | 0.2903 | 62 | 0.9521 | 0.2903 |
 
 Reliability data, `has_staff_pii` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 9 | 0.5169 | 0.5556 | 9 | 0.5169 | 0.5556 |
-| [0.533, 0.600) | 13 | 0.5705 | 0.2308 | 13 | 0.5705 | 0.2308 |
-| [0.600, 0.667) | 18 | 0.6357 | 0.2778 | 18 | 0.6357 | 0.2778 |
-| [0.667, 0.733) | 34 | 0.7012 | 0.2059 | 34 | 0.7012 | 0.2059 |
-| [0.733, 0.800) | 47 | 0.7735 | 0.1489 | 47 | 0.7735 | 0.1489 |
-| [0.800, 0.867) | 82 | 0.8353 | 0.1829 | 82 | 0.8353 | 0.1829 |
-| [0.867, 0.933) | 96 | 0.8983 | 0.1771 | 96 | 0.8983 | 0.1771 |
-| [0.933, 1.000) | 21 | 0.9500 | 0.1905 | 21 | 0.9500 | 0.1905 |
+| [0.467, 0.533) | 13 | 0.5212 | 0.4615 | 13 | 0.5212 | 0.4615 |
+| [0.533, 0.600) | 52 | 0.5687 | 0.4038 | 52 | 0.5687 | 0.4038 |
+| [0.600, 0.667) | 56 | 0.6347 | 0.3036 | 56 | 0.6347 | 0.3036 |
+| [0.667, 0.733) | 93 | 0.7022 | 0.2581 | 93 | 0.7022 | 0.2581 |
+| [0.733, 0.800) | 150 | 0.7709 | 0.1933 | 150 | 0.7709 | 0.1933 |
+| [0.800, 0.867) | 241 | 0.8365 | 0.1494 | 241 | 0.8365 | 0.1494 |
+| [0.867, 0.933) | 239 | 0.8989 | 0.1883 | 239 | 0.8989 | 0.1883 |
+| [0.933, 1.000) | 68 | 0.9525 | 0.2353 | 68 | 0.9525 | 0.2353 |
 
 ### B2 / qs_v2, holdout
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.4979 | 0.4979 | 0.9922 | 0.9922 | 0.4108 | 0.4108 |
-| has_phi_direct = raw (T fallback) | 0.7963 | 0.7963 | 1.3393 | 1.3393 | 0.0204 | 0.0204 |
-| has_phi_quasi = raw (T fallback) | 0.7639 | 0.7639 | 1.3127 | 1.3127 | 0.0208 | 0.0208 |
-| has_coded_id = raw (T fallback) | 0.7457 | 0.7457 | 1.2587 | 1.2587 | 0.0260 | 0.0260 |
-| has_staff_pii = raw (T fallback) | 0.4106 | 0.4106 | 0.8409 | 0.8409 | 0.3523 | 0.3523 |
+| pii_present = raw (T fallback) | 0.4776 | 0.4776 | 0.9495 | 0.9495 | 0.4245 | 0.4245 |
+| has_phi_direct = raw (T fallback) | 0.7888 | 0.7888 | 1.3059 | 1.3059 | 0.0234 | 0.0234 |
+| has_phi_quasi = raw (T fallback) | 0.7594 | 0.7594 | 1.2543 | 1.2543 | 0.0685 | 0.0685 |
+| has_coded_id = raw (T fallback) | 0.7596 | 0.7596 | 1.2569 | 1.2569 | 0.0933 | 0.0933 |
+| has_staff_pii = raw (T fallback) | 0.3500 | 0.3500 | 0.7544 | 0.7544 | 0.5031 | 0.5031 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.600, 0.667) | 1 | 0.6507 | 0.0000 | 1 | 0.6507 | 0.0000 |
-| [0.733, 0.800) | 3 | 0.7504 | 0.3333 | 3 | 0.7504 | 0.3333 |
-| [0.800, 0.867) | 6 | 0.8389 | 0.6667 | 6 | 0.8389 | 0.6667 |
-| [0.867, 0.933) | 23 | 0.9026 | 0.3913 | 23 | 0.9026 | 0.3913 |
-| [0.933, 1.000) | 17 | 0.9531 | 0.3529 | 17 | 0.9531 | 0.3529 |
+| [0.600, 0.667) | 2 | 0.6287 | 1.0000 | 2 | 0.6287 | 1.0000 |
+| [0.667, 0.733) | 2 | 0.6846 | 0.0000 | 2 | 0.6846 | 0.0000 |
+| [0.733, 0.800) | 6 | 0.7792 | 0.5000 | 6 | 0.7792 | 0.5000 |
+| [0.800, 0.867) | 22 | 0.8496 | 0.5455 | 22 | 0.8496 | 0.5455 |
+| [0.867, 0.933) | 56 | 0.9055 | 0.4286 | 56 | 0.9055 | 0.4286 |
+| [0.933, 1.000) | 42 | 0.9498 | 0.3571 | 42 | 0.9498 | 0.3571 |
 
 Reliability data, `has_phi_direct` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.533, 0.600) | 1 | 0.5525 | 0.0000 | 1 | 0.5525 | 0.0000 |
-| [0.600, 0.667) | 2 | 0.6351 | 0.5000 | 2 | 0.6351 | 0.5000 |
-| [0.667, 0.733) | 5 | 0.7076 | 0.0000 | 5 | 0.7076 | 0.0000 |
-| [0.733, 0.800) | 12 | 0.7677 | 0.0000 | 12 | 0.7677 | 0.0000 |
-| [0.800, 0.867) | 14 | 0.8366 | 0.0000 | 14 | 0.8366 | 0.0000 |
-| [0.867, 0.933) | 13 | 0.8960 | 0.0000 | 13 | 0.8960 | 0.0000 |
-| [0.933, 1.000) | 3 | 0.9612 | 0.0000 | 3 | 0.9612 | 0.0000 |
+| [0.467, 0.533) | 2 | 0.5147 | 0.0000 | 2 | 0.5147 | 0.0000 |
+| [0.533, 0.600) | 5 | 0.5811 | 0.4000 | 5 | 0.5811 | 0.4000 |
+| [0.600, 0.667) | 5 | 0.6474 | 0.0000 | 5 | 0.6474 | 0.0000 |
+| [0.667, 0.733) | 11 | 0.7050 | 0.0000 | 11 | 0.7050 | 0.0000 |
+| [0.733, 0.800) | 30 | 0.7676 | 0.0000 | 30 | 0.7676 | 0.0000 |
+| [0.800, 0.867) | 39 | 0.8314 | 0.0000 | 39 | 0.8314 | 0.0000 |
+| [0.867, 0.933) | 33 | 0.8921 | 0.0000 | 33 | 0.8921 | 0.0000 |
+| [0.933, 1.000) | 5 | 0.9439 | 0.0000 | 5 | 0.9439 | 0.0000 |
 
 Reliability data, `has_phi_quasi` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 2 | 0.5094 | 0.5000 | 2 | 0.5094 | 0.5000 |
-| [0.533, 0.600) | 2 | 0.5764 | 0.5000 | 2 | 0.5764 | 0.5000 |
-| [0.600, 0.667) | 2 | 0.6612 | 0.0000 | 2 | 0.6612 | 0.0000 |
-| [0.667, 0.733) | 6 | 0.7092 | 0.0000 | 6 | 0.7092 | 0.0000 |
-| [0.733, 0.800) | 10 | 0.7694 | 0.0000 | 10 | 0.7694 | 0.0000 |
-| [0.800, 0.867) | 9 | 0.8261 | 0.0000 | 9 | 0.8261 | 0.0000 |
-| [0.867, 0.933) | 13 | 0.8960 | 0.0000 | 13 | 0.8960 | 0.0000 |
-| [0.933, 1.000) | 6 | 0.9451 | 0.0000 | 6 | 0.9451 | 0.0000 |
+| [0.467, 0.533) | 5 | 0.5167 | 0.8000 | 5 | 0.5167 | 0.8000 |
+| [0.533, 0.600) | 4 | 0.5794 | 0.0000 | 4 | 0.5794 | 0.0000 |
+| [0.600, 0.667) | 6 | 0.6333 | 0.1667 | 6 | 0.6333 | 0.1667 |
+| [0.667, 0.733) | 18 | 0.7059 | 0.0556 | 18 | 0.7059 | 0.0556 |
+| [0.733, 0.800) | 25 | 0.7696 | 0.0400 | 25 | 0.7696 | 0.0400 |
+| [0.800, 0.867) | 42 | 0.8356 | 0.0000 | 42 | 0.8356 | 0.0000 |
+| [0.867, 0.933) | 25 | 0.8965 | 0.0000 | 25 | 0.8965 | 0.0000 |
+| [0.933, 1.000) | 5 | 0.9456 | 0.0000 | 5 | 0.9456 | 0.0000 |
 
 Reliability data, `has_coded_id` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 4 | 0.5113 | 0.5000 | 4 | 0.5113 | 0.5000 |
-| [0.600, 0.667) | 3 | 0.6492 | 0.0000 | 3 | 0.6492 | 0.0000 |
-| [0.667, 0.733) | 5 | 0.7002 | 0.0000 | 5 | 0.7002 | 0.0000 |
-| [0.733, 0.800) | 12 | 0.7594 | 0.0000 | 12 | 0.7594 | 0.0000 |
-| [0.800, 0.867) | 10 | 0.8286 | 0.0000 | 10 | 0.8286 | 0.0000 |
-| [0.867, 0.933) | 14 | 0.8920 | 0.0000 | 14 | 0.8920 | 0.0000 |
-| [0.933, 1.000) | 2 | 0.9528 | 0.0000 | 2 | 0.9528 | 0.0000 |
+| [0.467, 0.533) | 3 | 0.5108 | 0.0000 | 3 | 0.5108 | 0.0000 |
+| [0.533, 0.600) | 8 | 0.5637 | 0.2500 | 8 | 0.5637 | 0.2500 |
+| [0.600, 0.667) | 4 | 0.6448 | 0.2500 | 4 | 0.6448 | 0.2500 |
+| [0.667, 0.733) | 16 | 0.6983 | 0.0625 | 16 | 0.6983 | 0.0625 |
+| [0.733, 0.800) | 29 | 0.7650 | 0.0000 | 29 | 0.7650 | 0.0000 |
+| [0.800, 0.867) | 38 | 0.8396 | 0.0000 | 38 | 0.8396 | 0.0000 |
+| [0.867, 0.933) | 27 | 0.8941 | 0.0000 | 27 | 0.8941 | 0.0000 |
+| [0.933, 1.000) | 5 | 0.9458 | 0.0000 | 5 | 0.9458 | 0.0000 |
 
 Reliability data, `has_staff_pii` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.533, 0.600) | 2 | 0.5612 | 1.0000 | 2 | 0.5612 | 1.0000 |
-| [0.600, 0.667) | 1 | 0.6325 | 0.0000 | 1 | 0.6325 | 0.0000 |
-| [0.667, 0.733) | 4 | 0.7119 | 0.2500 | 4 | 0.7119 | 0.2500 |
-| [0.733, 0.800) | 15 | 0.7739 | 0.5333 | 15 | 0.7739 | 0.5333 |
-| [0.800, 0.867) | 12 | 0.8288 | 0.5833 | 12 | 0.8288 | 0.5833 |
-| [0.867, 0.933) | 12 | 0.8970 | 0.3333 | 12 | 0.8970 | 0.3333 |
-| [0.933, 1.000) | 4 | 0.9632 | 0.0000 | 4 | 0.9632 | 0.0000 |
+| [0.467, 0.533) | 4 | 0.5173 | 0.5000 | 4 | 0.5173 | 0.5000 |
+| [0.533, 0.600) | 2 | 0.5692 | 0.0000 | 2 | 0.5692 | 0.0000 |
+| [0.600, 0.667) | 8 | 0.6273 | 0.5000 | 8 | 0.6273 | 0.5000 |
+| [0.667, 0.733) | 14 | 0.6980 | 0.1429 | 14 | 0.6980 | 0.1429 |
+| [0.733, 0.800) | 31 | 0.7679 | 0.5806 | 31 | 0.7679 | 0.5806 |
+| [0.800, 0.867) | 31 | 0.8347 | 0.4516 | 31 | 0.8347 | 0.4516 |
+| [0.867, 0.933) | 39 | 0.8935 | 0.4615 | 39 | 0.8935 | 0.4615 |
+| [0.933, 1.000) | 1 | 0.9694 | 0.0000 | 1 | 0.9694 | 0.0000 |
 
 ### B3 / qs_v1 (doc-level, underpowered), test
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.4353 | 0.4353 | 0.8790 | 0.8790 | 0.5359 | 0.5359 |
-| subject_role = raw (T fallback) | 0.3990 | 0.3990 | 1.0165 | 1.0165 | 0.5295 | 0.5295 |
-| category | 0.2344 | 0.0993 | 0.8650 | 0.7812 | 0.5159 | 0.5136 |
-| doc_kind = raw (T fallback) | 0.4201 | 0.4201 | 1.0932 | 1.0932 | 0.4162 | 0.4164 |
+| pii_present = raw (T fallback) | 0.4515 | 0.4515 | 0.9130 | 0.9130 | 0.4989 | 0.4989 |
+| subject_role = raw (T fallback) | 0.4808 | 0.4808 | 1.1118 | 1.1118 | 0.5613 | 0.5613 |
+| category | 0.1981 | 0.0964 | 0.8325 | 0.7615 | 0.5344 | 0.5267 |
+| doc_kind = raw (T fallback) | 0.4468 | 0.4468 | 1.1282 | 1.1282 | 0.4213 | 0.4213 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 3 | 0.5171 | 0.3333 | 3 | 0.5171 | 0.3333 |
-| [0.533, 0.600) | 5 | 0.5608 | 0.4000 | 5 | 0.5608 | 0.4000 |
-| [0.600, 0.667) | 5 | 0.6460 | 0.0000 | 5 | 0.6460 | 0.0000 |
-| [0.667, 0.733) | 9 | 0.6941 | 0.5556 | 9 | 0.6941 | 0.5556 |
-| [0.733, 0.800) | 10 | 0.7707 | 0.5000 | 10 | 0.7707 | 0.5000 |
-| [0.800, 0.867) | 46 | 0.8380 | 0.4348 | 46 | 0.8380 | 0.4348 |
-| [0.867, 0.933) | 59 | 0.9073 | 0.3898 | 59 | 0.9073 | 0.3898 |
-| [0.933, 1.000) | 50 | 0.9556 | 0.4800 | 50 | 0.9556 | 0.4800 |
+| [0.467, 0.533) | 10 | 0.5166 | 0.2000 | 10 | 0.5166 | 0.2000 |
+| [0.533, 0.600) | 11 | 0.5643 | 0.5455 | 11 | 0.5643 | 0.5455 |
+| [0.600, 0.667) | 11 | 0.6290 | 0.3636 | 11 | 0.6290 | 0.3636 |
+| [0.667, 0.733) | 19 | 0.7044 | 0.3158 | 19 | 0.7044 | 0.3158 |
+| [0.733, 0.800) | 43 | 0.7712 | 0.6279 | 43 | 0.7712 | 0.6279 |
+| [0.800, 0.867) | 100 | 0.8383 | 0.3600 | 100 | 0.8383 | 0.3600 |
+| [0.867, 0.933) | 186 | 0.9028 | 0.3978 | 186 | 0.9028 | 0.3978 |
+| [0.933, 1.000) | 145 | 0.9548 | 0.4345 | 145 | 0.9548 | 0.4345 |
 
 Reliability data, `subject_role` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.267, 0.333) | 3 | 0.2965 | 0.0000 | 3 | 0.2965 | 0.0000 |
-| [0.333, 0.400) | 13 | 0.3648 | 0.3846 | 13 | 0.3648 | 0.3846 |
-| [0.400, 0.467) | 22 | 0.4381 | 0.4091 | 22 | 0.4381 | 0.4091 |
-| [0.467, 0.533) | 24 | 0.4991 | 0.0833 | 24 | 0.4991 | 0.0833 |
-| [0.533, 0.600) | 15 | 0.5627 | 0.3333 | 15 | 0.5627 | 0.3333 |
-| [0.600, 0.667) | 9 | 0.6272 | 0.2222 | 9 | 0.6272 | 0.2222 |
-| [0.667, 0.733) | 10 | 0.6943 | 0.2000 | 10 | 0.6943 | 0.2000 |
-| [0.733, 0.800) | 16 | 0.7733 | 0.3125 | 16 | 0.7733 | 0.3125 |
-| [0.800, 0.867) | 22 | 0.8423 | 0.3636 | 22 | 0.8423 | 0.3636 |
-| [0.867, 0.933) | 22 | 0.8989 | 0.2727 | 22 | 0.8989 | 0.2727 |
-| [0.933, 1.000) | 31 | 0.9721 | 0.3548 | 31 | 0.9721 | 0.3548 |
+| [0.267, 0.333) | 14 | 0.3098 | 0.2857 | 14 | 0.3098 | 0.2857 |
+| [0.333, 0.400) | 35 | 0.3751 | 0.1714 | 35 | 0.3751 | 0.1714 |
+| [0.400, 0.467) | 54 | 0.4333 | 0.1852 | 54 | 0.4333 | 0.1852 |
+| [0.467, 0.533) | 48 | 0.4957 | 0.1667 | 48 | 0.4957 | 0.1667 |
+| [0.533, 0.600) | 51 | 0.5651 | 0.1569 | 51 | 0.5651 | 0.1569 |
+| [0.600, 0.667) | 47 | 0.6317 | 0.2128 | 47 | 0.6317 | 0.2128 |
+| [0.667, 0.733) | 52 | 0.6979 | 0.2115 | 52 | 0.6979 | 0.2115 |
+| [0.733, 0.800) | 36 | 0.7660 | 0.1111 | 36 | 0.7660 | 0.1111 |
+| [0.800, 0.867) | 44 | 0.8353 | 0.0682 | 44 | 0.8353 | 0.0682 |
+| [0.867, 0.933) | 62 | 0.8992 | 0.2419 | 62 | 0.8992 | 0.2419 |
+| [0.933, 1.000) | 82 | 0.9741 | 0.3415 | 82 | 0.9741 | 0.3415 |
 
 Reliability data, `category` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 2 | 0.2425 | 0.5000 | 54 | 0.2491 | 0.2593 |
-| [0.267, 0.333) | 15 | 0.3131 | 0.1333 | 68 | 0.3013 | 0.4265 |
-| [0.333, 0.400) | 31 | 0.3650 | 0.2903 | 38 | 0.3565 | 0.3684 |
-| [0.400, 0.467) | 24 | 0.4315 | 0.3333 | 11 | 0.4227 | 0.2727 |
-| [0.467, 0.533) | 23 | 0.4977 | 0.5217 | 6 | 0.4966 | 0.1667 |
-| [0.533, 0.600) | 23 | 0.5695 | 0.3913 | 2 | 0.5907 | 0.0000 |
-| [0.600, 0.667) | 15 | 0.6301 | 0.3333 | 3 | 0.6247 | 0.0000 |
-| [0.667, 0.733) | 19 | 0.6891 | 0.4737 | 2 | 0.7125 | 0.5000 |
-| [0.733, 0.800) | 8 | 0.7620 | 0.2500 | 1 | 0.7819 | 1.0000 |
-| [0.800, 0.867) | 8 | 0.8287 | 0.3750 | 1 | 0.8149 | 0.0000 |
-| [0.867, 0.933) | 8 | 0.9013 | 0.1250 | 1 | 0.9083 | 0.0000 |
-| [0.933, 1.000) | 11 | 0.9828 | 0.1818 | 0 | n/a | n/a |
+| [0.200, 0.267) | 6 | 0.2561 | 0.0000 | 174 | 0.2461 | 0.3333 |
+| [0.267, 0.333) | 54 | 0.3052 | 0.2407 | 191 | 0.2950 | 0.4136 |
+| [0.333, 0.400) | 80 | 0.3714 | 0.3375 | 76 | 0.3619 | 0.3947 |
+| [0.400, 0.467) | 73 | 0.4338 | 0.4658 | 47 | 0.4255 | 0.4043 |
+| [0.467, 0.533) | 65 | 0.5045 | 0.4154 | 21 | 0.4880 | 0.3333 |
+| [0.533, 0.600) | 53 | 0.5610 | 0.3962 | 10 | 0.5663 | 0.2000 |
+| [0.600, 0.667) | 34 | 0.6390 | 0.4118 | 5 | 0.6413 | 0.2000 |
+| [0.667, 0.733) | 34 | 0.6999 | 0.3824 | 0 | n/a | n/a |
+| [0.733, 0.800) | 26 | 0.7552 | 0.4615 | 0 | n/a | n/a |
+| [0.800, 0.867) | 36 | 0.8303 | 0.3333 | 1 | 0.8252 | 1.0000 |
+| [0.867, 0.933) | 34 | 0.8953 | 0.4118 | 0 | n/a | n/a |
+| [0.933, 1.000) | 30 | 0.9650 | 0.3333 | 0 | n/a | n/a |
 
 Reliability data, `doc_kind` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 1 | 0.2610 | 0.0000 | 1 | 0.2610 | 0.0000 |
-| [0.267, 0.333) | 9 | 0.3076 | 0.2222 | 9 | 0.3076 | 0.2222 |
-| [0.333, 0.400) | 17 | 0.3735 | 0.4118 | 17 | 0.3735 | 0.4118 |
-| [0.400, 0.467) | 17 | 0.4319 | 0.4706 | 17 | 0.4320 | 0.4706 |
-| [0.467, 0.533) | 15 | 0.4974 | 0.4000 | 15 | 0.4974 | 0.4000 |
-| [0.533, 0.600) | 11 | 0.5632 | 0.4545 | 11 | 0.5632 | 0.4545 |
-| [0.600, 0.667) | 13 | 0.6366 | 0.2308 | 13 | 0.6366 | 0.2308 |
-| [0.667, 0.733) | 10 | 0.7013 | 0.3000 | 10 | 0.7013 | 0.3000 |
-| [0.733, 0.800) | 6 | 0.7623 | 0.5000 | 6 | 0.7624 | 0.5000 |
-| [0.800, 0.867) | 14 | 0.8365 | 0.3571 | 14 | 0.8365 | 0.3571 |
-| [0.867, 0.933) | 6 | 0.9036 | 0.3333 | 6 | 0.9036 | 0.3333 |
-| [0.933, 1.000) | 68 | 0.9936 | 0.2206 | 68 | 0.9936 | 0.2206 |
+| [0.200, 0.267) | 8 | 0.2602 | 0.2500 | 8 | 0.2602 | 0.2500 |
+| [0.267, 0.333) | 15 | 0.3105 | 0.2000 | 15 | 0.3105 | 0.2000 |
+| [0.333, 0.400) | 32 | 0.3720 | 0.2188 | 32 | 0.3720 | 0.2188 |
+| [0.400, 0.467) | 59 | 0.4303 | 0.4068 | 59 | 0.4303 | 0.4068 |
+| [0.467, 0.533) | 47 | 0.5001 | 0.2340 | 47 | 0.5001 | 0.2340 |
+| [0.533, 0.600) | 38 | 0.5619 | 0.3421 | 38 | 0.5619 | 0.3421 |
+| [0.600, 0.667) | 38 | 0.6338 | 0.3158 | 38 | 0.6338 | 0.3158 |
+| [0.667, 0.733) | 30 | 0.6956 | 0.4667 | 30 | 0.6956 | 0.4667 |
+| [0.733, 0.800) | 21 | 0.7632 | 0.4286 | 21 | 0.7632 | 0.4286 |
+| [0.800, 0.867) | 16 | 0.8291 | 0.5000 | 16 | 0.8291 | 0.5000 |
+| [0.867, 0.933) | 26 | 0.9061 | 0.2308 | 26 | 0.9061 | 0.2308 |
+| [0.933, 1.000) | 195 | 0.9942 | 0.1897 | 195 | 0.9942 | 0.1897 |
 
 ### B3 / qs_v1 (doc-level, underpowered), holdout
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.2570 | 0.2570 | 0.5698 | 0.5698 | 0.5909 | 0.5909 |
-| subject_role = raw (T fallback) | 0.2358 | 0.2358 | 0.5983 | 0.5983 | 0.5598 | 0.5598 |
-| category | 0.2056 | 0.4022 | 0.4956 | 0.6539 | 0.5404 | 0.5505 |
-| doc_kind = raw (T fallback) | 0.2552 | 0.2552 | 0.3412 | 0.3412 | 0.6385 | 0.6385 |
+| pii_present = raw (T fallback) | 0.2508 | 0.2508 | 0.5518 | 0.5518 | 0.5300 | 0.5300 |
+| subject_role = raw (T fallback) | 0.1832 | 0.1832 | 0.5996 | 0.5996 | 0.5530 | 0.5532 |
+| category | 0.1896 | 0.3650 | 0.5023 | 0.6737 | 0.6401 | 0.6414 |
+| doc_kind = raw (T fallback) | 0.1700 | 0.1700 | 0.4780 | 0.4780 | 0.5525 | 0.5525 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.733, 0.800) | 1 | 0.7432 | 1.0000 | 1 | 0.7432 | 1.0000 |
-| [0.800, 0.867) | 9 | 0.8319 | 0.5556 | 9 | 0.8319 | 0.5556 |
-| [0.867, 0.933) | 15 | 0.9015 | 0.6000 | 15 | 0.9015 | 0.6000 |
-| [0.933, 1.000) | 6 | 0.9498 | 0.8333 | 6 | 0.9498 | 0.8333 |
+| [0.600, 0.667) | 2 | 0.6289 | 1.0000 | 2 | 0.6289 | 1.0000 |
+| [0.667, 0.733) | 2 | 0.7118 | 0.5000 | 2 | 0.7118 | 0.5000 |
+| [0.733, 0.800) | 3 | 0.7680 | 1.0000 | 3 | 0.7680 | 1.0000 |
+| [0.800, 0.867) | 18 | 0.8435 | 0.6111 | 18 | 0.8435 | 0.6111 |
+| [0.867, 0.933) | 41 | 0.9022 | 0.5854 | 41 | 0.9022 | 0.5854 |
+| [0.933, 1.000) | 18 | 0.9461 | 0.8333 | 18 | 0.9461 | 0.8333 |
 
 Reliability data, `subject_role` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.333, 0.400) | 1 | 0.3942 | 1.0000 | 1 | 0.3942 | 1.0000 |
-| [0.400, 0.467) | 5 | 0.4407 | 0.6000 | 5 | 0.4407 | 0.6000 |
-| [0.467, 0.533) | 1 | 0.4914 | 1.0000 | 1 | 0.4914 | 1.0000 |
-| [0.533, 0.600) | 4 | 0.5572 | 0.2500 | 4 | 0.5571 | 0.2500 |
-| [0.600, 0.667) | 2 | 0.6301 | 0.5000 | 2 | 0.6301 | 0.5000 |
-| [0.667, 0.733) | 4 | 0.6989 | 0.2500 | 4 | 0.6990 | 0.2500 |
-| [0.733, 0.800) | 4 | 0.7708 | 0.5000 | 4 | 0.7708 | 0.5000 |
-| [0.800, 0.867) | 7 | 0.8380 | 0.7143 | 7 | 0.8380 | 0.7143 |
-| [0.867, 0.933) | 1 | 0.8949 | 1.0000 | 1 | 0.8949 | 1.0000 |
-| [0.933, 1.000) | 2 | 0.9704 | 1.0000 | 2 | 0.9703 | 1.0000 |
+| [0.267, 0.333) | 3 | 0.3073 | 0.3333 | 3 | 0.3073 | 0.3333 |
+| [0.333, 0.400) | 5 | 0.3736 | 0.4000 | 5 | 0.3736 | 0.4000 |
+| [0.400, 0.467) | 9 | 0.4335 | 0.6667 | 9 | 0.4335 | 0.6667 |
+| [0.467, 0.533) | 9 | 0.4927 | 0.6667 | 9 | 0.4926 | 0.6667 |
+| [0.533, 0.600) | 13 | 0.5643 | 0.3846 | 13 | 0.5643 | 0.3846 |
+| [0.600, 0.667) | 7 | 0.6217 | 0.7143 | 7 | 0.6217 | 0.7143 |
+| [0.667, 0.733) | 7 | 0.6993 | 0.2857 | 7 | 0.6993 | 0.2857 |
+| [0.733, 0.800) | 9 | 0.7610 | 0.7778 | 9 | 0.7610 | 0.7778 |
+| [0.800, 0.867) | 9 | 0.8297 | 0.6667 | 9 | 0.8297 | 0.6667 |
+| [0.867, 0.933) | 9 | 0.9064 | 0.6667 | 9 | 0.9064 | 0.6667 |
+| [0.933, 1.000) | 4 | 0.9645 | 0.5000 | 4 | 0.9645 | 0.5000 |
 
 Reliability data, `category` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 0 | n/a | n/a | 7 | 0.2511 | 0.7143 |
-| [0.267, 0.333) | 2 | 0.3293 | 1.0000 | 17 | 0.2979 | 0.5882 |
-| [0.333, 0.400) | 5 | 0.3637 | 0.6000 | 5 | 0.3595 | 1.0000 |
-| [0.400, 0.467) | 7 | 0.4440 | 0.7143 | 1 | 0.4180 | 1.0000 |
-| [0.467, 0.533) | 3 | 0.5001 | 0.6667 | 1 | 0.4931 | 1.0000 |
-| [0.533, 0.600) | 4 | 0.5618 | 0.5000 | 0 | n/a | n/a |
-| [0.600, 0.667) | 5 | 0.6363 | 0.6000 | 0 | n/a | n/a |
-| [0.667, 0.733) | 1 | 0.7008 | 1.0000 | 0 | n/a | n/a |
-| [0.733, 0.800) | 2 | 0.7549 | 1.0000 | 0 | n/a | n/a |
-| [0.800, 0.867) | 1 | 0.8358 | 1.0000 | 0 | n/a | n/a |
-| [0.867, 0.933) | 1 | 0.9243 | 1.0000 | 0 | n/a | n/a |
+| [0.200, 0.267) | 1 | 0.2469 | 0.0000 | 31 | 0.2478 | 0.5161 |
+| [0.267, 0.333) | 8 | 0.3125 | 0.6250 | 37 | 0.2915 | 0.7027 |
+| [0.333, 0.400) | 17 | 0.3738 | 0.4706 | 14 | 0.3557 | 0.7857 |
+| [0.400, 0.467) | 9 | 0.4333 | 0.6667 | 2 | 0.4456 | 1.0000 |
+| [0.467, 0.533) | 19 | 0.4980 | 0.7368 | 0 | n/a | n/a |
+| [0.533, 0.600) | 7 | 0.5563 | 0.4286 | 0 | n/a | n/a |
+| [0.600, 0.667) | 6 | 0.6353 | 0.8333 | 0 | n/a | n/a |
+| [0.667, 0.733) | 7 | 0.6944 | 0.5714 | 0 | n/a | n/a |
+| [0.733, 0.800) | 6 | 0.7635 | 1.0000 | 0 | n/a | n/a |
+| [0.800, 0.867) | 2 | 0.8216 | 1.0000 | 0 | n/a | n/a |
+| [0.867, 0.933) | 2 | 0.9100 | 1.0000 | 0 | n/a | n/a |
 
 Reliability data, `doc_kind` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.400, 0.467) | 4 | 0.4292 | 0.7500 | 4 | 0.4292 | 0.7500 |
-| [0.467, 0.533) | 5 | 0.4905 | 0.6000 | 5 | 0.4905 | 0.6000 |
-| [0.533, 0.600) | 3 | 0.5468 | 1.0000 | 3 | 0.5468 | 1.0000 |
-| [0.600, 0.667) | 3 | 0.6329 | 0.6667 | 3 | 0.6329 | 0.6667 |
-| [0.667, 0.733) | 7 | 0.6905 | 1.0000 | 7 | 0.6905 | 1.0000 |
-| [0.733, 0.800) | 4 | 0.7481 | 1.0000 | 4 | 0.7481 | 1.0000 |
-| [0.800, 0.867) | 1 | 0.8016 | 1.0000 | 1 | 0.8016 | 1.0000 |
-| [0.867, 0.933) | 3 | 0.9172 | 1.0000 | 3 | 0.9173 | 1.0000 |
-| [0.933, 1.000) | 1 | 0.9999 | 0.0000 | 1 | 0.9999 | 0.0000 |
+| [0.267, 0.333) | 3 | 0.3058 | 0.6667 | 3 | 0.3058 | 0.6667 |
+| [0.333, 0.400) | 13 | 0.3782 | 0.6923 | 13 | 0.3782 | 0.6923 |
+| [0.400, 0.467) | 13 | 0.4362 | 0.5385 | 13 | 0.4362 | 0.5385 |
+| [0.467, 0.533) | 4 | 0.4968 | 0.7500 | 4 | 0.4968 | 0.7500 |
+| [0.533, 0.600) | 13 | 0.5715 | 0.6923 | 13 | 0.5715 | 0.6923 |
+| [0.600, 0.667) | 9 | 0.6322 | 0.8889 | 9 | 0.6322 | 0.8889 |
+| [0.667, 0.733) | 6 | 0.6931 | 0.6667 | 6 | 0.6931 | 0.6667 |
+| [0.733, 0.800) | 8 | 0.7753 | 0.7500 | 8 | 0.7753 | 0.7500 |
+| [0.800, 0.867) | 7 | 0.8300 | 0.8571 | 7 | 0.8300 | 0.8571 |
+| [0.867, 0.933) | 5 | 0.8901 | 0.8000 | 5 | 0.8901 | 0.8000 |
+| [0.933, 1.000) | 3 | 0.9619 | 0.3333 | 3 | 0.9619 | 0.3333 |
 
 ### B3 / qs_v2 (doc-level, underpowered), test
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.4359 | 0.4359 | 0.8993 | 0.8993 | 0.5087 | 0.5087 |
-| has_phi_direct = raw (T fallback) | 0.5110 | 0.5110 | 0.9446 | 0.9446 | 0.4537 | 0.4537 |
-| has_phi_quasi = raw (T fallback) | 0.4507 | 0.4507 | 0.8547 | 0.8547 | 0.5321 | 0.5321 |
-| has_coded_id = raw (T fallback) | 0.3999 | 0.3999 | 0.7879 | 0.7879 | 0.5345 | 0.5345 |
-| has_staff_pii = raw (T fallback) | 0.4443 | 0.4443 | 0.8693 | 0.8693 | 0.4434 | 0.4434 |
+| pii_present = raw (T fallback) | 0.4515 | 0.4515 | 0.9131 | 0.9131 | 0.4988 | 0.4988 |
+| has_phi_direct = raw (T fallback) | 0.5272 | 0.5272 | 0.9852 | 0.9852 | 0.4232 | 0.4232 |
+| has_phi_quasi = raw (T fallback) | 0.4465 | 0.4465 | 0.8765 | 0.8765 | 0.4605 | 0.4605 |
+| has_coded_id = raw (T fallback) | 0.4299 | 0.4299 | 0.8596 | 0.8596 | 0.4912 | 0.4912 |
+| has_staff_pii = raw (T fallback) | 0.4591 | 0.4591 | 0.8997 | 0.8997 | 0.4471 | 0.4471 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 2 | 0.5115 | 0.5000 | 2 | 0.5115 | 0.5000 |
-| [0.533, 0.600) | 7 | 0.5769 | 0.5714 | 7 | 0.5769 | 0.5714 |
-| [0.600, 0.667) | 6 | 0.6327 | 0.3333 | 6 | 0.6327 | 0.3333 |
-| [0.667, 0.733) | 6 | 0.6919 | 0.5000 | 6 | 0.6919 | 0.5000 |
-| [0.733, 0.800) | 6 | 0.7705 | 0.6667 | 6 | 0.7705 | 0.6667 |
-| [0.800, 0.867) | 34 | 0.8452 | 0.4412 | 34 | 0.8452 | 0.4412 |
-| [0.867, 0.933) | 66 | 0.9050 | 0.3636 | 66 | 0.9050 | 0.3636 |
-| [0.933, 1.000) | 60 | 0.9569 | 0.4833 | 60 | 0.9569 | 0.4833 |
+| [0.467, 0.533) | 10 | 0.5166 | 0.2000 | 10 | 0.5166 | 0.2000 |
+| [0.533, 0.600) | 11 | 0.5641 | 0.5455 | 11 | 0.5641 | 0.5455 |
+| [0.600, 0.667) | 11 | 0.6289 | 0.3636 | 11 | 0.6289 | 0.3636 |
+| [0.667, 0.733) | 19 | 0.7046 | 0.3158 | 19 | 0.7046 | 0.3158 |
+| [0.733, 0.800) | 43 | 0.7712 | 0.6279 | 43 | 0.7712 | 0.6279 |
+| [0.800, 0.867) | 100 | 0.8383 | 0.3600 | 100 | 0.8383 | 0.3600 |
+| [0.867, 0.933) | 186 | 0.9028 | 0.3978 | 186 | 0.9028 | 0.3978 |
+| [0.933, 1.000) | 145 | 0.9548 | 0.4345 | 145 | 0.9548 | 0.4345 |
 
 Reliability data, `has_phi_direct` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 5 | 0.5097 | 0.6000 | 5 | 0.5097 | 0.6000 |
-| [0.533, 0.600) | 12 | 0.5640 | 0.5000 | 12 | 0.5640 | 0.5000 |
-| [0.600, 0.667) | 20 | 0.6391 | 0.2500 | 20 | 0.6391 | 0.2500 |
-| [0.667, 0.733) | 32 | 0.6964 | 0.1562 | 32 | 0.6964 | 0.1562 |
-| [0.733, 0.800) | 35 | 0.7692 | 0.2857 | 35 | 0.7692 | 0.2857 |
-| [0.800, 0.867) | 39 | 0.8326 | 0.2308 | 39 | 0.8326 | 0.2308 |
-| [0.867, 0.933) | 36 | 0.8962 | 0.2778 | 36 | 0.8962 | 0.2778 |
-| [0.933, 1.000) | 8 | 0.9521 | 0.1250 | 8 | 0.9521 | 0.1250 |
+| [0.467, 0.533) | 17 | 0.5217 | 0.5294 | 17 | 0.5217 | 0.5294 |
+| [0.533, 0.600) | 33 | 0.5635 | 0.3939 | 33 | 0.5635 | 0.3939 |
+| [0.600, 0.667) | 52 | 0.6349 | 0.3462 | 52 | 0.6349 | 0.3462 |
+| [0.667, 0.733) | 66 | 0.7055 | 0.2727 | 66 | 0.7055 | 0.2727 |
+| [0.733, 0.800) | 106 | 0.7671 | 0.2075 | 106 | 0.7671 | 0.2075 |
+| [0.800, 0.867) | 117 | 0.8359 | 0.1880 | 117 | 0.8359 | 0.1880 |
+| [0.867, 0.933) | 100 | 0.8986 | 0.1900 | 100 | 0.8986 | 0.1900 |
+| [0.933, 1.000) | 34 | 0.9560 | 0.3235 | 34 | 0.9560 | 0.3235 |
 
 Reliability data, `has_phi_quasi` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 8 | 0.5163 | 0.1250 | 8 | 0.5163 | 0.1250 |
-| [0.533, 0.600) | 10 | 0.5643 | 0.7000 | 10 | 0.5643 | 0.7000 |
-| [0.600, 0.667) | 18 | 0.6325 | 0.5000 | 18 | 0.6325 | 0.5000 |
-| [0.667, 0.733) | 22 | 0.7132 | 0.1818 | 22 | 0.7132 | 0.1818 |
-| [0.733, 0.800) | 37 | 0.7658 | 0.1892 | 37 | 0.7658 | 0.1892 |
-| [0.800, 0.867) | 40 | 0.8324 | 0.3500 | 40 | 0.8324 | 0.3500 |
-| [0.867, 0.933) | 44 | 0.8975 | 0.3864 | 44 | 0.8975 | 0.3864 |
-| [0.933, 1.000) | 8 | 0.9500 | 0.6250 | 8 | 0.9500 | 0.6250 |
+| [0.467, 0.533) | 17 | 0.5182 | 0.6471 | 17 | 0.5182 | 0.6471 |
+| [0.533, 0.600) | 30 | 0.5650 | 0.3333 | 30 | 0.5650 | 0.3333 |
+| [0.600, 0.667) | 52 | 0.6337 | 0.5000 | 52 | 0.6337 | 0.5000 |
+| [0.667, 0.733) | 71 | 0.7005 | 0.3099 | 71 | 0.7005 | 0.3099 |
+| [0.733, 0.800) | 95 | 0.7680 | 0.2211 | 95 | 0.7680 | 0.2211 |
+| [0.800, 0.867) | 129 | 0.8341 | 0.3488 | 129 | 0.8341 | 0.3488 |
+| [0.867, 0.933) | 103 | 0.8956 | 0.3010 | 103 | 0.8956 | 0.3010 |
+| [0.933, 1.000) | 28 | 0.9559 | 0.4286 | 28 | 0.9559 | 0.4286 |
 
 Reliability data, `has_coded_id` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 8 | 0.5158 | 0.6250 | 8 | 0.5159 | 0.6250 |
-| [0.533, 0.600) | 8 | 0.5722 | 0.2500 | 8 | 0.5722 | 0.2500 |
-| [0.600, 0.667) | 27 | 0.6364 | 0.4074 | 27 | 0.6364 | 0.4074 |
-| [0.667, 0.733) | 33 | 0.7005 | 0.3333 | 33 | 0.7005 | 0.3333 |
-| [0.733, 0.800) | 31 | 0.7632 | 0.1613 | 31 | 0.7632 | 0.1613 |
-| [0.800, 0.867) | 43 | 0.8303 | 0.4186 | 43 | 0.8303 | 0.4186 |
-| [0.867, 0.933) | 26 | 0.8944 | 0.4231 | 26 | 0.8944 | 0.4231 |
-| [0.933, 1.000) | 11 | 0.9471 | 0.5455 | 11 | 0.9471 | 0.5455 |
+| [0.467, 0.533) | 15 | 0.5193 | 0.5333 | 15 | 0.5193 | 0.5333 |
+| [0.533, 0.600) | 40 | 0.5627 | 0.4250 | 40 | 0.5627 | 0.4250 |
+| [0.600, 0.667) | 38 | 0.6363 | 0.3421 | 38 | 0.6363 | 0.3421 |
+| [0.667, 0.733) | 61 | 0.7053 | 0.3443 | 61 | 0.7053 | 0.3443 |
+| [0.733, 0.800) | 111 | 0.7705 | 0.3333 | 111 | 0.7705 | 0.3333 |
+| [0.800, 0.867) | 117 | 0.8384 | 0.3248 | 117 | 0.8384 | 0.3248 |
+| [0.867, 0.933) | 107 | 0.8954 | 0.3458 | 107 | 0.8954 | 0.3458 |
+| [0.933, 1.000) | 36 | 0.9547 | 0.4167 | 36 | 0.9547 | 0.4167 |
 
 Reliability data, `has_staff_pii` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 9 | 0.5186 | 0.6667 | 9 | 0.5186 | 0.6667 |
-| [0.533, 0.600) | 11 | 0.5690 | 0.3636 | 11 | 0.5690 | 0.3636 |
-| [0.600, 0.667) | 22 | 0.6377 | 0.2727 | 22 | 0.6377 | 0.2727 |
-| [0.667, 0.733) | 26 | 0.6986 | 0.4231 | 26 | 0.6986 | 0.4231 |
-| [0.733, 0.800) | 31 | 0.7680 | 0.2903 | 31 | 0.7680 | 0.2903 |
-| [0.800, 0.867) | 45 | 0.8321 | 0.3111 | 45 | 0.8321 | 0.3111 |
-| [0.867, 0.933) | 34 | 0.8967 | 0.3235 | 34 | 0.8967 | 0.3235 |
-| [0.933, 1.000) | 9 | 0.9502 | 0.2222 | 9 | 0.9502 | 0.2222 |
+| [0.467, 0.533) | 13 | 0.5141 | 0.7692 | 13 | 0.5141 | 0.7692 |
+| [0.533, 0.600) | 41 | 0.5664 | 0.5122 | 41 | 0.5664 | 0.5122 |
+| [0.600, 0.667) | 42 | 0.6376 | 0.5000 | 42 | 0.6376 | 0.5000 |
+| [0.667, 0.733) | 63 | 0.7052 | 0.2381 | 63 | 0.7052 | 0.2381 |
+| [0.733, 0.800) | 103 | 0.7674 | 0.2427 | 103 | 0.7674 | 0.2427 |
+| [0.800, 0.867) | 121 | 0.8334 | 0.3306 | 121 | 0.8334 | 0.3306 |
+| [0.867, 0.933) | 109 | 0.8978 | 0.3028 | 109 | 0.8978 | 0.3028 |
+| [0.933, 1.000) | 33 | 0.9565 | 0.3333 | 33 | 0.9565 | 0.3333 |
 
 ### B3 / qs_v2 (doc-level, underpowered), holdout
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present = raw (T fallback) | 0.2679 | 0.2679 | 0.5721 | 0.5721 | 0.6818 | 0.6818 |
-| has_phi_direct = raw (T fallback) | 0.7957 | 0.7957 | 1.2785 | 1.2785 | n/a | n/a |
-| has_phi_quasi = raw (T fallback) | 0.7486 | 0.7486 | 1.2103 | 1.2103 | 0.1000 | 0.1000 |
-| has_coded_id = raw (T fallback) | 0.7583 | 0.7583 | 1.1674 | 1.1674 | n/a | n/a |
-| has_staff_pii = raw (T fallback) | 0.1596 | 0.1596 | 0.4704 | 0.4704 | 0.6955 | 0.6955 |
+| pii_present = raw (T fallback) | 0.2508 | 0.2508 | 0.5519 | 0.5519 | 0.5290 | 0.5290 |
+| has_phi_direct = raw (T fallback) | 0.7846 | 0.7846 | 1.2818 | 1.2818 | 0.0482 | 0.0482 |
+| has_phi_quasi = raw (T fallback) | 0.7522 | 0.7522 | 1.2230 | 1.2230 | 0.0041 | 0.0041 |
+| has_coded_id = raw (T fallback) | 0.7657 | 0.7657 | 1.2567 | 1.2567 | 0.0366 | 0.0366 |
+| has_staff_pii = raw (T fallback) | 0.1310 | 0.1310 | 0.4420 | 0.4420 | 0.6319 | 0.6319 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.733, 0.800) | 1 | 0.7419 | 1.0000 | 1 | 0.7419 | 1.0000 |
-| [0.800, 0.867) | 7 | 0.8361 | 0.5714 | 7 | 0.8361 | 0.5714 |
-| [0.867, 0.933) | 15 | 0.9038 | 0.5333 | 15 | 0.9038 | 0.5333 |
-| [0.933, 1.000) | 8 | 0.9545 | 0.8750 | 8 | 0.9545 | 0.8750 |
+| [0.600, 0.667) | 2 | 0.6287 | 1.0000 | 2 | 0.6287 | 1.0000 |
+| [0.667, 0.733) | 2 | 0.7118 | 0.5000 | 2 | 0.7118 | 0.5000 |
+| [0.733, 0.800) | 3 | 0.7680 | 1.0000 | 3 | 0.7680 | 1.0000 |
+| [0.800, 0.867) | 19 | 0.8448 | 0.6316 | 19 | 0.8448 | 0.6316 |
+| [0.867, 0.933) | 40 | 0.9030 | 0.5750 | 40 | 0.9030 | 0.5750 |
+| [0.933, 1.000) | 18 | 0.9461 | 0.8333 | 18 | 0.9461 | 0.8333 |
 
 Reliability data, `has_phi_direct` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.600, 0.667) | 1 | 0.6320 | 0.0000 | 1 | 0.6320 | 0.0000 |
-| [0.667, 0.733) | 8 | 0.7072 | 0.0000 | 8 | 0.7072 | 0.0000 |
-| [0.733, 0.800) | 8 | 0.7758 | 0.0000 | 8 | 0.7758 | 0.0000 |
-| [0.800, 0.867) | 10 | 0.8484 | 0.0000 | 10 | 0.8484 | 0.0000 |
-| [0.867, 0.933) | 3 | 0.9128 | 0.0000 | 3 | 0.9128 | 0.0000 |
-| [0.933, 1.000) | 1 | 0.9481 | 0.0000 | 1 | 0.9481 | 0.0000 |
+| [0.467, 0.533) | 2 | 0.5147 | 0.0000 | 2 | 0.5147 | 0.0000 |
+| [0.533, 0.600) | 3 | 0.5841 | 0.3333 | 3 | 0.5841 | 0.3333 |
+| [0.600, 0.667) | 3 | 0.6550 | 0.0000 | 3 | 0.6550 | 0.0000 |
+| [0.667, 0.733) | 7 | 0.7123 | 0.0000 | 7 | 0.7123 | 0.0000 |
+| [0.733, 0.800) | 26 | 0.7652 | 0.0000 | 26 | 0.7652 | 0.0000 |
+| [0.800, 0.867) | 22 | 0.8342 | 0.0000 | 22 | 0.8342 | 0.0000 |
+| [0.867, 0.933) | 18 | 0.8933 | 0.0000 | 18 | 0.8933 | 0.0000 |
+| [0.933, 1.000) | 3 | 0.9480 | 0.0000 | 3 | 0.9480 | 0.0000 |
 
 Reliability data, `has_phi_quasi` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.533, 0.600) | 1 | 0.5988 | 0.0000 | 1 | 0.5988 | 0.0000 |
-| [0.600, 0.667) | 1 | 0.6641 | 0.0000 | 1 | 0.6641 | 0.0000 |
-| [0.667, 0.733) | 9 | 0.7046 | 0.1111 | 9 | 0.7046 | 0.1111 |
-| [0.733, 0.800) | 8 | 0.7676 | 0.0000 | 8 | 0.7676 | 0.0000 |
-| [0.800, 0.867) | 7 | 0.8407 | 0.0000 | 7 | 0.8407 | 0.0000 |
-| [0.867, 0.933) | 3 | 0.8991 | 0.0000 | 3 | 0.8991 | 0.0000 |
-| [0.933, 1.000) | 2 | 0.9399 | 0.0000 | 2 | 0.9399 | 0.0000 |
+| [0.467, 0.533) | 3 | 0.5120 | 0.6667 | 3 | 0.5120 | 0.6667 |
+| [0.533, 0.600) | 3 | 0.5696 | 0.3333 | 3 | 0.5696 | 0.3333 |
+| [0.600, 0.667) | 3 | 0.6460 | 0.0000 | 3 | 0.6460 | 0.0000 |
+| [0.667, 0.733) | 16 | 0.7034 | 0.0000 | 16 | 0.7034 | 0.0000 |
+| [0.733, 0.800) | 21 | 0.7727 | 0.0000 | 21 | 0.7727 | 0.0000 |
+| [0.800, 0.867) | 25 | 0.8362 | 0.0000 | 25 | 0.8362 | 0.0000 |
+| [0.867, 0.933) | 11 | 0.8910 | 0.0000 | 11 | 0.8910 | 0.0000 |
+| [0.933, 1.000) | 2 | 0.9424 | 0.0000 | 2 | 0.9424 | 0.0000 |
 
 Reliability data, `has_coded_id` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 1 | 0.5146 | 0.0000 | 1 | 0.5146 | 0.0000 |
-| [0.533, 0.600) | 1 | 0.5913 | 0.0000 | 1 | 0.5913 | 0.0000 |
-| [0.600, 0.667) | 3 | 0.6285 | 0.0000 | 3 | 0.6285 | 0.0000 |
-| [0.667, 0.733) | 4 | 0.7095 | 0.0000 | 4 | 0.7095 | 0.0000 |
-| [0.733, 0.800) | 10 | 0.7516 | 0.0000 | 10 | 0.7516 | 0.0000 |
-| [0.800, 0.867) | 8 | 0.8176 | 0.0000 | 8 | 0.8176 | 0.0000 |
-| [0.867, 0.933) | 4 | 0.9053 | 0.0000 | 4 | 0.9053 | 0.0000 |
+| [0.467, 0.533) | 1 | 0.5093 | 0.0000 | 1 | 0.5093 | 0.0000 |
+| [0.533, 0.600) | 4 | 0.5716 | 0.5000 | 4 | 0.5716 | 0.5000 |
+| [0.600, 0.667) | 3 | 0.6390 | 0.0000 | 3 | 0.6390 | 0.0000 |
+| [0.667, 0.733) | 12 | 0.6993 | 0.0000 | 12 | 0.6993 | 0.0000 |
+| [0.733, 0.800) | 23 | 0.7719 | 0.0000 | 23 | 0.7719 | 0.0000 |
+| [0.800, 0.867) | 23 | 0.8350 | 0.0000 | 23 | 0.8350 | 0.0000 |
+| [0.867, 0.933) | 16 | 0.8977 | 0.0000 | 16 | 0.8977 | 0.0000 |
+| [0.933, 1.000) | 2 | 0.9462 | 0.0000 | 2 | 0.9462 | 0.0000 |
 
 Reliability data, `has_staff_pii` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.667, 0.733) | 7 | 0.7148 | 0.4286 | 7 | 0.7148 | 0.4286 |
-| [0.733, 0.800) | 12 | 0.7688 | 0.5833 | 12 | 0.7688 | 0.5833 |
-| [0.800, 0.867) | 7 | 0.8270 | 0.8571 | 7 | 0.8270 | 0.8571 |
-| [0.867, 0.933) | 5 | 0.9017 | 0.8000 | 5 | 0.9017 | 0.8000 |
+| [0.467, 0.533) | 1 | 0.5244 | 0.0000 | 1 | 0.5244 | 0.0000 |
+| [0.533, 0.600) | 3 | 0.5613 | 0.3333 | 3 | 0.5613 | 0.3333 |
+| [0.600, 0.667) | 5 | 0.6293 | 0.8000 | 5 | 0.6293 | 0.8000 |
+| [0.667, 0.733) | 10 | 0.7082 | 0.5000 | 10 | 0.7082 | 0.5000 |
+| [0.733, 0.800) | 25 | 0.7683 | 0.6000 | 25 | 0.7683 | 0.6000 |
+| [0.800, 0.867) | 20 | 0.8344 | 0.8000 | 20 | 0.8344 | 0.8000 |
+| [0.867, 0.933) | 20 | 0.8983 | 0.8000 | 20 | 0.8983 | 0.8000 |
 
 ### B4 / qs_v1 (doc-level, underpowered), test
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.2568 | 0.1205 | 0.6152 | 0.4883 | 0.5529 | 0.5529 |
-| subject_role | 0.3259 | 0.0657 | 0.9165 | 0.7341 | 0.5858 | 0.5699 |
-| category | 0.3020 | 0.0595 | 0.9603 | 0.7999 | 0.4920 | 0.4856 |
-| doc_kind = raw (T fallback) | 0.5326 | 0.5326 | 1.1791 | 1.1791 | 0.4080 | 0.4088 |
+| pii_present | 0.2521 | 0.0659 | 0.6039 | 0.4789 | 0.5199 | 0.5199 |
+| subject_role | 0.4532 | 0.0335 | 1.0941 | 0.7508 | 0.5246 | 0.5288 |
+| category | 0.2893 | 0.0468 | 0.9526 | 0.7930 | 0.5274 | 0.5139 |
+| doc_kind = raw (T fallback) | 0.5522 | 0.5522 | 1.2802 | 1.2802 | 0.3731 | 0.3728 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 2 | 0.5137 | 0.5000 | 7 | 0.5159 | 0.4286 |
-| [0.533, 0.600) | 5 | 0.5608 | 0.4000 | 20 | 0.5656 | 0.4500 |
-| [0.600, 0.667) | 8 | 0.6359 | 0.2500 | 36 | 0.6368 | 0.7222 |
-| [0.667, 0.733) | 7 | 0.6925 | 0.5714 | 45 | 0.6964 | 0.5111 |
-| [0.733, 0.800) | 8 | 0.7690 | 0.6250 | 15 | 0.7625 | 0.7333 |
-| [0.800, 0.867) | 28 | 0.8404 | 0.7143 | 1 | 0.8383 | 1.0000 |
-| [0.867, 0.933) | 37 | 0.9081 | 0.5135 | 0 | n/a | n/a |
-| [0.933, 1.000) | 29 | 0.9586 | 0.6897 | 0 | n/a | n/a |
+| [0.467, 0.533) | 9 | 0.5153 | 0.2222 | 24 | 0.5137 | 0.4167 |
+| [0.533, 0.600) | 10 | 0.5613 | 0.5000 | 91 | 0.5765 | 0.6703 |
+| [0.600, 0.667) | 9 | 0.6260 | 0.5556 | 159 | 0.6340 | 0.5849 |
+| [0.667, 0.733) | 17 | 0.6994 | 0.4118 | 60 | 0.6884 | 0.6500 |
+| [0.733, 0.800) | 37 | 0.7706 | 0.8108 | 3 | 0.7410 | 0.3333 |
+| [0.800, 0.867) | 68 | 0.8361 | 0.6324 | 0 | n/a | n/a |
+| [0.867, 0.933) | 109 | 0.9028 | 0.5505 | 0 | n/a | n/a |
+| [0.933, 1.000) | 78 | 0.9544 | 0.6667 | 0 | n/a | n/a |
 
 Reliability data, `subject_role` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 0 | n/a | n/a | 18 | 0.2624 | 0.3333 |
-| [0.267, 0.333) | 2 | 0.2913 | 0.0000 | 93 | 0.2907 | 0.3441 |
-| [0.333, 0.400) | 7 | 0.3605 | 0.2857 | 10 | 0.3555 | 0.3000 |
-| [0.400, 0.467) | 21 | 0.4441 | 0.3333 | 1 | 0.4170 | 0.0000 |
-| [0.467, 0.533) | 15 | 0.4909 | 0.2000 | 0 | n/a | n/a |
-| [0.533, 0.600) | 11 | 0.5627 | 0.2727 | 2 | 0.5369 | 1.0000 |
-| [0.600, 0.667) | 9 | 0.6401 | 0.3333 | 0 | n/a | n/a |
-| [0.667, 0.733) | 5 | 0.6873 | 0.2000 | 0 | n/a | n/a |
-| [0.733, 0.800) | 10 | 0.7690 | 0.4000 | 0 | n/a | n/a |
-| [0.800, 0.867) | 9 | 0.8381 | 0.6667 | 0 | n/a | n/a |
-| [0.867, 0.933) | 14 | 0.8997 | 0.3571 | 0 | n/a | n/a |
-| [0.933, 1.000) | 21 | 0.9717 | 0.4286 | 0 | n/a | n/a |
+| [0.200, 0.267) | 0 | n/a | n/a | 122 | 0.2612 | 0.2623 |
+| [0.267, 0.333) | 5 | 0.3173 | 0.4000 | 208 | 0.2847 | 0.2356 |
+| [0.333, 0.400) | 25 | 0.3728 | 0.3600 | 5 | 0.3507 | 0.2000 |
+| [0.400, 0.467) | 32 | 0.4355 | 0.2188 | 2 | 0.4086 | 0.5000 |
+| [0.467, 0.533) | 33 | 0.4988 | 0.2121 | 0 | n/a | n/a |
+| [0.533, 0.600) | 32 | 0.5670 | 0.1250 | 0 | n/a | n/a |
+| [0.600, 0.667) | 30 | 0.6326 | 0.2333 | 0 | n/a | n/a |
+| [0.667, 0.733) | 29 | 0.6996 | 0.2759 | 0 | n/a | n/a |
+| [0.733, 0.800) | 22 | 0.7688 | 0.1364 | 0 | n/a | n/a |
+| [0.800, 0.867) | 28 | 0.8391 | 0.1071 | 0 | n/a | n/a |
+| [0.867, 0.933) | 37 | 0.8996 | 0.2973 | 0 | n/a | n/a |
+| [0.933, 1.000) | 64 | 0.9767 | 0.3438 | 0 | n/a | n/a |
 
 Reliability data, `category` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 1 | 0.2458 | 1.0000 | 63 | 0.2381 | 0.2540 |
-| [0.267, 0.333) | 13 | 0.3014 | 0.1538 | 50 | 0.2909 | 0.3400 |
-| [0.333, 0.400) | 23 | 0.3604 | 0.3043 | 6 | 0.3616 | 0.0000 |
-| [0.400, 0.467) | 10 | 0.4311 | 0.1000 | 2 | 0.4391 | 0.0000 |
-| [0.467, 0.533) | 9 | 0.4979 | 0.4444 | 0 | n/a | n/a |
-| [0.533, 0.600) | 16 | 0.5682 | 0.2500 | 2 | 0.5781 | 0.5000 |
-| [0.600, 0.667) | 12 | 0.6230 | 0.3333 | 0 | n/a | n/a |
-| [0.667, 0.733) | 14 | 0.6928 | 0.5000 | 1 | 0.7268 | 0.0000 |
-| [0.733, 0.800) | 7 | 0.7670 | 0.1429 | 0 | n/a | n/a |
-| [0.800, 0.867) | 8 | 0.8287 | 0.2500 | 0 | n/a | n/a |
-| [0.867, 0.933) | 5 | 0.9062 | 0.0000 | 0 | n/a | n/a |
-| [0.933, 1.000) | 6 | 0.9831 | 0.1667 | 0 | n/a | n/a |
+| [0.200, 0.267) | 6 | 0.2551 | 0.1667 | 273 | 0.2310 | 0.2821 |
+| [0.267, 0.333) | 36 | 0.3049 | 0.1389 | 58 | 0.2854 | 0.2759 |
+| [0.333, 0.400) | 51 | 0.3707 | 0.2941 | 5 | 0.3448 | 0.2000 |
+| [0.400, 0.467) | 42 | 0.4337 | 0.3571 | 1 | 0.4480 | 1.0000 |
+| [0.467, 0.533) | 39 | 0.5030 | 0.3590 | 0 | n/a | n/a |
+| [0.533, 0.600) | 31 | 0.5654 | 0.2258 | 0 | n/a | n/a |
+| [0.600, 0.667) | 25 | 0.6385 | 0.2800 | 0 | n/a | n/a |
+| [0.667, 0.733) | 19 | 0.7037 | 0.2632 | 0 | n/a | n/a |
+| [0.733, 0.800) | 16 | 0.7572 | 0.3125 | 0 | n/a | n/a |
+| [0.800, 0.867) | 28 | 0.8345 | 0.3214 | 0 | n/a | n/a |
+| [0.867, 0.933) | 23 | 0.8981 | 0.2174 | 0 | n/a | n/a |
+| [0.933, 1.000) | 21 | 0.9648 | 0.3333 | 0 | n/a | n/a |
 
 Reliability data, `doc_kind` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 1 | 0.2610 | 0.0000 | 1 | 0.2610 | 0.0000 |
-| [0.267, 0.333) | 6 | 0.3126 | 0.1667 | 6 | 0.3126 | 0.1667 |
-| [0.333, 0.400) | 8 | 0.3721 | 0.1250 | 8 | 0.3721 | 0.1250 |
-| [0.400, 0.467) | 8 | 0.4181 | 0.3750 | 8 | 0.4181 | 0.3750 |
-| [0.467, 0.533) | 13 | 0.4972 | 0.6923 | 13 | 0.4972 | 0.6923 |
-| [0.533, 0.600) | 5 | 0.5623 | 0.8000 | 5 | 0.5622 | 0.8000 |
-| [0.600, 0.667) | 5 | 0.6378 | 0.0000 | 5 | 0.6378 | 0.0000 |
-| [0.667, 0.733) | 4 | 0.6889 | 0.2500 | 4 | 0.6889 | 0.2500 |
-| [0.733, 0.800) | 3 | 0.7551 | 0.6667 | 3 | 0.7551 | 0.6667 |
-| [0.800, 0.867) | 4 | 0.8355 | 0.0000 | 4 | 0.8355 | 0.0000 |
-| [0.867, 0.933) | 4 | 0.9103 | 0.2500 | 4 | 0.9103 | 0.2500 |
-| [0.933, 1.000) | 63 | 0.9946 | 0.2381 | 63 | 0.9946 | 0.2381 |
+| [0.200, 0.267) | 4 | 0.2609 | 0.2500 | 4 | 0.2609 | 0.2500 |
+| [0.267, 0.333) | 7 | 0.3058 | 0.1429 | 7 | 0.3058 | 0.1429 |
+| [0.333, 0.400) | 20 | 0.3732 | 0.2500 | 20 | 0.3732 | 0.2500 |
+| [0.400, 0.467) | 19 | 0.4233 | 0.3158 | 19 | 0.4233 | 0.3158 |
+| [0.467, 0.533) | 19 | 0.5030 | 0.2632 | 19 | 0.5030 | 0.2632 |
+| [0.533, 0.600) | 22 | 0.5622 | 0.4091 | 22 | 0.5622 | 0.4091 |
+| [0.600, 0.667) | 19 | 0.6279 | 0.4737 | 19 | 0.6278 | 0.4737 |
+| [0.667, 0.733) | 12 | 0.7007 | 0.5000 | 12 | 0.7007 | 0.5000 |
+| [0.733, 0.800) | 11 | 0.7694 | 0.2727 | 11 | 0.7694 | 0.2727 |
+| [0.800, 0.867) | 5 | 0.8369 | 0.6000 | 5 | 0.8368 | 0.6000 |
+| [0.867, 0.933) | 15 | 0.9074 | 0.1333 | 15 | 0.9074 | 0.1333 |
+| [0.933, 1.000) | 184 | 0.9939 | 0.1848 | 184 | 0.9939 | 0.1848 |
 
 ### B4 / qs_v1 (doc-level, underpowered), holdout
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.2502 | 0.0840 | 0.5431 | 0.4397 | 0.5700 | 0.5700 |
-| subject_role | 0.2489 | 0.2775 | 0.6170 | 0.7075 | 0.5430 | 0.5566 |
-| category | 0.2311 | 0.4399 | 0.5131 | 0.7139 | 0.4974 | 0.5132 |
-| doc_kind = raw (T fallback) | 0.2444 | 0.2444 | 0.3366 | 0.3366 | 0.6640 | 0.6640 |
+| pii_present | 0.2249 | 0.0687 | 0.4974 | 0.4297 | 0.5432 | 0.5432 |
+| subject_role | 0.1897 | 0.3300 | 0.5791 | 0.7272 | 0.5482 | 0.5404 |
+| category | 0.1860 | 0.4063 | 0.5218 | 0.7530 | 0.6193 | 0.6193 |
+| doc_kind = raw (T fallback) | 0.1858 | 0.1858 | 0.4582 | 0.4581 | 0.5690 | 0.5690 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.533, 0.600) | 0 | n/a | n/a | 1 | 0.5878 | 1.0000 |
-| [0.600, 0.667) | 0 | n/a | n/a | 13 | 0.6413 | 0.5385 |
-| [0.667, 0.733) | 0 | n/a | n/a | 14 | 0.6952 | 0.7143 |
-| [0.733, 0.800) | 2 | 0.7690 | 1.0000 | 2 | 0.7480 | 1.0000 |
-| [0.800, 0.867) | 7 | 0.8318 | 0.5714 | 0 | n/a | n/a |
-| [0.867, 0.933) | 15 | 0.9015 | 0.6000 | 0 | n/a | n/a |
-| [0.933, 1.000) | 6 | 0.9498 | 0.8333 | 0 | n/a | n/a |
+| [0.467, 0.533) | 0 | n/a | n/a | 1 | 0.5284 | 1.0000 |
+| [0.533, 0.600) | 0 | n/a | n/a | 11 | 0.5787 | 0.7273 |
+| [0.600, 0.667) | 2 | 0.6289 | 1.0000 | 57 | 0.6345 | 0.6491 |
+| [0.667, 0.733) | 1 | 0.7082 | 0.0000 | 11 | 0.6765 | 0.9091 |
+| [0.733, 0.800) | 4 | 0.7651 | 1.0000 | 0 | n/a | n/a |
+| [0.800, 0.867) | 16 | 0.8429 | 0.6250 | 0 | n/a | n/a |
+| [0.867, 0.933) | 41 | 0.9025 | 0.6341 | 0 | n/a | n/a |
+| [0.933, 1.000) | 16 | 0.9447 | 0.8750 | 0 | n/a | n/a |
 
 Reliability data, `subject_role` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 0 | n/a | n/a | 3 | 0.2659 | 0.3333 |
-| [0.267, 0.333) | 0 | n/a | n/a | 26 | 0.2884 | 0.5769 |
-| [0.333, 0.400) | 1 | 0.3942 | 1.0000 | 1 | 0.3789 | 1.0000 |
-| [0.400, 0.467) | 5 | 0.4407 | 0.6000 | 0 | n/a | n/a |
-| [0.467, 0.533) | 1 | 0.4914 | 1.0000 | 0 | n/a | n/a |
-| [0.533, 0.600) | 4 | 0.5572 | 0.2500 | 0 | n/a | n/a |
-| [0.600, 0.667) | 2 | 0.6301 | 0.5000 | 0 | n/a | n/a |
-| [0.667, 0.733) | 4 | 0.6989 | 0.2500 | 0 | n/a | n/a |
-| [0.733, 0.800) | 4 | 0.7708 | 0.5000 | 0 | n/a | n/a |
-| [0.800, 0.867) | 6 | 0.8373 | 0.6667 | 0 | n/a | n/a |
-| [0.867, 0.933) | 1 | 0.8949 | 1.0000 | 0 | n/a | n/a |
-| [0.933, 1.000) | 2 | 0.9704 | 1.0000 | 0 | n/a | n/a |
+| [0.200, 0.267) | 0 | n/a | n/a | 39 | 0.2615 | 0.5897 |
+| [0.267, 0.333) | 3 | 0.3073 | 0.3333 | 41 | 0.2781 | 0.6098 |
+| [0.333, 0.400) | 5 | 0.3736 | 0.4000 | 0 | n/a | n/a |
+| [0.400, 0.467) | 8 | 0.4330 | 0.7500 | 0 | n/a | n/a |
+| [0.467, 0.533) | 8 | 0.4911 | 0.7500 | 0 | n/a | n/a |
+| [0.533, 0.600) | 12 | 0.5653 | 0.4167 | 0 | n/a | n/a |
+| [0.600, 0.667) | 7 | 0.6217 | 0.7143 | 0 | n/a | n/a |
+| [0.667, 0.733) | 7 | 0.6925 | 0.2857 | 0 | n/a | n/a |
+| [0.733, 0.800) | 10 | 0.7640 | 0.8000 | 0 | n/a | n/a |
+| [0.800, 0.867) | 8 | 0.8279 | 0.6250 | 0 | n/a | n/a |
+| [0.867, 0.933) | 8 | 0.9051 | 0.7500 | 0 | n/a | n/a |
+| [0.933, 1.000) | 4 | 0.9645 | 0.5000 | 0 | n/a | n/a |
 
 Reliability data, `category` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.200, 0.267) | 0 | n/a | n/a | 20 | 0.2442 | 0.7000 |
-| [0.267, 0.333) | 2 | 0.3293 | 1.0000 | 9 | 0.2838 | 0.6667 |
-| [0.333, 0.400) | 5 | 0.3637 | 0.6000 | 1 | 0.3642 | 1.0000 |
-| [0.400, 0.467) | 7 | 0.4440 | 0.7143 | 0 | n/a | n/a |
-| [0.467, 0.533) | 4 | 0.5081 | 0.7500 | 0 | n/a | n/a |
-| [0.533, 0.600) | 4 | 0.5618 | 0.5000 | 0 | n/a | n/a |
-| [0.600, 0.667) | 4 | 0.6336 | 0.5000 | 0 | n/a | n/a |
-| [0.667, 0.733) | 1 | 0.7008 | 1.0000 | 0 | n/a | n/a |
-| [0.733, 0.800) | 1 | 0.7708 | 1.0000 | 0 | n/a | n/a |
-| [0.800, 0.867) | 1 | 0.8358 | 1.0000 | 0 | n/a | n/a |
-| [0.867, 0.933) | 1 | 0.9243 | 1.0000 | 0 | n/a | n/a |
+| [0.200, 0.267) | 1 | 0.2469 | 0.0000 | 79 | 0.2305 | 0.6329 |
+| [0.267, 0.333) | 8 | 0.3125 | 0.6250 | 1 | 0.2850 | 1.0000 |
+| [0.333, 0.400) | 17 | 0.3738 | 0.4706 | 0 | n/a | n/a |
+| [0.400, 0.467) | 10 | 0.4346 | 0.7000 | 0 | n/a | n/a |
+| [0.467, 0.533) | 17 | 0.4988 | 0.7059 | 0 | n/a | n/a |
+| [0.533, 0.600) | 7 | 0.5563 | 0.4286 | 0 | n/a | n/a |
+| [0.600, 0.667) | 6 | 0.6353 | 0.8333 | 0 | n/a | n/a |
+| [0.667, 0.733) | 7 | 0.6966 | 0.5714 | 0 | n/a | n/a |
+| [0.733, 0.800) | 3 | 0.7571 | 1.0000 | 0 | n/a | n/a |
+| [0.800, 0.867) | 3 | 0.8168 | 1.0000 | 0 | n/a | n/a |
+| [0.867, 0.933) | 1 | 0.9210 | 1.0000 | 0 | n/a | n/a |
 
 Reliability data, `doc_kind` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.400, 0.467) | 3 | 0.4327 | 0.6667 | 3 | 0.4327 | 0.6667 |
-| [0.467, 0.533) | 5 | 0.4905 | 0.6000 | 5 | 0.4905 | 0.6000 |
-| [0.533, 0.600) | 3 | 0.5464 | 1.0000 | 3 | 0.5464 | 1.0000 |
-| [0.600, 0.667) | 3 | 0.6329 | 0.6667 | 3 | 0.6329 | 0.6667 |
-| [0.667, 0.733) | 7 | 0.6905 | 1.0000 | 7 | 0.6905 | 1.0000 |
-| [0.733, 0.800) | 4 | 0.7481 | 1.0000 | 4 | 0.7481 | 1.0000 |
-| [0.800, 0.867) | 1 | 0.8016 | 1.0000 | 1 | 0.8016 | 1.0000 |
-| [0.867, 0.933) | 3 | 0.9172 | 1.0000 | 3 | 0.9173 | 1.0000 |
-| [0.933, 1.000) | 1 | 0.9999 | 0.0000 | 1 | 0.9999 | 0.0000 |
+| [0.267, 0.333) | 3 | 0.3058 | 0.6667 | 3 | 0.3058 | 0.6667 |
+| [0.333, 0.400) | 12 | 0.3779 | 0.6667 | 12 | 0.3779 | 0.6667 |
+| [0.400, 0.467) | 12 | 0.4374 | 0.5833 | 12 | 0.4374 | 0.5833 |
+| [0.467, 0.533) | 4 | 0.4968 | 0.7500 | 4 | 0.4968 | 0.7500 |
+| [0.533, 0.600) | 13 | 0.5715 | 0.6923 | 13 | 0.5715 | 0.6923 |
+| [0.600, 0.667) | 9 | 0.6339 | 1.0000 | 9 | 0.6339 | 1.0000 |
+| [0.667, 0.733) | 4 | 0.6846 | 0.7500 | 4 | 0.6846 | 0.7500 |
+| [0.733, 0.800) | 8 | 0.7737 | 0.7500 | 8 | 0.7737 | 0.7500 |
+| [0.800, 0.867) | 6 | 0.8279 | 0.8333 | 6 | 0.8279 | 0.8333 |
+| [0.867, 0.933) | 6 | 0.8866 | 0.8333 | 6 | 0.8866 | 0.8333 |
+| [0.933, 1.000) | 3 | 0.9619 | 0.3333 | 3 | 0.9619 | 0.3333 |
 
 ### B4 / qs_v2 (doc-level, underpowered), test
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.2712 | 0.0905 | 0.6207 | 0.4873 | 0.5373 | 0.5373 |
-| has_phi_direct = raw (T fallback) | 0.4234 | 0.4234 | 0.8488 | 0.8488 | 0.4548 | 0.4548 |
-| has_phi_quasi | 0.3085 | 0.0672 | 0.7019 | 0.5068 | 0.5261 | 0.5261 |
-| has_coded_id = raw (T fallback) | 0.2285 | 0.2285 | 0.6025 | 0.6025 | 0.5438 | 0.5438 |
-| has_staff_pii = raw (T fallback) | 0.3304 | 0.3304 | 0.7506 | 0.7506 | 0.4258 | 0.4258 |
+| pii_present | 0.2521 | 0.0659 | 0.6039 | 0.4789 | 0.5199 | 0.5199 |
+| has_phi_direct = raw (T fallback) | 0.4060 | 0.4060 | 0.8671 | 0.8671 | 0.3718 | 0.3718 |
+| has_phi_quasi | 0.3029 | 0.0341 | 0.7127 | 0.5044 | 0.4393 | 0.4393 |
+| has_coded_id = raw (T fallback) | 0.2755 | 0.2755 | 0.6793 | 0.6793 | 0.4517 | 0.4517 |
+| has_staff_pii = raw (T fallback) | 0.3293 | 0.3293 | 0.7361 | 0.7361 | 0.4589 | 0.4589 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 1 | 0.5215 | 1.0000 | 8 | 0.5222 | 0.5000 |
-| [0.533, 0.600) | 7 | 0.5741 | 0.4286 | 13 | 0.5614 | 0.3846 |
-| [0.600, 0.667) | 5 | 0.6367 | 0.2000 | 37 | 0.6366 | 0.6757 |
-| [0.667, 0.733) | 7 | 0.6959 | 0.4286 | 50 | 0.6994 | 0.5800 |
-| [0.733, 0.800) | 3 | 0.7812 | 0.6667 | 14 | 0.7628 | 0.7143 |
-| [0.800, 0.867) | 27 | 0.8408 | 0.7778 | 2 | 0.8231 | 0.5000 |
-| [0.867, 0.933) | 37 | 0.9071 | 0.5405 | 0 | n/a | n/a |
-| [0.933, 1.000) | 37 | 0.9586 | 0.6216 | 0 | n/a | n/a |
+| [0.467, 0.533) | 9 | 0.5153 | 0.2222 | 24 | 0.5137 | 0.4167 |
+| [0.533, 0.600) | 10 | 0.5613 | 0.5000 | 91 | 0.5765 | 0.6703 |
+| [0.600, 0.667) | 9 | 0.6258 | 0.5556 | 160 | 0.6342 | 0.5813 |
+| [0.667, 0.733) | 17 | 0.6995 | 0.4118 | 59 | 0.6887 | 0.6610 |
+| [0.733, 0.800) | 37 | 0.7705 | 0.8108 | 3 | 0.7410 | 0.3333 |
+| [0.800, 0.867) | 68 | 0.8361 | 0.6324 | 0 | n/a | n/a |
+| [0.867, 0.933) | 109 | 0.9028 | 0.5505 | 0 | n/a | n/a |
+| [0.933, 1.000) | 78 | 0.9544 | 0.6667 | 0 | n/a | n/a |
 
 Reliability data, `has_phi_direct` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 5 | 0.5116 | 0.6000 | 5 | 0.5116 | 0.6000 |
-| [0.533, 0.600) | 12 | 0.5684 | 0.4167 | 12 | 0.5684 | 0.4167 |
-| [0.600, 0.667) | 12 | 0.6358 | 0.2500 | 12 | 0.6358 | 0.2500 |
-| [0.667, 0.733) | 18 | 0.7017 | 0.3333 | 18 | 0.7017 | 0.3333 |
-| [0.733, 0.800) | 26 | 0.7655 | 0.4231 | 26 | 0.7655 | 0.4231 |
-| [0.800, 0.867) | 18 | 0.8352 | 0.2222 | 18 | 0.8352 | 0.2222 |
-| [0.867, 0.933) | 26 | 0.8983 | 0.3846 | 26 | 0.8983 | 0.3846 |
-| [0.933, 1.000) | 7 | 0.9540 | 0.1429 | 7 | 0.9540 | 0.1429 |
+| [0.467, 0.533) | 12 | 0.5204 | 0.5833 | 12 | 0.5204 | 0.5833 |
+| [0.533, 0.600) | 21 | 0.5673 | 0.5238 | 21 | 0.5673 | 0.5238 |
+| [0.600, 0.667) | 35 | 0.6350 | 0.5714 | 35 | 0.6350 | 0.5714 |
+| [0.667, 0.733) | 46 | 0.7038 | 0.4783 | 46 | 0.7038 | 0.4783 |
+| [0.733, 0.800) | 67 | 0.7693 | 0.3433 | 67 | 0.7693 | 0.3433 |
+| [0.800, 0.867) | 77 | 0.8388 | 0.2597 | 77 | 0.8388 | 0.2597 |
+| [0.867, 0.933) | 55 | 0.8991 | 0.2364 | 55 | 0.8991 | 0.2364 |
+| [0.933, 1.000) | 24 | 0.9573 | 0.4167 | 24 | 0.9573 | 0.4167 |
 
 Reliability data, `has_phi_quasi` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 3 | 0.5228 | 0.0000 | 46 | 0.5196 | 0.5000 |
-| [0.533, 0.600) | 8 | 0.5666 | 0.6250 | 76 | 0.5554 | 0.4605 |
-| [0.600, 0.667) | 15 | 0.6321 | 0.6000 | 2 | 0.6076 | 0.5000 |
-| [0.667, 0.733) | 14 | 0.7063 | 0.4286 | 0 | n/a | n/a |
-| [0.733, 0.800) | 24 | 0.7637 | 0.3750 | 0 | n/a | n/a |
-| [0.800, 0.867) | 29 | 0.8360 | 0.3793 | 0 | n/a | n/a |
-| [0.867, 0.933) | 25 | 0.9012 | 0.6000 | 0 | n/a | n/a |
-| [0.933, 1.000) | 6 | 0.9573 | 0.6667 | 0 | n/a | n/a |
+| [0.467, 0.533) | 12 | 0.5166 | 0.7500 | 292 | 0.5176 | 0.4863 |
+| [0.533, 0.600) | 22 | 0.5647 | 0.4091 | 45 | 0.5415 | 0.4889 |
+| [0.600, 0.667) | 37 | 0.6335 | 0.6486 | 0 | n/a | n/a |
+| [0.667, 0.733) | 43 | 0.6989 | 0.5581 | 0 | n/a | n/a |
+| [0.733, 0.800) | 67 | 0.7663 | 0.4179 | 0 | n/a | n/a |
+| [0.800, 0.867) | 79 | 0.8324 | 0.4304 | 0 | n/a | n/a |
+| [0.867, 0.933) | 59 | 0.8970 | 0.4576 | 0 | n/a | n/a |
+| [0.933, 1.000) | 18 | 0.9558 | 0.5000 | 0 | n/a | n/a |
 
 Reliability data, `has_coded_id` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 7 | 0.5155 | 0.4286 | 7 | 0.5155 | 0.4286 |
-| [0.533, 0.600) | 7 | 0.5784 | 0.2857 | 7 | 0.5784 | 0.2857 |
-| [0.600, 0.667) | 24 | 0.6346 | 0.6667 | 24 | 0.6346 | 0.6667 |
-| [0.667, 0.733) | 23 | 0.7019 | 0.4783 | 23 | 0.7019 | 0.4783 |
-| [0.733, 0.800) | 14 | 0.7625 | 0.4286 | 14 | 0.7625 | 0.4286 |
-| [0.800, 0.867) | 19 | 0.8351 | 0.5263 | 19 | 0.8351 | 0.5263 |
-| [0.867, 0.933) | 22 | 0.8932 | 0.5909 | 22 | 0.8932 | 0.5909 |
-| [0.933, 1.000) | 8 | 0.9459 | 0.6250 | 8 | 0.9459 | 0.6250 |
+| [0.467, 0.533) | 7 | 0.5173 | 0.7143 | 7 | 0.5173 | 0.7143 |
+| [0.533, 0.600) | 30 | 0.5680 | 0.4667 | 30 | 0.5680 | 0.4667 |
+| [0.600, 0.667) | 28 | 0.6394 | 0.6786 | 28 | 0.6394 | 0.6786 |
+| [0.667, 0.733) | 41 | 0.7009 | 0.5610 | 41 | 0.7009 | 0.5610 |
+| [0.733, 0.800) | 61 | 0.7710 | 0.5410 | 61 | 0.7710 | 0.5410 |
+| [0.800, 0.867) | 79 | 0.8305 | 0.5063 | 79 | 0.8305 | 0.5063 |
+| [0.867, 0.933) | 68 | 0.8957 | 0.4118 | 68 | 0.8957 | 0.4118 |
+| [0.933, 1.000) | 23 | 0.9588 | 0.5652 | 23 | 0.9588 | 0.5652 |
 
 Reliability data, `has_staff_pii` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 7 | 0.5227 | 0.7143 | 7 | 0.5227 | 0.7143 |
-| [0.533, 0.600) | 10 | 0.5668 | 0.4000 | 10 | 0.5668 | 0.4000 |
-| [0.600, 0.667) | 13 | 0.6461 | 0.5385 | 13 | 0.6461 | 0.5385 |
-| [0.667, 0.733) | 19 | 0.6950 | 0.5263 | 19 | 0.6950 | 0.5263 |
-| [0.733, 0.800) | 21 | 0.7631 | 0.4762 | 21 | 0.7631 | 0.4762 |
-| [0.800, 0.867) | 21 | 0.8275 | 0.3333 | 21 | 0.8275 | 0.3333 |
-| [0.867, 0.933) | 25 | 0.8935 | 0.4400 | 25 | 0.8935 | 0.4400 |
-| [0.933, 1.000) | 8 | 0.9519 | 0.2500 | 8 | 0.9519 | 0.2500 |
+| [0.467, 0.533) | 9 | 0.5172 | 0.7778 | 9 | 0.5172 | 0.7778 |
+| [0.533, 0.600) | 26 | 0.5696 | 0.6154 | 26 | 0.5696 | 0.6154 |
+| [0.600, 0.667) | 35 | 0.6327 | 0.5429 | 35 | 0.6327 | 0.5429 |
+| [0.667, 0.733) | 52 | 0.7040 | 0.3846 | 52 | 0.7040 | 0.3846 |
+| [0.733, 0.800) | 69 | 0.7675 | 0.3768 | 69 | 0.7675 | 0.3768 |
+| [0.800, 0.867) | 69 | 0.8314 | 0.4493 | 69 | 0.8314 | 0.4493 |
+| [0.867, 0.933) | 56 | 0.8977 | 0.4821 | 56 | 0.8977 | 0.4821 |
+| [0.933, 1.000) | 21 | 0.9571 | 0.4286 | 21 | 0.9571 | 0.4286 |
 
 ### B4 / qs_v2 (doc-level, underpowered), holdout
 
 | question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
 |---|---|---|---|---|---|---|
-| pii_present | 0.2484 | 0.1282 | 0.5450 | 0.4321 | 0.6600 | 0.6600 |
-| has_phi_direct = raw (T fallback) | 0.8004 | 0.8004 | 1.2920 | 1.2920 | n/a | n/a |
-| has_phi_quasi | 0.7831 | 0.5424 | 1.2409 | 0.5892 | n/a | n/a |
-| has_coded_id = raw (T fallback) | 0.7629 | 0.7629 | 1.1800 | 1.1800 | n/a | n/a |
-| has_staff_pii = raw (T fallback) | 0.1407 | 0.1407 | 0.4544 | 0.4544 | 0.6600 | 0.6600 |
+| pii_present | 0.2249 | 0.0688 | 0.4974 | 0.4298 | 0.5428 | 0.5428 |
+| has_phi_direct = raw (T fallback) | 0.7858 | 0.7858 | 1.2852 | 1.2852 | 0.0380 | 0.0380 |
+| has_phi_quasi | 0.7526 | 0.4954 | 1.2238 | 0.5416 | 0.0064 | 0.0064 |
+| has_coded_id = raw (T fallback) | 0.7776 | 0.7776 | 1.2614 | 1.2614 | 0.0380 | 0.0380 |
+| has_staff_pii = raw (T fallback) | 0.1015 | 0.1015 | 0.4079 | 0.4079 | 0.6700 | 0.6700 |
 
 Reliability data, `pii_present` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.533, 0.600) | 0 | n/a | n/a | 1 | 0.5854 | 1.0000 |
-| [0.600, 0.667) | 0 | n/a | n/a | 11 | 0.6451 | 0.4545 |
-| [0.667, 0.733) | 0 | n/a | n/a | 15 | 0.6936 | 0.7333 |
-| [0.733, 0.800) | 1 | 0.7419 | 1.0000 | 3 | 0.7531 | 1.0000 |
-| [0.800, 0.867) | 6 | 0.8365 | 0.6667 | 0 | n/a | n/a |
-| [0.867, 0.933) | 15 | 0.9026 | 0.5333 | 0 | n/a | n/a |
-| [0.933, 1.000) | 8 | 0.9545 | 0.8750 | 0 | n/a | n/a |
+| [0.467, 0.533) | 0 | n/a | n/a | 1 | 0.5284 | 1.0000 |
+| [0.533, 0.600) | 0 | n/a | n/a | 11 | 0.5787 | 0.7273 |
+| [0.600, 0.667) | 2 | 0.6287 | 1.0000 | 57 | 0.6345 | 0.6491 |
+| [0.667, 0.733) | 1 | 0.7082 | 0.0000 | 11 | 0.6764 | 0.9091 |
+| [0.733, 0.800) | 4 | 0.7651 | 1.0000 | 0 | n/a | n/a |
+| [0.800, 0.867) | 17 | 0.8443 | 0.6471 | 0 | n/a | n/a |
+| [0.867, 0.933) | 40 | 0.9034 | 0.6250 | 0 | n/a | n/a |
+| [0.933, 1.000) | 16 | 0.9447 | 0.8750 | 0 | n/a | n/a |
 
 Reliability data, `has_phi_direct` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.667, 0.733) | 8 | 0.7072 | 0.0000 | 8 | 0.7072 | 0.0000 |
-| [0.733, 0.800) | 8 | 0.7758 | 0.0000 | 8 | 0.7758 | 0.0000 |
-| [0.800, 0.867) | 10 | 0.8461 | 0.0000 | 10 | 0.8461 | 0.0000 |
-| [0.867, 0.933) | 3 | 0.9128 | 0.0000 | 3 | 0.9128 | 0.0000 |
-| [0.933, 1.000) | 1 | 0.9481 | 0.0000 | 1 | 0.9481 | 0.0000 |
+| [0.467, 0.533) | 1 | 0.5288 | 0.0000 | 1 | 0.5288 | 0.0000 |
+| [0.533, 0.600) | 3 | 0.5841 | 0.3333 | 3 | 0.5841 | 0.3333 |
+| [0.600, 0.667) | 3 | 0.6550 | 0.0000 | 3 | 0.6550 | 0.0000 |
+| [0.667, 0.733) | 7 | 0.7123 | 0.0000 | 7 | 0.7123 | 0.0000 |
+| [0.733, 0.800) | 26 | 0.7675 | 0.0000 | 26 | 0.7675 | 0.0000 |
+| [0.800, 0.867) | 20 | 0.8350 | 0.0000 | 20 | 0.8350 | 0.0000 |
+| [0.867, 0.933) | 18 | 0.8933 | 0.0000 | 18 | 0.8933 | 0.0000 |
+| [0.933, 1.000) | 2 | 0.9464 | 0.0000 | 2 | 0.9464 | 0.0000 |
 
 Reliability data, `has_phi_quasi` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 0 | n/a | n/a | 11 | 0.5258 | 0.0000 |
-| [0.533, 0.600) | 1 | 0.5988 | 0.0000 | 19 | 0.5521 | 0.0000 |
-| [0.600, 0.667) | 1 | 0.6641 | 0.0000 | 0 | n/a | n/a |
-| [0.667, 0.733) | 8 | 0.7068 | 0.0000 | 0 | n/a | n/a |
-| [0.733, 0.800) | 8 | 0.7676 | 0.0000 | 0 | n/a | n/a |
-| [0.800, 0.867) | 7 | 0.8366 | 0.0000 | 0 | n/a | n/a |
-| [0.867, 0.933) | 3 | 0.8991 | 0.0000 | 0 | n/a | n/a |
-| [0.933, 1.000) | 2 | 0.9399 | 0.0000 | 0 | n/a | n/a |
+| [0.467, 0.533) | 2 | 0.5149 | 0.5000 | 74 | 0.5191 | 0.0270 |
+| [0.533, 0.600) | 3 | 0.5696 | 0.3333 | 6 | 0.5362 | 0.0000 |
+| [0.600, 0.667) | 3 | 0.6460 | 0.0000 | 0 | n/a | n/a |
+| [0.667, 0.733) | 16 | 0.7034 | 0.0000 | 0 | n/a | n/a |
+| [0.733, 0.800) | 20 | 0.7729 | 0.0000 | 0 | n/a | n/a |
+| [0.800, 0.867) | 24 | 0.8368 | 0.0000 | 0 | n/a | n/a |
+| [0.867, 0.933) | 11 | 0.8910 | 0.0000 | 0 | n/a | n/a |
+| [0.933, 1.000) | 1 | 0.9373 | 0.0000 | 0 | n/a | n/a |
 
 Reliability data, `has_coded_id` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.467, 0.533) | 1 | 0.5146 | 0.0000 | 1 | 0.5146 | 0.0000 |
-| [0.600, 0.667) | 3 | 0.6285 | 0.0000 | 3 | 0.6285 | 0.0000 |
-| [0.667, 0.733) | 4 | 0.7095 | 0.0000 | 4 | 0.7095 | 0.0000 |
-| [0.733, 0.800) | 11 | 0.7535 | 0.0000 | 11 | 0.7535 | 0.0000 |
-| [0.800, 0.867) | 7 | 0.8200 | 0.0000 | 7 | 0.8200 | 0.0000 |
-| [0.867, 0.933) | 4 | 0.9053 | 0.0000 | 4 | 0.9053 | 0.0000 |
+| [0.467, 0.533) | 1 | 0.5093 | 0.0000 | 1 | 0.5093 | 0.0000 |
+| [0.533, 0.600) | 3 | 0.5692 | 0.3333 | 3 | 0.5692 | 0.3333 |
+| [0.600, 0.667) | 3 | 0.6390 | 0.0000 | 3 | 0.6390 | 0.0000 |
+| [0.667, 0.733) | 12 | 0.6993 | 0.0000 | 12 | 0.6993 | 0.0000 |
+| [0.733, 0.800) | 21 | 0.7729 | 0.0000 | 21 | 0.7729 | 0.0000 |
+| [0.800, 0.867) | 23 | 0.8321 | 0.0000 | 23 | 0.8321 | 0.0000 |
+| [0.867, 0.933) | 16 | 0.8977 | 0.0000 | 16 | 0.8977 | 0.0000 |
+| [0.933, 1.000) | 1 | 0.9541 | 0.0000 | 1 | 0.9541 | 0.0000 |
 
 Reliability data, `has_staff_pii` (non-empty bins):
 
 | bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
 |---|---|---|---|---|---|---|
-| [0.667, 0.733) | 6 | 0.7176 | 0.5000 | 6 | 0.7176 | 0.5000 |
-| [0.733, 0.800) | 12 | 0.7664 | 0.5833 | 12 | 0.7664 | 0.5833 |
-| [0.800, 0.867) | 7 | 0.8270 | 0.8571 | 7 | 0.8270 | 0.8571 |
-| [0.867, 0.933) | 5 | 0.9017 | 0.8000 | 5 | 0.9017 | 0.8000 |
+| [0.467, 0.533) | 1 | 0.5244 | 0.0000 | 1 | 0.5244 | 0.0000 |
+| [0.533, 0.600) | 3 | 0.5613 | 0.3333 | 3 | 0.5613 | 0.3333 |
+| [0.600, 0.667) | 4 | 0.6327 | 0.7500 | 4 | 0.6327 | 0.7500 |
+| [0.667, 0.733) | 10 | 0.7082 | 0.5000 | 10 | 0.7082 | 0.5000 |
+| [0.733, 0.800) | 23 | 0.7663 | 0.6522 | 23 | 0.7663 | 0.6522 |
+| [0.800, 0.867) | 20 | 0.8343 | 0.8000 | 20 | 0.8343 | 0.8000 |
+| [0.867, 0.933) | 19 | 0.8972 | 0.8421 | 19 | 0.8972 | 0.8421 |
+
+### C / qs_v1, test
+
+| question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
+|---|---|---|---|---|---|---|
+| pii_present | 0.0009 | 0.0004 | 0.0021 | 0.0021 | 0.9889 | 0.9889 |
+| subject_role | 0.0032 | 0.0009 | 0.0039 | 0.0040 | 0.9527 | 0.9591 |
+| category | 0.0049 | 0.0012 | 0.0043 | 0.0044 | 0.6796 | 0.7014 |
+| doc_kind | 0.0554 | 0.0575 | 0.6238 | 0.6242 | 0.6836 | 0.6836 |
+
+Reliability data, `pii_present` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.533, 0.600) | 1 | 0.5467 | 1.0000 | 1 | 0.5499 | 1.0000 |
+| [0.600, 0.667) | 1 | 0.6246 | 0.0000 | 1 | 0.6328 | 0.0000 |
+| [0.667, 0.733) | 1 | 0.6976 | 0.0000 | 1 | 0.7097 | 0.0000 |
+| [0.867, 0.933) | 2 | 0.8996 | 1.0000 | 2 | 0.9125 | 1.0000 |
+| [0.933, 1.000) | 5708 | 0.9986 | 0.9991 | 5708 | 0.9991 | 0.9991 |
+
+Reliability data, `subject_role` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.400, 0.467) | 1 | 0.4351 | 0.0000 | 1 | 0.4573 | 0.0000 |
+| [0.467, 0.533) | 1 | 0.5074 | 0.0000 | 1 | 0.5326 | 0.0000 |
+| [0.533, 0.600) | 2 | 0.5656 | 0.5000 | 1 | 0.5450 | 1.0000 |
+| [0.600, 0.667) | 1 | 0.6021 | 0.0000 | 2 | 0.6130 | 0.0000 |
+| [0.867, 0.933) | 2 | 0.9007 | 0.5000 | 1 | 0.8983 | 0.0000 |
+| [0.933, 1.000) | 5706 | 0.9957 | 0.9984 | 5707 | 0.9981 | 0.9984 |
+
+Reliability data, `category` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.800, 0.867) | 1 | 0.8271 | 0.0000 | 0 | n/a | n/a |
+| [0.867, 0.933) | 4 | 0.8964 | 0.5000 | 4 | 0.9109 | 0.2500 |
+| [0.933, 1.000) | 5708 | 0.9938 | 0.9982 | 5709 | 0.9975 | 0.9982 |
+
+Reliability data, `doc_kind` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.200, 0.267) | 15 | 0.2655 | 0.4000 | 116 | 0.2654 | 0.3966 |
+| [0.267, 0.333) | 4583 | 0.2863 | 0.3450 | 4501 | 0.2816 | 0.3444 |
+| [0.333, 0.400) | 54 | 0.3611 | 0.4630 | 48 | 0.3640 | 0.4167 |
+| [0.400, 0.467) | 21 | 0.4281 | 0.2857 | 14 | 0.4310 | 0.4286 |
+| [0.467, 0.533) | 10 | 0.4987 | 0.6000 | 11 | 0.5011 | 0.5455 |
+| [0.533, 0.600) | 8 | 0.5634 | 0.6250 | 5 | 0.5710 | 0.8000 |
+| [0.600, 0.667) | 6 | 0.6427 | 0.6667 | 5 | 0.6313 | 0.6000 |
+| [0.667, 0.733) | 3 | 0.7098 | 0.6667 | 4 | 0.7051 | 0.7500 |
+| [0.733, 0.800) | 5 | 0.7737 | 0.8000 | 4 | 0.7597 | 0.5000 |
+| [0.800, 0.867) | 4 | 0.8359 | 0.2500 | 7 | 0.8389 | 0.1429 |
+| [0.867, 0.933) | 9 | 0.9041 | 0.2222 | 8 | 0.8993 | 0.3750 |
+| [0.933, 1.000) | 995 | 0.9936 | 0.9668 | 990 | 0.9857 | 0.9697 |
+
+### C / qs_v1, holdout
+
+| question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
+|---|---|---|---|---|---|---|
+| pii_present | 0.0083 | 0.0090 | 0.0224 | 0.0226 | 0.9923 | 0.9923 |
+| subject_role | 0.0144 | 0.0175 | 0.0387 | 0.0395 | 0.9865 | 0.9864 |
+| category | 0.0201 | 0.0235 | 0.0508 | 0.0512 | 0.8956 | 0.9093 |
+| doc_kind | 0.3007 | 0.2940 | 0.7846 | 0.7768 | 0.9485 | 0.9485 |
+
+Reliability data, `pii_present` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.467, 0.533) | 1 | 0.5324 | 0.0000 | 0 | n/a | n/a |
+| [0.533, 0.600) | 2 | 0.5586 | 0.5000 | 3 | 0.5533 | 0.3333 |
+| [0.600, 0.667) | 5 | 0.6263 | 0.4000 | 5 | 0.6346 | 0.4000 |
+| [0.667, 0.733) | 2 | 0.6709 | 0.5000 | 2 | 0.6818 | 0.5000 |
+| [0.733, 0.800) | 2 | 0.7480 | 0.5000 | 2 | 0.7620 | 0.5000 |
+| [0.800, 0.867) | 3 | 0.8125 | 0.6667 | 3 | 0.8275 | 0.6667 |
+| [0.867, 0.933) | 1 | 0.9062 | 1.0000 | 1 | 0.9187 | 1.0000 |
+| [0.933, 1.000) | 708 | 0.9984 | 0.9944 | 708 | 0.9989 | 0.9944 |
+
+Reliability data, `subject_role` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.800, 0.867) | 4 | 0.8321 | 0.5000 | 3 | 0.8598 | 0.6667 |
+| [0.867, 0.933) | 3 | 0.8982 | 0.6667 | 3 | 0.9098 | 0.6667 |
+| [0.933, 1.000) | 717 | 0.9950 | 0.9833 | 718 | 0.9977 | 0.9819 |
+
+Reliability data, `category` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.533, 0.600) | 3 | 0.5564 | 1.0000 | 3 | 0.5678 | 1.0000 |
+| [0.600, 0.667) | 4 | 0.6247 | 0.5000 | 3 | 0.6336 | 0.6667 |
+| [0.667, 0.733) | 2 | 0.7163 | 1.0000 | 2 | 0.7038 | 0.5000 |
+| [0.733, 0.800) | 1 | 0.7902 | 1.0000 | 1 | 0.7609 | 1.0000 |
+| [0.800, 0.867) | 0 | n/a | n/a | 1 | 0.8219 | 1.0000 |
+| [0.867, 0.933) | 2 | 0.8848 | 0.5000 | 2 | 0.9158 | 0.5000 |
+| [0.933, 1.000) | 712 | 0.9932 | 0.9775 | 712 | 0.9972 | 0.9775 |
+
+Reliability data, `doc_kind` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.200, 0.267) | 2 | 0.2653 | 0.0000 | 6 | 0.2648 | 0.0000 |
+| [0.267, 0.333) | 574 | 0.2864 | 0.0000 | 576 | 0.2817 | 0.0000 |
+| [0.333, 0.400) | 14 | 0.3558 | 0.0000 | 10 | 0.3577 | 0.0000 |
+| [0.400, 0.467) | 3 | 0.4201 | 0.0000 | 3 | 0.4335 | 0.0000 |
+| [0.467, 0.533) | 4 | 0.5022 | 0.0000 | 3 | 0.4917 | 0.0000 |
+| [0.533, 0.600) | 2 | 0.5746 | 0.0000 | 2 | 0.5550 | 0.0000 |
+| [0.600, 0.667) | 2 | 0.6459 | 0.0000 | 1 | 0.6058 | 0.0000 |
+| [0.867, 0.933) | 2 | 0.9222 | 0.5000 | 2 | 0.8810 | 0.5000 |
+| [0.933, 1.000) | 121 | 0.9934 | 0.6529 | 121 | 0.9848 | 0.6529 |
+
+### C / qs_v2, test
+
+| question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
+|---|---|---|---|---|---|---|
+| pii_present | 0.0009 | 0.0004 | 0.0021 | 0.0021 | 0.9889 | 0.9889 |
+| has_phi_direct | 0.0010 | 0.0003 | 0.0013 | 0.0013 | 0.8163 | 0.8163 |
+| has_phi_quasi | 0.0018 | 0.0019 | 0.0067 | 0.0067 | 0.9923 | 0.9923 |
+| has_coded_id | 0.0007 | 0.0004 | 0.0017 | 0.0017 | 0.9582 | 0.9582 |
+| has_staff_pii | 0.0017 | 0.0007 | 0.0006 | 0.0006 | 0.8310 | 0.8310 |
+
+Reliability data, `pii_present` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.533, 0.600) | 1 | 0.5398 | 1.0000 | 1 | 0.5425 | 1.0000 |
+| [0.600, 0.667) | 1 | 0.6240 | 0.0000 | 1 | 0.6322 | 0.0000 |
+| [0.667, 0.733) | 1 | 0.6992 | 0.0000 | 1 | 0.7114 | 0.0000 |
+| [0.867, 0.933) | 2 | 0.8982 | 1.0000 | 2 | 0.9112 | 1.0000 |
+| [0.933, 1.000) | 5708 | 0.9986 | 0.9991 | 5708 | 0.9991 | 0.9991 |
+
+Reliability data, `has_phi_direct` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.800, 0.867) | 1 | 0.8628 | 0.0000 | 0 | n/a | n/a |
+| [0.867, 0.933) | 0 | n/a | n/a | 1 | 0.8835 | 0.0000 |
+| [0.933, 1.000) | 5712 | 0.9986 | 0.9995 | 5712 | 0.9993 | 0.9995 |
+
+Reliability data, `has_phi_quasi` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.667, 0.733) | 2 | 0.7168 | 0.5000 | 2 | 0.7198 | 0.5000 |
+| [0.867, 0.933) | 4 | 0.9097 | 0.5000 | 4 | 0.9127 | 0.5000 |
+| [0.933, 1.000) | 5707 | 0.9984 | 0.9970 | 5707 | 0.9986 | 0.9970 |
+
+Reliability data, `has_coded_id` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.933, 1.000) | 5713 | 0.9984 | 0.9991 | 5713 | 0.9995 | 0.9991 |
+
+Reliability data, `has_staff_pii` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.533, 0.600) | 1 | 0.5499 | 1.0000 | 1 | 0.5571 | 1.0000 |
+| [0.600, 0.667) | 1 | 0.6309 | 0.0000 | 1 | 0.6490 | 0.0000 |
+| [0.733, 0.800) | 1 | 0.7799 | 1.0000 | 0 | n/a | n/a |
+| [0.800, 0.867) | 0 | n/a | n/a | 1 | 0.8100 | 1.0000 |
+| [0.933, 1.000) | 5710 | 0.9984 | 0.9998 | 5710 | 0.9994 | 0.9998 |
+
+### C / qs_v2, holdout
+
+| question | ECE raw | ECE cal | Brier raw | Brier cal | AUROC raw | AUROC cal |
+|---|---|---|---|---|---|---|
+| pii_present | 0.0091 | 0.0090 | 0.0224 | 0.0227 | 0.9923 | 0.9923 |
+| has_phi_direct | 0.0014 | 0.0007 | 0.0000 | 0.0000 | n/a | n/a |
+| has_phi_quasi | 0.0677 | 0.0687 | 0.1359 | 0.1361 | 0.9689 | 0.9689 |
+| has_coded_id | 0.0016 | 0.0005 | 0.0000 | 0.0000 | n/a | n/a |
+| has_staff_pii | 0.0020 | 0.0008 | 0.0000 | 0.0000 | n/a | n/a |
+
+Reliability data, `pii_present` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.467, 0.533) | 1 | 0.5312 | 0.0000 | 0 | n/a | n/a |
+| [0.533, 0.600) | 3 | 0.5723 | 0.6667 | 3 | 0.5531 | 0.3333 |
+| [0.600, 0.667) | 4 | 0.6345 | 0.2500 | 5 | 0.6358 | 0.4000 |
+| [0.667, 0.733) | 2 | 0.6699 | 0.5000 | 2 | 0.6806 | 0.5000 |
+| [0.733, 0.800) | 3 | 0.7648 | 0.6667 | 2 | 0.7617 | 0.5000 |
+| [0.800, 0.867) | 2 | 0.8157 | 0.5000 | 3 | 0.8251 | 0.6667 |
+| [0.867, 0.933) | 1 | 0.9077 | 1.0000 | 1 | 0.9202 | 1.0000 |
+| [0.933, 1.000) | 708 | 0.9984 | 0.9944 | 708 | 0.9989 | 0.9944 |
+
+Reliability data, `has_phi_direct` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.933, 1.000) | 724 | 0.9986 | 1.0000 | 724 | 0.9993 | 1.0000 |
+
+Reliability data, `has_phi_quasi` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.533, 0.600) | 1 | 0.5565 | 0.0000 | 1 | 0.5574 | 0.0000 |
+| [0.600, 0.667) | 3 | 0.6503 | 0.6667 | 2 | 0.6446 | 0.5000 |
+| [0.667, 0.733) | 1 | 0.7049 | 1.0000 | 2 | 0.6881 | 1.0000 |
+| [0.733, 0.800) | 3 | 0.7531 | 0.3333 | 3 | 0.7565 | 0.3333 |
+| [0.800, 0.867) | 3 | 0.8197 | 1.0000 | 3 | 0.8232 | 1.0000 |
+| [0.867, 0.933) | 9 | 0.8940 | 0.3333 | 8 | 0.8925 | 0.3750 |
+| [0.933, 1.000) | 704 | 0.9975 | 0.9389 | 705 | 0.9976 | 0.9376 |
+
+Reliability data, `has_coded_id` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.933, 1.000) | 724 | 0.9984 | 1.0000 | 724 | 0.9995 | 1.0000 |
+
+Reliability data, `has_staff_pii` (non-empty bins):
+
+| bin | n raw | conf raw | acc raw | n cal | conf cal | acc cal |
+|---|---|---|---|---|---|---|
+| [0.933, 1.000) | 724 | 0.9980 | 1.0000 | 724 | 0.9992 | 1.0000 |
 
 ## 5. Routing
 
@@ -2915,303 +3163,329 @@ Reliability data, `has_staff_pii` (non-empty bins):
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 24 | 120 | 144 |
-| B | 9 | 120 | 1733 | 1862 |
-| all | 9 | 144 | 1853 | 2006 |
+| A | 0 | 65 | 354 | 419 |
+| B | 29 | 335 | 4930 | 5294 |
+| all | 29 | 400 | 5284 | 5713 |
 
 | trigger | count |
 |---|---|
-| p_below_t_low | 9 |
-| p_in_escalate_band | 1853 |
-| role_both | 46 |
-| role_patient | 98 |
+| p_below_t_low | 29 |
+| p_in_escalate_band | 5284 |
+| role_both | 124 |
+| role_patient | 276 |
 
 ### A / qs_v1, holdout
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 0 | 20 | 20 |
-| B | 0 | 17 | 258 | 275 |
-| all | 0 | 17 | 278 | 295 |
+| A | 0 | 0 | 56 | 56 |
+| B | 1 | 35 | 632 | 668 |
+| all | 1 | 35 | 688 | 724 |
 
 | trigger | count |
 |---|---|
-| p_in_escalate_band | 278 |
-| role_both | 6 |
-| role_patient | 11 |
+| p_below_t_low | 1 |
+| p_in_escalate_band | 688 |
+| role_both | 15 |
+| role_patient | 20 |
 
 ### A / qs_v2, test
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 0 | 144 | 144 |
-| B | 9 | 0 | 1853 | 1862 |
-| all | 9 | 0 | 1997 | 2006 |
+| A | 0 | 0 | 419 | 419 |
+| B | 30 | 0 | 5264 | 5294 |
+| all | 30 | 0 | 5683 | 5713 |
 
 | trigger | count |
 |---|---|
-| p_below_t_low | 9 |
-| p_in_escalate_band | 1997 |
+| p_below_t_low | 30 |
+| p_in_escalate_band | 5683 |
 
 ### A / qs_v2, holdout
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 0 | 20 | 20 |
-| B | 0 | 0 | 275 | 275 |
-| all | 0 | 0 | 295 | 295 |
-
-| trigger | count |
-|---|---|
-| p_in_escalate_band | 295 |
-
-### A / qs_v3, test
-
-| gold pii_present | forward | redact | escalate | total |
-|---|---|---|---|---|
-| A | 1 | 24 | 119 | 144 |
-| B | 14 | 120 | 1728 | 1862 |
-| all | 15 | 144 | 1847 | 2006 |
-
-| trigger | count |
-|---|---|
-| p_below_t_low | 15 |
-| p_in_escalate_band | 1847 |
-| role_both | 46 |
-| role_patient | 98 |
-
-### A / qs_v3, holdout
-
-| gold pii_present | forward | redact | escalate | total |
-|---|---|---|---|---|
-| A | 0 | 0 | 20 | 20 |
-| B | 1 | 17 | 257 | 275 |
-| all | 1 | 17 | 277 | 295 |
+| A | 0 | 0 | 56 | 56 |
+| B | 1 | 0 | 667 | 668 |
+| all | 1 | 0 | 723 | 724 |
 
 | trigger | count |
 |---|---|
 | p_below_t_low | 1 |
-| p_in_escalate_band | 277 |
-| role_both | 6 |
-| role_patient | 11 |
+| p_in_escalate_band | 723 |
 
 ### B1 / qs_v1, test
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 1 | 31 | 68 | 100 |
-| B | 0 | 172 | 401 | 573 |
-| all | 1 | 203 | 469 | 673 |
+| A | 0 | 112 | 194 | 306 |
+| B | 2 | 502 | 1109 | 1613 |
+| all | 2 | 614 | 1303 | 1919 |
 
 | trigger | count |
 |---|---|
-| p_below_t_low | 1 |
-| p_in_escalate_band | 469 |
-| role_both | 20 |
-| role_patient | 183 |
+| p_at_or_above_t_high | 1 |
+| p_below_t_low | 2 |
+| p_in_escalate_band | 1303 |
+| role_both | 60 |
+| role_patient | 553 |
 
 ### B1 / qs_v1, holdout
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 6 | 14 | 20 |
-| B | 0 | 20 | 59 | 79 |
-| all | 0 | 26 | 73 | 99 |
+| A | 0 | 4 | 52 | 56 |
+| B | 0 | 59 | 134 | 193 |
+| all | 0 | 63 | 186 | 249 |
 
 | trigger | count |
 |---|---|
-| p_in_escalate_band | 73 |
-| role_both | 2 |
-| role_patient | 24 |
+| p_in_escalate_band | 186 |
+| role_both | 3 |
+| role_patient | 60 |
 
 ### B1 / qs_v2, test
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 0 | 100 | 100 |
-| B | 0 | 0 | 573 | 573 |
-| all | 0 | 0 | 673 | 673 |
+| A | 1 | 1 | 304 | 306 |
+| B | 4 | 0 | 1609 | 1613 |
+| all | 5 | 1 | 1913 | 1919 |
 
 | trigger | count |
 |---|---|
-| p_in_escalate_band | 673 |
+| p_at_or_above_t_high | 1 |
+| p_below_t_low | 5 |
+| p_in_escalate_band | 1913 |
 
 ### B1 / qs_v2, holdout
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 0 | 20 | 20 |
-| B | 0 | 0 | 79 | 79 |
-| all | 0 | 0 | 99 | 99 |
+| A | 0 | 0 | 56 | 56 |
+| B | 0 | 0 | 193 | 193 |
+| all | 0 | 0 | 249 | 249 |
 
 | trigger | count |
 |---|---|
-| p_in_escalate_band | 99 |
+| p_in_escalate_band | 249 |
 
 ### B2 / qs_v1, test
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 1 | 30 | 57 | 88 |
-| B | 2 | 56 | 174 | 232 |
-| all | 3 | 86 | 231 | 320 |
+| A | 1 | 88 | 144 | 233 |
+| B | 0 | 201 | 478 | 679 |
+| all | 1 | 289 | 622 | 912 |
 
 | trigger | count |
 |---|---|
-| p_below_t_low | 3 |
-| p_in_escalate_band | 231 |
-| role_both | 11 |
-| role_patient | 75 |
+| p_below_t_low | 1 |
+| p_in_escalate_band | 622 |
+| role_both | 31 |
+| role_patient | 258 |
 
 ### B2 / qs_v1, holdout
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 3 | 17 | 20 |
-| B | 0 | 2 | 28 | 30 |
-| all | 0 | 5 | 45 | 50 |
+| A | 0 | 4 | 52 | 56 |
+| B | 0 | 16 | 58 | 74 |
+| all | 0 | 20 | 110 | 130 |
 
 | trigger | count |
 |---|---|
-| p_in_escalate_band | 45 |
-| role_patient | 5 |
+| p_in_escalate_band | 110 |
+| role_both | 4 |
+| role_patient | 16 |
 
 ### B2 / qs_v2, test
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 2 | 0 | 86 | 88 |
-| B | 4 | 0 | 228 | 232 |
-| all | 6 | 0 | 314 | 320 |
+| A | 1 | 0 | 232 | 233 |
+| B | 0 | 0 | 679 | 679 |
+| all | 1 | 0 | 911 | 912 |
 
 | trigger | count |
 |---|---|
-| p_below_t_low | 6 |
-| p_in_escalate_band | 314 |
+| p_below_t_low | 1 |
+| p_in_escalate_band | 911 |
 
 ### B2 / qs_v2, holdout
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 0 | 20 | 20 |
-| B | 0 | 0 | 30 | 30 |
-| all | 0 | 0 | 50 | 50 |
+| A | 0 | 0 | 56 | 56 |
+| B | 0 | 0 | 74 | 74 |
+| all | 0 | 0 | 130 | 130 |
 
 | trigger | count |
 |---|---|
-| p_in_escalate_band | 50 |
+| p_in_escalate_band | 130 |
 
 ### B3 / qs_v1 (doc-level, underpowered), test
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 2 | 34 | 49 | 85 |
-| B | 1 | 31 | 70 | 102 |
-| all | 3 | 65 | 119 | 187 |
+| A | 0 | 90 | 140 | 230 |
+| B | 1 | 84 | 210 | 295 |
+| all | 1 | 174 | 350 | 525 |
 
 | trigger | count |
 |---|---|
-| p_at_or_above_t_high | 6 |
-| p_below_t_low | 3 |
-| p_in_escalate_band | 119 |
-| role_both | 10 |
-| role_patient | 51 |
+| p_below_t_low | 1 |
+| p_in_escalate_band | 350 |
+| role_both | 20 |
+| role_patient | 154 |
 
 ### B3 / qs_v1 (doc-level, underpowered), holdout
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 4 | 16 | 20 |
-| B | 0 | 0 | 11 | 11 |
-| all | 0 | 4 | 27 | 31 |
+| A | 0 | 4 | 52 | 56 |
+| B | 0 | 2 | 26 | 28 |
+| all | 0 | 6 | 78 | 84 |
 
 | trigger | count |
 |---|---|
-| p_in_escalate_band | 27 |
+| p_in_escalate_band | 78 |
 | role_both | 1 |
-| role_patient | 3 |
+| role_patient | 5 |
 
 ### B3 / qs_v2 (doc-level, underpowered), test
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 6 | 1 | 78 | 85 |
-| B | 4 | 0 | 98 | 102 |
-| all | 10 | 1 | 176 | 187 |
+| A | 0 | 0 | 230 | 230 |
+| B | 1 | 0 | 294 | 295 |
+| all | 1 | 0 | 524 | 525 |
 
 | trigger | count |
 |---|---|
-| p_at_or_above_t_high | 1 |
-| p_below_t_low | 10 |
-| p_in_escalate_band | 176 |
+| p_below_t_low | 1 |
+| p_in_escalate_band | 524 |
 
 ### B3 / qs_v2 (doc-level, underpowered), holdout
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 0 | 20 | 20 |
-| B | 0 | 0 | 11 | 11 |
-| all | 0 | 0 | 31 | 31 |
+| A | 0 | 0 | 56 | 56 |
+| B | 0 | 0 | 28 | 28 |
+| all | 0 | 0 | 84 | 84 |
 
 | trigger | count |
 |---|---|
-| p_in_escalate_band | 31 |
+| p_in_escalate_band | 84 |
 
 ### B4 / qs_v1 (doc-level, underpowered), test
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 2 | 37 | 41 | 80 |
-| B | 1 | 15 | 28 | 44 |
-| all | 3 | 52 | 69 | 124 |
+| A | 0 | 93 | 122 | 215 |
+| B | 0 | 42 | 80 | 122 |
+| all | 0 | 135 | 202 | 337 |
 
 | trigger | count |
 |---|---|
-| p_at_or_above_t_high | 14 |
-| p_below_t_low | 3 |
-| p_in_escalate_band | 69 |
-| role_both | 8 |
-| role_patient | 37 |
+| p_in_escalate_band | 202 |
+| role_both | 16 |
+| role_patient | 119 |
 
 ### B4 / qs_v1 (doc-level, underpowered), holdout
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 6 | 14 | 20 |
-| B | 0 | 0 | 10 | 10 |
-| all | 0 | 6 | 24 | 30 |
+| A | 0 | 4 | 52 | 56 |
+| B | 0 | 1 | 23 | 24 |
+| all | 0 | 5 | 75 | 80 |
 
 | trigger | count |
 |---|---|
-| p_at_or_above_t_high | 2 |
-| p_in_escalate_band | 24 |
+| p_in_escalate_band | 75 |
 | role_both | 1 |
-| role_patient | 3 |
+| role_patient | 4 |
 
 ### B4 / qs_v2 (doc-level, underpowered), test
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 6 | 0 | 74 | 80 |
-| B | 1 | 0 | 43 | 44 |
-| all | 7 | 0 | 117 | 124 |
+| A | 0 | 0 | 215 | 215 |
+| B | 0 | 0 | 122 | 122 |
+| all | 0 | 0 | 337 | 337 |
 
 | trigger | count |
 |---|---|
-| p_below_t_low | 7 |
-| p_in_escalate_band | 117 |
+| p_in_escalate_band | 337 |
 
 ### B4 / qs_v2 (doc-level, underpowered), holdout
 
 | gold pii_present | forward | redact | escalate | total |
 |---|---|---|---|---|
-| A | 0 | 0 | 20 | 20 |
-| B | 0 | 0 | 10 | 10 |
-| all | 0 | 0 | 30 | 30 |
+| A | 0 | 0 | 56 | 56 |
+| B | 0 | 0 | 24 | 24 |
+| all | 0 | 0 | 80 | 80 |
 
 | trigger | count |
 |---|---|
-| p_in_escalate_band | 30 |
+| p_in_escalate_band | 80 |
+
+### C / qs_v1, test
+
+| gold pii_present | forward | redact | escalate | total |
+|---|---|---|---|---|
+| A | 1 | 418 | 0 | 419 |
+| B | 5288 | 6 | 0 | 5294 |
+| all | 5289 | 424 | 0 | 5713 |
+
+| trigger | count |
+|---|---|
+| p_at_or_above_t_high | 421 |
+| p_below_t_low | 5289 |
+| role_both | 119 |
+| role_patient | 228 |
+
+### C / qs_v1, holdout
+
+| gold pii_present | forward | redact | escalate | total |
+|---|---|---|---|---|
+| A | 0 | 56 | 0 | 56 |
+| B | 664 | 4 | 0 | 668 |
+| all | 664 | 60 | 0 | 724 |
+
+| trigger | count |
+|---|---|
+| p_at_or_above_t_high | 59 |
+| p_below_t_low | 664 |
+| role_both | 11 |
+| role_patient | 4 |
+
+### C / qs_v2, test
+
+| gold pii_present | forward | redact | escalate | total |
+|---|---|---|---|---|
+| A | 2 | 417 | 0 | 419 |
+| B | 5290 | 4 | 0 | 5294 |
+| all | 5292 | 421 | 0 | 5713 |
+
+| trigger | count |
+|---|---|
+| p_at_or_above_t_high | 421 |
+| p_below_t_low | 5292 |
+
+### C / qs_v2, holdout
+
+| gold pii_present | forward | redact | escalate | total |
+|---|---|---|---|---|
+| A | 0 | 56 | 0 | 56 |
+| B | 665 | 3 | 0 | 668 |
+| all | 665 | 59 | 0 | 724 |
+
+| trigger | count |
+|---|---|
+| p_at_or_above_t_high | 59 |
+| p_below_t_low | 665 |
 
 ## 6. Speed
 
@@ -3219,140 +3493,151 @@ Per-unit latency is not comparable across arms (units range from 256-token chunk
 
 ### A / qs_v1
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 40. Batch-1 outliers (> 5x the median of similar-length calls): 1. Batch-1 ms/token, end of run vs start: 1.48x. laya autocast: batch-1 off, batched off (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 0.98x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 3603 | 685.8 | 969.6 | 1064.2 | 710.9 | 1.41 |
-| per unit, batched (amortized: batch time / batch size) | 3603 | 902.1 | 1412.6 | 1526.6 | 985.9 | 1.01 |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 8076.2 | 30341.6 | 39449.5 | 10245.0 | 0.10 |
-| per unit, batch-1, <1k tokens | 3603 | 685.8 | 969.6 | 1064.2 | 710.9 | 1.41 |
+| per unit, batch-1 | 10427 | 131.6 | 137.2 | 142.8 | 129.6 | 7.71 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 1405.2 | 6027.2 | 6718.8 | 2008.6 | 0.50 |
+| per unit, batch-1, <1k tokens | 10427 | 131.6 | 137.2 | 142.8 | 129.6 | 7.71 |
 
 ### A / qs_v2
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 20. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.38x. laya autocast: batch-1 on, batched on (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.03x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 3603 | 928.3 | 1078.3 | 1305.2 | 881.5 | 1.13 |
-| per unit, batched (amortized: batch time / batch size) | 3603 | 1014.1 | 1178.3 | 1619.8 | 1046.6 | 0.96 |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 10221.6 | 36889.4 | 49450.5 | 12704.5 | 0.08 |
-| per unit, batch-1, <1k tokens | 3603 | 928.3 | 1078.3 | 1305.2 | 881.5 | 1.13 |
-
-### A / qs_v3
-
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.01x. laya autocast: batch-1 off, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
-
-| mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
-|---|---|---|---|---|---|---|
-| per unit, batch-1 | 3603 | 632.4 | 721.1 | 736.5 | 638.0 | 1.57 |
+| per unit, batch-1 | 10427 | 142.0 | 146.6 | 151.0 | 139.1 | 7.19 |
 | per unit, batched | 0 | not run |  |  |  |  |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 6755.2 | 28206.3 | 33333.6 | 9195.0 | 0.11 |
-| per unit, batch-1, <1k tokens | 3603 | 632.4 | 721.1 | 736.5 | 638.0 | 1.57 |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 1488.4 | 6482.9 | 7279.2 | 2154.8 | 0.46 |
+| per unit, batch-1, <1k tokens | 10427 | 142.0 | 146.6 | 151.0 | 139.1 | 7.19 |
 
 ### B1 / qs_v1
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 20. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 0.96x. laya autocast: batch-1 off, batched off (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.05x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 1215 | 1088.4 | 1146.4 | 1200.8 | 990.4 | 1.01 |
-| per unit, batched (amortized: batch time / batch size) | 1215 | 1011.2 | 1139.8 | 1342.6 | 1033.8 | 0.97 |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 3851.5 | 14389.9 | 16929.0 | 4813.4 | 0.21 |
-| per unit, batch-1, <1k tokens | 1215 | 1088.4 | 1146.4 | 1200.8 | 990.4 | 1.01 |
+| per unit, batch-1 | 3509 | 156.6 | 161.3 | 169.3 | 143.0 | 6.99 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 547.8 | 2178.1 | 2448.0 | 745.5 | 1.34 |
+| per unit, batch-1, <1k tokens | 3509 | 156.6 | 161.3 | 169.3 | 143.0 | 6.99 |
 
 ### B1 / qs_v2
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 20. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 0.90x. laya autocast: batch-1 on, batched on (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.05x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 1215 | 1056.4 | 1206.7 | 1515.6 | 974.4 | 1.03 |
-| per unit, batched (amortized: batch time / batch size) | 1215 | 1241.6 | 1432.1 | 1974.0 | 1278.3 | 0.78 |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 3756.7 | 14431.3 | 16844.0 | 4735.6 | 0.21 |
-| per unit, batch-1, <1k tokens | 1215 | 1056.4 | 1206.7 | 1515.6 | 974.4 | 1.03 |
+| per unit, batch-1 | 3509 | 181.1 | 185.5 | 189.6 | 163.9 | 6.10 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 627.1 | 2523.0 | 2813.4 | 854.5 | 1.17 |
+| per unit, batch-1, <1k tokens | 3509 | 181.1 | 185.5 | 189.6 | 163.9 | 6.10 |
 
 ### B2 / qs_v1
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.15x. laya autocast: batch-1 off, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.05x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 593 | 2544.6 | 4104.7 | 4583.7 | 2280.0 | 0.44 |
+| per unit, batch-1 | 1700 | 368.1 | 438.2 | 484.9 | 305.2 | 3.28 |
 | per unit, batched | 0 | not run |  |  |  |  |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 4254.3 | 15799.8 | 23391.3 | 5408.2 | 0.18 |
-| per unit, batch-1, <1k tokens | 182 | 797.4 | 1749.2 | 2114.2 | 892.3 | 1.12 |
-| per unit, batch-1, 1-2k tokens | 403 | 2745.8 | 4246.1 | 4709.4 | 2887.5 | 0.35 |
-| per unit, batch-1, 2-4k tokens | 8 | 3162.3 | 3703.7 | 3754.7 | 3249.4 | 0.31 |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 555.8 | 2299.7 | 2544.0 | 771.0 | 1.30 |
+| per unit, batch-1, <1k tokens | 501 | 113.4 | 201.0 | 205.9 | 118.9 | 8.41 |
+| per unit, batch-1, 1-2k tokens | 1181 | 393.9 | 438.7 | 453.2 | 381.4 | 2.62 |
+| per unit, batch-1, 2-4k tokens | 18 | 487.4 | 516.2 | 516.7 | 492.0 | 2.03 |
 
 ### B2 / qs_v2
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 0.99x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.05x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 593 | 2024.0 | 2312.1 | 2540.6 | 1645.2 | 0.61 |
+| per unit, batch-1 | 1700 | 439.2 | 528.1 | 565.3 | 365.4 | 2.74 |
 | per unit, batched | 0 | not run |  |  |  |  |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 3002.1 | 11941.1 | 13571.1 | 3902.5 | 0.26 |
-| per unit, batch-1, <1k tokens | 182 | 636.4 | 1091.4 | 1117.9 | 641.0 | 1.56 |
-| per unit, batch-1, 1-2k tokens | 403 | 2136.6 | 2316.0 | 2539.9 | 2081.3 | 0.48 |
-| per unit, batch-1, 2-4k tokens | 8 | 2519.3 | 2562.5 | 2567.8 | 2525.6 | 0.40 |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 665.8 | 2772.8 | 3086.9 | 923.1 | 1.08 |
+| per unit, batch-1, <1k tokens | 501 | 128.0 | 229.9 | 245.1 | 135.8 | 7.36 |
+| per unit, batch-1, 1-2k tokens | 1181 | 465.7 | 528.8 | 542.9 | 459.7 | 2.18 |
+| per unit, batch-1, 2-4k tokens | 18 | 569.6 | 591.3 | 600.5 | 570.4 | 1.75 |
 
 ### B3 / qs_v1 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.07x. laya autocast: batch-1 off, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.12x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 345 | 3980.1 | 7169.9 | 8051.5 | 3832.7 | 0.26 |
+| per unit, batch-1 | 989 | 745.3 | 1396.1 | 1443.0 | 740.0 | 1.35 |
 | per unit, batched | 0 | not run |  |  |  |  |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 3670.7 | 16928.8 | 20078.9 | 5289.2 | 0.19 |
-| per unit, batch-1, <1k tokens | 112 | 620.4 | 1063.5 | 1239.7 | 639.3 | 1.56 |
-| per unit, batch-1, 1-2k tokens | 26 | 1916.1 | 2669.3 | 2771.4 | 2011.7 | 0.50 |
-| per unit, batch-1, 2-4k tokens | 207 | 6359.9 | 7451.4 | 8932.1 | 5789.3 | 0.17 |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 692.3 | 3350.1 | 3922.0 | 1087.5 | 0.92 |
+| per unit, batch-1, <1k tokens | 326 | 99.6 | 190.9 | 197.7 | 110.1 | 9.08 |
+| per unit, batch-1, 1-2k tokens | 78 | 387.1 | 496.8 | 506.7 | 383.0 | 2.61 |
+| per unit, batch-1, 2-4k tokens | 585 | 1259.2 | 1420.6 | 1448.9 | 1138.7 | 0.88 |
 
 ### B3 / qs_v2 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.20x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.06x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 345 | 4512.9 | 8729.9 | 9496.7 | 4342.8 | 0.23 |
+| per unit, batch-1 | 989 | 909.7 | 1679.9 | 1709.7 | 899.6 | 1.11 |
 | per unit, batched | 0 | not run |  |  |  |  |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 4497.2 | 18643.7 | 21595.2 | 5993.1 | 0.17 |
-| per unit, batch-1, <1k tokens | 112 | 741.7 | 1358.5 | 1492.8 | 783.0 | 1.28 |
-| per unit, batch-1, 1-2k tokens | 26 | 2367.9 | 3153.4 | 3360.3 | 2376.0 | 0.42 |
-| per unit, batch-1, 2-4k tokens | 207 | 6831.3 | 8950.9 | 9680.8 | 6516.0 | 0.15 |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 845.8 | 4045.0 | 4788.6 | 1321.9 | 0.76 |
+| per unit, batch-1, <1k tokens | 326 | 110.7 | 220.9 | 234.7 | 126.5 | 7.90 |
+| per unit, batch-1, 1-2k tokens | 78 | 463.7 | 571.7 | 590.5 | 458.1 | 2.18 |
+| per unit, batch-1, 2-4k tokens | 585 | 1552.6 | 1691.1 | 1716.6 | 1389.2 | 0.72 |
 
 ### B4 / qs_v1 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.31x. laya autocast: batch-1 off, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.04x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 250 | 5532.3 | 38867.8 | 47166.2 | 10332.0 | 0.10 |
+| per unit, batch-1 | 673 | 713.8 | 4791.9 | 4987.7 | 1485.8 | 0.67 |
 | per unit, batched | 0 | not run |  |  |  |  |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 5532.3 | 38867.8 | 47166.2 | 10332.0 | 0.10 |
-| per unit, batch-1, <1k tokens | 93 | 913.3 | 3407.3 | 4119.9 | 1195.3 | 0.84 |
-| per unit, batch-1, 1-2k tokens | 9 | 2470.1 | 5491.2 | 5786.3 | 3241.2 | 0.31 |
-| per unit, batch-1, 2-4k tokens | 90 | 7047.0 | 12606.6 | 15488.5 | 7673.8 | 0.13 |
-| per unit, batch-1, 4-8k tokens | 40 | 25637.3 | 43228.2 | 47833.1 | 26790.2 | 0.04 |
-| per unit, batch-1, >8k tokens | 18 | 35949.3 | 47777.9 | 48680.9 | 37800.8 | 0.03 |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 713.8 | 4791.9 | 4987.7 | 1485.8 | 0.67 |
+| per unit, batch-1, <1k tokens | 239 | 123.6 | 194.0 | 199.5 | 120.3 | 8.31 |
+| per unit, batch-1, 1-2k tokens | 50 | 387.7 | 502.4 | 512.2 | 397.9 | 2.51 |
+| per unit, batch-1, 2-4k tokens | 197 | 1034.6 | 1497.4 | 1528.9 | 1041.3 | 0.96 |
+| per unit, batch-1, 4-8k tokens | 138 | 3860.7 | 4987.3 | 5143.8 | 3716.4 | 0.27 |
+| per unit, batch-1, >8k tokens | 49 | 4765.2 | 4818.1 | 4844.0 | 4760.9 | 0.21 |
 
 ### B4 / qs_v2 (doc-level, underpowered)
 
-Hardware: **Apple M2, 8.0 GB RAM, device mps (Apple MPS), torch 2.14.0**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.56x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.04x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
 
 | mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
 |---|---|---|---|---|---|---|
-| per unit, batch-1 | 250 | 5923.7 | 37433.3 | 43250.8 | 10468.6 | 0.10 |
+| per unit, batch-1 | 673 | 849.6 | 5772.3 | 6049.2 | 1775.3 | 0.56 |
 | per unit, batched | 0 | not run |  |  |  |  |
-| per document (sum of units, batch-1; incl. calib docs) | 250 | 5923.7 | 37433.3 | 43250.8 | 10468.6 | 0.10 |
-| per unit, batch-1, <1k tokens | 93 | 1061.4 | 3353.1 | 4064.9 | 1300.6 | 0.77 |
-| per unit, batch-1, 1-2k tokens | 9 | 3291.1 | 5542.5 | 5841.7 | 3536.1 | 0.28 |
-| per unit, batch-1, 2-4k tokens | 90 | 7682.3 | 12146.4 | 13570.1 | 7912.5 | 0.13 |
-| per unit, batch-1, 4-8k tokens | 40 | 26160.4 | 41902.0 | 45693.4 | 27152.6 | 0.04 |
-| per unit, batch-1, >8k tokens | 18 | 36991.7 | 43039.5 | 45553.3 | 37008.3 | 0.03 |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 849.6 | 5772.3 | 6049.2 | 1775.3 | 0.56 |
+| per unit, batch-1, <1k tokens | 239 | 142.6 | 220.6 | 231.7 | 136.6 | 7.32 |
+| per unit, batch-1, 1-2k tokens | 50 | 461.0 | 566.8 | 587.9 | 466.8 | 2.14 |
+| per unit, batch-1, 2-4k tokens | 197 | 1217.1 | 1809.5 | 1863.0 | 1240.0 | 0.81 |
+| per unit, batch-1, 4-8k tokens | 138 | 4534.9 | 6041.9 | 6223.7 | 4440.8 | 0.23 |
+| per unit, batch-1, >8k tokens | 49 | 5753.8 | 5809.6 | 5820.8 | 5748.4 | 0.17 |
+
+### C / qs_v1
+
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.01x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+
+| mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
+|---|---|---|---|---|---|---|
+| per unit, batch-1 | 10427 | 127.3 | 130.7 | 132.8 | 125.0 | 8.00 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 1344.6 | 5885.5 | 6537.1 | 1936.7 | 0.52 |
+| per unit, batch-1, <1k tokens | 10427 | 127.3 | 130.7 | 132.8 | 125.0 | 8.00 |
+
+### C / qs_v2
+
+Hardware: **Intel(R) Xeon(R) CPU @ 2.00GHz, 31.3 GB RAM, device cuda (Tesla T4), torch 2.10.0+cu128**. Warmup calls excluded: 10. Batch-1 outliers (> 5x the median of similar-length calls): 0. Batch-1 ms/token, end of run vs start: 1.04x. laya autocast: batch-1 on, batched not run (on MPS, fp16 autocast starts at 5 question rows, so qs_v2 runs fp16 and qs_v1 fp32).
+
+| mode | n | p50 ms | p95 ms | p99 ms | mean ms | per sec |
+|---|---|---|---|---|---|---|
+| per unit, batch-1 | 10427 | 137.5 | 140.8 | 142.2 | 134.5 | 7.43 |
+| per unit, batched | 0 | not run |  |  |  |  |
+| per document (sum of units, batch-1; incl. calib docs) | 673 | 1442.2 | 6313.9 | 7013.9 | 2084.1 | 0.48 |
+| per unit, batch-1, <1k tokens | 10427 | 137.5 | 140.8 | 142.2 | 134.5 | 7.43 |
 
 ## 7. Slices
 
@@ -3362,42 +3647,42 @@ Slices with n < 30 are marked `*`.
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log | 97 | 8 | 10 | 1.0000 | 0.0103 | 0 | 0.8866 |
-| doc_type | crf_page | 113 | 14 | 26 | 1.0000 | 0.0000 | 0 | 0.7788 |
-| doc_type | csr_patient_narrative | 276 | 14 | 23 | 1.0000 | 0.0000 | 0 | 0.9312 |
-| doc_type | delegation_log | 43 | 5 | 5 | 1.0000 | 0.0233 | 0 | 0.9535 |
-| doc_type | deviation_log | 106 | 10 | 8 | 1.0000 | 0.0000 | 0 | 0.9245 |
-| doc_type | icf_signature_page * | 28 | 7 | 6 | 1.0000 | 0.0357 | 0 | 0.9286 |
-| doc_type | lab_report | 76 | 11 | 16 | 1.0000 | 0.0132 | 0 | 0.8289 |
-| doc_type | monitoring_visit_report | 349 | 11 | 19 | 1.0000 | 0.0000 | 0 | 0.9456 |
-| doc_type | protocol_section | 470 | 16 | 0 | n/a | 0.0021 | 0 | 1.0000 |
-| doc_type | sae_cioms | 75 | 14 | 18 | 1.0000 | 0.0533 | 0 | 0.7867 |
-| doc_type | site_correspondence | 373 | 14 | 13 | 1.0000 | 0.0000 | 0 | 0.9651 |
-| hard_negative | no | 1512 | 91 | 94 | 1.0000 | 0.0053 | 0 | 0.9444 |
-| hard_negative | yes | 494 | 33 | 50 | 1.0000 | 0.0020 | 0 | 0.9109 |
-| lang | de * | 7 | 4 | 5 | 1.0000 | 0.0000 | 0 | 0.2857 |
-| lang | en | 1975 | 107 | 123 | 1.0000 | 0.0046 | 0 | 0.9453 |
-| lang | es * | 12 | 7 | 8 | 1.0000 | 0.0000 | 0 | 0.4167 |
-| lang | pl * | 12 | 6 | 8 | 1.0000 | 0.0000 | 0 | 0.3333 |
-| length_bucket | long | 743 | 24 | 21 | 1.0000 | 0.0000 | 0 | 0.9758 |
-| length_bucket | medium | 538 | 41 | 64 | 1.0000 | 0.0093 | 0 | 0.8829 |
-| length_bucket | short | 134 | 46 | 45 | 1.0000 | 0.0224 | 0 | 0.7463 |
-| length_bucket | xl | 591 | 13 | 14 | 1.0000 | 0.0017 | 0 | 0.9780 |
-| perturbation | email_quoting | 373 | 14 | 13 | 1.0000 | 0.0000 | 0 | 0.9651 |
-| perturbation | headers_footers | 752 | 52 | 64 | 1.0000 | 0.0013 | 0 | 0.9309 |
-| perturbation | line_wrap | 621 | 31 | 37 | 1.0000 | 0.0048 | 0 | 0.9436 |
-| perturbation | none | 524 | 30 | 26 | 1.0000 | 0.0076 | 0 | 0.9561 |
-| perturbation | ocr_noise | 200 | 14 | 25 | 1.0000 | 0.0050 | 0 | 0.8950 |
-| perturbation | table | 239 | 27 | 40 | 1.0000 | 0.0084 | 0 | 0.8410 |
-| pii_depth | early | 277 | 7 | 10 | 1.0000 | 0.0000 | 0 | 0.9639 |
-| pii_depth | late | 61 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.9672 |
-| pii_depth | middle | 63 | 2 | 3 | 1.0000 | 0.0000 | 0 | 0.9524 |
-| pii_depth | none | 1605 | 113 | 129 | 1.0000 | 0.0056 | 0 | 0.9296 |
-| pre_redacted | no | 1852 | 109 | 123 | 1.0000 | 0.0038 | 0 | 0.9406 |
-| pre_redacted | yes | 154 | 15 | 21 | 1.0000 | 0.0130 | 0 | 0.8831 |
-| split_span | no | 1999 | 124 | 137 | 1.0000 | 0.0045 | 0 | 0.9395 |
-| split_span | yes * | 7 | 6 | 7 | 1.0000 | 0.0000 | 0 | 0.0000 |
-| truncated | no | 2006 | 124 | 144 | 1.0000 | 0.0045 | 0 | 0.9362 |
+| doc_type | conmed_log | 263 | 27 | 42 | 1.0000 | 0.0152 | 0 | 0.8479 |
+| doc_type | crf_page | 371 | 42 | 101 | 1.0000 | 0.0054 | 0 | 0.7278 |
+| doc_type | csr_patient_narrative | 964 | 42 | 72 | 1.0000 | 0.0041 | 0 | 0.9357 |
+| doc_type | delegation_log | 151 | 14 | 14 | 1.0000 | 0.0132 | 0 | 0.9470 |
+| doc_type | deviation_log | 203 | 23 | 23 | 1.0000 | 0.0099 | 0 | 0.8916 |
+| doc_type | icf_signature_page | 52 | 19 | 17 | 1.0000 | 0.0000 | 0 | 0.7885 |
+| doc_type | lab_report | 188 | 29 | 34 | 1.0000 | 0.0053 | 0 | 0.8404 |
+| doc_type | monitoring_visit_report | 986 | 29 | 47 | 1.0000 | 0.0000 | 0 | 0.9533 |
+| doc_type | protocol_section | 1240 | 41 | 0 | n/a | 0.0056 | 0 | 0.9992 |
+| doc_type | sae_cioms | 300 | 36 | 38 | 1.0000 | 0.0033 | 0 | 0.8733 |
+| doc_type | site_correspondence | 995 | 35 | 31 | 1.0000 | 0.0060 | 0 | 0.9698 |
+| hard_negative | no | 4393 | 260 | 302 | 1.0000 | 0.0052 | 0 | 0.9356 |
+| hard_negative | yes | 1320 | 77 | 117 | 1.0000 | 0.0045 | 0 | 0.9197 |
+| lang | de | 33 | 22 | 26 | 1.0000 | 0.0606 | 0 | 0.3636 |
+| lang | en | 5655 | 298 | 373 | 1.0000 | 0.0048 | 0 | 0.9383 |
+| lang | es * | 7 | 6 | 6 | 1.0000 | 0.0000 | 0 | 0.4286 |
+| lang | pl * | 18 | 11 | 14 | 1.0000 | 0.0000 | 0 | 0.1667 |
+| length_bucket | long | 2513 | 80 | 70 | 1.0000 | 0.0032 | 0 | 0.9721 |
+| length_bucket | medium | 1466 | 119 | 218 | 1.0000 | 0.0082 | 0 | 0.8595 |
+| length_bucket | short | 287 | 108 | 99 | 1.0000 | 0.0105 | 0 | 0.7003 |
+| length_bucket | xl | 1447 | 30 | 32 | 1.0000 | 0.0041 | 0 | 0.9813 |
+| perturbation | email_quoting | 995 | 35 | 31 | 1.0000 | 0.0060 | 0 | 0.9698 |
+| perturbation | headers_footers | 2405 | 132 | 156 | 1.0000 | 0.0046 | 0 | 0.9422 |
+| perturbation | line_wrap | 1852 | 105 | 151 | 1.0000 | 0.0059 | 0 | 0.9266 |
+| perturbation | none | 1421 | 93 | 104 | 1.0000 | 0.0049 | 0 | 0.9303 |
+| perturbation | ocr_noise | 567 | 39 | 45 | 1.0000 | 0.0088 | 0 | 0.9206 |
+| perturbation | table | 659 | 75 | 115 | 1.0000 | 0.0121 | 0 | 0.8240 |
+| pii_depth | early | 282 | 8 | 11 | 1.0000 | 0.0035 | 0 | 0.9645 |
+| pii_depth | late | 582 | 16 | 21 | 1.0000 | 0.0017 | 0 | 0.9656 |
+| pii_depth | middle | 327 | 10 | 11 | 1.0000 | 0.0031 | 0 | 0.9694 |
+| pii_depth | none | 4522 | 303 | 376 | 1.0000 | 0.0057 | 0 | 0.9228 |
+| pre_redacted | no | 5297 | 303 | 355 | 1.0000 | 0.0051 | 0 | 0.9379 |
+| pre_redacted | yes | 416 | 34 | 64 | 1.0000 | 0.0048 | 0 | 0.8558 |
+| split_span | no | 5695 | 337 | 402 | 1.0000 | 0.0051 | 0 | 0.9345 |
+| split_span | yes * | 18 | 17 | 17 | 1.0000 | 0.0000 | 0 | 0.1111 |
+| truncated | no | 5713 | 337 | 419 | 1.0000 | 0.0051 | 0 | 0.9319 |
 
 Value kinds of missed spans (false forwards):
 
@@ -3407,21 +3692,21 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
-| hard_negative | no | 234 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.9359 |
-| hard_negative | yes | 61 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.9180 |
-| lang | en | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
-| length_bucket | medium | 250 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.9400 |
-| length_bucket | short | 45 | 11 | 5 | 1.0000 | 0.0000 | 0 | 0.8889 |
-| perturbation | headers_footers | 119 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.9412 |
-| perturbation | line_wrap | 79 | 9 | 7 | 1.0000 | 0.0000 | 0 | 0.9114 |
-| perturbation | none | 109 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.9450 |
-| perturbation | ocr_noise | 36 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.9167 |
-| pii_depth | none | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
-| pre_redacted | no | 283 | 29 | 19 | 1.0000 | 0.0000 | 0 | 0.9329 |
-| pre_redacted | yes * | 12 | 1 | 1 | 1.0000 | 0.0000 | 0 | 0.9167 |
-| split_span | no | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
-| truncated | no | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
+| doc_type | irb_letter | 724 | 80 | 56 | 1.0000 | 0.0014 | 0 | 0.9227 |
+| hard_negative | no | 571 | 62 | 42 | 1.0000 | 0.0018 | 0 | 0.9264 |
+| hard_negative | yes | 153 | 18 | 14 | 1.0000 | 0.0000 | 0 | 0.9085 |
+| lang | en | 724 | 80 | 56 | 1.0000 | 0.0014 | 0 | 0.9227 |
+| length_bucket | medium | 596 | 47 | 34 | 1.0000 | 0.0000 | 0 | 0.9430 |
+| length_bucket | short | 128 | 33 | 22 | 1.0000 | 0.0078 | 0 | 0.8281 |
+| perturbation | headers_footers | 307 | 35 | 25 | 1.0000 | 0.0000 | 0 | 0.9186 |
+| perturbation | line_wrap | 185 | 26 | 19 | 1.0000 | 0.0054 | 0 | 0.8973 |
+| perturbation | none | 290 | 28 | 19 | 1.0000 | 0.0000 | 0 | 0.9345 |
+| perturbation | ocr_noise | 48 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8750 |
+| pii_depth | none | 724 | 80 | 56 | 1.0000 | 0.0014 | 0 | 0.9227 |
+| pre_redacted | no | 675 | 75 | 51 | 1.0000 | 0.0015 | 0 | 0.9244 |
+| pre_redacted | yes | 49 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.8980 |
+| split_span | no | 724 | 80 | 56 | 1.0000 | 0.0014 | 0 | 0.9227 |
+| truncated | no | 724 | 80 | 56 | 1.0000 | 0.0014 | 0 | 0.9227 |
 
 Value kinds of missed spans (false forwards):
 
@@ -3431,42 +3716,42 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log | 97 | 8 | 10 | 1.0000 | 0.0103 | 0 | 0.8866 |
-| doc_type | crf_page | 113 | 14 | 26 | 1.0000 | 0.0000 | 0 | 0.7788 |
-| doc_type | csr_patient_narrative | 276 | 14 | 23 | 1.0000 | 0.0000 | 0 | 0.9312 |
-| doc_type | delegation_log | 43 | 5 | 5 | 1.0000 | 0.0233 | 0 | 0.9535 |
-| doc_type | deviation_log | 106 | 10 | 8 | 1.0000 | 0.0000 | 0 | 0.9245 |
-| doc_type | icf_signature_page * | 28 | 7 | 6 | 1.0000 | 0.0357 | 0 | 0.9286 |
-| doc_type | lab_report | 76 | 11 | 16 | 1.0000 | 0.0132 | 0 | 0.8289 |
-| doc_type | monitoring_visit_report | 349 | 11 | 19 | 1.0000 | 0.0000 | 0 | 0.9456 |
-| doc_type | protocol_section | 470 | 16 | 0 | n/a | 0.0021 | 0 | 1.0000 |
-| doc_type | sae_cioms | 75 | 14 | 18 | 1.0000 | 0.0533 | 0 | 0.7867 |
-| doc_type | site_correspondence | 373 | 14 | 13 | 1.0000 | 0.0000 | 0 | 0.9651 |
-| hard_negative | no | 1512 | 91 | 94 | 1.0000 | 0.0053 | 0 | 0.9438 |
-| hard_negative | yes | 494 | 33 | 50 | 1.0000 | 0.0020 | 0 | 0.9130 |
-| lang | de * | 7 | 4 | 5 | 1.0000 | 0.0000 | 0 | 0.2857 |
-| lang | en | 1975 | 107 | 123 | 1.0000 | 0.0046 | 0 | 0.9453 |
-| lang | es * | 12 | 7 | 8 | 1.0000 | 0.0000 | 0 | 0.4167 |
-| lang | pl * | 12 | 6 | 8 | 1.0000 | 0.0000 | 0 | 0.3333 |
-| length_bucket | long | 743 | 24 | 21 | 1.0000 | 0.0000 | 0 | 0.9744 |
-| length_bucket | medium | 538 | 41 | 64 | 1.0000 | 0.0093 | 0 | 0.8829 |
-| length_bucket | short | 134 | 46 | 45 | 1.0000 | 0.0224 | 0 | 0.7463 |
-| length_bucket | xl | 591 | 13 | 14 | 1.0000 | 0.0017 | 0 | 0.9797 |
-| perturbation | email_quoting | 373 | 14 | 13 | 1.0000 | 0.0000 | 0 | 0.9651 |
-| perturbation | headers_footers | 752 | 52 | 64 | 1.0000 | 0.0013 | 0 | 0.9309 |
-| perturbation | line_wrap | 621 | 31 | 37 | 1.0000 | 0.0048 | 0 | 0.9436 |
-| perturbation | none | 524 | 30 | 26 | 1.0000 | 0.0076 | 0 | 0.9561 |
-| perturbation | ocr_noise | 200 | 14 | 25 | 1.0000 | 0.0050 | 0 | 0.8900 |
-| perturbation | table | 239 | 27 | 40 | 1.0000 | 0.0084 | 0 | 0.8410 |
-| pii_depth | early | 277 | 7 | 10 | 1.0000 | 0.0000 | 0 | 0.9603 |
-| pii_depth | late | 61 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.9672 |
-| pii_depth | middle | 63 | 2 | 3 | 1.0000 | 0.0000 | 0 | 0.9524 |
-| pii_depth | none | 1605 | 113 | 129 | 1.0000 | 0.0056 | 0 | 0.9302 |
-| pre_redacted | no | 1852 | 109 | 123 | 1.0000 | 0.0038 | 0 | 0.9406 |
-| pre_redacted | yes | 154 | 15 | 21 | 1.0000 | 0.0130 | 0 | 0.8831 |
-| split_span | no | 1999 | 124 | 137 | 1.0000 | 0.0045 | 0 | 0.9395 |
-| split_span | yes * | 7 | 6 | 7 | 1.0000 | 0.0000 | 0 | 0.0000 |
-| truncated | no | 2006 | 124 | 144 | 1.0000 | 0.0045 | 0 | 0.9362 |
+| doc_type | conmed_log | 263 | 27 | 42 | 1.0000 | 0.0152 | 0 | 0.8479 |
+| doc_type | crf_page | 371 | 42 | 101 | 1.0000 | 0.0054 | 0 | 0.7278 |
+| doc_type | csr_patient_narrative | 964 | 42 | 72 | 1.0000 | 0.0041 | 0 | 0.9357 |
+| doc_type | delegation_log | 151 | 14 | 14 | 1.0000 | 0.0132 | 0 | 0.9470 |
+| doc_type | deviation_log | 203 | 23 | 23 | 1.0000 | 0.0099 | 0 | 0.8916 |
+| doc_type | icf_signature_page | 52 | 19 | 17 | 1.0000 | 0.0000 | 0 | 0.7885 |
+| doc_type | lab_report | 188 | 29 | 34 | 1.0000 | 0.0106 | 0 | 0.8404 |
+| doc_type | monitoring_visit_report | 986 | 29 | 47 | 1.0000 | 0.0000 | 0 | 0.9533 |
+| doc_type | protocol_section | 1240 | 41 | 0 | n/a | 0.0056 | 0 | 0.9992 |
+| doc_type | sae_cioms | 300 | 36 | 38 | 1.0000 | 0.0033 | 0 | 0.8733 |
+| doc_type | site_correspondence | 995 | 35 | 31 | 1.0000 | 0.0060 | 0 | 0.9698 |
+| hard_negative | no | 4393 | 260 | 302 | 1.0000 | 0.0055 | 0 | 0.9356 |
+| hard_negative | yes | 1320 | 77 | 117 | 1.0000 | 0.0045 | 0 | 0.9197 |
+| lang | de | 33 | 22 | 26 | 1.0000 | 0.0606 | 0 | 0.3636 |
+| lang | en | 5655 | 298 | 373 | 1.0000 | 0.0050 | 0 | 0.9383 |
+| lang | es * | 7 | 6 | 6 | 1.0000 | 0.0000 | 0 | 0.4286 |
+| lang | pl * | 18 | 11 | 14 | 1.0000 | 0.0000 | 0 | 0.1667 |
+| length_bucket | long | 2513 | 80 | 70 | 1.0000 | 0.0032 | 0 | 0.9721 |
+| length_bucket | medium | 1466 | 119 | 218 | 1.0000 | 0.0089 | 0 | 0.8595 |
+| length_bucket | short | 287 | 108 | 99 | 1.0000 | 0.0105 | 0 | 0.7003 |
+| length_bucket | xl | 1447 | 30 | 32 | 1.0000 | 0.0041 | 0 | 0.9813 |
+| perturbation | email_quoting | 995 | 35 | 31 | 1.0000 | 0.0060 | 0 | 0.9698 |
+| perturbation | headers_footers | 2405 | 132 | 156 | 1.0000 | 0.0050 | 0 | 0.9422 |
+| perturbation | line_wrap | 1852 | 105 | 151 | 1.0000 | 0.0065 | 0 | 0.9266 |
+| perturbation | none | 1421 | 93 | 104 | 1.0000 | 0.0049 | 0 | 0.9303 |
+| perturbation | ocr_noise | 567 | 39 | 45 | 1.0000 | 0.0088 | 0 | 0.9206 |
+| perturbation | table | 659 | 75 | 115 | 1.0000 | 0.0121 | 0 | 0.8240 |
+| pii_depth | early | 282 | 8 | 11 | 1.0000 | 0.0035 | 0 | 0.9645 |
+| pii_depth | late | 582 | 16 | 21 | 1.0000 | 0.0017 | 0 | 0.9656 |
+| pii_depth | middle | 327 | 10 | 11 | 1.0000 | 0.0031 | 0 | 0.9694 |
+| pii_depth | none | 4522 | 303 | 376 | 1.0000 | 0.0060 | 0 | 0.9228 |
+| pre_redacted | no | 5297 | 303 | 355 | 1.0000 | 0.0053 | 0 | 0.9379 |
+| pre_redacted | yes | 416 | 34 | 64 | 1.0000 | 0.0048 | 0 | 0.8558 |
+| split_span | no | 5695 | 337 | 402 | 1.0000 | 0.0053 | 0 | 0.9345 |
+| split_span | yes * | 18 | 17 | 17 | 1.0000 | 0.0000 | 0 | 0.1111 |
+| truncated | no | 5713 | 337 | 419 | 1.0000 | 0.0053 | 0 | 0.9319 |
 
 Value kinds of missed spans (false forwards):
 
@@ -3476,93 +3761,21 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
-| hard_negative | no | 234 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.9359 |
-| hard_negative | yes | 61 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.9180 |
-| lang | en | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
-| length_bucket | medium | 250 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.9400 |
-| length_bucket | short | 45 | 11 | 5 | 1.0000 | 0.0000 | 0 | 0.8889 |
-| perturbation | headers_footers | 119 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.9412 |
-| perturbation | line_wrap | 79 | 9 | 7 | 1.0000 | 0.0000 | 0 | 0.9114 |
-| perturbation | none | 109 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.9450 |
-| perturbation | ocr_noise | 36 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.9167 |
-| pii_depth | none | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
-| pre_redacted | no | 283 | 29 | 19 | 1.0000 | 0.0000 | 0 | 0.9329 |
-| pre_redacted | yes * | 12 | 1 | 1 | 1.0000 | 0.0000 | 0 | 0.9167 |
-| split_span | no | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
-| truncated | no | 295 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.9322 |
-
-Value kinds of missed spans (false forwards):
-
-none
-
-### A / qs_v3, test
-
-| dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
-|---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log | 97 | 8 | 10 | 1.0000 | 0.0000 | 0 | 0.1959 |
-| doc_type | crf_page | 113 | 14 | 26 | 1.0000 | 0.0000 | 0 | 0.3628 |
-| doc_type | csr_patient_narrative | 276 | 14 | 23 | 1.0000 | 0.0036 | 0 | 0.3551 |
-| doc_type | delegation_log | 43 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.3256 |
-| doc_type | deviation_log | 106 | 10 | 8 | 1.0000 | 0.0094 | 0 | 0.3679 |
-| doc_type | icf_signature_page * | 28 | 7 | 6 | 1.0000 | 0.0357 | 0 | 0.3571 |
-| doc_type | lab_report | 76 | 11 | 16 | 1.0000 | 0.0395 | 0 | 0.4211 |
-| doc_type | monitoring_visit_report | 349 | 11 | 19 | 1.0000 | 0.0057 | 0 | 0.3295 |
-| doc_type | protocol_section | 470 | 16 | 0 | n/a | 0.0000 | 0 | 0.2553 |
-| doc_type | sae_cioms | 75 | 14 | 18 | 0.9444 | 0.0400 | 1 | 0.3600 |
-| doc_type | site_correspondence | 373 | 14 | 13 | 1.0000 | 0.0107 | 0 | 0.2949 |
-| hard_negative | no | 1512 | 91 | 94 | 1.0000 | 0.0093 | 0 | 0.3022 |
-| hard_negative | yes | 494 | 33 | 50 | 0.9800 | 0.0020 | 1 | 0.3401 |
-| lang | de * | 7 | 4 | 5 | 1.0000 | 0.0000 | 0 | 0.5714 |
-| lang | en | 1975 | 107 | 123 | 1.0000 | 0.0066 | 0 | 0.3078 |
-| lang | es * | 12 | 7 | 8 | 1.0000 | 0.0000 | 0 | 0.5833 |
-| lang | pl * | 12 | 6 | 8 | 0.8750 | 0.1667 | 1 | 0.5000 |
-| length_bucket | long | 743 | 24 | 21 | 1.0000 | 0.0067 | 0 | 0.2948 |
-| length_bucket | medium | 538 | 41 | 64 | 1.0000 | 0.0037 | 0 | 0.3401 |
-| length_bucket | short | 134 | 46 | 45 | 0.9778 | 0.0448 | 1 | 0.3955 |
-| length_bucket | xl | 591 | 13 | 14 | 1.0000 | 0.0034 | 0 | 0.2876 |
-| perturbation | email_quoting | 373 | 14 | 13 | 1.0000 | 0.0107 | 0 | 0.2949 |
-| perturbation | headers_footers | 752 | 52 | 64 | 0.9844 | 0.0080 | 1 | 0.3391 |
-| perturbation | line_wrap | 621 | 31 | 37 | 1.0000 | 0.0064 | 0 | 0.3800 |
-| perturbation | none | 524 | 30 | 26 | 1.0000 | 0.0076 | 0 | 0.2615 |
-| perturbation | ocr_noise | 200 | 14 | 25 | 1.0000 | 0.0050 | 0 | 0.3550 |
-| perturbation | table | 239 | 27 | 40 | 1.0000 | 0.0126 | 0 | 0.3180 |
-| pii_depth | early | 277 | 7 | 10 | 1.0000 | 0.0072 | 0 | 0.3682 |
-| pii_depth | late | 61 | 2 | 2 | 1.0000 | 0.0328 | 0 | 0.3115 |
-| pii_depth | middle | 63 | 2 | 3 | 1.0000 | 0.0159 | 0 | 0.3492 |
-| pii_depth | none | 1605 | 113 | 129 | 0.9922 | 0.0062 | 1 | 0.3003 |
-| pre_redacted | no | 1852 | 109 | 123 | 0.9919 | 0.0070 | 1 | 0.3072 |
-| pre_redacted | yes | 154 | 15 | 21 | 1.0000 | 0.0130 | 0 | 0.3636 |
-| split_span | no | 1999 | 124 | 137 | 0.9927 | 0.0075 | 1 | 0.3102 |
-| split_span | yes * | 7 | 6 | 7 | 1.0000 | 0.0000 | 0 | 0.7143 |
-| truncated | no | 2006 | 124 | 144 | 0.9931 | 0.0075 | 1 | 0.3116 |
-
-Value kinds of missed spans (false forwards):
-
-| value_kind | false forwards |
-|---|---|
-| event_date | 1 |
-| initials | 1 |
-
-### A / qs_v3, holdout
-
-| dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
-|---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 295 | 30 | 20 | 1.0000 | 0.0034 | 0 | 0.2169 |
-| hard_negative | no | 234 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.2308 |
-| hard_negative | yes | 61 | 7 | 5 | 1.0000 | 0.0164 | 0 | 0.1639 |
-| lang | en | 295 | 30 | 20 | 1.0000 | 0.0034 | 0 | 0.2169 |
-| length_bucket | medium | 250 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.2000 |
-| length_bucket | short | 45 | 11 | 5 | 1.0000 | 0.0222 | 0 | 0.3111 |
-| perturbation | headers_footers | 119 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.2605 |
-| perturbation | line_wrap | 79 | 9 | 7 | 1.0000 | 0.0127 | 0 | 0.2405 |
-| perturbation | none | 109 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.1743 |
-| perturbation | ocr_noise | 36 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.1944 |
-| pii_depth | none | 295 | 30 | 20 | 1.0000 | 0.0034 | 0 | 0.2169 |
-| pre_redacted | no | 283 | 29 | 19 | 1.0000 | 0.0035 | 0 | 0.2191 |
-| pre_redacted | yes * | 12 | 1 | 1 | 1.0000 | 0.0000 | 0 | 0.1667 |
-| split_span | no | 295 | 30 | 20 | 1.0000 | 0.0034 | 0 | 0.2169 |
-| truncated | no | 295 | 30 | 20 | 1.0000 | 0.0034 | 0 | 0.2169 |
+| doc_type | irb_letter | 724 | 80 | 56 | 1.0000 | 0.0014 | 0 | 0.9227 |
+| hard_negative | no | 571 | 62 | 42 | 1.0000 | 0.0018 | 0 | 0.9264 |
+| hard_negative | yes | 153 | 18 | 14 | 1.0000 | 0.0000 | 0 | 0.9085 |
+| lang | en | 724 | 80 | 56 | 1.0000 | 0.0014 | 0 | 0.9227 |
+| length_bucket | medium | 596 | 47 | 34 | 1.0000 | 0.0000 | 0 | 0.9430 |
+| length_bucket | short | 128 | 33 | 22 | 1.0000 | 0.0078 | 0 | 0.8281 |
+| perturbation | headers_footers | 307 | 35 | 25 | 1.0000 | 0.0000 | 0 | 0.9186 |
+| perturbation | line_wrap | 185 | 26 | 19 | 1.0000 | 0.0054 | 0 | 0.8973 |
+| perturbation | none | 290 | 28 | 19 | 1.0000 | 0.0000 | 0 | 0.9345 |
+| perturbation | ocr_noise | 48 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8750 |
+| pii_depth | none | 724 | 80 | 56 | 1.0000 | 0.0014 | 0 | 0.9227 |
+| pre_redacted | no | 675 | 75 | 51 | 1.0000 | 0.0015 | 0 | 0.9244 |
+| pre_redacted | yes | 49 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.8980 |
+| split_span | no | 724 | 80 | 56 | 1.0000 | 0.0014 | 0 | 0.9227 |
+| truncated | no | 724 | 80 | 56 | 1.0000 | 0.0014 | 0 | 0.9227 |
 
 Value kinds of missed spans (false forwards):
 
@@ -3572,69 +3785,66 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log | 32 | 8 | 4 | 1.0000 | 0.0000 | 0 | 0.1250 |
-| doc_type | crf_page | 54 | 14 | 17 | 1.0000 | 0.0000 | 0 | 0.3889 |
-| doc_type | csr_patient_narrative | 90 | 14 | 15 | 1.0000 | 0.0000 | 0 | 0.2111 |
-| doc_type | delegation_log * | 15 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.3333 |
-| doc_type | deviation_log | 37 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.2162 |
-| doc_type | icf_signature_page * | 10 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.6000 |
-| doc_type | lab_report * | 27 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.3333 |
-| doc_type | monitoring_visit_report | 111 | 11 | 15 | 0.9333 | 0.0090 | 1 | 0.1351 |
-| doc_type | protocol_section | 150 | 16 | 0 | n/a | 0.0000 | 0 | 0.0000 |
-| doc_type | sae_cioms | 30 | 14 | 13 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| doc_type | site_correspondence | 117 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.0769 |
-| hard_negative | no | 507 | 91 | 68 | 1.0000 | 0.0000 | 0 | 0.1558 |
-| hard_negative | yes | 166 | 33 | 32 | 0.9688 | 0.0060 | 1 | 0.1747 |
-| lang | de * | 4 | 4 | 4 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| lang | en | 656 | 107 | 86 | 0.9884 | 0.0015 | 1 | 0.1463 |
-| lang | es * | 7 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.5714 |
-| lang | pl * | 6 | 6 | 5 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| length_bucket | long | 235 | 24 | 16 | 1.0000 | 0.0000 | 0 | 0.0723 |
-| length_bucket | medium | 192 | 41 | 39 | 1.0000 | 0.0000 | 0 | 0.2292 |
-| length_bucket | short | 60 | 46 | 34 | 1.0000 | 0.0000 | 0 | 0.5667 |
-| length_bucket | xl | 186 | 13 | 11 | 0.9091 | 0.0054 | 1 | 0.0699 |
-| perturbation | email_quoting | 117 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.0769 |
-| perturbation | headers_footers | 254 | 52 | 42 | 0.9762 | 0.0039 | 1 | 0.1732 |
-| perturbation | line_wrap | 202 | 31 | 28 | 0.9643 | 0.0050 | 1 | 0.1535 |
-| perturbation | none | 172 | 30 | 19 | 1.0000 | 0.0000 | 0 | 0.1337 |
-| perturbation | ocr_noise | 68 | 14 | 15 | 1.0000 | 0.0000 | 0 | 0.2206 |
-| perturbation | table | 94 | 27 | 25 | 1.0000 | 0.0000 | 0 | 0.2872 |
-| pii_depth | early | 87 | 7 | 7 | 1.0000 | 0.0000 | 0 | 0.1034 |
-| pii_depth | late * | 19 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.1053 |
-| pii_depth | middle * | 20 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.1500 |
-| pii_depth | none | 547 | 113 | 89 | 0.9888 | 0.0018 | 1 | 0.1718 |
-| pre_redacted | no | 621 | 109 | 84 | 0.9881 | 0.0016 | 1 | 0.1465 |
-| pre_redacted | yes | 52 | 15 | 16 | 1.0000 | 0.0000 | 0 | 0.3269 |
-| split_span | no | 669 | 124 | 97 | 0.9897 | 0.0015 | 1 | 0.1555 |
-| split_span | yes * | 4 | 3 | 3 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| truncated | no | 673 | 124 | 100 | 0.9900 | 0.0015 | 1 | 0.1605 |
+| doc_type | conmed_log | 92 | 27 | 21 | 1.0000 | 0.0000 | 0 | 0.2283 |
+| doc_type | crf_page | 166 | 42 | 62 | 1.0000 | 0.0120 | 0 | 0.4157 |
+| doc_type | csr_patient_narrative | 309 | 42 | 56 | 1.0000 | 0.0000 | 0 | 0.1909 |
+| doc_type | delegation_log | 51 | 14 | 14 | 1.0000 | 0.0000 | 0 | 0.2745 |
+| doc_type | deviation_log | 76 | 23 | 18 | 0.9444 | 0.0000 | 0 | 0.2237 |
+| doc_type | icf_signature_page * | 23 | 19 | 14 | 1.0000 | 0.0000 | 0 | 0.5652 |
+| doc_type | lab_report | 74 | 29 | 23 | 1.0000 | 0.0000 | 0 | 0.3108 |
+| doc_type | monitoring_visit_report | 314 | 29 | 43 | 1.0000 | 0.0000 | 0 | 0.1401 |
+| doc_type | protocol_section | 391 | 41 | 0 | n/a | 0.0000 | 0 | 0.0077 |
+| doc_type | sae_cioms | 106 | 36 | 32 | 1.0000 | 0.0000 | 0 | 0.2736 |
+| doc_type | site_correspondence | 317 | 35 | 23 | 1.0000 | 0.0000 | 0 | 0.0726 |
+| hard_negative | no | 1470 | 260 | 227 | 0.9956 | 0.0007 | 0 | 0.1565 |
+| hard_negative | yes | 449 | 77 | 79 | 1.0000 | 0.0022 | 0 | 0.1893 |
+| lang | de * | 22 | 22 | 19 | 1.0000 | 0.0000 | 0 | 0.6818 |
+| lang | en | 1880 | 298 | 273 | 0.9963 | 0.0011 | 0 | 0.1537 |
+| lang | es * | 6 | 6 | 5 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| lang | pl * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.6364 |
+| length_bucket | long | 796 | 80 | 59 | 1.0000 | 0.0000 | 0 | 0.0817 |
+| length_bucket | medium | 534 | 119 | 140 | 0.9929 | 0.0037 | 0 | 0.2772 |
+| length_bucket | short | 137 | 108 | 78 | 1.0000 | 0.0000 | 0 | 0.5182 |
+| length_bucket | xl | 452 | 30 | 29 | 1.0000 | 0.0000 | 0 | 0.0686 |
+| perturbation | email_quoting | 317 | 35 | 23 | 1.0000 | 0.0000 | 0 | 0.0726 |
+| perturbation | headers_footers | 797 | 132 | 111 | 1.0000 | 0.0013 | 0 | 0.1531 |
+| perturbation | line_wrap | 619 | 105 | 115 | 0.9913 | 0.0000 | 0 | 0.1826 |
+| perturbation | none | 476 | 93 | 74 | 1.0000 | 0.0021 | 0 | 0.1597 |
+| perturbation | ocr_noise | 188 | 39 | 32 | 1.0000 | 0.0000 | 0 | 0.1755 |
+| perturbation | table | 263 | 75 | 79 | 0.9873 | 0.0000 | 0 | 0.3118 |
+| pii_depth | early | 90 | 8 | 8 | 1.0000 | 0.0000 | 0 | 0.1111 |
+| pii_depth | late | 182 | 16 | 18 | 1.0000 | 0.0000 | 0 | 0.0989 |
+| pii_depth | middle | 103 | 10 | 11 | 1.0000 | 0.0000 | 0 | 0.1165 |
+| pii_depth | none | 1544 | 303 | 269 | 0.9963 | 0.0013 | 0 | 0.1781 |
+| pre_redacted | no | 1773 | 303 | 263 | 0.9962 | 0.0011 | 0 | 0.1534 |
+| pre_redacted | yes | 146 | 34 | 43 | 1.0000 | 0.0000 | 0 | 0.2945 |
+| split_span | no | 1902 | 337 | 290 | 0.9966 | 0.0011 | 0 | 0.1577 |
+| split_span | yes * | 17 | 14 | 16 | 1.0000 | 0.0000 | 0 | 0.8824 |
+| truncated | no | 1919 | 337 | 306 | 0.9967 | 0.0010 | 0 | 0.1641 |
 
 Value kinds of missed spans (false forwards):
 
-| value_kind | false forwards |
-|---|---|
-| email | 1 |
-| person_name | 1 |
+none
 
 ### B1 / qs_v1, holdout
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 99 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.2121 |
-| hard_negative | no | 78 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.2051 |
-| hard_negative | yes * | 21 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.2381 |
-| lang | en | 99 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.2121 |
-| length_bucket | medium | 82 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.1829 |
-| length_bucket | short * | 17 | 11 | 5 | 1.0000 | 0.0000 | 0 | 0.3529 |
-| perturbation | headers_footers | 40 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.2000 |
-| perturbation | line_wrap * | 26 | 9 | 7 | 1.0000 | 0.0000 | 0 | 0.3077 |
-| perturbation | none | 37 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.1622 |
-| perturbation | ocr_noise * | 12 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.2500 |
-| pii_depth | none | 99 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.2121 |
-| pre_redacted | no | 95 | 29 | 19 | 1.0000 | 0.0000 | 0 | 0.2105 |
-| pre_redacted | yes * | 4 | 1 | 1 | 1.0000 | 0.0000 | 0 | 0.2500 |
-| split_span | no | 99 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.2121 |
-| truncated | no | 99 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.2121 |
+| doc_type | irb_letter | 249 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.2249 |
+| hard_negative | no | 197 | 62 | 42 | 1.0000 | 0.0000 | 0 | 0.2132 |
+| hard_negative | yes | 52 | 18 | 14 | 1.0000 | 0.0000 | 0 | 0.2692 |
+| lang | en | 249 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.2249 |
+| length_bucket | medium | 197 | 47 | 34 | 1.0000 | 0.0000 | 0 | 0.1726 |
+| length_bucket | short | 52 | 33 | 22 | 1.0000 | 0.0000 | 0 | 0.4231 |
+| perturbation | headers_footers | 107 | 35 | 25 | 1.0000 | 0.0000 | 0 | 0.2336 |
+| perturbation | line_wrap | 67 | 26 | 19 | 1.0000 | 0.0000 | 0 | 0.2836 |
+| perturbation | none | 98 | 28 | 19 | 1.0000 | 0.0000 | 0 | 0.1939 |
+| perturbation | ocr_noise * | 15 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.4000 |
+| pii_depth | none | 249 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.2249 |
+| pre_redacted | no | 232 | 75 | 51 | 1.0000 | 0.0000 | 0 | 0.2198 |
+| pre_redacted | yes * | 17 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.2941 |
+| split_span | no | 249 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.2249 |
+| truncated | no | 249 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.2249 |
 
 Value kinds of missed spans (false forwards):
 
@@ -3644,66 +3854,69 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log | 32 | 8 | 4 | 1.0000 | 0.0000 | 0 | 0.1250 |
-| doc_type | crf_page | 54 | 14 | 17 | 1.0000 | 0.0000 | 0 | 0.3889 |
-| doc_type | csr_patient_narrative | 90 | 14 | 15 | 1.0000 | 0.0000 | 0 | 0.2111 |
-| doc_type | delegation_log * | 15 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.3333 |
-| doc_type | deviation_log | 37 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.2162 |
-| doc_type | icf_signature_page * | 10 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.6000 |
-| doc_type | lab_report * | 27 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.3333 |
-| doc_type | monitoring_visit_report | 111 | 11 | 15 | 1.0000 | 0.0000 | 0 | 0.1351 |
-| doc_type | protocol_section | 150 | 16 | 0 | n/a | 0.0000 | 0 | 0.0000 |
-| doc_type | sae_cioms | 30 | 14 | 13 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| doc_type | site_correspondence | 117 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.0769 |
-| hard_negative | no | 507 | 91 | 68 | 1.0000 | 0.0000 | 0 | 0.1558 |
-| hard_negative | yes | 166 | 33 | 32 | 1.0000 | 0.0000 | 0 | 0.1747 |
-| lang | de * | 4 | 4 | 4 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| lang | en | 656 | 107 | 86 | 1.0000 | 0.0000 | 0 | 0.1463 |
-| lang | es * | 7 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.5714 |
-| lang | pl * | 6 | 6 | 5 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| length_bucket | long | 235 | 24 | 16 | 1.0000 | 0.0000 | 0 | 0.0723 |
-| length_bucket | medium | 192 | 41 | 39 | 1.0000 | 0.0000 | 0 | 0.2292 |
-| length_bucket | short | 60 | 46 | 34 | 1.0000 | 0.0000 | 0 | 0.5667 |
-| length_bucket | xl | 186 | 13 | 11 | 1.0000 | 0.0000 | 0 | 0.0699 |
-| perturbation | email_quoting | 117 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.0769 |
-| perturbation | headers_footers | 254 | 52 | 42 | 1.0000 | 0.0000 | 0 | 0.1732 |
-| perturbation | line_wrap | 202 | 31 | 28 | 1.0000 | 0.0000 | 0 | 0.1535 |
-| perturbation | none | 172 | 30 | 19 | 1.0000 | 0.0000 | 0 | 0.1337 |
-| perturbation | ocr_noise | 68 | 14 | 15 | 1.0000 | 0.0000 | 0 | 0.2206 |
-| perturbation | table | 94 | 27 | 25 | 1.0000 | 0.0000 | 0 | 0.2872 |
-| pii_depth | early | 87 | 7 | 7 | 1.0000 | 0.0000 | 0 | 0.1034 |
-| pii_depth | late * | 19 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.1053 |
-| pii_depth | middle * | 20 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.1500 |
-| pii_depth | none | 547 | 113 | 89 | 1.0000 | 0.0000 | 0 | 0.1718 |
-| pre_redacted | no | 621 | 109 | 84 | 1.0000 | 0.0000 | 0 | 0.1465 |
-| pre_redacted | yes | 52 | 15 | 16 | 1.0000 | 0.0000 | 0 | 0.3269 |
-| split_span | no | 669 | 124 | 97 | 1.0000 | 0.0000 | 0 | 0.1555 |
-| split_span | yes * | 4 | 3 | 3 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| truncated | no | 673 | 124 | 100 | 1.0000 | 0.0000 | 0 | 0.1605 |
+| doc_type | conmed_log | 92 | 27 | 21 | 1.0000 | 0.0000 | 0 | 0.2283 |
+| doc_type | crf_page | 166 | 42 | 62 | 1.0000 | 0.0241 | 0 | 0.4217 |
+| doc_type | csr_patient_narrative | 309 | 42 | 56 | 1.0000 | 0.0000 | 0 | 0.1909 |
+| doc_type | delegation_log | 51 | 14 | 14 | 1.0000 | 0.0000 | 0 | 0.2745 |
+| doc_type | deviation_log | 76 | 23 | 18 | 0.9444 | 0.0132 | 1 | 0.2237 |
+| doc_type | icf_signature_page * | 23 | 19 | 14 | 1.0000 | 0.0000 | 0 | 0.5652 |
+| doc_type | lab_report | 74 | 29 | 23 | 1.0000 | 0.0000 | 0 | 0.3108 |
+| doc_type | monitoring_visit_report | 314 | 29 | 43 | 1.0000 | 0.0000 | 0 | 0.1401 |
+| doc_type | protocol_section | 391 | 41 | 0 | n/a | 0.0000 | 0 | 0.0077 |
+| doc_type | sae_cioms | 106 | 36 | 32 | 1.0000 | 0.0000 | 0 | 0.2736 |
+| doc_type | site_correspondence | 317 | 35 | 23 | 1.0000 | 0.0000 | 0 | 0.0726 |
+| hard_negative | no | 1470 | 260 | 227 | 0.9956 | 0.0020 | 1 | 0.1571 |
+| hard_negative | yes | 449 | 77 | 79 | 1.0000 | 0.0045 | 0 | 0.1893 |
+| lang | de * | 22 | 22 | 19 | 1.0000 | 0.0000 | 0 | 0.6818 |
+| lang | en | 1880 | 298 | 273 | 0.9963 | 0.0027 | 1 | 0.1543 |
+| lang | es * | 6 | 6 | 5 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| lang | pl * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.6364 |
+| length_bucket | long | 796 | 80 | 59 | 1.0000 | 0.0000 | 0 | 0.0817 |
+| length_bucket | medium | 534 | 119 | 140 | 0.9929 | 0.0094 | 1 | 0.2790 |
+| length_bucket | short | 137 | 108 | 78 | 1.0000 | 0.0000 | 0 | 0.5182 |
+| length_bucket | xl | 452 | 30 | 29 | 1.0000 | 0.0000 | 0 | 0.0686 |
+| perturbation | email_quoting | 317 | 35 | 23 | 1.0000 | 0.0000 | 0 | 0.0726 |
+| perturbation | headers_footers | 797 | 132 | 111 | 1.0000 | 0.0013 | 0 | 0.1531 |
+| perturbation | line_wrap | 619 | 105 | 115 | 0.9913 | 0.0016 | 1 | 0.1826 |
+| perturbation | none | 476 | 93 | 74 | 1.0000 | 0.0063 | 0 | 0.1597 |
+| perturbation | ocr_noise | 188 | 39 | 32 | 1.0000 | 0.0000 | 0 | 0.1755 |
+| perturbation | table | 263 | 75 | 79 | 0.9873 | 0.0038 | 1 | 0.3156 |
+| pii_depth | early | 90 | 8 | 8 | 1.0000 | 0.0000 | 0 | 0.1111 |
+| pii_depth | late | 182 | 16 | 18 | 1.0000 | 0.0000 | 0 | 0.0989 |
+| pii_depth | middle | 103 | 10 | 11 | 1.0000 | 0.0000 | 0 | 0.1165 |
+| pii_depth | none | 1544 | 303 | 269 | 0.9963 | 0.0032 | 1 | 0.1788 |
+| pre_redacted | no | 1773 | 303 | 263 | 0.9962 | 0.0028 | 1 | 0.1540 |
+| pre_redacted | yes | 146 | 34 | 43 | 1.0000 | 0.0000 | 0 | 0.2945 |
+| split_span | no | 1902 | 337 | 290 | 0.9966 | 0.0026 | 1 | 0.1583 |
+| split_span | yes * | 17 | 14 | 16 | 1.0000 | 0.0000 | 0 | 0.8824 |
+| truncated | no | 1919 | 337 | 306 | 0.9967 | 0.0026 | 1 | 0.1647 |
 
 Value kinds of missed spans (false forwards):
 
-none
+| value_kind | false forwards |
+|---|---|
+| event_date | 1 |
+| initials | 1 |
 
 ### B1 / qs_v2, holdout
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 99 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.2121 |
-| hard_negative | no | 78 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.2051 |
-| hard_negative | yes * | 21 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.2381 |
-| lang | en | 99 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.2121 |
-| length_bucket | medium | 82 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.1829 |
-| length_bucket | short * | 17 | 11 | 5 | 1.0000 | 0.0000 | 0 | 0.3529 |
-| perturbation | headers_footers | 40 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.2000 |
-| perturbation | line_wrap * | 26 | 9 | 7 | 1.0000 | 0.0000 | 0 | 0.3077 |
-| perturbation | none | 37 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.1622 |
-| perturbation | ocr_noise * | 12 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.2500 |
-| pii_depth | none | 99 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.2121 |
-| pre_redacted | no | 95 | 29 | 19 | 1.0000 | 0.0000 | 0 | 0.2105 |
-| pre_redacted | yes * | 4 | 1 | 1 | 1.0000 | 0.0000 | 0 | 0.2500 |
-| split_span | no | 99 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.2121 |
-| truncated | no | 99 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.2121 |
+| doc_type | irb_letter | 249 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.2249 |
+| hard_negative | no | 197 | 62 | 42 | 1.0000 | 0.0000 | 0 | 0.2132 |
+| hard_negative | yes | 52 | 18 | 14 | 1.0000 | 0.0000 | 0 | 0.2692 |
+| lang | en | 249 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.2249 |
+| length_bucket | medium | 197 | 47 | 34 | 1.0000 | 0.0000 | 0 | 0.1726 |
+| length_bucket | short | 52 | 33 | 22 | 1.0000 | 0.0000 | 0 | 0.4231 |
+| perturbation | headers_footers | 107 | 35 | 25 | 1.0000 | 0.0000 | 0 | 0.2336 |
+| perturbation | line_wrap | 67 | 26 | 19 | 1.0000 | 0.0000 | 0 | 0.2836 |
+| perturbation | none | 98 | 28 | 19 | 1.0000 | 0.0000 | 0 | 0.1939 |
+| perturbation | ocr_noise * | 15 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.4000 |
+| pii_depth | none | 249 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.2249 |
+| pre_redacted | no | 232 | 75 | 51 | 1.0000 | 0.0000 | 0 | 0.2198 |
+| pre_redacted | yes * | 17 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.2941 |
+| split_span | no | 249 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.2249 |
+| truncated | no | 249 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.2249 |
 
 Value kinds of missed spans (false forwards):
 
@@ -3713,72 +3926,69 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log * | 17 | 8 | 2 | 1.0000 | 0.0000 | 0 | 0.1176 |
-| doc_type | crf_page * | 23 | 14 | 7 | 1.0000 | 0.0435 | 0 | 0.3043 |
-| doc_type | csr_patient_narrative | 43 | 14 | 15 | 0.9333 | 0.0233 | 0 | 0.3953 |
-| doc_type | delegation_log * | 8 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.6250 |
-| doc_type | deviation_log * | 18 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.3333 |
-| doc_type | icf_signature_page * | 7 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8571 |
-| doc_type | lab_report * | 15 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.6000 |
-| doc_type | monitoring_visit_report | 49 | 11 | 15 | 1.0000 | 0.0000 | 0 | 0.3061 |
-| doc_type | protocol_section | 67 | 16 | 0 | n/a | 0.0000 | 0 | 0.0000 |
-| doc_type | sae_cioms * | 18 | 14 | 13 | 0.9231 | 0.0556 | 1 | 0.6667 |
-| doc_type | site_correspondence | 55 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.1636 |
-| hard_negative | no | 239 | 91 | 62 | 0.9839 | 0.0084 | 1 | 0.2678 |
-| hard_negative | yes | 81 | 33 | 26 | 0.9615 | 0.0123 | 0 | 0.2963 |
-| lang | de * | 4 | 4 | 4 | 0.7500 | 0.0000 | 0 | 0.5000 |
-| lang | en | 303 | 107 | 74 | 1.0000 | 0.0033 | 0 | 0.2508 |
-| lang | es * | 7 | 7 | 5 | 0.8000 | 0.1429 | 1 | 0.5714 |
-| lang | pl * | 6 | 6 | 5 | 1.0000 | 0.1667 | 0 | 1.0000 |
-| length_bucket | long | 104 | 24 | 16 | 1.0000 | 0.0000 | 0 | 0.1635 |
-| length_bucket | medium | 88 | 41 | 27 | 1.0000 | 0.0114 | 0 | 0.3409 |
-| length_bucket | short | 46 | 46 | 34 | 0.9412 | 0.0435 | 1 | 0.6522 |
-| length_bucket | xl | 82 | 13 | 11 | 1.0000 | 0.0000 | 0 | 0.1341 |
-| perturbation | email_quoting | 55 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.1636 |
-| perturbation | headers_footers | 124 | 52 | 38 | 0.9474 | 0.0081 | 1 | 0.2984 |
-| perturbation | line_wrap | 94 | 31 | 28 | 1.0000 | 0.0106 | 0 | 0.3298 |
-| perturbation | none | 81 | 30 | 19 | 1.0000 | 0.0123 | 0 | 0.2469 |
-| perturbation | ocr_noise | 33 | 14 | 11 | 1.0000 | 0.0000 | 0 | 0.3030 |
-| perturbation | table | 45 | 27 | 16 | 1.0000 | 0.0000 | 0 | 0.3556 |
-| pii_depth | early | 38 | 7 | 7 | 1.0000 | 0.0000 | 0 | 0.1842 |
-| pii_depth | late * | 8 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.2500 |
-| pii_depth | middle * | 9 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.2222 |
-| pii_depth | none | 265 | 113 | 77 | 0.9740 | 0.0113 | 1 | 0.2906 |
-| pre_redacted | no | 291 | 109 | 72 | 0.9722 | 0.0069 | 1 | 0.2440 |
-| pre_redacted | yes * | 29 | 15 | 16 | 1.0000 | 0.0345 | 0 | 0.5862 |
-| split_span | no | 320 | 124 | 88 | 0.9773 | 0.0094 | 1 | 0.2750 |
-| truncated | no | 314 | 123 | 85 | 0.9765 | 0.0064 | 1 | 0.2675 |
-| truncated | yes * | 6 | 6 | 3 | 1.0000 | 0.1667 | 0 | 0.6667 |
+| doc_type | conmed_log | 48 | 27 | 12 | 1.0000 | 0.0000 | 0 | 0.2500 |
+| doc_type | crf_page | 76 | 42 | 23 | 0.9565 | 0.0132 | 1 | 0.3289 |
+| doc_type | csr_patient_narrative | 145 | 42 | 45 | 1.0000 | 0.0000 | 0 | 0.2897 |
+| doc_type | delegation_log * | 26 | 14 | 14 | 1.0000 | 0.0000 | 0 | 0.5385 |
+| doc_type | deviation_log | 41 | 23 | 13 | 1.0000 | 0.0000 | 0 | 0.2927 |
+| doc_type | icf_signature_page * | 19 | 19 | 14 | 1.0000 | 0.0000 | 0 | 0.6842 |
+| doc_type | lab_report | 42 | 29 | 21 | 1.0000 | 0.0000 | 0 | 0.5000 |
+| doc_type | monitoring_visit_report | 137 | 29 | 37 | 1.0000 | 0.0000 | 0 | 0.2628 |
+| doc_type | protocol_section | 174 | 41 | 0 | n/a | 0.0000 | 0 | 0.0115 |
+| doc_type | sae_cioms | 60 | 36 | 32 | 1.0000 | 0.0000 | 0 | 0.5000 |
+| doc_type | site_correspondence | 144 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.1458 |
+| hard_negative | no | 703 | 260 | 177 | 0.9944 | 0.0014 | 1 | 0.2447 |
+| hard_negative | yes | 209 | 77 | 56 | 1.0000 | 0.0000 | 0 | 0.2679 |
+| lang | de * | 22 | 22 | 19 | 1.0000 | 0.0000 | 0 | 0.6818 |
+| lang | en | 873 | 298 | 200 | 0.9950 | 0.0011 | 1 | 0.2314 |
+| lang | es * | 6 | 6 | 5 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| lang | pl * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.6364 |
+| length_bucket | long | 350 | 80 | 53 | 1.0000 | 0.0000 | 0 | 0.1543 |
+| length_bucket | medium | 255 | 119 | 80 | 0.9875 | 0.0039 | 1 | 0.3216 |
+| length_bucket | short | 108 | 108 | 77 | 1.0000 | 0.0000 | 0 | 0.6389 |
+| length_bucket | xl | 199 | 30 | 23 | 1.0000 | 0.0000 | 0 | 0.1156 |
+| perturbation | email_quoting | 144 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.1458 |
+| perturbation | headers_footers | 380 | 132 | 87 | 0.9885 | 0.0026 | 1 | 0.2368 |
+| perturbation | line_wrap | 291 | 105 | 82 | 1.0000 | 0.0000 | 0 | 0.2749 |
+| perturbation | none | 229 | 93 | 62 | 1.0000 | 0.0000 | 0 | 0.2620 |
+| perturbation | ocr_noise | 93 | 39 | 27 | 1.0000 | 0.0000 | 0 | 0.2796 |
+| perturbation | table | 135 | 75 | 47 | 1.0000 | 0.0000 | 0 | 0.3407 |
+| pii_depth | early | 39 | 8 | 8 | 1.0000 | 0.0000 | 0 | 0.2051 |
+| pii_depth | late | 79 | 16 | 16 | 1.0000 | 0.0000 | 0 | 0.2025 |
+| pii_depth | middle | 45 | 10 | 10 | 1.0000 | 0.0000 | 0 | 0.2222 |
+| pii_depth | none | 749 | 303 | 199 | 0.9950 | 0.0013 | 1 | 0.2590 |
+| pre_redacted | no | 836 | 303 | 205 | 0.9951 | 0.0012 | 1 | 0.2428 |
+| pre_redacted | yes | 76 | 34 | 28 | 1.0000 | 0.0000 | 0 | 0.3289 |
+| split_span | no | 912 | 337 | 233 | 0.9957 | 0.0011 | 1 | 0.2500 |
+| truncated | no | 898 | 336 | 225 | 0.9956 | 0.0011 | 1 | 0.2428 |
+| truncated | yes * | 14 | 14 | 8 | 1.0000 | 0.0000 | 0 | 0.7143 |
 
 Value kinds of missed spans (false forwards):
 
 | value_kind | false forwards |
 |---|---|
-| dob | 1 |
 | event_date | 1 |
 | initials | 1 |
-| person_name | 1 |
-| phone | 1 |
 
 ### B2 / qs_v1, holdout
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 50 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| hard_negative | no | 39 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.3846 |
-| hard_negative | yes * | 11 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.4545 |
-| lang | en | 50 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| length_bucket | medium | 39 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.3846 |
-| length_bucket | short * | 11 | 11 | 5 | 1.0000 | 0.0000 | 0 | 0.4545 |
-| perturbation | headers_footers * | 21 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.3333 |
-| perturbation | line_wrap * | 14 | 9 | 7 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| perturbation | none * | 17 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.3529 |
-| perturbation | ocr_noise * | 7 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.4286 |
-| pii_depth | none | 50 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| pre_redacted | no | 48 | 29 | 19 | 1.0000 | 0.0000 | 0 | 0.3958 |
-| pre_redacted | yes * | 2 | 1 | 1 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| split_span | no | 50 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| truncated | no | 50 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.4000 |
+| doc_type | irb_letter | 130 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.4308 |
+| hard_negative | no | 101 | 62 | 42 | 1.0000 | 0.0000 | 0 | 0.4158 |
+| hard_negative | yes * | 29 | 18 | 14 | 1.0000 | 0.0000 | 0 | 0.4828 |
+| lang | en | 130 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.4308 |
+| length_bucket | medium | 97 | 47 | 34 | 1.0000 | 0.0000 | 0 | 0.3505 |
+| length_bucket | short | 33 | 33 | 22 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| perturbation | headers_footers | 55 | 35 | 25 | 1.0000 | 0.0000 | 0 | 0.4545 |
+| perturbation | line_wrap | 36 | 26 | 19 | 1.0000 | 0.0000 | 0 | 0.5278 |
+| perturbation | none | 52 | 28 | 19 | 1.0000 | 0.0000 | 0 | 0.3654 |
+| perturbation | ocr_noise * | 9 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| pii_depth | none | 130 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.4308 |
+| pre_redacted | no | 121 | 75 | 51 | 1.0000 | 0.0000 | 0 | 0.4215 |
+| pre_redacted | yes * | 9 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.5556 |
+| split_span | no | 130 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.4308 |
+| truncated | no | 130 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.4308 |
 
 Value kinds of missed spans (false forwards):
 
@@ -3788,75 +3998,69 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log * | 17 | 8 | 2 | 1.0000 | 0.0000 | 0 | 0.1176 |
-| doc_type | crf_page * | 23 | 14 | 7 | 1.0000 | 0.1304 | 0 | 0.3043 |
-| doc_type | csr_patient_narrative | 43 | 14 | 15 | 0.9333 | 0.0465 | 1 | 0.3953 |
-| doc_type | delegation_log * | 8 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.6250 |
-| doc_type | deviation_log * | 18 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.3333 |
-| doc_type | icf_signature_page * | 7 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8571 |
-| doc_type | lab_report * | 15 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.6000 |
-| doc_type | monitoring_visit_report | 49 | 11 | 15 | 1.0000 | 0.0000 | 0 | 0.3061 |
-| doc_type | protocol_section | 67 | 16 | 0 | n/a | 0.0000 | 0 | 0.0000 |
-| doc_type | sae_cioms * | 18 | 14 | 13 | 0.9231 | 0.0556 | 1 | 0.6667 |
-| doc_type | site_correspondence | 55 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.1636 |
-| hard_negative | no | 239 | 91 | 62 | 0.9839 | 0.0167 | 1 | 0.2678 |
-| hard_negative | yes | 81 | 33 | 26 | 0.9615 | 0.0247 | 1 | 0.2963 |
-| lang | de * | 4 | 4 | 4 | 0.7500 | 0.2500 | 1 | 0.5000 |
-| lang | en | 303 | 107 | 74 | 1.0000 | 0.0099 | 0 | 0.2508 |
-| lang | es * | 7 | 7 | 5 | 0.8000 | 0.1429 | 1 | 0.5714 |
-| lang | pl * | 6 | 6 | 5 | 1.0000 | 0.1667 | 0 | 1.0000 |
-| length_bucket | long | 104 | 24 | 16 | 1.0000 | 0.0000 | 0 | 0.1635 |
-| length_bucket | medium | 88 | 41 | 27 | 1.0000 | 0.0341 | 0 | 0.3409 |
-| length_bucket | short | 46 | 46 | 34 | 0.9412 | 0.0652 | 2 | 0.6522 |
-| length_bucket | xl | 82 | 13 | 11 | 1.0000 | 0.0000 | 0 | 0.1341 |
-| perturbation | email_quoting | 55 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.1636 |
-| perturbation | headers_footers | 124 | 52 | 38 | 0.9474 | 0.0242 | 2 | 0.2984 |
-| perturbation | line_wrap | 94 | 31 | 28 | 1.0000 | 0.0106 | 0 | 0.3298 |
-| perturbation | none | 81 | 30 | 19 | 1.0000 | 0.0247 | 0 | 0.2469 |
-| perturbation | ocr_noise | 33 | 14 | 11 | 1.0000 | 0.0000 | 0 | 0.3030 |
-| perturbation | table | 45 | 27 | 16 | 1.0000 | 0.0000 | 0 | 0.3556 |
-| pii_depth | early | 38 | 7 | 7 | 1.0000 | 0.0000 | 0 | 0.1842 |
-| pii_depth | late * | 8 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.2500 |
-| pii_depth | middle * | 9 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.2222 |
-| pii_depth | none | 265 | 113 | 77 | 0.9740 | 0.0226 | 2 | 0.2906 |
-| pre_redacted | no | 291 | 109 | 72 | 0.9722 | 0.0172 | 2 | 0.2440 |
-| pre_redacted | yes * | 29 | 15 | 16 | 1.0000 | 0.0345 | 0 | 0.5862 |
-| split_span | no | 320 | 124 | 88 | 0.9773 | 0.0187 | 2 | 0.2750 |
-| truncated | no | 314 | 123 | 85 | 0.9765 | 0.0127 | 2 | 0.2675 |
-| truncated | yes * | 6 | 6 | 3 | 1.0000 | 0.3333 | 0 | 0.6667 |
+| doc_type | conmed_log | 48 | 27 | 12 | 1.0000 | 0.0000 | 0 | 0.2500 |
+| doc_type | crf_page | 76 | 42 | 23 | 0.9565 | 0.0132 | 1 | 0.3289 |
+| doc_type | csr_patient_narrative | 145 | 42 | 45 | 1.0000 | 0.0000 | 0 | 0.2897 |
+| doc_type | delegation_log * | 26 | 14 | 14 | 1.0000 | 0.0000 | 0 | 0.5385 |
+| doc_type | deviation_log | 41 | 23 | 13 | 1.0000 | 0.0000 | 0 | 0.2927 |
+| doc_type | icf_signature_page * | 19 | 19 | 14 | 1.0000 | 0.0000 | 0 | 0.6842 |
+| doc_type | lab_report | 42 | 29 | 21 | 1.0000 | 0.0000 | 0 | 0.5000 |
+| doc_type | monitoring_visit_report | 137 | 29 | 37 | 1.0000 | 0.0000 | 0 | 0.2628 |
+| doc_type | protocol_section | 174 | 41 | 0 | n/a | 0.0000 | 0 | 0.0115 |
+| doc_type | sae_cioms | 60 | 36 | 32 | 1.0000 | 0.0000 | 0 | 0.5000 |
+| doc_type | site_correspondence | 144 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.1458 |
+| hard_negative | no | 703 | 260 | 177 | 0.9944 | 0.0014 | 1 | 0.2447 |
+| hard_negative | yes | 209 | 77 | 56 | 1.0000 | 0.0000 | 0 | 0.2679 |
+| lang | de * | 22 | 22 | 19 | 1.0000 | 0.0000 | 0 | 0.6818 |
+| lang | en | 873 | 298 | 200 | 0.9950 | 0.0011 | 1 | 0.2314 |
+| lang | es * | 6 | 6 | 5 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| lang | pl * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.6364 |
+| length_bucket | long | 350 | 80 | 53 | 1.0000 | 0.0000 | 0 | 0.1543 |
+| length_bucket | medium | 255 | 119 | 80 | 0.9875 | 0.0039 | 1 | 0.3216 |
+| length_bucket | short | 108 | 108 | 77 | 1.0000 | 0.0000 | 0 | 0.6389 |
+| length_bucket | xl | 199 | 30 | 23 | 1.0000 | 0.0000 | 0 | 0.1156 |
+| perturbation | email_quoting | 144 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.1458 |
+| perturbation | headers_footers | 380 | 132 | 87 | 0.9885 | 0.0026 | 1 | 0.2368 |
+| perturbation | line_wrap | 291 | 105 | 82 | 1.0000 | 0.0000 | 0 | 0.2749 |
+| perturbation | none | 229 | 93 | 62 | 1.0000 | 0.0000 | 0 | 0.2620 |
+| perturbation | ocr_noise | 93 | 39 | 27 | 1.0000 | 0.0000 | 0 | 0.2796 |
+| perturbation | table | 135 | 75 | 47 | 1.0000 | 0.0000 | 0 | 0.3407 |
+| pii_depth | early | 39 | 8 | 8 | 1.0000 | 0.0000 | 0 | 0.2051 |
+| pii_depth | late | 79 | 16 | 16 | 1.0000 | 0.0000 | 0 | 0.2025 |
+| pii_depth | middle | 45 | 10 | 10 | 1.0000 | 0.0000 | 0 | 0.2222 |
+| pii_depth | none | 749 | 303 | 199 | 0.9950 | 0.0013 | 1 | 0.2590 |
+| pre_redacted | no | 836 | 303 | 205 | 0.9951 | 0.0012 | 1 | 0.2428 |
+| pre_redacted | yes | 76 | 34 | 28 | 1.0000 | 0.0000 | 0 | 0.3289 |
+| split_span | no | 912 | 337 | 233 | 0.9957 | 0.0011 | 1 | 0.2500 |
+| truncated | no | 898 | 336 | 225 | 0.9956 | 0.0011 | 1 | 0.2428 |
+| truncated | yes * | 14 | 14 | 8 | 1.0000 | 0.0000 | 0 | 0.7143 |
 
 Value kinds of missed spans (false forwards):
 
 | value_kind | false forwards |
 |---|---|
-| address | 1 |
-| dob | 2 |
-| event_date | 2 |
-| initials | 2 |
-| mrn | 1 |
-| person_name | 2 |
-| phone | 1 |
-| zip | 1 |
+| event_date | 1 |
+| initials | 1 |
 
 ### B2 / qs_v2, holdout
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 50 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| hard_negative | no | 39 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.3846 |
-| hard_negative | yes * | 11 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.4545 |
-| lang | en | 50 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| length_bucket | medium | 39 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.3846 |
-| length_bucket | short * | 11 | 11 | 5 | 1.0000 | 0.0000 | 0 | 0.4545 |
-| perturbation | headers_footers * | 21 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.3333 |
-| perturbation | line_wrap * | 14 | 9 | 7 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| perturbation | none * | 17 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.3529 |
-| perturbation | ocr_noise * | 7 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.4286 |
-| pii_depth | none | 50 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| pre_redacted | no | 48 | 29 | 19 | 1.0000 | 0.0000 | 0 | 0.3958 |
-| pre_redacted | yes * | 2 | 1 | 1 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| split_span | no | 50 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| truncated | no | 50 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.4000 |
+| doc_type | irb_letter | 130 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.4308 |
+| hard_negative | no | 101 | 62 | 42 | 1.0000 | 0.0000 | 0 | 0.4158 |
+| hard_negative | yes * | 29 | 18 | 14 | 1.0000 | 0.0000 | 0 | 0.4828 |
+| lang | en | 130 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.4308 |
+| length_bucket | medium | 97 | 47 | 34 | 1.0000 | 0.0000 | 0 | 0.3505 |
+| length_bucket | short | 33 | 33 | 22 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| perturbation | headers_footers | 55 | 35 | 25 | 1.0000 | 0.0000 | 0 | 0.4545 |
+| perturbation | line_wrap | 36 | 26 | 19 | 1.0000 | 0.0000 | 0 | 0.5278 |
+| perturbation | none | 52 | 28 | 19 | 1.0000 | 0.0000 | 0 | 0.3654 |
+| perturbation | ocr_noise * | 9 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| pii_depth | none | 130 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.4308 |
+| pre_redacted | no | 121 | 75 | 51 | 1.0000 | 0.0000 | 0 | 0.4215 |
+| pre_redacted | yes * | 9 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.5556 |
+| split_span | no | 130 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.4308 |
+| truncated | no | 130 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.4308 |
 
 Value kinds of missed spans (false forwards):
 
@@ -3866,71 +4070,65 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log * | 10 | 8 | 2 | 1.0000 | 0.0000 | 0 | 0.2000 |
-| doc_type | crf_page * | 16 | 14 | 7 | 0.8571 | 0.0625 | 1 | 0.2500 |
-| doc_type | csr_patient_narrative * | 25 | 14 | 13 | 1.0000 | 0.0400 | 0 | 0.5600 |
-| doc_type | delegation_log * | 5 | 5 | 5 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| doc_type | deviation_log * | 11 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.4545 |
-| doc_type | icf_signature_page * | 7 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8571 |
-| doc_type | lab_report * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.8182 |
-| doc_type | monitoring_visit_report * | 25 | 11 | 14 | 1.0000 | 0.0000 | 0 | 0.5600 |
-| doc_type | protocol_section | 34 | 16 | 0 | n/a | 0.0000 | 0 | 0.0000 |
-| doc_type | sae_cioms * | 14 | 14 | 13 | 0.9231 | 0.0714 | 1 | 0.8571 |
-| doc_type | site_correspondence * | 29 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.3103 |
-| hard_negative | no | 139 | 91 | 60 | 0.9833 | 0.0072 | 1 | 0.4173 |
-| hard_negative | yes | 48 | 33 | 25 | 0.9600 | 0.0417 | 1 | 0.4583 |
-| lang | de * | 4 | 4 | 4 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| lang | en | 170 | 107 | 71 | 0.9859 | 0.0059 | 1 | 0.4000 |
-| lang | es * | 7 | 7 | 5 | 0.8000 | 0.1429 | 1 | 0.5714 |
-| lang | pl * | 6 | 6 | 5 | 1.0000 | 0.1667 | 0 | 1.0000 |
-| length_bucket | long | 54 | 24 | 15 | 1.0000 | 0.0000 | 0 | 0.2778 |
-| length_bucket | medium | 48 | 41 | 25 | 0.9600 | 0.0208 | 1 | 0.5000 |
-| length_bucket | short | 46 | 46 | 34 | 0.9706 | 0.0435 | 1 | 0.6522 |
-| length_bucket | xl | 39 | 13 | 11 | 1.0000 | 0.0000 | 0 | 0.2821 |
-| perturbation | email_quoting * | 29 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.3103 |
-| perturbation | headers_footers | 75 | 52 | 37 | 0.9459 | 0.0267 | 2 | 0.4533 |
-| perturbation | line_wrap | 52 | 31 | 25 | 1.0000 | 0.0192 | 0 | 0.5192 |
-| perturbation | none | 47 | 30 | 19 | 1.0000 | 0.0000 | 0 | 0.3830 |
-| perturbation | ocr_noise * | 20 | 14 | 11 | 0.9091 | 0.0500 | 1 | 0.5000 |
-| perturbation | table * | 29 | 27 | 16 | 1.0000 | 0.0000 | 0 | 0.5172 |
-| pii_depth | early * | 19 | 7 | 7 | 1.0000 | 0.0000 | 0 | 0.3684 |
-| pii_depth | late * | 5 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| pii_depth | middle * | 5 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| pii_depth | none | 158 | 113 | 74 | 0.9730 | 0.0190 | 2 | 0.4367 |
-| pre_redacted | no | 169 | 109 | 71 | 0.9718 | 0.0118 | 2 | 0.3846 |
-| pre_redacted | yes * | 18 | 15 | 14 | 1.0000 | 0.0556 | 0 | 0.8333 |
-| split_span | no | 187 | 124 | 85 | 0.9765 | 0.0160 | 2 | 0.4278 |
-| truncated | no | 187 | 124 | 85 | 0.9765 | 0.0160 | 2 | 0.4278 |
+| doc_type | conmed_log | 32 | 27 | 12 | 1.0000 | 0.0000 | 0 | 0.3750 |
+| doc_type | crf_page | 48 | 42 | 23 | 1.0000 | 0.0208 | 0 | 0.4167 |
+| doc_type | csr_patient_narrative | 79 | 42 | 43 | 1.0000 | 0.0000 | 0 | 0.5190 |
+| doc_type | delegation_log * | 15 | 14 | 14 | 1.0000 | 0.0000 | 0 | 0.9333 |
+| doc_type | deviation_log * | 26 | 23 | 13 | 1.0000 | 0.0000 | 0 | 0.5000 |
+| doc_type | icf_signature_page * | 19 | 19 | 14 | 1.0000 | 0.0000 | 0 | 0.6842 |
+| doc_type | lab_report | 30 | 29 | 21 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| doc_type | monitoring_visit_report | 70 | 29 | 36 | 1.0000 | 0.0000 | 0 | 0.4857 |
+| doc_type | protocol_section | 90 | 41 | 0 | n/a | 0.0000 | 0 | 0.0000 |
+| doc_type | sae_cioms | 38 | 36 | 32 | 1.0000 | 0.0000 | 0 | 0.7632 |
+| doc_type | site_correspondence | 78 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.2821 |
+| hard_negative | no | 407 | 260 | 174 | 1.0000 | 0.0025 | 0 | 0.4029 |
+| hard_negative | yes | 118 | 77 | 56 | 1.0000 | 0.0000 | 0 | 0.4576 |
+| lang | de * | 22 | 22 | 19 | 1.0000 | 0.0000 | 0 | 0.6818 |
+| lang | en | 486 | 298 | 197 | 1.0000 | 0.0021 | 0 | 0.3951 |
+| lang | es * | 6 | 6 | 5 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| lang | pl * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.6364 |
+| length_bucket | long | 187 | 80 | 53 | 1.0000 | 0.0000 | 0 | 0.2781 |
+| length_bucket | medium | 140 | 119 | 78 | 1.0000 | 0.0071 | 0 | 0.5357 |
+| length_bucket | short | 108 | 108 | 77 | 1.0000 | 0.0000 | 0 | 0.6389 |
+| length_bucket | xl | 90 | 30 | 22 | 1.0000 | 0.0000 | 0 | 0.2444 |
+| perturbation | email_quoting | 78 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.2821 |
+| perturbation | headers_footers | 216 | 132 | 87 | 1.0000 | 0.0046 | 0 | 0.3935 |
+| perturbation | line_wrap | 168 | 105 | 78 | 1.0000 | 0.0060 | 0 | 0.4286 |
+| perturbation | none | 135 | 93 | 62 | 1.0000 | 0.0000 | 0 | 0.4370 |
+| perturbation | ocr_noise | 57 | 39 | 26 | 1.0000 | 0.0000 | 0 | 0.4386 |
+| perturbation | table | 87 | 75 | 47 | 1.0000 | 0.0115 | 0 | 0.5057 |
+| pii_depth | early * | 21 | 8 | 8 | 1.0000 | 0.0000 | 0 | 0.3810 |
+| pii_depth | late | 40 | 16 | 16 | 1.0000 | 0.0000 | 0 | 0.4000 |
+| pii_depth | middle * | 24 | 10 | 10 | 1.0000 | 0.0000 | 0 | 0.4167 |
+| pii_depth | none | 440 | 303 | 196 | 1.0000 | 0.0023 | 0 | 0.4182 |
+| pre_redacted | no | 480 | 303 | 202 | 1.0000 | 0.0021 | 0 | 0.4000 |
+| pre_redacted | yes | 45 | 34 | 28 | 1.0000 | 0.0000 | 0 | 0.5778 |
+| split_span | no | 525 | 337 | 230 | 1.0000 | 0.0019 | 0 | 0.4152 |
+| truncated | no | 525 | 337 | 230 | 1.0000 | 0.0019 | 0 | 0.4152 |
 
 Value kinds of missed spans (false forwards):
 
-| value_kind | false forwards |
-|---|---|
-| dob | 1 |
-| event_date | 2 |
-| initials | 2 |
-| person_name | 1 |
-| phone | 1 |
+none
 
 ### B3 / qs_v1 (doc-level, underpowered), holdout
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 31 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6452 |
-| hard_negative | no * | 24 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.6250 |
-| hard_negative | yes * | 7 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.7143 |
-| lang | en | 31 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6452 |
-| length_bucket | medium * | 20 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.7500 |
-| length_bucket | short * | 11 | 11 | 5 | 1.0000 | 0.0000 | 0 | 0.4545 |
-| perturbation | headers_footers * | 13 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.5385 |
-| perturbation | line_wrap * | 9 | 9 | 7 | 1.0000 | 0.0000 | 0 | 0.7778 |
-| perturbation | none * | 10 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.6000 |
-| perturbation | ocr_noise * | 4 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.7500 |
-| pii_depth | none | 31 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6452 |
-| pre_redacted | no | 30 | 29 | 19 | 1.0000 | 0.0000 | 0 | 0.6333 |
-| pre_redacted | yes * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| split_span | no | 31 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6452 |
-| truncated | no | 31 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6452 |
+| doc_type | irb_letter | 84 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| hard_negative | no | 66 | 62 | 42 | 1.0000 | 0.0000 | 0 | 0.6364 |
+| hard_negative | yes * | 18 | 18 | 14 | 1.0000 | 0.0000 | 0 | 0.7778 |
+| lang | en | 84 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| length_bucket | medium | 51 | 47 | 34 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| length_bucket | short | 33 | 33 | 22 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| perturbation | headers_footers | 36 | 35 | 25 | 1.0000 | 0.0000 | 0 | 0.6944 |
+| perturbation | line_wrap * | 27 | 26 | 19 | 1.0000 | 0.0000 | 0 | 0.7037 |
+| perturbation | none | 30 | 28 | 19 | 1.0000 | 0.0000 | 0 | 0.6333 |
+| perturbation | ocr_noise * | 7 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8571 |
+| pii_depth | none | 84 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| pre_redacted | no | 78 | 75 | 51 | 1.0000 | 0.0000 | 0 | 0.6538 |
+| pre_redacted | yes * | 6 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.8333 |
+| split_span | no | 84 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| truncated | no | 84 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.6667 |
 
 Value kinds of missed spans (false forwards):
 
@@ -3940,75 +4138,65 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log * | 10 | 8 | 2 | 1.0000 | 0.0000 | 0 | 0.2000 |
-| doc_type | crf_page * | 16 | 14 | 7 | 0.5714 | 0.2500 | 3 | 0.3125 |
-| doc_type | csr_patient_narrative * | 25 | 14 | 13 | 0.9231 | 0.1200 | 1 | 0.5600 |
-| doc_type | delegation_log * | 5 | 5 | 5 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| doc_type | deviation_log * | 11 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.5455 |
-| doc_type | icf_signature_page * | 7 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8571 |
-| doc_type | lab_report * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.8182 |
-| doc_type | monitoring_visit_report * | 25 | 11 | 14 | 1.0000 | 0.0000 | 0 | 0.5600 |
-| doc_type | protocol_section | 34 | 16 | 0 | n/a | 0.0294 | 0 | 0.0000 |
-| doc_type | sae_cioms * | 14 | 14 | 13 | 0.9231 | 0.0714 | 1 | 0.8571 |
-| doc_type | site_correspondence * | 29 | 14 | 10 | 0.9000 | 0.0345 | 1 | 0.3103 |
-| hard_negative | no | 139 | 91 | 60 | 0.9500 | 0.0432 | 3 | 0.4245 |
-| hard_negative | yes | 48 | 33 | 25 | 0.8800 | 0.0833 | 3 | 0.4792 |
-| lang | de * | 4 | 4 | 4 | 0.5000 | 0.5000 | 2 | 0.5000 |
-| lang | en | 170 | 107 | 71 | 0.9577 | 0.0353 | 3 | 0.4118 |
-| lang | es * | 7 | 7 | 5 | 0.8000 | 0.1429 | 1 | 0.5714 |
-| lang | pl * | 6 | 6 | 5 | 1.0000 | 0.1667 | 0 | 1.0000 |
-| length_bucket | long | 54 | 24 | 15 | 1.0000 | 0.0185 | 0 | 0.2778 |
-| length_bucket | medium | 48 | 41 | 25 | 0.9600 | 0.0625 | 1 | 0.5417 |
-| length_bucket | short | 46 | 46 | 34 | 0.8529 | 0.1304 | 5 | 0.6522 |
-| length_bucket | xl | 39 | 13 | 11 | 1.0000 | 0.0000 | 0 | 0.2821 |
-| perturbation | email_quoting * | 29 | 14 | 10 | 0.9000 | 0.0345 | 1 | 0.3103 |
-| perturbation | headers_footers | 75 | 52 | 37 | 0.9189 | 0.0533 | 3 | 0.4667 |
-| perturbation | line_wrap | 52 | 31 | 25 | 1.0000 | 0.0385 | 0 | 0.5192 |
-| perturbation | none | 47 | 30 | 19 | 0.9474 | 0.0638 | 1 | 0.4043 |
-| perturbation | ocr_noise * | 20 | 14 | 11 | 1.0000 | 0.0000 | 0 | 0.5500 |
-| perturbation | table * | 29 | 27 | 16 | 0.9375 | 0.0345 | 1 | 0.5172 |
-| pii_depth | early * | 19 | 7 | 7 | 1.0000 | 0.0000 | 0 | 0.3684 |
-| pii_depth | late * | 5 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| pii_depth | middle * | 5 | 2 | 2 | 1.0000 | 0.0000 | 0 | 0.4000 |
-| pii_depth | none | 158 | 113 | 74 | 0.9189 | 0.0633 | 6 | 0.4494 |
-| pre_redacted | no | 169 | 109 | 71 | 0.9155 | 0.0533 | 6 | 0.3964 |
-| pre_redacted | yes * | 18 | 15 | 14 | 1.0000 | 0.0556 | 0 | 0.8333 |
-| split_span | no | 187 | 124 | 85 | 0.9294 | 0.0535 | 6 | 0.4385 |
-| truncated | no | 187 | 124 | 85 | 0.9294 | 0.0535 | 6 | 0.4385 |
+| doc_type | conmed_log | 32 | 27 | 12 | 1.0000 | 0.0000 | 0 | 0.3750 |
+| doc_type | crf_page | 48 | 42 | 23 | 1.0000 | 0.0208 | 0 | 0.4167 |
+| doc_type | csr_patient_narrative | 79 | 42 | 43 | 1.0000 | 0.0000 | 0 | 0.5190 |
+| doc_type | delegation_log * | 15 | 14 | 14 | 1.0000 | 0.0000 | 0 | 0.9333 |
+| doc_type | deviation_log * | 26 | 23 | 13 | 1.0000 | 0.0000 | 0 | 0.5000 |
+| doc_type | icf_signature_page * | 19 | 19 | 14 | 1.0000 | 0.0000 | 0 | 0.6842 |
+| doc_type | lab_report | 30 | 29 | 21 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| doc_type | monitoring_visit_report | 70 | 29 | 36 | 1.0000 | 0.0000 | 0 | 0.4857 |
+| doc_type | protocol_section | 90 | 41 | 0 | n/a | 0.0000 | 0 | 0.0000 |
+| doc_type | sae_cioms | 38 | 36 | 32 | 1.0000 | 0.0000 | 0 | 0.7632 |
+| doc_type | site_correspondence | 78 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.2821 |
+| hard_negative | no | 407 | 260 | 174 | 1.0000 | 0.0025 | 0 | 0.4029 |
+| hard_negative | yes | 118 | 77 | 56 | 1.0000 | 0.0000 | 0 | 0.4576 |
+| lang | de * | 22 | 22 | 19 | 1.0000 | 0.0000 | 0 | 0.6818 |
+| lang | en | 486 | 298 | 197 | 1.0000 | 0.0021 | 0 | 0.3951 |
+| lang | es * | 6 | 6 | 5 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| lang | pl * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.6364 |
+| length_bucket | long | 187 | 80 | 53 | 1.0000 | 0.0000 | 0 | 0.2781 |
+| length_bucket | medium | 140 | 119 | 78 | 1.0000 | 0.0071 | 0 | 0.5357 |
+| length_bucket | short | 108 | 108 | 77 | 1.0000 | 0.0000 | 0 | 0.6389 |
+| length_bucket | xl | 90 | 30 | 22 | 1.0000 | 0.0000 | 0 | 0.2444 |
+| perturbation | email_quoting | 78 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.2821 |
+| perturbation | headers_footers | 216 | 132 | 87 | 1.0000 | 0.0046 | 0 | 0.3935 |
+| perturbation | line_wrap | 168 | 105 | 78 | 1.0000 | 0.0060 | 0 | 0.4286 |
+| perturbation | none | 135 | 93 | 62 | 1.0000 | 0.0000 | 0 | 0.4370 |
+| perturbation | ocr_noise | 57 | 39 | 26 | 1.0000 | 0.0000 | 0 | 0.4386 |
+| perturbation | table | 87 | 75 | 47 | 1.0000 | 0.0115 | 0 | 0.5057 |
+| pii_depth | early * | 21 | 8 | 8 | 1.0000 | 0.0000 | 0 | 0.3810 |
+| pii_depth | late | 40 | 16 | 16 | 1.0000 | 0.0000 | 0 | 0.4000 |
+| pii_depth | middle * | 24 | 10 | 10 | 1.0000 | 0.0000 | 0 | 0.4167 |
+| pii_depth | none | 440 | 303 | 196 | 1.0000 | 0.0023 | 0 | 0.4182 |
+| pre_redacted | no | 480 | 303 | 202 | 1.0000 | 0.0021 | 0 | 0.4000 |
+| pre_redacted | yes | 45 | 34 | 28 | 1.0000 | 0.0000 | 0 | 0.5778 |
+| split_span | no | 525 | 337 | 230 | 1.0000 | 0.0019 | 0 | 0.4152 |
+| truncated | no | 525 | 337 | 230 | 1.0000 | 0.0019 | 0 | 0.4152 |
 
 Value kinds of missed spans (false forwards):
 
-| value_kind | false forwards |
-|---|---|
-| address | 1 |
-| dob | 2 |
-| email | 1 |
-| event_date | 6 |
-| initials | 5 |
-| mrn | 1 |
-| person_name | 3 |
-| phone | 2 |
-| zip | 1 |
+none
 
 ### B3 / qs_v2 (doc-level, underpowered), holdout
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 31 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6452 |
-| hard_negative | no * | 24 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.6250 |
-| hard_negative | yes * | 7 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.7143 |
-| lang | en | 31 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6452 |
-| length_bucket | medium * | 20 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.7500 |
-| length_bucket | short * | 11 | 11 | 5 | 1.0000 | 0.0000 | 0 | 0.4545 |
-| perturbation | headers_footers * | 13 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.5385 |
-| perturbation | line_wrap * | 9 | 9 | 7 | 1.0000 | 0.0000 | 0 | 0.7778 |
-| perturbation | none * | 10 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.6000 |
-| perturbation | ocr_noise * | 4 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.7500 |
-| pii_depth | none | 31 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6452 |
-| pre_redacted | no | 30 | 29 | 19 | 1.0000 | 0.0000 | 0 | 0.6333 |
-| pre_redacted | yes * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| split_span | no | 31 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6452 |
-| truncated | no | 31 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6452 |
+| doc_type | irb_letter | 84 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| hard_negative | no | 66 | 62 | 42 | 1.0000 | 0.0000 | 0 | 0.6364 |
+| hard_negative | yes * | 18 | 18 | 14 | 1.0000 | 0.0000 | 0 | 0.7778 |
+| lang | en | 84 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| length_bucket | medium | 51 | 47 | 34 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| length_bucket | short | 33 | 33 | 22 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| perturbation | headers_footers | 36 | 35 | 25 | 1.0000 | 0.0000 | 0 | 0.6944 |
+| perturbation | line_wrap * | 27 | 26 | 19 | 1.0000 | 0.0000 | 0 | 0.7037 |
+| perturbation | none | 30 | 28 | 19 | 1.0000 | 0.0000 | 0 | 0.6333 |
+| perturbation | ocr_noise * | 7 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8571 |
+| pii_depth | none | 84 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| pre_redacted | no | 78 | 75 | 51 | 1.0000 | 0.0000 | 0 | 0.6538 |
+| pre_redacted | yes * | 6 | 5 | 5 | 1.0000 | 0.0000 | 0 | 0.8333 |
+| split_span | no | 84 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| truncated | no | 84 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.6667 |
 
 Value kinds of missed spans (false forwards):
 
@@ -4018,72 +4206,66 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log * | 8 | 8 | 2 | 1.0000 | 0.0000 | 0 | 0.2500 |
-| doc_type | crf_page * | 14 | 14 | 7 | 0.8571 | 0.0714 | 1 | 0.2143 |
-| doc_type | csr_patient_narrative * | 14 | 14 | 12 | 0.9167 | 0.0714 | 0 | 0.8571 |
-| doc_type | delegation_log * | 5 | 5 | 5 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| doc_type | deviation_log * | 10 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| doc_type | icf_signature_page * | 7 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8571 |
-| doc_type | lab_report * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.8182 |
-| doc_type | monitoring_visit_report * | 11 | 11 | 10 | 1.0000 | 0.0000 | 0 | 0.9091 |
-| doc_type | protocol_section * | 16 | 16 | 0 | n/a | 0.0000 | 0 | 0.0000 |
-| doc_type | sae_cioms * | 14 | 14 | 13 | 0.9231 | 0.0714 | 1 | 0.8571 |
-| doc_type | site_correspondence * | 14 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.6429 |
-| hard_negative | no | 91 | 91 | 57 | 0.9825 | 0.0110 | 1 | 0.5824 |
-| hard_negative | yes | 33 | 33 | 23 | 0.9130 | 0.0606 | 1 | 0.6061 |
-| lang | de * | 4 | 4 | 4 | 0.7500 | 0.0000 | 0 | 0.5000 |
-| lang | en | 107 | 107 | 66 | 0.9848 | 0.0093 | 1 | 0.5701 |
-| lang | es * | 7 | 7 | 5 | 0.8000 | 0.1429 | 1 | 0.5714 |
-| lang | pl * | 6 | 6 | 5 | 1.0000 | 0.1667 | 0 | 1.0000 |
-| length_bucket | long * | 24 | 24 | 12 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| length_bucket | medium | 41 | 41 | 25 | 0.9600 | 0.0244 | 1 | 0.5366 |
-| length_bucket | short | 46 | 46 | 34 | 0.9412 | 0.0435 | 1 | 0.6522 |
-| length_bucket | xl * | 13 | 13 | 9 | 1.0000 | 0.0000 | 0 | 0.6923 |
-| perturbation | email_quoting * | 14 | 14 | 10 | 1.0000 | 0.0000 | 0 | 0.6429 |
-| perturbation | headers_footers | 52 | 52 | 34 | 0.9118 | 0.0385 | 2 | 0.5769 |
-| perturbation | line_wrap | 31 | 31 | 22 | 1.0000 | 0.0323 | 0 | 0.7419 |
-| perturbation | none | 30 | 30 | 18 | 1.0000 | 0.0000 | 0 | 0.5333 |
-| perturbation | ocr_noise * | 14 | 14 | 10 | 0.9000 | 0.0714 | 1 | 0.6429 |
-| perturbation | table * | 27 | 27 | 16 | 1.0000 | 0.0000 | 0 | 0.5556 |
-| pii_depth | early * | 7 | 7 | 7 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| pii_depth | late * | 2 | 2 | 2 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| pii_depth | middle * | 2 | 2 | 2 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| pii_depth | none | 113 | 113 | 69 | 0.9565 | 0.0265 | 2 | 0.5487 |
-| pre_redacted | no | 109 | 109 | 67 | 0.9552 | 0.0183 | 2 | 0.5413 |
-| pre_redacted | yes * | 15 | 15 | 13 | 1.0000 | 0.0667 | 0 | 0.9333 |
-| split_span | no | 124 | 124 | 80 | 0.9625 | 0.0242 | 2 | 0.5887 |
-| truncated | no | 111 | 111 | 71 | 0.9577 | 0.0270 | 2 | 0.5766 |
-| truncated | yes * | 13 | 13 | 9 | 1.0000 | 0.0000 | 0 | 0.6923 |
+| doc_type | conmed_log * | 27 | 27 | 12 | 1.0000 | 0.0000 | 0 | 0.4444 |
+| doc_type | crf_page | 42 | 42 | 23 | 1.0000 | 0.0000 | 0 | 0.4524 |
+| doc_type | csr_patient_narrative | 42 | 42 | 39 | 1.0000 | 0.0000 | 0 | 0.8810 |
+| doc_type | delegation_log * | 14 | 14 | 14 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| doc_type | deviation_log * | 23 | 23 | 13 | 1.0000 | 0.0000 | 0 | 0.5652 |
+| doc_type | icf_signature_page * | 19 | 19 | 14 | 1.0000 | 0.0000 | 0 | 0.6842 |
+| doc_type | lab_report * | 29 | 29 | 21 | 1.0000 | 0.0000 | 0 | 0.6897 |
+| doc_type | monitoring_visit_report * | 29 | 29 | 25 | 1.0000 | 0.0000 | 0 | 0.8621 |
+| doc_type | protocol_section | 41 | 41 | 0 | n/a | 0.0000 | 0 | 0.0000 |
+| doc_type | sae_cioms | 36 | 36 | 32 | 1.0000 | 0.0000 | 0 | 0.8056 |
+| doc_type | site_correspondence | 35 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.6286 |
+| hard_negative | no | 260 | 260 | 163 | 1.0000 | 0.0000 | 0 | 0.5923 |
+| hard_negative | yes | 77 | 77 | 52 | 1.0000 | 0.0000 | 0 | 0.6494 |
+| lang | de * | 22 | 22 | 19 | 1.0000 | 0.0000 | 0 | 0.6818 |
+| lang | en | 298 | 298 | 182 | 1.0000 | 0.0000 | 0 | 0.5973 |
+| lang | es * | 6 | 6 | 5 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| lang | pl * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.6364 |
+| length_bucket | long | 80 | 80 | 43 | 1.0000 | 0.0000 | 0 | 0.5375 |
+| length_bucket | medium | 119 | 119 | 77 | 1.0000 | 0.0000 | 0 | 0.6218 |
+| length_bucket | short | 108 | 108 | 77 | 1.0000 | 0.0000 | 0 | 0.6389 |
+| length_bucket | xl | 30 | 30 | 18 | 1.0000 | 0.0000 | 0 | 0.6000 |
+| perturbation | email_quoting | 35 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.6286 |
+| perturbation | headers_footers | 132 | 132 | 81 | 1.0000 | 0.0000 | 0 | 0.5985 |
+| perturbation | line_wrap | 105 | 105 | 71 | 1.0000 | 0.0000 | 0 | 0.6190 |
+| perturbation | none | 93 | 93 | 58 | 1.0000 | 0.0000 | 0 | 0.6022 |
+| perturbation | ocr_noise | 39 | 39 | 25 | 1.0000 | 0.0000 | 0 | 0.6154 |
+| perturbation | table | 75 | 75 | 47 | 1.0000 | 0.0000 | 0 | 0.5733 |
+| pii_depth | early * | 8 | 8 | 8 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| pii_depth | late * | 16 | 16 | 16 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| pii_depth | middle * | 10 | 10 | 10 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| pii_depth | none | 303 | 303 | 181 | 1.0000 | 0.0000 | 0 | 0.5611 |
+| pre_redacted | no | 303 | 303 | 189 | 1.0000 | 0.0000 | 0 | 0.5941 |
+| pre_redacted | yes | 34 | 34 | 26 | 1.0000 | 0.0000 | 0 | 0.7059 |
+| split_span | no | 337 | 337 | 215 | 1.0000 | 0.0000 | 0 | 0.6053 |
+| truncated | no | 307 | 307 | 197 | 1.0000 | 0.0000 | 0 | 0.6059 |
+| truncated | yes | 30 | 30 | 18 | 1.0000 | 0.0000 | 0 | 0.6000 |
 
 Value kinds of missed spans (false forwards):
 
-| value_kind | false forwards |
-|---|---|
-| dob | 1 |
-| event_date | 2 |
-| initials | 2 |
-| person_name | 1 |
-| phone | 1 |
+none
 
 ### B4 / qs_v1 (doc-level, underpowered), holdout
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 30 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6667 |
-| hard_negative | no * | 23 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.6522 |
-| hard_negative | yes * | 7 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.7143 |
-| lang | en | 30 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6667 |
-| length_bucket | medium * | 19 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.7895 |
-| length_bucket | short * | 11 | 11 | 5 | 1.0000 | 0.0000 | 0 | 0.4545 |
-| perturbation | headers_footers * | 12 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.5833 |
-| perturbation | line_wrap * | 9 | 9 | 7 | 1.0000 | 0.0000 | 0 | 0.7778 |
-| perturbation | none * | 10 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.6000 |
-| perturbation | ocr_noise * | 4 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.7500 |
-| pii_depth | none | 30 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6667 |
-| pre_redacted | no * | 29 | 29 | 19 | 1.0000 | 0.0000 | 0 | 0.6552 |
-| pre_redacted | yes * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| split_span | no | 30 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6667 |
-| truncated | no | 30 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| doc_type | irb_letter | 80 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.7000 |
+| hard_negative | no | 62 | 62 | 42 | 1.0000 | 0.0000 | 0 | 0.6774 |
+| hard_negative | yes * | 18 | 18 | 14 | 1.0000 | 0.0000 | 0 | 0.7778 |
+| lang | en | 80 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.7000 |
+| length_bucket | medium | 47 | 47 | 34 | 1.0000 | 0.0000 | 0 | 0.7234 |
+| length_bucket | short | 33 | 33 | 22 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| perturbation | headers_footers | 35 | 35 | 25 | 1.0000 | 0.0000 | 0 | 0.7143 |
+| perturbation | line_wrap * | 26 | 26 | 19 | 1.0000 | 0.0000 | 0 | 0.7308 |
+| perturbation | none * | 28 | 28 | 19 | 1.0000 | 0.0000 | 0 | 0.6786 |
+| perturbation | ocr_noise * | 7 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8571 |
+| pii_depth | none | 80 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.7000 |
+| pre_redacted | no | 75 | 75 | 51 | 1.0000 | 0.0000 | 0 | 0.6800 |
+| pre_redacted | yes * | 5 | 5 | 5 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| split_span | no | 80 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.7000 |
+| truncated | no | 80 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.7000 |
 
 Value kinds of missed spans (false forwards):
 
@@ -4093,76 +4275,209 @@ none
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | conmed_log * | 8 | 8 | 2 | 1.0000 | 0.0000 | 0 | 0.2500 |
-| doc_type | crf_page * | 14 | 14 | 7 | 0.5714 | 0.2143 | 3 | 0.2143 |
-| doc_type | csr_patient_narrative * | 14 | 14 | 12 | 0.9167 | 0.1429 | 1 | 0.8571 |
-| doc_type | delegation_log * | 5 | 5 | 5 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| doc_type | deviation_log * | 10 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.6000 |
-| doc_type | icf_signature_page * | 7 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8571 |
-| doc_type | lab_report * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.8182 |
-| doc_type | monitoring_visit_report * | 11 | 11 | 10 | 1.0000 | 0.0000 | 0 | 0.9091 |
-| doc_type | protocol_section * | 16 | 16 | 0 | n/a | 0.0000 | 0 | 0.0000 |
-| doc_type | sae_cioms * | 14 | 14 | 13 | 0.9231 | 0.0714 | 1 | 0.8571 |
-| doc_type | site_correspondence * | 14 | 14 | 10 | 0.9000 | 0.0714 | 1 | 0.6429 |
-| hard_negative | no | 91 | 91 | 57 | 0.9649 | 0.0220 | 2 | 0.5934 |
-| hard_negative | yes | 33 | 33 | 23 | 0.8261 | 0.1515 | 4 | 0.6061 |
-| lang | de * | 4 | 4 | 4 | 0.5000 | 0.5000 | 2 | 0.5000 |
-| lang | en | 107 | 107 | 66 | 0.9545 | 0.0280 | 3 | 0.5794 |
-| lang | es * | 7 | 7 | 5 | 0.8000 | 0.1429 | 1 | 0.5714 |
-| lang | pl * | 6 | 6 | 5 | 1.0000 | 0.1667 | 0 | 1.0000 |
-| length_bucket | long * | 24 | 24 | 12 | 1.0000 | 0.0000 | 0 | 0.5000 |
-| length_bucket | medium | 41 | 41 | 25 | 0.9200 | 0.0488 | 2 | 0.5610 |
-| length_bucket | short | 46 | 46 | 34 | 0.8824 | 0.1087 | 4 | 0.6522 |
-| length_bucket | xl * | 13 | 13 | 9 | 1.0000 | 0.0000 | 0 | 0.6923 |
-| perturbation | email_quoting * | 14 | 14 | 10 | 0.9000 | 0.0714 | 1 | 0.6429 |
-| perturbation | headers_footers | 52 | 52 | 34 | 0.9118 | 0.0577 | 3 | 0.5769 |
-| perturbation | line_wrap | 31 | 31 | 22 | 1.0000 | 0.0323 | 0 | 0.7419 |
-| perturbation | none | 30 | 30 | 18 | 0.9444 | 0.0333 | 1 | 0.5667 |
-| perturbation | ocr_noise * | 14 | 14 | 10 | 0.9000 | 0.0714 | 1 | 0.6429 |
-| perturbation | table * | 27 | 27 | 16 | 0.9375 | 0.0370 | 1 | 0.5556 |
-| pii_depth | early * | 7 | 7 | 7 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| pii_depth | late * | 2 | 2 | 2 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| pii_depth | middle * | 2 | 2 | 2 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| pii_depth | none | 113 | 113 | 69 | 0.9130 | 0.0619 | 6 | 0.5575 |
-| pre_redacted | no | 109 | 109 | 67 | 0.9104 | 0.0550 | 6 | 0.5505 |
-| pre_redacted | yes * | 15 | 15 | 13 | 1.0000 | 0.0667 | 0 | 0.9333 |
-| split_span | no | 124 | 124 | 80 | 0.9250 | 0.0565 | 6 | 0.5968 |
-| truncated | no | 111 | 111 | 71 | 0.9155 | 0.0631 | 6 | 0.5856 |
-| truncated | yes * | 13 | 13 | 9 | 1.0000 | 0.0000 | 0 | 0.6923 |
+| doc_type | conmed_log * | 27 | 27 | 12 | 1.0000 | 0.0000 | 0 | 0.4444 |
+| doc_type | crf_page | 42 | 42 | 23 | 1.0000 | 0.0000 | 0 | 0.4524 |
+| doc_type | csr_patient_narrative | 42 | 42 | 39 | 1.0000 | 0.0000 | 0 | 0.8810 |
+| doc_type | delegation_log * | 14 | 14 | 14 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| doc_type | deviation_log * | 23 | 23 | 13 | 1.0000 | 0.0000 | 0 | 0.5652 |
+| doc_type | icf_signature_page * | 19 | 19 | 14 | 1.0000 | 0.0000 | 0 | 0.6842 |
+| doc_type | lab_report * | 29 | 29 | 21 | 1.0000 | 0.0000 | 0 | 0.6897 |
+| doc_type | monitoring_visit_report * | 29 | 29 | 25 | 1.0000 | 0.0000 | 0 | 0.8621 |
+| doc_type | protocol_section | 41 | 41 | 0 | n/a | 0.0000 | 0 | 0.0000 |
+| doc_type | sae_cioms | 36 | 36 | 32 | 1.0000 | 0.0000 | 0 | 0.8056 |
+| doc_type | site_correspondence | 35 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.6286 |
+| hard_negative | no | 260 | 260 | 163 | 1.0000 | 0.0000 | 0 | 0.5923 |
+| hard_negative | yes | 77 | 77 | 52 | 1.0000 | 0.0000 | 0 | 0.6494 |
+| lang | de * | 22 | 22 | 19 | 1.0000 | 0.0000 | 0 | 0.6818 |
+| lang | en | 298 | 298 | 182 | 1.0000 | 0.0000 | 0 | 0.5973 |
+| lang | es * | 6 | 6 | 5 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| lang | pl * | 11 | 11 | 9 | 1.0000 | 0.0000 | 0 | 0.6364 |
+| length_bucket | long | 80 | 80 | 43 | 1.0000 | 0.0000 | 0 | 0.5375 |
+| length_bucket | medium | 119 | 119 | 77 | 1.0000 | 0.0000 | 0 | 0.6218 |
+| length_bucket | short | 108 | 108 | 77 | 1.0000 | 0.0000 | 0 | 0.6389 |
+| length_bucket | xl | 30 | 30 | 18 | 1.0000 | 0.0000 | 0 | 0.6000 |
+| perturbation | email_quoting | 35 | 35 | 22 | 1.0000 | 0.0000 | 0 | 0.6286 |
+| perturbation | headers_footers | 132 | 132 | 81 | 1.0000 | 0.0000 | 0 | 0.5985 |
+| perturbation | line_wrap | 105 | 105 | 71 | 1.0000 | 0.0000 | 0 | 0.6190 |
+| perturbation | none | 93 | 93 | 58 | 1.0000 | 0.0000 | 0 | 0.6022 |
+| perturbation | ocr_noise | 39 | 39 | 25 | 1.0000 | 0.0000 | 0 | 0.6154 |
+| perturbation | table | 75 | 75 | 47 | 1.0000 | 0.0000 | 0 | 0.5733 |
+| pii_depth | early * | 8 | 8 | 8 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| pii_depth | late * | 16 | 16 | 16 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| pii_depth | middle * | 10 | 10 | 10 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| pii_depth | none | 303 | 303 | 181 | 1.0000 | 0.0000 | 0 | 0.5611 |
+| pre_redacted | no | 303 | 303 | 189 | 1.0000 | 0.0000 | 0 | 0.5941 |
+| pre_redacted | yes | 34 | 34 | 26 | 1.0000 | 0.0000 | 0 | 0.7059 |
+| split_span | no | 337 | 337 | 215 | 1.0000 | 0.0000 | 0 | 0.6053 |
+| truncated | no | 307 | 307 | 197 | 1.0000 | 0.0000 | 0 | 0.6059 |
+| truncated | yes | 30 | 30 | 18 | 1.0000 | 0.0000 | 0 | 0.6000 |
 
 Value kinds of missed spans (false forwards):
 
-| value_kind | false forwards |
-|---|---|
-| address | 1 |
-| dob | 2 |
-| email | 1 |
-| event_date | 6 |
-| initials | 5 |
-| mrn | 1 |
-| person_name | 3 |
-| phone | 2 |
-| zip | 1 |
+none
 
 ### B4 / qs_v2 (doc-level, underpowered), holdout
 
 | dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
 |---|---|---|---|---|---|---|---|---|
-| doc_type | irb_letter | 30 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6667 |
-| hard_negative | no * | 23 | 23 | 15 | 1.0000 | 0.0000 | 0 | 0.6522 |
-| hard_negative | yes * | 7 | 7 | 5 | 1.0000 | 0.0000 | 0 | 0.7143 |
-| lang | en | 30 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6667 |
-| length_bucket | medium * | 19 | 19 | 15 | 1.0000 | 0.0000 | 0 | 0.7895 |
-| length_bucket | short * | 11 | 11 | 5 | 1.0000 | 0.0000 | 0 | 0.4545 |
-| perturbation | headers_footers * | 12 | 12 | 7 | 1.0000 | 0.0000 | 0 | 0.5833 |
-| perturbation | line_wrap * | 9 | 9 | 7 | 1.0000 | 0.0000 | 0 | 0.7778 |
-| perturbation | none * | 10 | 10 | 6 | 1.0000 | 0.0000 | 0 | 0.6000 |
-| perturbation | ocr_noise * | 4 | 4 | 3 | 1.0000 | 0.0000 | 0 | 0.7500 |
-| pii_depth | none | 30 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6667 |
-| pre_redacted | no * | 29 | 29 | 19 | 1.0000 | 0.0000 | 0 | 0.6552 |
-| pre_redacted | yes * | 1 | 1 | 1 | 1.0000 | 0.0000 | 0 | 1.0000 |
-| split_span | no | 30 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6667 |
-| truncated | no | 30 | 30 | 20 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| doc_type | irb_letter | 80 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.7000 |
+| hard_negative | no | 62 | 62 | 42 | 1.0000 | 0.0000 | 0 | 0.6774 |
+| hard_negative | yes * | 18 | 18 | 14 | 1.0000 | 0.0000 | 0 | 0.7778 |
+| lang | en | 80 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.7000 |
+| length_bucket | medium | 47 | 47 | 34 | 1.0000 | 0.0000 | 0 | 0.7234 |
+| length_bucket | short | 33 | 33 | 22 | 1.0000 | 0.0000 | 0 | 0.6667 |
+| perturbation | headers_footers | 35 | 35 | 25 | 1.0000 | 0.0000 | 0 | 0.7143 |
+| perturbation | line_wrap * | 26 | 26 | 19 | 1.0000 | 0.0000 | 0 | 0.7308 |
+| perturbation | none * | 28 | 28 | 19 | 1.0000 | 0.0000 | 0 | 0.6786 |
+| perturbation | ocr_noise * | 7 | 7 | 6 | 1.0000 | 0.0000 | 0 | 0.8571 |
+| pii_depth | none | 80 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.7000 |
+| pre_redacted | no | 75 | 75 | 51 | 1.0000 | 0.0000 | 0 | 0.6800 |
+| pre_redacted | yes * | 5 | 5 | 5 | 1.0000 | 0.0000 | 0 | 1.0000 |
+| split_span | no | 80 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.7000 |
+| truncated | no | 80 | 80 | 56 | 1.0000 | 0.0000 | 0 | 0.7000 |
+
+Value kinds of missed spans (false forwards):
+
+none
+
+### C / qs_v1, test
+
+| dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
+|---|---|---|---|---|---|---|---|---|
+| doc_type | conmed_log | 263 | 27 | 42 | 1.0000 | 0.8403 | 0 | 1.0000 |
+| doc_type | crf_page | 371 | 42 | 101 | 0.9901 | 0.7305 | 1 | 0.9973 |
+| doc_type | csr_patient_narrative | 964 | 42 | 72 | 0.9861 | 0.9243 | 0 | 1.0000 |
+| doc_type | delegation_log | 151 | 14 | 14 | 1.0000 | 0.9073 | 0 | 1.0000 |
+| doc_type | deviation_log | 203 | 23 | 23 | 1.0000 | 0.8867 | 0 | 1.0000 |
+| doc_type | icf_signature_page | 52 | 19 | 17 | 1.0000 | 0.6538 | 0 | 0.9808 |
+| doc_type | lab_report | 188 | 29 | 34 | 1.0000 | 0.8085 | 0 | 0.9894 |
+| doc_type | monitoring_visit_report | 986 | 29 | 47 | 1.0000 | 0.9523 | 0 | 1.0000 |
+| doc_type | protocol_section | 1240 | 41 | 0 | n/a | 1.0000 | 0 | 1.0000 |
+| doc_type | sae_cioms | 300 | 36 | 38 | 1.0000 | 0.8700 | 0 | 0.9967 |
+| doc_type | site_correspondence | 995 | 35 | 31 | 1.0000 | 0.9678 | 0 | 0.9980 |
+| hard_negative | no | 4393 | 260 | 302 | 0.9934 | 0.9306 | 1 | 0.9991 |
+| hard_negative | yes | 1320 | 77 | 117 | 1.0000 | 0.9098 | 0 | 0.9977 |
+| lang | de | 33 | 22 | 26 | 1.0000 | 0.1818 | 0 | 0.9697 |
+| lang | en | 5655 | 298 | 373 | 0.9946 | 0.9337 | 1 | 0.9993 |
+| lang | es * | 7 | 6 | 6 | 1.0000 | 0.1429 | 0 | 1.0000 |
+| lang | pl * | 18 | 11 | 14 | 1.0000 | 0.1111 | 0 | 0.8889 |
+| length_bucket | long | 2513 | 80 | 70 | 0.9857 | 0.9713 | 0 | 0.9992 |
+| length_bucket | medium | 1466 | 119 | 218 | 0.9954 | 0.8520 | 1 | 0.9993 |
+| length_bucket | short | 287 | 108 | 99 | 1.0000 | 0.6411 | 0 | 0.9861 |
+| length_bucket | xl | 1447 | 30 | 32 | 1.0000 | 0.9779 | 0 | 1.0000 |
+| perturbation | email_quoting | 995 | 35 | 31 | 1.0000 | 0.9678 | 0 | 0.9980 |
+| perturbation | headers_footers | 2405 | 132 | 156 | 0.9936 | 0.9343 | 0 | 0.9988 |
+| perturbation | line_wrap | 1852 | 105 | 151 | 1.0000 | 0.9174 | 0 | 0.9989 |
+| perturbation | none | 1421 | 93 | 104 | 0.9904 | 0.9275 | 1 | 0.9993 |
+| perturbation | ocr_noise | 567 | 39 | 45 | 1.0000 | 0.9171 | 0 | 0.9965 |
+| perturbation | table | 659 | 75 | 115 | 1.0000 | 0.8225 | 0 | 0.9970 |
+| pii_depth | early | 282 | 8 | 11 | 1.0000 | 0.9610 | 0 | 1.0000 |
+| pii_depth | late | 582 | 16 | 21 | 1.0000 | 0.9639 | 0 | 1.0000 |
+| pii_depth | middle | 327 | 10 | 11 | 1.0000 | 0.9602 | 0 | 0.9969 |
+| pii_depth | none | 4522 | 303 | 376 | 0.9947 | 0.9162 | 1 | 0.9987 |
+| pre_redacted | no | 5297 | 303 | 355 | 0.9944 | 0.9320 | 1 | 0.9987 |
+| pre_redacted | yes | 416 | 34 | 64 | 1.0000 | 0.8462 | 0 | 1.0000 |
+| split_span | no | 5695 | 337 | 402 | 0.9950 | 0.9285 | 1 | 0.9988 |
+| split_span | yes * | 18 | 17 | 17 | 1.0000 | 0.0556 | 0 | 1.0000 |
+| truncated | no | 5713 | 337 | 419 | 0.9952 | 0.9258 | 1 | 0.9988 |
+
+Value kinds of missed spans (false forwards):
+
+| value_kind | false forwards |
+|---|---|
+| initials | 1 |
+
+### C / qs_v1, holdout
+
+| dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
+|---|---|---|---|---|---|---|---|---|
+| doc_type | irb_letter | 724 | 80 | 56 | 1.0000 | 0.9171 | 0 | 0.9834 |
+| hard_negative | no | 571 | 62 | 42 | 1.0000 | 0.9212 | 0 | 0.9825 |
+| hard_negative | yes | 153 | 18 | 14 | 1.0000 | 0.9020 | 0 | 0.9869 |
+| lang | en | 724 | 80 | 56 | 1.0000 | 0.9171 | 0 | 0.9834 |
+| length_bucket | medium | 596 | 47 | 34 | 1.0000 | 0.9396 | 0 | 0.9866 |
+| length_bucket | short | 128 | 33 | 22 | 1.0000 | 0.8125 | 0 | 0.9688 |
+| perturbation | headers_footers | 307 | 35 | 25 | 1.0000 | 0.9055 | 0 | 0.9707 |
+| perturbation | line_wrap | 185 | 26 | 19 | 1.0000 | 0.8919 | 0 | 0.9892 |
+| perturbation | none | 290 | 28 | 19 | 1.0000 | 0.9345 | 0 | 0.9897 |
+| perturbation | ocr_noise | 48 | 7 | 6 | 1.0000 | 0.8750 | 0 | 1.0000 |
+| pii_depth | none | 724 | 80 | 56 | 1.0000 | 0.9171 | 0 | 0.9834 |
+| pre_redacted | no | 675 | 75 | 51 | 1.0000 | 0.9185 | 0 | 0.9822 |
+| pre_redacted | yes | 49 | 5 | 5 | 1.0000 | 0.8980 | 0 | 1.0000 |
+| split_span | no | 724 | 80 | 56 | 1.0000 | 0.9171 | 0 | 0.9834 |
+| truncated | no | 724 | 80 | 56 | 1.0000 | 0.9171 | 0 | 0.9834 |
+
+Value kinds of missed spans (false forwards):
+
+none
+
+### C / qs_v2, test
+
+| dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
+|---|---|---|---|---|---|---|---|---|
+| doc_type | conmed_log | 263 | 27 | 42 | 1.0000 | 0.8403 | 0 | 1.0000 |
+| doc_type | crf_page | 371 | 42 | 101 | 0.9901 | 0.7305 | 1 | 0.9973 |
+| doc_type | csr_patient_narrative | 964 | 42 | 72 | 0.9861 | 0.9263 | 1 | 1.0000 |
+| doc_type | delegation_log | 151 | 14 | 14 | 1.0000 | 0.9073 | 0 | 1.0000 |
+| doc_type | deviation_log | 203 | 23 | 23 | 1.0000 | 0.8867 | 0 | 1.0000 |
+| doc_type | icf_signature_page | 52 | 19 | 17 | 1.0000 | 0.6538 | 0 | 0.9808 |
+| doc_type | lab_report | 188 | 29 | 34 | 1.0000 | 0.8085 | 0 | 0.9894 |
+| doc_type | monitoring_visit_report | 986 | 29 | 47 | 1.0000 | 0.9523 | 0 | 1.0000 |
+| doc_type | protocol_section | 1240 | 41 | 0 | n/a | 1.0000 | 0 | 1.0000 |
+| doc_type | sae_cioms | 300 | 36 | 38 | 1.0000 | 0.8733 | 0 | 0.9967 |
+| doc_type | site_correspondence | 995 | 35 | 31 | 1.0000 | 0.9678 | 0 | 0.9980 |
+| hard_negative | no | 4393 | 260 | 302 | 0.9934 | 0.9313 | 2 | 0.9991 |
+| hard_negative | yes | 1320 | 77 | 117 | 1.0000 | 0.9098 | 0 | 0.9977 |
+| lang | de | 33 | 22 | 26 | 1.0000 | 0.1818 | 0 | 0.9697 |
+| lang | en | 5655 | 298 | 373 | 0.9946 | 0.9342 | 2 | 0.9993 |
+| lang | es * | 7 | 6 | 6 | 1.0000 | 0.1429 | 0 | 1.0000 |
+| lang | pl * | 18 | 11 | 14 | 1.0000 | 0.1111 | 0 | 0.8889 |
+| length_bucket | long | 2513 | 80 | 70 | 0.9857 | 0.9721 | 1 | 0.9992 |
+| length_bucket | medium | 1466 | 119 | 218 | 0.9954 | 0.8520 | 1 | 0.9993 |
+| length_bucket | short | 287 | 108 | 99 | 1.0000 | 0.6446 | 0 | 0.9861 |
+| length_bucket | xl | 1447 | 30 | 32 | 1.0000 | 0.9779 | 0 | 1.0000 |
+| perturbation | email_quoting | 995 | 35 | 31 | 1.0000 | 0.9678 | 0 | 0.9980 |
+| perturbation | headers_footers | 2405 | 132 | 156 | 0.9936 | 0.9347 | 1 | 0.9988 |
+| perturbation | line_wrap | 1852 | 105 | 151 | 1.0000 | 0.9185 | 0 | 0.9989 |
+| perturbation | none | 1421 | 93 | 104 | 0.9904 | 0.9275 | 1 | 0.9993 |
+| perturbation | ocr_noise | 567 | 39 | 45 | 1.0000 | 0.9171 | 0 | 0.9965 |
+| perturbation | table | 659 | 75 | 115 | 1.0000 | 0.8225 | 0 | 0.9970 |
+| pii_depth | early | 282 | 8 | 11 | 1.0000 | 0.9610 | 0 | 1.0000 |
+| pii_depth | late | 582 | 16 | 21 | 1.0000 | 0.9639 | 0 | 1.0000 |
+| pii_depth | middle | 327 | 10 | 11 | 1.0000 | 0.9633 | 0 | 0.9969 |
+| pii_depth | none | 4522 | 303 | 376 | 0.9947 | 0.9166 | 2 | 0.9987 |
+| pre_redacted | no | 5297 | 303 | 355 | 0.9944 | 0.9326 | 2 | 0.9987 |
+| pre_redacted | yes | 416 | 34 | 64 | 1.0000 | 0.8462 | 0 | 1.0000 |
+| split_span | no | 5695 | 337 | 402 | 0.9950 | 0.9291 | 2 | 0.9988 |
+| split_span | yes * | 18 | 17 | 17 | 1.0000 | 0.0556 | 0 | 1.0000 |
+| truncated | no | 5713 | 337 | 419 | 0.9952 | 0.9263 | 2 | 0.9988 |
+
+Value kinds of missed spans (false forwards):
+
+| value_kind | false forwards |
+|---|---|
+| initials | 1 |
+| zip | 1 |
+
+### C / qs_v2, holdout
+
+| dimension | value | units | docs | positives | recall | forward rate | false fwd | pii acc |
+|---|---|---|---|---|---|---|---|---|
+| doc_type | irb_letter | 724 | 80 | 56 | 1.0000 | 0.9185 | 0 | 0.9834 |
+| hard_negative | no | 571 | 62 | 42 | 1.0000 | 0.9212 | 0 | 0.9825 |
+| hard_negative | yes | 153 | 18 | 14 | 1.0000 | 0.9085 | 0 | 0.9869 |
+| lang | en | 724 | 80 | 56 | 1.0000 | 0.9185 | 0 | 0.9834 |
+| length_bucket | medium | 596 | 47 | 34 | 1.0000 | 0.9413 | 0 | 0.9866 |
+| length_bucket | short | 128 | 33 | 22 | 1.0000 | 0.8125 | 0 | 0.9688 |
+| perturbation | headers_footers | 307 | 35 | 25 | 1.0000 | 0.9088 | 0 | 0.9707 |
+| perturbation | line_wrap | 185 | 26 | 19 | 1.0000 | 0.8973 | 0 | 0.9892 |
+| perturbation | none | 290 | 28 | 19 | 1.0000 | 0.9345 | 0 | 0.9897 |
+| perturbation | ocr_noise | 48 | 7 | 6 | 1.0000 | 0.8750 | 0 | 1.0000 |
+| pii_depth | none | 724 | 80 | 56 | 1.0000 | 0.9185 | 0 | 0.9834 |
+| pre_redacted | no | 675 | 75 | 51 | 1.0000 | 0.9200 | 0 | 0.9822 |
+| pre_redacted | yes | 49 | 5 | 5 | 1.0000 | 0.8980 | 0 | 1.0000 |
+| split_span | no | 724 | 80 | 56 | 1.0000 | 0.9185 | 0 | 0.9834 |
+| truncated | no | 724 | 80 | 56 | 1.0000 | 0.9185 | 0 | 0.9834 |
 
 Value kinds of missed spans (false forwards):
 
@@ -4178,979 +4493,296 @@ none
 
 ### A / qs_v2, holdout: 0 false forward(s)
 
-### A / qs_v3, test: 1 false forward(s)
-
-**d0293:chunk:512:1** route forward (p_below_t_low); p(pii) raw 0.2389, calibrated 0.2389; gold role patient, category quasi; missed event_date, initials
-
-> 
-> 
-> I. Informacje o reakcji
-> 1. Inicjały: **A.Ż.**    1a. Uczestnik: 1005-0014
-> 2. Data urodzenia: nie podano    2a. Wiek: 79 lat    3. Płeć: M
-> 4-6. Początek reakcji: **31.05.2025**
-> 7+13. Opis: podwyższona ALT, stopień 2; wymagała hospitalizacji.
-> 
-> V. Zgłaszający
-> 24b. Badacz ośrodka, Centrum Badań Klinicznych Dolna Łąka, tel. w dokumentacji
-> 25a. Data zgłoszenia: 2025-07-08
-> 
-> Strona 1
-> 
-
-### A / qs_v3, holdout: 0 false forward(s)
-
-### B1 / qs_v1, test: 1 false forward(s)
-
-**d0310:chunk:1024:15** route forward (p_below_t_low); p(pii) raw 0.0226, calibrated 0.0226; gold role staff, category staff; missed email, person_name
-
->  study. Edit checks identify missing, inconsistent or out-of-range values
-> during cleaning. Edit checks flag missing, inconsistent or out-of-range values
-> at entry. Edit checks identify missing, inconsistent or out-of-range values at
-> entry.
-> 
-> Access to the database is restricted to authorised personnel with role-based
-> permissions. Access to the database is restricted to authorised personnel
-> according to the access matrix. Data are entered into a validated clinical
-> database with an audit trail.
-> 
-> Edit checks flag missing, inconsistent or out-of-range values at entry. Edit
-> checks identify missing, inconsistent or out-of-range values during cleaning.
-> Medical history and adverse events are coded with a standard dictionary during
-> the study. Data are entered into a validated clinical database with an audit
-> trail. Edit checks flag missing, inconsistent or out-of-range values during
-> cleaning.
-> 
-> 3. Action Items
-> The site will resolve open queries before the next visit and send confirmation
-> to **Ms. Pitts** at **m.pitts@halcyon-cro.example.com**.
-> 
-> Page 12
-> 
+### B1 / qs_v1, test: 0 false forward(s)
 
 ### B1 / qs_v1, holdout: 0 false forward(s)
 
-### B1 / qs_v2, test: 0 false forward(s)
+### B1 / qs_v2, test: 1 false forward(s)
+
+**d0854:chunk:1024:1** route forward (p_below_t_low); p(pii) raw 0.0161, calibrated 0.0161; gold role both, category quasi; missed event_date, initials
+
+>            minor     **N-H**
+> 10   \#20030002       **17-Nov-2025**       fasting status not recorded            
+>                       major     **B.H.**
+> 
+> Deviations are reviewed monthly by the investigator and reported to the
+> sponsor within 5 working days.
+> 
+> Data Handling and Record Keeping
+> Edit checks identify missing, inconsistent or out-of-range values at entry.
+> Medical history and adverse events are coded with standard terminology before
+> database lock. Data are entered into a validated electronic data capture
+> system with an audit trail. Access to the database is restricted to authorised
+> personnel according to the access matrix.
+> 
+> Medical history and adverse events are coded with a standard dictionary during
+> the study. Reconciliation of laboratory data with the clinical database is
+> performed before each data cut. Reconciliation of laboratory data with the
+> clinical database is performed periodically. Edit checks flag missing,
+> inconsistent or out-of-range values during cleaning.
+> 
+> Monitoring Procedures
+> On-site and remote monitoring visits are scheduled based on enrollment and
+> risk indicators. On-site and remote monitoring visits are scheduled according
+> to the monitoring plan. The investigator site file is reviewed for
+> completeness at each visit. Findings are documented in the visit report and
+> followed up until closure.
+> 
+> Findings are documented in the visit report and followed up until resolution.
+> Queries are raised in the data capture system and resolved by site staff
+> within ten working days. The investigator site file is reviewed for currency
+> of essential documents at each visit.
+> 
+> Queries are raised in the data capture system and answered by the site within
+> five working days. The investigator site file is reviewed for completeness at
+> each visit. The investigator site file is reviewed for currency of essential
+> documents at each visit. The investigator site file is reviewed for
+> completeness at each visit. Findings are documented in the visit report and
+> followed up until closure. On-site and remote monitoring visits are scheduled
+> based on enrollment and risk indicators.
+> 
+> Findings are documented in the visit report and followed up until closure.
+> Queries are raised in the data capture system and resolved by site staff
+> within ten working days. Queries are raised in the data capture system and
+> resolved by site staff within five working days. Protocol deviations are
+> assessed for impact on participant safety and data integrity. Source data
+> verification focuses on eligibility, informed consent, primary endpoints and
+> serious adverse events. On-site and remote monitoring visits are scheduled
+> according to the monitoring plan.
+> 
+> Good Clinical Practice
+> Participants may withdraw consent at any time without penalty. Confidentiality
+> of participant information is protected at all times. The sponsor may conduct
+> audits of study sites and vendors to verify compliance.
+> 
+> Confidentiality of participant information is protected at all times. The
+> study will be conducted in accordance with the principles of good clinical
+> practice and applicable regulatory requirements. The sponsor may conduct
+> audits of study sites and vendors to verify compliance. The sponsor reserves
+> the right to conduct audits of study sites and vendors to verify compliance.
+> 
+> Confidentiality of participant information is protected at all times. The
+> sponsor may conduct audits of study sites and vendors to verify compliance.
+> The protocol and any amendments are approved by the ethics committee before
+> implementation. Participants may withdraw consent at any time without penalty.
+> Essential documents are retained for at least 15 years after the end of the
+> study or longer if required by local regulations.
+> 
+> Storage and Handling
+> Unused product is returned to the sponsor after reconciliation. Tablet counts
 
 ### B1 / qs_v2, holdout: 0 false forward(s)
 
 ### B2 / qs_v1, test: 1 false forward(s)
 
-**d0352:section:2048:0** route forward (p_below_t_low); p(pii) raw 0.0499, calibrated 0.0499; gold role both, category direct; missed dob, event_date, initials, person_name, phone
+**d1294:section:2048:0** route forward (p_below_t_low); p(pii) raw 0.0176, calibrated 0.0176; gold role patient, category quasi; missed event_date, initials
 
-> Fenwick Therapeutics \| Protocolo FTX-5142-018 \| Confidencial
+> Fenwick Therapeutics \| Protocol FTX-8191-011 \| Confidential
 > 
-> CIOMS I: notificación de sospecha de reacción adversa
-> N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
+> CRF Page 19: Vital Signs
+> Protocol FTX-8191-011    Site 1017
 > 
-> I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
-> 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
-> 4-6. Inicio de la reacción: **18/04/2025**
-> 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
+> Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
+> 1017-0002 \| **MD** \| Visit 4 \| **06/19/2025** \| 128 \| 64 \| 97 \| 36.8
+> 1017-0003 \| **PN** \| Visit 2 \| **14-Feb-2025** \| 109 \| 95 \| 84 \| 37.0
+> Subj 1017-0003 \| **P-N** \| Visit 3 \| **March 1, 2025** \| 130 \| 62 \| 95 \| 36.6
+> \#10170004 \| **MF** \| Visit 2 \| **April 18, 2025** \| 125 \| 94 \| 87 \| 37.4
+> \#10170004 \| **M-F** \| Visit 5 \| **27JUN2025** \| 118 \| 80 \| 72 \| 36.5
+> \#10170005 \| **F.J.** \| Visit 3 \| **18OCT2025** \| 119 \| 94 \| 68 \| 36.7
+> \#10170005 \| **FJ** \| Visit 5 \| **11-Dec-2025** \| 165 \| 65 \| 67 \| 36.5
+> 1017-0006 \| **AB** \| Visit 3 \| **12-Oct-2025** \| 146 \| 92 \| 68 \| 36.9
+> \#10170007 \| **EP** \| Visit 2 \| **April 12, 2025** \| 136 \| 72 \| 60 \| 37.4
+> Subj 1017-0007 \| **E-P** \| Visit 4 \| **2025-05-21** \| 147 \| 92 \| 62 \| 36.9
+> Subj 1017-0007 \| **E-P** \| Visit 5 \| **19-Jun-2025** \| 142 \| 82 \| 70 \| 37.5
+> Subj 1017-0008 \| **MP** \| Visit 2 \| **2025-09-09** \| 148 \| 87 \| 83 \| 36.9
+> Subj 1017-0008 \| **M.P.** \| Visit 3 \| **09/21/2025** \| 121 \| 94 \| 94 \| 36.6
+> 1017-0008 \| **M-P** \| Visit 4 \| **10/21/2025** \| 145 \| 88 \| 98 \| 36.6
+> Subj 1017-0008 \| **M.P.** \| Visit 5 \| **11/16/2025** \| 162 \| 70 \| 76 \| 37.5
+> \#10170009 \| **J-A** \| Visit 2 \| **01MAY2025** \| 119 \| 81 \| 90 \| 36.7
+> 1017-0010 \| **CG** \| Visit 2 \| **2025-09-25** \| 112 \| 76 \| 64 \| 37.7
+> 1017-0011 \| **P-B** \| Visit 2 \| **24JAN2025** \| 115 \| 70 \| 78 \| 37.3
+> Subj 1017-0011 \| **PXB** \| Visit 3 \| **02/05/2025** \| 125 \| 68 \| 74 \| 37.0
+> Subj 1017-0012 \| **T-C** \| Visit 3 \| **06SEP2025** \| 151 \| 89 \| 76 \| 37.2
+> 1017-0012 \| **T.C.** \| Visit 5 \| **02-Nov-2025** \| 113 \| 93 \| 73 \| 36.3
+> 1017-0013 \| **AÁ** \| Visit 2 \| **14FEB2025** \| 111 \| 78 \| 88 \| 36.3
+> \#10170013 \| **A.Á.** \| Visit 3 \| **2025-02-28** \| 106 \| 96 \| 71 \| 36.2
+> 1017-0013 \| **A.Á.** \| Visit 5 \| **28-Apr-2025** \| 126 \| 90 \| 78 \| 36.3
+> Subj 1017-0014 \| **RF** \| Visit 2 \| **07/22/2025** \| 113 \| 66 \| 57 \| 37.2
+> 1017-0015 \| **SXP** \| Visit 2 \| **08/26/2025** \| 162 \| 68 \| 80 \| 36.1
+> 1017-0015 \| **SP** \| Visit 3 \| **09/10/2025** \| 125 \| 71 \| 92 \| 37.3
+> Subj 1017-0015 \| **SXP** \| Visit 4 \| **09OCT2025** \| 144 \| 68 \| 59 \| 36.5
 > 
-> V. Notificador
-> 24b. **A. Marcos**, Centro de Investigación Clínica Llanodorado, tel. **+34 555 019 6055**
-> 25a. Fecha de este informe: 01/05/2025
+> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
+> Entered by: site staff
+> Source verified against medical record (source on file) for subject \#10170002.
 > 
-> Página 1
+> Handling of Missing Data
+> Categorical variables are presented as counts and percentages of the analysis set. Subgroup analyses by geographic region are exploratory and not adjusted for multiplicity. Categorical variables are presented as counts and percentages within each treatment group. Categorical variables are presented as counts and percentages of the analysis set.
+> 
+> Categorical variables are presented as counts and percentages within each treatment group. Missing data are not imputed unless stated otherwise under a missing-at-random assumption. All tests are two-sided with a significance level of 2.5 percent unless otherwise specified. Categorical variables are presented as counts and percentages within each treatment group.
+> 
+> Sensitivity analyses explore the robustness of the primary result to protocol deviations. All tests are two-sided with a significance level of 5 percent unless otherwise specified. Continuous variables are summarised with the number of observations, mean, standard deviation, median and range. Subgroup analyses by baseline severity are exploratory and not adjusted for multiplicity.
+> 
+> The statistical analysis plan is finalised before database lock and describes all derived variables. The statistical analysis plan is finalised before database lock and specifies all derived variables. Categorical variables are presented as counts and percentages within each treatment group. Subgroup analyses by age group are descriptive and not adjusted for multiplicity.
+> 
 > 
 
 ### B2 / qs_v1, holdout: 0 false forward(s)
 
-### B2 / qs_v2, test: 2 false forward(s)
+### B2 / qs_v2, test: 1 false forward(s)
 
-**d0352:section:2048:0** route forward (p_below_t_low); p(pii) raw 0.0471, calibrated 0.0471; gold role both, category direct; missed dob, event_date, initials, person_name, phone
+**d1294:section:2048:0** route forward (p_below_t_low); p(pii) raw 0.0176, calibrated 0.0176; gold role patient, category quasi; missed event_date, initials
 
-> Fenwick Therapeutics \| Protocolo FTX-5142-018 \| Confidencial
+> Fenwick Therapeutics \| Protocol FTX-8191-011 \| Confidential
 > 
-> CIOMS I: notificación de sospecha de reacción adversa
-> N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
+> CRF Page 19: Vital Signs
+> Protocol FTX-8191-011    Site 1017
 > 
-> I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
-> 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
-> 4-6. Inicio de la reacción: **18/04/2025**
-> 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
+> Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
+> 1017-0002 \| **MD** \| Visit 4 \| **06/19/2025** \| 128 \| 64 \| 97 \| 36.8
+> 1017-0003 \| **PN** \| Visit 2 \| **14-Feb-2025** \| 109 \| 95 \| 84 \| 37.0
+> Subj 1017-0003 \| **P-N** \| Visit 3 \| **March 1, 2025** \| 130 \| 62 \| 95 \| 36.6
+> \#10170004 \| **MF** \| Visit 2 \| **April 18, 2025** \| 125 \| 94 \| 87 \| 37.4
+> \#10170004 \| **M-F** \| Visit 5 \| **27JUN2025** \| 118 \| 80 \| 72 \| 36.5
+> \#10170005 \| **F.J.** \| Visit 3 \| **18OCT2025** \| 119 \| 94 \| 68 \| 36.7
+> \#10170005 \| **FJ** \| Visit 5 \| **11-Dec-2025** \| 165 \| 65 \| 67 \| 36.5
+> 1017-0006 \| **AB** \| Visit 3 \| **12-Oct-2025** \| 146 \| 92 \| 68 \| 36.9
+> \#10170007 \| **EP** \| Visit 2 \| **April 12, 2025** \| 136 \| 72 \| 60 \| 37.4
+> Subj 1017-0007 \| **E-P** \| Visit 4 \| **2025-05-21** \| 147 \| 92 \| 62 \| 36.9
+> Subj 1017-0007 \| **E-P** \| Visit 5 \| **19-Jun-2025** \| 142 \| 82 \| 70 \| 37.5
+> Subj 1017-0008 \| **MP** \| Visit 2 \| **2025-09-09** \| 148 \| 87 \| 83 \| 36.9
+> Subj 1017-0008 \| **M.P.** \| Visit 3 \| **09/21/2025** \| 121 \| 94 \| 94 \| 36.6
+> 1017-0008 \| **M-P** \| Visit 4 \| **10/21/2025** \| 145 \| 88 \| 98 \| 36.6
+> Subj 1017-0008 \| **M.P.** \| Visit 5 \| **11/16/2025** \| 162 \| 70 \| 76 \| 37.5
+> \#10170009 \| **J-A** \| Visit 2 \| **01MAY2025** \| 119 \| 81 \| 90 \| 36.7
+> 1017-0010 \| **CG** \| Visit 2 \| **2025-09-25** \| 112 \| 76 \| 64 \| 37.7
+> 1017-0011 \| **P-B** \| Visit 2 \| **24JAN2025** \| 115 \| 70 \| 78 \| 37.3
+> Subj 1017-0011 \| **PXB** \| Visit 3 \| **02/05/2025** \| 125 \| 68 \| 74 \| 37.0
+> Subj 1017-0012 \| **T-C** \| Visit 3 \| **06SEP2025** \| 151 \| 89 \| 76 \| 37.2
+> 1017-0012 \| **T.C.** \| Visit 5 \| **02-Nov-2025** \| 113 \| 93 \| 73 \| 36.3
+> 1017-0013 \| **AÁ** \| Visit 2 \| **14FEB2025** \| 111 \| 78 \| 88 \| 36.3
+> \#10170013 \| **A.Á.** \| Visit 3 \| **2025-02-28** \| 106 \| 96 \| 71 \| 36.2
+> 1017-0013 \| **A.Á.** \| Visit 5 \| **28-Apr-2025** \| 126 \| 90 \| 78 \| 36.3
+> Subj 1017-0014 \| **RF** \| Visit 2 \| **07/22/2025** \| 113 \| 66 \| 57 \| 37.2
+> 1017-0015 \| **SXP** \| Visit 2 \| **08/26/2025** \| 162 \| 68 \| 80 \| 36.1
+> 1017-0015 \| **SP** \| Visit 3 \| **09/10/2025** \| 125 \| 71 \| 92 \| 37.3
+> Subj 1017-0015 \| **SXP** \| Visit 4 \| **09OCT2025** \| 144 \| 68 \| 59 \| 36.5
 > 
-> V. Notificador
-> 24b. **A. Marcos**, Centro de Investigación Clínica Llanodorado, tel. **+34 555 019 6055**
-> 25a. Fecha de este informe: 01/05/2025
+> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
+> Entered by: site staff
+> Source verified against medical record (source on file) for subject \#10170002.
 > 
-> Página 1
+> Handling of Missing Data
+> Categorical variables are presented as counts and percentages of the analysis set. Subgroup analyses by geographic region are exploratory and not adjusted for multiplicity. Categorical variables are presented as counts and percentages within each treatment group. Categorical variables are presented as counts and percentages of the analysis set.
 > 
-
-**d0447:section:2048:0** route forward (p_below_t_low); p(pii) raw 0.2966, calibrated 0.2966; gold role both, category direct; missed address, dob, event_date, initials, mrn, person_name, zip
-
-> Fenwick Therapeutics \| Prüfplan FTX-5142-018 \| Vertraulich
+> Categorical variables are presented as counts and percentages within each treatment group. Missing data are not imputed unless stated otherwise under a missing-at-random assumption. All tests are two-sided with a significance level of 2.5 percent unless otherwise specified. Categorical variables are presented as counts and percentages within each treatment group.
 > 
-> Patientennarrativ: Prüfungsteilnehmer Subj 3005-0010
-> Prüfplan FTX-5142-018, Prüfzentrum 3005
+> Sensitivity analyses explore the robustness of the primary result to protocol deviations. All tests are two-sided with a significance level of 5 percent unless otherwise specified. Continuous variables are summarised with the number of observations, mean, standard deviation, median and range. Subgroup analyses by baseline severity are exploratory and not adjusted for multiplicity.
 > 
-> Demografie und Ausgangsbefund
-> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer R-65247) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.
-> Die Begleitmedikation wurde von **SCHMIDTKE, Dieter** überprüft.
+> The statistical analysis plan is finalised before database lock and describes all derived variables. The statistical analysis plan is finalised before database lock and specifies all derived variables. Categorical variables are presented as counts and percentages within each treatment group. Subgroup analyses by age group are descriptive and not adjusted for multiplicity.
 > 
-> Unerwünschtes Ereignis
-> Während der Behandlungsphase wurden keine unerwünschten Ereignisse gemeldet.
-> 
-> Ereigniszeitanalysen verwenden die Kaplan-Meier-Methode; die Kreatinin-Clearance wird nach Cockcroft-Gault berechnet. Prüfpräparat FTX-5142, Charge LT-255487-A, wurde aus Kit K-954687 im Visitenfenster Day 29 ±3 ausgegeben. Prüfplan FTX-5142-018 (NCT99608180; EudraCT 2031-854061-77), Amendment A5, gültig ab 2025-04-03.
-> 
-> Verlauf
-> Die Teilnahme wurde gemäß Prüfplan fortgesetzt.
-> 
-> Seite 1
 > 
 
 ### B2 / qs_v2, holdout: 0 false forward(s)
 
-### B3 / qs_v1 (doc-level, underpowered), test: 2 false forward(s)
-
-**d0352:section:4096:0** route forward (p_below_t_low); p(pii) raw 0.0499, calibrated 0.0499; gold role both, category direct; missed dob, event_date, initials, person_name, phone
-
-> Fenwick Therapeutics \| Protocolo FTX-5142-018 \| Confidencial
-> 
-> CIOMS I: notificación de sospecha de reacción adversa
-> N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
-> 
-> I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
-> 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
-> 4-6. Inicio de la reacción: **18/04/2025**
-> 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
-> 
-> V. Notificador
-> 24b. **A. Marcos**, Centro de Investigación Clínica Llanodorado, tel. **+34 555 019 6055**
-> 25a. Fecha de este informe: 01/05/2025
-> 
-> Página 1
-> 
-
-**d0418:section:4096:0** route forward (p_below_t_low); p(pii) raw 0.1351, calibrated 0.1351; gold role both, category quasi; missed event_date, initials
-
-> Fenwick Therapeutics \| Protocol FTX-5142-018 \| Confidential
-> 
-> CRF Page 14: Vital Signs
-> Protocol FTX-5142-018    Site 3005
-> 
-> Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> 3005-0001 \| **J-B** \| Visit 2 \| **June 18, 2025** \| 149 \| 75 \| 81 \| 36.6
-> 3005-0001 \| **J-B** \| Visit 3 \| **29JUN2025** \| 120 \| 64 \| 69 \| 37.5
-> \#30050001 \| **J.B.** \| Visit 4 \| **30-Jul-2025** \| 107 \| 94 \| 92 \| 37.4
-> \#300S0001 \| **J-B** \| Visit 5 \| **08/27/2025** \| 132 \| 81 \| 58 \| 36.4
-> 3005-0002 \| **S.H.** \| Visit 2 \| **06-May-2025** \| 113 \| 77 \| 59 \| 37.5
-> Subj 3005-0002 \| **S-H** \| Visit 3 \| **2025-05-20** \| 111 \| 67 \| 98 \| 37.2
-> Subj 3005-0002 \| **S-H** \| Visit 4 \| **06/18/2025** \| 118 \| 79 \| 81 \| 37.2
-> 3005-0002 \| **S-H** \| Visit 5 \| **13JUL2025** \| 109 \| 78 \| 61 \| 37.6
-> 3005-0003 \| **S.S.** \| Visit 2 \| **23-Sep-2025** \| 127 \| 96 \| 62 \| 36.9
-> Subj 3005-0003 \| **S.S.** \| Visit 3 \| **10/06/2025** \| 162 \| 91 \| 63 \| 37.7
-> \#30050003 \| **SS** \| Visit 4 \| **November 6, 2025** \| 164 \| 62 \| 58 \| 37.5
-> \#30050003 \| **SXS** \| Visit S \| **04DECZ025** \| 111 \| 85 \| 65 \| 37.2
-> Subj 3005-0004 \| **E-W** \| Visit Z \| **2025-08-18** \| 126 \| 81 \| 64 \| 37.0
-> \#30050004 \| **E.W.** \| Visit 3 \| **August 28, 2025** \| 135 \| 72 \| 60 \| 37.5
-> Subj 3005-0004 \| **EXW** \| Visit 4 \| **09/28/2025** \| 143 \| 98 \| 89 \| 37.2
-> 3005-0004 \| **E-W** \| Viit 5 \| **25OCT2O25** \| 124 \| 72 \| 80 \| 37.7
-> Subj 3005-0005 \| **LXK** \| Visit 2 \| **June 10, 2025** \| 112 \| 83 \| 88 \| 36.8
-> Subj 3005-0005 \| **LXK** \| Visit 3 \| **June 25, 20Z5** \| 152 \| 97 \| 67 \| 37.1
-> Subj 3005-0005 \| **L-K** \| Visit 4 \| **25-Jul-2025** \| 155 \| 62 \| 93 \| 37.1
-> 3005-0005 \| **L-K** \| Visit 5 \| **08/22/2025** \| 146 \| 70 \| 72 \| 37.2
-> Subj 3005-0006 \| **G.P.** \| Visit 2 \| **24-Jul-2025** \| 134 \| 77 \| 86 \| 37.0
-> Subj 3005-0006 \| **GXP** \| Visit 3 \| **August 11, 2025** \| 158 \| 65 \| 58 \| 37.7
-> \#30050006 \| **GXP** \| Visit 4 \| **09/06/2025** \| 106 \| 76 \| 77 \| 36.9
-> 3005-0006 \| **G-P** \| Visit 5 \| **04OCT2025** \| 158 \| 85 \| 78 \| 36.7
-> 3005-0007 \| **E-M** \| Visit 2 \| **2025-05-19** \| 118 \| 74 \| 82 \| 37.7
-> 3005-0007 \| **EXM** \| Visit 3 \| **June 2, 2025** \| 111 \| 74 \| 82 \| 37.7
-> \#30050007 \| **EM** \| Visit 4 \| **30JUN20Z5** \| 143 \| 67 \| 92 \| 37.3
-> \#30050007 \| **E-M** \| Visit 5 \| **27JUL2025** \| 110 \| 80 \| 94 \| 36.3
-> Subj 3005-0008 \| **S-K** \| Visit 3 \| **2025-08-03** \| 134 \| 86 \| 78 \| 36.5
-> 3005-0008 \| **SXK** \| Visit 4 \| **2025-09-01** \| 121 \| 71 \| 67 \| 37.0
-> \#30050008 \| **SXK** \| Visit 5 \| **01-Oct-2025** \| 161 \| 68 \| 83 \| 36.7
-> Subj 3005-0009 \| **D.E.** \| Visit 2 \| **May 2, 2025** \| 125 \| 81 \| 90 \| 36.3
-> 3005-0009 \| **DE** \| Visit 4 \| **06/14/2025** \| 153 \| 62 \| 86 \| 37.6
-> \#30050010 \| **PR** \| Visit 2 \| **27APR2025** \| 153 \| 92 \| 88 \| 37.7
-> Subj 3005-0010 \| **P.R.** \| Visit 3 \| **13-May-2025** \| 112 \| 76 \| 98 \| 36.7
-> \#30050010 \| **P-R** \| Visit 4 \| **11JUN2025** \| 106 \| 79 \| 95 \| 37.4
-> \#30050011 \| **D.R.** \| Visit 2 \| **22MAR2025** \| 120 \| 69 \| 68 \| 36.4
-> Subj 3005-0011 \| **DR** \| Visit 3 \| **03-Apr-2025** \| 136 \| 94 \| 74 \| 36.7
-> Subj 3005-0011 \| **D.R.** \| Visit 4 \| **2025-04-30** \| 162 \| 66 \| 81 \| 36.7
-> \#30050011 \| **D-R** \| Visit 5 \| **31MAY2025** \| 149 \| 83 \| 58 \| 37.5
-> 300S-0012 \| **JXG** \| Visit 2 \| **02/24/2025** \| 136 \| 71 \| 65 \| 36.2
-> Subj 3005-0012 \| **JG** \| Visit 3 \| **March 6, 2025** \| 156 \| 63 \| 62 \| 36.2
-> \#30050012 \| **J-G** \| Visit 4 \| **05-Apr-2025** \| 161 \| 86 \| 86 \| 36.8
-> \#3005001Z \| **JXG** \| Visit 5 \| **01-May-2025** \| 116 \| 98 \| 93 \| 37.0
-> Subj 3005-0013 \| **S-E** \| Viit 2 \| **July 23, 2025** \| 147 \| 87 \| 63 \| 37.8
-> Subj 3005-0013 \| **S-E** \| Visit 3 \| **04AUG2025** \| 139 \| 78 \| 66 \| 37.2
-> 3005-0013 \| **S.E.** \| Visit 5 \| **09/30/2025** \| 123 \| 82 \| 84 \| 36.9
-> \#30050014 \| **SXG** \| Visit 2 \| **February 9, 2025** \| 144 \| 68 \| 89 \| 37.0
-> \#30050014 \| **S.G.** \| Visit 3 \| **21-Feb-2025** \| 147 \| 69 \| 81 \| 36.4
-> 3005-0014 \| **SG** \| Visit 4 \| **22MAR2025** \| 125 \| 93 \| 69 \| 36.1
-> \#30050014 \| **SG** \| Visit 5 \| **18APR2025** \| 138 \| 77 \| 59 \| 37.6
-> Subj 3005-0015 \| **D.M.** \| Visit 2 \| **09-May-2025** \| 151 \| 96 \| 69 \| 37.3
-> \#30050015 \| **DXM** \| Visit 3 \| **May 25, 2O25** \| 132 \| 84 \| 78 \| 37.3
-> 3005-0O15 \| **D.M.** \| Visit 4 \| **June 20, 2025** \| 107 \| 62 \| 55 \| 37.1
-> 
-> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 16O mmHg within 15 minutes.
-> Entered by: **AXW**
-> Source verified against medical record (source on file) for subject 3005-0001.
-> 
-> Events are coded to MedDRA preferred term 10586823; the target dose is 150 mg. Agreement between central and local readigs is shown in Bland-Altman plots. Secondary endpoints are compard with the Wilcoxon test with Bonferroni correction; sparse tables use Fisher's exact test.
-> 
-> Database Procedures
-> Access to the database is restricted to authorised personnel with role-based permissions. Edit checks identify missing, inconsistent or out-of-range values during cleaning. Reconciliation of safety data with the clinical database is performed periodically. Edit checks identify missing, inconsistent or out-of-range values during cleaning. Access to the database is restricted to authorised personnel with role-based permissions.
-> 
-> Data are entered into a validated c1inical database with an audit trail. Edit checks identify missing, inconsistent or out-of-range vlues at entry. Medical history and adverse evets are coded with a standard dictionary before database lock. Medical history and adverse events are coded with standard terminology before database lock.
-> 
-> Source Data Verification
-> Queries are raised in the data capture system and resolved by site staff within ten working days. Protocol deviations are classified as minor or major. The investigator site file is reviewed for completeness at each visit. Source data verification prioritises eligibility, informed consent, primary endpoints and serious aderse events. Queries are raised in the data capture system and answered by the site within ten working days.
-> 
-> Protocol deviations are assessed for impact on participant safety and data integrity. The investigator site file is reviewed for currency of essential documents at each visit. Protocol deviations are classified as minor or majr.
-> 
-> On-site and remote monitoring visits are scheduled based on enrollment and risk indicators. The investigator site file is reviewed for completeness at each visit. Findings are documented in the visit report and followed up until closure.
-> 
-> Analysis Methods
-> Sensitivity analyses assess the robustness of the primary result to protocol deviations. All tests are two-sided with a significance level of 5 percent unless otherwise specified. Subgroup analyses by geograhic region are exploratory and not adjusted for multiplicity.
-> 
-> Subgroup analyses by age group are descriptive and not adjusted for multiplicity. All tests are two-sided with a significance level of 5 pecnt unless otherwise spcified. Continuous variables are summaised with the nmber of observations, mean, standard deviation, median and range. Sensitivity analyses assess the robstness of the primary result to alternative assumptions. The statistical analyss plan is finalised befre database lock and specifies all derived variab1es.
-> 
-> Categorical vriables are presented as counts and percentages within each treatment group. Subgroup analyses by baseline severity are descriptive and not adjusted for multiplicity. Categorical variables are presented as counts and percentages of the analysis set.
-> 
-> Page 1
-> 
-> Fenwick Therapeutics \| Protocol FTX-5142-018 \| Confidential
-> 
-> Categorical variables are presented as counts and percentages of the analysis set. All tests are two-sided with a significance level of 2.5 percent unless otherwise specified. Sensitivity aalses asess the robustness of the primary resu1t to alternative assumptions. Continuous variables are summarised wih the number of observations, mean, standard deviation, median and range. All tests are two-sided with a significance level of 5 percent unless otherwise specified. Categorical variables are presented as counts and percentages of the analysis set.
-> 
-> Drug Accountabiliy
-> Investigational product is stored in a secure, temperature-monitored area with access limited to authorised staff. Dispensing and returns are recorded on the accountability log at every dispensing visit. Temperature excursions must be reported to the sponsor before further use of the affected supply. Unused product is returned to the sponsor after reconciliation. Dispensing and returns are recorded on the accountability log at every dispensing visit. Unused product is destroyed according to local procedures after reconciliation.
-> 
-> Investigtional product is stored in a secure, temperature-monitored area with access limited to authorised staff. Temperature excursions must be reported to the sponsor immediately. Temperature excursions are reported to the sponsor immediately. Temperature excursions must be reported to the sponsor before further use of the affected suply.
-> 
-> Tablet counts are reconciled against the dosing dary to assess compliance. Tablet counts are reconciled against the dosing diary to assss compliance. Dispensing and returns are recorded on the accountability log at every dispensing visit. Temperature excursons are reported to the sponsor immediately. Investigational product is stored in a secure, temerature-monitored area with access limited to authorised staff.
-> 
-> 
+### B3 / qs_v1 (doc-level, underpowered), test: 0 false forward(s)
 
 ### B3 / qs_v1 (doc-level, underpowered), holdout: 0 false forward(s)
 
-### B3 / qs_v2 (doc-level, underpowered), test: 6 false forward(s)
-
-**d0062:section:4096:0** route forward (p_below_t_low); p(pii) raw 0.4012, calibrated 0.4012; gold role patient, category quasi; missed event_date, initials
-
-> CRF Page 15: Vital Signs
-> Protocol FTX-9990-002    Site 2003
-> 
-> Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> Subj 2003-0001 \| **TW** \| Visit 5 \| **2025-05-12** \| 141 \| 85 \| 84 \| 37.0
-> \#20030004 \| **K.C.** \| Visit 5 \| **15SEP2025** \| 135 \| 89 \| 95 \| 36.1
-> Subj 2003-0006 \| **AXC** \| Visit 2 \| **2025-08-07** \| 111 \| 70 \| 61 \| 37.2
-> Subj 2003-0008 \| **LXH** \| Visit 2 \| **2025-03-20** \| 159 \| 63 \| 94 \| 36.2
-> Subj 2003-0010 \| **SO** \| Visit 4 \| **03JUL2025** \| 143 \| 69 \| 76 \| 37.7
-> 2003-0014 \| **EH** \| Visit 5 \| **06/14/2025** \| 119 \| 89 \| 77 \| 36.6
-> 
-> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
-> Entered by: site staff
-> Source verified against medical record (source on file) for subject Subj 2003-0001.
-> 
-> Laboratory Assessments
-> Blood samples are collected after an overnight fast and processed within two hours. Samples are shipped at ambient temperature to the central laboratory with the requisition form. Clinically significant laboratory abnormalities are recorded as adverse events. Reference ranges are provided by the laboratory and updated when changed.
-> 
-> Blood samples are collected after an overnight fast and processed according to the laboratory manual. Clinically significant laboratory abnormalities are recorded as adverse events. Blood samples are collected after an overnight fast and processed within two hours. Clinically significant laboratory abnormalities should be recorded as adverse events.
-> 
-> Blood samples are collected after an overnight fast and processed within two hours. Blood samples are collected in the morning and processed within two hours. Blood samples are collected after an overnight fast and processed within two hours. Reference ranges are provided by the laboratory and updated when changed. Samples are shipped frozen on dry ice to the central laboratory with the requisition form. Reference ranges are provided by the laboratory and filed in the investigator site file.
-> 
-> Good Clinical Practice
-> The study will be conducted in accordance with the principles of good clinical practice and applicable regulatory requirements. The sponsor may conduct audits of study sites and vendors to verify compliance. Confidentiality of participant information is protected at all times.
-> 
-> Confidentiality of participant information is protected at all times. Essential documents are retained for at least 25 years after the end of the study or longer if required by local regulations. The sponsor reserves the right to conduct audits of study sites and vendors to verify compliance. The informed consent form and any amendments must be approved by the ethics committee before implementation.
-> 
-> Participants may withdraw consent at any time without consequences for their medical care. Participants may withdraw consent at any time without consequences for their medical care. Essential documents are retained for at least 25 years after the end of the study or longer if required by local regulations. Participants may withdraw consent at any time without consequences for their medical care. The protocol and any amendments are approved by the ethics committee before implementation.
-> 
-> Essential documents are retained for at least 15 years after the end of the study or longer if required by local regulations. The sponsor reserves the right to conduct audits of study sites and vendors to verify compliance. The protocol and any amendments must be approved by the ethics committee before implementation. Confidentiality of participant information is protected in line with applicable data protection law. Essential documents are retained for at least 15 years after the end of the study as required.
-> 
-
-**d0082:section:4096:0** route forward (p_below_t_low); p(pii) raw 0.4550, calibrated 0.4550; gold role patient, category quasi; missed event_date, initials
-
-> Fenwick Therapeutics \| Protocol FTX-5142-018 \| Confidential
-> 
-> CRF Page 14: Vital Signs
-> Protocol FTX-5142-018    Site 3003
-> 
-> Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> \#30030002 \| **S-I** \| Visit 3 \| **08/23/2025** \| 130 \| 79 \| 84 \| 36.1
-> \#30030007 \| **YXC** \| Visit 4 \| **09/18/2025** \| 154 \| 91 \| 96 \| 36.2
-> \#30030013 \| **PR** \| Visit 4 \| **July 20, 2025** \| 153 \| 78 \| 59 \| 37.6
-> 3003-0014 \| **A-B** \| Visit 4 \| **03-Aug-2025** \| 107 \| 97 \| 55 \| 37.6
-> Subj 3003-0015 \| **C-L** \| Visit 2 \| **04/17/2025** \| 152 \| 77 \| 58 \| 36.3
-> 
-> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
-> Entered by: site staff
-> Source verified against medical record (source on file) for subject \#30030002.
-> 
-> Drug Accountability
-> Dispensing and returns are recorded on the accountability log at each visit. Temperature excursions must be reported to the sponsor immediately. Tablet counts are compared with the dosing diary to assess compliance. Investigational product is stored in a secure, temperature-monitored area with access limited to authorised staff. Tablet counts are reconciled against the dosing diary to assess compliance. Investigational product is stored in a secure, temperature-monitored area with access limited to authorised staff.
-> 
-> Tablet counts are reconciled against the dosing diary to assess compliance. Dispensing and returns are recorded on the accountability log at every dispensing visit. Unused product is returned to the sponsor after reconciliation. Dispensing and returns are recorded on the accountability log at each visit. Tablet counts are compared with the dosing diary to assess compliance.
-> 
-> Dispensing and returns are recorded on the accountability log at every dispensing visit. Dispensing and returns are recorded on the accountability log at each visit. Investigational product is stored in a secure, temperature-monitored area with access limited to authorised staff. Investigational product is stored in a secure, temperature-monitored area with access limited to authorised staff.
-> 
-> Reporting of Safety Events
-> Pregnancy in a participant is reported using the pregnancy notification form within 24 hours. Follow-up information must be provided until the event resolves or the participant is lost to follow-up. The sponsor evaluates each report for expectedness against the reference safety information.
-> 
-> Non-serious adverse events are recorded in the electronic data capture system throughout the treatment period. Non-serious adverse events are recorded in the electronic data capture system at each visit. Events that begin after the first dose and up to 30 days after the last dose are considered treatment-emergent. Pregnancy in a participant is reported on the dedicated form within one working day. Events that start after the first dose and up to 30 days after the last dose are summarised as treatment-emergent.
-> 
-> Follow-up information must be provided until the event stabilises or the participant is lost to follow-up. Follow-up information must be provided until the event stabilises or the participant is lost to follow-up. Non-serious adverse events are recorded in the electronic data capture system at each visit. The sponsor reviews each report for expectedness against the reference safety information. All serious adverse events are reported to the sponsor within 48 hours of the investigator becoming aware of the event. Non-serious adverse events are recorded in the electronic data capture system at each visit.
-> 
-> All serious adverse events must be reported to the sponsor within 48 hours of the investigator becoming aware of the event. Events that start after the first dose and up to 30 days after the last dose are considered treatment-emergent. The sponsor reviews each report for expectedness against the reference safety information.
-> 
-> Page 1
-> 
-
-**d0150:section:4096:0** route forward (p_below_t_low); p(pii) raw 0.3739, calibrated 0.3739; gold role patient, category quasi; missed event_date, initials
-
-> CRF Page 26: Vital Signs
-> Protocol FTX-8191-011    Site 1005
-> 
-> Subject	Initials	Visit	Visit date	SBP	DBP	HR	Temp
-> 1005-0001	**J.K.**	Visit 2	**2025-06-24**	158	62	98	37.6
-> \#10050001	**JK**	Visit 4	**August 5, 2025**	160	70	55	36.3
-> \#10050001	**J.K.**	Visit 5	**2025-08-31**	123	95	59	36.8
-> 1005-0002	**D.W.**	Visit 2	**2025-06-18**	151	74	70	36.1
-> 1005-0002	**D-W**	Visit 3	**02JUL2025**	132	70	71	36.8
-> Subj 1005-0002	**DW**	Visit 4	**27-Jul-2025**	129	74	94	36.4
-> Subj 1005-0002	**D.W.**	Visit 5	**August 26, 2025**	137	76	59	36.7
-> Subj 1005-0003	**R.S.**	Visit 2	**08/16/2025**	115	78	70	36.6
-> Subj 1005-0003	**RS**	Visit 3	**2025-08-27**	163	80	75	37.4
-> 1005-0003	**R-S**	Visit 5	**October 22, 2025**	145	86	63	37.6
-> Subj 1005-0004	**A-J**	Visit 2	**2025-02-28**	147	86	73	36.7
-> 1005-0004	**AJ**	Visit 3	**13-Mar-2025**	156	79	83	37.2
-> \#10050004	**AJ**	Visit 4	**April 9, 2025**	150	64	60	37.7
-> 1005-0004	**A.J.**	Visit 5	**08-May-2025**	136	66	96	36.5
-> Subj 1005-0005	**A-S**	Visit 3	**23MAR2025**	119	87	90	37.0
-> Subj 1005-0005	**AS**	Visit 4	**04/19/2025**	119	85	83	36.6
-> 1005-0006	**TXP**	Visit 2	**April 19, 2025**	135	68	55	37.7
-> Subj 1005-0006	**TP**	Visit 5	**25JUN2025**	125	69	92	36.7
-> 1005-0007	**AXG**	Visit 2	**2025-02-12**	162	86	79	36.9
-> Subj 1005-0007	**AXG**	Visit 3	**February 24, 2025**	140	76	60	36.3
-> \#10050007	**AG**	Visit 4	**March 23, 2025**	120	88	88	36.5
-> Subj 1005-0007	**A-G**	Visit 5	**April 20, 2025**	154	84	67	36.6
-> Subj 1005-0008	**F-T**	Visit 2	**07-Jun-2025**	121	81	78	37.4
-> \#10050008	**F-T**	Visit 3	**2025-06-24**	129	83	88	37.6
-> Subj 1005-0008	**FT**	Visit 5	**August 19, 2025**	154	96	66	36.4
-> 1005-0009	**S-P**	Visit 3	**September 28, 2025**	117	86	58	36.8
-> 1005-0009	**SP**	Visit 4	**October 23, 2025**	139	96	59	37.3
-> Subj 1005-0009	**SP**	Visit 5	**2025-11-21**	151	87	56	37.0
-> \#10050010	**EK**	Visit 4	**10/22/2025**	106	86	92	37.7
-> 1005-0010	**E-K**	Visit 5	**November 17, 2025**	118	97	62	37.6
-> \#10050011	**H-L**	Visit 2	**February 27, 2025**	112	93	80	36.5
-> \#10050011	**HXL**	Visit 3	**2025-03-12**	160	77	78	36.2
-> \#10050011	**HXL**	Visit 5	**09MAY2025**	113	65	77	37.7
-> \#10050012	**D-S**	Visit 3	**05/01/2025**	126	75	59	36.8
-> \#10050012	**D-S**	Visit 5	**25-Jun-2025**	125	94	96	36.1
-> \#10050013	**S.K.**	Visit 2	**2025-02-18**	146	70	69	36.3
-> \#10050013	**S.K.**	Visit 3	**04-Mar-2025**	124	81	92	36.6
-> Subj 1005-0013	**S.K.**	Visit 4	**04/01/2025**	154	88	71	36.9
-> Subj 1005-0013	**SXK**	Visit 5	**2025-04-26**	150	88	81	37.2
-> \#10050014	**AŻ**	Visit 2	**05APR2025**	140	81	60	37.2
-> Subj 1005-0014	**A-Ż**	Visit 4	**May 18, 2025**	145	74	78	37.3
-> Subj 1005-0014	**AXŻ**	Visit 5	**06/16/2025**	158	70	95	36.4
-> \#10050015	**J-C**	Visit 2	**06/02/2025**	119	81	78	37.5
-> \#10050015	**J.C.**	Visit 3	**19JUN2025**	121	82	93	36.8
-> 1005-0015	**JC**	Visit 4	**2025-07-18**	128	81	97	36.6
-> 1005-0015	**JC**	Visit 5	**August 14, 2025**	165	81	85	37.0
-> 
-> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
-> Entered by: site staff
-> Source verified against medical record (source on file) for subject \#10050001.
-> 
-> Investigational product FTX-8191 lot LT-246523-C was dispensed from kit K-042791 within the Day 8 ±1 visit window. Time-to-event endpoints are estimated with the Kaplan-Meier method and compared with a Mantel-Haenszel test stratified by region. Agreement between central and local readings is shown in Bland-Altman plots.
-> 
-> Safety Reporting
-> The investigator assesses intensity using the common terminology criteria and documents the assessment in the source record. Follow-up information must be provided until the event resolves or the participant is lost to follow-up. Non-serious adverse events are recorded in the electronic data capture system at each visit.
-> 
-> Non-serious adverse events are recorded in the electronic data capture system at each visit. All serious adverse events must be reported to the sponsor within 24 hours of the investigator becoming aware of the event. Follow-up information must be provided until the event stabilises or the participant is lost to follow-up.
-> 
-> The sponsor reviews each report for expectedness against the reference safety information. Pregnancy occurring during the study is reported on the dedicated form within 24 hours. Follow-up information must be provided until the event stabilises or the participant is lost to follow-up. The responsible physician assesses severity using the common terminology criteria and documents the assessment in the source record. Any serious adverse events are reported to the sponsor within 24 hours of the investigator becoming aware of the event. The sponsor reviews each report for expectedness against the reference safety information.
-> 
-> All serious adverse events are reported to the sponsor within 48 hours of the investigator becoming aware of the event. Non-serious adverse events are recorded in the electronic data capture system throughout the treatment period. The sponsor evaluates each report for expectedness against the reference safety information.
-> 
-> Handling of Missing Data
-> Missing data are handled by multiple imputation under a missing-at-random assumption. Categorical variables are presented as counts and percentages within each treatment group. Missing data are handled by multiple imputation in the primary analysis. Subgroup analyses by geographic region are exploratory and not adjusted for multiplicity. The statistical analysis plan is finalised before database lock and describes all derived variables. Continuous variables are summarised with the number of observations, mean, standard deviation, median and range.
-> 
-> Subgroup analyses by geographic region are descriptive and not adjusted for multiplicity. Missing data are not imputed unless stated otherwise in the primary analysis. Sensitivity analyses assess the robustness of the primary result to alternative assumptions.
-> 
-> Continuous variables are summarised with the number of observations, mean, standard deviation, median and range. The statistical analysis plan is finalised before database lock and specifies all derived variables. All tests are two-sided with a significance level of 5 percent unless otherwise specified. All tests are two-sided with a significance level of 2.5 percent unless otherwise specified. Missing data are not imputed unless stated otherwise under a missing-at-random assumption. Missing data are not imputed unless stated otherwise under a missing-at-random assumption.
-> 
-> Good Clinical Practice
-> The protocol and any amendments must be approved by the ethics committee before implementation. The sponsor may conduct audits of study sites and vendors to verify compliance. The protocol and any amendments are approved by the ethics committee before implementation. Participants may withdraw consent at any time without consequences for their medical care.
-> 
-> Participants may withdraw consent at any time without consequences for their medical care. Participants may withdraw consent at any time without penalty. Essential documents are retained for at least 15 years after the end of the study as required. Participants may withdraw consent at any time without consequences for their medical care. Participants may withdraw consent at any time without consequences for their medical care.
-> 
-> Participants may withdraw consent at any time without consequences for their medical care. Confidentiality of participant information is protected in line with applicable data protection law. Essential documents are retained for at least 25 years after the end of the study as required. The informed consent form and any amendments are approved by the ethics committee before implementation.
-> 
-> The informed consent form and any amendments are approved by the ethics committee before implementation. Confidentiality of participant information is protected in line with applicable data protection law. The sponsor may conduct audits of study sites and vendors to verify compliance. Participants may withdraw consent at any time without penalty. Essential documents are retained for at least 15 years after the end of the study as required.
-> 
-> Laboratory Assessments
-> Blood samples are collected in the morning and processed within two hours. Clinically significant laboratory abnormalities should be recorded as adverse events. Blood samples are collected after an overnight fast and processed according to the laboratory manual. Samples are shipped frozen on dry ice to the central laboratory with the requisition form. Blood samples are collected after an overnight fast and processed according to the laboratory manual.
-> 
-> Blood samples are collected in the morning and processed according to the laboratory manual. Reference ranges are provided by the laboratory and updated when changed. Clinically significant laboratory abnormalities should be recorded as adverse events. Blood samples are collected after an overnight fast and processed within two hours.
-> 
-> Data Management
-> Data are entered into a validated electronic data capture system with an audit trail. Reconciliation of laboratory data with the clinical database is performed before each data cut. Medical history and adverse events are coded with a standard dictionary during the study. Access to the database is restricted to authorised personnel according to the access matrix. Access to the database is restricted to authorised personnel according to the access matrix.
-> 
-> Edit checks flag missing, inconsistent or out-of-range values during cleaning. Reconciliation of laboratory data with the clinical database is performed before each data cut. Reconciliation of laboratory data with the clinical database is performed periodically. Data are entered into a validated clinical database with an audit trail.
-> 
-> Reconciliation of safety data with the clinical database is performed before each data cut. Edit checks identify missing, inconsistent or out-of-range values at entry. Edit checks flag missing, inconsistent or out-of-range values at entry. Data are entered into a validated clinical database with an audit trail.
-> 
-> Reconciliation of safety data with the clinical database is performed before each data cut. Reconciliation of laboratory data with the clinical database is performed periodically. Medical history and adverse events are coded with standard terminology before database lock. Data are entered into a validated clinical database with an audit trail.
-> 
-
-**d0352:section:4096:0** route forward (p_below_t_low); p(pii) raw 0.0471, calibrated 0.0471; gold role both, category direct; missed dob, event_date, initials, person_name, phone
-
-> Fenwick Therapeutics \| Protocolo FTX-5142-018 \| Confidencial
-> 
-> CIOMS I: notificación de sospecha de reacción adversa
-> N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
-> 
-> I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
-> 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
-> 4-6. Inicio de la reacción: **18/04/2025**
-> 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
-> 
-> V. Notificador
-> 24b. **A. Marcos**, Centro de Investigación Clínica Llanodorado, tel. **+34 555 019 6055**
-> 25a. Fecha de este informe: 01/05/2025
-> 
-> Página 1
-> 
-
-**d0377:section:4096:0** route forward (p_below_t_low); p(pii) raw 0.3661, calibrated 0.3661; gold role both, category quasi; missed email, event_date, person_name, phone
-
-> Von: **Dieter Schmidtke** \<**d.schmidtke@niederheide-crc.example.org**\>
-> An: **Riza Scheel** \<**r.scheel@fenwick-tx.example.com**\>
-> Betreff: AW: Datenklärung zu Teilnehmer 3005-0010
-> Hallo **Riza**,
-> 
-> die offenen Fragen wurden bearbeitet und die Einträge im eCRF korrigiert.
-> Die korrigierten Seiten liegen im Prüfarztordner; die Quelldokumente wurden erneut abgeglichen. Bitte geben Sie kurz Bescheid, ob weitere Anfragen offen sind.
-> Teilnehmer \#30050010: Daten der Visite 2 (**27. April 2025**) korrigiert.
-> Die Papierquelle für diesen Teilnehmer liegt im Teilnehmerordner.
-> 
-> Viele Grüße
-> **Dieter Schmidtke**
-> Klinikum Niederheide
-> Tel. **+49 555 017 9336**
-> 
-> \> Am 2025-05-28 schrieb **Riza Scheel**:
-> \> Hallo **Dieter**, bitte prüfen Sie die offenen Anfragen.
-> \> Danke, **Riza**
-> 
-> Ereigniszeitanalysen verwenden die Kaplan-Meier-Methode; die Kreatinin-Clearance wird nach Cockcroft-Gault berechnet. Prüfplan FTX-5142-018 (NCT99608180; EudraCT 2031-854061-77), Amendment A1, gültig ab 05.10.2025. Prüfpräparat FTX-5142, Charge LT-230007-D, wurde aus Kit K-283296 im Visitenfenster Day 85 ±1 ausgegeben.
-> 
-
-**d0447:section:4096:0** route forward (p_below_t_low); p(pii) raw 0.2966, calibrated 0.2966; gold role both, category direct; missed address, dob, event_date, initials, mrn, person_name, zip
-
-> Fenwick Therapeutics \| Prüfplan FTX-5142-018 \| Vertraulich
-> 
-> Patientennarrativ: Prüfungsteilnehmer Subj 3005-0010
-> Prüfplan FTX-5142-018, Prüfzentrum 3005
-> 
-> Demografie und Ausgangsbefund
-> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer R-65247) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.
-> Die Begleitmedikation wurde von **SCHMIDTKE, Dieter** überprüft.
-> 
-> Unerwünschtes Ereignis
-> Während der Behandlungsphase wurden keine unerwünschten Ereignisse gemeldet.
-> 
-> Ereigniszeitanalysen verwenden die Kaplan-Meier-Methode; die Kreatinin-Clearance wird nach Cockcroft-Gault berechnet. Prüfpräparat FTX-5142, Charge LT-255487-A, wurde aus Kit K-954687 im Visitenfenster Day 29 ±3 ausgegeben. Prüfplan FTX-5142-018 (NCT99608180; EudraCT 2031-854061-77), Amendment A5, gültig ab 2025-04-03.
-> 
-> Verlauf
-> Die Teilnahme wurde gemäß Prüfplan fortgesetzt.
-> 
-> Seite 1
-> 
+### B3 / qs_v2 (doc-level, underpowered), test: 0 false forward(s)
 
 ### B3 / qs_v2 (doc-level, underpowered), holdout: 0 false forward(s)
 
-### B4 / qs_v1 (doc-level, underpowered), test: 2 false forward(s)
-
-**d0352:doc:8192:0** route forward (p_below_t_low); p(pii) raw 0.0499, calibrated 0.2720; gold role both, category direct; missed dob, event_date, initials, person_name, phone
-
-> Fenwick Therapeutics \| Protocolo FTX-5142-018 \| Confidencial
-> 
-> CIOMS I: notificación de sospecha de reacción adversa
-> N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
-> 
-> I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
-> 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
-> 4-6. Inicio de la reacción: **18/04/2025**
-> 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
-> 
-> V. Notificador
-> 24b. **A. Marcos**, Centro de Investigación Clínica Llanodorado, tel. **+34 555 019 6055**
-> 25a. Fecha de este informe: 01/05/2025
-> 
-> Página 1
-> 
-
-**d0418:doc:8192:0** route forward (p_below_t_low); p(pii) raw 0.0747, calibrated 0.3014; gold role both, category quasi; missed event_date, initials
-
-> Fenwick Therapeutics \| Protocol FTX-5142-018 \| Confidential
-> 
-> CRF Page 14: Vital Signs
-> Protocol FTX-5142-018    Site 3005
-> 
-> Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> 3005-0001 \| **J-B** \| Visit 2 \| **June 18, 2025** \| 149 \| 75 \| 81 \| 36.6
-> 3005-0001 \| **J-B** \| Visit 3 \| **29JUN2025** \| 120 \| 64 \| 69 \| 37.5
-> \#30050001 \| **J.B.** \| Visit 4 \| **30-Jul-2025** \| 107 \| 94 \| 92 \| 37.4
-> \#300S0001 \| **J-B** \| Visit 5 \| **08/27/2025** \| 132 \| 81 \| 58 \| 36.4
-> 3005-0002 \| **S.H.** \| Visit 2 \| **06-May-2025** \| 113 \| 77 \| 59 \| 37.5
-> Subj 3005-0002 \| **S-H** \| Visit 3 \| **2025-05-20** \| 111 \| 67 \| 98 \| 37.2
-> Subj 3005-0002 \| **S-H** \| Visit 4 \| **06/18/2025** \| 118 \| 79 \| 81 \| 37.2
-> 3005-0002 \| **S-H** \| Visit 5 \| **13JUL2025** \| 109 \| 78 \| 61 \| 37.6
-> 3005-0003 \| **S.S.** \| Visit 2 \| **23-Sep-2025** \| 127 \| 96 \| 62 \| 36.9
-> Subj 3005-0003 \| **S.S.** \| Visit 3 \| **10/06/2025** \| 162 \| 91 \| 63 \| 37.7
-> \#30050003 \| **SS** \| Visit 4 \| **November 6, 2025** \| 164 \| 62 \| 58 \| 37.5
-> \#30050003 \| **SXS** \| Visit S \| **04DECZ025** \| 111 \| 85 \| 65 \| 37.2
-> Subj 3005-0004 \| **E-W** \| Visit Z \| **2025-08-18** \| 126 \| 81 \| 64 \| 37.0
-> \#30050004 \| **E.W.** \| Visit 3 \| **August 28, 2025** \| 135 \| 72 \| 60 \| 37.5
-> Subj 3005-0004 \| **EXW** \| Visit 4 \| **09/28/2025** \| 143 \| 98 \| 89 \| 37.2
-> 3005-0004 \| **E-W** \| Viit 5 \| **25OCT2O25** \| 124 \| 72 \| 80 \| 37.7
-> Subj 3005-0005 \| **LXK** \| Visit 2 \| **June 10, 2025** \| 112 \| 83 \| 88 \| 36.8
-> Subj 3005-0005 \| **LXK** \| Visit 3 \| **June 25, 20Z5** \| 152 \| 97 \| 67 \| 37.1
-> Subj 3005-0005 \| **L-K** \| Visit 4 \| **25-Jul-2025** \| 155 \| 62 \| 93 \| 37.1
-> 3005-0005 \| **L-K** \| Visit 5 \| **08/22/2025** \| 146 \| 70 \| 72 \| 37.2
-> Subj 3005-0006 \| **G.P.** \| Visit 2 \| **24-Jul-2025** \| 134 \| 77 \| 86 \| 37.0
-> Subj 3005-0006 \| **GXP** \| Visit 3 \| **August 11, 2025** \| 158 \| 65 \| 58 \| 37.7
-> \#30050006 \| **GXP** \| Visit 4 \| **09/06/2025** \| 106 \| 76 \| 77 \| 36.9
-> 3005-0006 \| **G-P** \| Visit 5 \| **04OCT2025** \| 158 \| 85 \| 78 \| 36.7
-> 3005-0007 \| **E-M** \| Visit 2 \| **2025-05-19** \| 118 \| 74 \| 82 \| 37.7
-> 3005-0007 \| **EXM** \| Visit 3 \| **June 2, 2025** \| 111 \| 74 \| 82 \| 37.7
-> \#30050007 \| **EM** \| Visit 4 \| **30JUN20Z5** \| 143 \| 67 \| 92 \| 37.3
-> \#30050007 \| **E-M** \| Visit 5 \| **27JUL2025** \| 110 \| 80 \| 94 \| 36.3
-> Subj 3005-0008 \| **S-K** \| Visit 3 \| **2025-08-03** \| 134 \| 86 \| 78 \| 36.5
-> 3005-0008 \| **SXK** \| Visit 4 \| **2025-09-01** \| 121 \| 71 \| 67 \| 37.0
-> \#30050008 \| **SXK** \| Visit 5 \| **01-Oct-2025** \| 161 \| 68 \| 83 \| 36.7
-> Subj 3005-0009 \| **D.E.** \| Visit 2 \| **May 2, 2025** \| 125 \| 81 \| 90 \| 36.3
-> 3005-0009 \| **DE** \| Visit 4 \| **06/14/2025** \| 153 \| 62 \| 86 \| 37.6
-> \#30050010 \| **PR** \| Visit 2 \| **27APR2025** \| 153 \| 92 \| 88 \| 37.7
-> Subj 3005-0010 \| **P.R.** \| Visit 3 \| **13-May-2025** \| 112 \| 76 \| 98 \| 36.7
-> \#30050010 \| **P-R** \| Visit 4 \| **11JUN2025** \| 106 \| 79 \| 95 \| 37.4
-> \#30050011 \| **D.R.** \| Visit 2 \| **22MAR2025** \| 120 \| 69 \| 68 \| 36.4
-> Subj 3005-0011 \| **DR** \| Visit 3 \| **03-Apr-2025** \| 136 \| 94 \| 74 \| 36.7
-> Subj 3005-0011 \| **D.R.** \| Visit 4 \| **2025-04-30** \| 162 \| 66 \| 81 \| 36.7
-> \#30050011 \| **D-R** \| Visit 5 \| **31MAY2025** \| 149 \| 83 \| 58 \| 37.5
-> 300S-0012 \| **JXG** \| Visit 2 \| **02/24/2025** \| 136 \| 71 \| 65 \| 36.2
-> Subj 3005-0012 \| **JG** \| Visit 3 \| **March 6, 2025** \| 156 \| 63 \| 62 \| 36.2
-> \#30050012 \| **J-G** \| Visit 4 \| **05-Apr-2025** \| 161 \| 86 \| 86 \| 36.8
-> \#3005001Z \| **JXG** \| Visit 5 \| **01-May-2025** \| 116 \| 98 \| 93 \| 37.0
-> Subj 3005-0013 \| **S-E** \| Viit 2 \| **July 23, 2025** \| 147 \| 87 \| 63 \| 37.8
-> Subj 3005-0013 \| **S-E** \| Visit 3 \| **04AUG2025** \| 139 \| 78 \| 66 \| 37.2
-> 3005-0013 \| **S.E.** \| Visit 5 \| **09/30/2025** \| 123 \| 82 \| 84 \| 36.9
-> \#30050014 \| **SXG** \| Visit 2 \| **February 9, 2025** \| 144 \| 68 \| 89 \| 37.0
-> \#30050014 \| **S.G.** \| Visit 3 \| **21-Feb-2025** \| 147 \| 69 \| 81 \| 36.4
-> 3005-0014 \| **SG** \| Visit 4 \| **22MAR2025** \| 125 \| 93 \| 69 \| 36.1
-> \#30050014 \| **SG** \| Visit 5 \| **18APR2025** \| 138 \| 77 \| 59 \| 37.6
-> Subj 3005-0015 \| **D.M.** \| Visit 2 \| **09-May-2025** \| 151 \| 96 \| 69 \| 37.3
-> \#30050015 \| **DXM** \| Visit 3 \| **May 25, 2O25** \| 132 \| 84 \| 78 \| 37.3
-> 3005-0O15 \| **D.M.** \| Visit 4 \| **June 20, 2025** \| 107 \| 62 \| 55 \| 37.1
-> 
-> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 16O mmHg within 15 minutes.
-> Entered by: **AXW**
-> Source verified against medical record (source on file) for subject 3005-0001.
-> 
-> Events are coded to MedDRA preferred term 10586823; the target dose is 150 mg. Agreement between central and local readigs is shown in Bland-Altman plots. Secondary endpoints are compard with the Wilcoxon test with Bonferroni correction; sparse tables use Fisher's exact test.
-> 
-> Database Procedures
-> Access to the database is restricted to authorised personnel with role-based permissions. Edit checks identify missing, inconsistent or out-of-range values during cleaning. Reconciliation of safety data with the clinical database is performed periodically. Edit checks identify missing, inconsistent or out-of-range values during cleaning. Access to the database is restricted to authorised personnel with role-based permissions.
-> 
-> Data are entered into a validated c1inical database with an audit trail. Edit checks identify missing, inconsistent or out-of-range vlues at entry. Medical history and adverse evets are coded with a standard dictionary before database lock. Medical history and adverse events are coded with standard terminology before database lock.
-> 
-> Source Data Verification
-> Queries are raised in the data capture system and resolved by site staff within ten working days. Protocol deviations are classified as minor or major. The investigator site file is reviewed for completeness at each visit. Source data verification prioritises eligibility, informed consent, primary endpoints and serious aderse events. Queries are raised in the data capture system and answered by the site within ten working days.
-> 
-> Protocol deviations are assessed for impact on participant safety and data integrity. The investigator site file is reviewed for currency of essential documents at each visit. Protocol deviations are classified as minor or majr.
-> 
-> On-site and remote monitoring visits are scheduled based on enrollment and risk indicators. The investigator site file is reviewed for completeness at each visit. Findings are documented in the visit report and followed up until closure.
-> 
-> Analysis Methods
-> Sensitivity analyses assess the robustness of the primary result to protocol deviations. All tests are two-sided with a significance level of 5 percent unless otherwise specified. Subgroup analyses by geograhic region are exploratory and not adjusted for multiplicity.
-> 
-> Subgroup analyses by age group are descriptive and not adjusted for multiplicity. All tests are two-sided with a significance level of 5 pecnt unless otherwise spcified. Continuous variables are summaised with the nmber of observations, mean, standard deviation, median and range. Sensitivity analyses assess the robstness of the primary result to alternative assumptions. The statistical analyss plan is finalised befre database lock and specifies all derived variab1es.
-> 
-> Categorical vriables are presented as counts and percentages within each treatment group. Subgroup analyses by baseline severity are descriptive and not adjusted for multiplicity. Categorical variables are presented as counts and percentages of the analysis set.
-> 
-> Page 1
-> 
-> Fenwick Therapeutics \| Protocol FTX-5142-018 \| Confidential
-> 
-> Categorical variables are presented as counts and percentages of the analysis set. All tests are two-sided with a significance level of 2.5 percent unless otherwise specified. Sensitivity aalses asess the robustness of the primary resu1t to alternative assumptions. Continuous variables are summarised wih the number of observations, mean, standard deviation, median and range. All tests are two-sided with a significance level of 5 percent unless otherwise specified. Categorical variables are presented as counts and percentages of the analysis set.
-> 
-> Drug Accountabiliy
-> Investigational product is stored in a secure, temperature-monitored area with access limited to authorised staff. Dispensing and returns are recorded on the accountability log at every dispensing visit. Temperature excursions must be reported to the sponsor before further use of the affected supply. Unused product is returned to the sponsor after reconciliation. Dispensing and returns are recorded on the accountability log at every dispensing visit. Unused product is destroyed according to local procedures after reconciliation.
-> 
-> Investigtional product is stored in a secure, temperature-monitored area with access limited to authorised staff. Temperature excursions must be reported to the sponsor immediately. Temperature excursions are reported to the sponsor immediately. Temperature excursions must be reported to the sponsor before further use of the affected suply.
-> 
-> Tablet counts are reconciled against the dosing dary to assess compliance. Tablet counts are reconciled against the dosing diary to assss compliance. Dispensing and returns are recorded on the accountability log at every dispensing visit. Temperature excursons are reported to the sponsor immediately. Investigational product is stored in a secure, temerature-monitored area with access limited to authorised staff.
-> 
-> Reporting of Safety Events
-> The investigator assesses intensity using the common terminology citeria and documents the assessment in te source record. Pregnancy in a participant is reported using the pregnancy notification form within 24 hours. Pregnancy in a participant is reported using the pregnancy notification form within one working day. The responsible physician assesses intensity using the common terminology criteria and documents the assessment in the source record. The resonsible physician assesses intensity using the common terminology criteria and documets the assessment in the source record.
-> 
-> Pregnancy in a participant is reported using the pregnancy notification form withn 24 hours. Evets that start after the first dose and until 28 days after the last dose are considered treatment-emergent. Follow-up information is provided until the event stabilises or the participant is lost to follow-up. Events that begin after the first dose and up to 28 days after the last dose are summarised as treatment-emergent. Non-serious adverse events are recorded in the case report form throughout the treatment period.
-> 
-> Any serious adverse events are reported to the sponsor within 24 hours of the site becoming aware of the event. All serios adverse events must be reported to the sponsor within 48 hours of the investigator becoming aware of the event. Non-serious adverse events are recored in te case reprt form throughout the treatment period.
-> 
-> Page 2
-> 
+### B4 / qs_v1 (doc-level, underpowered), test: 0 false forward(s)
 
 ### B4 / qs_v1 (doc-level, underpowered), holdout: 0 false forward(s)
 
-### B4 / qs_v2 (doc-level, underpowered), test: 6 false forward(s)
-
-**d0062:doc:8192:0** route forward (p_below_t_low); p(pii) raw 0.4012, calibrated 0.4674; gold role patient, category quasi; missed event_date, initials
-
-> CRF Page 15: Vital Signs
-> Protocol FTX-9990-002    Site 2003
-> 
-> Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> Subj 2003-0001 \| **TW** \| Visit 5 \| **2025-05-12** \| 141 \| 85 \| 84 \| 37.0
-> \#20030004 \| **K.C.** \| Visit 5 \| **15SEP2025** \| 135 \| 89 \| 95 \| 36.1
-> Subj 2003-0006 \| **AXC** \| Visit 2 \| **2025-08-07** \| 111 \| 70 \| 61 \| 37.2
-> Subj 2003-0008 \| **LXH** \| Visit 2 \| **2025-03-20** \| 159 \| 63 \| 94 \| 36.2
-> Subj 2003-0010 \| **SO** \| Visit 4 \| **03JUL2025** \| 143 \| 69 \| 76 \| 37.7
-> 2003-0014 \| **EH** \| Visit 5 \| **06/14/2025** \| 119 \| 89 \| 77 \| 36.6
-> 
-> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
-> Entered by: site staff
-> Source verified against medical record (source on file) for subject Subj 2003-0001.
-> 
-> Laboratory Assessments
-> Blood samples are collected after an overnight fast and processed within two hours. Samples are shipped at ambient temperature to the central laboratory with the requisition form. Clinically significant laboratory abnormalities are recorded as adverse events. Reference ranges are provided by the laboratory and updated when changed.
-> 
-> Blood samples are collected after an overnight fast and processed according to the laboratory manual. Clinically significant laboratory abnormalities are recorded as adverse events. Blood samples are collected after an overnight fast and processed within two hours. Clinically significant laboratory abnormalities should be recorded as adverse events.
-> 
-> Blood samples are collected after an overnight fast and processed within two hours. Blood samples are collected in the morning and processed within two hours. Blood samples are collected after an overnight fast and processed within two hours. Reference ranges are provided by the laboratory and updated when changed. Samples are shipped frozen on dry ice to the central laboratory with the requisition form. Reference ranges are provided by the laboratory and filed in the investigator site file.
-> 
-> Good Clinical Practice
-> The study will be conducted in accordance with the principles of good clinical practice and applicable regulatory requirements. The sponsor may conduct audits of study sites and vendors to verify compliance. Confidentiality of participant information is protected at all times.
-> 
-> Confidentiality of participant information is protected at all times. Essential documents are retained for at least 25 years after the end of the study or longer if required by local regulations. The sponsor reserves the right to conduct audits of study sites and vendors to verify compliance. The informed consent form and any amendments must be approved by the ethics committee before implementation.
-> 
-> Participants may withdraw consent at any time without consequences for their medical care. Participants may withdraw consent at any time without consequences for their medical care. Essential documents are retained for at least 25 years after the end of the study or longer if required by local regulations. Participants may withdraw consent at any time without consequences for their medical care. The protocol and any amendments are approved by the ethics committee before implementation.
-> 
-> Essential documents are retained for at least 15 years after the end of the study or longer if required by local regulations. The sponsor reserves the right to conduct audits of study sites and vendors to verify compliance. The protocol and any amendments must be approved by the ethics committee before implementation. Confidentiality of participant information is protected in line with applicable data protection law. Essential documents are retained for at least 15 years after the end of the study as required.
-> 
-
-**d0150:doc:8192:0** route forward (p_below_t_low); p(pii) raw 0.3739, calibrated 0.4580; gold role patient, category quasi; missed event_date, initials
-
-> CRF Page 26: Vital Signs
-> Protocol FTX-8191-011    Site 1005
-> 
-> Subject	Initials	Visit	Visit date	SBP	DBP	HR	Temp
-> 1005-0001	**J.K.**	Visit 2	**2025-06-24**	158	62	98	37.6
-> \#10050001	**JK**	Visit 4	**August 5, 2025**	160	70	55	36.3
-> \#10050001	**J.K.**	Visit 5	**2025-08-31**	123	95	59	36.8
-> 1005-0002	**D.W.**	Visit 2	**2025-06-18**	151	74	70	36.1
-> 1005-0002	**D-W**	Visit 3	**02JUL2025**	132	70	71	36.8
-> Subj 1005-0002	**DW**	Visit 4	**27-Jul-2025**	129	74	94	36.4
-> Subj 1005-0002	**D.W.**	Visit 5	**August 26, 2025**	137	76	59	36.7
-> Subj 1005-0003	**R.S.**	Visit 2	**08/16/2025**	115	78	70	36.6
-> Subj 1005-0003	**RS**	Visit 3	**2025-08-27**	163	80	75	37.4
-> 1005-0003	**R-S**	Visit 5	**October 22, 2025**	145	86	63	37.6
-> Subj 1005-0004	**A-J**	Visit 2	**2025-02-28**	147	86	73	36.7
-> 1005-0004	**AJ**	Visit 3	**13-Mar-2025**	156	79	83	37.2
-> \#10050004	**AJ**	Visit 4	**April 9, 2025**	150	64	60	37.7
-> 1005-0004	**A.J.**	Visit 5	**08-May-2025**	136	66	96	36.5
-> Subj 1005-0005	**A-S**	Visit 3	**23MAR2025**	119	87	90	37.0
-> Subj 1005-0005	**AS**	Visit 4	**04/19/2025**	119	85	83	36.6
-> 1005-0006	**TXP**	Visit 2	**April 19, 2025**	135	68	55	37.7
-> Subj 1005-0006	**TP**	Visit 5	**25JUN2025**	125	69	92	36.7
-> 1005-0007	**AXG**	Visit 2	**2025-02-12**	162	86	79	36.9
-> Subj 1005-0007	**AXG**	Visit 3	**February 24, 2025**	140	76	60	36.3
-> \#10050007	**AG**	Visit 4	**March 23, 2025**	120	88	88	36.5
-> Subj 1005-0007	**A-G**	Visit 5	**April 20, 2025**	154	84	67	36.6
-> Subj 1005-0008	**F-T**	Visit 2	**07-Jun-2025**	121	81	78	37.4
-> \#10050008	**F-T**	Visit 3	**2025-06-24**	129	83	88	37.6
-> Subj 1005-0008	**FT**	Visit 5	**August 19, 2025**	154	96	66	36.4
-> 1005-0009	**S-P**	Visit 3	**September 28, 2025**	117	86	58	36.8
-> 1005-0009	**SP**	Visit 4	**October 23, 2025**	139	96	59	37.3
-> Subj 1005-0009	**SP**	Visit 5	**2025-11-21**	151	87	56	37.0
-> \#10050010	**EK**	Visit 4	**10/22/2025**	106	86	92	37.7
-> 1005-0010	**E-K**	Visit 5	**November 17, 2025**	118	97	62	37.6
-> \#10050011	**H-L**	Visit 2	**February 27, 2025**	112	93	80	36.5
-> \#10050011	**HXL**	Visit 3	**2025-03-12**	160	77	78	36.2
-> \#10050011	**HXL**	Visit 5	**09MAY2025**	113	65	77	37.7
-> \#10050012	**D-S**	Visit 3	**05/01/2025**	126	75	59	36.8
-> \#10050012	**D-S**	Visit 5	**25-Jun-2025**	125	94	96	36.1
-> \#10050013	**S.K.**	Visit 2	**2025-02-18**	146	70	69	36.3
-> \#10050013	**S.K.**	Visit 3	**04-Mar-2025**	124	81	92	36.6
-> Subj 1005-0013	**S.K.**	Visit 4	**04/01/2025**	154	88	71	36.9
-> Subj 1005-0013	**SXK**	Visit 5	**2025-04-26**	150	88	81	37.2
-> \#10050014	**AŻ**	Visit 2	**05APR2025**	140	81	60	37.2
-> Subj 1005-0014	**A-Ż**	Visit 4	**May 18, 2025**	145	74	78	37.3
-> Subj 1005-0014	**AXŻ**	Visit 5	**06/16/2025**	158	70	95	36.4
-> \#10050015	**J-C**	Visit 2	**06/02/2025**	119	81	78	37.5
-> \#10050015	**J.C.**	Visit 3	**19JUN2025**	121	82	93	36.8
-> 1005-0015	**JC**	Visit 4	**2025-07-18**	128	81	97	36.6
-> 1005-0015	**JC**	Visit 5	**August 14, 2025**	165	81	85	37.0
-> 
-> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
-> Entered by: site staff
-> Source verified against medical record (source on file) for subject \#10050001.
-> 
-> Investigational product FTX-8191 lot LT-246523-C was dispensed from kit K-042791 within the Day 8 ±1 visit window. Time-to-event endpoints are estimated with the Kaplan-Meier method and compared with a Mantel-Haenszel test stratified by region. Agreement between central and local readings is shown in Bland-Altman plots.
-> 
-> Safety Reporting
-> The investigator assesses intensity using the common terminology criteria and documents the assessment in the source record. Follow-up information must be provided until the event resolves or the participant is lost to follow-up. Non-serious adverse events are recorded in the electronic data capture system at each visit.
-> 
-> Non-serious adverse events are recorded in the electronic data capture system at each visit. All serious adverse events must be reported to the sponsor within 24 hours of the investigator becoming aware of the event. Follow-up information must be provided until the event stabilises or the participant is lost to follow-up.
-> 
-> The sponsor reviews each report for expectedness against the reference safety information. Pregnancy occurring during the study is reported on the dedicated form within 24 hours. Follow-up information must be provided until the event stabilises or the participant is lost to follow-up. The responsible physician assesses severity using the common terminology criteria and documents the assessment in the source record. Any serious adverse events are reported to the sponsor within 24 hours of the investigator becoming aware of the event. The sponsor reviews each report for expectedness against the reference safety information.
-> 
-> All serious adverse events are reported to the sponsor within 48 hours of the investigator becoming aware of the event. Non-serious adverse events are recorded in the electronic data capture system throughout the treatment period. The sponsor evaluates each report for expectedness against the reference safety information.
-> 
-> Handling of Missing Data
-> Missing data are handled by multiple imputation under a missing-at-random assumption. Categorical variables are presented as counts and percentages within each treatment group. Missing data are handled by multiple imputation in the primary analysis. Subgroup analyses by geographic region are exploratory and not adjusted for multiplicity. The statistical analysis plan is finalised before database lock and describes all derived variables. Continuous variables are summarised with the number of observations, mean, standard deviation, median and range.
-> 
-> Subgroup analyses by geographic region are descriptive and not adjusted for multiplicity. Missing data are not imputed unless stated otherwise in the primary analysis. Sensitivity analyses assess the robustness of the primary result to alternative assumptions.
-> 
-> Continuous variables are summarised with the number of observations, mean, standard deviation, median and range. The statistical analysis plan is finalised before database lock and specifies all derived variables. All tests are two-sided with a significance level of 5 percent unless otherwise specified. All tests are two-sided with a significance level of 2.5 percent unless otherwise specified. Missing data are not imputed unless stated otherwise under a missing-at-random assumption. Missing data are not imputed unless stated otherwise under a missing-at-random assumption.
-> 
-> Good Clinical Practice
-> The protocol and any amendments must be approved by the ethics committee before implementation. The sponsor may conduct audits of study sites and vendors to verify compliance. The protocol and any amendments are approved by the ethics committee before implementation. Participants may withdraw consent at any time without consequences for their medical care.
-> 
-> Participants may withdraw consent at any time without consequences for their medical care. Participants may withdraw consent at any time without penalty. Essential documents are retained for at least 15 years after the end of the study as required. Participants may withdraw consent at any time without consequences for their medical care. Participants may withdraw consent at any time without consequences for their medical care.
-> 
-> Participants may withdraw consent at any time without consequences for their medical care. Confidentiality of participant information is protected in line with applicable data protection law. Essential documents are retained for at least 25 years after the end of the study as required. The informed consent form and any amendments are approved by the ethics committee before implementation.
-> 
-> The informed consent form and any amendments are approved by the ethics committee before implementation. Confidentiality of participant information is protected in line with applicable data protection law. The sponsor may conduct audits of study sites and vendors to verify compliance. Participants may withdraw consent at any time without penalty. Essential documents are retained for at least 15 years after the end of the study as required.
-> 
-> Laboratory Assessments
-> Blood samples are collected in the morning and processed within two hours. Clinically significant laboratory abnormalities should be recorded as adverse events. Blood samples are collected after an overnight fast and processed according to the laboratory manual. Samples are shipped frozen on dry ice to the central laboratory with the requisition form. Blood samples are collected after an overnight fast and processed according to the laboratory manual.
-> 
-> Blood samples are collected in the morning and processed according to the laboratory manual. Reference ranges are provided by the laboratory and updated when changed. Clinically significant laboratory abnormalities should be recorded as adverse events. Blood samples are collected after an overnight fast and processed within two hours.
-> 
-> Data Management
-> Data are entered into a validated electronic data capture system with an audit trail. Reconciliation of laboratory data with the clinical database is performed before each data cut. Medical history and adverse events are coded with a standard dictionary during the study. Access to the database is restricted to authorised personnel according to the access matrix. Access to the database is restricted to authorised personnel according to the access matrix.
-> 
-> Edit checks flag missing, inconsistent or out-of-range values during cleaning. Reconciliation of laboratory data with the clinical database is performed before each data cut. Reconciliation of laboratory data with the clinical database is performed periodically. Data are entered into a validated clinical database with an audit trail.
-> 
-> Reconciliation of safety data with the clinical database is performed before each data cut. Edit checks identify missing, inconsistent or out-of-range values at entry. Edit checks flag missing, inconsistent or out-of-range values at entry. Data are entered into a validated clinical database with an audit trail.
-> 
-> Reconciliation of safety data with the clinical database is performed before each data cut. Reconciliation of laboratory data with the clinical database is performed periodically. Medical history and adverse events are coded with standard terminology before database lock. Data are entered into a validated clinical database with an audit trail.
-> 
-
-**d0352:doc:8192:0** route forward (p_below_t_low); p(pii) raw 0.0471, calibrated 0.2725; gold role both, category direct; missed dob, event_date, initials, person_name, phone
-
-> Fenwick Therapeutics \| Protocolo FTX-5142-018 \| Confidencial
-> 
-> CIOMS I: notificación de sospecha de reacción adversa
-> N.º de control: FEN-2025342    Protocolo: FTX-5142-018    Centro: 3003
-> 
-> I. Información de la reacción
-> 1. Iniciales: **PA**    1a. Sujeto: \#30030005
-> 2. Fecha de nacimiento: **7 de agosto de 1961**    2a. Edad: 63 años    3. Sexo: F
-> 4-6. Inicio de la reacción: **18/04/2025**
-> 7+13. Descripción: fatiga, grado 2; requirió hospitalización.
-> 
-> V. Notificador
-> 24b. **A. Marcos**, Centro de Investigación Clínica Llanodorado, tel. **+34 555 019 6055**
-> 25a. Fecha de este informe: 01/05/2025
-> 
-> Página 1
-> 
-
-**d0377:doc:8192:0** route forward (p_below_t_low); p(pii) raw 0.3661, calibrated 0.4553; gold role both, category quasi; missed email, event_date, person_name, phone
-
-> Von: **Dieter Schmidtke** \<**d.schmidtke@niederheide-crc.example.org**\>
-> An: **Riza Scheel** \<**r.scheel@fenwick-tx.example.com**\>
-> Betreff: AW: Datenklärung zu Teilnehmer 3005-0010
-> Hallo **Riza**,
-> 
-> die offenen Fragen wurden bearbeitet und die Einträge im eCRF korrigiert.
-> Die korrigierten Seiten liegen im Prüfarztordner; die Quelldokumente wurden erneut abgeglichen. Bitte geben Sie kurz Bescheid, ob weitere Anfragen offen sind.
-> Teilnehmer \#30050010: Daten der Visite 2 (**27. April 2025**) korrigiert.
-> Die Papierquelle für diesen Teilnehmer liegt im Teilnehmerordner.
-> 
-> Viele Grüße
-> **Dieter Schmidtke**
-> Klinikum Niederheide
-> Tel. **+49 555 017 9336**
-> 
-> \> Am 2025-05-28 schrieb **Riza Scheel**:
-> \> Hallo **Dieter**, bitte prüfen Sie die offenen Anfragen.
-> \> Danke, **Riza**
-> 
-> Ereigniszeitanalysen verwenden die Kaplan-Meier-Methode; die Kreatinin-Clearance wird nach Cockcroft-Gault berechnet. Prüfplan FTX-5142-018 (NCT99608180; EudraCT 2031-854061-77), Amendment A1, gültig ab 05.10.2025. Prüfpräparat FTX-5142, Charge LT-230007-D, wurde aus Kit K-283296 im Visitenfenster Day 85 ±1 ausgegeben.
-> 
-
-**d0418:doc:8192:0** route forward (p_below_t_low); p(pii) raw 0.4244, calibrated 0.4751; gold role both, category quasi; missed event_date, initials
-
-> Fenwick Therapeutics \| Protocol FTX-5142-018 \| Confidential
-> 
-> CRF Page 14: Vital Signs
-> Protocol FTX-5142-018    Site 3005
-> 
-> Subject \| Initials \| Visit \| Visit date \| SBP \| DBP \| HR \| Temp
-> 3005-0001 \| **J-B** \| Visit 2 \| **June 18, 2025** \| 149 \| 75 \| 81 \| 36.6
-> 3005-0001 \| **J-B** \| Visit 3 \| **29JUN2025** \| 120 \| 64 \| 69 \| 37.5
-> \#30050001 \| **J.B.** \| Visit 4 \| **30-Jul-2025** \| 107 \| 94 \| 92 \| 37.4
-> \#300S0001 \| **J-B** \| Visit 5 \| **08/27/2025** \| 132 \| 81 \| 58 \| 36.4
-> 3005-0002 \| **S.H.** \| Visit 2 \| **06-May-2025** \| 113 \| 77 \| 59 \| 37.5
-> Subj 3005-0002 \| **S-H** \| Visit 3 \| **2025-05-20** \| 111 \| 67 \| 98 \| 37.2
-> Subj 3005-0002 \| **S-H** \| Visit 4 \| **06/18/2025** \| 118 \| 79 \| 81 \| 37.2
-> 3005-0002 \| **S-H** \| Visit 5 \| **13JUL2025** \| 109 \| 78 \| 61 \| 37.6
-> 3005-0003 \| **S.S.** \| Visit 2 \| **23-Sep-2025** \| 127 \| 96 \| 62 \| 36.9
-> Subj 3005-0003 \| **S.S.** \| Visit 3 \| **10/06/2025** \| 162 \| 91 \| 63 \| 37.7
-> \#30050003 \| **SS** \| Visit 4 \| **November 6, 2025** \| 164 \| 62 \| 58 \| 37.5
-> \#30050003 \| **SXS** \| Visit S \| **04DECZ025** \| 111 \| 85 \| 65 \| 37.2
-> Subj 3005-0004 \| **E-W** \| Visit Z \| **2025-08-18** \| 126 \| 81 \| 64 \| 37.0
-> \#30050004 \| **E.W.** \| Visit 3 \| **August 28, 2025** \| 135 \| 72 \| 60 \| 37.5
-> Subj 3005-0004 \| **EXW** \| Visit 4 \| **09/28/2025** \| 143 \| 98 \| 89 \| 37.2
-> 3005-0004 \| **E-W** \| Viit 5 \| **25OCT2O25** \| 124 \| 72 \| 80 \| 37.7
-> Subj 3005-0005 \| **LXK** \| Visit 2 \| **June 10, 2025** \| 112 \| 83 \| 88 \| 36.8
-> Subj 3005-0005 \| **LXK** \| Visit 3 \| **June 25, 20Z5** \| 152 \| 97 \| 67 \| 37.1
-> Subj 3005-0005 \| **L-K** \| Visit 4 \| **25-Jul-2025** \| 155 \| 62 \| 93 \| 37.1
-> 3005-0005 \| **L-K** \| Visit 5 \| **08/22/2025** \| 146 \| 70 \| 72 \| 37.2
-> Subj 3005-0006 \| **G.P.** \| Visit 2 \| **24-Jul-2025** \| 134 \| 77 \| 86 \| 37.0
-> Subj 3005-0006 \| **GXP** \| Visit 3 \| **August 11, 2025** \| 158 \| 65 \| 58 \| 37.7
-> \#30050006 \| **GXP** \| Visit 4 \| **09/06/2025** \| 106 \| 76 \| 77 \| 36.9
-> 3005-0006 \| **G-P** \| Visit 5 \| **04OCT2025** \| 158 \| 85 \| 78 \| 36.7
-> 3005-0007 \| **E-M** \| Visit 2 \| **2025-05-19** \| 118 \| 74 \| 82 \| 37.7
-> 3005-0007 \| **EXM** \| Visit 3 \| **June 2, 2025** \| 111 \| 74 \| 82 \| 37.7
-> \#30050007 \| **EM** \| Visit 4 \| **30JUN20Z5** \| 143 \| 67 \| 92 \| 37.3
-> \#30050007 \| **E-M** \| Visit 5 \| **27JUL2025** \| 110 \| 80 \| 94 \| 36.3
-> Subj 3005-0008 \| **S-K** \| Visit 3 \| **2025-08-03** \| 134 \| 86 \| 78 \| 36.5
-> 3005-0008 \| **SXK** \| Visit 4 \| **2025-09-01** \| 121 \| 71 \| 67 \| 37.0
-> \#30050008 \| **SXK** \| Visit 5 \| **01-Oct-2025** \| 161 \| 68 \| 83 \| 36.7
-> Subj 3005-0009 \| **D.E.** \| Visit 2 \| **May 2, 2025** \| 125 \| 81 \| 90 \| 36.3
-> 3005-0009 \| **DE** \| Visit 4 \| **06/14/2025** \| 153 \| 62 \| 86 \| 37.6
-> \#30050010 \| **PR** \| Visit 2 \| **27APR2025** \| 153 \| 92 \| 88 \| 37.7
-> Subj 3005-0010 \| **P.R.** \| Visit 3 \| **13-May-2025** \| 112 \| 76 \| 98 \| 36.7
-> \#30050010 \| **P-R** \| Visit 4 \| **11JUN2025** \| 106 \| 79 \| 95 \| 37.4
-> \#30050011 \| **D.R.** \| Visit 2 \| **22MAR2025** \| 120 \| 69 \| 68 \| 36.4
-> Subj 3005-0011 \| **DR** \| Visit 3 \| **03-Apr-2025** \| 136 \| 94 \| 74 \| 36.7
-> Subj 3005-0011 \| **D.R.** \| Visit 4 \| **2025-04-30** \| 162 \| 66 \| 81 \| 36.7
-> \#30050011 \| **D-R** \| Visit 5 \| **31MAY2025** \| 149 \| 83 \| 58 \| 37.5
-> 300S-0012 \| **JXG** \| Visit 2 \| **02/24/2025** \| 136 \| 71 \| 65 \| 36.2
-> Subj 3005-0012 \| **JG** \| Visit 3 \| **March 6, 2025** \| 156 \| 63 \| 62 \| 36.2
-> \#30050012 \| **J-G** \| Visit 4 \| **05-Apr-2025** \| 161 \| 86 \| 86 \| 36.8
-> \#3005001Z \| **JXG** \| Visit 5 \| **01-May-2025** \| 116 \| 98 \| 93 \| 37.0
-> Subj 3005-0013 \| **S-E** \| Viit 2 \| **July 23, 2025** \| 147 \| 87 \| 63 \| 37.8
-> Subj 3005-0013 \| **S-E** \| Visit 3 \| **04AUG2025** \| 139 \| 78 \| 66 \| 37.2
-> 3005-0013 \| **S.E.** \| Visit 5 \| **09/30/2025** \| 123 \| 82 \| 84 \| 36.9
-> \#30050014 \| **SXG** \| Visit 2 \| **February 9, 2025** \| 144 \| 68 \| 89 \| 37.0
-> \#30050014 \| **S.G.** \| Visit 3 \| **21-Feb-2025** \| 147 \| 69 \| 81 \| 36.4
-> 3005-0014 \| **SG** \| Visit 4 \| **22MAR2025** \| 125 \| 93 \| 69 \| 36.1
-> \#30050014 \| **SG** \| Visit 5 \| **18APR2025** \| 138 \| 77 \| 59 \| 37.6
-> Subj 3005-0015 \| **D.M.** \| Visit 2 \| **09-May-2025** \| 151 \| 96 \| 69 \| 37.3
-> \#30050015 \| **DXM** \| Visit 3 \| **May 25, 2O25** \| 132 \| 84 \| 78 \| 37.3
-> 3005-0O15 \| **D.M.** \| Visit 4 \| **June 20, 2025** \| 107 \| 62 \| 55 \| 37.1
-> 
-> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 16O mmHg within 15 minutes.
-> Entered by: **AXW**
-> Source verified against medical record (source on file) for subject 3005-0001.
-> 
-> Events are coded to MedDRA preferred term 10586823; the target dose is 150 mg. Agreement between central and local readigs is shown in Bland-Altman plots. Secondary endpoints are compard with the Wilcoxon test with Bonferroni correction; sparse tables use Fisher's exact test.
-> 
-> Database Procedures
-> Access to the database is restricted to authorised personnel with role-based permissions. Edit checks identify missing, inconsistent or out-of-range values during cleaning. Reconciliation of safety data with the clinical database is performed periodically. Edit checks identify missing, inconsistent or out-of-range values during cleaning. Access to the database is restricted to authorised personnel with role-based permissions.
-> 
-> Data are entered into a validated c1inical database with an audit trail. Edit checks identify missing, inconsistent or out-of-range vlues at entry. Medical history and adverse evets are coded with a standard dictionary before database lock. Medical history and adverse events are coded with standard terminology before database lock.
-> 
-> Source Data Verification
-> Queries are raised in the data capture system and resolved by site staff within ten working days. Protocol deviations are classified as minor or major. The investigator site file is reviewed for completeness at each visit. Source data verification prioritises eligibility, informed consent, primary endpoints and serious aderse events. Queries are raised in the data capture system and answered by the site within ten working days.
-> 
-> Protocol deviations are assessed for impact on participant safety and data integrity. The investigator site file is reviewed for currency of essential documents at each visit. Protocol deviations are classified as minor or majr.
-> 
-> On-site and remote monitoring visits are scheduled based on enrollment and risk indicators. The investigator site file is reviewed for completeness at each visit. Findings are documented in the visit report and followed up until closure.
-> 
-> Analysis Methods
-> Sensitivity analyses assess the robustness of the primary result to protocol deviations. All tests are two-sided with a significance level of 5 percent unless otherwise specified. Subgroup analyses by geograhic region are exploratory and not adjusted for multiplicity.
-> 
-> Subgroup analyses by age group are descriptive and not adjusted for multiplicity. All tests are two-sided with a significance level of 5 pecnt unless otherwise spcified. Continuous variables are summaised with the nmber of observations, mean, standard deviation, median and range. Sensitivity analyses assess the robstness of the primary result to alternative assumptions. The statistical analyss plan is finalised befre database lock and specifies all derived variab1es.
-> 
-> Categorical vriables are presented as counts and percentages within each treatment group. Subgroup analyses by baseline severity are descriptive and not adjusted for multiplicity. Categorical variables are presented as counts and percentages of the analysis set.
-> 
-> Page 1
-> 
-> Fenwick Therapeutics \| Protocol FTX-5142-018 \| Confidential
-> 
-> Categorical variables are presented as counts and percentages of the analysis set. All tests are two-sided with a significance level of 2.5 percent unless otherwise specified. Sensitivity aalses asess the robustness of the primary resu1t to alternative assumptions. Continuous variables are summarised wih the number of observations, mean, standard deviation, median and range. All tests are two-sided with a significance level of 5 percent unless otherwise specified. Categorical variables are presented as counts and percentages of the analysis set.
-> 
-> Drug Accountabiliy
-> Investigational product is stored in a secure, temperature-monitored area with access limited to authorised staff. Dispensing and returns are recorded on the accountability log at every dispensing visit. Temperature excursions must be reported to the sponsor before further use of the affected supply. Unused product is returned to the sponsor after reconciliation. Dispensing and returns are recorded on the accountability log at every dispensing visit. Unused product is destroyed according to local procedures after reconciliation.
-> 
-> Investigtional product is stored in a secure, temperature-monitored area with access limited to authorised staff. Temperature excursions must be reported to the sponsor immediately. Temperature excursions are reported to the sponsor immediately. Temperature excursions must be reported to the sponsor before further use of the affected suply.
-> 
-> Tablet counts are reconciled against the dosing dary to assess compliance. Tablet counts are reconciled against the dosing diary to assss compliance. Dispensing and returns are recorded on the accountability log at every dispensing visit. Temperature excursons are reported to the sponsor immediately. Investigational product is stored in a secure, temerature-monitored area with access limited to authorised staff.
-> 
-> Reporting of Safety Events
-> The investigator assesses intensity using the common terminology citeria and documents the assessment in te source record. Pregnancy in a participant is reported using the pregnancy notification form within 24 hours. Pregnancy in a participant is reported using the pregnancy notification form within one working day. The responsible physician assesses intensity using the common terminology criteria and documents the assessment in the source record. The resonsible physician assesses intensity using the common terminology criteria and documets the assessment in the source record.
-> 
-> Pregnancy in a participant is reported using the pregnancy notification form withn 24 hours. Evets that start after the first dose and until 28 days after the last dose are considered treatment-emergent. Follow-up information is provided until the event stabilises or the participant is lost to follow-up. Events that begin after the first dose and up to 28 days after the last dose are summarised as treatment-emergent. Non-serious adverse events are recorded in the case report form throughout the treatment period.
-> 
-> Any serious adverse events are reported to the sponsor within 24 hours of the site becoming aware of the event. All serios adverse events must be reported to the sponsor within 48 hours of the investigator becoming aware of the event. Non-serious adverse events are recored in te case reprt form throughout the treatment period.
-> 
-> Page 2
-> 
-
-**d0447:doc:8192:0** route forward (p_below_t_low); p(pii) raw 0.2966, calibrated 0.4300; gold role both, category direct; missed address, dob, event_date, initials, mrn, person_name, zip
-
-> Fenwick Therapeutics \| Prüfplan FTX-5142-018 \| Vertraulich
-> 
-> Patientennarrativ: Prüfungsteilnehmer Subj 3005-0010
-> Prüfplan FTX-5142-018, Prüfzentrum 3005
-> 
-> Demografie und Ausgangsbefund
-> **P. Rohleder** (**P-R**), 75 Jahre, geb. **18. Juli 1949**, Patientennummer **70322471**, wurde am **15. April 2025** randomisiert (Randomisierungsnummer R-65247) und erhielt am selben Tag die erste Dosis FTX-5142. Wohnort: **Baumring 1-8, Niederheide** **30576**.
-> Die Begleitmedikation wurde von **SCHMIDTKE, Dieter** überprüft.
-> 
-> Unerwünschtes Ereignis
-> Während der Behandlungsphase wurden keine unerwünschten Ereignisse gemeldet.
-> 
-> Ereigniszeitanalysen verwenden die Kaplan-Meier-Methode; die Kreatinin-Clearance wird nach Cockcroft-Gault berechnet. Prüfpräparat FTX-5142, Charge LT-255487-A, wurde aus Kit K-954687 im Visitenfenster Day 29 ±3 ausgegeben. Prüfplan FTX-5142-018 (NCT99608180; EudraCT 2031-854061-77), Amendment A5, gültig ab 2025-04-03.
-> 
-> Verlauf
-> Die Teilnahme wurde gemäß Prüfplan fortgesetzt.
-> 
-> Seite 1
-> 
+### B4 / qs_v2 (doc-level, underpowered), test: 0 false forward(s)
 
 ### B4 / qs_v2 (doc-level, underpowered), holdout: 0 false forward(s)
 
+### C / qs_v1, test: 1 false forward(s)
+
+**d0693:chunk:512:6** route forward (p_below_t_low); p(pii) raw 0.0030, calibrated 0.0020; gold role patient, category quasi; missed initials
+
+>  \| 64 \| 79 \| 37.5
+> ---- \| **JXM** \| Visit 5 \| ---- \| 128 \| 78 \| 98 \| 37.0
+> 
+> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
+> Entered by: site staff
+> Source verified against medical record (source on file) for subject (see first row).
+> 
+> Data Management
+> Access to the database is restricted to authorised personnel with role-based permissions. Reconciliation of safety data with the clinical database is performed periodically. Data are entered into a validated electronic data capture system with an audit trail. Data are entered into a validated clinical database with an audit trail. Access to the database is restricted to authorised personnel according to the access matrix. Medical history and adverse events are coded with standard terminology before database lock.
+> 
+> Edit checks flag missing, inconsistent or out-of-range values at entry. Medical history and adverse events are coded with a standard dictionary before database lock. Medical history and adverse events are coded with a standard dictionary before database lock.
+> 
+> Reconciliation of laboratory data with the clinical database is performed periodically. Data are entered into a validated clinical database with an audit trail. Medical history and adverse events are coded with a standard
+
+### C / qs_v1, holdout: 0 false forward(s)
+
+### C / qs_v2, test: 2 false forward(s)
+
+**d0625:chunk:512:24** route forward (p_below_t_low); p(pii) raw 0.9566, calibrated 0.9647; gold role patient, category quasi; missed zip
+
+>  **10504**.
+> Medical history was notable for hypertension. Concomitant medications at baseline were reviewed by the investigator.
+> 
+> Adverse Event
+> No adverse events were reported during the treatment period.
+> 
+> Page 6
+> 
+> Fenwick Therapeutics \| Protocol FTX-9990-002 \| Confidential
+> 
+> Data Handling and Record Keeping
+> Edit checks flag missing, inconsistent or out-of-range values at entry. Data are entered into a validated clinical database with an audit trail. Reconciliation of laboratory data with the clinical database is performed periodically. Data are entered into a validated clinical database with an audit trail. Access to the database is restricted to authorised personnel with role-based permissions.
+> 
+> Data are entered into a validated electronic data capture system with an audit trail. Reconciliation of laboratory data with the clinical database is performed periodically. Data are entered into a validated electronic data capture system with an audit trail. Edit checks flag missing, inconsistent or out-of-range values at entry.
+> 
+> Edit checks identify missing, inconsistent or out-of-range values at entry. Access to the database is restricted to authorised personnel with role-based permissions. Medical history and adverse events are coded with standard terminology before database lock. Edit checks identify
+
+**d0693:chunk:512:6** route forward (p_below_t_low); p(pii) raw 0.0030, calibrated 0.0020; gold role patient, category quasi; missed initials
+
+>  \| 64 \| 79 \| 37.5
+> ---- \| **JXM** \| Visit 5 \| ---- \| 128 \| 78 \| 98 \| 37.0
+> 
+> Measurements taken seated after 5 minutes of rest. Repeat any systolic value above 160 mmHg within 15 minutes.
+> Entered by: site staff
+> Source verified against medical record (source on file) for subject (see first row).
+> 
+> Data Management
+> Access to the database is restricted to authorised personnel with role-based permissions. Reconciliation of safety data with the clinical database is performed periodically. Data are entered into a validated electronic data capture system with an audit trail. Data are entered into a validated clinical database with an audit trail. Access to the database is restricted to authorised personnel according to the access matrix. Medical history and adverse events are coded with standard terminology before database lock.
+> 
+> Edit checks flag missing, inconsistent or out-of-range values at entry. Medical history and adverse events are coded with a standard dictionary before database lock. Medical history and adverse events are coded with a standard dictionary before database lock.
+> 
+> Reconciliation of laboratory data with the clinical database is performed periodically. Data are entered into a validated clinical database with an audit trail. Medical history and adverse events are coded with a standard
+
+### C / qs_v2, holdout: 0 false forward(s)
+
 ## 9. Caveats
 
-- A / qs_v1: D-008 review: test recall 1.0000 minus its exact 95% lower bound 0.9747 = 0.0253 > 0.01 (144 positives).
-- A / qs_v1: Batch-1 latency per token drifted to 1.48x its start by the end of the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds.
-- A / qs_v1: test: slices with n < 30: doc_type=icf_signature_page (n=28), lang=de (n=7), lang=es (n=12), lang=pl (n=12), split_span=yes (n=7)
-- A / qs_v1: holdout: slices with n < 30: pre_redacted=yes (n=12)
-- A / qs_v2: D-008 review: test recall 1.0000 minus its exact 95% lower bound 0.9747 = 0.0253 > 0.01 (144 positives).
-- A / qs_v2: Batch-1 latency per token drifted to 1.38x its start by the end of the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds.
-- A / qs_v2: test: slices with n < 30: doc_type=icf_signature_page (n=28), lang=de (n=7), lang=es (n=12), lang=pl (n=12), split_span=yes (n=7)
-- A / qs_v2: holdout: slices with n < 30: pre_redacted=yes (n=12)
-- A / qs_v3: D-008 review: test recall 0.9931 minus its exact 95% lower bound 0.9619 = 0.0311 > 0.01 (144 positives).
-- A / qs_v3: test: slices with n < 30: doc_type=icf_signature_page (n=28), lang=de (n=7), lang=es (n=12), lang=pl (n=12), split_span=yes (n=7)
-- A / qs_v3: holdout: slices with n < 30: pre_redacted=yes (n=12)
-- B1 / qs_v1: test: slices with n < 30: doc_type=delegation_log (n=15), doc_type=icf_signature_page (n=10), doc_type=lab_report (n=27), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=19), pii_depth=middle (n=20), split_span=yes (n=4)
-- B1 / qs_v1: holdout: slices with n < 30: hard_negative=yes (n=21), length_bucket=short (n=17), perturbation=line_wrap (n=26), perturbation=ocr_noise (n=12), pre_redacted=yes (n=4)
-- B1 / qs_v2: test: slices with n < 30: doc_type=delegation_log (n=15), doc_type=icf_signature_page (n=10), doc_type=lab_report (n=27), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=19), pii_depth=middle (n=20), split_span=yes (n=4)
-- B1 / qs_v2: holdout: slices with n < 30: hard_negative=yes (n=21), length_bucket=short (n=17), perturbation=line_wrap (n=26), perturbation=ocr_noise (n=12), pre_redacted=yes (n=4)
-- B2 / qs_v1: test: slices with n < 30: doc_type=conmed_log (n=17), doc_type=crf_page (n=23), doc_type=delegation_log (n=8), doc_type=deviation_log (n=18), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=15), doc_type=sae_cioms (n=18), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=8), pii_depth=middle (n=9), pre_redacted=yes (n=29), truncated=yes (n=6)
-- B2 / qs_v1: holdout: slices with n < 30: hard_negative=yes (n=11), length_bucket=short (n=11), perturbation=headers_footers (n=21), perturbation=line_wrap (n=14), perturbation=none (n=17), perturbation=ocr_noise (n=7), pre_redacted=yes (n=2)
-- B2 / qs_v2: test: slices with n < 30: doc_type=conmed_log (n=17), doc_type=crf_page (n=23), doc_type=delegation_log (n=8), doc_type=deviation_log (n=18), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=15), doc_type=sae_cioms (n=18), lang=de (n=4), lang=es (n=7), lang=pl (n=6), pii_depth=late (n=8), pii_depth=middle (n=9), pre_redacted=yes (n=29), truncated=yes (n=6)
-- B2 / qs_v2: holdout: slices with n < 30: hard_negative=yes (n=11), length_bucket=short (n=11), perturbation=headers_footers (n=21), perturbation=line_wrap (n=14), perturbation=none (n=17), perturbation=ocr_noise (n=7), pre_redacted=yes (n=2)
-- B3 / qs_v1 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 124 test documents, few units each, so recall intervals are wide.
-- B3 / qs_v1 (doc-level, underpowered): test: slices with n < 30: doc_type=conmed_log (n=10), doc_type=crf_page (n=16), doc_type=csr_patient_narrative (n=25), doc_type=delegation_log (n=5), doc_type=deviation_log (n=11), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=11), doc_type=monitoring_visit_report (n=25), doc_type=sae_cioms (n=14), doc_type=site_correspondence (n=29), lang=de (n=4), lang=es (n=7), lang=pl (n=6), perturbation=email_quoting (n=29), perturbation=ocr_noise (n=20), perturbation=table (n=29), pii_depth=early (n=19), pii_depth=late (n=5), pii_depth=middle (n=5), pre_redacted=yes (n=18)
-- B3 / qs_v1 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=no (n=24), hard_negative=yes (n=7), length_bucket=medium (n=20), length_bucket=short (n=11), perturbation=headers_footers (n=13), perturbation=line_wrap (n=9), perturbation=none (n=10), perturbation=ocr_noise (n=4), pre_redacted=yes (n=1)
-- B3 / qs_v2 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 124 test documents, few units each, so recall intervals are wide.
-- B3 / qs_v2 (doc-level, underpowered): test: slices with n < 30: doc_type=conmed_log (n=10), doc_type=crf_page (n=16), doc_type=csr_patient_narrative (n=25), doc_type=delegation_log (n=5), doc_type=deviation_log (n=11), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=11), doc_type=monitoring_visit_report (n=25), doc_type=sae_cioms (n=14), doc_type=site_correspondence (n=29), lang=de (n=4), lang=es (n=7), lang=pl (n=6), perturbation=email_quoting (n=29), perturbation=ocr_noise (n=20), perturbation=table (n=29), pii_depth=early (n=19), pii_depth=late (n=5), pii_depth=middle (n=5), pre_redacted=yes (n=18)
-- B3 / qs_v2 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=no (n=24), hard_negative=yes (n=7), length_bucket=medium (n=20), length_bucket=short (n=11), perturbation=headers_footers (n=13), perturbation=line_wrap (n=9), perturbation=none (n=10), perturbation=ocr_noise (n=4), pre_redacted=yes (n=1)
-- B4 / qs_v1 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 124 test documents, few units each, so recall intervals are wide.
-- B4 / qs_v1 (doc-level, underpowered): Batch-1 latency per token drifted to 1.31x its start by the end of the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds.
-- B4 / qs_v1 (doc-level, underpowered): test: slices with n < 30: doc_type=conmed_log (n=8), doc_type=crf_page (n=14), doc_type=csr_patient_narrative (n=14), doc_type=delegation_log (n=5), doc_type=deviation_log (n=10), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=11), doc_type=monitoring_visit_report (n=11), doc_type=protocol_section (n=16), doc_type=sae_cioms (n=14), doc_type=site_correspondence (n=14), lang=de (n=4), lang=es (n=7), lang=pl (n=6), length_bucket=long (n=24), length_bucket=xl (n=13), perturbation=email_quoting (n=14), perturbation=ocr_noise (n=14), perturbation=table (n=27), pii_depth=early (n=7), pii_depth=late (n=2), pii_depth=middle (n=2), pre_redacted=yes (n=15), truncated=yes (n=13)
-- B4 / qs_v1 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=no (n=23), hard_negative=yes (n=7), length_bucket=medium (n=19), length_bucket=short (n=11), perturbation=headers_footers (n=12), perturbation=line_wrap (n=9), perturbation=none (n=10), perturbation=ocr_noise (n=4), pre_redacted=no (n=29), pre_redacted=yes (n=1)
-- B4 / qs_v2 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 124 test documents, few units each, so recall intervals are wide.
-- B4 / qs_v2 (doc-level, underpowered): Batch-1 latency per token drifted to 1.56x its start by the end of the run at similar unit lengths (e.g. MPS allocator growth; the runner releases it between calls since 8e004bb): treat batch-1 p50/p95 as upper bounds.
-- B4 / qs_v2 (doc-level, underpowered): test: slices with n < 30: doc_type=conmed_log (n=8), doc_type=crf_page (n=14), doc_type=csr_patient_narrative (n=14), doc_type=delegation_log (n=5), doc_type=deviation_log (n=10), doc_type=icf_signature_page (n=7), doc_type=lab_report (n=11), doc_type=monitoring_visit_report (n=11), doc_type=protocol_section (n=16), doc_type=sae_cioms (n=14), doc_type=site_correspondence (n=14), lang=de (n=4), lang=es (n=7), lang=pl (n=6), length_bucket=long (n=24), length_bucket=xl (n=13), perturbation=email_quoting (n=14), perturbation=ocr_noise (n=14), perturbation=table (n=27), pii_depth=early (n=7), pii_depth=late (n=2), pii_depth=middle (n=2), pre_redacted=yes (n=15), truncated=yes (n=13)
-- B4 / qs_v2 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=no (n=23), hard_negative=yes (n=7), length_bucket=medium (n=19), length_bucket=short (n=11), perturbation=headers_footers (n=12), perturbation=line_wrap (n=9), perturbation=none (n=10), perturbation=ocr_noise (n=4), pre_redacted=no (n=29), pre_redacted=yes (n=1)
+- A / qs_v1: test: slices with n < 30: lang=es (n=7), lang=pl (n=18), split_span=yes (n=18)
+- A / qs_v2: test: slices with n < 30: lang=es (n=7), lang=pl (n=18), split_span=yes (n=18)
+- B1 / qs_v1: test: slices with n < 30: doc_type=icf_signature_page (n=23), lang=de (n=22), lang=es (n=6), lang=pl (n=11), split_span=yes (n=17)
+- B1 / qs_v1: holdout: slices with n < 30: perturbation=ocr_noise (n=15), pre_redacted=yes (n=17)
+- B1 / qs_v2: test: slices with n < 30: doc_type=icf_signature_page (n=23), lang=de (n=22), lang=es (n=6), lang=pl (n=11), split_span=yes (n=17)
+- B1 / qs_v2: holdout: slices with n < 30: perturbation=ocr_noise (n=15), pre_redacted=yes (n=17)
+- B2 / qs_v1: test: slices with n < 30: doc_type=delegation_log (n=26), doc_type=icf_signature_page (n=19), lang=de (n=22), lang=es (n=6), lang=pl (n=11), truncated=yes (n=14)
+- B2 / qs_v1: holdout: slices with n < 30: hard_negative=yes (n=29), perturbation=ocr_noise (n=9), pre_redacted=yes (n=9)
+- B2 / qs_v2: test: slices with n < 30: doc_type=delegation_log (n=26), doc_type=icf_signature_page (n=19), lang=de (n=22), lang=es (n=6), lang=pl (n=11), truncated=yes (n=14)
+- B2 / qs_v2: holdout: slices with n < 30: hard_negative=yes (n=29), perturbation=ocr_noise (n=9), pre_redacted=yes (n=9)
+- B3 / qs_v1 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 337 test documents, few units each, so recall intervals are wide.
+- B3 / qs_v1 (doc-level, underpowered): test: slices with n < 30: doc_type=delegation_log (n=15), doc_type=deviation_log (n=26), doc_type=icf_signature_page (n=19), lang=de (n=22), lang=es (n=6), lang=pl (n=11), pii_depth=early (n=21), pii_depth=middle (n=24)
+- B3 / qs_v1 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=yes (n=18), perturbation=line_wrap (n=27), perturbation=ocr_noise (n=7), pre_redacted=yes (n=6)
+- B3 / qs_v2 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 337 test documents, few units each, so recall intervals are wide.
+- B3 / qs_v2 (doc-level, underpowered): test: slices with n < 30: doc_type=delegation_log (n=15), doc_type=deviation_log (n=26), doc_type=icf_signature_page (n=19), lang=de (n=22), lang=es (n=6), lang=pl (n=11), pii_depth=early (n=21), pii_depth=middle (n=24)
+- B3 / qs_v2 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=yes (n=18), perturbation=line_wrap (n=27), perturbation=ocr_noise (n=7), pre_redacted=yes (n=6)
+- B4 / qs_v1 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 337 test documents, few units each, so recall intervals are wide.
+- B4 / qs_v1 (doc-level, underpowered): test: slices with n < 30: doc_type=conmed_log (n=27), doc_type=delegation_log (n=14), doc_type=deviation_log (n=23), doc_type=icf_signature_page (n=19), doc_type=lab_report (n=29), doc_type=monitoring_visit_report (n=29), lang=de (n=22), lang=es (n=6), lang=pl (n=11), pii_depth=early (n=8), pii_depth=late (n=16), pii_depth=middle (n=10)
+- B4 / qs_v1 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=yes (n=18), perturbation=line_wrap (n=26), perturbation=none (n=28), perturbation=ocr_noise (n=7), pre_redacted=yes (n=5)
+- B4 / qs_v2 (doc-level, underpowered): Doc-level arm: underpowered (D-008 amended); 337 test documents, few units each, so recall intervals are wide.
+- B4 / qs_v2 (doc-level, underpowered): test: slices with n < 30: doc_type=conmed_log (n=27), doc_type=delegation_log (n=14), doc_type=deviation_log (n=23), doc_type=icf_signature_page (n=19), doc_type=lab_report (n=29), doc_type=monitoring_visit_report (n=29), lang=de (n=22), lang=es (n=6), lang=pl (n=11), pii_depth=early (n=8), pii_depth=late (n=16), pii_depth=middle (n=10)
+- B4 / qs_v2 (doc-level, underpowered): holdout: slices with n < 30: hard_negative=yes (n=18), perturbation=line_wrap (n=26), perturbation=none (n=28), perturbation=ocr_noise (n=7), pre_redacted=yes (n=5)
+- C / qs_v1: test: slices with n < 30: lang=es (n=7), lang=pl (n=18), split_span=yes (n=18)
+- C / qs_v2: test: slices with n < 30: lang=es (n=7), lang=pl (n=18), split_span=yes (n=18)

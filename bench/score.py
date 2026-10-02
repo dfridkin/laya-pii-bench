@@ -569,7 +569,9 @@ def split_scores(
 
 
 def curve(rows: Sequence[Row], calib: CalibParams, policy: Policy) -> list[CurvePoint]:
-    """D-007 amended: each calib-fit t_low of the curve, routed like the headline."""
+    """D-007 amended: each calib-fit t_low of the curve, routed like the headline. Recall here is
+    route recall (PII units not forwarded / PII units): with saturated scores a stricter t_low can
+    sit above t_high, and the units between are redacted, not missed (M8, arm C)."""
     out: list[CurvePoint] = []
     pos = [r.positive for r in rows]
     n_pos, n_neg = sum(pos), len(rows) - sum(pos)
@@ -579,8 +581,8 @@ def curve(rows: Sequence[Row], calib: CalibParams, policy: Policy) -> list[Curve
                        t, calib.t_high, policy.routing.patient_role_forces_redact)[0]
             for r in rows
         ]  # fmt: skip
-        hits = sum(y and r.p_pii >= t for r, y in zip(rows, pos, strict=True))
         fwd = [rt is Route.FORWARD for rt in routes]
+        hits = sum(y and not f for f, y in zip(fwd, pos, strict=True))
         out.append(CurvePoint(
             target=float(key), t_low=t,
             recall=hits / n_pos if n_pos else None,
@@ -854,6 +856,7 @@ def score(
         units_sha256=hashes["units"],
         decisions_sha256=hashes["decisions"],
         calib_hash=calib.content_hash,
+        calib_auroc_pii=calib.calib_auroc_pii,
         calib_fit_on=calib.fit_on,
         calib_temperature_fallbacks=dict(calib.temperature_fallbacks),
         calib_commit=calib_commit[0],
@@ -896,3 +899,15 @@ def routed(
         for r in rows
         if r.doc.id in split_of
     ]  # fmt: skip
+
+
+def with_timing(scores: Scores, rows: Sequence[Decision], hardware: str, sha256: str) -> Scores:
+    """Attach a timing-only run's latency (speed only, never accuracy) with its hardware label."""
+    live = [d for d in rows if not d.warmup and d.mode == "batch1"]
+    sp = scores.speed.model_copy(update={
+        "timing": latency_stats([d.latency_ms for d in live]),
+        "timing_hardware": hardware,
+        "timing_drift": drift(live),
+    })  # fmt: skip
+    ctx = scores.context.model_copy(update={"timing_decisions_sha256": sha256})
+    return scores.model_copy(update={"speed": sp, "context": ctx})

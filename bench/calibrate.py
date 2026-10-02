@@ -91,6 +91,21 @@ def fit_temperature(rows: Sequence[Sequence[float]], gold_idx: Sequence[int]) ->
 CURVE_TARGETS = (0.90, 0.95, 0.98, 0.99, 0.995)  # D-007 amended: the headline is this curve
 
 
+def _auroc(scores: Sequence[float], labels: Sequence[bool]) -> float | None:
+    """Mann-Whitney AUROC with ties counted half (same definition as bench.score.auroc)."""
+    import bisect
+
+    pos = [s for s, y in zip(scores, labels, strict=True) if y]
+    neg = sorted(s for s, y in zip(scores, labels, strict=True) if not y)
+    if not pos or not neg:
+        return None
+    total = 0.0
+    for p in pos:
+        lo, hi = bisect.bisect_left(neg, p), bisect.bisect_right(neg, p)
+        total += lo + 0.5 * (hi - lo)
+    return total / (len(pos) * len(neg))
+
+
 def fit_t_low(p_positive: Sequence[float], recall_target: float) -> float:
     if not p_positive:
         raise CalibError("no positive units: cannot fit t_low")
@@ -133,8 +148,12 @@ def calib_key(question: str, n_options: int) -> str:
 
 def content_hash(params: CalibParams) -> str:
     body = params.model_dump(mode="json", exclude={"content_hash"})
-    if not body["t_low_curve"]:  # added in M6 (D-007 amended): files fit before it keep their hash
+    # fields added after files were frozen are left out at their default, so those files keep
+    # their hash (t_low_curve: M6 follow-up, D-007; calib_auroc_pii: M8)
+    if not body["t_low_curve"]:
         del body["t_low_curve"]
+    if body["calib_auroc_pii"] is None:
+        del body["calib_auroc_pii"]
     return hashlib.sha256(
         json.dumps(body, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()
@@ -207,6 +226,7 @@ def fit(
         recall_target=policy.routing.recall_target,
         precision_target=policy.routing.precision_target,
         t_low_curve=curve,
+        calib_auroc_pii=_auroc(p_pii, positive),
         fit_on=fit_on,
         decisions_sha256=input_hashes["decisions"],
         units_sha256=input_hashes["units"],

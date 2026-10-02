@@ -100,6 +100,7 @@ export interface ArmLabelStats {
  */
 export interface CalibParams {
   arm: string;
+  calib_auroc_pii?: number | null;
   calib_doc_ids: string[];
   content_hash: string;
   decisions_sha256: string;
@@ -632,6 +633,7 @@ export interface RoutingMetrics {
 export interface RunContext {
   arm: string;
   batched_decisions_sha256?: string | null;
+  calib_auroc_pii?: number | null;
   calib_commit: string;
   calib_committed_at: string;
   calib_fit_on: "calib" | "fixture_debug";
@@ -650,6 +652,7 @@ export interface RunContext {
   qs: string;
   routed_sha256?: string | null;
   splits: string[];
+  timing_decisions_sha256?: string | null;
   units_sha256: string;
 }
 /**
@@ -680,6 +683,9 @@ export interface SpeedMetrics {
   batched_autocast?: string;
   hardware: string;
   per_doc_ms: LatencyStats | null;
+  timing?: LatencyStats | null;
+  timing_drift?: number | null;
+  timing_hardware?: string;
   warmup_excluded: number;
 }
 /**

@@ -148,6 +148,17 @@
         "arm": {
           "type": "string"
         },
+        "calib_auroc_pii": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "calib_doc_ids": {
           "items": {
             "type": "string"
@@ -1778,6 +1789,17 @@
           ],
           "default": null
         },
+        "calib_auroc_pii": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "calib_commit": {
           "type": "string"
         },
@@ -1857,6 +1879,17 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "timing_decisions_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "units_sha256": {
           "type": "string"
@@ -2197,6 +2230,32 @@
               "type": "null"
             }
           ]
+        },
+        "timing": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LatencyStats"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "timing_drift": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "timing_hardware": {
+          "default": "",
+          "type": "string"
         },
         "warmup_excluded": {
           "type": "integer"

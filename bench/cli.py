@@ -154,6 +154,26 @@ def _run_meta(decisions: Path) -> Any:
     return RunMeta.model_validate_json(meta_path.read_text()) if meta_path.exists() else None
 
 
+def _timing_rows(path: Path, params: Any, hashes: Mapping[str, str]) -> tuple[list[Any], str]:
+    """A timing-only run of the same arm x qs over the same units and docs (D-022)."""
+    from bench import score as sc
+
+    meta = _run_meta(path)
+    if meta is None or "timing_sample" not in meta.config_hashes:
+        raise sc.ScoreError(f"{path} is not a timing-only run (no meta timing_sample)")
+    if (meta.arm, meta.qs) != (params.arm, params.qs):
+        raise sc.ScoreError(f"{path} is not a timing run of {params.arm}/{params.qs}")
+    for key in ("units", "docs"):
+        if meta.config_hashes.get(key) != hashes[key]:
+            raise sc.ScoreError(f"timing run {key} differ from the scored run's")
+    rows = sc.read_decisions(path)
+    sc.verify_run_rows(rows, meta.batch_size)
+    hw = meta.hw
+    label = (f"{hw.cpu}, {hw.ram_gb} GB RAM, device {meta.device} ({hw.device_name}), "
+             f"torch {hw.torch}")  # fmt: skip
+    return rows, label
+
+
 def _batched_rows(path: Path, params: Any, hashes: Mapping[str, str]) -> list[Any]:
     """The batched run of the same arm x qs over the same units and docs (timing only)."""
     from bench import score as sc
@@ -444,6 +464,9 @@ def run_cmd(
     splits: Annotated[Path, typer.Option(help="Splits (main dataset only).")] = Path(
         "data/splits.json"
     ),
+    timing_sample: Annotated[
+        int, typer.Option(help="Timing-only run on N seeded test units (latency, D-022).")
+    ] = 0,
 ) -> None:
     """Run one arm x question set over units: raw probabilities, honest timing, resumable."""
     import json
@@ -471,6 +494,8 @@ def run_cmd(
         )
         raise typer.Exit(2)
     out = out or run_dir(docs, arm, qs, batch_size)
+    if timing_sample and out == run_dir(docs, arm, qs, batch_size):
+        out = out.with_name(f"{out.name}__timing{timing_sample}")
     qs_path = qs_dir / f"{qs}.yaml"
     qset = load_question_set(qs_path)
     questions = build(qset, spec_arm.checkpoint)  # rejects noul on English before loading
@@ -499,6 +524,15 @@ def run_cmd(
         keep = set(cfg.defaults.splits_to_run)
         unit_list = [u for u in unit_list if sp.doc_split[u.doc_id] in keep]
         split_hash = {"splits": sha256_file(splits)}
+        if timing_sample:  # timing-only: the same seeded unit ids for every arm sharing a spec
+            from bench.generate.seeds import rng as seeded
+
+            pool = sorted((u for u in unit_list if sp.doc_split[u.doc_id] == "test"),
+                          key=lambda u: u.id)  # fmt: skip
+            picked = {u.id for u in seeded(20261001, "timing", timing_sample).sample(
+                pool, min(timing_sample, len(pool)))}  # fmt: skip
+            unit_list = [u for u in unit_list if u.id in picked]
+            split_hash["timing_sample"] = f"test:{timing_sample}:20261001"
     texts = {u.id: doc_map[u.doc_id].text[u.start : u.end] for u in unit_list}
     arm_json = json.dumps(spec_arm.model_dump(mode="json"), sort_keys=True).encode()
     hashes = {
@@ -568,6 +602,10 @@ def score(
     arms: Annotated[Path, typer.Option(help="Arms config (doc-level label).")] = Path(
         "config/arms.yaml"
     ),
+    timing_decisions: Annotated[
+        Path | None,
+        typer.Option(help="Timing-only run of this arm x qs (`--timing-sample`): speed only."),
+    ] = None,
 ) -> None:
     """Score decisions against gold with frozen calib params. Refuses a calib hash mismatch and a
     calib file that isn't committed unmodified at HEAD (D-019)."""
@@ -641,6 +679,11 @@ def score(
         rows = sc.read_decisions(decisions)
         if run_batch_size is not None:
             sc.verify_run_rows(rows, run_batch_size)
+        timing_rows: list[Any] = []
+        timing_hw = ""
+        if timing_decisions is not None:
+            timing_rows, timing_hw = _timing_rows(timing_decisions, params, hashes)
+            hashes["timing_decisions"] = sc.sha256_file(timing_decisions)
         batched_rows = []
         if batched_decisions is not None:
             batched_rows = _batched_rows(batched_decisions, params, hashes)
@@ -656,6 +699,8 @@ def score(
                           extra_caveats, commit, batched_rows,
                           arm_cfg.doc_level if arm_cfg else False)  # fmt: skip
         routes = sc.routed(rows, unit_list, documents, params, pol, split_docs)
+        if timing_rows:
+            scores = sc.with_timing(scores, timing_rows, timing_hw, hashes["timing_decisions"])
     except (sc.ScoreError, freeze.FreezeError) as e:
         typer.echo(f"error: {e}", err=True)
         raise typer.Exit(2) from e

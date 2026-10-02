@@ -218,6 +218,18 @@ def _findings(all_scores: Sequence[Scores]) -> list[str]:
             + "."
         )
     by_arm_qs = {(s.context.arm, s.context.qs): h for s, h in test}
+    for (arm, qs), hc in sorted(by_arm_qs.items()):
+        ha = by_arm_qs.get(("A", qs))
+        if arm != "C" or ha is None or ha.auroc_pii is None or hc.auroc_pii is None:
+            continue
+        out.append(
+            f"- **Fine-tuning (arm C, {qs}) changes discrimination from AUROC {ha.auroc_pii:.3f} "
+            f"(zero-shot A) to {hc.auroc_pii:.3f}.** At the 99.5% target C forwards "
+            f"{hc.forward_rate.point:.1%} of test units (A {ha.forward_rate.point:.1%}) with "
+            f"{hc.false_forwards} PII units forwarded (A {ha.false_forwards}); test recall "
+            f"{_recall_ci(hc)}, exact 95% bounds {_f(hc.recall_exact_lo)} / "
+            f"{_f(hc.recall_exact_hi)}."
+        )
     for (arm, qs), h3 in sorted(by_arm_qs.items()):
         h1 = by_arm_qs.get((arm, "qs_v1"))
         if qs != "qs_v3" or h1 is None or h1.auroc_pii is None or h3.auroc_pii is None:
@@ -233,12 +245,78 @@ def _findings(all_scores: Sequence[Scores]) -> list[str]:
             "(`reports/audits/M6_qs_v3_result-20260930.md`)."
         )
     if {"qs_v1", "qs_v2"} <= {s.context.qs for s in all_scores}:
+        devices = {s.context.hw.device for s in all_scores if s.context.hw}
+        numerics = (
+            "qs_v1 runs fp32 and qs_v2 fp16 (5 rows) on MPS, which moves long-input probabilities"
+            if devices == {"mps"}
+            else f"these runs ran on {', '.join(sorted(devices))}"
+        )
         out.append(
             "- qs_v1 vs qs_v2 differences in the same arm are not a question-wording effect: "
-            "pii_present has the same text in both, qs_v1 runs fp32 and qs_v2 fp16 (5 rows) on "
-            "MPS, which moves long-input probabilities, and only qs_v1 has the role rule."
+            f"pii_present has the same text in both; {numerics}; and only qs_v1 has the role rule."
         )
     return out
+
+
+def best_b(all_scores: Sequence[Scores], qs: str) -> Scores | None:
+    """The B arm with the highest calibration-split AUROC for this question set (no test)."""
+    bs = [s for s in all_scores if s.context.arm.startswith("B") and s.context.qs == qs]
+    scored = [s for s in bs if s.context.calib_auroc_pii is not None]
+    return max(scored, key=lambda s: s.context.calib_auroc_pii or 0.0) if scored else None
+
+
+def _at(s: Scores, target: float) -> str:
+    c = next((c for c in s.splits["test"].curve if abs(c.target - target) < 1e-9), None)
+    return "n/a" if c is None else f"{c.forward_rate:.1%} at recall {_f(c.recall, 3)}"
+
+
+def _comparison(all_scores: Sequence[Scores]) -> list[str]:
+    """Report v2 (M8): A vs best B vs fine-tuned C on the same test documents."""
+    by = {(s.context.arm, s.context.qs): s for s in all_scores if "test" in s.splits}
+    rows: list[Sequence[object]] = []
+    for qs in sorted({q for a, q in by if a == "C"}):
+        b = best_b(all_scores, qs)
+        for s, role in ((by.get(("A", qs)), "A, zero-shot English"),
+                        (b, f"best B ({b.context.arm if b else '-'}), by calib AUROC "
+                            f"{_f(b.context.calib_auroc_pii, 3) if b else 'n/a'}"),
+                        (by.get(("C", qs)), "C, fine-tuned English")):  # fmt: skip
+            if s is None:
+                continue
+            h, sp = s.splits["test"].headline, s.speed
+            m2 = sp.timing.p50_ms if sp.timing else None
+            rows.append((qs, role, _recall_ci(h),
+                         f"{_f(h.recall_exact_lo)} / {_f(h.recall_exact_hi)}",
+                         f"{h.forward_rate.point:.2%}", _f(h.specificity), h.false_forwards,
+                         _f(h.auroc_pii), _at(s, 0.95), _at(s, 0.9),
+                         "not timed" if m2 is None else f"{m2:.0f}"))  # fmt: skip
+    if not rows:
+        return []
+    return [
+        "### Arm comparison: A vs best B vs fine-tuned C (report v2)",
+        "",
+        "Same test documents for every arm; A and C score identical units (same unit spec). "
+        "Best B is chosen on the calibration split, never on test. Thresholds are fit on "
+        "calibration at each recall target. M2 latency is the p50 of a timing-only run on a "
+        "seeded sample of test units (D-022); accuracy runs ran on Kaggle T4 GPUs.",
+        "",
+        *_table(
+            [
+                "qs",
+                "arm",
+                "recall @ 99.5% target",
+                "exact lo / hi",
+                "forwarded",
+                "negatives forwarded",
+                "false forwards",
+                "AUROC p(pii)",
+                "at 95% target",
+                "at 90% target",
+                "M2 p50 ms/unit",
+            ],
+            rows,
+        ),
+        "",
+    ]
 
 
 def _headline(all_scores: Sequence[Scores]) -> list[str]:
@@ -247,6 +325,7 @@ def _headline(all_scores: Sequence[Scores]) -> list[str]:
         "",
         *_findings(all_scores),
         "",
+        *_comparison(all_scores),
         "### Test (headline)",
         "",
         "pii_present recall at the calib-fit `t_low` (95% document-level bootstrap CI). Exact "
@@ -263,8 +342,9 @@ def _headline(all_scores: Sequence[Scores]) -> list[str]:
         "### Recall vs forward rate on test (D-007 amended)",
         "",
         "`t_low` fit on calib for each recall target, then applied to test with the same routing "
-        "(role rule included). Forward rate is the share of test units passed without review; "
-        "negatives forwarded is the share of PII-free units passed (the work saved).",
+        "(role rule included). Test recall here is route recall: PII units not forwarded / PII "
+        "units. Forward rate is the share of test units passed without review; negatives "
+        "forwarded is the share of PII-free units passed (the work saved).",
         "",
         *_table(
             [
@@ -472,6 +552,8 @@ def _speed(all_scores: Sequence[Scores]) -> list[str]:
             ["mode", "n", "p50 ms", "p95 ms", "p99 ms", "mean ms", "per sec"],
             [
                 _lat("per unit, batch-1", sp.batch1),
+                *([_lat(f"per unit, timing run on {sp.timing_hardware}", sp.timing)]
+                  if sp.timing is not None else []),
                 batched,
                 _lat("per document (sum of units, batch-1; incl. calib docs)", sp.per_doc_ms),
                 *(_lat(f"per unit, batch-1, {k} tokens", v)

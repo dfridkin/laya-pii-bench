@@ -270,6 +270,8 @@ class CalibParams(_Model):
     calib_doc_ids: list[str]
     # D-007 amended: t_low fit on calib at each curve target (keys like "0.95")
     t_low_curve: dict[str, float] = Field(default_factory=lambda: {})
+    # discrimination of calibrated p(pii) on the calib split: picks "best B" without test (M8)
+    calib_auroc_pii: float | None = None
     content_hash: str
 
 
@@ -493,6 +495,11 @@ class SpeedMetrics(_Model):
     batch1_by_length: dict[str, LatencyStats] = Field(default_factory=lambda: {})
     # median ms/token in the last eighth of the run over the first (> 1: latency drifted up)
     batch1_drift: float | None = None
+    # timing-only run on the headline machine (D-022: accuracy runs on Kaggle, latency on the M2):
+    # a seeded sample of test units, batch-1, its own hardware label; never used for accuracy
+    timing: LatencyStats | None = None
+    timing_hardware: str = ""
+    timing_drift: float | None = None
 
 
 class RunContext(_Model):
@@ -510,6 +517,8 @@ class RunContext(_Model):
     calib_committed_at: str
     batched_decisions_sha256: str | None = None  # the arm's batched run, for speed only (C6)
     routed_sha256: str | None = None  # the routed JSONL written with these scores (HUD provenance)
+    timing_decisions_sha256: str | None = None  # timing-only run on the M2 (D-022), speed only
+    calib_auroc_pii: float | None = None  # from the calib file: best-B selection (no test)
     doc_level: bool = False  # doc-level arm (B3, B4): report labels it underpowered (D-008)
     hw: HwInfo | None
     laya_version: str

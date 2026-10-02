@@ -4,7 +4,7 @@ export TOKENIZERS_PARALLELISM := false
 
 ARM ?= A
 QS ?= qs_v1
-ARMS ?= A B1 B2 B3 B4
+ARMS ?= A B1 B2 B3 B4 C
 QSETS ?= qs_v1 qs_v2
 BENCH := uv run bench
 

@@ -242,3 +242,26 @@ def test_calib_files_fit_before_the_curve_still_verify() -> None:
 
     for p in sorted((Path(__file__).parent.parent / "calib" / "mini").glob("*.json")):
         assert not cal.load_verified(p, allow_debug=True).t_low_curve
+
+
+def test_timing_run_feeds_speed_only(run: dict[str, Path], tmp_path: Path) -> None:
+    assert _score(run)[0] == 0
+    plain = Scores.model_validate_json(run["out"].read_text())
+    d = tmp_path / "timing"
+    d.mkdir()
+    rows = [Decision.model_validate_json(x) for x in run["dec"].read_text().splitlines()]
+    (d / "decisions.jsonl").write_text(
+        "".join(r.model_copy(update={"latency_ms": 7.0}).model_dump_json() + "\n" for r in rows)
+    )
+    meta = RunMeta.model_validate_json((run["dec"].parent / "meta.json").read_text())
+    ch = {**meta.config_hashes, "timing_sample": "test:5:20261001"}
+    (d / "meta.json").write_text(meta.model_copy(update={"config_hashes": ch}).model_dump_json())
+    code, out = _score(run, "--timing-decisions", str(d / "decisions.jsonl"))
+    assert code == 0, out
+    s = Scores.model_validate_json(run["out"].read_text())
+    assert s.speed.timing is not None and s.speed.timing.p50_ms == 7.0
+    assert s.speed.timing_hardware and s.context.timing_decisions_sha256
+    assert s.splits == plain.splits  # timing never enters accuracy
+    (d / "meta.json").write_text(meta.model_dump_json())  # an ordinary run is refused
+    code, out = _score(run, "--timing-decisions", str(d / "decisions.jsonl"))
+    assert code == 2 and "not a timing-only run" in out
